@@ -1,0 +1,103 @@
+.home-cards {
+
+	margin: 20px 0 100px;
+
+	@media #{$smWidth} {
+
+		margin: 20px 0;
+
+	}
+
+	&__box {
+
+		display: flex;
+		justify-content: space-between;
+
+		@media #{$smWidth} {
+
+			display: block;
+
+		}
+
+	}
+
+	&__item {
+
+		padding: 46px 40px 48px;
+		position: relative;
+		border-radius: 20px;
+		margin: 18px 0;
+		border: 1px solid rgba(250,208,106,.2);
+		display: flex;
+		flex-direction: column;
+
+		@media #{$mdWidth} {
+
+			padding: 36px;
+			width: 336px;
+			text-align: center;
+			margin: 0;
+
+		}
+
+		@media #{$smWidth} {
+
+			max-width: 100%;
+			margin: 18px auto;
+
+		}
+
+	}
+
+	p {
+
+		margin: 13px 0 36px;
+
+	}
+
+	&__btn {
+
+		margin-top: auto;
+
+	}
+
+	&__token {
+
+		text-align: center;
+		width: 336px;
+		justify-content: center;
+		align-items: center;
+
+	}
+
+	&__first-workshop {
+
+		width: 708px;
+		padding-left: 336px;
+
+		@media #{$mdWidth} {
+
+			justify-content: center;
+			align-items: center;
+			padding: 36px;
+			width: 336px;
+
+		}
+
+	}
+
+	&__img {
+
+		position: absolute;
+		top: 33px;
+		left: 71px;
+
+		@media #{$mdWidth} {
+
+			display: none;
+
+		}
+
+	}
+
+}

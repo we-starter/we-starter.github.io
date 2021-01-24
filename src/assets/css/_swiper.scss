@@ -1,0 +1,307 @@
+/**
+ * Swiper 4.4.5
+ * Most modern mobile touch slider and framework with hardware accelerated transitions
+ * http://www.idangero.us/swiper/
+ *
+ * Copyright 2014-2018 Vladimir Kharlampidi
+ *
+ * Released under the MIT License
+ *
+ * Released on: December 14, 2018
+ */
+ .swiper-container-style {
+
+	position: relative;
+
+	.swiper-controls {
+/*
+		position: absolute;
+		top: 50%;
+		right: 0;
+		z-index: 5;
+		display: flex;
+		justify-content: space-between;
+		pointer-events: none; */
+
+		@media #{$mdWidth} {
+
+
+		}
+
+		@media #{$mdWidth} {
+
+
+		}
+
+	}
+
+	.swiper-container {
+
+		margin: 0 auto;
+		position: relative;
+		overflow: hidden;
+		list-style: none;
+		padding: 0;
+		z-index: 1;
+
+	}
+
+	.swiper-container-no-flexbox .swiper-slide {
+
+		float: left;
+
+	}
+
+	.swiper-container-wrap {
+
+		position: relative;
+
+	}
+
+	.swiper-container--off .swiper-wrapper {
+
+		justify-content: center;
+
+	}
+
+	.swiper-wrapper {
+
+		position: relative;
+		width: 100%;
+		height: 100%;
+		z-index: 1;
+		display: flex;
+		transition-property: transform;
+
+	}
+
+	.swiper-container-android .swiper-slide,
+	.swiper-wrapper {
+
+		transform: translate3d(0px, 0, 0);
+
+	}
+
+	.swiper-slide {
+
+		flex-shrink: 0;
+		width: 100%;
+		height: 100%;
+		position: relative;
+		transition-property: transform;
+
+	}
+
+	.swiper-container--slides-per-view-auto .swiper-slide {
+
+		width: auto !important;
+		padding-left: 32px;
+
+		&:first-child {
+
+			padding-left: 0 !important;
+
+		}
+
+		@media #{$smWidth} {
+
+			padding-left: 16px;
+
+		}
+
+	}
+
+	.swiper-slide-invisible-blank {
+
+		visibility: hidden;
+
+	}
+
+	/* Auto Height */
+	.swiper-container-autoheight,
+	.swiper-container-autoheight .swiper-slide {
+
+		height: auto;
+
+	}
+
+	.swiper-container-autoheight .swiper-wrapper {
+
+		align-items: flex-start;
+		transition-property: transform, height;
+
+	}
+
+	/* IE10 Windows Phone 8 Fixes */
+	.swiper-container-wp8-horizontal,
+	.swiper-container-wp8-horizontal > .swiper-wrapper {
+
+		touch-action: pan-y;
+
+	}
+
+	.swiper-navigation {
+
+		position: relative;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		pointer-events: none;
+
+		@media #{$smWidth} {
+
+		}
+
+	}
+
+	.swiper-button-prev,
+	.swiper-button-next {
+
+		z-index: 2;
+		position: relative;
+		pointer-events: auto;
+
+		border-radius: 50%;
+		width: 64px;
+		height: 64px;
+		background-color: rgba(255,255,255,.4);
+
+		@media #{$mdWidth} {
+
+			width: 40px;
+			height: 40px;
+
+			svg {
+
+				width: 17px;
+				height: 16px;
+
+			}
+
+		}
+
+		svg {
+
+			fill: var(--color);
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			margin: auto;
+
+		}
+
+		&.swiper-button-disabled {
+
+			pointer-events: none;
+			opacity: 0;
+
+			svg {
+
+				opacity: 0.5;
+
+			}
+
+		}
+
+		@media ($desktop) {
+
+			&:hover {
+
+				box-shadow: 0 2px 8px rgba(34, 34, 34, 0.2);
+
+			}
+
+		}
+
+	}
+
+	.swiper-button-prev {
+
+		transform: rotate(180deg);
+
+
+	}
+
+	.swiper-button-next {
+
+
+	}
+
+	.swiper-pagination {
+
+		transition: 300ms opacity;
+		transform: translate3d(0, 0, 0);
+		z-index: 10;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		position: relative;
+		display: none;
+		flex-grow: 1;
+
+		@media #{$smWidth} {
+
+			display: flex;
+
+		}
+
+		.button {
+
+			background-color: var(--color);
+			opacity: .2;
+			height: 6px;
+			width: 6px;
+			transition: .3s;
+			margin: 5px;
+			border-radius: 3px;
+			pointer-events: auto;
+
+			&.is-active {
+
+				opacity: 1;
+				width: 20px;
+
+			}
+
+		}
+
+	}
+
+	button.swiper-pagination-bullet {
+
+		border: none;
+		box-shadow: none;
+		appearance: none;
+
+	}
+
+	.swiper-container-fade.swiper-container-free-mode .swiper-slide {
+
+		transition-timing-function: ease-out;
+
+	}
+
+	.swiper-container-fade .swiper-slide {
+
+		pointer-events: none;
+		opacity: 0;
+		transition-property: opacity;
+
+		&-active {
+
+			opacity: 1;
+			pointer-events: auto;
+
+		}
+
+	}
+
+}

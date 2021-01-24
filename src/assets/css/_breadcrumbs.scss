@@ -1,0 +1,50 @@
+.breadcrumbs {
+
+	display: flex;
+	flex-wrap: wrap;
+	margin: 40px 0 20px;
+
+	&__item {
+
+		display: flex;
+		align-items: center;
+		color: #fff;
+		font-size: 15px;
+		line-height: 25px;
+
+		&::after {
+
+			content: '';
+			margin: 0 12px;
+			width: 6px;
+			height: 9px;
+			opacity: .1;
+			background-image: url("data:image/svg+xml,%3Csvg width='6' height='9' viewBox='0 0 6 9' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M3.69 4.5L.86 1.42a.63.63 0 010-.88.61.61 0 01.87 0l3.45 3.52c.24.24.24.64 0 .88L1.73 8.46a.61.61 0 01-.87 0 .63.63 0 010-.88L3.7 4.5z' fill='%23fff'/%3E%3C/svg%3E");
+
+		}
+
+		&:last-child::after {
+
+			display: none;
+
+		}
+
+	}
+
+	&__link {
+
+		color: rgba(255, 255, 255, .4);
+
+		@media ($desktop) {
+
+			&:hover {
+
+				color: #fff;
+
+			}
+
+		}
+
+	}
+
+}

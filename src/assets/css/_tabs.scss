@@ -1,0 +1,68 @@
+.tabs {
+
+	margin: 24px 0;
+
+	&__nav {
+
+		display: flex;
+        border-bottom: 1px solid rgba(255, 255, 255, .1);
+        
+        @media #{$smWidth} {
+            overflow-x: auto;
+            overflow-y: hidden;
+            scroll-snap-type: x mandatory;
+        }
+
+	}
+
+	&__btn {
+
+		height: 52px;
+		line-height: 52px;
+		font-size: 16px;
+		padding: 0 10px;
+		color: rgba(255, 255, 255, .5);
+
+
+		& + & {
+
+			margin-left: 36px;
+
+		}
+		&:hover {
+
+			color: #fff;
+
+		}
+
+		@media ($desktop) {
+
+			&:hover {
+
+				color: #fff;
+
+			}
+
+		}
+
+		&.is-active {
+
+			color: #fff;
+
+			&::after {
+
+				position: absolute;
+				height: 3px;
+				left: 0;
+				right: 0;
+				bottom: -1px;
+				content: '';
+				background-color: var(--yellow);
+
+			}
+
+		}
+
+	}
+
+}

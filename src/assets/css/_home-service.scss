@@ -1,0 +1,53 @@
+.home-service {
+
+	margin: 42px 0;
+
+	&__list {
+
+		display: flex;
+		margin: 0 -18px;
+		justify-content: space-between;
+
+		@media #{(max-width: 1199px)} {
+
+			flex-wrap: wrap;
+			justify-content: center;
+
+		}
+
+	}
+
+	&__item {
+
+		width: 336px;
+		text-align: center;
+		margin: 0 18px;
+
+	}
+
+	&__ico {
+
+		width: 72px;
+		height: 72px;
+		border-radius: 50%;
+		margin: 30px auto 23px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		background-color: rgba(250,208,106,.1);
+
+		svg {
+
+			fill: var(--yellow);
+
+		}
+
+	}
+
+	&__title {
+
+		margin: 23px 0 12px;
+
+	}
+
+}

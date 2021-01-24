@@ -1,0 +1,113 @@
+.transction-submitted {
+
+	text-align: center;
+
+	&__logo {
+
+		width: 120px;
+		height: 120px;
+		border-radius: 50%;
+		margin: 24px auto;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		background-color: rgba(250,208,106,.5);
+
+		@media #{$smWidth} {
+
+			width: 80px;
+			height: 80px;
+
+		}
+
+		svg {
+
+			fill: #000;
+
+		}
+
+	}
+
+	.modal__title {
+
+		margin: 0;
+
+	}
+
+	&__link {
+
+		text-align: center;
+		margin: 12px 0;
+
+	}
+
+	&__tip{
+		margin-top: 13px;
+		font-size: 14px;
+		font-family: PingFangSC-Regular, PingFang SC;
+		font-weight: 400;
+		color: #22292F;
+		line-height: 28px;
+		max-width: 300px;
+		text-align: left;
+	}
+
+	&__loading {
+
+		display: flex;
+		justify-content: center;
+
+		img {
+			width: 24px;
+			height: 24px;
+			-webkit-animation:loading 3s linear infinite;
+		}
+
+	}
+
+	&__status {
+		display: flex;
+		justify-content: center;
+
+		img {
+			width: 48px;
+			height: 48px;
+		}
+
+	}
+
+	&__text {
+		font-size: 14px;
+		color: #808080;
+		margin: 0px 0 30px;
+		text-align: center;
+
+	}
+
+	&__btn {
+
+		background: #0F8C20;
+		border-radius: 100px;
+		width: fit-content;
+		margin-top: 30px;
+		color: #ffffff;
+		padding: 0 16px;
+		margin: auto;
+
+
+		@media #{$smWidth} {
+
+			margin-top: 24px;
+
+		}
+
+	}
+
+}
+
+
+@keyframes loading {
+	to {
+		transform: rotate(360deg);
+	}
+}

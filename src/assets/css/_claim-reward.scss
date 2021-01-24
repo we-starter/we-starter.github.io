@@ -1,0 +1,120 @@
+.claim-reward {
+
+
+    .checkbox {
+        text-align: left;
+    }
+
+	&__title {
+
+		font-weight: 400;
+		margin-bottom: 18px;
+
+	}
+
+	hr {
+
+		background-color: #c4c4c4;
+		opacity: .2;
+
+	}
+
+	&__dl {
+
+		white-space: nowrap;
+		margin: 24px 0;
+
+		&-row {
+
+			display: flex;
+			justify-content: space-between;
+
+			& + & {
+
+				margin-top: 12px;
+
+			}
+
+		}
+
+		&-dt {
+
+			color: #8E8E8E;
+
+			@media #{$smWidth} {
+
+				font-size: 14px;
+
+			}
+
+		}
+
+		&-dd {
+
+			font-weight: 600;
+			font-size: 20px;
+			line-height: 1.2;
+			color: #000;
+
+			@media #{$smWidth} {
+
+				font-size: 16px;
+
+			}
+
+		}
+
+	}
+
+	&__columns {
+
+		margin: 36px 0 24px;
+		padding: 24px;
+		background-color: rgba(196,196,196,.2);
+		border-radius: 8px;
+		font-size: 14px;
+        color: #000;
+
+		&-caption {
+
+			margin-bottom: 24px;
+
+		}
+
+		&-col {
+
+			column-gap: 58px;
+			column-count: 2;
+			white-space: nowrap;
+
+			@media #{$smWidth} {
+
+				column-count: auto;
+
+			}
+
+		}
+
+		&-row {
+
+			display: flex;
+			justify-content: space-between;
+			margin-bottom: 12px;
+
+		}
+
+		&-dt {
+
+			opacity: .5;
+
+		}
+
+		&-dd {
+
+
+		}
+
+	}
+
+
+}

@@ -1,0 +1,19 @@
+.tooltip {
+
+	svg {
+
+		fill: color(var(--bg) a(50%));
+
+	}
+
+	@media #{$desktop} {
+
+		&:hover svg {
+
+			fill: var(--bg);
+
+		}
+
+	}
+
+}

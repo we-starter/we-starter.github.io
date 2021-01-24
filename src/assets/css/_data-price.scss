@@ -1,0 +1,30 @@
+.data-price {
+
+	display: flex;
+	justify-content: space-between;
+	color: #000;
+	font-size: 14px;
+	line-height: 21px;
+
+	&__label {
+
+		white-space: nowrap;
+		font-weight: 400;
+		font-size: 14px;
+
+	}
+
+	&__item {
+
+		text-align: right;
+
+
+		& + & {
+
+			margin-top: 6px;
+
+		}
+
+	}
+
+}

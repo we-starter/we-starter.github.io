@@ -1,0 +1,363 @@
+.btn,
+.button {
+  border-radius: 0;
+  font-family: inherit;
+  background-color: transparent;
+  transition: var(--transitionDefault);
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+  font-size: 0;
+  color: transparent;
+  text-align: center;
+  white-space: nowrap;
+  display: block;
+  flex-shrink: 0;
+  outline: none;
+  box-shadow: 0px 2px 4px 0px rgba(255, 255, 255, 0.5), -2px 2px 6px 0px rgba(122, 127, 130, 0.4);
+  border: none;
+
+}
+
+
+.btn {
+  flex: 1;
+  height: 40px;
+  font-size: 14px;
+  font-family: HelveticaNeue-Medium, HelveticaNeue;
+  font-weight: 500;
+  color: #22292F;
+  border-radius: 8px;
+  background: #F2F0EB;
+  box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.1);
+  line-height: 40px;
+
+  @media #{$desktop} {
+    &:hover {
+
+    }
+  }
+
+  &--medium {
+    height: 80px;
+    line-height: 80px;
+    padding: 0 48px;
+  }
+
+  &--outline {
+    background-color: transparent;
+    box-shadow: inset 0 0 0 1px var(--bg);
+
+    @media #{$desktop} {
+      &:hover {
+        background-color: color(var(--bg) a(10%));
+      }
+    }
+  }
+
+  &--green {
+    color: var(--green);
+    background-color: color(var(--green) a(20%));
+
+    @media #{$desktop} {
+      &:hover {
+        background-color: color(var(--green) a(40%));
+      }
+    }
+  }
+
+  &--red {
+    color: #fff;
+    background-color: color(var(--red) a(100%));
+
+    @media #{$desktop} {
+      &:hover {
+        background-color: color(var(--red) a(70%));
+      }
+    }
+  }
+
+  &--vote {
+    border: 2px solid;
+    color: var(--yellow);
+    padding: 0 22px !important;
+    height: 39px !important;
+    background-color: transparent;
+    line-height: 35px !important;
+
+    @media #{$desktop} {
+      &:hover {
+        color: var(--bg);
+        border-color: var(--yellowHover);
+      }
+    }
+  }
+  &--gray {
+    color: var(--bg);
+    background-color: #e0e0e0;
+    &:hover {
+      background-color: #f0f0f0;
+    }
+
+    @media ($desktop) {
+      &:hover {
+        background-color: #f0f0f0;
+      }
+    }
+  }
+
+  &--border {
+    color: var(--yellow);
+    box-shadow: inset 0 0 0 2px var(--yellow);
+    background: transparent;
+
+    &:hover {
+        background: var(--yellow);
+        color: var(--bg);
+    }
+  }
+
+  &--small {
+    height: 40px;
+    line-height: 40px;
+    padding: 0 24px;
+  }
+
+  @media #{$mdWidth} {
+    padding: 0 20px;
+    height: 46px;
+    line-height: 40px;
+  }
+}
+
+.input {
+  height: 42px;
+  line-height: 20px;
+
+  padding: 20px;
+
+  font-size: 16px;
+  color: #000;
+  font-weight: 600;
+
+  width: 100%;
+  font-family: inherit;
+  position: relative;
+  appearance: none;
+  display: block;
+  filter: none;
+  -webkit-transform: translateZ(0px);
+  /* FIX for iOS safari https://forum.ionicframework.com/t/ion-input-shows-only-the-first-entered-character-on-ios/73107/5 */
+
+  border-radius: 8px;
+
+  border: 1px solid rgba(29, 29, 29, 0.2);
+  background-color: transparent;
+
+  &::placeholder {
+    color: inherit;
+    opacity: 0.4;
+  }
+
+  &::-ms-clear {
+    display: none;
+  }
+
+  @media #{$desktop} {
+    &:hover {
+      border-color: rgba(212, 233, 226, 1);
+    }
+  }
+
+  &:focus {
+    outline: none;
+    border-color: rgba(212, 233, 226, 1) !important;
+  }
+
+  &[disabled] {
+    pointer-events: none;
+  }
+
+  &--error {
+    border-color: var(--error) !important;
+  }
+
+  &:invalid {
+    box-shadow: none;
+  }
+
+  &--sm {
+      height: 40px;
+      font-weight: 400;
+      padding: 12px;
+  }
+}
+
+textarea.input {
+  height: 120px;
+  overflow: hidden;
+  resize: none;
+}
+
+@keyframes autofill {
+  to {
+    color: #000;
+    background-color: #fff;
+  }
+}
+
+.select {
+  position: relative;
+  display: block;
+
+  &::after {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    content: '';
+    pointer-events: none;
+    width: 24px;
+    height: 24px;
+    background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M17.2 8.3A1.05 1.05 0 1118.7 9.8l-5.95 5.9c-.4.41-1.07.41-1.49 0L5.31 9.8A1.06 1.06 0 016.8 8.3l5.2 4.84 5.2-4.83z' fill='%23fff'/%3E%3C/svg%3E");
+  }
+
+  select {
+    background-color: transparent;
+    position: relative;
+    display: block;
+    font-size: 16px;
+    font-family: inherit;
+    color: #fff;
+    padding: 16px;
+    width: 100%;
+    max-width: 100%;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    appearance: none;
+    line-height: 20px;
+    height: 60px;
+
+    &::-ms-expand {
+      display: none;
+    }
+
+    @media #{$desktop} {
+      &:hover:not(:focus) {
+        border-color: rgba(255, 255, 255, 0.4);
+        cursor: pointer;
+      }
+    }
+
+    &:focus {
+      outline: none;
+      border-color: rgba(255, 255, 255, 1);
+    }
+  }
+
+  option {
+    font-size: 16px;
+    font-family: inherit;
+    color: #fff;
+    line-height: 1.5;
+
+    &[value='none'] {
+      display: none;
+    }
+  }
+}
+
+.checkbox {
+  display: block;
+  position: relative;
+  cursor: pointer;
+
+  font-size: 14px;
+  line-height: 20px;
+  color: #000;
+
+  &__label {
+    display: block;
+    padding-left: 36px;
+
+    &::before {
+      position: absolute;
+      width: 22px;
+      height: 22px;
+      left: 0;
+      top: 0;
+      border: 1px solid rgba(29, 29, 29, 0.3);
+      border-radius: 4px;
+      content: '';
+    }
+
+    a {
+      text-decoration: underline;
+
+      @media ($desktop) {
+        &:hover {
+          text-decoration: none;
+        }
+      }
+    }
+  }
+
+  @media ($desktop) {
+    &:hover &__label::before {
+      border-color: var(--bg);
+    }
+  }
+
+  &__input:checked + &__label::before {
+    background-image: url("data:image/svg+xml,%3Csvg width='14' height='14' viewBox='0 0 14 14' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M5.8 11.9c-.3 0-.59-.14-.77-.39l-2.5-3.3a.97.97 0 111.55-1.18L5.73 9.2l4.14-6.64a.98.98 0 011.65 1.03l-4.89 7.85a.97.97 0 01-.78.46h-.04z' fill='%23000'/%3E%3C/svg%3E");
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+}
+
+.checkbox {
+  display: block;
+  position: relative;
+  cursor: pointer;
+
+  font-size: 14px;
+  line-height: 20px;
+  color: #000;
+
+  &__label {
+    display: block;
+    padding-left: 36px;
+
+    &::before {
+      position: absolute;
+      width: 22px;
+      height: 22px;
+      left: 0;
+      top: 0;
+      border: 1px solid rgba(29, 29, 29, 0.3);
+      border-radius: 4px;
+      content: '';
+    }
+
+    a {
+      text-decoration: underline;
+
+      @media ($desktop) {
+        &:hover {
+          text-decoration: none;
+        }
+      }
+    }
+  }
+
+  @media ($desktop) {
+    &:hover &__label::before {
+      border-color: var(--bg);
+    }
+  }
+
+  &__input:checked + &__label::before {
+    background-image: url("data:image/svg+xml,%3Csvg width='14' height='14' viewBox='0 0 14 14' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M5.8 11.9c-.3 0-.59-.14-.77-.39l-2.5-3.3a.97.97 0 111.55-1.18L5.73 9.2l4.14-6.64a.98.98 0 011.65 1.03l-4.89 7.85a.97.97 0 01-.78.46h-.04z' fill='%23000'/%3E%3C/svg%3E");
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+}

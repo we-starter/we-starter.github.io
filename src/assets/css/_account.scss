@@ -1,0 +1,159 @@
+.account {
+
+	&__title {
+
+		color: var(--yellow);
+		font-weight: 400;
+		margin: 16px 0 24px;
+
+	}
+
+	.voter-table {
+
+        margin: 28px 0;
+        
+        @media #{$smWidth} {
+            margin: 28px -20px;
+        }
+
+	}
+
+	.artwork-list {
+
+		margin: 60px 0;
+
+	}
+
+/* balance */
+
+	&-balance {
+
+		margin: 36px 0;
+
+		&__title {
+
+			font-weight: 400;
+
+            @media #{$smWidth} {
+                margin-top: 24px;
+            }
+		}
+
+		&__value {
+
+			color: var(--yellow);
+			font-weight: 600;
+			text-align: right;
+			white-space: nowrap;
+			padding-left: 52px;
+
+        }
+        
+        &__title,
+		&__value {
+
+			text-align: left;
+			height: 45px;
+			padding-left: 34px;
+            vertical-align: middle;
+            
+            @media #{$smWidth} {
+                padding-left: 34px;
+                text-align: left;
+                height: auto;
+            }
+
+		}
+
+		&__btn {
+
+            padding: 0 50px 0 30px;
+            
+            @media #{$smWidth} {
+                padding: 12px 0 0 34px;
+            }
+
+		}
+
+		&__head {
+
+			font-weight: 400;
+			color: var(--yellow);
+			padding: 25px 34px 12px;
+            text-align: left;
+            
+            @media #{$smWidth} {
+                padding-bottom: 0;
+            }
+
+		}
+
+		&__hr {
+
+			padding: 0;
+
+			&::before {
+
+				display: block;
+				height: 1px;
+				margin: 27px 0;
+				content: '';
+				background-color: rgba(255, 255, 255, .1);
+
+			}
+
+		}
+
+		&__submit {
+
+			margin: 36px 34px;
+			padding: 0 40px;
+
+		}
+
+		&__lock,
+		&__total,
+		&__unlock {
+
+			position: relative;
+
+			&::before {
+
+				position: absolute;
+				width: 24px;
+				height: 24px;
+				top: 0;
+				left: -34px;
+				content: '';
+				background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 11c0-1.1.9-2 2-2h11a2 2 0 012 2v9a2 2 0 01-2 2H3a2 2 0 01-2-2v-9z' fill='%234F4F4F'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M3 6.5a5.5 5.5 0 1111 0V17h-2V6.5a3.5 3.5 0 10-7 0V9H3V6.5z' fill='%234F4F4F'/%3E%3C/svg%3E");
+
+			}
+
+		}
+
+		&__unlock::before {
+
+			background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 11c0-1.1.9-2 2-2h11a2 2 0 012 2v9a2 2 0 01-2 2H3a2 2 0 01-2-2v-9z' fill='%23fff'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M23 5.5a5.5 5.5 0 10-11 0V16h2V5.5a3.5 3.5 0 117 0V8h2V5.5z' fill='%23fff'/%3E%3C/svg%3E");
+
+		}
+
+		&__total::before {
+
+			background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22ZM12 19C15.866 19 19 15.866 19 12C19 8.13401 15.866 5 12 5C8.13401 5 5 8.13401 5 12C5 15.866 8.13401 19 12 19Z' fill='white'/%3E%3C/svg%3E%0A");
+
+		}
+
+	}
+
+}
+
+@media #{$smWidth} {
+    .account-balance table,
+    .account-balance tbody,
+    .account-balance td,
+    .account-balance th,
+    .account-balance tr,
+    .form-app__submit--row {
+        display: block;
+    }
+}

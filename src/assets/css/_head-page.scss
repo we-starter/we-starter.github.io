@@ -1,0 +1,76 @@
+.head-page {
+
+    margin-bottom: 72px;
+    text-align: center;
+    
+    &.head-page--margin-top {
+        margin: 116px 0 72px;
+    }
+
+	@media #{$smWidth} {
+
+		margin: 20px 0;
+
+	}
+
+	&__title {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin: 22px 0;
+
+		img{
+			width: 40px;
+		}
+	}
+
+	&__intro {
+
+		font-size: 20px;
+		color: rgba(255,255,255,.7);
+		margin: 22px 0;
+
+		@media #{$smWidth} {
+
+			font-size: 16px;
+			margin: 16px 0;
+
+		}
+
+	}
+
+	&__btn {
+
+		display: flex;
+		justify-content: center;
+
+	}
+
+	&__audited {
+		margin-top: 8px;
+		height: 64px;
+		line-height: 64px;
+		border-bottom: 1px solid #fff;
+		&:hover{
+			color: var(--yellow);
+			border-bottom: 1px solid var(--yellow);
+		}
+	}
+
+}
+
+.arrow-back {
+    margin: 41px 0;
+    
+    a {
+        display: inline-flex;
+        align-items: center;
+        font-size: 15px;
+        font-weight: 600;
+        cursor: pointer;
+    }
+
+    svg {
+        margin-right: 16px;
+    }
+}

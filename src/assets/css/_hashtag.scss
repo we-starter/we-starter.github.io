@@ -1,0 +1,64 @@
+.hashtag {
+
+	margin: 24px 0;
+
+	&__list {
+
+		display: flex;
+		flex-wrap: wrap;
+		margin: -6px;
+
+	}
+
+	&__item {
+
+		margin: 6px;
+		position: relative;
+
+	}
+
+	&__label {
+
+		display: block;
+		white-space: nowrap;
+		line-height: 39px;
+		background: rgba(255, 255, 255, 0.1);
+		border-radius: 20px;
+		color: #fff;
+		padding: 0 24px;
+		cursor: pointer;
+        text-decoration: underline;
+        
+        &--more {
+            color: var(--yellow);
+            background: transparent;
+            text-decoration: none;
+
+            svg {
+                display: inline-block;
+                margin-left: 6px;
+                margin-bottom: 1px;
+                fill: none;
+            }
+        }
+
+	}
+
+	&__input:checked ~ &__label {
+
+		color: var(--bg);
+		background-color: #fff;
+
+	}
+
+	@media ($desktop) {
+
+		&__item:hover &__label {
+
+			text-decoration: none;
+
+		}
+
+	}
+
+}

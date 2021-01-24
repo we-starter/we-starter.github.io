@@ -1,0 +1,41 @@
+.tab {
+  margin: 26px 0;
+  display: flex;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+  &__btn {
+    position: relative;
+
+    & + & {
+      margin-left: 28px;
+    }
+  }
+
+  &__input:checked ~ &__label {
+    opacity: 1;
+
+    &::after {
+      position: absolute;
+      height: 3px;
+      left: 0;
+      right: 0;
+      bottom: -1px;
+      content: '';
+      background-color: var(--yellow);
+    }
+  }
+
+  &__label {
+    color: #fff;
+    opacity: 0.5;
+    padding: 15px 17px;
+    display: block;
+    cursor: pointer;
+
+    @media ($desktop) {
+      &:hover {
+        opacity: 1;
+      }
+    }
+  }
+}
