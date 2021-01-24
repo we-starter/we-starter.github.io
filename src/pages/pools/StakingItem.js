@@ -376,7 +376,7 @@ export const StakingItem = ({info, double}) => {
                     <div className="wrapper">
                         <StakeModal
                             amount={amount}
-                            symbol={'GLF'}
+                            symbol={info.symbol}
                             tokenName={'Gallery Token'}
                             balance={stakingInfo.balance}
                             onChange={(e) => {

@@ -12,9 +12,9 @@ export const StakeModal = ({amount, onConfirm, onCancel, onChange, balance, toke
             <div className="modal__box" style={{zIndex: 2}}>
                 <form className="form-app" action="/">
                     <div className="form-app__inner deposit">
-                        <h1 className="form-app__title">Deposit ETH</h1>
+                        <h1 className="form-app__title" style={{marginTop: 0}}>Deposit LP Token</h1>
                         <p className="form-app__label">
-                            {fromWei(balance.toString())} WAR-ETH SLP Available
+                            {fromWei(balance.toString())} {symbol} SLP Available
                         </p>
 
                         <div className="deposit__inputbox form-app__inputbox">
