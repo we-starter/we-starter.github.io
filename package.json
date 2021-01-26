@@ -24,6 +24,8 @@
     "@web3-react/walletconnect-connector": "^6.1.6",
     "@web3-react/walletlink-connector": "^6.1.6",
     "bignumber.js": "^9.0.1",
+    "browserslist": "^4.16.1",
+    "caniuse-lite": "^1.0.30001179",
     "node-sass": "^4.14.1",
     "react": "^16.13.1",
     "react-copy-to-clipboard": "^5.0.3",

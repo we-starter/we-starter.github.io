@@ -1,40 +1,94 @@
 .footer {
+    flex-shrink: 0;
+    background-color: rgba(255, 255, 255, 0.05);
+    padding: 12px;
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
 
-	flex-shrink: 0;
-	background-color: rgba(255,255,255,.05);
-	padding: 12px;
-	display: flex;
-	justify-content: center;
-	position: fixed;
-	bottom: 0;
-	width: 100%;
+    &__links {
+        width: 1380px;
+        display: flex;
 
-	&__links  {
-		width: 1380px;
-		display: flex;
+        li {
+            margin: 12px;
+        }
 
-		li {
+        a {
+            display: block;
+            width: 20px;
 
-			margin: 12px;
+            @media #{$desktop} {
+                &:hover svg {
+                    fill: var(--yellow);
+                }
+            }
+        }
+    }
+}
+@media #{$smWidth} {
+    .footer {
+        flex-shrink: 0;
+        background-color: rgba(255, 255, 255, 0.05);
+        padding: 12px;
+        display: flex;
+        justify-content: center;
+        position: absolute;
+        bottom: 420px;
+        width: 100%;
 
-		}
+        &__links {
+            width: 100%;
+            display: flex;
 
-		a {
-			display: block;
-			width: 20px;
+            li {
+                margin: 12px;
+            }
 
-			@media #{$desktop} {
+            a {
+                display: block;
+                width: 20px;
 
-				&:hover svg {
+                @media #{$desktop} {
+                    &:hover svg {
+                        fill: var(--yellow);
+                    }
+                }
+            }
+        }
+    }
+}
+@media #{$xsWidth} {
+    .footer {
+        flex-shrink: 0;
+        background-color: rgba(255, 255, 255, 0.05);
+        padding: 12px;
+        display: flex;
+        justify-content: center;
+        position: absolute;
+        bottom: 420px;
+        width: 100%;
 
-					fill: var(--yellow);
+        &__links {
+            width: 100%;
+            display: flex;
 
-				}
+            li {
+                margin: 12px;
+            }
 
-			}
+            a {
+                display: block;
+                width: 20px;
 
-		}
-
-	}
-
+                @media #{$desktop} {
+                    &:hover svg {
+                        fill: var(--yellow);
+                    }
+                }
+            }
+        }
+    }
 }
