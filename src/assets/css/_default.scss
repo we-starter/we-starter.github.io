@@ -235,14 +235,13 @@ a[href^='tel'],
     position: fixed;
     font-size: 14px;
     font-family: HelveticaNeue;
-    color: #7a7f82;
+    color: #22292f;
     padding: 10px;
     right: 385px;
     bottom: 16px;
     cursor: pointer;
     z-index: 999;
     display: flex;
-
     img {
         width: 20px;
         height: 20px;
@@ -260,11 +259,13 @@ a[href^='tel'],
         padding: 12px 10px;
         right: 376px;
         p {
+            color: #22292f;
             width: 90px;
             padding: 5px 0;
             text-align: center;
             &:hover {
                 background-color: rgba(212, 233, 226, 1);
+                border-radius: 5px;
             }
         }
     }
@@ -290,6 +291,54 @@ a[href^='tel'],
         bottom: 0;
         right: 50%;
         transform: translate(50%);
+    }
+    .language {
+        background: transparent;
+        border-radius: 5px;
+        position: absolute;
+        font-size: 14px;
+        font-family: HelveticaNeue;
+        color: #22292f;
+        padding: 10px;
+        right: 15px;
+        bottom: 435px;
+        cursor: pointer;
+        z-index: 999;
+        display: flex;
+        img {
+            width: 20px;
+            height: 20px;
+            margin-right: 8px;
+        }
+
+        .language-items {
+            display: none;
+            flex-direction: column;
+            background: #f2f0eb;
+            box-shadow: 0px 0px 6px 0px rgba(122, 127, 130, 0.2);
+            border-radius: 5px 5px 0px 0px;
+            bottom: 40px;
+            position: absolute;
+            padding: 12px 10px;
+            right: -5px;
+            p {
+                color: #22292f;
+                width: 90px;
+                padding: 5px 0;
+                text-align: center;
+                &:hover {
+                    background-color: rgba(212, 233, 226, 1);
+                    border-radius: 5px;
+                }
+            }
+        }
+
+        &:hover {
+            display: flex;
+            .language-items {
+                display: flex;
+            }
+        }
     }
 }
 .right {
