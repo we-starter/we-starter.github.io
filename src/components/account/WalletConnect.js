@@ -4,18 +4,14 @@ import { mainContext } from '../../reducer';
 import { InjectedConnector } from '@web3-react/injected-connector';
 import {
     GALLERY_SELECT_WEB3_CONTEXT,
-    HANDLE_SHOW_CONNECT_MODAL,
-    HANDLE_SHOW_TRANSACTION_MODAL,
     HANDLE_WALLET_MODAL,
 } from '../../const';
-import { formatAddress } from '../../utils/format';
 import metamask from '../../assets/icon/metamask.png';
-import dot from '../../assets/icon/dot.png';
+import walletConnect from '../../assets/icon/walletConnect.png';
+
 
 import { WalletConnectConnector } from '@web3-react/walletconnect-connector';
 import { LedgerConnector } from '@web3-react/ledger-connector';
-import close from '../../assets/icon/close.png';
-import back from '../../assets/icon/back.png';
 
 const injected = new InjectedConnector({
     supportedChainIds: [1, 3, 4, 5, 42, 31337],
@@ -34,21 +30,6 @@ const walletChange = new WalletConnectConnector({
     pollingInterval: POLLING_INTERVAL,
 });
 
-const ledger = new LedgerConnector({
-    chainId: 1,
-    url: RPC_URLS[1],
-    pollingInterval: POLLING_INTERVAL,
-});
-
-const wallets = {
-    MetaMask: injected,
-    WalletConnect: walletChange,
-    Ledger: ledger,
-    //TrustWallet: injected,
-    //Squarelink: squarelink,
-    //Torus: torus,
-    //Aut
-};
 
 export const WalletConnect = ({ onClose, onCancel }) => {
     const { dispatch, state } = useContext(mainContext);
@@ -60,12 +41,7 @@ export const WalletConnect = ({ onClose, onCancel }) => {
 
     const {
         connector,
-        library,
-        account,
         activate,
-        deactivate,
-        active,
-        error,
     } = context;
 
     useEffect(() => {
@@ -91,11 +67,6 @@ export const WalletConnect = ({ onClose, onCancel }) => {
                         <div className='form-app__inner__wallets'>
                             <div
                                 onClick={() => {
-                                    dispatch({
-                                        type: HANDLE_WALLET_MODAL,
-                                        walletModal: 'connecting',
-                                    });
-                                    //setConnecting(true)
                                     activate(injected)
                                         .then(() => {
                                             dispatch({
@@ -120,10 +91,28 @@ export const WalletConnect = ({ onClose, onCancel }) => {
                             </div>
 
                             <div
-                                onClick={() => {}}
+                                onClick={() => {
+                                    dispatch({
+                                        type: HANDLE_WALLET_MODAL,
+                                        walletModal: 'connecting',
+                                    });
+                                    activate(walletChange)
+                                        .then(() => {
+                                            dispatch({
+                                                type: HANDLE_WALLET_MODAL,
+                                                walletModal: null,
+                                            });
+                                            window &&
+                                            window.localStorage.setItem(
+                                                GALLERY_SELECT_WEB3_CONTEXT,
+                                                'MetaMask'
+                                            );
+                                        })
+                                        .catch(() => {});
+                                }}
                                 className='form-app__inner__wallets__item'>
-                                <img src={metamask} />
-                                <p>Connect to your Math Wallet</p>
+                                <img src={walletConnect} />
+                                <p>Connect to your WalletConnect</p>
                             </div>
                         </div>
                     </div>
