@@ -1,10 +1,43 @@
 .header {
     position: relative;
+    background: #fff;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    .center {
-        width: 1380px;
-        padding: 0;
+    @media #{$desktop} {
+        background-image: url('../image/weBanner.png');
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        height: 700px;
     }
+    @media #{$mdWidth} {
+        background: #fff;
+        background-image: url('../image/weBanner.png');
+        background-repeat: no-repeat;
+        height: 700px;
+    }
+    @media #{$smWidth} {
+        background: #fff;
+        height: auto;
+    }
+    @media #{$xsWidth} {
+        background: #fff;
+        height: auto;
+    }
+    .center {
+        padding: 0;
+        @media #{$desktop} {
+            width: 1200px;
+        }
+        @media #{$mdWidth} {
+            width: 1200px;
+        }
+        @media #{$smWidth} {
+            width: 100%;
+        }
+        @media #{$xsWidth} {
+            width: 100%;
+        }
+    }
+
     @media #{$mdWidth} {
         padding: 0 15px;
     }

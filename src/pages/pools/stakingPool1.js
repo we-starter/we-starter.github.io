@@ -2,7 +2,6 @@ import React from 'react';
 import { ReactComponent as HUSD } from '../../assets/logo/HUSD.svg';
 import { ReactComponent as ONE } from '../../assets/icon/1X.svg';
 import { StakingItem } from './StakingItem';
-import ant from '../../assets/icon/ant.png';
 
 export const StakingPool1 = () => {
     const stakingInfos = [
@@ -37,11 +36,7 @@ export const StakingPool1 = () => {
 
     return (
         <article className='center'>
-            <header className='head-page'>
-                <h1 className='head-page__title h5'>
-                    <img src={ant} /> 一池
-                </h1>
-            </header>
+            <header className='head-page'></header>
 
             <div className='statistics'>
                 <div className='statistics__list'>
