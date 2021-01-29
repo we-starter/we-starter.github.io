@@ -48,7 +48,7 @@ function App() {
                             <StakingPool2 />
                         </Route>
                     </Switch>
-                    {/* <InitPage /> */}
+                     <InitPage />
                     <Footer />
                 </Router>
             </Web3ReactProvider>

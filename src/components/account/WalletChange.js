@@ -2,11 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useWeb3React } from '@web3-react/core';
 import { mainContext } from '../../reducer';
 import { InjectedConnector } from '@web3-react/injected-connector';
-import {
-    GALLERY_SELECT_WEB3_CONTEXT,
-    HANDLE_SHOW_CONNECT_MODAL,
-    HANDLE_SHOW_TRANSACTION_MODAL,
-} from '../../const';
+import { GALLERY_SELECT_WEB3_CONTEXT } from '../../const';
 import { formatAddress } from '../../utils/format';
 import metamask from '../../assets/icon/metamask.png';
 import dot from '../../assets/icon/dot.png';
@@ -50,7 +46,6 @@ const wallets = {
 };
 
 export const WalletChange = ({ onClose, onCancel }) => {
-    const { dispatch, state } = useContext(mainContext);
     const [connectedName, setConnectedName] = useState();
 
     const context = useWeb3React();

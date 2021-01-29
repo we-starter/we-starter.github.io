@@ -3,7 +3,6 @@ import { formatAmount } from '../../utils/format';
 import {
     HANDLE_SHOW_CONNECT_MODAL,
     HANDLE_SHOW_FAILED_TRANSACTION_MODAL,
-    HANDLE_SHOW_TRANSACTION_MODAL,
     HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
     HANDLE_TX_STATUS,
     REQUESTING_DATA,
@@ -24,10 +23,9 @@ import WAR from '../../assets/logo/WAR.svg';
 export const StakingItem = ({ info, double }) => {
     const { toWei, fromWei } = Web3.utils;
 
-    const { account, active, library, chainId } = useActiveWeb3React();
-    const { dispatch, state } = useContext(mainContext);
+    const { account, active, library } = useActiveWeb3React();
+    const { dispatch } = useContext(mainContext);
 
-    const [reward, setRewards] = useState();
     const [amount, setAmount] = useState();
 
     const [staking, setStaking] = useState(false);

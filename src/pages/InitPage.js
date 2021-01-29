@@ -89,16 +89,16 @@ export const InitPage = () => {
     return (
         <>
 
-            <div className="language">
-                <img src={globe} alt=""/>
-                ZH-CN
-                <div className="language-items">
-                    <p>English</p>
-                    <p>中文简体</p>
-                </div>
-            </div>
+            {/*<div className="language">*/}
+            {/*    <img src={globe} alt=""/>*/}
+            {/*    ZH-CN*/}
+            {/*    <div className="language-items">*/}
+            {/*        <p>English</p>*/}
+            {/*        <p>中文简体</p>*/}
+            {/*    </div>*/}
+            {/*</div>*/}
 
-            <img src={satellite} className="satellite"/>
+            {/*<img src={satellite} className="satellite"/>*/}
 
             {showStakeModal && (
                 <div className="modal-show">
