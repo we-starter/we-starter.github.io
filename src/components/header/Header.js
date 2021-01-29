@@ -9,6 +9,8 @@ import { Logoicon, LogoSmallIcon } from '../../icons';
 import { ReactComponent as LogoText } from '../../assets/image/logo-text.svg';
 import { ReactComponent as More } from '../../assets/icon/more.svg';
 import dot from '../../assets/icon/dot.png';
+import heco from '../../assets/image/heco.png';
+
 
 export const Header = () => {
     const { active, account } = useActiveWeb3React();
@@ -50,7 +52,7 @@ export const Header = () => {
                                         className='menu__link'
                                         activeClassName='is-current'
                                         onClick={handleMenuItemClick}>
-                                        一池
+                                        抵押挖矿
                                     </NavLink>
                                 </li>
                                 <li className='menu__item'>
@@ -59,7 +61,16 @@ export const Header = () => {
                                         className='menu__link'
                                         activeClassName='is-current'
                                         onClick={handleMenuItemClick}>
-                                        二池
+                                        流动性挖矿
+                                    </NavLink>
+                                </li>
+                                <li className='menu__item'>
+                                    <NavLink
+                                        to='/staking-pool3'
+                                        className='menu__link'
+                                        activeClassName='is-current'
+                                        onClick={handleMenuItemClick}>
+                                        累计币领
                                     </NavLink>
                                 </li>
                             </ul>
@@ -115,6 +126,18 @@ export const Header = () => {
                         Menu
                     </button>
                 </div> */}
+            </div>
+            <div className='center'>
+               <div className='header__adv'>
+                   <h2>流动性价值发现平台</h2>
+                   <p>
+                   Westarter是一个连接加密货币创新者和投资者的对接平台，任何创新者都可以无需许可的使用标准化的界面来发起和管理流动性拍卖。
+                   </p>
+                   <div className='header__adv__img'>
+                      <p>Live on:</p>
+                      <img src={heco}></img>
+                   </div>
+               </div>
             </div>
         </header>
     );

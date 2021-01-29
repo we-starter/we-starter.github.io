@@ -1,18 +1,65 @@
 .header {
     position: relative;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    background-image: url(../image/banner@2x.png);
+    background-position: center;
+    background-size:100% 100%;
+    background-color: #FFFFFF;
+    height: 720px;
     .center {
         width: 1380px;
         padding: 0;
     }
     @media #{$mdWidth} {
         padding: 0 15px;
+        height: auto;
+        background-image: none;
+        &__adv {
+            display: none;;
+        }
     }
     @media #{$smWidth} {
         padding: 0 15px;
+        height: auto;
+        background-image: none;
+        &__adv {
+            display: none;;
+        }
     }
     @media #{$xsWidth} {
         padding: 0 15px;
+        height: auto;
+        background-image: none;
+        &__adv {
+            display: none;;
+        }
+    }
+    &__adv {
+        h2 {
+            margin-top: 140px;
+            font-size: 56px;
+            color: #22292F;
+        }
+        &>p {
+            margin-top: 20px;
+            font-size: 20px;
+            color: #7A7F82;
+            width: 532px;
+        }
+        &__img {
+            margin-top: 72px;
+            display: flex;
+            justify-content: flex-start;
+            p {
+                color: #22292F;
+                font-size: 20px;
+            }
+            img {
+                margin-left: 20px;
+                width: 133px;
+                height: 24px;
+            }
+        }
     }
     &--bb0 {
         border-bottom-color: transparent;
