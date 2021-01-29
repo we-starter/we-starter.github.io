@@ -60,7 +60,16 @@ export const Header = () => {
                                         className='menu__link'
                                         activeClassName='is-current'
                                         onClick={handleMenuItemClick}>
-                                        二池
+                                        流动性挖矿
+                                    </NavLink>
+                                </li>
+                                <li className='menu__item'>
+                                    <NavLink
+                                        to='/staking-pool3'
+                                        className='menu__link'
+                                        activeClassName='is-current'
+                                        onClick={handleMenuItemClick}>
+                                        累计币领
                                     </NavLink>
                                 </li> */}
                             </ul>
