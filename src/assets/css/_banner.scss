@@ -1,0 +1,220 @@
+.banner {
+    width: 100%;
+}
+@media #{$desktop} {
+    .banner {
+        width: 1200px;
+        margin: 0 auto;
+        &_img {
+            display: none;
+            margin: 0 auto;
+            width: 98%;
+            height: 270px;
+            // background-image: url('../image/weBanner.png');
+            // background-repeat: no-repeat;
+            // background-size: 100% 100%;
+        }
+        &_text {
+            padding: 0 28px;
+            font-size: 44px;
+            font-weight: 600;
+            color: #22292f;
+            line-height: 62px;
+            margin-top: 140px;
+        }
+        &_dec {
+            width: 522px;
+            padding: 0 28px;
+            font-size: 20px;
+            font-weight: 300;
+            color: #7a7f82;
+            line-height: 36px;
+            margin-top: 20px;
+        }
+        &_link {
+            display: flex;
+            align-items: center;
+            margin-top: 72px;
+            padding-bottom: 52px;
+            padding-left: 28px;
+            span {
+                font-size: 20px;
+                font-family: PTMono-Regular, PTMono !important;
+                font-weight: 400;
+                color: #22292f;
+                line-height: 20px;
+            }
+            a {
+                display: inline-block;
+                background-image: url('../image/HecoScan.png');
+                background-repeat: no-repeat;
+                background-size: cover;
+                width: 133px;
+                height: 24px;
+                margin-left: 8px;
+            }
+        }
+    }
+}
+@media #{$mdWidth} {
+    .banner {
+        width: 1200px;
+        margin: 0 auto;
+        &_img {
+            display: none;
+            margin: 0 auto;
+            width: 98%;
+            height: 270px;
+            // background-image: url('../image/weBanner.png');
+            // background-repeat: no-repeat;
+            // background-size: 100% 100%;
+        }
+        &_text {
+            padding: 0 28px;
+            font-size: 44px;
+            font-weight: 600;
+            color: #22292f;
+            line-height: 62px;
+            margin-top: 140px;
+        }
+        &_dec {
+            width: 522px;
+            padding: 0 28px;
+            font-size: 20px;
+            font-weight: 300;
+            color: #7a7f82;
+            line-height: 36px;
+            margin-top: 20px;
+        }
+        &_link {
+            display: flex;
+            align-items: center;
+            margin-top: 72px;
+            padding-bottom: 52px;
+            padding-left: 28px;
+            span {
+                font-size: 20px;
+                font-family: PTMono-Regular, PTMono !important;
+                font-weight: 400;
+                color: #22292f;
+                line-height: 20px;
+            }
+            a {
+                display: inline-block;
+                background-image: url('../image/HecoScan.png');
+                background-repeat: no-repeat;
+                background-size: cover;
+                width: 133px;
+                height: 24px;
+                margin-left: 8px;
+            }
+        }
+    }
+}
+@media #{$smWidth} {
+    .banner {
+        width: 100%;
+        &_img {
+            display: block;
+            margin: 0 auto;
+            width: 98%;
+            height: 270px;
+            background-image: url('../image/weBanner_h5.png');
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+        }
+        &_text {
+            padding: 0 28px;
+            font-size: 44px;
+            font-weight: 600;
+            color: #22292f;
+            line-height: 62px;
+            margin-top: 50px;
+        }
+        &_dec {
+            width: auto;
+            padding: 0 28px;
+            font-size: 20px;
+            font-weight: 300;
+            color: #7a7f82;
+            line-height: 36px;
+            margin-top: 20px;
+        }
+        &_link {
+            display: flex;
+            align-items: center;
+            margin-top: 20px;
+            padding-bottom: 52px;
+            padding-left: 28px;
+            span {
+                font-size: 20px;
+                font-family: PTMono-Regular, PTMono !important;
+                font-weight: 400;
+                color: #22292f;
+                line-height: 20px;
+            }
+            a {
+                display: inline-block;
+                background-image: url('../image/HecoScan.png');
+                background-repeat: no-repeat;
+                background-size: cover;
+                width: 133px;
+                height: 24px;
+                margin-left: 8px;
+            }
+        }
+    }
+}
+@media #{$xsWidth} {
+    .banner {
+        width: 100%;
+        &_img {
+            display: block;
+            margin: 0 auto;
+            width: 99%;
+            height: 270px;
+            background-image: url('../image/weBanner_h5.png');
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+        }
+        &_text {
+            padding: 0 28px;
+            font-size: 44px;
+            font-weight: 600;
+            color: #22292f;
+            line-height: 62px;
+        }
+        &_dec {
+            width: auto;
+            padding: 0 28px;
+            font-size: 20px;
+            font-weight: 300;
+            color: #7a7f82;
+            line-height: 36px;
+            margin-top: 20px;
+        }
+        &_link {
+            display: flex;
+            align-items: center;
+            margin-top: 20px;
+            padding-bottom: 52px;
+            padding-left: 28px;
+            span {
+                font-size: 20px;
+                font-family: PTMono-Regular, PTMono !important;
+                font-weight: 400;
+                color: #22292f;
+                line-height: 20px;
+            }
+            a {
+                display: inline-block;
+                background-image: url('../image/HecoScan.png');
+                background-repeat: no-repeat;
+                background-size: cover;
+                width: 133px;
+                height: 24px;
+                margin-left: 8px;
+            }
+        }
+    }
+}

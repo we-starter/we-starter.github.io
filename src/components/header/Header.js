@@ -9,6 +9,7 @@ import { Logoicon, LogoSmallIcon } from '../../icons';
 import { ReactComponent as LogoText } from '../../assets/image/logo-text.svg';
 import { ReactComponent as More } from '../../assets/icon/more.svg';
 import dot from '../../assets/icon/dot.png';
+import { Banner } from '../banner/Banner';
 
 export const Header = () => {
     const { active, account } = useActiveWeb3React();
@@ -46,22 +47,31 @@ export const Header = () => {
                             <ul className='menu__list'>
                                 <li className='menu__item'>
                                     <NavLink
-                                        to='/staking-pool1'
+                                        to='/'
                                         className='menu__link'
                                         activeClassName='is-current'
                                         onClick={handleMenuItemClick}>
-                                        一池
+                                        抵押挖矿
                                     </NavLink>
                                 </li>
-                                <li className='menu__item'>
+                                {/* <li className='menu__item'>
                                     <NavLink
                                         to='/staking-pool2'
                                         className='menu__link'
                                         activeClassName='is-current'
                                         onClick={handleMenuItemClick}>
-                                        二池
+                                        流动性挖矿
                                     </NavLink>
                                 </li>
+                                <li className='menu__item'>
+                                    <NavLink
+                                        to='/staking-pool3'
+                                        className='menu__link'
+                                        activeClassName='is-current'
+                                        onClick={handleMenuItemClick}>
+                                        累计币领
+                                    </NavLink>
+                                </li> */}
                             </ul>
                         </nav>
                     </div>
@@ -106,16 +116,9 @@ export const Header = () => {
                         <More />
                     </div>
                 </div>
-
-                {/* <div className='visible-md'>
-                    <button
-                        className='button btn-menu-toggle'
-                        type='button'
-                        onClick={() => setShowMenu((prev) => !prev)}>
-                        Menu
-                    </button>
-                </div> */}
             </div>
+            {/* banner图 */}
+            <Banner />
         </header>
     );
 };
