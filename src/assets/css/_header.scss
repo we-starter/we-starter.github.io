@@ -12,6 +12,7 @@
         background: #fff;
         background-image: url('../image/weBanner.png');
         background-repeat: no-repeat;
+        background-size: 100% 100%;
         height: 700px;
     }
     @media #{$smWidth} {
@@ -41,37 +42,37 @@
     @media #{$mdWidth} {
         padding: 0 15px;
         height: auto;
-        background-image: none;
+
         &__adv {
-            display: none;;
+            display: none;
         }
     }
     @media #{$smWidth} {
         padding: 0 15px;
         height: auto;
-        background-image: none;
+
         &__adv {
-            display: none;;
+            display: none;
         }
     }
     @media #{$xsWidth} {
         padding: 0 15px;
         height: auto;
-        background-image: none;
+
         &__adv {
-            display: none;;
+            display: none;
         }
     }
     &__adv {
         h2 {
             margin-top: 140px;
             font-size: 56px;
-            color: #22292F;
+            color: #22292f;
         }
-        &>p {
+        & > p {
             margin-top: 20px;
             font-size: 20px;
-            color: #7A7F82;
+            color: #7a7f82;
             width: 532px;
         }
         &__img {
@@ -79,7 +80,7 @@
             display: flex;
             justify-content: flex-start;
             p {
-                color: #22292F;
+                color: #22292f;
                 font-size: 20px;
             }
             img {
@@ -207,6 +208,11 @@
             margin-left: 7px;
             display: none;
         }
+        @media #{$mdWidth} {
+            .more {
+                display: block;
+            }
+        }
         @media #{$smWidth} {
             .more {
                 display: block;
@@ -260,6 +266,18 @@
         margin-left: 50px;
 
         @media #{$mdWidth} {
+            display: none;
+            margin: 20px -20px 0;
+            padding-top: 72px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        @media #{$smWidth} {
+            display: none;
+            margin: 20px -20px 0;
+            padding-top: 72px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        @media #{$xsWidth} {
             display: none;
             margin: 20px -20px 0;
             padding-top: 72px;

@@ -5,8 +5,8 @@ import { Web3Provider } from '@ethersproject/providers';
 
 import './assets/css/style.scss';
 import { Header } from './components/header/Header';
-import { Banner } from './components/banner/Banner';
 import { PoolTab } from './components/pooltab/PoolTab';
+
 import { HomePage } from './pages/HomePage';
 import { ContextProvider } from './reducer';
 import { InitPage } from './pages/InitPage';
@@ -48,7 +48,7 @@ function App() {
                             <StakingPool2 />
                         </Route>
                     </Switch>
-                     <InitPage />
+                    <InitPage />
                     <Footer />
                 </Router>
             </Web3ReactProvider>
