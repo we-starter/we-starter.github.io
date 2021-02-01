@@ -25,7 +25,7 @@ function App() {
     useEffect(() => {
         const el = document.querySelector('.loader-container');
         if (el) {
-            // el.remove();
+            el.remove();
         }
     }, []);
 
