@@ -18,7 +18,7 @@ import ERC20 from '../../web3/abi/ERC20.json';
 import StakingReward from '../../web3/abi/StakingReward.json';
 import { StakeModal, WithdrawModal } from '../../components/Modals';
 import Web3 from 'web3';
-import WAR from '../../assets/logo/WAR.svg';
+import WAR from '../../assets/logo/war.svg';
 
 export const StakingItem = ({ info, double }) => {
     const { toWei, fromWei } = Web3.utils;
