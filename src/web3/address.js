@@ -284,6 +284,8 @@ export function WETH_ADDRESS(chainId) {
             return '0xc778417e063141139fce010982780140aa0cd5ab'
         case 3:
             return '0xc778417e063141139fce010982780140aa0cd5ab'
+        case 128:
+            return '0x5545153ccfca01fbd7dd11c0b23ba694d9509a6f'
         default:
             throw new Error('unknown chain')
     }

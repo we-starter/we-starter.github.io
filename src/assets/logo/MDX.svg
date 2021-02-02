@@ -9,6 +9,7 @@
         </filter>
     </defs>
     <g id="MDX" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <rect id="矩形" x="0" y="0" width="50" height="50"></rect>
         <g id="编组" transform="translate(1.000000, 3.000000)">
             <g id="编组-9" fill-rule="nonzero">
                 <path d="M22,44 C34.1503169,44 44,34.1503169 44,22 C44,9.84968314 34.1503169,0 22,0 C9.84980989,0 0,9.84968314 0,22 C0,34.1503169 9.84980989,44 22,44 Z" id="Path备份" fill="#4CA9DC"></path>

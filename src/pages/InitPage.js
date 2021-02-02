@@ -27,7 +27,7 @@ import { TXStatusModal } from '../components/Modals/TXStatusModal';
 import satellite from '../assets/image/satellite.png';
 
 const injected = new InjectedConnector({
-    supportedChainIds: [1, 3, 4, 5, 42, 31337],
+    supportedChainIds: [1, 3, 4, 5, 42, 128],
 });
 
 const POLLING_INTERVAL = 12000;

@@ -1,238 +1,17 @@
 import React, {useState, useEffect} from 'react';
 import {getContract, useActiveWeb3React} from "../../web3";
 import {
-    getBotAddress,
-    getDEGOAddress,
-    getDONUTAddress,
-    getETHAddress,
-    getGalleryAddress,
-    getGLFStakingAddress,
-    getMEMOAddress, getStakingScoreAddress,
-    getUSDTAddress,
-    getUSDTTokenAddress, WETH_ADDRESS
+    WETH_ADDRESS
 } from "../../web3/address";
-import BigNumber from "bignumber.js";
-import ERC20 from "../../web3/abi/ERC20.json";
-import {ChainId, Fetcher, Route, Token, WETH} from "@uniswap/sdk";
-import StakingScore from "../../web3/abi/StakingScore.json";
 import StakingReward from "../../web3/abi/StakingReward.json";
 import Web3 from "web3";
+import {ReactComponent as HUSD} from "../../assets/logo/HUSD.svg";
+import {ReactComponent as ONE} from "../../assets/icon/1X.svg";
+import {ReactComponent as HT} from "../../assets/logo/HT.svg";
+import {ReactComponent as MDX} from "../../assets/logo/MDX.svg";
+import {ReactComponent as WAR} from "../../assets/logo/war.svg";
+import {ReactComponent as HBTC} from "../../assets/logo/HBTC.svg";
 
-
-export const useStatistics = () => {
-    const {account, active, library, chainId} = useActiveWeb3React()
-    const [totalStaked] = useState()
-    const [glfBalance, setGLFBalance] = useState()
-    const [curPrice, setCurPrice] = useState()
-    const [totalSupply, setTotalSupply] = useState()
-    const [curSupply, setCurSupply] = useState()
-    const [totalBurned, setTotalBurned] = useState()
-
-    const [ETHPrice, setETHPrice] = useState()
-    const [BOTPrice, setBOTPrice] = useState()
-    const [USDTPrice, setUSDTPrice] = useState()
-    const [DEGOPrice, setDEGOPrice] = useState()
-    const [DONUTPrice, setDONUTPrice] = useState()
-    const [MEMEPrice, setMEMEPrice] = useState()
-
-
-    const [burnedTotal, setBurnedTotal] = useState()
-
-
-    async function queryTotalSupply() {
-        console.log('queryTotalSupply')
-        const glfContract = getContract(library, ERC20.abi, getGLFStakingAddress(chainId))
-
-        const botStaked = await glfContract.methods.balanceOf(getBotAddress(chainId)).call()
-
-        const ethStaked = await glfContract.methods.balanceOf(getETHAddress(chainId)).call()
-
-        const usdtStaked = await glfContract.methods.balanceOf(getUSDTAddress(chainId)).call()
-
-        const memeStaked = await glfContract.methods.balanceOf(getMEMOAddress(chainId)).call()
-
-        const donutStaked = await glfContract.methods.balanceOf(getDONUTAddress(chainId)).call()
-
-        const degoStaked = await glfContract.methods.balanceOf(getDEGOAddress(chainId)).call()
-
-        const total = new BigNumber((botStaked))
-            .plus(new BigNumber((ethStaked)))
-            .plus(new BigNumber((usdtStaked)))
-            .plus(new BigNumber((memeStaked)))
-            .plus(new BigNumber((donutStaked)))
-            .plus(new BigNumber((degoStaked)))
-            .toFixed()
-            .toString()
-
-        setTotalSupply(total)
-    }
-
-    async function queryTokensPrice() {
-        try {
-            const USDT = new Token(ChainId.MAINNET, getUSDTTokenAddress(), 6)
-
-            const BOT = await Fetcher.fetchTokenData(ChainId.MAINNET, getBotAddress(ChainId.MAINNET))
-            const ETHWETHPair = await Fetcher.fetchPairData(WETH[ChainId.MAINNET], BOT)
-            const USDTWETHPair = await Fetcher.fetchPairData(USDT, WETH[ChainId.MAINNET])
-            const ETHRoute = new Route([ETHWETHPair, USDTWETHPair], BOT)
-            const BOTPrice = ETHRoute.midPrice.toSignificant(6)
-            console.log('botPrice', ETHRoute.midPrice.toSignificant(6))
-            setBOTPrice(BOTPrice)
-
-            const MEME = await Fetcher.fetchTokenData(ChainId.MAINNET, getMEMOAddress(ChainId.MAINNET))
-            const MEMEpair = await Fetcher.fetchPairData(USDT, MEME)
-            const MEMEroute = new Route([MEMEpair], MEME)
-            console.log('cur meme price', MEMEroute.midPrice.toSignificant(6))
-            setMEMEPrice(MEMEroute.midPrice.toSignificant(6))
-
-            setDONUTPrice('0.006')
-            setDEGOPrice('1.1')
-            setUSDTPrice('1')
-            setETHPrice('376')
-            //
-            // const ETH = await new Token(ChainId.MAINNET, getETHAddress(ChainId.MAINNET), 18)
-            // const ETHpair = await Fetcher.fetchPairData(USDT, ETH)
-            // const ETHroute = new Route([ETHpair], ETH)
-            // console.log('ETH price',ETHroute.midPrice.toSignificant(6))
-            // setDONUTPrice(ETHroute.midPrice.toSignificant(6))
-            //
-            // const DONUT = await Fetcher.fetchTokenData(ChainId.MAINNET, getDONUTAddress(ChainId.MAINNET))
-            // const DONUTpair = await Fetcher.fetchPairData(USDT, DONUT)
-            // const DONUTroute = new Route([DONUTpair], DONUT)
-            // console.log('DONUT dego price',DONUTroute.midPrice.toSignificant(6))
-            // setDONUTPrice(DONUTroute.midPrice.toSignificant(6))
-            //
-            // const DEGO = await Fetcher.fetchTokenData(ChainId.MAINNET, getDEGOAddress(ChainId.MAINNET))
-            // const DEGOpair = await Fetcher.fetchPairData(USDT, DEGO)
-            // const DEGOroute = new Route([DEGOpair], DEGO)
-            // console.log('cur dego price',DEGOroute.midPrice.toSignificant(6))
-            // setDEGOPrice(DEGOroute.midPrice.toSignificant(6))
-
-        } catch (e) {
-            console.log('queryTokensPrice error', e)
-        }
-
-        //const ETH = new Token(ChainId.MAINNET, '0x710980bb4a0866e9ec162ccd84439dda5a04b99c', 18)
-
-    }
-
-    async function queryGLFPrice() {
-        try {
-            const USDT = new Token(ChainId.MAINNET, getUSDTTokenAddress(), 6)
-            const GLF = await Fetcher.fetchTokenData(ChainId.MAINNET, getGLFStakingAddress(ChainId.MAINNET))
-            const pair = await Fetcher.fetchPairData(USDT, GLF)
-            const route = new Route([pair], GLF)
-            console.log('cur glf price', route.midPrice.toSignificant(6))
-            setCurPrice(route.midPrice.toSignificant(6))
-        } catch (e) {
-            console.log('queryGLFPrice', e)
-        }
-
-    }
-
-    useEffect(() => {
-        if (active) {
-            queryTokensPrice()
-            queryTotalSupply()
-            queryGLFPrice()
-            const glfContract = getContract(library, ERC20.abi, getGLFStakingAddress(chainId))
-            glfContract.methods.balanceOf('0x000000000000000000000000000000000000dEaD').call().then((res) => {
-                setBurnedTotal(res)
-            })
-        }
-    }, [active])
-
-    return {
-        totalStaked,
-        burnedTotal,
-        curPrice,
-        BOTPrice,
-        ETHPrice,
-        MEMEPrice,
-        DONUTPrice,
-        DEGOPrice,
-        USDTPrice,
-        totalSupply
-    }
-}
-
-export const useGLFStaking = () => {
-    const {account, active, library, chainId} = useActiveWeb3React()
-    const [glfStakedAmount, setGLFStakedAmount] = useState()
-    const [glfRewards, setGLFRewards] = useState()
-    const [redeemedCount, setRedeemedCount] = useState()
-    const [NFTsLeft, setNFTsLeft] = useState()
-
-    function queryGLFStaking() {
-        const contract = getContract(library, StakingScore.abi, getStakingScoreAddress(chainId))
-        const tokenContract = getContract(library, ERC20.abi, getGalleryAddress(chainId))
-        try {
-            contract.methods.myStake(account).call().then(res => {
-                console.log('glf myStake', res)
-                setGLFStakedAmount(res)
-            })
-        } catch (e) {
-            console.log('glf myStake error', e)
-        }
-
-        try {
-            contract.methods.calculateReward(account).call().then(res => {
-                console.log('glf calculateReward', res)
-                setGLFRewards(res)
-            })
-        } catch (e) {
-            console.log('glf calculateReward error', e)
-        }
-    }
-
-    useEffect(() => {
-        if (active) {
-            queryGLFStaking()
-        }
-
-    }, [active])
-
-    return {glfStakedAmount, glfRewards}
-}
-
-export const useMyGLFStaking = () => {
-    const {account, active, library, chainId} = useActiveWeb3React()
-    const [glfStakedAmount, setGLFStakedAmount] = useState()
-    const [glfRewards, setGLFRewards] = useState()
-    const [redeemedCount, setRedeemedCount] = useState()
-    const [NFTsLeft, setNFTsLeft] = useState()
-
-    function queryGLFStaking() {
-        const contract = getContract(library, StakingScore.abi, getStakingScoreAddress(chainId))
-        const tokenContract = getContract(library, ERC20.abi, getGalleryAddress(chainId))
-        try {
-            contract.methods.myStake(account).call().then(res => {
-                console.log('glf myStake', res)
-                setGLFStakedAmount(res)
-            })
-        } catch (e) {
-            console.log('glf myStake error', e)
-        }
-
-        try {
-            contract.methods.calculateReward(account).call().then(res => {
-                console.log('glf calculateReward', res)
-                setGLFRewards(res)
-            })
-        } catch (e) {
-            console.log('glf calculateReward error', e)
-        }
-    }
-
-    useEffect(() => {
-        if (active) {
-            queryGLFStaking()
-        }
-
-    }, [active])
-
-    return {glfStakedAmount, glfRewards}
-}
 
 
 export const useStakingInfo = (stakingInfo) => {
@@ -312,6 +91,152 @@ export const useStakingInfo = (stakingInfo) => {
     }, [account])
 
     return earned && reward && earnedTotal && balance ? {earned, reward, earnedTotal, balance} : null
+}
+
+export const useStakingPoolInfo = () => {
+    const [stakingInfos, setStakingInfos] = useState({
+        staking1: [],
+        staking2: [],
+        staking3: []
+    })
+
+    const {chainId} = useActiveWeb3React()
+
+    useEffect(()=>{
+        switch (chainId) {
+            case 3:
+                setStakingInfos({
+                    staking1: [
+                        {
+                            id: 0,
+                            title: 'EHT POOL',
+                            symbol: 'EHT',
+                            address: null,
+                            stakingAddress: '0xB65853Ddc2366564e2238c70a0676B886c79dD9b',
+                            logo: <HUSD />,
+                            multiple: <ONE />,
+                        },
+                        {
+                            id: 1,
+                            title: 'DAI POOL',
+                            symbol: 'DAI',
+                            address: '0xad6d458402f60fd3bd25163575031acdce07538d',
+                            stakingAddress: '0xE9bA85Ef193c02a5583599676d93b408E106b60B',
+                            logo: <HUSD />,
+                            multiple: <ONE />,
+                        },
+                        // {
+                        //     id: 0,
+                        //     title: 'WAR POOL',
+                        //     symbol: 'WAR',
+                        //     address: '0x880bd31775d97Ce7006D1Cc72EbCC36E412E663C',
+                        //     stakingAddress: '0xDdB7B0a03A98e7814430E8C010D221D010F2cD6F',
+                        //     logo: <HUSD />,
+                        //     multiple: <ONE />,
+                        // },
+                    ],
+                    staking2: [
+                        {
+                            id: 0,
+                            title: 'WAR-ETH',
+                            symbol: 'LP',
+                            address: '0x441FB052eb4b78148DA28D5da95C38E49e900afB',
+                            stakingAddress: '0x51137287b88F2CcC39f0E32267035Ad46aeB1e9b',
+                            logo: <HUSD />,
+                        },
+                        {
+                            id: 0,
+                            title: 'WAR-DAI',
+                            symbol: 'LP',
+                            address: '0xe46Eff65f94935501e343B2B56bA59400661eC10',
+                            stakingAddress: '0x54aDaC57CED2318fB23D3093d07558C868dCf972',
+                            logo: <HUSD />,
+                        },
+                    ],
+                    staking3: [
+                        {
+                            id: 0,
+                            title: 'WAR-ETH',
+                            symbol: 'LP',
+                            address: '0x441FB052eb4b78148DA28D5da95C38E49e900afB',
+                            stakingAddress: '0x51137287b88F2CcC39f0E32267035Ad46aeB1e9b',
+                            logo: <HUSD />,
+                        },
+                        {
+                            id: 0,
+                            title: 'WAR-DAI',
+                            symbol: 'LP',
+                            address: '0xe46Eff65f94935501e343B2B56bA59400661eC10',
+                            stakingAddress: '0x54aDaC57CED2318fB23D3093d07558C868dCf972',
+                            logo: <HUSD />,
+                        },
+                    ]
+                })
+                break
+            case 128:
+                setStakingInfos({
+                    staking1: [
+                        {
+                            id: 0,
+                            title: 'HT POOL',
+                            symbol: 'HT',
+                            address: null,
+                            stakingAddress: '0xB65853Ddc2366564e2238c70a0676B886c79dD9b',
+                            logo: <HT />,
+                            multiple: <ONE />,
+                        },
+                        {
+                            id: 1,
+                            title: 'HUSD POOL',
+                            symbol: 'DAI',
+                            address: '0x0298c2b32eae4da002a15f36fdf7615bea3da047',
+                            stakingAddress: '0xE9bA85Ef193c02a5583599676d93b408E106b60B',
+                            logo: <HUSD />,
+                            multiple: <ONE />,
+                        },
+                        {
+                            id: 0,
+                            title: 'HBTC POOL',
+                            symbol: 'HBTC',
+                            address: '0x66a79d23e58475d2738179ca52cd0b41d73f0bea',
+                            stakingAddress: '0xDdB7B0a03A98e7814430E8C010D221D010F2cD6F',
+                            logo: <HBTC />,
+                            multiple: <ONE />,
+                        },
+                        {
+                            id: 0,
+                            title: 'MDX POOL',
+                            symbol: 'MDX',
+                            address: '0x25D2e80cB6B86881Fd7e07dd263Fb79f4AbE033c',
+                            stakingAddress: '0x51137287b88F2CcC39f0E32267035Ad46aeB1e9b',
+                            logo: <MDX />,
+                            multiple: <ONE />,
+                        },
+                        {
+                            id: 0,
+                            title: 'WAR POOL',
+                            symbol: 'WAR',
+                            address: '0xf45e4cc4DC165F9D30750F9F9c7f710288FD37b2',
+                            stakingAddress: '0x54aDaC57CED2318fB23D3093d07558C868dCf972',
+                            logo: <WAR />,
+                            multiple: <ONE />,
+                        },
+                    ],
+                    staking2: [
+
+                    ],
+                    staking3: [
+
+                    ]
+                })
+                break
+            default :
+                setStakingInfos({staking1: [], staking2: [], staking3: []})
+        }
+
+    },[chainId])
+
+    return  stakingInfos
 }
 
 
