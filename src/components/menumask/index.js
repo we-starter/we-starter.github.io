@@ -24,9 +24,9 @@ export const MenuMask = () => {
                     <ul className='menumask_list'>
                         <li className='menumask_item'>
                             <NavLink
-                                to='/'
+                                exact
+                                to='/staking-pool1'
                                 className='menumask_link'
-                                activeClassName='is-current'
                                 onClick={() =>
                                     dispatch({
                                         type: HANDLE_SHOW_MENUMASK_MODAL,
@@ -38,9 +38,9 @@ export const MenuMask = () => {
                         </li>
                         <li className='menumask_item'>
                             <NavLink
-                                to='/'
+                                exact
+                                to=''
                                 className='menumask_link'
-                                activeClassName='is-current'
                                 onClick={() =>
                                     dispatch({
                                         type: HANDLE_SHOW_MENUMASK_MODAL,
@@ -50,11 +50,10 @@ export const MenuMask = () => {
                                 众筹池
                             </NavLink>
                         </li>
-                        <li className='menumask_item'>
+                        {/* <li className='menumask_item'>
                             <NavLink
                                 to='/'
                                 className='menumask_link'
-                                activeClassName='is-current'
                                 onClick={() =>
                                     dispatch({
                                         type: HANDLE_SHOW_MENUMASK_MODAL,
@@ -68,7 +67,6 @@ export const MenuMask = () => {
                             <NavLink
                                 to='/'
                                 className='menumask_link'
-                                activeClassName='is-current'
                                 onClick={() =>
                                     dispatch({
                                         type: HANDLE_SHOW_MENUMASK_MODAL,
@@ -77,7 +75,7 @@ export const MenuMask = () => {
                                 }>
                                 新鲜事
                             </NavLink>
-                        </li>
+                        </li> */}
                     </ul>
                 </nav>
             </div>

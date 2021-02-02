@@ -47,40 +47,40 @@ export const Header = () => {
                             <ul className='menu__list'>
                                 <li className='menu__item'>
                                     <NavLink
-                                        to='/'
+                                        exact
+                                        to='/staking-pool1'
                                         className='menu__link'
-                                        activeClassName='is-current'
                                         onClick={handleMenuItemClick}>
                                         挖矿池
                                     </NavLink>
                                 </li>
                                 <li className='menu__item'>
                                     <NavLink
-                                        to='/'
+                                        exact
+                                        to=''
                                         className='menu__link'
-                                        activeClassName='is-current'
                                         onClick={handleMenuItemClick}>
                                         众筹池
                                     </NavLink>
                                 </li>
-                                <li className='menu__item'>
+                                {/* <li className='menu__item'>
                                     <NavLink
-                                        to='/'
+                                        exact
+                                        to=''
                                         className='menu__link'
-                                        activeClassName='is-current'
                                         onClick={handleMenuItemClick}>
                                         使用指南
                                     </NavLink>
                                 </li>
                                 <li className='menu__item'>
                                     <NavLink
-                                        to='/'
+                                        exact
+                                        to=''
                                         className='menu__link'
-                                        activeClassName='is-current'
                                         onClick={handleMenuItemClick}>
                                         新鲜事
                                     </NavLink>
-                                </li>
+                                </li> */}
                                 {/* <li className='menu__item'>
                                     <NavLink
                                         to='/staking-pool2'

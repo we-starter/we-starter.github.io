@@ -48,7 +48,7 @@
         font-weight: 600;
         line-height: 24px;
     }
-    .is-current {
+    .active {
         color: #0f8c20;
     }
 }
@@ -59,7 +59,7 @@
 }
 @media #{$mdWidth} {
     .menumask {
-        display: none;
+        display: block;
     }
 }
 @media #{$smWidth} {

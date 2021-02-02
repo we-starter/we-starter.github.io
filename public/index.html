@@ -36,21 +36,23 @@
             position: fixed;
             top: 50%;
             left: 50%;
-            /* transform: translate(-50%, -50%); */
             animation: logoimg 1s infinite;
         }
 
         @keyframes logoimg {
             0% {
                 transform: scale(1) translate(-50%, -50%);
+                transform-origin: left;
             }
 
             50% {
                 transform: scale(0.75) translate(-50%, -50%);
+                transform-origin: left;
             }
 
             100% {
                 transform: scale(1) translate(-50%, -50%);
+                transform-origin: left;
             }
         }
 
