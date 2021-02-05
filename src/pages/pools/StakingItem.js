@@ -301,7 +301,7 @@ export const StakingItem = ({ info, double }) => {
                     {info.logo}
                     {info.title}
                 </p>
-                <span>{info.multiple}</span>
+                {info.multiple}
             </div>
 
             <dl className='statistics__dl'>

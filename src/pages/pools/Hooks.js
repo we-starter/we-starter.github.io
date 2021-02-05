@@ -1,17 +1,25 @@
-import React, { useState, useEffect } from 'react';
-import { getContract, useActiveWeb3React } from '../../web3';
-import { WETH_ADDRESS } from '../../web3/address';
+import React, {useState, useEffect} from 'react';
+import {getContract, useActiveWeb3React} from '../../web3';
+import {WETH_ADDRESS} from '../../web3/address';
 import StakingReward from '../../web3/abi/StakingReward.json';
 import Web3 from 'web3';
-import { ReactComponent as HUSD } from '../../assets/logo/HUSD.svg';
-import { ReactComponent as ONE } from '../../assets/icon/1X.svg';
-import { ReactComponent as HT } from '../../assets/logo/HT.svg';
-import { ReactComponent as MDX } from '../../assets/logo/MDX.svg';
-import { ReactComponent as WAR } from '../../assets/logo/war.svg';
-import { ReactComponent as HBTC } from '../../assets/logo/HBTC.svg';
+import {ReactComponent as HUSD} from '../../assets/logo/HUSD.svg';
+import {ReactComponent as HT} from '../../assets/logo/HT.svg';
+import {ReactComponent as MDX} from '../../assets/logo/MDX.svg';
+import {ReactComponent as WAR} from '../../assets/logo/war.svg';
+import {ReactComponent as HBTC} from '../../assets/logo/HBTC.svg';
+
+import {ReactComponent as X1} from '../../assets/logo/1x.svg';
+import {ReactComponent as X2_5} from '../../assets/logo/2.5X.svg';
+import {ReactComponent as X2} from '../../assets/logo/2X.svg';
+import {ReactComponent as X4} from '../../assets/logo/4X.svg';
+import {ReactComponent as X5} from '../../assets/logo/5x.svg';
+import {ReactComponent as X10} from '../../assets/logo/10X.svg';
+
+
 
 export const useStakingInfo = (stakingInfo) => {
-    const { account, active, library, chainId } = useActiveWeb3React();
+    const {account, active, library, chainId} = useActiveWeb3React();
     const [earned, setEarned] = useState();
     const [reward, setReward] = useState();
     const [earnedTotal, setEarnedTotal] = useState();
@@ -115,7 +123,7 @@ export const useStakingInfo = (stakingInfo) => {
     }, [account]);
 
     return earned && reward && earnedTotal && balance
-        ? { earned, reward, earnedTotal, balance }
+        ? {earned, reward, earnedTotal, balance}
         : null;
 };
 
@@ -126,7 +134,7 @@ export const useStakingPoolInfo = () => {
         staking3: [],
     });
 
-    const { chainId } = useActiveWeb3React();
+    const {chainId} = useActiveWeb3React();
 
     useEffect(() => {
         switch (chainId) {
@@ -141,8 +149,8 @@ export const useStakingPoolInfo = () => {
                                 '0x0298c2b32eae4da002a15f36fdf7615bea3da047',
                             stakingAddress:
                                 '0xE9bA85Ef193c02a5583599676d93b408E106b60B',
-                            logo: <HUSD />,
-                            multiple: <ONE />,
+                            logo: <HUSD/>,
+                            multiple: <X1/>,
                         },
                         {
                             id: 1,
@@ -152,8 +160,8 @@ export const useStakingPoolInfo = () => {
                                 '0x66a79d23e58475d2738179ca52cd0b41d73f0bea',
                             stakingAddress:
                                 '0xDdB7B0a03A98e7814430E8C010D221D010F2cD6F',
-                            logo: <HUSD />,
-                            multiple: <ONE />,
+                            logo: <HUSD/>,
+                            multiple: <X1/>,
                         },
                         {
                             id: 3,
@@ -163,8 +171,8 @@ export const useStakingPoolInfo = () => {
                                 '0x25D2e80cB6B86881Fd7e07dd263Fb79f4AbE033c',
                             stakingAddress:
                                 '0x51137287b88F2CcC39f0E32267035Ad46aeB1e9b',
-                            logo: <MDX />,
-                            multiple: <ONE />,
+                            logo: <MDX/>,
+                            multiple: <X1/>,
                         },
                         {
                             id: 4,
@@ -173,40 +181,43 @@ export const useStakingPoolInfo = () => {
                             address: null,
                             stakingAddress:
                                 '0xB65853Ddc2366564e2238c70a0676B886c79dD9b',
-                            logo: <HUSD />,
-                            multiple: <ONE />,
+                            logo: <HUSD/>,
+                            multiple: <X2_5/>,
                         },
                     ],
                     staking2: [
                         {
                             id: 0,
-                            title: 'WAR-HT',
-                            symbol: 'LP',
+                            title: 'WAR-HT POOL',
+                            symbol: 'WAR-HT',
                             address:
                                 '0x7Aa096b705FA16B595F307Ad647912077521d571',
                             stakingAddress:
                                 '0x0509ff1628c90890e52874b3b8b8eeaa5a2af101',
-                            logo: <HT />,
+                            logo: <HT/>,
+                            multiple: <X10/>,
                         },
                         {
                             id: 1,
-                            title: 'WAR-HUSD',
-                            symbol: 'LP',
+                            title: 'WAR-HUSD POOL',
+                            symbol: 'WAR-HUSD',
                             address:
                                 '0x1E214fd9348F6A35541C64CA668f25b0Cd59B2A6',
                             stakingAddress:
                                 '0x8b8389d355eb7b2c6c86e1bb6614c0a4cb28743a',
-                            logo: <HUSD />,
+                            logo: <HUSD/>,
+                            multiple: <X4/>,
                         },
                         {
                             id: 2,
-                            title: 'WAR-MDX',
-                            symbol: 'LP',
+                            title: 'WAR-MDX POOL',
+                            symbol: 'WAR-MDX',
                             address:
                                 '0x9cd0C27f743a18Ce38acf28F051Baf09C94423Ff',
                             stakingAddress:
                                 '0x608b1d5314b6bba219ccc73caa8831f240f1dfa2',
-                            logo: <HUSD />,
+                            logo: <HUSD/>,
+                            multiple: <X2/>,
                         },
                     ],
                     staking3: [
@@ -218,11 +229,12 @@ export const useStakingPoolInfo = () => {
                                 '0xf45e4cc4DC165F9D30750F9F9c7f710288FD37b2',
                             stakingAddress:
                                 '0x54aDaC57CED2318fB23D3093d07558C868dCf972',
-                            logo: <WAR />,
-                            multiple: <ONE />,
+                            logo: <WAR/>,
+                            multiple: <X5/>,
                         },
                     ],
                 });
+                break
             case 128:
                 setStakingInfos({
                     staking1: [
@@ -234,8 +246,8 @@ export const useStakingPoolInfo = () => {
                                 '0x0298c2b32eae4da002a15f36fdf7615bea3da047',
                             stakingAddress:
                                 '0xE9bA85Ef193c02a5583599676d93b408E106b60B',
-                            logo: <HUSD />,
-                            multiple: <ONE />,
+                            logo: <HUSD/>,
+                            multiple: <X1/>,
                         },
                         {
                             id: 1,
@@ -245,8 +257,8 @@ export const useStakingPoolInfo = () => {
                                 '0x66a79d23e58475d2738179ca52cd0b41d73f0bea',
                             stakingAddress:
                                 '0xDdB7B0a03A98e7814430E8C010D221D010F2cD6F',
-                            logo: <HUSD />,
-                            multiple: <ONE />,
+                            logo: <HUSD/>,
+                            multiple: <X1/>,
                         },
                         {
                             id: 3,
@@ -256,8 +268,8 @@ export const useStakingPoolInfo = () => {
                                 '0x25D2e80cB6B86881Fd7e07dd263Fb79f4AbE033c',
                             stakingAddress:
                                 '0x51137287b88F2CcC39f0E32267035Ad46aeB1e9b',
-                            logo: <MDX />,
-                            multiple: <ONE />,
+                            logo: <MDX/>,
+                            multiple: <X1/>,
                         },
                         {
                             id: 4,
@@ -266,40 +278,43 @@ export const useStakingPoolInfo = () => {
                             address: null,
                             stakingAddress:
                                 '0xB65853Ddc2366564e2238c70a0676B886c79dD9b',
-                            logo: <HUSD />,
-                            multiple: <ONE />,
+                            logo: <HUSD/>,
+                            multiple: <X2_5/>,
                         },
                     ],
                     staking2: [
                         {
                             id: 0,
-                            title: 'WAR-HT',
-                            symbol: 'LP',
+                            title: 'WAR-HT POOL',
+                            symbol: 'WAR-HT',
                             address:
-                                '0x7Aa096b705FA16B595F307Ad647912077521d571',
-                            stakingAddress:
                                 '0x0509ff1628c90890e52874b3b8b8eeaa5a2af101',
-                            logo: <HT />,
+                            stakingAddress:
+                                '0x7Aa096b705FA16B595F307Ad647912077521d571',
+                            logo: <HT/>,
+                            multiple: <X10/>,
                         },
                         {
                             id: 1,
-                            title: 'WAR-HUSD',
-                            symbol: 'LP',
+                            title: 'WAR-HUSD POOL',
+                            symbol: 'WAR-HUSD',
                             address:
-                                '0x1E214fd9348F6A35541C64CA668f25b0Cd59B2A6',
-                            stakingAddress:
                                 '0x8b8389d355eb7b2c6c86e1bb6614c0a4cb28743a',
-                            logo: <HUSD />,
+                            stakingAddress:
+                                '0x1E214fd9348F6A35541C64CA668f25b0Cd59B2A6',
+                            logo: <HUSD/>,
+                            multiple: <X4/>,
                         },
                         {
                             id: 2,
-                            title: 'WAR-MDX',
-                            symbol: 'LP',
+                            title: 'WAR-MDX POOL',
+                            symbol: 'WAR-MDX ',
                             address:
-                                '0x9cd0C27f743a18Ce38acf28F051Baf09C94423Ff',
-                            stakingAddress:
                                 '0x608b1d5314b6bba219ccc73caa8831f240f1dfa2',
-                            logo: <HUSD />,
+                            stakingAddress:
+                                '0x9cd0C27f743a18Ce38acf28F051Baf09C94423Ff',
+                            logo: <HUSD/>,
+                            multiple: <X2/>,
                         },
                     ],
                     staking3: [
@@ -311,107 +326,14 @@ export const useStakingPoolInfo = () => {
                                 '0xf45e4cc4DC165F9D30750F9F9c7f710288FD37b2',
                             stakingAddress:
                                 '0x54aDaC57CED2318fB23D3093d07558C868dCf972',
-                            logo: <WAR />,
-                            multiple: <ONE />,
-                        },
-                    ],
-                });
-                break;
-                setStakingInfos({
-                    staking1: [
-                        {
-                            id: 0,
-                            title: 'HUSD POOL',
-                            symbol: 'HUSD',
-                            address:
-                                '0x0298c2b32eae4da002a15f36fdf7615bea3da047',
-                            stakingAddress:
-                                '0xE9bA85Ef193c02a5583599676d93b408E106b60B',
-                            logo: <HUSD />,
-                            multiple: <ONE />,
-                        },
-                        {
-                            id: 1,
-                            title: 'HBTC POOL',
-                            symbol: 'HBTC',
-                            address:
-                                '0x66a79d23e58475d2738179ca52cd0b41d73f0bea',
-                            stakingAddress:
-                                '0xDdB7B0a03A98e7814430E8C010D221D010F2cD6F',
-                            logo: <HUSD />,
-                            multiple: <ONE />,
-                        },
-                        {
-                            id: 3,
-                            title: 'MDX POOL',
-                            symbol: 'MDX',
-                            address:
-                                '0x25D2e80cB6B86881Fd7e07dd263Fb79f4AbE033c',
-                            stakingAddress:
-                                '0x51137287b88F2CcC39f0E32267035Ad46aeB1e9b',
-                            logo: <MDX />,
-                            multiple: <ONE />,
-                        },
-                        {
-                            id: 4,
-                            title: 'HT POOL',
-                            symbol: 'HT',
-                            address: null,
-                            stakingAddress:
-                                '0xB65853Ddc2366564e2238c70a0676B886c79dD9b',
-                            logo: <HUSD />,
-                            multiple: <ONE />,
-                        },
-                    ],
-                    staking2: [
-                        {
-                            id: 0,
-                            title: 'WAR-HT',
-                            symbol: 'LP',
-                            address:
-                                '0x7Aa096b705FA16B595F307Ad647912077521d571',
-                            stakingAddress:
-                                '0x0509ff1628c90890e52874b3b8b8eeaa5a2af101',
-                            logo: <HT />,
-                        },
-                        {
-                            id: 1,
-                            title: 'WAR-HUSD',
-                            symbol: 'LP',
-                            address:
-                                '0x1E214fd9348F6A35541C64CA668f25b0Cd59B2A6',
-                            stakingAddress:
-                                '0x8b8389d355eb7b2c6c86e1bb6614c0a4cb28743a',
-                            logo: <HUSD />,
-                        },
-                        {
-                            id: 2,
-                            title: 'WAR-MDX',
-                            symbol: 'LP',
-                            address:
-                                '0x9cd0C27f743a18Ce38acf28F051Baf09C94423Ff',
-                            stakingAddress:
-                                '0x608b1d5314b6bba219ccc73caa8831f240f1dfa2',
-                            logo: <HUSD />,
-                        },
-                    ],
-                    staking3: [
-                        {
-                            id: 0,
-                            title: 'WAR POOL',
-                            symbol: 'WAR',
-                            address:
-                                '0xf45e4cc4DC165F9D30750F9F9c7f710288FD37b2',
-                            stakingAddress:
-                                '0x54aDaC57CED2318fB23D3093d07558C868dCf972',
-                            logo: <WAR />,
-                            multiple: <ONE />,
+                            logo: <WAR/>,
+                            multiple: <X5/>,
                         },
                     ],
                 });
                 break;
             default:
-                setStakingInfos({ staking1: [], staking2: [], staking3: [] });
+                setStakingInfos({staking1: [], staking2: [], staking3: []});
         }
     }, [chainId]);
 
