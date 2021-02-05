@@ -114,23 +114,22 @@
         position: relative;
         color: #000;
         transition: 1s;
-        width: 100%;
+        // width: 100%;
         height: 38px;
         padding: 0 16px;
         background: #d4e9e2;
         border-radius: 5px;
 
         @media #{$mdWidth} {
-            width: 290px;
+            width: 153px;
             position: absolute;
-            height: 24px;
             top: 21px;
             right: 65px;
         }
 
         @media (max-width: 470px) {
             right: unset;
-            left: 20px;
+            // left: 20px;
         }
 
         @media (max-width: 370px) {
@@ -250,7 +249,7 @@
 
             &.active {
                 @media (max-width: 470px) {
-                    display: none;
+                    display: block;
                 }
             }
 

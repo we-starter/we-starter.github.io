@@ -1,9 +1,10 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { ReactComponent as HUSD } from '../../assets/logo/HUSD.svg';
 import { ReactComponent as ONE } from '../../assets/icon/1X.svg';
 import { StakingItem } from './StakingItem';
 import ant from '../../assets/icon/ant.png';
 import { NavLink } from 'react-router-dom';
+import { useStakingPoolInfo } from './Hooks';
 
 export const StakingPool3 = () => {
     const [showMenu, setShowMenu] = useState(false);
@@ -11,7 +12,9 @@ export const StakingPool3 = () => {
     const handleMenuItemClick = () => {
         setShowMenu(false);
     };
-    const stakingInfos = [
+    const stakingInfos = useStakingPoolInfo();
+
+    const stakingInfouos = [
         {
             id: 0,
             title: 'WAR POOL',
@@ -20,12 +23,12 @@ export const StakingPool3 = () => {
             stakingAddress: '0xDdB7B0a03A98e7814430E8C010D221D010F2cD6F',
             logo: <HUSD />,
             multiple: <ONE />,
-        }
+        },
     ];
 
     return (
         <article className='center'>
-              <header className='head-page'>
+            {/* <header className='head-page'>
                 <nav className='menu'>
                         <ul className='menu__list'>
                             <li className='menu__item'>
@@ -57,13 +60,12 @@ export const StakingPool3 = () => {
                             </li>
                         </ul>
                 </nav>
-            </header>
-
+            </header> */}
 
             <div className='statistics'>
                 <div className='statistics__list'>
-                    {stakingInfos.map((item) => {
-                        return <StakingItem info={item} key={item.id}/>;
+                    {stakingInfos.staking3.map((item) => {
+                        return <StakingItem info={item} key={item.id} />;
                     })}
                 </div>
             </div>

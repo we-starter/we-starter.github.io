@@ -33,7 +33,16 @@ export const MenuMask = () => {
                                         showMenuMaskModal: false,
                                     })
                                 }>
-                                挖矿池
+                                抵押挖矿
+                            </NavLink>
+                        </li>
+                        <li className='menumask_item'>
+                            <NavLink
+                                exact
+                                to='/staking-pool2'
+                                className='menu__link'
+                                onClick={handleMenuItemClick}>
+                                流动性挖矿
                             </NavLink>
                         </li>
                         <li className='menumask_item'>

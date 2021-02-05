@@ -14,6 +14,7 @@ import { InitPage } from './pages/InitPage';
 import { Footer } from './components/Footer';
 import { StakingPool1 } from './pages/pools/stakingPool1';
 import { StakingPool2 } from './pages/pools/stakingPool2';
+import { StakingPool3 } from './pages/pools/stakingPool3';
 
 function getLibrary(provider) {
     const library = new Web3Provider(provider);
@@ -38,14 +39,14 @@ function App() {
                     {/* 矿池类型 */}
                     <PoolTab />
                     <Switch>
-                        <Route exact path='/'>
-                            <StakingPool1 />
-                        </Route>
-                        <Route path='/staking-pool1'>
+                        <Route exact path='/staking-pool1'>
                             <StakingPool1 />
                         </Route>
                         <Route path='/staking-pool2'>
                             <StakingPool2 />
+                        </Route>
+                        <Route path='/staking-pool3'>
+                            <StakingPool3 />
                         </Route>
                     </Switch>
                     <InitPage />

@@ -13,6 +13,10 @@ export const PoolTab = () => {
                 流动性挖矿
                 <img src={ant} alt='' />
             </NavLink>
+            <NavLink to='/staking-pool3'>
+                累计币领
+                <img src={ant} alt='' />
+            </NavLink>
         </div>
     );
 };
