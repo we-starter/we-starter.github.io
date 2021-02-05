@@ -14,13 +14,24 @@
 
         &__wallets {
             width: 100%;
-            height: 280px;
             display: flex;
             align-items: center;
             justify-content: center;
+            @media #{$smWidth} {
+                flex-direction: column;
+            }
+            @media #{$xsWidth} {
+                flex-direction: column;
+            }
             &__item {
                 width: 320px;
                 height: 280px;
+                @media #{$smWidth} {
+                    height: 240px;
+                }
+                @media #{$xsWidth} {
+                    height: 240px;
+                }
                 display: flex;
                 flex-direction: column;
                 align-items: center;
@@ -431,6 +442,12 @@
 .deposit {
     padding: 30px 30px 38px 30px;
     width: 480px;
+    @media #{$smWidth} {
+        width: 100%;
+    }
+    @media #{$xsWidth} {
+        width: 100%;
+    }
     &__logo {
         display: flex;
         justify-content: center;
@@ -544,8 +561,28 @@
 }
 
 .wallet-connect {
-    width: 640px;
     padding: 0;
     border-radius: 5px;
     overflow: hidden;
+}
+@media #{$desktop} {
+    .wallet-connect {
+        width: 640px;
+    }
+}
+@media #{$mdWidth} {
+    .wallet-connect {
+        width: 640px;
+    }
+}
+@media #{$smWidth} {
+    .wallet-connect {
+        width: 320px;
+    }
+}
+
+@media #{$xsWidth} {
+    .wallet-connect {
+        width: 320px;
+    }
 }
