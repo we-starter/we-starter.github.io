@@ -32,7 +32,7 @@ export const WithdrawModal = ({onWithdraw, onDismiss, stakingInfo, info}) => {
                                 {stakingInfo && formatAmount(stakingInfo.earned)}
                             </p>
                             <p className="withdraw-title">
-                                Your Unclaimed {info && info.symbol}
+                                Your Unclaimed WAR
                             </p>
                         </div>
                         <button
