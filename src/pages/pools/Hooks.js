@@ -17,11 +17,11 @@ import {ReactComponent as X5} from '../../assets/logo/5x.svg';
 import {ReactComponent as X10} from '../../assets/logo/10X.svg';
 
 
-
 export const useStakingInfo = (stakingInfo) => {
     const {account, active, library, chainId} = useActiveWeb3React();
     const [earned, setEarned] = useState();
     const [reward, setReward] = useState();
+    const [staked, setStaked] = useState();
     const [earnedTotal, setEarnedTotal] = useState();
     const [balance, setBalance] = useState();
 
@@ -56,6 +56,18 @@ export const useStakingInfo = (stakingInfo) => {
                 });
         } catch (e) {
             console.log('getReward error', e);
+        }
+
+        try {
+            contract.methods
+                .balanceOf(account)
+                .call()
+                .then((res) => {
+                    console.log('staked', res);
+                    setStaked(res);
+                });
+        } catch (e) {
+            console.log('staked error', e);
         }
 
         try {
@@ -122,8 +134,8 @@ export const useStakingInfo = (stakingInfo) => {
         }
     }, [account]);
 
-    return earned && reward && earnedTotal && balance
-        ? {earned, reward, earnedTotal, balance}
+    return earned && reward && earnedTotal && balance && staked
+        ? {earned, reward, earnedTotal, balance, staked}
         : null;
 };
 
@@ -323,7 +335,7 @@ export const useStakingPoolInfo = () => {
                             title: 'WAR POOL',
                             symbol: 'WAR',
                             address:
-                                '0xf45e4cc4DC165F9D30750F9F9c7f710288FD37b2',
+                                '0x880bd31775d97Ce7006D1Cc72EbCC36E412E663C',
                             stakingAddress:
                                 '0x54aDaC57CED2318fB23D3093d07558C868dCf972',
                             logo: <WAR/>,
