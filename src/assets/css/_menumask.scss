@@ -1,74 +1,87 @@
 .menumask {
-    width: 100%;
-    height: 100vh;
-    position: fixed;
-    background: rgba(34, 41, 47, 0.6);
-    left: 0;
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  background: rgba(34, 41, 47, 0.6);
+  left: 0;
+  top: 0;
+  touch-action: none;
+  z-index: 99;
+  &_left {
+    width: 20%;
+    height: 100%;
+  }
+  &_right {
     top: 0;
-    touch-action: none;
-    z-index: 99;
-    &_left {
-        width: 20%;
-        height: 100%;
+    width: 80%;
+    height: 100%;
+    background: #f2f0eb;
+    position: absolute;
+    animation: mask_right 1s;
+    right: 0;
+  }
+  @keyframes mask_right {
+    0% {
+      right: -80%;
     }
-    &_right {
-        top: 0;
-        width: 80%;
-        height: 100%;
-        background: #f2f0eb;
-        position: absolute;
-        animation: mask_right 1s;
-        right: 0;
+    100% {
+      right: 0%;
     }
-    @keyframes mask_right {
-        0% {
-            right: -80%;
-        }
-        100% {
-            right: 0%;
-        }
+  }
+  &_nav {
+    width: 100%;
+    height: 100%;
+  }
+  &_list {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  &_item {
+    margin: 15px 0;
+  }
+  &_link {
+    position: relative;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 24px;
+    &:hover {
+      color: rgba(15, 140, 32, 1);
     }
-    &_nav {
-        width: 100%;
-        height: 100%;
-    }
-    &_list {
-        width: 100%;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-    }
-    &_item {
-        margin: 15px 0;
-    }
-    &_link {
-        font-size: 14px;
-        font-weight: 600;
-        line-height: 24px;
-    }
-    .active {
-        color: #0f8c20;
-    }
+  }
+  &__hot {
+    position: absolute;
+    top: -22px;
+    right: -34px;
+    width: 46px;
+    height: 26px;
+    background: url('../icon/HOT@2x.png') no-repeat;
+    background-size: 100% 100%;
+  }
+  .active {
+    color: #0f8c20;
+  }
 }
 @media #{$desktop} {
-    .menumask {
-        display: none;
-    }
+  .menumask {
+    display: none;
+  }
 }
 @media #{$mdWidth} {
-    .menumask {
-        display: block;
-    }
+  .menumask {
+    display: block;
+  }
 }
 @media #{$smWidth} {
-    .menumask {
-        display: block;
-    }
+  .menumask {
+    display: block;
+  }
 }
 @media #{$xsWidth} {
-    .menumask {
-        display: block;
-    }
+  .menumask {
+    display: block;
+  }
 }

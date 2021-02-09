@@ -1,0 +1,274 @@
+.pools_banner {
+  width: 100%;
+}
+
+@media #{$desktop} {
+  .pools_banner {
+    width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+    &_img {
+      display: none;
+      margin: 0 auto;
+      width: 100%;
+      height: 460px;
+      background-image: url('../image/pools-banner@2x.png');
+      background-repeat: no-repeat;
+      background-size: 100% 100%;
+    }
+    &_text {
+      font-size: 56px;
+      font-weight: 600;
+      color: #22292f;
+      line-height: 78px;
+      margin-top: 102px;
+    }
+    &_dec {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0 28px;
+      font-size: 24px;
+      font-weight: 700;
+      color: #0f8c20;
+      line-height: 36px;
+      margin-top: 20px;
+      a {
+        display: inline-block;
+        width: 24px;
+        height: 24px;
+        background: url('../image/file-copy-line@2x.png') no-repeat;
+        background-size: 100% 100%;
+      }
+    }
+    &_btn {
+      display: inline-block;
+      width: 128px;
+      height: 48px;
+      font-size: 16px;
+      color: #22292f;
+      font-weight: 600;
+      line-height: 48px;
+      border-radius: 24px;
+      background: #f2f0eb;
+      &:hover {
+        color: #fff;
+      }
+      &:last-child {
+        margin-left: 24px;
+        &:hover {
+          color: #0f8c20;
+        }
+      }
+    }
+    &_btn_active {
+      color: #fff;
+      background: #0f8c20;
+      box-shadow: 0px 4px 20px 0px rgba(15, 140, 32, 0.3);
+    }
+  }
+}
+@media #{$mdWidth} {
+  .pools_banner {
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+    &_img {
+      display: none;
+      margin: 0 auto;
+      width: 98%;
+      height: 460px;
+      background-image: url('../image/pools-banner@2x.png');
+      background-repeat: no-repeat;
+      background-size: 100% 100%;
+    }
+    &_text {
+      font-size: 56px;
+      font-weight: 600;
+      color: #22292f;
+      line-height: 78px;
+      margin-top: 102px;
+    }
+    &_dec {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0 28px;
+      font-size: 24px;
+      font-weight: 700;
+      color: #0f8c20;
+      line-height: 36px;
+      margin-top: 20px;
+      a {
+        display: inline-block;
+        width: 24px;
+        height: 24px;
+        background: url('../image/file-copy-line@2x.png') no-repeat;
+        background-size: 100% 100%;
+      }
+    }
+    &_btn {
+      display: inline-block;
+      width: 128px;
+      height: 48px;
+      font-size: 16px;
+      color: #22292f;
+      font-weight: 600;
+      line-height: 48px;
+      border-radius: 24px;
+      background: #f2f0eb;
+      &:hover {
+        color: #fff;
+      }
+      &:last-child {
+        margin-left: 24px;
+        &:hover {
+          color: #0f8c20;
+        }
+      }
+    }
+    &_btn_active {
+      color: #fff;
+      background: #0f8c20;
+      box-shadow: 0px 4px 20px 0px rgba(15, 140, 32, 0.3);
+    }
+  }
+}
+@media #{$smWidth} {
+  .pools_banner {
+    width: 100%;
+    text-align: center;
+    margin: 0 auto;
+    height: 270px;
+    background-image: url('../image/pools-banner@2x_h5.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    border: 1px solid #22292f;
+    border-style: dashed;
+    &_img {
+      display: none;
+      margin: 0 auto;
+      width: 98%;
+      height: 270px;
+      background-image: url('../image/pools-banner@2x_h5.png');
+      background-repeat: no-repeat;
+      background-size: 100% 100%;
+    }
+    &_text {
+      padding-top: 50px;
+      width: 100%;
+      font-size: 40px;
+      font-weight: 600;
+      color: #22292f;
+      line-height: 56px;
+    }
+    &_dec {
+      font-size: 16px;
+      font-weight: 700;
+      color: #0f8c20;
+      line-height: 32px;
+      margin-top: 6px;
+      word-break: break-word;
+      a {
+        display: inline-block;
+        width: 12px;
+        height: 12px;
+        background: url('../image/file-copy-line@2x.png') no-repeat;
+        background-size: 100% 100%;
+      }
+    }
+    &_btn {
+      display: inline-block;
+      width: 128px;
+      height: 48px;
+      font-size: 16px;
+      color: #22292f;
+      font-weight: 600;
+      line-height: 48px;
+      border-radius: 24px;
+      background: #f2f0eb;
+      &:hover {
+        color: #fff;
+      }
+      &:last-child {
+        margin-left: 24px;
+        &:hover {
+          color: #0f8c20;
+        }
+      }
+    }
+    &_btn_active {
+      color: #fff;
+      background: #0f8c20;
+      box-shadow: 0px 4px 20px 0px rgba(15, 140, 32, 0.3);
+    }
+  }
+}
+@media #{$xsWidth} {
+  .pools_banner {
+    width: 100%;
+    text-align: center;
+    margin: 0 auto;
+    height: 270px;
+    background-image: url('../image/pools-banner@2x_h5.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    border: 1px solid #22292f;
+    border-style: dashed;
+    &_img {
+      display: none;
+      margin: 0 auto;
+      width: 99%;
+      height: 270px;
+      background-image: url('../image/pools-banner@2x_h5.png');
+      background-repeat: no-repeat;
+      background-size: 100% 100%;
+    }
+    &_text {
+      padding-top: 50px;
+      font-size: 40px;
+      font-weight: 600;
+      color: #22292f;
+      line-height: 56px;
+    }
+    &_dec {
+      font-size: 12px;
+      font-weight: 700;
+      color: #0f8c20;
+      line-height: 36px;
+      word-break: break-word;
+      a {
+        display: inline-block;
+        width: 12px;
+        height: 12px;
+        background: url('../image/file-copy-line@2x.png') no-repeat;
+        background-size: 100% 100%;
+      }
+    }
+    &_btn {
+      display: inline-block;
+      width: 128px;
+      height: 48px;
+      font-size: 16px;
+      color: #22292f;
+      font-weight: 600;
+      line-height: 48px;
+      border-radius: 24px;
+      background: #f2f0eb;
+      &:hover {
+        color: #fff;
+      }
+      &:last-child {
+        margin-left: 24px;
+        &:hover {
+          color: #0f8c20;
+        }
+      }
+    }
+    &_btn_active {
+      color: #fff;
+      background: #0f8c20;
+      box-shadow: 0px 4px 20px 0px rgba(15, 140, 32, 0.3);
+    }
+  }
+}
