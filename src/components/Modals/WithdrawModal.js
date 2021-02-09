@@ -20,6 +20,15 @@ export const WithdrawModal = ({onWithdraw, onDismiss, stakingInfo, info}) => {
 
                         <div className="form-app__title h3">
                             <p className="value">
+                                {stakingInfo && formatAmount(stakingInfo.staked)}
+                            </p>
+                            <p className="withdraw-title">
+                                Deposited {info && info.symbol}
+                            </p>
+                        </div>
+
+                        <div className="form-app__title h3">
+                            <p className="value">
                                 {stakingInfo && formatAmount(stakingInfo.earned)}
                             </p>
                             <p className="withdraw-title">
