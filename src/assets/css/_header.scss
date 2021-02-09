@@ -5,14 +5,14 @@
     @media #{$desktop} {
         background-image: url('../image/weBanner.png');
         background-repeat: no-repeat;
-        background-size: 100% 100%;
+        background-size: contain;
         height: 700px;
     }
     @media #{$mdWidth} {
         background: #fff;
         background-image: url('../image/weBanner.png');
         background-repeat: no-repeat;
-        background-size: 100% 100%;
+        background-size: contain;
         height: 700px;
     }
     @media #{$smWidth} {
@@ -133,7 +133,7 @@
         }
 
         @media (max-width: 370px) {
-            width: 240px;
+            width: 143px;
         }
 
         .balance {

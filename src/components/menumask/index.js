@@ -40,9 +40,14 @@ export const MenuMask = () => {
                             <NavLink
                                 exact
                                 to='/staking-pool2'
-                                className='menu__link'
-                                onClick={handleMenuItemClick}>
-                                流动性挖矿
+                                className='menumask_link'
+                                onClick={() =>
+                                    dispatch({
+                                        type: HANDLE_SHOW_MENUMASK_MODAL,
+                                        showMenuMaskModal: false,
+                                    })
+                                }>
+                                动性挖矿
                             </NavLink>
                         </li>
                         <li className='menumask_item'>

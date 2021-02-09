@@ -342,7 +342,7 @@ export const StakingItem = ({ info, double }) => {
 
                 {double && (
                     <div className='statistics__dl-column'>
-                        <dd className='statistics__dl-dd right'>apy</dd>
+                        <dd className='statistics__dl-dd right'>APY</dd>
                         <dt className='statistics__dl-dt right'>
                             {stakingInfo
                                 ? formatAmount(stakingInfo.earned)

@@ -5,6 +5,7 @@ import { StakingItem } from './StakingItem';
 import ant from '../../assets/icon/ant.png';
 import { NavLink } from 'react-router-dom';
 import { useStakingPoolInfo } from './Hooks';
+import { NoConnect } from '../../components/noConnet/index.js';
 
 export const StakingPool3 = () => {
     const [showMenu, setShowMenu] = useState(false);
@@ -64,9 +65,13 @@ export const StakingPool3 = () => {
 
             <div className='statistics'>
                 <div className='statistics__list'>
-                    {stakingInfos.staking3.map((item) => {
-                        return <StakingItem info={item} key={item.id} />;
-                    })}
+                    {stakingInfos.staking3.length ? (
+                        stakingInfos.staking3.map((item) => {
+                            return <StakingItem info={item} key={item.id} />;
+                        })
+                    ) : (
+                        <NoConnect />
+                    )}
                 </div>
             </div>
         </article>
