@@ -4,7 +4,7 @@ import { GLFIcon } from "../../icons";
 import {formatAmount} from "../../utils/format";
 import Web3 from "web3";
 
-export const StakeModal = ({amount, onConfirm, onCancel, onChange, balance, tokenName, symbol, onMax}) => {
+export const StakeModal = ({info, amount, onConfirm, onCancel, onChange, balance, tokenName, symbol, onMax}) => {
     const {toWei, fromWei} = Web3.utils
 
     return (
@@ -14,7 +14,7 @@ export const StakeModal = ({amount, onConfirm, onCancel, onChange, balance, toke
                     <div className="form-app__inner deposit">
                         <h1 className="form-app__title" style={{marginTop: 0}}>Deposit LP Token</h1>
                         <p className="form-app__label">
-                            {fromWei(balance.toString())} {symbol} SLP Available
+                            {formatAmount(balance.toString(), info.decimals)} {symbol} SLP Available
                         </p>
 
                         <div className="deposit__inputbox form-app__inputbox">
