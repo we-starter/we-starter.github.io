@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import { usage } from 'browserslist'
 import { formatAmount } from '../../utils/format'
+import cs from 'classnames'
 import { GLFIcon } from '../../icons'
-import { Select } from 'antd'
+import { Select, Avatar } from 'antd'
 
 const { Option } = Select
 
@@ -16,9 +16,12 @@ export const PoolsJoin = ({
   onConfirm,
   symbol,
 }) => {
+  const [defaultVal, setDefaultVal] = useState('HT')
   const handleChange = (value) => {
     console.log(`selected ${value}`)
+    setDefaultVal(value)
   }
+  const items = ['HT', 'WAR']
   return (
     <div className='modal'>
       <div className='modal__box'>
@@ -26,23 +29,37 @@ export const PoolsJoin = ({
           <div className='form-app__inner deposit'>
             <h1
               className='form-app__title h3'
-              style={{ marginTop: 0, marginBottom: '20px' }}
+              style={{ marginTop: 0, marginBottom: '10px' }}
             >
               Join XXX Pool
             </h1>
             <p className='form-app__tip'>1HT = 143.22 WAR</p>
             <Select
-              defaultValue='lucy'
-              style={{ width: 120 }}
+              suffixIcon={icon}
+              defaultValue='HT'
               onChange={handleChange}
+              style={{ width: '112px' }}
+              aria-expanded='true'
             >
-              <Option value='jack'>
-                {/* <GLFIcon width={24} height={24} />
-                {icon} */}
-                Jack
-              </Option>
-              <Option value='lucy'>Lucy</Option>
-              <Option value='Yiminghe'>yiminghe</Option>
+              {items.map((item) => (
+                <Select.Option
+                  key={item}
+                  value={item}
+                  className={cs(
+                    'option_hover_style',
+                    defaultVal === item && 'active'
+                  )}
+                  label={item}
+                >
+                  <div>
+                    <Avatar size='small' icon={icon}>
+                      <GLFIcon width={24} height={24} />
+                      {icon}
+                    </Avatar>{' '}
+                    {item}
+                  </div>
+                </Select.Option>
+              ))}
             </Select>
             <p
               className='form-app__inputbox-after-text'
