@@ -13,7 +13,7 @@ import { HomePage } from './pages/HomePage'
 import { ContextProvider } from './reducer'
 import { InitPage } from './pages/InitPage'
 
-import { Footer } from './components/Footer'
+import Footer from './components/Footer'
 import { StakingPool1 } from './pages/pools/stakingPool1'
 import { StakingPool2 } from './pages/pools/stakingPool2'
 import { StakingPool3 } from './pages/pools/stakingPool3'

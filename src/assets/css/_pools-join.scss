@@ -20,27 +20,25 @@
   font-weight: 500;
   color: #22292f;
 }
-.ant-select-dropdown-menu {
-  background: #1f1f26;
-  border: solid 1px #32323a;
-}
-.ant-select-dropdown-menu-item {
-  background-color: #fff !important;
-}
-.ant-select-dropdown-menu-item:hover {
-  background: #d4e9e2;
-}
-.ant-select-dropdown-menu-item-selected {
-  background: #d4e9e2;
-}
-.ant-select-dropdown-menu-item-active {
-  background: #d4e9e2;
-}
-.ant-select.ant-select-focused.ant-select-single.ant-select-show-arrow.ant-select-open {
-  &:hover {
-    background: #d4e9e2;
+.option_hover_style {
+  margin: 0 10px 4px;
+  padding: 0 2px !important;
+  height: 28px;
+  line-height: 28px;
+  border-radius: 5px;
+  &.active {
+    background-color: #d4e9e2;
   }
+  &:hover,
   &:focus {
-    background: #d4e9e2;
+    background-color: #d4e9e2;
   }
+}
+
+.ant-avatar {
+  background-color: transparent !important;
+}
+
+.ant-avatar-string {
+  transform: scale(0.7) translateX(-50%) !important;
 }

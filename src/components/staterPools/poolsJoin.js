@@ -89,7 +89,7 @@ export const PoolsJoin = ({
                     <div className='form-app__inner deposit'>
                         <h1
                             className='form-app__title h3'
-                            style={{marginTop: 0, marginBottom: '20px'}}
+                            style={{marginTop: 0, marginBottom: '10px'}}
                         >
                             Join {pool && pool.underlying.symbol} Pool
                         </h1>
