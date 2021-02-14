@@ -1,37 +1,95 @@
-import React, { useState } from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 import cs from 'classnames'
 import PoolsHeader from '../../components/staterPools/poolsHeader'
 import chromeLine from '../../assets/icon/chrome-line@2x.png'
 import bookMarkLine from '../../assets/icon/book-mark-line@2x.png'
+import Web3 from 'web3'
 import transitions from '@material-ui/core/styles/transitions'
+import pools from "../../configs/pools";
+import {usePoolsInfo} from "./Hooks";
+import {getContract, useActiveWeb3React} from "../../web3";
+import {
+  HANDLE_SHOW_FAILED_TRANSACTION_MODAL,
+  HANDLE_SHOW_TRANSACTION_MODAL,
+  HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
+  waitingForInit,
+  waitingPending
+} from "../../const";
+import {mainContext} from "../../reducer";
+import Starter from "../../web3/abi/Starter.json";
 
-export const PoolsDetail = () => {
+export const PoolsDetail = (props) => {
+  const {address} = props.match.params
+
+  const {account, active, library, chainId} = useActiveWeb3React();
+  const pools = usePoolsInfo(address)
+
   const [detailTab, setDetailTab] = useState('detail')
   const [recordTab, setRecordTab] = useState(1)
+  const [pool, setPool] = useState(null)
 
+  const {dispatch} = useContext(mainContext);
+
+  useEffect(() => {
+    setPool(pools.pop())
+  }, [pools, address])
+  console.log(pool)
+
+  const onClaim = () => {
+    getContract(library, Starter, address).methods.settle().send({
+      from: account
+    }).on('transactionHash', hash => {
+      dispatch({
+        type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
+        showWaitingWalletConfirmModal: {...waitingPending, hash}
+      });
+    }).on('receipt', (_, receipt) => {
+      console.log('BOT staking success')
+      dispatch({
+        type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
+        showWaitingWalletConfirmModal: waitingForInit
+      });
+      dispatch({
+        type: HANDLE_SHOW_TRANSACTION_MODAL,
+        showTransactionModal: true
+      });
+    }).on('error', (err, receipt) => {
+      console.log('BOT staking error', err)
+      dispatch({
+        type: HANDLE_SHOW_FAILED_TRANSACTION_MODAL,
+        showFailedTransactionModal: true
+      });
+      dispatch({
+        type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
+        showWaitingWalletConfirmModal: waitingForInit
+      });
+    })
+  }
   return (
     <div>
-      <PoolsHeader />
+      <PoolsHeader address={address} pool={pool}/>
       <div className='pools_card'>
         <div className='pools_card_content'>
           <div className='pools_card_content_title'>
             <span>Swap Amount</span>
-            <span>1HT =143.22 WAR</span>
+            <span>{pool && pool.ratio}</span>
           </div>
-          <div className='pools_card_val'>100000.00 WAR</div>
-          <div className='pools_card_start'>即将上线…</div>
+          <div className='pools_card_val'>{pool && pool.amount} {pool && pool.underlying.symbol}</div>
+          <div className='pools_card_start'>
+            {pool && renderStatus(pool.status)}
+          </div>
           <div className='pools_card_content_title'>
             <span>Swap Progress</span>
           </div>
           <div className='pools_card_progress__bar'>
-            <span style={{ left: '0%' }}></span>
+            <span style={{ left: pool ? `${pool.progress * 100}%` : '0%' }}></span>
             <p>
-              <a style={{ width: '0%' }}></a>
+              <a style={{ width: pool ? `${pool.progress * 100}%` : '0%' }}></a>
             </p>
           </div>
           <div className='pools_card_content_title pools_card_schedule'>
-            <span>0%</span>
-            <span>0/1000000</span>
+            <span>{pool && pool.progress * 100}%</span>
+            <span>{pool && Web3.utils.fromWei(pool.totalPurchasedCurrency, 'ether')}/{pool && Web3.utils.fromWei(pool.totalPurchasedAmount, 'ether')}</span>
           </div>
         </div>
       </div>
@@ -84,12 +142,12 @@ export const PoolsDetail = () => {
           )}
           {recordTab === 2 && (
             <div>
-              <div style={{ marginTop: '24px' }}>
-                <a className='pools_detail_coin__list pools_detail_coin__list_active'>
-                  HT
-                </a>
-                <a className='pools_detail_coin__list'>WAR</a>
-              </div>
+              {/*<div style={{ marginTop: '24px' }}>*/}
+              {/*  <a className='pools_detail_coin__list pools_detail_coin__list_active'>*/}
+              {/*    HT*/}
+              {/*  </a>*/}
+              {/*  <a className='pools_detail_coin__list'>WAR</a>*/}
+              {/*</div>*/}
               <div
                 className='pools_detail_table_box'
                 style={{ marginBottom: '40px', marginTop: '24px' }}
@@ -97,9 +155,9 @@ export const PoolsDetail = () => {
                 <table className='pools_detail_table pools_detail_table__list'>
                   <thead>
                     <tr>
-                      <th>剩余HT数量</th>
-                      <th>获取XXX数量</th>
-                      <th>预计中签量</th>
+                      <th>未结算的{pool.currency.symbol}</th>
+                      <th>获取{pool.underlying.symbol}的数量</th>
+                      <th>操作</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -107,14 +165,7 @@ export const PoolsDetail = () => {
                       <td>11111111</td>
                       <td>11111111</td>
                       <td>
-                        <a className='pools_detail_table__confirm'>Claim</a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>111111</td>
-                      <td>111111</td>
-                      <td>
-                        <a className='pools_detail_table__confirm'>Claim</a>
+                        <a className='pools_detail_table__confirm' onClick={onClaim}>Claim</a>
                       </td>
                     </tr>
                   </tbody>
@@ -151,7 +202,7 @@ export const PoolsDetail = () => {
                     <td>
                       <p>
                         <span>Token Distribution</span>
-                        <span>January 30th 2021, 1</span>
+                        <span>{pool && pool.pool_info.token_distribution}</span>
                       </p>
                     </td>
                   </tr>
@@ -159,7 +210,7 @@ export const PoolsDetail = () => {
                     <td>
                       <p>
                         <span>Min. Allocation</span>
-                        <span>No minimum HT</span>
+                        <span>{pool && pool.pool_info.min_allocation}</span>
                       </p>
                     </td>
                   </tr>
@@ -167,7 +218,7 @@ export const PoolsDetail = () => {
                     <td>
                       <p>
                         <span>Max. Allocation</span>
-                        <span>0.25 HT</span>
+                        <span>{pool && pool.pool_info.max_allocation}</span>
                       </p>
                     </td>
                   </tr>
@@ -175,18 +226,18 @@ export const PoolsDetail = () => {
                     <td>
                       <p>
                         <span>Min Swap Level</span>
-                        <span>27 HT</span>
+                        <span>{pool && pool.pool_info.min_swap_level}</span>
                       </p>
                     </td>
                   </tr>
-                  <tr>
-                    <td>
-                      <p>
-                        <span>Access Type</span>
-                        <span>Private</span>
-                      </p>
-                    </td>
-                  </tr>
+                  {/*<tr>*/}
+                  {/*  <td>*/}
+                  {/*    <p>*/}
+                  {/*      <span>Access Type</span>*/}
+                  {/*      <span>Private</span>*/}
+                  {/*    </p>*/}
+                  {/*  </td>*/}
+                  {/*</tr>*/}
                 </tbody>
               </table>
               <table className='pools_detail_table pools-detail_table__right'>
@@ -200,7 +251,7 @@ export const PoolsDetail = () => {
                     <td>
                       <p>
                         <span>Name</span>
-                        <span>We Starter</span>
+                        <span>{pool && pool.underlying.name}</span>
                       </p>
                     </td>
                   </tr>
@@ -208,7 +259,7 @@ export const PoolsDetail = () => {
                     <td>
                       <p>
                         <span>Address</span>
-                        <span>0x725C263e32c72dDC3A</span>
+                        <span>{pool && pool.underlying.address}</span>
                       </p>
                     </td>
                   </tr>
@@ -216,45 +267,46 @@ export const PoolsDetail = () => {
                     <td>
                       <p>
                         <span>Total Supply</span>
-                        <span>160,000,000.0</span>
+                        <span>{pool && pool.underlying.total_supply}</span>
                       </p>
                     </td>
                   </tr>
-                  <tr>
-                    <td>
-                      <p>
-                        <span>Holders</span>
-                        <span>3,433</span>
-                      </p>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <p>
-                        <span>Transfers</span>
-                        <span>10,041</span>
-                      </p>
-                    </td>
-                  </tr>
+                  {/*需要提供api获取*/}
+                  {/*<tr>*/}
+                  {/*  <td>*/}
+                  {/*    <p>*/}
+                  {/*      <span>Holders</span>*/}
+                  {/*      <span>3,433</span>*/}
+                  {/*    </p>*/}
+                  {/*  </td>*/}
+                  {/*</tr>*/}
+                  {/*<tr>*/}
+                  {/*  <td>*/}
+                  {/*    <p>*/}
+                  {/*      <span>Transfers</span>*/}
+                  {/*      <span>10,041</span>*/}
+                  {/*    </p>*/}
+                  {/*  </td>*/}
+                  {/*</tr>*/}
                 </tbody>
               </table>
             </div>
           )}
           {detailTab === 'project' && (
-            <div className='pools_detail_content_link'>
+              <div className='pools_detail_content_link'>
               <a>
                 <img src={chromeLine} />
-                网站
+                {pool && pool.website}
               </a>
               <a>
                 <img src={bookMarkLine} />
-                白皮书
+                {pool && pool.white_paper}
               </a>
               <a>
                 <svg width='24' height='24' viewBox='0 0 30 30'>
                   <path d='M27.7 7.07c-.95.42-1.96.7-3 .82A5.25 5.25 0 0027 5a10.45 10.45 0 01-3.32 1.27 5.23 5.23 0 00-8.9 4.77A14.84 14.84 0 014 5.57a5.21 5.21 0 001.61 6.98 5.21 5.21 0 01-2.36-.65v.06a5.23 5.23 0 004.2 5.13c-.78.21-1.59.24-2.37.1a5.23 5.23 0 004.88 3.62 10.49 10.49 0 01-7.74 2.17 14.79 14.79 0 008.02 2.35c9.61 0 14.87-7.97 14.87-14.88 0-.22 0-.45-.02-.67 1.03-.74 1.91-1.66 2.61-2.7v-.01z' />
                 </svg>
-                推特
+                {pool && pool.twitter}
               </a>
               <a>
                 Westarter是一个连接加密货币创新者和投资者的对接平台，
@@ -266,4 +318,17 @@ export const PoolsDetail = () => {
       </div>
     </div>
   )
+}
+
+const renderStatus = (status) => {
+  switch (status){
+    case 0:
+      return '即将上线...'
+    case 1:
+      return '募集中'
+    case 2:
+      return '结算中'
+    case 3:
+      return '已完成'
+  }
 }

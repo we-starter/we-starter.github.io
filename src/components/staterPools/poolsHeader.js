@@ -15,7 +15,7 @@ import { PoolsBanner } from '../banner/PoolsBanner'
 const PoolsHeader = (props) => {
   const { active, account } = useActiveWeb3React()
   const { dispatch } = useContext(mainContext)
-
+  
   const [showMenu, setShowMenu] = useState(false)
   const [showPoolsStarter, setShowPoolsStarter] = useState(false)
   const location = useLocation()
@@ -158,7 +158,7 @@ const PoolsHeader = (props) => {
         </div>
       </div>
       {/* banner图 */}
-      <PoolsBanner />
+      <PoolsBanner {...props}/>
     </header>
   )
 }
