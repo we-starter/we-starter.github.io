@@ -19,10 +19,9 @@ import StakingReward from '../../web3/abi/StakingReward.json';
 import { StakeModal, WithdrawModal } from '../../components/Modals';
 import Web3 from 'web3';
 import WAR from '../../assets/logo/war.svg';
+import BigNumber from "bignumber.js";
 
 export const StakingItem = ({ info, double }) => {
-    const { toWei } = Web3.utils;
-
     const { account, active, library } = useActiveWeb3React();
     const { dispatch } = useContext(mainContext);
 
@@ -45,22 +44,25 @@ export const StakingItem = ({ info, double }) => {
             info.stakingAddress
         );
         const weiAmount = numToWei(amount, info.decimals);
-
-        console.log('starting Staking glf', account, weiAmount);
-        dispatch({
-            type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
-            showWaitingWalletConfirmModal: waitingForApprove,
-        });
         try {
             if (info.address) {
-                await tokenContract.methods
-                    .approve(info.stakingAddress, weiAmount)
-                    .send({ from: account });
-                dispatch({
-                    type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
-                    showWaitingWalletConfirmModal: waitingForConfirm,
-                });
+                const allowance = await tokenContract.methods.allowance(account, info.stakingAddress).call()
+                console.log('starting Staking', allowance);
+                if(!new BigNumber(allowance).isGreaterThan(weiAmount)){
+                    dispatch({
+                        type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
+                        showWaitingWalletConfirmModal: waitingForApprove,
+                    });
+                    await tokenContract.methods
+                        .approve(info.stakingAddress, '0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff')
+                        .send({ from: account });
+                }
             }
+
+            dispatch({
+                type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
+                showWaitingWalletConfirmModal: waitingForConfirm,
+            });
 
             console.log('stakingFunc', contract);
             if (info.address) {
@@ -422,7 +424,8 @@ export const StakingItem = ({ info, double }) => {
                             tokenName={'Gallery Token'}
                             balance={stakingInfo.balance}
                             onChange={(e) => {
-                                setAmount(e.target.value);
+                                const value = e.target.value.replace(/^(.*\..{6}).*$/,"$1");
+                                setAmount(value);
                             }}
                             onMax={() => {
                                 setAmount(formatAmount(stakingInfo.balance, info.decimals));
