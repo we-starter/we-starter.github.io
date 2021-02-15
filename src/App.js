@@ -18,6 +18,7 @@ import { StakingPool1 } from './pages/pools/stakingPool1'
 import { StakingPool2 } from './pages/pools/stakingPool2'
 import { StakingPool3 } from './pages/pools/stakingPool3'
 import StakingPool4 from './pages/pools/stakingPool4'
+import PoolsIndex from './pages/pools/poolsIndex'
 import WriteInformation from './pages/pools/writeInformation'
 import { PoolsDetail } from './pages/pools/poolsDetail'
 
@@ -49,8 +50,12 @@ function App() {
             <Route exact path='/staking-pool1' component={StakingPool1}></Route>
             <Route exact path='/staking-pool2' component={StakingPool2}></Route>
             <Route exact path='/staking-pool3' component={StakingPool3}></Route>
-            <Route exact path='/pools' component={StakingPool4}></Route>
-            <Route exact path='/pools/detail/:address' component={PoolsDetail}></Route>
+            <Route exact path='/pools' component={PoolsIndex}></Route>
+            <Route
+              exact
+              path='/pools/detail/:address'
+              component={PoolsDetail}
+            ></Route>
             <Route
               exact
               path='/information'

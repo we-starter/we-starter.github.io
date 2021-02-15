@@ -1,34 +1,34 @@
-import React, {useContext, useEffect, useState} from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import cs from 'classnames'
 import PoolsHeader from '../../components/staterPools/poolsHeader'
 import chromeLine from '../../assets/icon/chrome-line@2x.png'
 import bookMarkLine from '../../assets/icon/book-mark-line@2x.png'
 import Web3 from 'web3'
 import transitions from '@material-ui/core/styles/transitions'
-import pools from "../../configs/pools";
-import {usePoolsInfo} from "./Hooks";
-import {getContract, useActiveWeb3React} from "../../web3";
+import pools from '../../configs/pools'
+import { usePoolsInfo } from './Hooks'
+import { getContract, useActiveWeb3React } from '../../web3'
 import {
   HANDLE_SHOW_FAILED_TRANSACTION_MODAL,
   HANDLE_SHOW_TRANSACTION_MODAL,
   HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
   waitingForInit,
-  waitingPending
-} from "../../const";
-import {mainContext} from "../../reducer";
-import Starter from "../../web3/abi/Starter.json";
+  waitingPending,
+} from '../../const'
+import { mainContext } from '../../reducer'
+import Starter from '../../web3/abi/Starter.json'
 
 export const PoolsDetail = (props) => {
-  const {address} = props.match.params
+  const { address } = props.match.params
 
-  const {account, active, library, chainId} = useActiveWeb3React();
+  const { account, active, library, chainId } = useActiveWeb3React()
   const pools = usePoolsInfo(address)
 
   const [detailTab, setDetailTab] = useState('detail')
   const [recordTab, setRecordTab] = useState(1)
   const [pool, setPool] = useState(null)
 
-  const {dispatch} = useContext(mainContext);
+  const { dispatch } = useContext(mainContext)
 
   useEffect(() => {
     setPool(pools.pop())
@@ -36,45 +36,122 @@ export const PoolsDetail = (props) => {
   console.log(pool)
 
   const onClaim = () => {
-    getContract(library, Starter, address).methods.settle().send({
-      from: account
-    }).on('transactionHash', hash => {
-      dispatch({
-        type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
-        showWaitingWalletConfirmModal: {...waitingPending, hash}
-      });
-    }).on('receipt', (_, receipt) => {
-      console.log('BOT staking success')
-      dispatch({
-        type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
-        showWaitingWalletConfirmModal: waitingForInit
-      });
-      dispatch({
-        type: HANDLE_SHOW_TRANSACTION_MODAL,
-        showTransactionModal: true
-      });
-    }).on('error', (err, receipt) => {
-      console.log('BOT staking error', err)
-      dispatch({
-        type: HANDLE_SHOW_FAILED_TRANSACTION_MODAL,
-        showFailedTransactionModal: true
-      });
-      dispatch({
-        type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
-        showWaitingWalletConfirmModal: waitingForInit
-      });
-    })
+    getContract(library, Starter, address)
+      .methods.settle()
+      .send({
+        from: account,
+      })
+      .on('transactionHash', (hash) => {
+        dispatch({
+          type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
+          showWaitingWalletConfirmModal: { ...waitingPending, hash },
+        })
+      })
+      .on('receipt', (_, receipt) => {
+        console.log('BOT staking success')
+        dispatch({
+          type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
+          showWaitingWalletConfirmModal: waitingForInit,
+        })
+        dispatch({
+          type: HANDLE_SHOW_TRANSACTION_MODAL,
+          showTransactionModal: true,
+        })
+      })
+      .on('error', (err, receipt) => {
+        console.log('BOT staking error', err)
+        dispatch({
+          type: HANDLE_SHOW_FAILED_TRANSACTION_MODAL,
+          showFailedTransactionModal: true,
+        })
+        dispatch({
+          type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
+          showWaitingWalletConfirmModal: waitingForInit,
+        })
+      })
   }
   return (
-    <div>
-      <PoolsHeader address={address} pool={pool}/>
+    <div style={{ background: '#fff' }}>
+      <PoolsHeader address={address} pool={pool} />
+      <div className='pools_detail_record'>
+        <div className='pools_detail_record_tab'>
+          <a
+            onClick={() => setRecordTab(1)}
+            className={cs(recordTab === 1 && 'active')}
+          >
+            募资记录
+          </a>
+          <a
+            onClick={() => setRecordTab(2)}
+            className={cs(recordTab === 2 && 'active')}
+          >
+            Claim
+          </a>
+        </div>
+        {recordTab === 1 && (
+          <div className='pools_detail_record_box'>
+            <table className='pools_detail_record_title'>
+              <thead>
+                <tr>
+                  <td>投入HT数量</td>
+                  <td>预计中签率</td>
+                  <td>预计中签量</td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>--</td>
+                  <td>--</td>
+                  <td>--</td>
+                </tr>
+                <tr>
+                  <td>--</td>
+                  <td>--</td>
+                  <td>--</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        )}
+        {recordTab === 2 && (
+          <div className='pools_detail_record_box'>
+            <table className='pools_detail_record_title'>
+              <thead>
+                <tr>
+                  <td>未结算HT</td>
+                  <td>获取xxx币数量</td>
+                  <td></td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>203902</td>
+                  <td>203902</td>
+                  <td>
+                    <a className='pools_detail_record_btn'>Claim</a>
+                  </td>
+                </tr>
+                <tr>
+                  <td>203902</td>
+                  <td>203902</td>
+                  <td>
+                    <a className='pools_detail_record_btn'>Claim</a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        )}
+      </div>
       <div className='pools_card'>
         <div className='pools_card_content'>
           <div className='pools_card_content_title'>
             <span>Swap Amount</span>
             <span>{pool && pool.ratio}</span>
           </div>
-          <div className='pools_card_val'>{pool && pool.amount} {pool && pool.underlying.symbol}</div>
+          <div className='pools_card_val'>
+            {pool && pool.amount} {pool && pool.underlying.symbol}
+          </div>
           <div className='pools_card_start'>
             {pool && renderStatus(pool.status)}
           </div>
@@ -82,98 +159,23 @@ export const PoolsDetail = (props) => {
             <span>Swap Progress</span>
           </div>
           <div className='pools_card_progress__bar'>
-            <span style={{ left: pool ? `${pool.progress * 100}%` : '0%' }}></span>
+            <span
+              style={{ left: pool ? `${pool.progress * 100}%` : '0%' }}
+            ></span>
             <p>
               <a style={{ width: pool ? `${pool.progress * 100}%` : '0%' }}></a>
             </p>
           </div>
           <div className='pools_card_content_title pools_card_schedule'>
             <span>{pool && pool.progress * 100}%</span>
-            <span>{pool && Web3.utils.fromWei(pool.totalPurchasedCurrency, 'ether')}/{pool && Web3.utils.fromWei(pool.totalPurchasedAmount, 'ether')}</span>
+            <span>
+              {pool && Web3.utils.fromWei(pool.totalPurchasedCurrency, 'ether')}
+              /{pool && Web3.utils.fromWei(pool.totalPurchasedAmount, 'ether')}
+            </span>
           </div>
         </div>
       </div>
       <div className='pools_detail'>
-        <div className='pools_detail_content'>
-          <div className='pools_detail_content_tab'>
-            <a
-              onClick={() => setRecordTab(1)}
-              className={cs(recordTab === 1 && 'active')}
-            >
-              募资记录
-            </a>
-            <a
-              onClick={() => setRecordTab(2)}
-              className={cs(recordTab === 2 && 'active')}
-            >
-              claim
-            </a>
-          </div>
-          {recordTab === 1 && (
-            <div
-              className='pools_detail_table_box'
-              style={{ marginBottom: '40px' }}
-            >
-              <table className='pools_detail_table pools_detail_table__list'>
-                <thead>
-                  <tr>
-                    <th>时间</th>
-                    <th>数量</th>
-                    <th>预计中签率</th>
-                    <th>预计中签量</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>11111111</td>
-                    <td>11111111</td>
-                    <td>11111111</td>
-                    <td>11111111</td>
-                  </tr>
-                  <tr>
-                    <td>11111111</td>
-                    <td>11111111</td>
-                    <td>11111111</td>
-                    <td>11111111</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          )}
-          {recordTab === 2 && (
-            <div>
-              {/*<div style={{ marginTop: '24px' }}>*/}
-              {/*  <a className='pools_detail_coin__list pools_detail_coin__list_active'>*/}
-              {/*    HT*/}
-              {/*  </a>*/}
-              {/*  <a className='pools_detail_coin__list'>WAR</a>*/}
-              {/*</div>*/}
-              <div
-                className='pools_detail_table_box'
-                style={{ marginBottom: '40px', marginTop: '24px' }}
-              >
-                <table className='pools_detail_table pools_detail_table__list'>
-                  <thead>
-                    <tr>
-                      <th>未结算的{pool.currency.symbol}</th>
-                      <th>获取{pool.underlying.symbol}的数量</th>
-                      <th>操作</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>11111111</td>
-                      <td>11111111</td>
-                      <td>
-                        <a className='pools_detail_table__confirm' onClick={onClaim}>Claim</a>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          )}
-        </div>
         <div className='pools_detail_content'>
           <div className='pools_detail_content_tab'>
             <a
@@ -293,7 +295,7 @@ export const PoolsDetail = (props) => {
             </div>
           )}
           {detailTab === 'project' && (
-              <div className='pools_detail_content_link'>
+            <div className='pools_detail_content_link'>
               <a>
                 <img src={chromeLine} />
                 {pool && pool.website}
@@ -321,7 +323,7 @@ export const PoolsDetail = (props) => {
 }
 
 const renderStatus = (status) => {
-  switch (status){
+  switch (status) {
     case 0:
       return '即将上线...'
     case 1:

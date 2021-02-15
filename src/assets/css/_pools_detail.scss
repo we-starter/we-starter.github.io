@@ -5,6 +5,89 @@
 @media #{$desktop} {
   .pools_detail {
     padding-bottom: 176px;
+    &_record {
+      margin: 56px auto 0px;
+      padding: 0 50px 30px;
+      width: 640px;
+      min-height: 164px;
+      background: #f2f0eb;
+      border-radius: 10px;
+    }
+    &_record_tab {
+      a {
+        position: relative;
+        margin: 0 36px 22px 0;
+        height: 60px;
+        display: inline-block;
+        font-size: 16px;
+        font-weight: 500;
+        color: #7a7f82;
+        line-height: 60px;
+        &:hover {
+          color: #0f8c20;
+          &:after {
+            position: absolute;
+            content: '';
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: #0f8c20;
+          }
+        }
+      }
+      a.active {
+        color: #0f8c20;
+        &:after {
+          position: absolute;
+          content: '';
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          height: 4px;
+          background: #0f8c20;
+        }
+      }
+    }
+    &_record_title {
+      width: 100%;
+      thead {
+        tr {
+          td {
+            font-size: 12px;
+            font-weight: 400;
+            color: #7a7f82;
+            line-height: 28px;
+            &:last-child {
+              text-align: right;
+            }
+          }
+        }
+      }
+      tbody {
+        tr {
+          td {
+            font-size: 14px;
+            font-weight: 500;
+            color: #22292f;
+            line-height: 26px;
+            &:last-child {
+              text-align: right;
+            }
+          }
+          .pools_detail_record_btn {
+            display: inline-block;
+            padding: 0 8px;
+            font-size: 14px;
+            color: #ffffff;
+            line-height: 24px;
+            background: #0f8c20;
+            border-radius: 12px;
+            text-align: right;
+          }
+        }
+      }
+    }
     &_content {
       width: 1100px;
       margin: 0 auto;
@@ -43,11 +126,11 @@
       margin: 40px auto 0;
       display: flex;
       justify-content: center;
-      border-radius: 5px;
-      border: 1px solid #ebe9e3;
     }
     &_table {
       width: 100%;
+      border-radius: 5px;
+      border: 1px solid #ebe9e3;
       tr {
         height: 60px;
         border-bottom: 1px solid #ebe9e3;
@@ -81,7 +164,6 @@
         }
       }
       &:first-child {
-        border-right: 1px solid #ebe9e3;
         th {
           padding: 0 50px 0 30px;
         }
@@ -90,6 +172,7 @@
         }
       }
       &:last-child {
+        border-left: none;
         th {
           padding: 0 30px 0 50px;
         }
@@ -180,6 +263,89 @@
 @media #{$mdWidth} {
   .pools_detail {
     padding-bottom: 176px;
+    &_record {
+      margin: 56px auto 0px;
+      padding: 0 50px 30px;
+      width: 640px;
+      min-height: 164px;
+      background: #f2f0eb;
+      border-radius: 10px;
+    }
+    &_record_tab {
+      a {
+        position: relative;
+        margin: 0 36px 22px 0;
+        height: 60px;
+        display: inline-block;
+        font-size: 16px;
+        font-weight: 500;
+        color: #7a7f82;
+        line-height: 60px;
+        &:hover {
+          color: #0f8c20;
+          &:after {
+            position: absolute;
+            content: '';
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: #0f8c20;
+          }
+        }
+      }
+      a.active {
+        color: #0f8c20;
+        &:after {
+          position: absolute;
+          content: '';
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          height: 4px;
+          background: #0f8c20;
+        }
+      }
+    }
+    &_record_title {
+      width: 100%;
+      thead {
+        tr {
+          td {
+            font-size: 12px;
+            font-weight: 400;
+            color: #7a7f82;
+            line-height: 28px;
+            &:last-child {
+              text-align: right;
+            }
+          }
+        }
+      }
+      tbody {
+        tr {
+          td {
+            font-size: 14px;
+            font-weight: 500;
+            color: #22292f;
+            line-height: 26px;
+            &:last-child {
+              text-align: right;
+            }
+          }
+          .pools_detail_record_btn {
+            display: inline-block;
+            padding: 0 8px;
+            font-size: 14px;
+            color: #ffffff;
+            line-height: 24px;
+            background: #0f8c20;
+            border-radius: 12px;
+            text-align: right;
+          }
+        }
+      }
+    }
     &_content {
       width: 1100px;
       margin: 0 auto;
@@ -219,10 +385,11 @@
       display: flex;
       justify-content: center;
       border-radius: 5px;
-      border: 1px solid #ebe9e3;
     }
     &_table {
       width: 100%;
+      border-radius: 5px;
+      border: 1px solid #ebe9e3;
       tr {
         height: 60px;
         border-bottom: 1px solid #ebe9e3;
@@ -249,7 +416,6 @@
         }
       }
       &:first-child {
-        border-right: 1px solid #ebe9e3;
         th {
           padding: 0 50px 0 30px;
         }
@@ -258,6 +424,7 @@
         }
       }
       &:last-child {
+        border-left: none;
         th {
           padding: 0 30px 0 50px;
         }
@@ -348,6 +515,89 @@
 @media #{$smWidth} {
   .pools_detail {
     padding-bottom: 28px;
+    &_record {
+      margin: 56px auto 20px;
+      padding: 0 18px 12px;
+      width: 320px;
+      min-height: 164px;
+      background: #f2f0eb;
+      border-radius: 10px;
+    }
+    &_record_tab {
+      a {
+        position: relative;
+        margin: 0 36px 18px 0;
+        height: 60px;
+        display: inline-block;
+        font-size: 16px;
+        font-weight: 500;
+        color: #7a7f82;
+        line-height: 60px;
+        &:hover {
+          color: #0f8c20;
+          &:after {
+            position: absolute;
+            content: '';
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: #0f8c20;
+          }
+        }
+      }
+      a.active {
+        color: #0f8c20;
+        &:after {
+          position: absolute;
+          content: '';
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          height: 4px;
+          background: #0f8c20;
+        }
+      }
+    }
+    &_record_title {
+      width: 100%;
+      thead {
+        tr {
+          td {
+            font-size: 12px;
+            font-weight: 400;
+            color: #7a7f82;
+            line-height: 28px;
+            &:last-child {
+              text-align: right;
+            }
+          }
+        }
+      }
+      tbody {
+        tr {
+          td {
+            font-size: 14px;
+            font-weight: 500;
+            color: #22292f;
+            line-height: 26px;
+            &:last-child {
+              text-align: right;
+            }
+          }
+          .pools_detail_record_btn {
+            display: inline-block;
+            padding: 0 8px;
+            font-size: 14px;
+            color: #ffffff;
+            line-height: 24px;
+            background: #0f8c20;
+            border-radius: 12px;
+            text-align: right;
+          }
+        }
+      }
+    }
     &_content {
       width: 320px;
       margin: 0 auto;
@@ -512,6 +762,89 @@
 @media #{$xsWidth} {
   .pools_detail {
     padding-bottom: 28px;
+    &_record {
+      margin: 56px auto 20px;
+      padding: 0 18px 12px;
+      width: 320px;
+      min-height: 164px;
+      background: #f2f0eb;
+      border-radius: 10px;
+    }
+    &_record_tab {
+      a {
+        position: relative;
+        margin: 0 36px 18px 0;
+        height: 60px;
+        display: inline-block;
+        font-size: 16px;
+        font-weight: 500;
+        color: #7a7f82;
+        line-height: 60px;
+        &:hover {
+          color: #0f8c20;
+          &:after {
+            position: absolute;
+            content: '';
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: #0f8c20;
+          }
+        }
+      }
+      a.active {
+        color: #0f8c20;
+        &:after {
+          position: absolute;
+          content: '';
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          height: 4px;
+          background: #0f8c20;
+        }
+      }
+    }
+    &_record_title {
+      width: 100%;
+      thead {
+        tr {
+          td {
+            font-size: 12px;
+            font-weight: 400;
+            color: #7a7f82;
+            line-height: 28px;
+            &:last-child {
+              text-align: right;
+            }
+          }
+        }
+      }
+      tbody {
+        tr {
+          td {
+            font-size: 14px;
+            font-weight: 500;
+            color: #22292f;
+            line-height: 26px;
+            &:last-child {
+              text-align: right;
+            }
+          }
+          .pools_detail_record_btn {
+            display: inline-block;
+            padding: 0 8px;
+            font-size: 14px;
+            color: #ffffff;
+            line-height: 24px;
+            background: #0f8c20;
+            border-radius: 12px;
+            text-align: right;
+          }
+        }
+      }
+    }
     &_content {
       width: 320px;
       margin: 0 auto;
