@@ -66,6 +66,12 @@
       background: #0f8c20;
       box-shadow: 0px 4px 20px 0px rgba(15, 140, 32, 0.3);
     }
+
+    &_btn_disable {
+      color: #fff;
+      background: #999;
+      box-shadow: 0px 4px 20px 0px rgba(#999, 0.3);
+    }
   }
 }
 @media #{$mdWidth} {

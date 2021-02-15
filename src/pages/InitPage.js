@@ -84,11 +84,13 @@ export const InitPage = () => {
 
   useEffect(() => {
     const localContent =
-      window && window.localStorage.getItem(GALLERY_SELECT_WEB3_CONTEXT)
+      window && window.localStorage.getItem(GALLERY_SELECT_WEB3_CONTEXT) || 'MetaMask'
     console.log('wallet content', localContent)
     if (localContent) {
       console.log('activate', wallets[localContent])
-      activate(wallets[localContent])
+      activate(wallets[localContent]).then(() =>{
+        console.log(wallets[localContent])
+      })
     }
   }, [])
 

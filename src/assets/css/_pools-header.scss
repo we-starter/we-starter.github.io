@@ -2,16 +2,12 @@
     position: relative;
     background: #fff;
     @media #{$desktop} {
-        border: 1px solid #22292f;
-        border-style: dashed;
         background-image: url('../image/pools-banner@2x.png');
         background-repeat: no-repeat;
         background-size: contain;
         height: 460px;
     }
     @media #{$mdWidth} {
-        border: 1px solid #22292f;
-        border-style: dashed;
         background: #fff;
         background-image: url('../image/pools-banner@2x.png');
         background-repeat: no-repeat;

@@ -21,15 +21,18 @@ export const PoolsBanner = (props) => {
             </p>
             <div>
                 <a
-                    className='pools_banner_btn pools_banner_btn_active'
+                    className={`pools_banner_btn ${pool && pool.status === 1 ? 'pools_banner_btn_active' : 'pools_banner_btn_disable'}`}
                     onClick={() => {
-                        dispatch({
-                            type: HANDLE_WALLET_MODAL,
-                            walletModal: 'join',
-                            pool,
-                        })
-                        window &&
-                        window.localStorage.setItem(GALLERY_SELECT_WEB3_CONTEXT, null)
+                        if(pool.status === 1){
+                            dispatch({
+                                type: HANDLE_WALLET_MODAL,
+                                walletModal: 'join',
+                                pool,
+                            })
+                        }else{
+                            message.info('当前无法申购')
+                        }
+
                     }}
                 >
                     Join Pool

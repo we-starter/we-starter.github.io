@@ -81,34 +81,45 @@ export const PoolsDetail = (props) => {
           >
             募资记录
           </a>
-          <a
-            onClick={() => setRecordTab(2)}
-            className={cs(recordTab === 2 && 'active')}
-          >
-            Claim
-          </a>
+          {
+            pool && pool.status >= 2 && (
+                <a
+                    onClick={() => setRecordTab(2)}
+                    className={cs(recordTab === 2 && 'active')}
+                >
+                  Claim
+                </a>
+            )
+          }
+
         </div>
         {recordTab === 1 && (
           <div className='pools_detail_record_box'>
             <table className='pools_detail_record_title'>
               <thead>
                 <tr>
-                  <td>投入HT数量</td>
+                  <td>投入{pool && pool.currency.symbol}数量</td>
                   <td>预计中签率</td>
                   <td>预计中签量</td>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>--</td>
-                  <td>--</td>
-                  <td>--</td>
-                </tr>
-                <tr>
-                  <td>--</td>
-                  <td>--</td>
-                  <td>--</td>
-                </tr>
+              {
+                (pool && pool.purchasedCurrencyOf.toNumber()) > 0 ? (
+                    <tr>
+                      <td>{Web3.utils.fromWei(pool.purchasedCurrencyOf, 'ether')}</td>
+                      <td>{(Web3.utils.fromWei(pool.settleable.rate, 'ether') * 100).toFixed(2)}%</td>
+                      <td>{Web3.utils.fromWei(pool.settleable.volume, 'ether')}</td>
+                    </tr>
+                ) :
+                    (
+                        <tr>
+                          <td>-</td>
+                          <td>-</td>
+                          <td>-</td>
+                        </tr>
+                    )
+              }
               </tbody>
             </table>
           </div>
@@ -118,26 +129,30 @@ export const PoolsDetail = (props) => {
             <table className='pools_detail_record_title'>
               <thead>
                 <tr>
-                  <td>未结算HT</td>
-                  <td>获取xxx币数量</td>
+                  <td>未结算{pool && pool.currency.symbol}</td>
+                  <td>获取{pool && pool.underlying.symbol}数量</td>
                   <td></td>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>203902</td>
-                  <td>203902</td>
-                  <td>
-                    <a className='pools_detail_record_btn'>Claim</a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>203902</td>
-                  <td>203902</td>
-                  <td>
-                    <a className='pools_detail_record_btn'>Claim</a>
-                  </td>
-                </tr>
+              {
+                (pool && pool.purchasedCurrencyOf.toNumber()) > 0 ? (
+                    <tr>
+                      <td>{pool && Web3.utils.fromWei(pool.settleable.amount, 'ether')}</td>
+                      <td>{pool && Web3.utils.fromWei(pool.settleable.volume, 'ether')}</td>
+                      <td>
+                        <a className='pools_detail_record_btn' onClick={() => onClaim()}>Claim</a>
+                      </td>
+                    </tr>
+                ) : (
+                    <tr>
+                      <td>-</td>
+                      <td>-</td>
+                      <td></td>
+                    </tr>
+                )
+              }
+
               </tbody>
             </table>
           </div>
