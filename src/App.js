@@ -50,7 +50,7 @@ function App() {
             <Route exact path='/staking-pool2' component={StakingPool2}></Route>
             <Route exact path='/staking-pool3' component={StakingPool3}></Route>
             <Route exact path='/pools' component={StakingPool4}></Route>
-            <Route exact path='/pools/detail' component={PoolsDetail}></Route>
+            <Route exact path='/pools/detail/:address' component={PoolsDetail}></Route>
             <Route
               exact
               path='/information'

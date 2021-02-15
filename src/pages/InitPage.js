@@ -78,6 +78,7 @@ export const InitPage = () => {
     showTransactionModal,
     walletModal,
     txStatus,
+    pool,
     showMenuMaskModal,
   } = state
 
@@ -239,6 +240,7 @@ export const InitPage = () => {
         <div className='modal-show' style={{ zIndex: 11 }}>
           <div className='wrapper'>
             <PoolsJoin
+              pool={pool}
               onClose={() =>
                 dispatch({
                   type: HANDLE_WALLET_MODAL,

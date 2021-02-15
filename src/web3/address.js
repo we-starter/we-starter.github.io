@@ -1,3 +1,7 @@
+const NETWORK_ID_ETHEREUM_MAINNET = 1;
+const NETWORK_ID_ETHEREUM_ROPSTEN = 3;
+const NETWORK_ID_HUOBI_ECO_CHAIN_MAINNET = 128;
+
 // GLF token
 export function getGalleryAddress(chainId) {
     switch (chainId) {
@@ -288,5 +292,28 @@ export function WETH_ADDRESS(chainId) {
             return '0x5545153ccfca01fbd7dd11c0b23ba694d9509a6f'
         default:
             throw new Error('unknown chain')
+    }
+}
+
+
+// pools
+
+export function DAI_ADDRESS(chainId) {
+    switch(chainId) {
+        case NETWORK_ID_ETHEREUM_ROPSTEN:
+            return '0xaD6D458402F60fD3Bd25163575031ACDce07538D'
+        default:
+            return '0xaD6D458402F60fD3Bd25163575031ACDce07538D'
+    }
+}
+
+export function STARTER_ADDRESS(chainId) {
+    switch (chainId){
+        case NETWORK_ID_ETHEREUM_ROPSTEN:
+            return '0xf749abd9966D104d9f3DE4a843Fb806191A12D72'
+        case NETWORK_ID_HUOBI_ECO_CHAIN_MAINNET:
+            return '0xf749abd9966D104d9f3DE4a843Fb806191A12D72'
+        default:
+            return '0xf749abd9966D104d9f3DE4a843Fb806191A12D72'
     }
 }

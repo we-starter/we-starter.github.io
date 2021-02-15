@@ -55,7 +55,7 @@ const reducer = (state, action) => {
                 showTransactionModal: action.showTransactionModal,
             };
         case HANDLE_WALLET_MODAL:
-            return { ...state, walletModal: action.walletModal };
+            return { ...state, walletModal: action.walletModal, pool: action.pool || null };
         case HANDLE_TX_STATUS:
             return { ...state, txStatus: action.txStatus };
         case HANDLE_SHOW_MENUMASK_MODAL:
@@ -78,6 +78,7 @@ const ContextProvider = (props) => {
         showTransactionModal: false,
         walletModal: null,
         txStatus: null,
+        pool: null,
         showMenuMaskModal: false,
     });
     return (
