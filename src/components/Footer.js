@@ -19,12 +19,7 @@ const Footer = (props) => {
       <div className='footer_wrap'>
         <ul className='footer__links'>
           <li>
-            <a
-              title='title'
-              href='https://medium.com/@gallery_finance/introducing-gallery-finance-nft-workshop-where-your-ideas-become-art-fabf8b4165a4'
-              target='_blank'
-              rel='noopener noreferrer'
-            >
+            <a title='title' href='' target='_blank' rel='noopener noreferrer'>
               <svg width='24' height='24' viewBox='0 0 30 30'>
                 <path d='M5 3.75h20A1.25 1.25 0 0126.25 5v20A1.25 1.25 0 0125 26.25H5A1.25 1.25 0 013.75 25V5A1.25 1.25 0 015 3.75zm16.63 16.18c-.13-.07-.2-.25-.2-.38V10c0-.13.07-.31.2-.44l1.19-1.38v-.06h-4.27l-3.2 8.1-3.64-8.1H7.3v.06l1.13 1.57c.26.25.32.63.32.94v6.9c.06.38 0 .82-.19 1.2l-1.7 2.32v.06h4.52v-.06L9.7 18.86a1.93 1.93 0 01-.19-1.2V11.4c.06.12.13.12.19.37l4.27 9.54h.06l4.15-10.35c-.07.38-.07.82-.07 1.13v7.4c0 .2-.06.32-.18.45l-1.26 1.19v.06h6.15v-.06l-1.2-1.2z' />
               </svg>
@@ -32,18 +27,12 @@ const Footer = (props) => {
           </li>
 
           <li>
-            <a
-              title='title'
-              href='https://twitter.com/FinanceGallery'
-              target='_blank'
-              rel='noopener'
-            >
+            <a title='title' href='' target='_blank' rel='noopener'>
               <svg width='24' height='24' viewBox='0 0 30 30'>
                 <path d='M27.7 7.07c-.95.42-1.96.7-3 .82A5.25 5.25 0 0027 5a10.45 10.45 0 01-3.32 1.27 5.23 5.23 0 00-8.9 4.77A14.84 14.84 0 014 5.57a5.21 5.21 0 001.61 6.98 5.21 5.21 0 01-2.36-.65v.06a5.23 5.23 0 004.2 5.13c-.78.21-1.59.24-2.37.1a5.23 5.23 0 004.88 3.62 10.49 10.49 0 01-7.74 2.17 14.79 14.79 0 008.02 2.35c9.61 0 14.87-7.97 14.87-14.88 0-.22 0-.45-.02-.67 1.03-.74 1.91-1.66 2.61-2.7v-.01z' />
               </svg>
             </a>
           </li>
-
           <li>
             <a
               title='title'

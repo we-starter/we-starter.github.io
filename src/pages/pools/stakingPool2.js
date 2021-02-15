@@ -1,9 +1,7 @@
-import React, { useContext, useState } from 'react';
-import { mainContext } from '../../reducer';
-import { ReactComponent as HUSD } from '../../assets/logo/HUSD.svg';
+import React  from 'react';
 import { StakingItem } from './StakingItem';
 import { useStakingPoolInfo } from './Hooks';
-import { NoConnect } from '../../components/noConnet/index.js';
+import { NoConnect } from '../../components/noConnet';
 
 export const StakingPool2 = () => {
     const stakingInfos = useStakingPoolInfo();
@@ -13,8 +11,6 @@ export const StakingPool2 = () => {
     // const stakingAddress = Pair.getAddress(tokenA, tokenB)
     //
     // console.log('stakingAddress--->', stakingAddress)
-
-    const { dispatch, state } = useContext(mainContext);
 
     return (
         <article className='center'>
