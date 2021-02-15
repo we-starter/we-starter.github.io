@@ -8,6 +8,10 @@ import {ReactComponent as HT} from '../../assets/logo/HT.svg';
 import {ReactComponent as MDX} from '../../assets/logo/MDX.svg';
 import {ReactComponent as WAR} from '../../assets/logo/war.svg';
 import {ReactComponent as HBTC} from '../../assets/logo/HBTC.svg';
+import {ReactComponent as HUSD_HT} from '../../assets/logo/HUSD-HT.svg';
+import {ReactComponent as HUSD_WAR} from '../../assets/logo/HUSD-WAR.svg';
+import {ReactComponent as HUSD_MDX} from '../../assets/logo/HUSD-MDX.svg';
+
 
 import {ReactComponent as X1} from '../../assets/logo/1x.svg';
 import {ReactComponent as X2_5} from '../../assets/logo/2.5X.svg';
@@ -18,7 +22,7 @@ import {ReactComponent as X10} from '../../assets/logo/10X.svg';
 
 
 export const useStakingInfo = (stakingInfo) => {
-    const {account, active, library, chainId} = useActiveWeb3React();
+    const {account, library, chainId} = useActiveWeb3React();
     const [earned, setEarned] = useState();
     const [reward, setReward] = useState();
     const [staked, setStaked] = useState();
@@ -304,7 +308,7 @@ export const useStakingPoolInfo = () => {
                                 '0x0509ff1628c90890e52874b3b8b8eeaa5a2af101',
                             stakingAddress:
                                 '0x7Aa096b705FA16B595F307Ad647912077521d571',
-                            logo: <HT/>,
+                            logo: <HUSD_HT/>,
                             multiple: <X10/>,
                         },
                         {
@@ -315,7 +319,7 @@ export const useStakingPoolInfo = () => {
                                 '0x8b8389d355eb7b2c6c86e1bb6614c0a4cb28743a',
                             stakingAddress:
                                 '0x1E214fd9348F6A35541C64CA668f25b0Cd59B2A6',
-                            logo: <HUSD/>,
+                            logo: <HUSD_WAR/>,
                             multiple: <X4/>,
                         },
                         {
@@ -326,7 +330,7 @@ export const useStakingPoolInfo = () => {
                                 '0x608b1d5314b6bba219ccc73caa8831f240f1dfa2',
                             stakingAddress:
                                 '0x9cd0C27f743a18Ce38acf28F051Baf09C94423Ff',
-                            logo: <HUSD/>,
+                            logo: <HUSD_MDX/>,
                             multiple: <X2/>,
                         },
                     ],

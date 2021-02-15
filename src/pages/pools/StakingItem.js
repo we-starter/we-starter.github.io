@@ -17,7 +17,6 @@ import { useStakingInfo } from './Hooks';
 import ERC20 from '../../web3/abi/ERC20.json';
 import StakingReward from '../../web3/abi/StakingReward.json';
 import { StakeModal, WithdrawModal } from '../../components/Modals';
-import Web3 from 'web3';
 import WAR from '../../assets/logo/war.svg';
 import BigNumber from "bignumber.js";
 
@@ -33,7 +32,6 @@ export const StakingItem = ({ info, double }) => {
     const stakingInfo = useStakingInfo(info);
 
     const onStake = async () => {
-        console.log('on stake launch');
         if (!amount) {
             return;
         }
@@ -47,7 +45,6 @@ export const StakingItem = ({ info, double }) => {
         try {
             if (info.address) {
                 const allowance = await tokenContract.methods.allowance(account, info.stakingAddress).call()
-                console.log('starting Staking', allowance);
                 if(!new BigNumber(allowance).isGreaterThan(weiAmount)){
                     dispatch({
                         type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
@@ -303,7 +300,7 @@ export const StakingItem = ({ info, double }) => {
                     {info.logo}
                     {info.title}
                 </p>
-                {info.multiple}
+                <div className="statistics__header__mul">{info.multiple}</div>
             </div>
 
             <dl className='statistics__dl'>

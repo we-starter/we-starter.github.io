@@ -70,7 +70,15 @@
         }
         svg {
             margin-right: 8px;
-            width: 50px;
+            height: 50px;
+        }
+
+        &__mul {
+            width: 32px;
+            svg {
+                margin-right: 8px;
+                width: 100%;
+            }
         }
     }
 

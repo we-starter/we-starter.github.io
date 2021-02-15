@@ -9,7 +9,7 @@ export const Footer = () => {
                     <li>
                         <a
                             title='title'
-                            href='https://medium.com/@gallery_finance/introducing-gallery-finance-nft-workshop-where-your-ideas-become-art-fabf8b4165a4'
+                            href=''
                             target='_blank'
                             rel='noopener noreferrer'>
                             <svg width='24' height='24' viewBox='0 0 30 30'>
@@ -21,7 +21,7 @@ export const Footer = () => {
                     <li>
                         <a
                             title='title'
-                            href='https://twitter.com/FinanceGallery'
+                            href=''
                             target='_blank'
                             rel='noopener'>
                             <svg width='24' height='24' viewBox='0 0 30 30'>
