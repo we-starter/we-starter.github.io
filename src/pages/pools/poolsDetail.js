@@ -17,6 +17,7 @@ import {
 } from '../../const'
 import { mainContext } from '../../reducer'
 import Starter from '../../web3/abi/Starter.json'
+import BigNumber from "bignumber.js";
 
 export const PoolsDetail = (props) => {
   const { address } = props.match.params
@@ -109,7 +110,8 @@ export const PoolsDetail = (props) => {
                     <tr>
                       <td>{Web3.utils.fromWei(pool.purchasedCurrencyOf, 'ether')}</td>
                       <td>{(Web3.utils.fromWei(pool.settleable.rate, 'ether') * 100).toFixed(2) * 1}%</td>
-                      <td>{Web3.utils.fromWei(pool.settleable.volume, 'ether')}</td>
+                      {/*<td>{Web3.utils.fromWei(pool.settleable.volume, 'ether')}</td>*/}
+                      <td>{new BigNumber(Web3.utils.fromWei(pool.purchasedCurrencyOf, 'ether')).multipliedBy(new BigNumber(Web3.utils.fromWei(pool.settleable.rate, 'ether'))).dividedBy(new BigNumber(pool.price)).toString()}</td>
                     </tr>
                 ) :
                     (
@@ -141,7 +143,11 @@ export const PoolsDetail = (props) => {
                       <td>{pool && Web3.utils.fromWei(pool.settleable.amount, 'ether')}</td>
                       <td>{pool && Web3.utils.fromWei(pool.settleable.volume, 'ether')}</td>
                       <td>
-                        <a className='pools_detail_record_btn' onClick={() => onClaim()}>Claim</a>
+                        {
+                          pool && pool.settleable.volume > 0 && (
+                              <a className='pools_detail_record_btn' onClick={() => onClaim()}>Claim</a>
+                          )
+                        }
                       </td>
                     </tr>
                 ) : (
