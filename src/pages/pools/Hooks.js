@@ -254,6 +254,7 @@ export const useStakingPoolInfo = () => {
                             id: 0,
                             title: 'HUSD POOL',
                             symbol: 'HUSD',
+                            decimals: 8,
                             address:
                                 '0x0298c2b32eae4da002a15f36fdf7615bea3da047',
                             stakingAddress:

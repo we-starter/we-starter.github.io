@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { formatAmount } from '../../utils/format';
+import {formatAmount, numToWei} from '../../utils/format';
 import {
     HANDLE_SHOW_CONNECT_MODAL,
     HANDLE_SHOW_FAILED_TRANSACTION_MODAL,
@@ -19,10 +19,9 @@ import StakingReward from '../../web3/abi/StakingReward.json';
 import { StakeModal, WithdrawModal } from '../../components/Modals';
 import Web3 from 'web3';
 import WAR from '../../assets/logo/war.svg';
+import BigNumber from "bignumber.js";
 
 export const StakingItem = ({ info, double }) => {
-    const { toWei, fromWei } = Web3.utils;
-
     const { account, active, library } = useActiveWeb3React();
     const { dispatch } = useContext(mainContext);
 
@@ -44,23 +43,26 @@ export const StakingItem = ({ info, double }) => {
             StakingReward,
             info.stakingAddress
         );
-        const weiAmount = toWei(amount, 'ether');
-
-        console.log('starting Staking glf', account, weiAmount);
-        dispatch({
-            type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
-            showWaitingWalletConfirmModal: waitingForApprove,
-        });
+        const weiAmount = numToWei(amount, info.decimals);
         try {
             if (info.address) {
-                await tokenContract.methods
-                    .approve(info.stakingAddress, weiAmount)
-                    .send({ from: account });
-                dispatch({
-                    type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
-                    showWaitingWalletConfirmModal: waitingForConfirm,
-                });
+                const allowance = await tokenContract.methods.allowance(account, info.stakingAddress).call()
+                console.log('starting Staking', allowance);
+                if(!new BigNumber(allowance).isGreaterThan(weiAmount)){
+                    dispatch({
+                        type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
+                        showWaitingWalletConfirmModal: waitingForApprove,
+                    });
+                    await tokenContract.methods
+                        .approve(info.stakingAddress, '0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff')
+                        .send({ from: account });
+                }
             }
+
+            dispatch({
+                type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
+                showWaitingWalletConfirmModal: waitingForConfirm,
+            });
 
             console.log('stakingFunc', contract);
             if (info.address) {
@@ -309,23 +311,34 @@ export const StakingItem = ({ info, double }) => {
                     <dd className='statistics__dl-dd'>抵押总量</dd>
                     <dt className='statistics__dl-dt'>
                         {stakingInfo
-                            ? formatAmount(stakingInfo.earnedTotal)
+                            ? formatAmount(stakingInfo.earnedTotal, info.decimals)
+                            : REQUESTING_DATA}
+                        {stakingInfo && <p>{info.symbol}</p>}
+                    </dt>
+                </div>
+            </dl>
+
+
+            <dl className='statistics__dl'>
+                <div className='statistics__dl-column'>
+                    <dd className='statistics__dl-dd'>我的抵押</dd>
+                    <dt className='statistics__dl-dt'>
+                        {stakingInfo
+                            ? formatAmount(stakingInfo.staked, info.decimals)
                             : REQUESTING_DATA}
                         {stakingInfo && <p>{info.symbol}</p>}
                     </dt>
                 </div>
 
-                {!double && (
                     <div className='statistics__dl-column'>
                         <dd className='statistics__dl-dd'>余额</dd>
                         <dt className='statistics__dl-dt'>
                             {stakingInfo
-                                ? formatAmount(stakingInfo.balance)
+                                ? formatAmount(stakingInfo.balance, info.decimals)
                                 : REQUESTING_DATA}
                             {stakingInfo && <p>{info.symbol}</p>}
                         </dt>
                     </div>
-                )}
             </dl>
 
             <dl className='statistics__dl'>
@@ -340,16 +353,16 @@ export const StakingItem = ({ info, double }) => {
                     </dt>
                 </div>
 
-                {double && (
-                    <div className='statistics__dl-column'>
-                        <dd className='statistics__dl-dd right'>APY</dd>
-                        <dt className='statistics__dl-dt right'>
-                            {stakingInfo
-                                ? formatAmount(stakingInfo.earned)
-                                : REQUESTING_DATA}
-                        </dt>
-                    </div>
-                )}
+                {/*{double && (*/}
+                {/*    <div className='statistics__dl-column'>*/}
+                {/*        <dd className='statistics__dl-dd right'>APY</dd>*/}
+                {/*        <dt className='statistics__dl-dt right'>*/}
+                {/*            {stakingInfo*/}
+                {/*                ? formatAmount(stakingInfo.earned)*/}
+                {/*                : REQUESTING_DATA}*/}
+                {/*        </dt>*/}
+                {/*    </div>*/}
+                {/*)}*/}
             </dl>
 
             <div className='button-row'>
@@ -405,15 +418,17 @@ export const StakingItem = ({ info, double }) => {
                 <div className='modal-show'>
                     <div className='wrapper'>
                         <StakeModal
+                            info={info}
                             amount={amount}
                             symbol={info.symbol}
                             tokenName={'Gallery Token'}
                             balance={stakingInfo.balance}
                             onChange={(e) => {
-                                setAmount(e.target.value);
+                                const value = e.target.value.replace(/^(.*\..{6}).*$/,"$1");
+                                setAmount(value);
                             }}
                             onMax={() => {
-                                setAmount(fromWei(stakingInfo.balance));
+                                setAmount(formatAmount(stakingInfo.balance, info.decimals));
                             }}
                             onConfirm={onStake}
                             onCancel={() => {
