@@ -105,10 +105,10 @@ export const PoolsDetail = (props) => {
               </thead>
               <tbody>
               {
-                (pool && pool.purchasedCurrencyOf.toNumber()) > 0 ? (
+                (pool && pool.purchasedCurrencyOf.toString()) > 0 ? (
                     <tr>
                       <td>{Web3.utils.fromWei(pool.purchasedCurrencyOf, 'ether')}</td>
-                      <td>{(Web3.utils.fromWei(pool.settleable.rate, 'ether') * 100).toFixed(2)}%</td>
+                      <td>{(Web3.utils.fromWei(pool.settleable.rate, 'ether') * 100).toFixed(2) * 1}%</td>
                       <td>{Web3.utils.fromWei(pool.settleable.volume, 'ether')}</td>
                     </tr>
                 ) :
@@ -136,7 +136,7 @@ export const PoolsDetail = (props) => {
               </thead>
               <tbody>
               {
-                (pool && pool.purchasedCurrencyOf.toNumber()) > 0 ? (
+                (pool && pool.purchasedCurrencyOf.toString()) > 0 ? (
                     <tr>
                       <td>{pool && Web3.utils.fromWei(pool.settleable.amount, 'ether')}</td>
                       <td>{pool && Web3.utils.fromWei(pool.settleable.volume, 'ether')}</td>
@@ -175,10 +175,10 @@ export const PoolsDetail = (props) => {
           </div>
           <div className='pools_card_progress__bar'>
             <span
-              style={{ left: pool ? `${pool.progress * 100}%` : '0%' }}
+              style={{ left: pool ? `${pool.progress > 1 ? 100 : pool.progress * 100}%` : '0%' }}
             ></span>
             <p>
-              <a style={{ width: pool ? `${pool.progress * 100}%` : '0%' }}></a>
+              <a style={{ width: pool ? `${pool.progress > 1 ? 100 : pool.progress * 100}%` : '0%' }}></a>
             </p>
           </div>
           <div className='pools_card_content_title pools_card_schedule'>

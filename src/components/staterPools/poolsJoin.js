@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 import {usage} from 'browserslist'
 import {formatAmount} from '../../utils/format'
 import {Select} from 'antd'
@@ -7,6 +7,7 @@ import {getPointAddress} from "../../web3/address";
 import Web3 from 'web3'
 import {getContract, useActiveWeb3React} from "../../web3";
 import Starter from "../../web3/abi/Starter.json";
+import ERC20 from "../../web3/abi/ERC20.json";
 import {
     HANDLE_SHOW_FAILED_TRANSACTION_MODAL,
     HANDLE_SHOW_TRANSACTION_MODAL,
@@ -26,31 +27,77 @@ export const PoolsJoin = ({
                           }) => {
     const {account, active, library, chainId} = useActiveWeb3React();
     const {dispatch} = useContext(mainContext);
+    const [approve, setApprove] = useState(true)
     const [amount, setAmount] = useState('')
     const currency_address = pool ? pool.currency.address : '0x0000000000000000000000000000000000000000'
+
     const {balance = 0} = useBalance(currency_address)
 
     const handleChange = (value) => {
         console.log(`selected ${value}`)
     }
+
+    useEffect(() => {
+        if(pool && pool.currency.allowance > 0) {
+            setApprove(false)
+        }
+    }, [pool])
+
     const onMax = () => {
         setAmount(parseFloat(Web3.utils.fromWei(balance, 'ether')).toFixed(6) * 1)
     }
 
     const onChange = (e) => {
         const {value} = e.target
-        setAmount(value * 1)
+        const re = /^[0-9]+([.|,][0-9]+)?$/g;
+        if (value === '' || re.test(value) || (value.split('.').length === 2 &&  value.slice(value.length - 1) === '.')) {
+            setAmount(value)
+        }
+    }
+
+    const onApprove = (e) => {
+        const contract = getContract(
+            library,
+            ERC20.abi,
+            pool.currency.address
+        );
+        contract.methods.approve(pool.address, '0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff').send({
+            from: account
+        }).on('transactionHash', hash => {
+            dispatch({
+                type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
+                showWaitingWalletConfirmModal: {...waitingPending, hash}
+            });
+        }).on('receipt', (_, receipt) => {
+            console.log('approve success')
+            dispatch({
+                type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
+                showWaitingWalletConfirmModal: waitingForInit
+            });
+            dispatch({
+                type: HANDLE_SHOW_TRANSACTION_MODAL,
+                showTransactionModal: true
+            });
+            setApprove(false)
+        }).on('error', (err, receipt) => {
+            console.log('approve error', err)
+            dispatch({
+                type: HANDLE_SHOW_FAILED_TRANSACTION_MODAL,
+                showFailedTransactionModal: true
+            });
+            dispatch({
+                type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
+                showWaitingWalletConfirmModal: waitingForInit
+            });
+        })
     }
 
     const onConfirm = (e) => {
-
         const pool_contract = getContract(
             library,
             Starter,
             pool.address
         );
-        const amount_wei = Web3.utils.toWei(`${amount}`, 'ether')
-        if(amount_wei )
         pool_contract.methods.purchase(Web3.utils.toWei(`${amount}`, 'ether')).send({
             from: account
         }).on('transactionHash', hash => {
@@ -144,14 +191,25 @@ export const PoolsJoin = ({
                             >
                                 Cancel
                             </button>
-
-                            <button
-                                type='button'
-                                className='btn btn--medium'
-                                onClick={onConfirm}
-                            >
-                                Confirm
-                            </button>
+                            {
+                                approve ? (
+                                    <button
+                                        type='button'
+                                        className='btn btn--medium'
+                                        onClick={onApprove}
+                                    >
+                                        Approve
+                                    </button>
+                                ) : (
+                                    <button
+                                        type='button'
+                                        className='btn btn--medium'
+                                        onClick={onConfirm}
+                                    >
+                                        Confirm
+                                    </button>
+                                )
+                            }
                         </div>
                     </div>
                 </form>

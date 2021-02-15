@@ -11,7 +11,6 @@ const PoolsIndex = (props) => {
   const [listData, setListData] = useState([])
 
   const pools = usePoolsInfo()
-
   const setData = async () => {
     setListData(pools.filter(o => o.is_top))
   }
@@ -38,7 +37,7 @@ const PoolsIndex = (props) => {
   const renderCard = (pool) => {
     const {address, name, ratio, progress, status, totalPurchasedAmount, currency} = pool
     return (
-        <div className='pools-type_card_box'>
+        <div className='pools-type_card_box' key={pool.address}>
           <div className='pools-type_title'>
             <p className='pools-type_card_title'>
               <img src={HUSD} />
@@ -71,10 +70,10 @@ const PoolsIndex = (props) => {
             <a>
               <i
                   className='pools-type_progress_bar'
-                  style={{ width: `${progress}%`}}
+                  style={{ width: `${pool.progress > 1 ? 100 : pool.progress * 100}%`}}
               ></i>
             </a>
-            <p>{progress}%</p>
+            <p>{progress * 100}%</p>
           </div>
           <a
               className='pools-type_enter'
