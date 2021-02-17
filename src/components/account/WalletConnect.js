@@ -67,21 +67,28 @@ export const WalletConnect = ({ onClose, onCancel }) => {
                         <div className='form-app__inner__wallets'>
                             <div
                                 onClick={() => {
-                                    dispatch({
-                                        type: HANDLE_WALLET_MODAL,
-                                        walletModal: 'connecting',
-                                    });
                                     activate(injected)
-                                        .then(() => {
-                                            dispatch({
-                                                type: HANDLE_WALLET_MODAL,
-                                                walletModal: null,
-                                            });
-                                            window &&
-                                                window.localStorage.setItem(
-                                                    GALLERY_SELECT_WEB3_CONTEXT,
-                                                    'MetaMask'
-                                                );
+                                        .then((e) => {
+                                            // 验证链接之后
+                                            injected.isAuthorized().then((is_authorized) => {
+                                                if(is_authorized){
+                                                    dispatch({
+                                                        type: HANDLE_WALLET_MODAL,
+                                                        walletModal: null,
+                                                    });
+                                                    window &&
+                                                    window.localStorage.setItem(
+                                                        GALLERY_SELECT_WEB3_CONTEXT,
+                                                        'MetaMask'
+                                                    );
+                                                }else{
+                                                    dispatch({
+                                                        type: HANDLE_WALLET_MODAL,
+                                                        walletModal: 'connecting',
+                                                    });
+                                                }
+                                            })
+
                                         })
                                         .catch(() => {
                                             console.log('error')
@@ -98,21 +105,27 @@ export const WalletConnect = ({ onClose, onCancel }) => {
 
                             <div
                                 onClick={() => {
-                                    dispatch({
-                                        type: HANDLE_WALLET_MODAL,
-                                        walletModal: 'connecting',
-                                    });
                                     activate(walletChange)
                                         .then(() => {
-                                            dispatch({
-                                                type: HANDLE_WALLET_MODAL,
-                                                walletModal: null,
-                                            });
-                                            window &&
-                                            window.localStorage.setItem(
-                                                GALLERY_SELECT_WEB3_CONTEXT,
-                                                'MetaMask'
-                                            );
+                                            // 验证链接之后
+                                            walletChange.isAuthorized().then((is_authorized) => {
+                                                if(is_authorized){
+                                                    dispatch({
+                                                        type: HANDLE_WALLET_MODAL,
+                                                        walletModal: null,
+                                                    });
+                                                    window &&
+                                                    window.localStorage.setItem(
+                                                        GALLERY_SELECT_WEB3_CONTEXT,
+                                                        'WalletConnect'
+                                                    );
+                                                }else{
+                                                    dispatch({
+                                                        type: HANDLE_WALLET_MODAL,
+                                                        walletModal: 'connecting',
+                                                    });
+                                                }
+                                            })
                                         })
                                         .catch(() => {});
                                 }}
@@ -125,5 +138,5 @@ export const WalletConnect = ({ onClose, onCancel }) => {
                 </form>
             </div>
         </div>
-    );
-};
+    )
+}

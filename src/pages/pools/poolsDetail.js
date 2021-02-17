@@ -33,8 +33,8 @@ export const PoolsDetail = (props) => {
 
   useEffect(() => {
     setPool(pools.pop())
+    console.log(pool)
   }, [pools, address])
-  console.log(pool)
 
   const onClaim = () => {
     getContract(library, Starter, address)
