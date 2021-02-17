@@ -50,10 +50,49 @@
         }
       }
 
+<<<<<<< HEAD
       &__item:hover {
         background-color: #ffffff;
         p {
           color: rgba(15, 140, 32, 1);
+=======
+        &__frame {
+            width: 100%;
+            height: 42px;
+            background: #ffffff;
+            border-radius: 5px;
+            border: 2px solid #d4e9e2;
+            display: flex;
+            align-items: center;
+            padding: 0 16px;
+            cursor: pointer;
+
+            &__dot {
+                width: 12px !important;
+            }
+
+            &__dot-default {
+                width: 12px !important;
+                background-color: transparent;
+            }
+
+            img {
+                width: 24px;
+                margin-right: 12px;
+            }
+
+            p {
+                font-size: 14px;
+                font-family: HelveticaNeue-Medium, HelveticaNeue;
+                font-weight: 500;
+                color: #22292f;
+            }
+
+            &__right-icon {
+                margin-left: auto;
+                margin-right: 0 !important;
+            }
+>>>>>>> 0cd66abe2922b67f11a45b6ed9d242c89d858ec8
         }
       }
     }

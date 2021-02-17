@@ -158,6 +158,7 @@ export const useStakingPoolInfo = () => {
     const {chainId} = useActiveWeb3React();
 
     useEffect(() => {
+        console.log('chain id ---->',chainId)
         switch (chainId) {
             case 3:
                 setStakingInfos({
