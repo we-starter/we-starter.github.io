@@ -73,9 +73,8 @@ export const WalletModal = ({ onChange, onClose }) => {
                                     walletModal: null,
                                 });
                                 window &&
-                                    window.localStorage.setItem(
-                                        GALLERY_SELECT_WEB3_CONTEXT,
-                                        null
+                                    window.localStorage.removeItem(
+                                        GALLERY_SELECT_WEB3_CONTEXT
                                     );
                             }}>
                             Disconnect Wallet

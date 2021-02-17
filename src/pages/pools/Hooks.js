@@ -366,15 +366,15 @@ export const useStakingPoolInfo = () => {
 export const usePoolsInfo = (address = '') => {
     const {account, active, library, chainId} = useActiveWeb3React();
     const [poolsInfo, setPoolsInfo] = useState([])
-    const now = Date.now()
+    const now = parseInt(Date.now() / 1000)
     useEffect(() => {
         library && Promise.all(pools.filter(o => address === '' || o.address === address).map(pool => {
-            // const currency_token = getContract(
-            //     library,
-            //     ERC20,
-            //     pool.currency.address,
-            // )
-            //
+            const currency_token = getContract(
+                library,
+                ERC20,
+                pool.currency.address,
+            )
+
             // const underlying_token = getContract(
             //     library,
             //     ERC20,
@@ -391,19 +391,20 @@ export const usePoolsInfo = (address = '') => {
                 pool_contract.methods.time().call(), // 结算时间点
                 pool_contract.methods.price().call(), // 结算时间点
                 pool_contract.methods.totalPurchasedCurrency().call(), //总申购的量
-                address ? pool_contract.methods.purchasedCurrencyOf(address).call() : Promise.resolve(0),
+                address ? pool_contract.methods.purchasedCurrencyOf(account).call() : Promise.resolve(0),
                 pool_contract.methods.totalSettleable().call(),
-                address ? pool_contract.methods.settleable(address).call() : Promise.resolve({
+                address ? pool_contract.methods.settleable(account).call() : Promise.resolve({
                     completed_: false,
                     amount: 0,
                     volume: 0,
                     rate: 0
                 }),
-                getLogs(library, Starter, {fromBlock: 0, toBlock: 'latest', address: pool.address, topics: [null, Web3.utils.padLeft(account, 64)]})
-                // currency_token.methods.balanceOf(pool.address).call(),
+                getLogs(library, Starter, {fromBlock: 0, toBlock: 'latest', address: pool.address, topics: [null, Web3.utils.padLeft(account, 64)]}),
+                address ? currency_token.methods.allowance(account, pool.address).call() : 0,
                 // underlying_token.methods.balanceOf(pool.address).call(),
             ]
-            return Promise.all(promise_list).then(([time, price, totalPurchasedCurrency, purchasedCurrencyOf, totalSettleable, settleable, logs]) => {
+            return Promise.all(promise_list).then(([time, price, totalPurchasedCurrency, purchasedCurrencyOf, totalSettleable, settleable, logs, currency_allowance]) => {
+                console.log(currency_allowance)
                 let status = 0 // 即将上线
                 if(pool.start_at < now){
                     // 募集中
@@ -419,24 +420,26 @@ export const usePoolsInfo = (address = '') => {
                     status = 3
                 }
 
-                const totalPurchasedAmount = new BN(Web3.utils.toWei(pool.amount, 'ether')).mul(new BN(price)).div(new BN(Web3.utils.toWei('1', 'ether')))
-                totalPurchasedCurrency = new BN(totalPurchasedCurrency)
-                purchasedCurrencyOf = new BN(purchasedCurrencyOf)
+                const totalPurchasedAmount = new BigNumber(Web3.utils.toWei(pool.amount, 'ether')).multipliedBy(new BigNumber(price)).div(new BigNumber(Web3.utils.toWei('1', 'ether')))
 
                 let is_join = false
                 if(logs.length > 0 && logs.findIndex(log => log.event === 'Purchase') > -1){
                     is_join = true
                 }
 
+                Object.assign(pool.currency, {
+                    allowance: currency_allowance
+                })
+
                 return Object.assign({}, pool, {
-                    ratio: `1${pool.currency.symbol} = ${new BN(Web3.utils.toWei('1', 'ether')).div(new BN(price)).toNumber().toFixed(6) * 1}${pool.underlying.symbol}`,
-                    progress: new BN(totalPurchasedCurrency).div(totalPurchasedAmount).toNumber().toFixed(2) * 1,
+                    ratio: `1${pool.currency.symbol} = ${new BigNumber(Web3.utils.toWei('1', 'ether')).div(new BigNumber(price)).toNumber().toFixed(6) * 1}${pool.underlying.symbol}`,
+                    progress: (new BigNumber(totalPurchasedCurrency).dividedBy(totalPurchasedAmount).toNumber()).toFixed(2) * 1,
                     status: status,
                     time: time,
                     price: Web3.utils.fromWei(price, 'ether'),
                     is_join,
                     totalPurchasedCurrency,
-                    totalPurchasedAmount,
+                    totalPurchasedAmount: totalPurchasedAmount.toString(),
                     purchasedCurrencyOf,
                     totalSettleable,
                     settleable,

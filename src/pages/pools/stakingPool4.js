@@ -140,17 +140,21 @@ const StakingPool4 = (props) => {
                       ></i>
                     </a>
                   </td>
-                  {item.status === 1 ? (
+                  {item.status === 0 ? (
                     <td>
-                      <p className='pools-index_over_status'>已结束</p>
+                      <p className='pools-index_coming_status'>即将上线</p>
                     </td>
-                  ) : item.status === 2 ? (
+                  ) : item.status === 1 ? (
                     <td>
                       <p className='pools-index_progress_status'>募集中</p>
                     </td>
+                  ) : item.status === 2 ? (
+                      <td>
+                        <p className='pools-index_progress_status'>结算中</p>
+                      </td>
                   ) : (
                     <td>
-                      <p className='pools-index_coming_status'>即将上线</p>
+                      <p className='pools-index_over_status'>已结束</p>
                     </td>
                   )}
                 </tr>

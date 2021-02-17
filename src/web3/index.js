@@ -42,7 +42,7 @@ function getABIEventMap(abi) {
     return event_map;
 }
 
-export const  useActiveWeb3React =() => {
+export const useActiveWeb3React =() => {
     const context = useWeb3ReactCore()
     const contextNetwork = useWeb3ReactCore()
     return context.active ? context : contextNetwork

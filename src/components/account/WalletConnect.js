@@ -67,6 +67,10 @@ export const WalletConnect = ({ onClose, onCancel }) => {
                         <div className='form-app__inner__wallets'>
                             <div
                                 onClick={() => {
+                                    dispatch({
+                                        type: HANDLE_WALLET_MODAL,
+                                        walletModal: 'connecting',
+                                    });
                                     activate(injected)
                                         .then(() => {
                                             dispatch({
@@ -79,7 +83,9 @@ export const WalletConnect = ({ onClose, onCancel }) => {
                                                     'MetaMask'
                                                 );
                                         })
-                                        .catch(() => {});
+                                        .catch(() => {
+                                            console.log('error')
+                                        });
                                 }}
                                 className='form-app__inner__wallets__item'
                                 style={{
