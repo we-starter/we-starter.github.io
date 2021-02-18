@@ -49,7 +49,7 @@ function App() {
             {/* pools页面banner和其他的不同，所以单独拎出去判断了 */}
             <ExtractComponents />
             <Switch>
-              <Route
+              {/* <Route
                 exact
                 path='/staking-pool1'
                 component={StakingPool1}
@@ -63,7 +63,7 @@ function App() {
                 exact
                 path='/staking-pool3'
                 component={StakingPool3}
-              ></Route>
+              ></Route> */}
               <Route exact path='/pools' component={PoolsIndex}></Route>
               <Route
                 exact

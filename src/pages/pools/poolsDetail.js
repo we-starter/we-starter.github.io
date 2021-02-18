@@ -235,7 +235,7 @@ export const PoolsDetail = (props) => {
             <span
               style={{
                 left: pool
-                  ? `${pool.progress > 1 ? 100 : pool.progress * 100}%`
+                  ? `${pool.progress > 1 ? 94 : pool.progress * 100}%`
                   : '0%',
               }}
             ></span>

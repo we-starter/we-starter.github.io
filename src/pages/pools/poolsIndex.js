@@ -9,11 +9,19 @@ import Web3 from 'web3'
 
 const PoolsIndex = (props) => {
   const [listData, setListData] = useState([])
+  const [tabFlag, setTabFlag] = useState(1)
+  const changeTab = (val) => {
+    setTabFlag(val)
+  }
 
   const pools = usePoolsInfo()
   const setData = async () => {
     setListData(pools.filter((o) => o.is_top))
   }
+
+  useEffect(() => {
+    // 重新请求数据进行赋值
+  }, [tabFlag])
 
   // 列表查看详情
   const goDetail = (address) => {
@@ -112,7 +120,20 @@ const PoolsIndex = (props) => {
     <div className='pools-type'>
       <PoolsTextHeader />
       <div className='pools-type_content'>
-        <h2>Top Pools</h2>
+        <div className='pools-type_tab'>
+          <h2
+            onClick={() => changeTab(1)}
+            className={tabFlag === 1 ? 'tab_active' : ''}
+          >
+            Top Pools
+          </h2>
+          <h2
+            onClick={() => changeTab(2)}
+            className={tabFlag === 2 ? 'tab_active' : ''}
+          >
+            <FormattedMessage id='myJoinPool' />
+          </h2>
+        </div>
         <div className='pools-type_card'>
           {pools &&
             pools.map((pool) => {

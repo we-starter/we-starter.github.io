@@ -1,5 +1,5 @@
 const en_US = {
-  fundraisingPool: '募资池',
+  fundraisingPool: 'Pool',
   mortgage: 'collateral mining',
   liquidityPool: 'liquidity mining',
   crowdfund: 'crowdfunding pool',

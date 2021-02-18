@@ -1,6 +1,69 @@
 .pools_text_header {
   position: relative;
   background: #fff;
+  .download-pdf {
+    margin-right: 30px;
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    background: url('../icon/file-shield-fill@2x.png') no-repeat;
+    background-size: 100% 100%;
+    @media #{$mdWidth} {
+      display: none;
+      position: absolute;
+      top: 28px;
+      right: 328px;
+    }
+    @media #{$smWidth} {
+      display: none;
+    }
+    @media #{$xsWidth} {
+      display: none;
+    }
+    @media (max-width: 470px) {
+      right: unset;
+      // left: 20px;
+    }
+  }
+  .ht-balance {
+    display: flex;
+    align-items: center;
+    padding: 0 12px;
+    height: 38px;
+    background: #f2f0eb;
+    border-radius: 5px 0px 0px 5px;
+    span {
+      margin-right: 8px;
+      display: inline-block;
+      width: 24px;
+      height: 24px;
+      background: url('../icon/HT@2x.png') no-repeat;
+      background-size: 100% 100%;
+    }
+    p {
+      margin-bottom: 0;
+      font-size: 14px;
+      font-weight: 600;
+      color: #22292f;
+    }
+    @media #{$mdWidth} {
+      display: none;
+      position: absolute;
+      top: 22px;
+      right: 218px;
+    }
+
+    @media (max-width: 470px) {
+      right: unset;
+      // left: 20px;
+    }
+    @media #{$smWidth} {
+      display: none;
+    }
+    @media #{$xsWidth} {
+      display: none;
+    }
+  }
   .center {
     padding: 0;
     @media #{$desktop} {
@@ -96,6 +159,7 @@
     border-radius: 5px;
 
     @media #{$mdWidth} {
+      display: none;
       width: 153px;
       position: absolute;
       top: 21px;
@@ -154,6 +218,12 @@
       @media (max-width: 370px) {
         display: none;
       }
+    }
+    @media #{$smWidth} {
+      display: none;
+    }
+    @media #{$xsWidth} {
+      display: none;
     }
   }
 

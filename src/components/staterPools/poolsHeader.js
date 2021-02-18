@@ -12,6 +12,7 @@ import { ReactComponent as More } from '../../assets/icon/more.svg'
 import dot from '../../assets/icon/dot.png'
 import PoolsBanner from '../banner/PoolsBanner'
 import { FormattedMessage } from 'react-intl'
+import Form from 'antd/lib/form/Form'
 
 const PoolsHeader = (props) => {
   const { active, account } = useActiveWeb3React()
@@ -40,12 +41,12 @@ const PoolsHeader = (props) => {
     >
       <div className='center'>
         <div className='pools_header__box'>
-          <Link to='/' className='pools_header__logo'>
+          <Link to='/pools' className='pools_header__logo'>
             <LogoText />
           </Link>
 
           <Link
-            to='/'
+            to='/pools'
             className={`pools_header__logo--small ${active ? 'active' : ''}`}
           >
             <LogoText />
@@ -54,7 +55,7 @@ const PoolsHeader = (props) => {
           <div className='pools_header__menu'>
             <nav className='menu'>
               <ul className='menu__list'>
-                <li className='menu__item'>
+                {/* <li className='menu__item'>
                   <NavLink
                     exact
                     to='/staking-pool1'
@@ -83,14 +84,14 @@ const PoolsHeader = (props) => {
                   >
                     <FormattedMessage id='crowdfund' />
                   </NavLink>
-                </li>
+                </li> */}
                 <li className='menu__item'>
                   <NavLink
                     to='/pools'
                     className='menu__link'
                     onClick={handleMenuItemClick}
                   >
-                    PoolS
+                    <FormattedMessage id='fundraisingPool' />
                     <span className='menu__hot'></span>
                   </NavLink>
                 </li>
@@ -104,11 +105,28 @@ const PoolsHeader = (props) => {
                     <FormattedMessage id='projectApplication' />
                   </NavLink>
                 </li>
+                <li className='menu__item'>
+                  <a
+                    href='https://www.baidu.com'
+                    target='_blank'
+                    className='menu__link'
+                    onClick={handleMenuItemClick}
+                  >
+                    Medium
+                  </a>
+                </li>
               </ul>
             </nav>
           </div>
 
           <div className='pools_header__menu-wrapper'>
+            <a className='download-pdf'></a>
+            {active && (
+              <div className='ht-balance'>
+                <span></span>
+                <p>2.22222</p>
+              </div>
+            )}
             {/* <a>Guide</a> */}
 
             {active && (

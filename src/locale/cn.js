@@ -1,5 +1,5 @@
 const zh_CN = {
-  fundraisingPool: '募资池',
+  fundraisingPool: 'Pool',
   mortgage: '抵押挖矿',
   liquidityPool: '流动性挖矿',
   crowdfund: '众筹池',

@@ -11,6 +11,7 @@ import { ReactComponent as LogoText } from '../../assets/image/logo-text.svg'
 import { ReactComponent as More } from '../../assets/icon/more.svg'
 import { FormattedMessage } from 'react-intl'
 import dot from '../../assets/icon/dot.png'
+import WeStarterPDF from '../../pdfFile/Security Assessment for WeStarter - Starter.pdf'
 
 const PoolsTextHeader = (props) => {
   const { active, account } = useActiveWeb3React()
@@ -40,12 +41,12 @@ const PoolsTextHeader = (props) => {
     >
       <div className='center'>
         <div className='pools_text_header__box'>
-          <Link to='/' className='pools_text_header__logo'>
+          <Link to='/pools' className='pools_text_header__logo'>
             <LogoText />
           </Link>
 
           <Link
-            to='/'
+            to='/pools'
             className={`pools_text_header__logo--small ${
               active ? 'active' : ''
             }`}
@@ -56,7 +57,7 @@ const PoolsTextHeader = (props) => {
           <div className='pools_text_header__menu'>
             <nav className='menu'>
               <ul className='menu__list'>
-                <li className='menu__item'>
+                {/* <li className='menu__item'>
                   <NavLink
                     exact
                     to='/staking-pool1'
@@ -85,7 +86,7 @@ const PoolsTextHeader = (props) => {
                   >
                     <FormattedMessage id='crowdfund' />
                   </NavLink>
-                </li>
+                </li> */}
                 <li className='menu__item'>
                   <NavLink
                     exact
@@ -93,7 +94,7 @@ const PoolsTextHeader = (props) => {
                     className='menu__link'
                     onClick={handleMenuItemClick}
                   >
-                    PoolS
+                    <FormattedMessage id='fundraisingPool' />
                     <span className='menu__hot'></span>
                   </NavLink>
                 </li>
@@ -107,12 +108,29 @@ const PoolsTextHeader = (props) => {
                     <FormattedMessage id='projectApplication' />
                   </NavLink>
                 </li>
+                <li className='menu__item'>
+                  <a
+                    href='https://www.baidu.com'
+                    target='_blank'
+                    className='menu__link'
+                    onClick={handleMenuItemClick}
+                  >
+                    Medium
+                  </a>
+                </li>
               </ul>
             </nav>
           </div>
 
           <div className='pools_text_header__menu-wrapper'>
             {/* <a>Guide</a> */}
+            <a className='download-pdf' href={WeStarterPDF} target='_blank'></a>
+            {active && (
+              <div className='ht-balance'>
+                <span></span>
+                <p>2.22222</p>
+              </div>
+            )}
 
             {active && (
               <div className='pools_text_header-account'>
