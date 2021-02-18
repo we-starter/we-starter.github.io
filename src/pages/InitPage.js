@@ -160,16 +160,16 @@ export const InitPage = () => {
       {/*)}*/}
 
       {showTransactionModal && (
-        <div className='modal-show' style={{ zIndex: 11 }}>
-          <div className='wrapper'>
+        <div className='modal-show'>
+          <div className='wrapper' style={{ zIndex: 11 }}>
             <TransactionModal />
           </div>
         </div>
       )}
 
       {txStatus && (
-        <div className='modal-show' style={{ zIndex: 11 }}>
-          <div className='wrapper'>
+        <div className='modal-show'>
+          <div className='wrapper' style={{ zIndex: 11 }}>
             <TXStatusModal />
           </div>
         </div>
@@ -199,8 +199,8 @@ export const InitPage = () => {
       )}
 
       {walletModal === 'status' && (
-        <div className='modal-show' style={{ zIndex: 11 }}>
-          <div className='wrapper'>
+        <div className='modal-show'>
+          <div className='wrapper' style={{ zIndex: 11 }}>
             <WalletModal
               onClose={() =>
                 dispatch({
@@ -239,8 +239,8 @@ export const InitPage = () => {
         </div>
       )}
       {walletModal === 'join' && (
-        <div className='modal-show' style={{ zIndex: 11 }}>
-          <div className='wrapper'>
+        <div className='modal-show'>
+          <div className='wrapper' style={{ zIndex: 10 }}>
             <PoolsJoin
               pool={pool}
               onClose={() =>
