@@ -54,7 +54,7 @@ export const useBalance = (address) =>{
 export const useHTBalance = () =>{
     const {account, active, library} = useActiveWeb3React()
     const [blockNumber, setBlockNumber] = useState(0)
-    const [ balance, setBalance] = useState()
+    const [ balance, setBalance] = useState(0)
 
     useEffect(() => {
 
@@ -69,7 +69,6 @@ export const useHTBalance = () =>{
 
             const web3 = getWeb3(library);
             web3.eth.getBalance(account).then(balance => {
-                console.log(balance)
                 setBalance(balance)
             })
         }

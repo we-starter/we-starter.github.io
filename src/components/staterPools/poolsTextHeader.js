@@ -43,7 +43,7 @@ const PoolsTextHeader = (props) => {
     >
       <div className='center'>
         <div className='pools_text_header__box'>
-          <Link to='/pools' className='pools_text_header__logo'>
+          <Link to='/' className='pools_text_header__logo'>
             <LogoText />
           </Link>
 
@@ -110,16 +110,16 @@ const PoolsTextHeader = (props) => {
                     <FormattedMessage id='projectApplication' />
                   </NavLink>
                 </li>
-                <li className='menu__item'>
-                  <a
-                    href='https://www.baidu.com'
-                    target='_blank'
-                    className='menu__link'
-                    onClick={handleMenuItemClick}
-                  >
-                    Medium
-                  </a>
-                </li>
+                {/*<li className='menu__item'>*/}
+                {/*  <a*/}
+                {/*    href='https://www.baidu.com'*/}
+                {/*    target='_blank'*/}
+                {/*    className='menu__link'*/}
+                {/*    onClick={handleMenuItemClick}*/}
+                {/*  >*/}
+                {/*    Medium*/}
+                {/*  </a>*/}
+                {/*</li>*/}
               </ul>
             </nav>
           </div>

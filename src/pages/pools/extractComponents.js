@@ -7,6 +7,7 @@ const ExtractComponents = (props) => {
   const [showComponents, setShowComponents] = useState(true)
   useEffect(() => {
     if (
+      // props.history.location.pathname === '/' ||
       props.history.location.pathname === '/pools' ||
       props.history.location.pathname.indexOf('/pools/detail') > -1 ||
       props.history.location.pathname === '/information'
