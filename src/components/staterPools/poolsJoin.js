@@ -22,8 +22,8 @@ import BigNumber from 'bignumber.js'
 
 const { Option } = Select
 
-const PoolsJoin = (props, { icon, onClose, pool }) => {
-  const { intl } = props
+const PoolsJoin = (props) => {
+  const { intl, icon, onClose, pool } = props
   const { account, active, library, chainId } = useActiveWeb3React()
   const { dispatch } = useContext(mainContext)
   const [approve, setApprove] = useState(true)
@@ -31,7 +31,6 @@ const PoolsJoin = (props, { icon, onClose, pool }) => {
   const currency_address = pool
     ? pool.currency.address
     : '0x0000000000000000000000000000000000000000'
-
   const { balance = 0 } = useBalance(currency_address)
 
   const handleChange = (value) => {

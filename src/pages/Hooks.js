@@ -32,10 +32,11 @@ export const useBalance = (address) =>{
     const [ balance, setBalance] = useState()
 
     useEffect(()=>{
+        console.log(active)
         if(active){
             try{
                 const contract = getContract(library, ERC20.abi, address)
-                console.log('token totalSupply:',address)
+                console.log('token address:',address)
                 contract.methods.balanceOf(account).call().then(res =>{
                     console.log('token totalSupply:',res)
                     setBalance(res)
