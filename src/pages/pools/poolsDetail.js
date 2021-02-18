@@ -19,6 +19,7 @@ import { mainContext } from '../../reducer'
 import Starter from '../../web3/abi/Starter.json'
 import { FormattedMessage } from 'react-intl'
 import BigNumber from 'bignumber.js'
+import {formatAmount, fromWei} from "../../utils/format";
 
 export const PoolsDetail = (props) => {
   const { address } = props.match.params
@@ -114,12 +115,12 @@ export const PoolsDetail = (props) => {
                 {(pool && pool.purchasedCurrencyOf.toString()) > 0 ? (
                   <tr>
                     <td>
-                      {Web3.utils.fromWei(pool.purchasedCurrencyOf, 'ether')}
+                      {fromWei(pool.purchasedCurrencyOf).toFixed(6, 1) * 1}
                     </td>
                     <td>
                       {(
-                        Web3.utils.fromWei(pool.settleable.rate, 'ether') * 100
-                      ).toFixed(2) * 1}
+                          fromWei(pool.settleable.rate).multipliedBy(new BigNumber(100))
+                      ).toFixed(2, 1).toString() * 1}
                       %
                     </td>
                     {/*<td>{Web3.utils.fromWei(pool.settleable.volume, 'ether')}</td>*/}
@@ -132,8 +133,8 @@ export const PoolsDetail = (props) => {
                             Web3.utils.fromWei(pool.settleable.rate, 'ether')
                           )
                         )
-                        .dividedBy(new BigNumber(pool.price))
-                        .toString()}
+                        .dividedBy(new BigNumber(pool.price)).toFixed(6,  1)
+                        .toString() * 1}
                     </td>
                   </tr>
                 ) : (
@@ -169,11 +170,11 @@ export const PoolsDetail = (props) => {
                   <tr>
                     <td>
                       {pool &&
-                        Web3.utils.fromWei(pool.settleable.amount, 'ether')}
+                        formatAmount(pool.settleable.amount)}
                     </td>
                     <td>
                       {pool &&
-                        Web3.utils.fromWei(pool.settleable.volume, 'ether')}
+                        formatAmount(pool.settleable.volume)}
                     </td>
                     <td>
                       {pool && pool.settleable.volume > 0 && (
@@ -252,8 +253,8 @@ export const PoolsDetail = (props) => {
           <div className='pools_card_content_title pools_card_schedule'>
             <span>{pool && pool.progress * 100}%</span>
             <span>
-              {pool && Web3.utils.fromWei(pool.totalPurchasedCurrency, 'ether')}
-              /{pool && Web3.utils.fromWei(pool.totalPurchasedAmount, 'ether')}
+              {pool && formatAmount(pool.totalPurchasedCurrency)}
+              /{pool && formatAmount(pool.totalPurchasedAmount)}
             </span>
           </div>
         </div>

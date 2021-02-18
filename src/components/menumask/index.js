@@ -8,12 +8,14 @@ import doubleLine from '../../assets/icon/check-double-line.png'
 
 import { mainContext } from '../../reducer'
 import { FormattedMessage } from 'react-intl'
+import {useHTBalance} from "../../pages/Hooks";
 
 export const MenuMask = () => {
   const { active, account } = useActiveWeb3React()
   const [showMenu, setShowMenu] = useState(false)
   const { dispatch, state } = useContext(mainContext)
   const location = useLocation()
+  const {balance} = useHTBalance()
   const handleMenuItemClick = () => {
     setShowMenu(false)
   }
@@ -162,7 +164,7 @@ export const MenuMask = () => {
               {active && (
                 <div className='menumask_ht-balance'>
                   <span></span>
-                  <p>2.22222</p>
+                  <p>{formatAmount(balance)}</p>
                 </div>
               )}
             </div>

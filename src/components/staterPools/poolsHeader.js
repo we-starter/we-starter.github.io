@@ -13,6 +13,7 @@ import dot from '../../assets/icon/dot.png'
 import PoolsBanner from '../banner/PoolsBanner'
 import { FormattedMessage } from 'react-intl'
 import Form from 'antd/lib/form/Form'
+import {useHTBalance} from "../../pages/Hooks";
 
 const PoolsHeader = (props) => {
   const { active, account } = useActiveWeb3React()
@@ -21,7 +22,7 @@ const PoolsHeader = (props) => {
   const [showMenu, setShowMenu] = useState(false)
   const [showPoolsStarter, setShowPoolsStarter] = useState(false)
   const location = useLocation()
-
+  const {balance} = useHTBalance(account)
   const handleMenuItemClick = () => {
     setShowMenu(false)
   }
@@ -124,7 +125,7 @@ const PoolsHeader = (props) => {
             {active && (
               <div className='ht-balance'>
                 <span></span>
-                <p>2.22222</p>
+                <p>{formatAmount(balance)}</p>
               </div>
             )}
             {/* <a>Guide</a> */}
