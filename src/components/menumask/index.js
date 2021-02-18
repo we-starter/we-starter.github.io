@@ -2,6 +2,8 @@ import React, { useContext, useState } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import { HANDLE_SHOW_MENUMASK_MODAL } from '../../const'
 import { mainContext } from '../../reducer'
+import { FormattedMessage } from 'react-intl'
+
 export const MenuMask = () => {
   const [showMenu, setShowMenu] = useState(false)
   const { dispatch, state } = useContext(mainContext)
@@ -35,7 +37,7 @@ export const MenuMask = () => {
                   })
                 }
               >
-                抵押挖矿
+                <FormattedMessage id='mortgage' />
               </NavLink>
             </li>
             <li className='menumask_item'>
@@ -50,7 +52,7 @@ export const MenuMask = () => {
                   })
                 }
               >
-                动性挖矿
+                <FormattedMessage id='liquidityPool' />
               </NavLink>
             </li>
             <li className='menumask_item'>
@@ -65,7 +67,7 @@ export const MenuMask = () => {
                   })
                 }
               >
-                众筹池
+                <FormattedMessage id='crowdfund' />
               </NavLink>
             </li>
             <li className='menumask_item'>
@@ -96,7 +98,7 @@ export const MenuMask = () => {
                   })
                 }
               >
-                项目申请
+                <FormattedMessage id='projectApplication' />
               </NavLink>
             </li>
             {/* <li className='menumask_item'>

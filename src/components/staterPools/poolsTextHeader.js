@@ -9,6 +9,7 @@ import doubleLine from '../../assets/icon/check-double-line.png'
 import { Logoicon, LogoSmallIcon } from '../../icons'
 import { ReactComponent as LogoText } from '../../assets/image/logo-text.svg'
 import { ReactComponent as More } from '../../assets/icon/more.svg'
+import { FormattedMessage } from 'react-intl'
 import dot from '../../assets/icon/dot.png'
 
 const PoolsTextHeader = (props) => {
@@ -62,7 +63,7 @@ const PoolsTextHeader = (props) => {
                     className='menu__link'
                     onClick={handleMenuItemClick}
                   >
-                    抵押挖矿
+                    <FormattedMessage id='mortgage' />
                   </NavLink>
                 </li>
                 <li className='menu__item'>
@@ -72,7 +73,7 @@ const PoolsTextHeader = (props) => {
                     className='menu__link'
                     onClick={handleMenuItemClick}
                   >
-                    流动性挖矿
+                    <FormattedMessage id='liquidityPool' />
                   </NavLink>
                 </li>
                 <li className='menu__item'>
@@ -82,7 +83,7 @@ const PoolsTextHeader = (props) => {
                     className='menu__link'
                     onClick={handleMenuItemClick}
                   >
-                    众筹池
+                    <FormattedMessage id='crowdfund' />
                   </NavLink>
                 </li>
                 <li className='menu__item'>
@@ -103,7 +104,7 @@ const PoolsTextHeader = (props) => {
                     className='menu__link'
                     onClick={handleMenuItemClick}
                   >
-                    项目申请
+                    <FormattedMessage id='projectApplication' />
                   </NavLink>
                 </li>
               </ul>
@@ -141,7 +142,7 @@ const PoolsTextHeader = (props) => {
                       })
                     }}
                   >
-                    链接钱包
+                    <FormattedMessage id='linkWallet' />
                   </span>
                   <img src={dot} />
                 </button>

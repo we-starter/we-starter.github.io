@@ -17,7 +17,8 @@ import {
 } from '../../const'
 import { mainContext } from '../../reducer'
 import Starter from '../../web3/abi/Starter.json'
-import BigNumber from "bignumber.js";
+import { FormattedMessage } from 'react-intl'
+import BigNumber from 'bignumber.js'
 
 export const PoolsDetail = (props) => {
   const { address } = props.match.params
@@ -33,8 +34,8 @@ export const PoolsDetail = (props) => {
 
   useEffect(() => {
     setPool(pools.pop())
+    console.log(pool)
   }, [pools, address])
-  console.log(pool)
 
   const onClaim = () => {
     getContract(library, Starter, address)
@@ -80,48 +81,68 @@ export const PoolsDetail = (props) => {
             onClick={() => setRecordTab(1)}
             className={cs(recordTab === 1 && 'active')}
           >
-            募资记录
+            <FormattedMessage id='FundraisingRecord' />
           </a>
-          {
-            pool && pool.status >= 2 && (
-                <a
-                    onClick={() => setRecordTab(2)}
-                    className={cs(recordTab === 2 && 'active')}
-                >
-                  Claim
-                </a>
-            )
-          }
-
+          {pool && pool.status >= 2 && (
+            <a
+              onClick={() => setRecordTab(2)}
+              className={cs(recordTab === 2 && 'active')}
+            >
+              Claim
+            </a>
+          )}
         </div>
         {recordTab === 1 && (
           <div className='pools_detail_record_box'>
             <table className='pools_detail_record_title'>
               <thead>
                 <tr>
-                  <td>投入{pool && pool.currency.symbol}数量</td>
-                  <td>预计中签率</td>
-                  <td>预计中签量</td>
+                  <td>
+                    <FormattedMessage id='invest' />
+                    {pool && pool.currency.symbol}
+                    <FormattedMessage id='num' />
+                  </td>
+                  <td>
+                    <FormattedMessage id='winningRate' />
+                  </td>
+                  <td>
+                    <FormattedMessage id='winningAmount' />
+                  </td>
                 </tr>
               </thead>
               <tbody>
-              {
-                (pool && pool.purchasedCurrencyOf.toString()) > 0 ? (
-                    <tr>
-                      <td>{Web3.utils.fromWei(pool.purchasedCurrencyOf, 'ether')}</td>
-                      <td>{(Web3.utils.fromWei(pool.settleable.rate, 'ether') * 100).toFixed(2) * 1}%</td>
-                      {/*<td>{Web3.utils.fromWei(pool.settleable.volume, 'ether')}</td>*/}
-                      <td>{new BigNumber(Web3.utils.fromWei(pool.purchasedCurrencyOf, 'ether')).multipliedBy(new BigNumber(Web3.utils.fromWei(pool.settleable.rate, 'ether'))).dividedBy(new BigNumber(pool.price)).toString()}</td>
-                    </tr>
-                ) :
-                    (
-                        <tr>
-                          <td>-</td>
-                          <td>-</td>
-                          <td>-</td>
-                        </tr>
-                    )
-              }
+                {(pool && pool.purchasedCurrencyOf.toString()) > 0 ? (
+                  <tr>
+                    <td>
+                      {Web3.utils.fromWei(pool.purchasedCurrencyOf, 'ether')}
+                    </td>
+                    <td>
+                      {(
+                        Web3.utils.fromWei(pool.settleable.rate, 'ether') * 100
+                      ).toFixed(2) * 1}
+                      %
+                    </td>
+                    {/*<td>{Web3.utils.fromWei(pool.settleable.volume, 'ether')}</td>*/}
+                    <td>
+                      {new BigNumber(
+                        Web3.utils.fromWei(pool.purchasedCurrencyOf, 'ether')
+                      )
+                        .multipliedBy(
+                          new BigNumber(
+                            Web3.utils.fromWei(pool.settleable.rate, 'ether')
+                          )
+                        )
+                        .dividedBy(new BigNumber(pool.price))
+                        .toString()}
+                    </td>
+                  </tr>
+                ) : (
+                  <tr>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                  </tr>
+                )}
               </tbody>
             </table>
           </div>
@@ -131,34 +152,47 @@ export const PoolsDetail = (props) => {
             <table className='pools_detail_record_title'>
               <thead>
                 <tr>
-                  <td>未结算{pool && pool.currency.symbol}</td>
-                  <td>获取{pool && pool.underlying.symbol}数量</td>
+                  <td>
+                    <FormattedMessage id='unsettlement' />
+                    {pool && pool.currency.symbol}
+                  </td>
+                  <td>
+                    <FormattedMessage id='obtain' />
+                    {pool && pool.underlying.symbol}
+                    <FormattedMessage id='num' />
+                  </td>
                   <td></td>
                 </tr>
               </thead>
               <tbody>
-              {
-                (pool && pool.purchasedCurrencyOf.toString()) > 0 ? (
-                    <tr>
-                      <td>{pool && Web3.utils.fromWei(pool.settleable.amount, 'ether')}</td>
-                      <td>{pool && Web3.utils.fromWei(pool.settleable.volume, 'ether')}</td>
-                      <td>
-                        {
-                          pool && pool.settleable.volume > 0 && (
-                              <a className='pools_detail_record_btn' onClick={() => onClaim()}>Claim</a>
-                          )
-                        }
-                      </td>
-                    </tr>
+                {(pool && pool.purchasedCurrencyOf.toString()) > 0 ? (
+                  <tr>
+                    <td>
+                      {pool &&
+                        Web3.utils.fromWei(pool.settleable.amount, 'ether')}
+                    </td>
+                    <td>
+                      {pool &&
+                        Web3.utils.fromWei(pool.settleable.volume, 'ether')}
+                    </td>
+                    <td>
+                      {pool && pool.settleable.volume > 0 && (
+                        <a
+                          className='pools_detail_record_btn'
+                          onClick={() => onClaim()}
+                        >
+                          Claim
+                        </a>
+                      )}
+                    </td>
+                  </tr>
                 ) : (
-                    <tr>
-                      <td>-</td>
-                      <td>-</td>
-                      <td></td>
-                    </tr>
-                )
-              }
-
+                  <tr>
+                    <td>-</td>
+                    <td>-</td>
+                    <td></td>
+                  </tr>
+                )}
               </tbody>
             </table>
           </div>
@@ -173,18 +207,46 @@ export const PoolsDetail = (props) => {
           <div className='pools_card_val'>
             {pool && pool.amount} {pool && pool.underlying.symbol}
           </div>
-          <div className='pools_card_start'>
-            {pool && renderStatus(pool.status)}
-          </div>
+          {pool && pool.status === 0 && (
+            <div className='pools_card_start'>
+              <FormattedMessage id='comingSoon' />
+              ...
+            </div>
+          )}
+          {pool && pool.status === 1 && (
+            <div className='pools_card_start'>
+              <FormattedMessage id='recruit' />
+            </div>
+          )}
+          {pool && pool.status === 2 && (
+            <div className='pools_card_start'>
+              <FormattedMessage id='settlement' />
+            </div>
+          )}
+          {pool && pool.status === 3 && (
+            <div className='pools_card_start'>
+              <FormattedMessage id='completed' />
+            </div>
+          )}
           <div className='pools_card_content_title'>
             <span>Swap Progress</span>
           </div>
           <div className='pools_card_progress__bar'>
             <span
-              style={{ left: pool ? `${pool.progress > 1 ? 100 : pool.progress * 100}%` : '0%' }}
+              style={{
+                left: pool
+                  ? `${pool.progress > 1 ? 100 : pool.progress * 100}%`
+                  : '0%',
+              }}
             ></span>
             <p>
-              <a style={{ width: pool ? `${pool.progress > 1 ? 100 : pool.progress * 100}%` : '0%' }}></a>
+              <a
+                style={{
+                  width: pool
+                    ? `${pool.progress > 1 ? 100 : pool.progress * 100}%`
+                    : '0%',
+                }}
+              ></a>
             </p>
           </div>
           <div className='pools_card_content_title pools_card_schedule'>
@@ -332,8 +394,7 @@ export const PoolsDetail = (props) => {
                 {pool && pool.twitter}
               </a>
               <a>
-                Westarter是一个连接加密货币创新者和投资者的对接平台，
-                任何创新者都可以无需许可的使用标准化的界面来发起和管理流动性的拍卖。
+                <FormattedMessage id='bannerContent' />
               </a>
             </div>
           )}

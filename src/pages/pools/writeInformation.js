@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Form, Input, Button, Slider, Upload, message } from 'antd'
 import Container from '../../assets/icon/container2@2x.png'
+import { FormattedMessage, injectIntl } from 'react-intl'
 import PoolsTextHeader from '../../components/staterPools/poolsTextHeader'
 
 const layout = {
@@ -10,10 +11,6 @@ const layout = {
   wrapperCol: {
     span: 16,
   },
-}
-
-const validateMessages = {
-  required: '请输入内容，该内容不能为空！',
 }
 
 const { Dragger } = Upload
@@ -35,7 +32,11 @@ const props = {
   },
 }
 
-const WriteInformation = () => {
+const WriteInformation = (props) => {
+  const { intl } = props
+  const validateMessages = {
+    required: intl.formatMessage({ id: 'errorTip' }),
+  }
   const onFinish = (values) => {
     console.log(values, 111)
   }
@@ -48,7 +49,9 @@ const WriteInformation = () => {
       <PoolsTextHeader styleVal='#F2F0EB' />
       <div className='write-information'>
         <div className='write-information_box'>
-          <p className='write-information_title'>募集申请资料</p>
+          <p className='write-information_title'>
+            <FormattedMessage id='recruitMaterials' />
+          </p>
           <Form
             {...layout}
             name='nest-messages'
@@ -63,7 +66,8 @@ const WriteInformation = () => {
               ]}
             >
               <p>
-                项目名<span>*</span>
+                <FormattedMessage id='projectTitle' />
+                <span>*</span>
               </p>
               <Form.Item
                 noStyle
@@ -85,7 +89,8 @@ const WriteInformation = () => {
               ]}
             >
               <p>
-                您在项目中的职位/角色<span>*</span>
+                <FormattedMessage id='role' />
+                <span>*</span>
               </p>
               <Form.Item
                 name='user'
@@ -107,7 +112,8 @@ const WriteInformation = () => {
               ]}
             >
               <p>
-                邮箱<span>*</span>
+                <FormattedMessage id='email' />
+                <span>*</span>
               </p>
               <Form.Item
                 name='email'
@@ -122,7 +128,9 @@ const WriteInformation = () => {
               </Form.Item>
             </Form.Item>
             <Form.Item>
-              <p>您的TelegramID</p>
+              <p>
+                <FormattedMessage id='telegramID' />
+              </p>
               <Form.Item name='telegramID' noStyle>
                 <Input placeholder='@yourid' />
               </Form.Item>
@@ -135,7 +143,8 @@ const WriteInformation = () => {
               ]}
             >
               <p>
-                您想什么时间开启认购<span>*</span>
+                <FormattedMessage id='openSubscription' />
+                <span>*</span>
               </p>
               <Form.Item
                 name='buy'
@@ -150,20 +159,26 @@ const WriteInformation = () => {
               </Form.Item>
             </Form.Item>
             <Form.Item>
-              <p>您希望筹集多少资金</p>
+              <p>
+                <FormattedMessage id='raiseMoney' />
+              </p>
               <Form.Item name='slider'>
                 <Slider onChange={(value) => setSliderVal(value)} />
               </Form.Item>
               <i>Selected Value: {sliderVal} </i>
             </Form.Item>
             <Form.Item>
-              <p>您理想的募集币种</p>
+              <p>
+                <FormattedMessage id='raiseCoin' />
+              </p>
               <Form.Item name='coin' noStyle>
                 <Input placeholder='HT、USDT、WAR、ETH、BTC' />
               </Form.Item>
             </Form.Item>
             <Form.Item>
-              <p>您设定的认购比例</p>
+              <p>
+                <FormattedMessage id='subscriptionRatio' />
+              </p>
               <Form.Item name='scale' noStyle>
                 <Input />
               </Form.Item>
@@ -176,7 +191,8 @@ const WriteInformation = () => {
               ]}
             >
               <p>
-                项目说明<span>*</span>
+                <FormattedMessage id='projectInstruction' />
+                <span>*</span>
               </p>
               <Form.Item
                 name='project'
@@ -187,35 +203,46 @@ const WriteInformation = () => {
                   },
                 ]}
               >
-                <Input.TextArea placeholder='简介、网址、官方账号URL' />
+                <Input.TextArea
+                  placeholder={intl.formatMessage({ id: 'introduction' })}
+                />
               </Form.Item>
             </Form.Item>
             <Form.Item>
-              <p>项目的代币经济模型</p>
+              <p>
+                <FormattedMessage id='projectModel' />
+              </p>
               <Form.Item name='model' noStyle>
-                <Input.TextArea placeholder='投融资进度、代币分配与分发情况、代币使用场景概述' />
+                <Input.TextArea
+                  placeholder={intl.formatMessage({ id: 'modelTip' })}
+                />
               </Form.Item>
             </Form.Item>
             <Form.Item style={{ marginBottom: '60px' }}>
-              <p>您想与我们分享的其他文件</p>
+              <p>
+                <FormattedMessage id='shareFile' />
+              </p>
               <Form.Item name='upload'>
                 <Dragger {...props}>
                   <p className='ant-upload-drag-icon'>
                     <img src={Container} />
                   </p>
-                  <p className='ant-upload-text'>点击或将文件拖拽到这里上传</p>
+                  <p className='ant-upload-text'>
+                    <FormattedMessage id='uploadFile' />
+                  </p>
                   <p className='ant-upload-hint'>
-                    支持扩展名：.rar .zip .doc .docx .pdf .jpg...
+                    <FormattedMessage id='support' />
+                    .rar .zip .doc .docx .pdf .jpg...
                   </p>
                 </Dragger>
               </Form.Item>
               <i className='tip'>
-                提示：参与募集的项目需提交相关的安全证明资料（如代码审计、合规性证明等，可在“其他资料”栏添加）
+                <FormattedMessage id='tip' />
               </i>
             </Form.Item>
             <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
               <Button type='primary' htmlType='submit'>
-                提交
+                <FormattedMessage id='submit' />
               </Button>
             </Form.Item>
           </Form>
@@ -224,4 +251,5 @@ const WriteInformation = () => {
     </div>
   )
 }
-export default WriteInformation
+
+export default injectIntl(WriteInformation)

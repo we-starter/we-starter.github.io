@@ -10,12 +10,13 @@ import { Logoicon, LogoSmallIcon } from '../../icons'
 import { ReactComponent as LogoText } from '../../assets/image/logo-text.svg'
 import { ReactComponent as More } from '../../assets/icon/more.svg'
 import dot from '../../assets/icon/dot.png'
-import { PoolsBanner } from '../banner/PoolsBanner'
+import PoolsBanner from '../banner/PoolsBanner'
+import { FormattedMessage } from 'react-intl'
 
 const PoolsHeader = (props) => {
   const { active, account } = useActiveWeb3React()
   const { dispatch } = useContext(mainContext)
-  
+
   const [showMenu, setShowMenu] = useState(false)
   const [showPoolsStarter, setShowPoolsStarter] = useState(false)
   const location = useLocation()
@@ -60,7 +61,7 @@ const PoolsHeader = (props) => {
                     className='menu__link'
                     onClick={handleMenuItemClick}
                   >
-                    抵押挖矿
+                    <FormattedMessage id='mortgage' />
                   </NavLink>
                 </li>
                 <li className='menu__item'>
@@ -70,7 +71,7 @@ const PoolsHeader = (props) => {
                     className='menu__link'
                     onClick={handleMenuItemClick}
                   >
-                    流动性挖矿
+                    <FormattedMessage id='liquidityPool' />
                   </NavLink>
                 </li>
                 <li className='menu__item'>
@@ -80,7 +81,7 @@ const PoolsHeader = (props) => {
                     className='menu__link'
                     onClick={handleMenuItemClick}
                   >
-                    众筹池
+                    <FormattedMessage id='crowdfund' />
                   </NavLink>
                 </li>
                 <li className='menu__item'>
@@ -100,7 +101,7 @@ const PoolsHeader = (props) => {
                     className='menu__link'
                     onClick={handleMenuItemClick}
                   >
-                    项目申请
+                    <FormattedMessage id='projectApplication' />
                   </NavLink>
                 </li>
               </ul>
@@ -138,7 +139,7 @@ const PoolsHeader = (props) => {
                       })
                     }}
                   >
-                    链接钱包
+                    <FormattedMessage id='linkWallet' />
                   </span>
                   <img src={dot} />
                 </button>
@@ -158,7 +159,7 @@ const PoolsHeader = (props) => {
         </div>
       </div>
       {/* banner图 */}
-      <PoolsBanner {...props}/>
+      <PoolsBanner {...props} />
     </header>
   )
 }

@@ -21,6 +21,7 @@ import StakingPool4 from './pages/pools/stakingPool4'
 import PoolsIndex from './pages/pools/poolsIndex'
 import WriteInformation from './pages/pools/writeInformation'
 import { PoolsDetail } from './pages/pools/poolsDetail'
+import Intl from './locale/intl'
 
 function getLibrary(provider) {
   const library = new Web3Provider(provider)
@@ -39,32 +40,46 @@ function App() {
   return (
     <ContextProvider>
       <Web3ReactProvider getLibrary={getLibrary}>
-        <Router>
-          {/* 头部 */}
-          {/*<Header />*/}
-          {/* 矿池类型 */}
-          {/*<PoolTab />*/}
-          {/* pools页面banner和其他的不同，所以单独拎出去判断了 */}
-          <ExtractComponents />
-          <Switch>
-            <Route exact path='/staking-pool1' component={StakingPool1}></Route>
-            <Route exact path='/staking-pool2' component={StakingPool2}></Route>
-            <Route exact path='/staking-pool3' component={StakingPool3}></Route>
-            <Route exact path='/pools' component={PoolsIndex}></Route>
-            <Route
-              exact
-              path='/pools/detail/:address'
-              component={PoolsDetail}
-            ></Route>
-            <Route
-              exact
-              path='/information'
-              component={WriteInformation}
-            ></Route>
-          </Switch>
-          <InitPage />
-          <Footer />
-        </Router>
+        <Intl>
+          <Router>
+            {/* 头部 */}
+            {/*<Header />*/}
+            {/* 矿池类型 */}
+            {/*<PoolTab />*/}
+            {/* pools页面banner和其他的不同，所以单独拎出去判断了 */}
+            <ExtractComponents />
+            <Switch>
+              <Route
+                exact
+                path='/staking-pool1'
+                component={StakingPool1}
+              ></Route>
+              <Route
+                exact
+                path='/staking-pool2'
+                component={StakingPool2}
+              ></Route>
+              <Route
+                exact
+                path='/staking-pool3'
+                component={StakingPool3}
+              ></Route>
+              <Route exact path='/pools' component={PoolsIndex}></Route>
+              <Route
+                exact
+                path='/pools/detail/:address'
+                component={PoolsDetail}
+              ></Route>
+              <Route
+                exact
+                path='/information'
+                component={WriteInformation}
+              ></Route>
+            </Switch>
+            <InitPage />
+            <Footer />
+          </Router>
+        </Intl>
       </Web3ReactProvider>
     </ContextProvider>
   )

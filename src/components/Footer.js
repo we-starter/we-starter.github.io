@@ -1,9 +1,21 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import globe from '../assets/icon/globe.png'
+import { mainContext } from '../reducer'
 import { withRouter } from 'react-router'
+import { CHANGE_LOCALE } from '../const'
 
 const Footer = (props) => {
+  const { dispatch, state } = useContext(mainContext)
   const [flag, setFlag] = useState(false)
+  const [language, setLanguage] = useState(
+    (state.locale === 'en' && 'English') || (state.locale === 'zh' && 'ZH-CH')
+  )
+
+  useEffect(() => {
+    if (state.locale === 'en') setLanguage('English')
+    if (state.locale === 'zh') setLanguage('ZH-CH')
+  }, [state.locale])
+
   useEffect(() => {
     if (props.history.location.pathname === '/information') {
       setFlag(true)
@@ -11,6 +23,16 @@ const Footer = (props) => {
       setFlag(false)
     }
   })
+
+  const tabLanguage = (val) => {
+    if (val === 'en') setLanguage('English')
+    if (val === 'zh') setLanguage('ZH-CH')
+    dispatch({
+      type: CHANGE_LOCALE,
+      locale: val,
+    })
+  }
+
   return (
     <footer
       className='footer'
@@ -56,10 +78,10 @@ const Footer = (props) => {
         </ul>
         <div className='language'>
           <img src={globe} alt='' />
-          ZH-CN
+          {language}
           <div className='language-items'>
-            <p>English</p>
-            <p>中文简体</p>
+            <p onClick={() => tabLanguage('en')}>English</p>
+            <p onClick={() => tabLanguage('zh')}>中文简体</p>
           </div>
         </div>
       </div>
