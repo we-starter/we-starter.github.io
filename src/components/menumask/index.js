@@ -8,14 +8,14 @@ import doubleLine from '../../assets/icon/check-double-line.png'
 
 import { mainContext } from '../../reducer'
 import { FormattedMessage } from 'react-intl'
-import {useHTBalance} from "../../pages/Hooks";
+import { useHTBalance } from '../../pages/Hooks'
 
 export const MenuMask = () => {
   const { active, account } = useActiveWeb3React()
   const [showMenu, setShowMenu] = useState(false)
   const { dispatch, state } = useContext(mainContext)
   const location = useLocation()
-  const {balance} = useHTBalance()
+  const { balance } = useHTBalance()
   const handleMenuItemClick = () => {
     setShowMenu(false)
   }
@@ -109,7 +109,7 @@ export const MenuMask = () => {
                 <FormattedMessage id='projectApplication' />
               </NavLink>
             </li>
-            <li className='menumask_item'>
+            {/* <li className='menumask_item'>
               <a
                 href='https://www.baidu.com'
                 target='_blank'
@@ -118,7 +118,7 @@ export const MenuMask = () => {
               >
                 Medium
               </a>
-            </li>
+            </li> */}
             <li className='menumask_item'>
               {/* <a>Guide</a> */}
               {/* <Document file={WeStarterPDF} className='download-pdf'>
