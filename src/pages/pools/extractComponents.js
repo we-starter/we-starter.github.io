@@ -20,7 +20,7 @@ const ExtractComponents = (props) => {
   return (
     <div>
       {showComponents && <Header />}
-      {showComponents && <PoolTab />}
+      {/* {showComponents && <PoolTab />} */}
     </div>
   )
 }

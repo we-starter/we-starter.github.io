@@ -10,7 +10,9 @@ export const Banner = () => {
         <FormattedMessage id='bannerTitle' />
       </h3>
       <p className='banner_dec'>
-        <FormattedMessage id='bannerContent' />
+        <FormattedMessage id='bannerContent1' />
+        <br />
+        <FormattedMessage id='bannerContent2' />
       </p>
       <div className='banner_link'>
         <span>Live on : </span> <a href=''></a>

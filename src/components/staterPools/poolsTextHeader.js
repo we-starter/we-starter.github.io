@@ -12,7 +12,7 @@ import { ReactComponent as More } from '../../assets/icon/more.svg'
 import { FormattedMessage } from 'react-intl'
 import dot from '../../assets/icon/dot.png'
 import WeStarterPDF from '../../pdfFile/Security Assessment for WeStarter - Starter.pdf'
-import {useHTBalance} from "../../pages/Hooks";
+import { useHTBalance } from '../../pages/Hooks'
 
 const PoolsTextHeader = (props) => {
   const { active, account } = useActiveWeb3React()
@@ -21,7 +21,7 @@ const PoolsTextHeader = (props) => {
   const [showMenu, setShowMenu] = useState(false)
   const [showPoolsStarter, setShowPoolsStarter] = useState(false)
   const location = useLocation()
-  const {balance} = useHTBalance()
+  const { balance } = useHTBalance()
 
   const handleMenuItemClick = () => {
     setShowMenu(false)
@@ -48,7 +48,7 @@ const PoolsTextHeader = (props) => {
           </Link>
 
           <Link
-            to='/pools'
+            to='/'
             className={`pools_text_header__logo--small ${
               active ? 'active' : ''
             }`}

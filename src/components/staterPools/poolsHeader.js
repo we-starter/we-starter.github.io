@@ -13,7 +13,7 @@ import dot from '../../assets/icon/dot.png'
 import PoolsBanner from '../banner/PoolsBanner'
 import { FormattedMessage } from 'react-intl'
 import Form from 'antd/lib/form/Form'
-import {useHTBalance} from "../../pages/Hooks";
+import { useHTBalance } from '../../pages/Hooks'
 
 const PoolsHeader = (props) => {
   const { active, account } = useActiveWeb3React()
@@ -22,7 +22,7 @@ const PoolsHeader = (props) => {
   const [showMenu, setShowMenu] = useState(false)
   const [showPoolsStarter, setShowPoolsStarter] = useState(false)
   const location = useLocation()
-  const {balance} = useHTBalance(account)
+  const { balance } = useHTBalance(account)
   const handleMenuItemClick = () => {
     setShowMenu(false)
   }
@@ -42,12 +42,12 @@ const PoolsHeader = (props) => {
     >
       <div className='center'>
         <div className='pools_header__box'>
-          <Link to='/pools' className='pools_header__logo'>
+          <Link to='/' className='pools_header__logo'>
             <LogoText />
           </Link>
 
           <Link
-            to='/pools'
+            to='/'
             className={`pools_header__logo--small ${active ? 'active' : ''}`}
           >
             <LogoText />
@@ -106,7 +106,7 @@ const PoolsHeader = (props) => {
                     <FormattedMessage id='projectApplication' />
                   </NavLink>
                 </li>
-                <li className='menu__item'>
+                {/* <li className='menu__item'>
                   <a
                     href='https://www.baidu.com'
                     target='_blank'
@@ -115,7 +115,7 @@ const PoolsHeader = (props) => {
                   >
                     Medium
                   </a>
-                </li>
+                </li> */}
               </ul>
             </nav>
           </div>

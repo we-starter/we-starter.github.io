@@ -11,8 +11,10 @@ const en_US = {
   noNetwork: 'transaction failed',
   cannotSubscribe: 'purchase currently unavailable',
   bannerTitle: 'purchase currently unavailable',
-  bannerContent:
-    'WeStarter is a token distribution platform based on the Heco network, the Huobi eco chain. By virtue of innovative produces and sufficient resources, it supports transactions of multiple types of assets and connects with both primary and secondary markets, which make WeStarter an accelerator for DeFi projects.<br />WeStarter is a token distribution platform based on the Heco network, the Huobi eco chain. By virtue of innovative produces and sufficient resources, it supports transactions of multiple types of assets and connects with both primary and secondary markets, which make WeStarter an accelerator for DeFi projects.',
+  bannerContent1:
+    'WeStarter is a token distribution platform based on the Heco network, the Huobi eco chain. By virtue of innovative produces and sufficient resources, it supports transactions of multiple types of assets and connects with both primary and secondary markets, which make WeStarter an accelerator for DeFi projects.',
+  bannerContent2:
+    'WeStarter platform supports token distribution of cross-chain assets, and continues to explore the connection with other fields, such as STO and NFT assets so to provide a variety of distribution choices for both developers and investors.',
   money: 'input investment amount',
   FundraisingRecord: 'fundraising record',
   invest: 'investment',
