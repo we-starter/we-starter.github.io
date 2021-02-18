@@ -125,6 +125,10 @@
     &_table_box {
       margin: 40px auto 0;
       display: flex;
+      display: -webkit-box;
+      display: -moz-box;
+      display: -ms-flexbox;
+      display: -webkit-flex;
       justify-content: center;
     }
     &_table {
@@ -146,6 +150,10 @@
           color: #7a7f82;
           line-height: 60px;
           p {
+            display: -webkit-box;
+            display: -moz-box;
+            display: -ms-flexbox;
+            display: -webkit-flex;
             display: flex;
             justify-content: space-between;
             margin: 0;
@@ -383,6 +391,10 @@
     &_table_box {
       margin: 40px auto 0;
       display: flex;
+      display: -webkit-box;
+      display: -moz-box;
+      display: -ms-flexbox;
+      display: -webkit-flex;
       justify-content: center;
       border-radius: 5px;
     }
@@ -406,6 +418,10 @@
           line-height: 60px;
           p {
             display: flex;
+            display: -webkit-box;
+            display: -moz-box;
+            display: -ms-flexbox;
+            display: -webkit-flex;
             justify-content: space-between;
             margin: 0;
           }
@@ -671,6 +687,10 @@
           line-height: 18px;
           p {
             display: flex;
+            display: -webkit-box;
+            display: -moz-box;
+            display: -ms-flexbox;
+            display: -webkit-flex;
             justify-content: space-between;
             margin: 0;
           }
@@ -918,6 +938,10 @@
           line-height: 18px;
           p {
             display: flex;
+            display: -webkit-box;
+            display: -moz-box;
+            display: -ms-flexbox;
+            display: -webkit-flex;
             justify-content: space-between;
             margin: 0;
           }
