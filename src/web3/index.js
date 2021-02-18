@@ -2,6 +2,10 @@ import { useWeb3React as useWeb3ReactCore } from '@web3-react/core'
 import Web3 from "web3";
 import ethAbi from 'web3-eth-abi'
 
+export function getWeb3(library) {
+    return new Web3(library.provider)
+}
+
 export function getContract(library, abi, address) {
     const web3 = new Web3(library.provider);
     return  new web3.eth.Contract(abi, address)

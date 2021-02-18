@@ -347,7 +347,7 @@
       }
     }
     &_content {
-      width: 1100px;
+      width: 100%;
       margin: 0 auto;
     }
     &_content_tab {
@@ -512,6 +512,7 @@
     }
   }
 }
+
 @media #{$smWidth} {
   .pools_detail {
     padding-bottom: 28px;

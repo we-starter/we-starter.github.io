@@ -6,6 +6,7 @@ import HUSD from '../../assets/icon/HUSD@2x.png'
 import { usePoolsInfo } from './Hooks'
 import { FormattedMessage } from 'react-intl'
 import Web3 from 'web3'
+import {formatAmount} from "../../utils/format";
 
 const PoolsIndex = (props) => {
   const [listData, setListData] = useState([])
@@ -16,12 +17,21 @@ const PoolsIndex = (props) => {
 
   const pools = usePoolsInfo()
   const setData = async () => {
-    setListData(pools.filter((o) => o.is_top))
+    switch (tabFlag) {
+      case 1:
+        setListData(pools.filter((o) => o.is_top));
+        break;
+      case 2:
+        setListData(pools.filter((o) => o.is_join));
+        break;
+      default:
+        setListData(pools.filter((o) => o.is_top));
+    }
   }
 
   useEffect(() => {
-    // 重新请求数据进行赋值
-  }, [tabFlag])
+    setData()
+  }, [tabFlag, pools])
 
   // 列表查看详情
   const goDetail = (address) => {
@@ -84,7 +94,7 @@ const PoolsIndex = (props) => {
           <p className='pools-type_card_ratio' style={{ textAlign: 'right' }}>
             <FormattedMessage id='totalRaised' />
             <i>
-              {Web3.utils.fromWei(totalPurchasedAmount, 'ether')}{' '}
+              {formatAmount(totalPurchasedAmount)}{' '}
               {currency.symbol}
             </i>
           </p>
@@ -135,8 +145,8 @@ const PoolsIndex = (props) => {
           </h2>
         </div>
         <div className='pools-type_card'>
-          {pools &&
-            pools.map((pool) => {
+          {listData &&
+          listData.map((pool) => {
               return renderCard(pool)
             })}
         </div>

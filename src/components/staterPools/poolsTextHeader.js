@@ -12,6 +12,7 @@ import { ReactComponent as More } from '../../assets/icon/more.svg'
 import { FormattedMessage } from 'react-intl'
 import dot from '../../assets/icon/dot.png'
 import WeStarterPDF from '../../pdfFile/Security Assessment for WeStarter - Starter.pdf'
+import {useHTBalance} from "../../pages/Hooks";
 
 const PoolsTextHeader = (props) => {
   const { active, account } = useActiveWeb3React()
@@ -20,6 +21,7 @@ const PoolsTextHeader = (props) => {
   const [showMenu, setShowMenu] = useState(false)
   const [showPoolsStarter, setShowPoolsStarter] = useState(false)
   const location = useLocation()
+  const {balance} = useHTBalance()
 
   const handleMenuItemClick = () => {
     setShowMenu(false)
@@ -128,7 +130,7 @@ const PoolsTextHeader = (props) => {
             {active && (
               <div className='ht-balance'>
                 <span></span>
-                <p>2.22222</p>
+                <p>{formatAmount(balance)}</p>
               </div>
             )}
 
