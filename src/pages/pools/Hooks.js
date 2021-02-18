@@ -366,9 +366,18 @@ export const useStakingPoolInfo = () => {
 export const usePoolsInfo = (address = '') => {
     const {account, active, library, chainId} = useActiveWeb3React();
     const [poolsInfo, setPoolsInfo] = useState([])
+    const [blockNumber, setBlockNumber] = useState(0)
     const now = parseInt(Date.now() / 1000)
+
     useEffect(() => {
-        library && Promise.all(pools.filter(o => address === '' || o.address === address).map(pool => {
+        if(!library) return
+
+        library.once('block', (blockNumber) => {
+            console.log('block update')
+            setBlockNumber(blockNumber)
+        })
+
+        Promise.all(pools.filter(o => address === '' || o.address === address).map(pool => {
             const currency_token = getContract(
                 library,
                 ERC20,
@@ -404,7 +413,6 @@ export const usePoolsInfo = (address = '') => {
                 // underlying_token.methods.balanceOf(pool.address).call(),
             ]
             return Promise.all(promise_list).then(([time, price, totalPurchasedCurrency, purchasedCurrencyOf, totalSettleable, settleable, logs, currency_allowance]) => {
-                console.log(currency_allowance)
                 let status = 0 // 即将上线
                 if(pool.start_at < now){
                     // 募集中
@@ -431,6 +439,8 @@ export const usePoolsInfo = (address = '') => {
                     allowance: currency_allowance
                 })
 
+                console.log('update pools')
+
                 return Object.assign({}, pool, {
                     ratio: `1${pool.currency.symbol} = ${new BigNumber(Web3.utils.toWei('1', 'ether')).div(new BigNumber(price)).toNumber().toFixed(6) * 1}${pool.underlying.symbol}`,
                     progress: (new BigNumber(totalPurchasedCurrency).dividedBy(totalPurchasedAmount).toNumber()).toFixed(2) * 1,
@@ -449,6 +459,6 @@ export const usePoolsInfo = (address = '') => {
         })).then(pools => {
             setPoolsInfo(pools)
         })
-    }, [account, address]);
+    }, [account, address, blockNumber]);
     return poolsInfo;
 }
