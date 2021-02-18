@@ -30,7 +30,7 @@ const en_US = {
   myMortgage: 'my collateral',
   balance: 'balance',
   income: 'revenue',
-  recruitMaterials: '募集申请资料',
+  recruitMaterials: 'fundraising application information',
   projectTitle: 'project title',
   role: 'your role/position in the project',
   email: 'email',
@@ -50,6 +50,6 @@ const en_US = {
     'Reminder: To participate in fundraising, the project owner shall submit documents (e.g., code auditing reports, legitimacy proof which can be uploaded in "other files") to prove the project is secure. ',
   submit: 'submit',
   errorTip: 'Please fill in this blank.',
-  myJoinPool: '我参与的Pool',
+  myJoinPool: 'My Pool',
 }
 export default en_US
