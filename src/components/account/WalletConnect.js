@@ -3,7 +3,7 @@ import {UnsupportedChainIdError, useWeb3React} from '@web3-react/core';
 import { mainContext } from '../../reducer';
 import { InjectedConnector,  NoEthereumProviderError } from '@web3-react/injected-connector';
 import {
-    GALLERY_SELECT_WEB3_CONTEXT,
+    GALLERY_SELECT_WEB3_CONTEXT, HANDLE_CHANGE_NETWORKS,
     HANDLE_WALLET_MODAL,
 } from '../../const';
 import metamask from '../../assets/icon/metamask.png';
@@ -72,6 +72,10 @@ export const WalletConnect = ({ onClose, onCancel }) => {
                                         // 钱包无法连接
                                         if(e instanceof UnsupportedChainIdError){
                                             // TODO网络不支持
+                                            dispatch({
+                                                type: HANDLE_CHANGE_NETWORKS,
+                                                changeNetworkStatus: true,
+                                            });
                                             console.log('network not support')
                                         }else if(e instanceof NoEthereumProviderError) {
                                             dispatch({
