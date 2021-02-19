@@ -52,3 +52,4 @@ export const waitingPending = {
 export const HANDLE_WALLET_MODAL = 'HANDLE_WALLET_MODAL'
 export const HANDLE_TX_STATUS = 'HANDLE_TX_STATUS'
 export const CHANGE_LOCALE = 'CHANGE_LOCALE'
+export const HANDLE_CHANGE_NETWORKS = 'HANDLE_CHANGE_NETWORKS'

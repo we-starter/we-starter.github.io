@@ -16,6 +16,7 @@ import {
   GALLERY_SELECT_WEB3_CONTEXT,
   HANDLE_WALLET_MODAL,
   HANDLE_SHOW_MENUMASK_MODAL,
+  HANDLE_CHANGE_NETWORKS,
 } from '../const'
 import { InjectedConnector } from '@web3-react/injected-connector'
 import { WalletConnectConnector } from '@web3-react/walletconnect-connector'
@@ -24,6 +25,7 @@ import { WalletModal } from '../components/Modals/WalletModal'
 import PoolsJoin from '../components/staterPools/poolsJoin'
 import { WalletChange } from '../components/account/WalletChange'
 import { LoginModal } from '../components/Modals/LoginModl'
+import { ChangeNetworks } from '../components/Modals/ChangeNetworks'
 import { TXStatusModal } from '../components/Modals/TXStatusModal'
 import satellite from '../assets/image/satellite.png'
 
@@ -80,15 +82,17 @@ export const InitPage = () => {
     txStatus,
     pool,
     showMenuMaskModal,
+    changeNetworkStatus,
   } = state
 
   useEffect(() => {
     const localContent =
-      window && window.localStorage.getItem(GALLERY_SELECT_WEB3_CONTEXT) || 'MetaMask'
+      (window && window.localStorage.getItem(GALLERY_SELECT_WEB3_CONTEXT)) ||
+      'MetaMask'
     console.log('wallet content', localContent)
     if (localContent) {
       console.log('activate', wallets[localContent])
-      activate(wallets[localContent]).then(() =>{
+      activate(wallets[localContent]).then(() => {
         console.log(wallets[localContent])
       })
     }
@@ -250,6 +254,21 @@ export const InitPage = () => {
                 })
               }
               onChange={() => {}}
+            />
+          </div>
+        </div>
+      )}
+
+      {changeNetworkStatus && (
+        <div className='modal-show'>
+          <div className='wrapper'>
+            <ChangeNetworks
+              onClose={() =>
+                dispatch({
+                  type: HANDLE_CHANGE_NETWORKS,
+                  walletModal: false,
+                })
+              }
             />
           </div>
         </div>

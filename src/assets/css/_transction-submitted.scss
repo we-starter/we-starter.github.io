@@ -1,104 +1,121 @@
 .transction-submitted {
-    text-align: center;
-    @media #{$desktop} {
-        width: 400px;
-    }
-    @media #{$mdWidth} {
-        width: 400px;
-    }
+  text-align: center;
+  @media #{$desktop} {
+    width: 400px;
+  }
+  @media #{$mdWidth} {
+    width: 400px;
+  }
+  @media #{$smWidth} {
+    width: 95%;
+    min-width: 320px;
+  }
+  @media #{$xsWidth} {
+    width: 95%;
+    min-width: 320px;
+  }
+  &__logo {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    margin: 24px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(250, 208, 106, 0.5);
+
     @media #{$smWidth} {
-        width: 95%;
-        min-width: 320px;
-    }
-    @media #{$xsWidth} {
-        width: 95%;
-        min-width: 320px;
-    }
-    &__logo {
-        width: 120px;
-        height: 120px;
-        border-radius: 50%;
-        margin: 24px auto;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background-color: rgba(250, 208, 106, 0.5);
-
-        @media #{$smWidth} {
-            width: 80px;
-            height: 80px;
-        }
-
-        svg {
-            fill: #000;
-        }
+      width: 80px;
+      height: 80px;
     }
 
-    .modal__title {
-        margin: 0;
+    svg {
+      fill: #000;
     }
+  }
 
-    &__link {
-        text-align: center;
-        margin: 12px 0;
+  .modal__title {
+    margin: 0;
+  }
+
+  &__link {
+    text-align: center;
+    margin: 12px 0;
+  }
+
+  &__tip {
+    margin-top: 13px;
+    font-size: 14px;
+    font-family: PingFangSC-Regular, PingFang SC;
+    font-weight: 400;
+    color: #22292f;
+    line-height: 28px;
+    max-width: 300px;
+    text-align: left;
+  }
+
+  &__loading {
+    display: flex;
+    justify-content: center;
+
+    img {
+      width: 24px;
+      height: 24px;
+      -webkit-animation: loading 3s linear infinite;
     }
+  }
 
-    &__tip {
-        margin-top: 13px;
-        font-size: 14px;
-        font-family: PingFangSC-Regular, PingFang SC;
-        font-weight: 400;
-        color: #22292f;
-        line-height: 28px;
-        max-width: 300px;
-        text-align: left;
+  &__status {
+    display: flex;
+    justify-content: center;
+
+    img {
+      width: 48px;
+      height: 48px;
     }
+  }
 
-    &__loading {
-        display: flex;
-        justify-content: center;
+  &__text {
+    font-size: 14px;
+    color: #808080;
+    margin: 0px 0 30px;
+    text-align: center;
+  }
 
-        img {
-            width: 24px;
-            height: 24px;
-            -webkit-animation: loading 3s linear infinite;
-        }
+  &__btn {
+    background: #0f8c20;
+    border-radius: 100px;
+    width: fit-content;
+    margin-top: 30px;
+    color: #ffffff;
+    padding: 0 16px;
+    margin: auto;
+
+    @media #{$smWidth} {
+      margin-top: 24px;
     }
+  }
+}
 
-    &__status {
-        display: flex;
-        justify-content: center;
-
-        img {
-            width: 48px;
-            height: 48px;
-        }
-    }
-
-    &__text {
-        font-size: 14px;
-        color: #808080;
-        margin: 0px 0 30px;
-        text-align: center;
-    }
-
-    &__btn {
-        background: #0f8c20;
-        border-radius: 100px;
-        width: fit-content;
-        margin-top: 30px;
-        color: #ffffff;
-        padding: 0 16px;
-        margin: auto;
-
-        @media #{$smWidth} {
-            margin-top: 24px;
-        }
-    }
+.transction-submitted-box {
+  @media #{$desktop} {
+    width: 480px;
+  }
+  @media #{$mdWidth} {
+    width: 480px;
+  }
+  @media #{$smWidth} {
+    width: 100%;
+    min-width: 320px;
+  }
+  @media #{$xsWidth} {
+    width: 100%;
+    min-width: 320px;
+  }
 }
 
 @keyframes loading {
-    to {
-        transform: rotate(360deg);
-    }
+  to {
+    transform: rotate(360deg);
+  }
 }
