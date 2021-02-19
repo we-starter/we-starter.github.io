@@ -45,14 +45,16 @@
     background-image: url('../image/weBanner.png');
     background-repeat: no-repeat;
     background-size: contain;
-    height: 638px;
+    background-position: top;
+    height: auto;
   }
   @media #{$mdWidth} {
     background: #fff;
     background-image: url('../image/weBanner.png');
     background-repeat: no-repeat;
     background-size: contain;
-    height: 638px;
+    background-position: top;
+    height: auto;
   }
   @media #{$smWidth} {
     background: #fff;
@@ -241,17 +243,16 @@
     @media #{$mdWidth} {
       display: flex;
       height: auto;
-      padding: 20px 0;
     }
     @media #{$smWidth} {
       display: flex;
       height: auto;
-      padding: 20px 0;
+      padding: 20px 15px;
     }
     @media #{$xsWidth} {
       display: flex;
       height: auto;
-      padding: 20px 0;
+      padding: 20px 15px;
     }
     .more {
       margin-left: 7px;

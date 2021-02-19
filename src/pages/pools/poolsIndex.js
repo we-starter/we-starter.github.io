@@ -163,7 +163,9 @@ const PoolsIndex = (props) => {
         </div>
       </div>
       <div className='pools-type-bottom'>
-        <h2>合作伙伴</h2>
+        <h2>
+          <FormattedMessage id='partner' />
+        </h2>
       </div>
     </div>
   )

@@ -10,6 +10,9 @@ export const Banner = () => {
       <h3 className='banner_text'>
         <FormattedMessage id='bannerTitle' />
       </h3>
+      <h3 className='banner_text-title'>
+        <FormattedMessage id='bannerTitle1' />
+      </h3>
       <p className='banner_dec'>
         <FormattedMessage id='bannerContent1' />
         <br />
@@ -21,9 +24,16 @@ export const Banner = () => {
       <div className='banner_pdf'>
         <a href={WeStarterPDF} target='_blank'>
           <span className='pdf-icon'></span>
-          <span className='pdf-text'>Certik审计报告</span>
+          <span className='pdf-text'>
+            <FormattedMessage id='certik' />
+          </span>
         </a>
-        <a className='down-load'></a>
+        <a
+          className='down-load'
+          download='application/pptx'
+          href={WeStarterPDF}
+          target='_blank'
+        ></a>
       </div>
     </div>
   )

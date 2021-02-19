@@ -6,8 +6,8 @@ import cs from 'classnames'
 import { withRouter } from 'react-router'
 import { Pagination } from 'antd'
 import PoolsTextHeader from '../../components/staterPools/poolsTextHeader'
-import {usePoolsInfo} from './Hooks';
-import BigNumber from "bignumber.js";
+import { usePoolsInfo } from './Hooks'
+import BigNumber from 'bignumber.js'
 
 const StakingPool4 = (props) => {
   const [showTab, setShowTab] = useState(2)
@@ -20,14 +20,10 @@ const StakingPool4 = (props) => {
   //   列表初始值
   const setData = async () => {
     console.log(pools)
-    showTab === 1 &&
-      setListData(pools)
-    showTab === 2 &&
-      setListData(pools.filter(o => o.is_top))
-    showTab === 3 &&
-      setListData(pools.filter(o => o.is_join))
-    showTab === 4 &&
-      setListData(pools.filter(o => o.is_create))
+    showTab === 1 && setListData(pools)
+    showTab === 2 && setListData(pools.filter((o) => o.is_top))
+    showTab === 3 && setListData(pools.filter((o) => o.is_join))
+    showTab === 4 && setListData(pools.filter((o) => o.is_create))
   }
   useEffect(() => {
     setData()
@@ -62,7 +58,6 @@ const StakingPool4 = (props) => {
 
   useEffect(() => {
     // 更新数据
-
   }, [page])
 
   return (
@@ -95,17 +90,17 @@ const StakingPool4 = (props) => {
           {/*  Pools Created*/}
           {/*</a>*/}
         </div>
-        {
-          false && <div className='pools-index_search'>
-          <input
-            placeholder='Search by Pool ID,Pool name,Token contract address,Token symbo'
-            value={searchData}
-            onChange={(event) => {
-              change(event)
-            }}
-          />
-        </div>
-        }
+        {false && (
+          <div className='pools-index_search'>
+            <input
+              placeholder='Search by Pool ID,Pool name,Token contract address,Token symbo'
+              value={searchData}
+              onChange={(event) => {
+                change(event)
+              }}
+            />
+          </div>
+        )}
         <table className='pools-index_table'>
           <thead>
             <tr>
@@ -149,9 +144,9 @@ const StakingPool4 = (props) => {
                       <p className='pools-index_progress_status'>募集中</p>
                     </td>
                   ) : item.status === 2 ? (
-                      <td>
-                        <p className='pools-index_progress_status'>结算中</p>
-                      </td>
+                    <td>
+                      <p className='pools-index_progress_status'>结算中</p>
+                    </td>
                   ) : (
                     <td>
                       <p className='pools-index_over_status'>已结束</p>
@@ -171,16 +166,16 @@ const StakingPool4 = (props) => {
             </tbody>
           )}
         </table>
-        {
-          listData.length > 10 && <Pagination
-              defaultCurrent={1}
-              current={page}
-              total={50}
-              onChange={changePage}
-              // hideOnSinglePage // 当数据不足一页时不展示分页
-              pageSize='10' // 显示数据条数 默认十条
+        {listData.length > 10 && (
+          <Pagination
+            defaultCurrent={1}
+            current={page}
+            total={50}
+            onChange={changePage}
+            // hideOnSinglePage // 当数据不足一页时不展示分页
+            pageSize='10' // 显示数据条数 默认十条
           />
-        }
+        )}
       </div>
     </div>
   )
