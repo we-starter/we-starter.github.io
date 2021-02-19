@@ -1,220 +1,352 @@
 .banner {
-    width: 100%;
+  width: 100%;
 }
 @media #{$desktop} {
-    .banner {
-        width: 1200px;
-        margin: 0 auto;
-        &_img {
-            display: none;
-            margin: 0 auto;
-            width: 98%;
-            height: 270px;
-            // background-image: url('../image/weBanner.png');
-            // background-repeat: no-repeat;
-            // background-size: 100% 100%;
-        }
-        &_text {
-            padding: 0 28px;
-            font-size: 44px;
-            font-weight: 600;
-            color: #22292f;
-            line-height: 62px;
-            margin-top: 140px;
-        }
-        &_dec {
-            width: 522px;
-            padding: 0 28px;
-            font-size: 20px;
-            font-weight: 300;
-            color: #7a7f82;
-            line-height: 36px;
-            margin-top: 20px;
-        }
-        &_link {
-            display: flex;
-            align-items: center;
-            margin-top: 72px;
-            padding-bottom: 52px;
-            padding-left: 28px;
-            span {
-                font-size: 20px;
-                font-family: PTMono-Regular, PTMono !important;
-                font-weight: 400;
-                color: #22292f;
-                line-height: 20px;
-            }
-            a {
-                display: inline-block;
-                background-image: url('../image/HecoScan.png');
-                background-repeat: no-repeat;
-                background-size: cover;
-                width: 133px;
-                height: 24px;
-                margin-left: 8px;
-            }
-        }
+  .banner {
+    width: 1080px;
+    margin: 0 auto;
+    &_img {
+      display: none;
+      margin: 0 auto;
+      width: 98%;
+      height: 270px;
+      // background-image: url('../image/weBanner.png');
+      // background-repeat: no-repeat;
+      // background-size: 100% 100%;
     }
+    &_text {
+      font-size: 44px;
+      font-weight: 600;
+      color: #22292f;
+      line-height: 62px;
+      margin-top: 50px;
+    }
+    &_dec {
+      width: 522px;
+      font-size: 18px;
+      font-weight: 300;
+      color: #7a7f82;
+      line-height: 36px;
+      margin-top: 20px;
+    }
+    &_link {
+      display: flex;
+      align-items: center;
+      margin-top: 20px;
+      padding-bottom: 52px;
+      span {
+        font-size: 20px;
+        font-family: PTMono-Regular, PTMono !important;
+        font-weight: 400;
+        color: #22292f;
+        line-height: 20px;
+      }
+      a {
+        display: inline-block;
+        background-image: url('../image/HecoScan.png');
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        width: 220px;
+        height: 26px;
+        margin-left: 8px;
+      }
+    }
+    &_pdf {
+      display: flex;
+      align-items: center;
+      padding-bottom: 40px;
+      a {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-right: 16px;
+        padding: 0 14px;
+        width: 162px;
+        height: 40px;
+        background: #0f8c20;
+        border-radius: 24px;
+      }
+      .pdf-icon {
+        width: 18px;
+        height: 18px;
+        background: url('../icon/CTK@2x.png') no-repeat;
+        background-size: 100% 100%;
+      }
+      .pdf-text {
+        margin-left: 8px;
+        margin-bottom: 0;
+        font-size: 16px;
+        font-weight: 300;
+        color: #ffffff;
+      }
+      .down-load {
+        display: inline-block;
+        width: 24px;
+        height: 24px;
+        background: url('../icon/folder-download@2x.png') no-repeat;
+        background-size: 100% 100%;
+      }
+    }
+  }
 }
 @media #{$mdWidth} {
-    .banner {
-        width: 100%;
-        margin: 0 auto;
-        &_img {
-            display: none;
-            margin: 0 auto;
-            width: 98%;
-            height: 270px;
-            // background-image: url('../image/weBanner.png');
-            // background-repeat: no-repeat;
-            // background-size: 100% 100%;
-        }
-        &_text {
-            padding: 0 28px;
-            font-size: 44px;
-            font-weight: 600;
-            color: #22292f;
-            line-height: 62px;
-            margin-top: 140px;
-        }
-        &_dec {
-            width: 522px;
-            padding: 0 28px;
-            font-size: 20px;
-            font-weight: 300;
-            color: #7a7f82;
-            line-height: 36px;
-            margin-top: 20px;
-        }
-        &_link {
-            display: flex;
-            align-items: center;
-            margin-top: 72px;
-            padding-bottom: 52px;
-            padding-left: 28px;
-            span {
-                font-size: 20px;
-                font-family: PTMono-Regular, PTMono !important;
-                font-weight: 400;
-                color: #22292f;
-                line-height: 20px;
-            }
-            a {
-                display: inline-block;
-                background-image: url('../image/HecoScan.png');
-                background-repeat: no-repeat;
-                background-size: cover;
-                width: 133px;
-                height: 24px;
-                margin-left: 8px;
-            }
-        }
+  .banner {
+    width: 1080px;
+    margin: 0 auto;
+    &_img {
+      display: none;
+      margin: 0 auto;
+      width: 98%;
+      height: 270px;
+      // background-image: url('../image/weBanner.png');
+      // background-repeat: no-repeat;
+      // background-size: 100% 100%;
     }
+    &_text {
+      font-size: 44px;
+      font-weight: 600;
+      color: #22292f;
+      line-height: 62px;
+      margin-top: 50px;
+    }
+    &_dec {
+      width: 522px;
+      font-size: 18px;
+      font-weight: 300;
+      color: #7a7f82;
+      line-height: 36px;
+      margin-top: 20px;
+    }
+    &_link {
+      display: flex;
+      align-items: center;
+      margin-top: 20px;
+      padding-bottom: 42px;
+      span {
+        font-size: 20px;
+        font-family: PTMono-Regular, PTMono !important;
+        font-weight: 400;
+        color: #22292f;
+        line-height: 20px;
+      }
+      a {
+        display: inline-block;
+        background-image: url('../image/HecoScan.png');
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        width: 220px;
+        height: 26px;
+        margin-left: 8px;
+      }
+    }
+    &_pdf {
+      display: flex;
+      align-items: center;
+      padding-bottom: 40px;
+      a {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-right: 16px;
+        padding: 0 14px;
+        width: 162px;
+        height: 40px;
+        background: #0f8c20;
+        border-radius: 24px;
+      }
+      .pdf-icon {
+        width: 18px;
+        height: 18px;
+        background: url('../icon/CTK@2x.png') no-repeat;
+        background-size: 100% 100%;
+      }
+      .pdf-text {
+        margin-left: 8px;
+        margin-bottom: 0;
+        font-size: 16px;
+        font-weight: 300;
+        color: #ffffff;
+      }
+      .down-load {
+        display: inline-block;
+        width: 24px;
+        height: 24px;
+        background: url('../icon/folder-download@2x.png') no-repeat;
+        background-size: 100% 100%;
+      }
+    }
+  }
 }
 @media #{$smWidth} {
-    .banner {
-        width: 100%;
-        &_img {
-            display: block;
-            margin: 0 auto;
-            width: 98%;
-            height: 270px;
-            background-image: url('../image/weBanner_h5.png');
-            background-repeat: no-repeat;
-            background-size: 100% 100%;
-        }
-        &_text {
-            padding: 0 28px;
-            font-size: 44px;
-            font-weight: 600;
-            color: #22292f;
-            line-height: 62px;
-            margin-top: 50px;
-        }
-        &_dec {
-            width: auto;
-            padding: 0 28px;
-            font-size: 20px;
-            font-weight: 300;
-            color: #7a7f82;
-            line-height: 36px;
-            margin-top: 20px;
-        }
-        &_link {
-            display: flex;
-            align-items: center;
-            margin-top: 20px;
-            padding-bottom: 52px;
-            padding-left: 28px;
-            span {
-                font-size: 20px;
-                font-family: PTMono-Regular, PTMono !important;
-                font-weight: 400;
-                color: #22292f;
-                line-height: 20px;
-            }
-            a {
-                display: inline-block;
-                background-image: url('../image/HecoScan.png');
-                background-repeat: no-repeat;
-                background-size: cover;
-                width: 133px;
-                height: 24px;
-                margin-left: 8px;
-            }
-        }
+  .banner {
+    width: 100%;
+    &_img {
+      display: block;
+      margin: 0 auto;
+      width: 98%;
+      height: 270px;
+      background-image: url('../image/weBanner_h5.png');
+      background-repeat: no-repeat;
+      background-size: 100% 100%;
     }
+    &_text {
+      font-size: 44px;
+      font-weight: 600;
+      color: #22292f;
+      line-height: 62px;
+      margin-top: 50px;
+    }
+    &_dec {
+      width: auto;
+      font-size: 18px;
+      font-weight: 300;
+      color: #7a7f82;
+      line-height: 36px;
+      margin-top: 20px;
+    }
+    &_link {
+      display: flex;
+      align-items: center;
+      margin-top: 20px;
+      padding-bottom: 42px;
+      span {
+        font-size: 20px;
+        font-family: PTMono-Regular, PTMono !important;
+        font-weight: 400;
+        color: #22292f;
+        line-height: 20px;
+      }
+      a {
+        display: inline-block;
+        background-image: url('../image/HecoScan.png');
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        width: 220px;
+        height: 26px;
+        margin-left: 8px;
+      }
+    }
+    &_pdf {
+      display: flex;
+      align-items: center;
+      padding-bottom: 40px;
+      a {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-right: 16px;
+        padding: 0 14px;
+        width: 162px;
+        height: 40px;
+        background: #0f8c20;
+        border-radius: 24px;
+      }
+      .pdf-icon {
+        width: 18px;
+        height: 18px;
+        background: url('../icon/CTK@2x.png') no-repeat;
+        background-size: 100% 100%;
+      }
+      .pdf-text {
+        margin-left: 8px;
+        margin-bottom: 0;
+        font-size: 16px;
+        font-weight: 300;
+        color: #ffffff;
+      }
+      .down-load {
+        display: inline-block;
+        width: 24px;
+        height: 24px;
+        background: url('../icon/folder-download@2x.png') no-repeat;
+        background-size: 100% 100%;
+      }
+    }
+  }
 }
 @media #{$xsWidth} {
-    .banner {
-        width: 100%;
-        &_img {
-            display: block;
-            margin: 0 auto;
-            width: 99%;
-            height: 270px;
-            background-image: url('../image/weBanner_h5.png');
-            background-repeat: no-repeat;
-            background-size: 100% 100%;
-        }
-        &_text {
-            padding: 0 28px;
-            font-size: 44px;
-            font-weight: 600;
-            color: #22292f;
-            line-height: 62px;
-        }
-        &_dec {
-            width: auto;
-            padding: 0 28px;
-            font-size: 20px;
-            font-weight: 300;
-            color: #7a7f82;
-            line-height: 36px;
-            margin-top: 20px;
-        }
-        &_link {
-            display: flex;
-            align-items: center;
-            margin-top: 20px;
-            padding-bottom: 52px;
-            padding-left: 28px;
-            span {
-                font-size: 20px;
-                font-family: PTMono-Regular, PTMono !important;
-                font-weight: 400;
-                color: #22292f;
-                line-height: 20px;
-            }
-            a {
-                display: inline-block;
-                background-image: url('../image/HecoScan.png');
-                background-repeat: no-repeat;
-                background-size: cover;
-                width: 133px;
-                height: 24px;
-                margin-left: 8px;
-            }
-        }
+  .banner {
+    width: 100%;
+    &_img {
+      display: block;
+      margin: 0 auto;
+      width: 99%;
+      height: 270px;
+      background-image: url('../image/weBanner_h5.png');
+      background-repeat: no-repeat;
+      background-size: 100% 100%;
     }
+    &_text {
+      font-size: 44px;
+      font-weight: 600;
+      color: #22292f;
+      line-height: 62px;
+    }
+    &_dec {
+      width: auto;
+      font-size: 18px;
+      font-weight: 300;
+      color: #7a7f82;
+      line-height: 36px;
+      margin-top: 20px;
+    }
+    &_link {
+      display: flex;
+      align-items: center;
+      margin-top: 20px;
+      padding-bottom: 42px;
+      span {
+        font-size: 20px;
+        font-family: PTMono-Regular, PTMono !important;
+        font-weight: 400;
+        color: #22292f;
+        line-height: 20px;
+      }
+      a {
+        display: inline-block;
+        background-image: url('../image/HecoScan.png');
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        width: 220px;
+        height: 26px;
+        margin-left: 8px;
+      }
+    }
+    &_pdf {
+      display: flex;
+      align-items: center;
+      padding-bottom: 40px;
+      a {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-right: 16px;
+        padding: 0 14px;
+        width: 162px;
+        height: 40px;
+        background: #0f8c20;
+        border-radius: 24px;
+      }
+      .pdf-icon {
+        width: 18px;
+        height: 18px;
+        background: url('../icon/CTK@2x.png') no-repeat;
+        background-size: 100% 100%;
+      }
+      .pdf-text {
+        margin-left: 8px;
+        margin-bottom: 0;
+        font-size: 16px;
+        font-weight: 300;
+        color: #ffffff;
+      }
+      .down-load {
+        display: inline-block;
+        width: 24px;
+        height: 24px;
+        background: url('../icon/folder-download@2x.png') no-repeat;
+        background-size: 100% 100%;
+      }
+    }
+  }
 }

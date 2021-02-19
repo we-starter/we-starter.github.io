@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import cs from 'classnames'
 import { withRouter } from 'react-router'
-import PoolsTextHeader from '../../components/staterPools/poolsTextHeader'
 import HUSD from '../../assets/icon/HUSD@2x.png'
+import noDataPng from '../../assets/icon/noData@2x.png'
 import { usePoolsInfo } from './Hooks'
 import { FormattedMessage } from 'react-intl'
 import Web3 from 'web3'
-import {formatAmount} from "../../utils/format";
+import { formatAmount } from '../../utils/format'
 
 const PoolsIndex = (props) => {
   const [listData, setListData] = useState([])
@@ -19,13 +19,13 @@ const PoolsIndex = (props) => {
   const setData = async () => {
     switch (tabFlag) {
       case 1:
-        setListData(pools.filter((o) => o.is_top));
-        break;
+        setListData(pools.filter((o) => o.is_top))
+        break
       case 2:
-        setListData(pools.filter((o) => o.is_join));
-        break;
+        setListData(pools.filter((o) => o.is_join))
+        break
       default:
-        setListData(pools.filter((o) => o.is_top));
+        setListData(pools.filter((o) => o.is_top))
     }
   }
 
@@ -94,8 +94,7 @@ const PoolsIndex = (props) => {
           <p className='pools-type_card_ratio' style={{ textAlign: 'right' }}>
             <FormattedMessage id='totalRaised' />
             <i>
-              {formatAmount(totalPurchasedAmount)}{' '}
-              {currency.symbol}
+              {formatAmount(totalPurchasedAmount)} {currency.symbol}
             </i>
           </p>
         </div>
@@ -126,30 +125,45 @@ const PoolsIndex = (props) => {
       </div>
     )
   }
+  const noData = () => {
+    return (
+      <div className='pools-type_noData'>
+        <img src={noDataPng} />
+        <p>
+          <FormattedMessage id='noData' />
+        </p>
+      </div>
+    )
+  }
   return (
     <div className='pools-type'>
-      <PoolsTextHeader />
-      <div className='pools-type_content'>
-        <div className='pools-type_tab'>
-          <h2
-            onClick={() => changeTab(1)}
-            className={tabFlag === 1 ? 'tab_active' : ''}
-          >
-            Top Pools
-          </h2>
-          <h2
-            onClick={() => changeTab(2)}
-            className={tabFlag === 2 ? 'tab_active' : ''}
-          >
-            <FormattedMessage id='myJoinPool' />
-          </h2>
+      <div className='pools-type-top'>
+        <div className='pools-type_content'>
+          <div className='pools-type_tab'>
+            <h2
+              onClick={() => changeTab(1)}
+              className={tabFlag === 1 ? 'tab_active' : ''}
+            >
+              Top Pools
+            </h2>
+            <h2
+              onClick={() => changeTab(2)}
+              className={tabFlag === 2 ? 'tab_active' : ''}
+            >
+              <FormattedMessage id='myJoinPool' />
+            </h2>
+          </div>
+          <div className='pools-type_card'>
+            {listData &&
+              listData.map((pool) => {
+                return renderCard(pool)
+              })}
+            {!listData.length && noData()}
+          </div>
         </div>
-        <div className='pools-type_card'>
-          {listData &&
-          listData.map((pool) => {
-              return renderCard(pool)
-            })}
-        </div>
+      </div>
+      <div className='pools-type-bottom'>
+        <h2>合作伙伴</h2>
       </div>
     </div>
   )

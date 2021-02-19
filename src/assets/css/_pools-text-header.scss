@@ -513,3 +513,14 @@
     display: none;
   }
 }
+.pools_text_header__menu-guide {
+  @media #{$mdWidth} {
+    display: none;
+  }
+  @media #{$smWidth} {
+    display: none;
+  }
+  @media #{$xsWidth} {
+    display: none;
+  }
+}

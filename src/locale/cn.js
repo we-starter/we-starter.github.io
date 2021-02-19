@@ -53,5 +53,7 @@ const zh_CN = {
   submit: '提交',
   errorTip: '请输入内容，该内容不能为空',
   myJoinPool: '我参与的Pool',
+  noData: '暂无数据',
+  guide: '使用教程',
 }
 export default zh_CN

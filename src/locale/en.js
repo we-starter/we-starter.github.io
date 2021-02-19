@@ -53,5 +53,7 @@ const en_US = {
   submit: 'submit',
   errorTip: 'Please fill in this blank.',
   myJoinPool: 'My Pool',
+  noData: 'No Data',
+  guide: 'Guide',
 }
 export default en_US

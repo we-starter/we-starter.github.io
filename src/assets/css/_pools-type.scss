@@ -1,16 +1,27 @@
 .pools-type {
   width: 100%;
   min-height: 800px;
-  background: #fff;
 }
 @media #{$desktop} {
   .pools-type {
+    &-top {
+      width: 100%;
+      min-height: 800px;
+      background: #f2f0eb;
+    }
+    &-bottom {
+      padding: 90px 0 50px;
+      width: 100%;
+      text-align: center;
+      background: #fff;
+    }
     &_content {
       margin: 0 auto;
       padding-bottom: 50px;
       width: 1080px;
     }
     &_tab {
+      padding-top: 60px;
       display: flex;
       width: 100%;
       border-bottom: 2px solid #ebe9e3;
@@ -40,6 +51,23 @@
         }
       }
     }
+    &_noData {
+      padding-top: 120px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      img {
+        width: 370px;
+        height: 200px;
+      }
+      p {
+        margin-top: 16px;
+        font-size: 12px;
+        font-weight: 400;
+        color: #7a7f82;
+      }
+    }
     &_card {
       margin-top: 30px;
       .pools-type_card_box {
@@ -48,7 +76,7 @@
         padding: 30px 30px 40px 30px;
         width: 332px;
         height: 334px;
-        background: #f2f0eb;
+        background: #fff;
         border-radius: 20px;
         &:nth-child(3n-1) {
           margin: 0 40px;
@@ -161,12 +189,24 @@
 @media #{$mdWidth} {
   .pools-type {
     min-width: 1080px;
+    &-top {
+      width: 100%;
+      min-height: 800px;
+      background: #f2f0eb;
+    }
+    &-bottom {
+      padding: 90px 0 50px;
+      width: 100%;
+      text-align: center;
+      background: #fff;
+    }
     &_content {
       margin: 0 auto;
       padding-bottom: 50px;
       width: 1080px;
     }
     &_tab {
+      padding-top: 60px;
       display: flex;
       width: 100%;
       border-bottom: 2px solid #ebe9e3;
@@ -196,6 +236,23 @@
         }
       }
     }
+    &_noData {
+      padding-top: 120px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      img {
+        width: 370px;
+        height: 200px;
+      }
+      p {
+        margin-top: 16px;
+        font-size: 12px;
+        font-weight: 400;
+        color: #7a7f82;
+      }
+    }
     &_card {
       margin-top: 30px;
       .pools-type_card_box {
@@ -204,7 +261,7 @@
         padding: 30px 30px 40px 30px;
         width: 332px;
         height: 334px;
-        background: #f2f0eb;
+        background: #fff;
         border-radius: 20px;
         &:nth-child(3n-1) {
           margin: 0 40px;
@@ -316,12 +373,23 @@
 }
 @media #{$smWidth} {
   .pools-type {
+    &-top {
+      width: 100%;
+      background: #f2f0eb;
+    }
+    &-bottom {
+      padding: 90px 0 50px;
+      width: 100%;
+      text-align: center;
+      background: #fff;
+    }
     &_content {
       margin: 0 auto;
       padding-bottom: 40px;
       width: 100%;
     }
     &_tab {
+      padding-top: 60px;
       display: flex;
       width: 100%;
       border-bottom: 2px solid #ebe9e3;
@@ -351,6 +419,23 @@
         }
       }
     }
+    &_noData {
+      padding-top: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      img {
+        width: 270px;
+        height: 200px;
+      }
+      p {
+        margin-top: 16px;
+        font-size: 12px;
+        font-weight: 400;
+        color: #7a7f82;
+      }
+    }
     &_card {
       margin-top: 10px;
       .pools-type_card_box {
@@ -359,7 +444,7 @@
         padding: 30px 30px 40px 30px;
         width: 332px;
         height: 334px;
-        background: #f2f0eb;
+        background: #fff;
         border-radius: 20px;
       }
     }
@@ -468,12 +553,23 @@
 }
 @media #{$xsWidth} {
   .pools-type {
+    &-top {
+      width: 100%;
+      background: #f2f0eb;
+    }
+    &-bottom {
+      padding: 90px 0 50px;
+      width: 100%;
+      text-align: center;
+      background: #fff;
+    }
     &_content {
       margin: 0 auto;
       padding-bottom: 40px;
       width: 100%;
     }
     &_tab {
+      padding-top: 60px;
       display: flex;
       width: 100%;
       border-bottom: 2px solid #ebe9e3;
@@ -503,6 +599,23 @@
         }
       }
     }
+    &_noData {
+      padding-top: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      img {
+        width: 270px;
+        height: 200px;
+      }
+      p {
+        margin-top: 16px;
+        font-size: 12px;
+        font-weight: 400;
+        color: #7a7f82;
+      }
+    }
     &_card {
       margin-top: 10px;
       .pools-type_card_box {
@@ -511,7 +624,7 @@
         padding: 30px 30px 40px 30px;
         width: 320px;
         height: 334px;
-        background: #f2f0eb;
+        background: #fff;
         border-radius: 20px;
       }
     }

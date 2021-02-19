@@ -10,11 +10,14 @@ import { ReactComponent as LogoText } from '../../assets/image/logo-text.svg'
 import { ReactComponent as More } from '../../assets/icon/more.svg'
 import dot from '../../assets/icon/dot.png'
 import { Banner } from '../banner/Banner'
+import { useHTBalance } from '../../pages/Hooks'
+
 import { FormattedMessage } from 'react-intl'
 
 export const Header = () => {
   const { active, account } = useActiveWeb3React()
   const { dispatch } = useContext(mainContext)
+  const { balance } = useHTBalance()
 
   const [showMenu, setShowMenu] = useState(false)
   const [showPoolsStarter, setShowPoolsStarter] = useState(false)
@@ -138,8 +141,15 @@ export const Header = () => {
           </div>
 
           <div className='header__menu-wrapper'>
-            {/* <a>Guide</a> */}
-
+            <a className='header__menu-guide'>
+              <FormattedMessage id='guide' />
+            </a>
+            {active && (
+              <div className='ht-balance'>
+                <span></span>
+                <p>{formatAmount(balance)}</p>
+              </div>
+            )}
             {active && (
               <div className='header-account'>
                 <div

@@ -25,6 +25,17 @@
       // left: 20px;
     }
   }
+  &__menu-guide {
+    @media #{$mdWidth} {
+      display: none;
+    }
+    @media #{$smWidth} {
+      display: none;
+    }
+    @media #{$xsWidth} {
+      display: none;
+    }
+  }
   .ht-balance {
     display: flex;
     align-items: center;

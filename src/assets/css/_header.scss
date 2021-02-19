@@ -2,18 +2,57 @@
   position: relative;
   background: #fff;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  .ht-balance {
+    display: flex;
+    align-items: center;
+    padding: 0 12px;
+    height: 38px;
+    background: #f2f0eb;
+    border-radius: 5px 0px 0px 5px;
+    span {
+      margin-right: 8px;
+      display: inline-block;
+      width: 24px;
+      height: 24px;
+      background: url('../icon/HT@2x.png') no-repeat;
+      background-size: 100% 100%;
+    }
+    p {
+      margin-bottom: 0;
+      font-size: 14px;
+      font-weight: 600;
+      color: #22292f;
+    }
+    @media #{$mdWidth} {
+      display: none;
+      position: absolute;
+      top: 22px;
+      right: 218px;
+    }
+
+    @media (max-width: 470px) {
+      right: unset;
+      // left: 20px;
+    }
+    @media #{$smWidth} {
+      display: none;
+    }
+    @media #{$xsWidth} {
+      display: none;
+    }
+  }
   @media #{$desktop} {
     background-image: url('../image/weBanner.png');
     background-repeat: no-repeat;
     background-size: contain;
-    height: 700px;
+    height: 638px;
   }
   @media #{$mdWidth} {
     background: #fff;
     background-image: url('../image/weBanner.png');
     background-repeat: no-repeat;
     background-size: contain;
-    height: 700px;
+    height: 638px;
   }
   @media #{$smWidth} {
     background: #fff;
@@ -25,11 +64,12 @@
   }
   .center {
     padding: 0;
+    max-width: 1080px;
     @media #{$desktop} {
-      width: 1200px;
+      width: 1080px;
     }
     @media #{$mdWidth} {
-      width: 1200px;
+      width: 1080px;
     }
     @media #{$smWidth} {
       width: 100%;
@@ -40,7 +80,7 @@
   }
 
   @media #{$mdWidth} {
-    padding: 0 15px;
+    // padding: 0 15px;
     height: auto;
 
     &__adv {
@@ -48,7 +88,7 @@
     }
   }
   @media #{$smWidth} {
-    padding: 0 15px;
+    // padding: 0 15px;
     height: auto;
 
     &__adv {
@@ -56,7 +96,7 @@
     }
   }
   @media #{$xsWidth} {
-    padding: 0 15px;
+    // padding: 0 15px;
     height: auto;
 
     &__adv {
@@ -325,15 +365,19 @@
 
     @media (max-width: 370px) {
       position: static;
+      display: none;
     }
     @media #{$smWidth} {
       position: static;
+      display: none;
     }
     @media #{$xsWidth} {
       position: static;
+      display: none;
     }
     @media #{$mdWidth} {
       position: static;
+      display: none;
     }
     .connect-btn {
       min-width: 106px;
@@ -475,6 +519,17 @@
 }
 @media #{$xsWidth} {
   .btn-menu-toggle {
+    display: none;
+  }
+}
+.header__menu-guide {
+  @media #{$mdWidth} {
+    display: none;
+  }
+  @media #{$smWidth} {
+    display: none;
+  }
+  @media #{$xsWidth} {
     display: none;
   }
 }

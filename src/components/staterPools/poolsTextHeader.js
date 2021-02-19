@@ -125,15 +125,16 @@ const PoolsTextHeader = (props) => {
           </div>
 
           <div className='pools_text_header__menu-wrapper'>
-            {/* <a>Guide</a> */}
-            <a className='download-pdf' href={WeStarterPDF} target='_blank'></a>
+            <a className='pools_text_header__menu-guide'>
+              <FormattedMessage id='guide' />
+            </a>{' '}
+            {/* <a className='download-pdf' href={WeStarterPDF} target='_blank'></a> */}
             {active && (
               <div className='ht-balance'>
                 <span></span>
                 <p>{formatAmount(balance)}</p>
               </div>
             )}
-
             {active && (
               <div className='pools_text_header-account'>
                 <div
@@ -150,7 +151,6 @@ const PoolsTextHeader = (props) => {
                 </div>
               </div>
             )}
-
             {!active && (
               <div className='pools_text_header__btn'>
                 <button className='connect-btn'>

@@ -121,7 +121,10 @@ const PoolsHeader = (props) => {
           </div>
 
           <div className='pools_header__menu-wrapper'>
-            <a className='download-pdf'></a>
+            <a className='pools_header__menu-guide'>
+              <FormattedMessage id='guide' />
+            </a>{' '}
+            {/* <a className='download-pdf'></a> */}
             {active && (
               <div className='ht-balance'>
                 <span></span>
@@ -129,7 +132,6 @@ const PoolsHeader = (props) => {
               </div>
             )}
             {/* <a>Guide</a> */}
-
             {active && (
               <div className='pools_header-account'>
                 <div
@@ -146,7 +148,6 @@ const PoolsHeader = (props) => {
                 </div>
               </div>
             )}
-
             {!active && (
               <div className='pools_header__btn'>
                 <button className='connect-btn'>
