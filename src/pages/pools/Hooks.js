@@ -409,7 +409,8 @@ export const usePoolsInfo = (address = '') => {
                         volume: 0,
                         rate: 0
                     }),
-                    getLogs(library, Starter, {fromBlock: 0, toBlock: 'latest', address: pool.address, topics: [null, Web3.utils.padLeft(account, 64)]}),
+                    // getLogs(library, Starter, {fromBlock: 0, toBlock: 'latest', address: pool.address, topics: [null, Web3.utils.padLeft(account, 64)]}),
+                    getLogs(library, Starter, {address: pool.address, topics: [null, Web3.utils.padLeft(account, 64)]}),
                     address ? currency_token.methods.allowance(account, pool.address).call() : 0,
                     // underlying_token.methods.balanceOf(pool.address).call(),
                 ]

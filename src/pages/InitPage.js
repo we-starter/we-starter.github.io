@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react'
 import { WalletConnect } from '../components/account/WalletConnect'
-import { useWeb3React } from '@web3-react/core'
+import {UnsupportedChainIdError, useWeb3React} from '@web3-react/core'
 import { mainContext } from '../reducer'
 import {
   StakeModal,
@@ -17,7 +17,7 @@ import {
   HANDLE_WALLET_MODAL,
   HANDLE_SHOW_MENUMASK_MODAL,
 } from '../const'
-import { InjectedConnector } from '@web3-react/injected-connector'
+import {InjectedConnector, NoEthereumProviderError} from '@web3-react/injected-connector'
 import { WalletConnectConnector } from '@web3-react/walletconnect-connector'
 import { LedgerConnector } from '@web3-react/ledger-connector'
 import { WalletModal } from '../components/Modals/WalletModal'
@@ -28,7 +28,7 @@ import { TXStatusModal } from '../components/Modals/TXStatusModal'
 import satellite from '../assets/image/satellite.png'
 
 const injected = new InjectedConnector({
-  supportedChainIds: [1, 3, 4, 5, 42, 128],
+  supportedChainIds: [3, 128],
 })
 
 const POLLING_INTERVAL = 12000

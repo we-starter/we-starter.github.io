@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { useWeb3React } from '@web3-react/core';
+import {UnsupportedChainIdError, useWeb3React} from '@web3-react/core';
 import { mainContext } from '../../reducer';
-import { InjectedConnector } from '@web3-react/injected-connector';
+import { InjectedConnector,  NoEthereumProviderError } from '@web3-react/injected-connector';
 import {
     GALLERY_SELECT_WEB3_CONTEXT,
     HANDLE_WALLET_MODAL,
@@ -14,7 +14,7 @@ import { WalletConnectConnector } from '@web3-react/walletconnect-connector';
 import { LedgerConnector } from '@web3-react/ledger-connector';
 
 const injected = new InjectedConnector({
-    supportedChainIds: [1, 3, 4, 5, 42, 128],
+    supportedChainIds: [3, 128],
 });
 
 const POLLING_INTERVAL = 12000;
@@ -42,6 +42,7 @@ export const WalletConnect = ({ onClose, onCancel }) => {
     const {
         connector,
         activate,
+        active,
     } = context;
 
     useEffect(() => {
@@ -67,32 +68,28 @@ export const WalletConnect = ({ onClose, onCancel }) => {
                         <div className='form-app__inner__wallets'>
                             <div
                                 onClick={() => {
-                                    activate(injected)
-                                        .then((e) => {
-                                            // 验证链接之后
-                                            injected.isAuthorized().then((is_authorized) => {
-                                                if(is_authorized){
-                                                    dispatch({
-                                                        type: HANDLE_WALLET_MODAL,
-                                                        walletModal: null,
-                                                    });
-                                                    window &&
-                                                    window.localStorage.setItem(
-                                                        GALLERY_SELECT_WEB3_CONTEXT,
-                                                        'MetaMask'
-                                                    );
-                                                }else{
-                                                    dispatch({
-                                                        type: HANDLE_WALLET_MODAL,
-                                                        walletModal: 'connecting',
-                                                    });
-                                                }
-                                            })
-
-                                        })
-                                        .catch(() => {
-                                            console.log('error')
+                                    activate(injected, (e) => {
+                                        // 钱包无法连接
+                                        if(e instanceof UnsupportedChainIdError){
+                                            // TODO网络不支持
+                                            console.log('network not support')
+                                        }else if(e instanceof NoEthereumProviderError) {
+                                            dispatch({
+                                                type: HANDLE_WALLET_MODAL,
+                                                walletModal: 'connecting',
+                                            });
+                                        }
+                                    }).then((e) => {
+                                        dispatch({
+                                            type: HANDLE_WALLET_MODAL,
+                                            walletModal: null,
                                         });
+                                        window &&
+                                        window.localStorage.setItem(
+                                            GALLERY_SELECT_WEB3_CONTEXT,
+                                            'MetaMask'
+                                        );
+                                    });
                                 }}
                                 className='form-app__inner__wallets__item'
                                 style={{

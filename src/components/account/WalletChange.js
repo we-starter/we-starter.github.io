@@ -1,6 +1,6 @@
 import React, {useContext, useEffect, useState} from 'react';
-import {useWeb3React} from '@web3-react/core';
-import {InjectedConnector} from '@web3-react/injected-connector';
+import {UnsupportedChainIdError, useWeb3React} from '@web3-react/core';
+import {InjectedConnector, NoEthereumProviderError} from '@web3-react/injected-connector';
 import {GALLERY_SELECT_WEB3_CONTEXT, HANDLE_WALLET_MODAL} from '../../const';
 import {formatAddress} from '../../utils/format';
 import metamask from '../../assets/icon/metamask.png';
@@ -15,7 +15,7 @@ import back from '../../assets/icon/back.png';
 import {mainContext} from "../../reducer";
 
 const injected = new InjectedConnector({
-  supportedChainIds: [1, 3, 4, 5, 42, 128],
+  supportedChainIds: [3, 128],
 });
 
 const POLLING_INTERVAL = 12000;
@@ -78,7 +78,18 @@ export const WalletChange = ({onClose, onCancel}) => {
               <div
                   onClick={() => {
                     if (connectedName !== 'MetaMask') {
-                      activate(injected)
+                      activate(injected, (e) => {
+                          // 钱包无法连接
+                          if(e instanceof UnsupportedChainIdError){
+                              // TODO网络不支持
+                              console.log('network not support')
+                          }else if(e instanceof NoEthereumProviderError) {
+                              dispatch({
+                                  type: HANDLE_WALLET_MODAL,
+                                  walletModal: 'connecting',
+                              });
+                          }
+                      })
                           .then(() => {
                             setConnectedName('MetaMask')
                             // dispatch({
