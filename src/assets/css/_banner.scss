@@ -21,6 +21,9 @@
       line-height: 62px;
       margin-top: 50px;
     }
+    &_text-title {
+      display: none;
+    }
     &_dec {
       width: 522px;
       font-size: 18px;
@@ -61,7 +64,6 @@
         align-items: center;
         margin-right: 16px;
         padding: 0 14px;
-        width: 162px;
         height: 40px;
         background: #0f8c20;
         border-radius: 24px;
@@ -109,6 +111,9 @@
       line-height: 62px;
       margin-top: 50px;
     }
+    &_text-title {
+      display: none;
+    }
     &_dec {
       width: 522px;
       font-size: 18px;
@@ -149,7 +154,6 @@
         align-items: center;
         margin-right: 16px;
         padding: 0 14px;
-        width: 162px;
         height: 40px;
         background: #0f8c20;
         border-radius: 24px;
@@ -180,8 +184,9 @@
 @media #{$smWidth} {
   .banner {
     width: 100%;
+    padding: 0 15px;
     &_img {
-      display: block;
+      display: none;
       margin: 0 auto;
       width: 98%;
       height: 270px;
@@ -190,13 +195,22 @@
       background-size: 100% 100%;
     }
     &_text {
+      display: none;
       font-size: 44px;
       font-weight: 600;
       color: #22292f;
       line-height: 62px;
       margin-top: 50px;
     }
+    &_text-title {
+      font-size: 24px;
+      font-weight: 600;
+      color: #22292f;
+      line-height: 62px;
+      margin-top: 50px;
+    }
     &_dec {
+      display: none;
       width: auto;
       font-size: 18px;
       font-weight: 300;
@@ -236,7 +250,6 @@
         align-items: center;
         margin-right: 16px;
         padding: 0 14px;
-        width: 162px;
         height: 40px;
         background: #0f8c20;
         border-radius: 24px;
@@ -267,8 +280,10 @@
 @media #{$xsWidth} {
   .banner {
     width: 100%;
+    padding: 0 15px;
     &_img {
-      display: block;
+      display: none;
+      // display: block;
       margin: 0 auto;
       width: 99%;
       height: 270px;
@@ -277,12 +292,21 @@
       background-size: 100% 100%;
     }
     &_text {
+      display: none;
       font-size: 44px;
       font-weight: 600;
       color: #22292f;
       line-height: 62px;
     }
+    &_text-title {
+      font-size: 24px;
+      font-weight: 600;
+      color: #22292f;
+      line-height: 62px;
+      margin-top: 50px;
+    }
     &_dec {
+      display: none;
       width: auto;
       font-size: 18px;
       font-weight: 300;
@@ -322,7 +346,6 @@
         align-items: center;
         margin-right: 16px;
         padding: 0 14px;
-        width: 162px;
         height: 40px;
         background: #0f8c20;
         border-radius: 24px;

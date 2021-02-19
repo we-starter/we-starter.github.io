@@ -53,7 +53,11 @@ const en_US = {
   submit: 'submit',
   errorTip: 'Please fill in this blank.',
   myJoinPool: 'My Pool',
-  noData: 'No Data',
   guide: 'Guide',
+  bannerTitle1: 'Get the Drop on Spotting the Value',
+  certik: 'Audit Report',
+  partner: 'Business Partner',
+  noData: 'no internet connection',
+  guide: 'Tutorial/Guide',
 }
 export default en_US

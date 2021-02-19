@@ -55,5 +55,8 @@ const zh_CN = {
   myJoinPool: '我参与的Pool',
   noData: '暂无数据',
   guide: '使用教程',
+  bannerTitle1: '更早一步发现价值',
+  certik: 'Certik审计报告',
+  partner: '合作伙伴'
 }
 export default zh_CN
