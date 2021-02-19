@@ -147,7 +147,7 @@ export const MenuMask = () => {
             <li className='menumask_item' style={{ margin: '40px 0 15px' }}>
               <NavLink
                 exact
-                to='/pools'
+                to='/'
                 className='menumask_link'
                 onClick={() =>
                   dispatch({

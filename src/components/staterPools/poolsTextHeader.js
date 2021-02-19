@@ -92,7 +92,7 @@ const PoolsTextHeader = (props) => {
                 <li className='menu__item'>
                   <NavLink
                     exact
-                    to='/pools'
+                    to='/'
                     className='menu__link'
                     onClick={handleMenuItemClick}
                   >

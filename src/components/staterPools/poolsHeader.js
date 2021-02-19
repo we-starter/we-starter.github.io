@@ -88,7 +88,7 @@ const PoolsHeader = (props) => {
                 </li> */}
                 <li className='menu__item'>
                   <NavLink
-                    to='/pools'
+                    to='/'
                     className='menu__link'
                     onClick={handleMenuItemClick}
                   >

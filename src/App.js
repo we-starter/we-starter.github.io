@@ -64,7 +64,7 @@ function App() {
                 path='/staking-pool3'
                 component={StakingPool3}
               ></Route> */}
-              <Route exact path={['/pools']} component={PoolsIndex}></Route>
+              <Route exact path={['/']} component={PoolsIndex}></Route>
               <Route
                 exact
                 path='/pools/detail/:address'
