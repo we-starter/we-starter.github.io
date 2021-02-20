@@ -1,6 +1,9 @@
 .pools-type {
   width: 100%;
   min-height: 800px;
+  p {
+    margin-bottom: 0;
+  }
 }
 @media #{$desktop} {
   .pools-type {
@@ -100,6 +103,29 @@
         font-weight: bold;
         color: #22292f;
         line-height: 20px;
+      }
+      .pools-type_card_title_right {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+      }
+      .pools-type_time {
+        display: flex;
+        align-items: center;
+        margin-bottom: 0;
+        em {
+          font-style: normal;
+          display: inline-block;
+          padding: 0 4px;
+          height: 16px;
+          text-align: center;
+          background: #f2f0eb;
+          border-radius: 3px;
+          font-size: 12px;
+          font-weight: 600;
+          color: #22292f;
+          line-height: 16px;
+        }
       }
       span {
         display: inline-block;
@@ -286,6 +312,29 @@
         color: #22292f;
         line-height: 20px;
       }
+      .pools-type_card_title_right {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+      }
+      .pools-type_time {
+        display: flex;
+        align-items: center;
+        margin-bottom: 0;
+        em {
+          font-style: normal;
+          display: inline-block;
+          padding: 0 4px;
+          height: 16px;
+          text-align: center;
+          background: #f2f0eb;
+          border-radius: 3px;
+          font-size: 12px;
+          font-weight: 600;
+          color: #22292f;
+          line-height: 16px;
+        }
+      }
       span {
         display: inline-block;
         padding: 0 4px;
@@ -465,6 +514,29 @@
         color: #22292f;
         line-height: 20px;
       }
+      .pools-type_card_title_right {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+      }
+      .pools-type_time {
+        display: flex;
+        align-items: center;
+        margin-bottom: 0;
+        em {
+          font-style: normal;
+          display: inline-block;
+          padding: 0 4px;
+          height: 16px;
+          text-align: center;
+          background: #f2f0eb;
+          border-radius: 3px;
+          font-size: 12px;
+          font-weight: 600;
+          color: #22292f;
+          line-height: 16px;
+        }
+      }
       span {
         display: inline-block;
         padding: 0 4px;
@@ -643,6 +715,29 @@
         font-weight: bold;
         color: #22292f;
         line-height: 20px;
+      }
+      .pools-type_card_title_right {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+      }
+      .pools-type_time {
+        display: flex;
+        align-items: center;
+        margin-bottom: 0;
+        em {
+          font-style: normal;
+          display: inline-block;
+          padding: 0 4px;
+          height: 16px;
+          text-align: center;
+          background: #f2f0eb;
+          border-radius: 3px;
+          font-size: 12px;
+          font-weight: 600;
+          color: #22292f;
+          line-height: 16px;
+        }
       }
       span {
         display: inline-block;

@@ -8,10 +8,10 @@ export const Banner = () => {
     <div className='banner'>
       <div className='banner_img'></div>
       <h3 className='banner_text'>
-        <FormattedMessage id='bannerTitle' />
+        <FormattedMessage id='bannerTitle1' />
       </h3>
       <h3 className='banner_text-title'>
-        <FormattedMessage id='bannerTitle1' />
+        <span>Live on : </span> <a href=''></a>
       </h3>
       <p className='banner_dec'>
         <FormattedMessage id='bannerContent1' />
@@ -28,12 +28,12 @@ export const Banner = () => {
             <FormattedMessage id='certik' />
           </span>
         </a>
-        <a
+        {/* <a
           className='down-load'
           download='application/pptx'
           href={WeStarterPDF}
           target='_blank'
-        ></a>
+        ></a> */}
       </div>
     </div>
   )

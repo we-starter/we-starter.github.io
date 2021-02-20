@@ -79,14 +79,30 @@
     background-image: url('../image/pools-banner@2x.png');
     background-repeat: no-repeat;
     background-size: contain;
-    height: 460px;
+    background-position: center;
+    height: 378px;
   }
   @media #{$mdWidth} {
     background: #fff;
     background-image: url('../image/pools-banner@2x.png');
     background-repeat: no-repeat;
     background-size: contain;
-    height: 460px;
+    background-position: center;
+    height: 378px;
+  }
+  @media #{$smWidth} {
+    background-image: url('../image/pools-banner-h5@2x.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-position: top;
+    height: 204px;
+  }
+  @media #{$xsWidth} {
+    background-image: url('../image/pools-banner-h5@2x.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-position: top;
+    height: 204px;
   }
   .center {
     padding: 0;
@@ -183,7 +199,7 @@
     border-radius: 5px;
 
     @media #{$mdWidth} {
-      display: none;
+      // display: none;
       width: 153px;
       position: absolute;
       top: 21px;
@@ -199,10 +215,10 @@
       width: 143px;
     }
     @media #{$smWidth} {
-      display: none;
+      // display: none;
     }
     @media #{$xsWidth} {
-      display: none;
+      // display: none;
     }
 
     .balance {
@@ -311,9 +327,29 @@
 
     &--small {
       display: none;
-      svg {
-        width: 155px;
-        height: 24px;
+      @media #{$desktop} {
+        svg {
+          width: 155px;
+          height: 24px;
+        }
+      }
+      @media #{$mdWidth} {
+        svg {
+          width: 155px;
+          height: 24px;
+        }
+      }
+      @media #{$smWidth} {
+        svg {
+          width: 100px;
+          height: 16px;
+        }
+      }
+      @media #{$xsWidth} {
+        svg {
+          width: 100px;
+          height: 16px;
+        }
       }
 
       &.active {

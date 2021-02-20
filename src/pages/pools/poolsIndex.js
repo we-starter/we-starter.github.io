@@ -84,7 +84,13 @@ const PoolsIndex = (props) => {
             <img src={HUSD} />
             {name}
           </p>
-          {renderStatus(status)}
+          <p className='pools-type_card_title_right'>
+            {renderStatus(status)}
+
+            <p className='pools-type_time'>
+              <em>12</em>&nbsp;:&nbsp;<em>12</em>&nbsp;:&nbsp;<em>12</em>
+            </p>
+          </p>
         </div>
         <div className='pools-type_title'>
           <p className='pools-type_card_ratio'>

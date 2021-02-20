@@ -12,7 +12,7 @@ const PoolsBanner = (props) => {
   return (
     <div className='pools_banner'>
       <div className='pools_banner_img'></div>
-      <h3 className='pools_banner_text'>We Starter Public</h3>
+      <h3 className='pools_banner_text'>WeStarter Public</h3>
       <p className='pools_banner_dec'>
         {address}
         <CopyToClipboard
@@ -24,7 +24,7 @@ const PoolsBanner = (props) => {
           <a></a>
         </CopyToClipboard>
       </p>
-      <div>
+      {/* <div>
         <a
           className={`pools_banner_btn ${
             pool && pool.status === 1
@@ -52,7 +52,7 @@ const PoolsBanner = (props) => {
         >
           View HECO
         </a>
-      </div>
+      </div> */}
     </div>
   )
 }

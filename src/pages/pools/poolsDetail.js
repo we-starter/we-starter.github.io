@@ -4,9 +4,11 @@ import PoolsHeader from '../../components/staterPools/poolsHeader'
 import chromeLine from '../../assets/icon/chrome-line@2x.png'
 import bookMarkLine from '../../assets/icon/book-mark-line@2x.png'
 import Web3 from 'web3'
+import { GALLERY_SELECT_WEB3_CONTEXT, HANDLE_WALLET_MODAL } from '../../const'
 import transitions from '@material-ui/core/styles/transitions'
 import pools from '../../configs/pools'
 import { usePoolsInfo } from './Hooks'
+import { message } from 'antd'
 import { getContract, useActiveWeb3React } from '../../web3'
 import {
   HANDLE_SHOW_FAILED_TRANSACTION_MODAL,
@@ -19,10 +21,12 @@ import { mainContext } from '../../reducer'
 import Starter from '../../web3/abi/Starter.json'
 import { FormattedMessage } from 'react-intl'
 import BigNumber from 'bignumber.js'
-import {formatAmount, fromWei} from "../../utils/format";
+import { formatAmount, fromWei } from '../../utils/format'
 
 export const PoolsDetail = (props) => {
   const { address } = props.match.params
+
+  const { intl } = props
 
   const { account, active, library, chainId } = useActiveWeb3React()
   const pools = usePoolsInfo(address)
@@ -35,7 +39,6 @@ export const PoolsDetail = (props) => {
 
   useEffect(() => {
     setPool(pools.pop())
-    console.log(pool)
   }, [pools, address])
 
   const onClaim = () => {
@@ -76,129 +79,6 @@ export const PoolsDetail = (props) => {
   return (
     <div style={{ background: '#fff' }}>
       <PoolsHeader address={address} pool={pool} />
-      <div className='pools_detail_record'>
-        <div className='pools_detail_record_tab'>
-          <a
-            onClick={() => setRecordTab(1)}
-            className={cs(recordTab === 1 && 'active')}
-          >
-            <FormattedMessage id='FundraisingRecord' />
-          </a>
-          {pool && pool.status >= 2 && (
-            <a
-              onClick={() => setRecordTab(2)}
-              className={cs(recordTab === 2 && 'active')}
-            >
-              Claim
-            </a>
-          )}
-        </div>
-        {recordTab === 1 && (
-          <div className='pools_detail_record_box'>
-            <table className='pools_detail_record_title'>
-              <thead>
-                <tr>
-                  <td>
-                    <FormattedMessage id='invest' />
-                    {pool && pool.currency.symbol}
-                    <FormattedMessage id='num' />
-                  </td>
-                  <td>
-                    <FormattedMessage id='winningRate' />
-                  </td>
-                  <td>
-                    <FormattedMessage id='winningAmount' />
-                  </td>
-                </tr>
-              </thead>
-              <tbody>
-                {(pool && pool.purchasedCurrencyOf.toString()) > 0 ? (
-                  <tr>
-                    <td>
-                      {fromWei(pool.purchasedCurrencyOf).toFixed(6, 1) * 1}
-                    </td>
-                    <td>
-                      {(
-                          fromWei(pool.settleable.rate).multipliedBy(new BigNumber(100))
-                      ).toFixed(2, 1).toString() * 1}
-                      %
-                    </td>
-                    {/*<td>{Web3.utils.fromWei(pool.settleable.volume, 'ether')}</td>*/}
-                    <td>
-                      {new BigNumber(
-                        Web3.utils.fromWei(pool.purchasedCurrencyOf, 'ether')
-                      )
-                        .multipliedBy(
-                          new BigNumber(
-                            Web3.utils.fromWei(pool.settleable.rate, 'ether')
-                          )
-                        )
-                        .dividedBy(new BigNumber(pool.price)).toFixed(6,  1)
-                        .toString() * 1}
-                    </td>
-                  </tr>
-                ) : (
-                  <tr>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                  </tr>
-                )}
-              </tbody>
-            </table>
-          </div>
-        )}
-        {recordTab === 2 && (
-          <div className='pools_detail_record_box'>
-            <table className='pools_detail_record_title'>
-              <thead>
-                <tr>
-                  <td>
-                    <FormattedMessage id='unsettlement' />
-                    {pool && pool.currency.symbol}
-                  </td>
-                  <td>
-                    <FormattedMessage id='obtain' />
-                    {pool && pool.underlying.symbol}
-                    <FormattedMessage id='num' />
-                  </td>
-                  <td></td>
-                </tr>
-              </thead>
-              <tbody>
-                {(pool && pool.purchasedCurrencyOf.toString()) > 0 ? (
-                  <tr>
-                    <td>
-                      {pool &&
-                        formatAmount(pool.settleable.amount)}
-                    </td>
-                    <td>
-                      {pool &&
-                        formatAmount(pool.settleable.volume)}
-                    </td>
-                    <td>
-                      {pool && pool.settleable.volume > 0 && (
-                        <a
-                          className='pools_detail_record_btn'
-                          onClick={() => onClaim()}
-                        >
-                          Claim
-                        </a>
-                      )}
-                    </td>
-                  </tr>
-                ) : (
-                  <tr>
-                    <td>-</td>
-                    <td>-</td>
-                    <td></td>
-                  </tr>
-                )}
-              </tbody>
-            </table>
-          </div>
-        )}
-      </div>
       <div className='pools_card'>
         <div className='pools_card_content'>
           <div className='pools_card_content_title'>
@@ -253,11 +133,159 @@ export const PoolsDetail = (props) => {
           <div className='pools_card_content_title pools_card_schedule'>
             <span>{pool && pool.progress * 100}%</span>
             <span>
-              {pool && formatAmount(pool.totalPurchasedCurrency)}
-              /{pool && formatAmount(pool.totalPurchasedAmount)}
+              {pool && formatAmount(pool.totalPurchasedCurrency)}/
+              {pool && formatAmount(pool.totalPurchasedAmount)}
             </span>
           </div>
         </div>
+      </div>
+      <div className='pools_detail_btn_box'>
+        <a
+          className={`pools_detail_btn ${
+            pool && pool.status === 1
+              ? 'pools_detail_btn_active'
+              : 'pools_detail_btn_disable'
+          }`}
+          onClick={() => {
+            if (pool.status === 1) {
+              dispatch({
+                type: HANDLE_WALLET_MODAL,
+                walletModal: 'join',
+                pool,
+              })
+            } else {
+              message.info(intl.formatMessage({ id: 'cannotSubscribe' }))
+            }
+          }}
+        >
+          Join Pool
+        </a>
+        <a
+          className='pools_detail_btn'
+          href={`https://scan.hecochain.com/address/${address}`}
+          target='_blank'
+        >
+          View HECO
+        </a>
+      </div>
+      <div className='pools_detail_record'>
+        <div className='pools_detail_record_tab'>
+          <a
+            onClick={() => setRecordTab(1)}
+            className={cs(recordTab === 1 && 'active')}
+          >
+            <FormattedMessage id='FundraisingRecord' />
+          </a>
+          {pool && pool.status >= 2 && (
+            <a
+              onClick={() => setRecordTab(2)}
+              className={cs(recordTab === 2 && 'active')}
+            >
+              Claim
+            </a>
+          )}
+        </div>
+        {recordTab === 1 && (
+          <div className='pools_detail_record_box'>
+            <table className='pools_detail_record_title'>
+              <thead>
+                <tr>
+                  <td>
+                    <FormattedMessage id='invest' />
+                    {pool && pool.currency.symbol + ' '}
+                    <FormattedMessage id='num' />
+                  </td>
+                  <td>
+                    <FormattedMessage id='winningRate' />
+                  </td>
+                  {/* <td>
+                    <FormattedMessage id='winningAmount' />
+                  </td> */}
+                </tr>
+              </thead>
+              <tbody>
+                {(pool && pool.purchasedCurrencyOf.toString()) > 0 ? (
+                  <tr>
+                    <td>
+                      {fromWei(pool.purchasedCurrencyOf).toFixed(6, 1) * 1}
+                    </td>
+                    <td>
+                      {fromWei(pool.settleable.rate)
+                        .multipliedBy(new BigNumber(100))
+                        .toFixed(2, 1)
+                        .toString() * 1}
+                      %
+                    </td>
+                    {/*<td>{Web3.utils.fromWei(pool.settleable.volume, 'ether')}</td>*/}
+                    {/* <td>
+                      {new BigNumber(
+                        Web3.utils.fromWei(pool.purchasedCurrencyOf, 'ether')
+                      )
+                        .multipliedBy(
+                          new BigNumber(
+                            Web3.utils.fromWei(pool.settleable.rate, 'ether')
+                          )
+                        )
+                        .dividedBy(new BigNumber(pool.price))
+                        .toFixed(6, 1)
+                        .toString() * 1}
+                    </td> */}
+                  </tr>
+                ) : (
+                  <tr>
+                    <td>-</td>
+                    <td>-</td>
+                    {/* <td>-</td> */}
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </div>
+        )}
+        {recordTab === 2 && (
+          <div className='pools_detail_record_box'>
+            <table className='pools_detail_record_title'>
+              <thead>
+                <tr>
+                  <td>
+                    <FormattedMessage id='unsettlement' />
+                    {pool && pool.currency.symbol}
+                  </td>
+                  <td>
+                    <FormattedMessage id='obtain' />
+                    {pool && pool.underlying.symbol + ' '}
+                    <FormattedMessage id='num' />
+                  </td>
+                  <td></td>
+                </tr>
+              </thead>
+              <tbody>
+                {(pool && pool.purchasedCurrencyOf.toString()) > 0 ? (
+                  <tr>
+                    <td>{pool && formatAmount(pool.settleable.amount)}</td>
+                    <td>{pool && formatAmount(pool.settleable.volume)}</td>
+                    <td>
+                      {pool && pool.settleable.volume > 0 && (
+                        <a
+                          className='pools_detail_record_btn'
+                          onClick={() => onClaim()}
+                        >
+                          Claim
+                        </a>
+                      )}
+                    </td>
+                  </tr>
+                ) : (
+                  <tr>
+                    <td>-</td>
+                    <td>-</td>
+                    <td></td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </div>
+        )}
       </div>
       <div className='pools_detail'>
         <div className='pools_detail_content'>

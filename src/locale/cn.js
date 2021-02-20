@@ -57,6 +57,8 @@ const zh_CN = {
   guide: '使用教程',
   bannerTitle1: '更早一步发现价值',
   certik: 'Certik审计报告',
-  partner: '合作伙伴'
+  partner: '合作伙伴',
+  productManual: '产品说明',
+  tutorial: '认购教程',
 }
 export default zh_CN
