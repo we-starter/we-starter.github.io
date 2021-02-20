@@ -7,6 +7,7 @@ import { usePoolsInfo } from './Hooks'
 import { FormattedMessage } from 'react-intl'
 import Web3 from 'web3'
 import { formatAmount } from '../../utils/format'
+import Timer from "react-compound-timer";
 
 const PoolsIndex = (props) => {
   const [listData, setListData] = useState([])
@@ -76,7 +77,19 @@ const PoolsIndex = (props) => {
       status,
       totalPurchasedAmount,
       currency,
+      start_at, // 开始时间
+      time, // 结算时间
     } = pool
+
+    let left_time = 0
+    if(status === 0) {
+      left_time = start_at * 1000 - Date.now()
+    }else if(status === 1) {
+      left_time = time * 1000 - Date.now()
+    }
+      console.log(time)
+      console.log(left_time)
+
     return (
       <div className='pools-type_card_box' key={pool.address}>
         <div className='pools-type_title'>
@@ -86,10 +99,26 @@ const PoolsIndex = (props) => {
           </p>
           <p className='pools-type_card_title_right'>
             {renderStatus(status)}
+            {
+              status < 2 && (
+                  <span className='pools-type_time'>
+              <Timer
+                  initialTime={left_time}
+                  direction="backward"
+                  formatValue={(number) => {
+                    if(number === 0) return '00'
+                    if(number < 10) {
+                      return `0${number}`
+                    }
+                    return number
+                  }}
+              >
+                <span><Timer.Consumer>{({h, d, formatValue}) => formatValue(d * 24 + h)}</Timer.Consumer></span>&nbsp;:&nbsp;<span><Timer.Minutes/></span>&nbsp;:&nbsp;<span><Timer.Seconds/></span>
+              </Timer>
+                </span>
+              )
+            }
 
-            <p className='pools-type_time'>
-              <em>12</em>&nbsp;:&nbsp;<em>12</em>&nbsp;:&nbsp;<em>12</em>
-            </p>
           </p>
         </div>
         <div className='pools-type_title'>

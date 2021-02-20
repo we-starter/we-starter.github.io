@@ -113,7 +113,7 @@
         display: flex;
         align-items: center;
         margin-bottom: 0;
-        em {
+        span {
           font-style: normal;
           display: inline-block;
           padding: 0 4px;
@@ -321,7 +321,7 @@
         display: flex;
         align-items: center;
         margin-bottom: 0;
-        em {
+        span {
           font-style: normal;
           display: inline-block;
           padding: 0 4px;
@@ -523,7 +523,7 @@
         display: flex;
         align-items: center;
         margin-bottom: 0;
-        em {
+        span {
           font-style: normal;
           display: inline-block;
           padding: 0 4px;
@@ -725,9 +725,8 @@
         display: flex;
         align-items: center;
         margin-bottom: 0;
-        em {
+        span {
           font-style: normal;
-          display: inline-block;
           padding: 0 4px;
           height: 16px;
           text-align: center;
