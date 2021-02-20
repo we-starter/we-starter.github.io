@@ -59,40 +59,6 @@ export const MenuMask = () => {
           <ul className='menumask_list'>
             <div className='menumask__menu-wrapper'>
               {active && (
-                <div className='menumask_header-account'>
-                  <div
-                    className='address'
-                    onClick={() => {
-                      dispatch({
-                        type: HANDLE_WALLET_MODAL,
-                        walletModal: 'status',
-                      })
-                    }}
-                  >
-                    {formatAddress(account)}
-                    <img src={doubleLine} />
-                  </div>
-                </div>
-              )}
-
-              {!active && (
-                <div className='pools_text_header__btn'>
-                  <button className='connect-btn'>
-                    <span
-                      onClick={() => {
-                        dispatch({
-                          type: HANDLE_WALLET_MODAL,
-                          walletModal: 'connect',
-                        })
-                      }}
-                    >
-                      <FormattedMessage id='linkWallet' />
-                    </span>
-                    <img src={dot} />
-                  </button>
-                </div>
-              )}
-              {active && (
                 <div className='menumask_ht-balance'>
                   <span></span>
                   <p>{formatAmount(balance)}</p>
@@ -161,19 +127,14 @@ export const MenuMask = () => {
               </NavLink>
             </li>
             <li className='menumask_item'>
-              <NavLink
-                exact
-                to='/information'
-                className='menumask_link'
-                onClick={() =>
-                  dispatch({
-                    type: HANDLE_SHOW_MENUMASK_MODAL,
-                    showMenuMaskModal: false,
-                  })
-                }
+              <a
+                href='https://forms.gle/n6M5tJ46KtEfEDQz9'
+                target='_blank'
+                className='menumask_item-guide menumask_link'
+                onClick={handleMenuItemClick}
               >
                 <FormattedMessage id='projectApplication' />
-              </NavLink>
+              </a>
             </li>
             {/* <li className='menumask_item'>
               <a

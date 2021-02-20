@@ -97,14 +97,14 @@ const PoolsHeader = (props) => {
                   </NavLink>
                 </li>
                 <li className='menu__item'>
-                  <NavLink
-                    exact
-                    to='/information'
+                  <a
+                    href='https://forms.gle/n6M5tJ46KtEfEDQz9'
+                    target='_blank'
                     className='menu__link'
                     onClick={handleMenuItemClick}
                   >
                     <FormattedMessage id='projectApplication' />
-                  </NavLink>
+                  </a>
                 </li>
                 {/* <li className='menu__item'>
                   <a

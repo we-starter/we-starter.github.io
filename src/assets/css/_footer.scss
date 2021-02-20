@@ -36,9 +36,6 @@
   }
 }
 @media #{$mdWidth} {
-  .footer {
-    display: none;
-  }
   .footer_wrap {
     width: 100%;
     display: flex;

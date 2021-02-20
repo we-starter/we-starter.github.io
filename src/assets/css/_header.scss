@@ -178,16 +178,6 @@
       width: 143px;
     }
 
-    @media #{$mdWidth} {
-      display: none;
-    }
-    @media #{$smWidth} {
-      display: none;
-    }
-    @media #{$xsWidth} {
-      display: none;
-    }
-
     .balance {
       width: 160px;
       text-align: right;
@@ -366,19 +356,15 @@
 
     @media (max-width: 370px) {
       position: static;
-      display: none;
     }
     @media #{$smWidth} {
       position: static;
-      display: none;
     }
     @media #{$xsWidth} {
       position: static;
-      display: none;
     }
     @media #{$mdWidth} {
       position: static;
-      display: none;
     }
     .connect-btn {
       min-width: 106px;

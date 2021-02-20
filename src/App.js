@@ -70,11 +70,11 @@ function App() {
                 path='/pools/detail/:address'
                 component={PoolsDetail}
               ></Route>
-              <Route
+              {/* <Route
                 exact
                 path='/information'
                 component={WriteInformation}
-              ></Route>
+              ></Route> */}
             </Switch>
             <InitPage />
             <Footer />
