@@ -87,8 +87,6 @@ const PoolsIndex = (props) => {
     }else if(status === 1) {
       left_time = time * 1000 - Date.now()
     }
-      console.log(time)
-      console.log(left_time)
 
     return (
       <div className='pools-type_card_box' key={pool.address}>

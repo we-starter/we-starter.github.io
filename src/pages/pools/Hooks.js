@@ -433,7 +433,7 @@ export const usePoolsInfo = (address = '') => {
                     const totalPurchasedAmount = new BigNumber(Web3.utils.toWei(pool.amount, 'ether')).multipliedBy(new BigNumber(price)).div(new BigNumber(Web3.utils.toWei('1', 'ether')))
 
                     let is_join = false
-                    if(logs.length > 0 && logs.findIndex(log => log.event === 'Purchase') > -1){
+                    if(purchasedCurrencyOf > 0){
                         is_join = true
                     }
 
