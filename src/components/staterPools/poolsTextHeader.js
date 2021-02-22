@@ -1,65 +1,65 @@
-import React, { useEffect, useContext, useState } from 'react'
-import { useActiveWeb3React } from '../../web3'
-import { formatAddress, formatAmount } from '../../utils/format'
-import { withRouter } from 'react-router'
-import { mainContext } from '../../reducer'
-import { HANDLE_WALLET_MODAL, HANDLE_SHOW_MENUMASK_MODAL } from '../../const'
-import { Link, NavLink, useLocation } from 'react-router-dom'
-import doubleLine from '../../assets/icon/check-double-line.png'
-import { Logoicon, LogoSmallIcon } from '../../icons'
-import { ReactComponent as LogoText } from '../../assets/image/logo-text.svg'
-import { ReactComponent as More } from '../../assets/icon/more.svg'
-import { FormattedMessage } from 'react-intl'
-import dot from '../../assets/icon/dot.png'
-import WeStarterPDF from '../../pdfFile/Security Assessment for WeStarter - Starter.pdf'
-import { useHTBalance } from '../../pages/Hooks'
+import React, { useEffect, useContext, useState } from 'react';
+import { useActiveWeb3React } from '../../web3';
+import { formatAddress, formatAmount } from '../../utils/format';
+import { withRouter } from 'react-router';
+import { mainContext } from '../../reducer';
+import { HANDLE_WALLET_MODAL, HANDLE_SHOW_MENUMASK_MODAL } from '../../const';
+import { Link, NavLink, useLocation } from 'react-router-dom';
+import doubleLine from '../../assets/icon/check-double-line.png';
+import { Logoicon, LogoSmallIcon } from '../../icons';
+import { ReactComponent as LogoText } from '../../assets/image/logo-text.svg';
+import { ReactComponent as More } from '../../assets/icon/more.svg';
+import { FormattedMessage } from 'react-intl';
+import dot from '../../assets/icon/dot.png';
+import WeStarterPDF from '../../pdfFile/Security Assessment for WeStarter - Starter.pdf';
+import { useHTBalance } from '../../pages/Hooks';
 
 const PoolsTextHeader = (props) => {
-  const { active, account } = useActiveWeb3React()
-  const { dispatch } = useContext(mainContext)
-  const { styleVal } = props
-  const [showMenu, setShowMenu] = useState(false)
-  const [showPoolsStarter, setShowPoolsStarter] = useState(false)
-  const location = useLocation()
-  const { balance } = useHTBalance()
+    const { active, account } = useActiveWeb3React();
+    const { dispatch } = useContext(mainContext);
+    const { styleVal } = props;
+    const [showMenu, setShowMenu] = useState(false);
+    const [showPoolsStarter, setShowPoolsStarter] = useState(false);
+    const location = useLocation();
+    const { balance } = useHTBalance();
 
-  const handleMenuItemClick = () => {
-    setShowMenu(false)
-  }
+    const handleMenuItemClick = () => {
+        setShowMenu(false);
+    };
 
-  useEffect(() => {
-    // if (props.history.location.pathname === '/pools') {
-    //   setShowPoolsStarter(true)
-    // } else {
-    //   setShowPoolsStarter(false)
-    // }
-  })
+    useEffect(() => {
+        // if (props.history.location.pathname === '/pools') {
+        //   setShowPoolsStarter(true)
+        // } else {
+        //   setShowPoolsStarter(false)
+        // }
+    });
 
-  return (
-    <header
-      className={`pools_text_header ${showMenu ? 'menu-show' : ''}`}
-      style={location.pathname === '/' ? { borderBottom: 'transparent' } : {}}
-      style={styleVal && { background: styleVal }}
-    >
-      <div className='center'>
-        <div className='pools_text_header__box'>
-          <Link to='/' className='pools_text_header__logo'>
-            <LogoText />
-          </Link>
+    return (
+        <header
+            className={`pools_text_header ${showMenu ? 'menu-show' : ''}`}
+            style={
+                location.pathname === '/' ? { borderBottom: 'transparent' } : {}
+            }
+            style={styleVal && { background: styleVal }}>
+            <div className='center'>
+                <div className='pools_text_header__box'>
+                    <Link to='/' className='pools_text_header__logo'>
+                        <LogoText />
+                    </Link>
 
-          <Link
-            to='/'
-            className={`pools_text_header__logo--small ${
-              active ? 'active' : ''
-            }`}
-          >
-            <LogoText />
-          </Link>
+                    <Link
+                        to='/'
+                        className={`pools_text_header__logo--small ${
+                            active ? 'active' : ''
+                        }`}>
+                        <LogoText />
+                    </Link>
 
-          <div className='pools_text_header__menu'>
-            <nav className='menu'>
-              <ul className='menu__list'>
-                {/* <li className='menu__item'>
+                    <div className='pools_text_header__menu'>
+                        <nav className='menu'>
+                            <ul className='menu__list'>
+                                {/* <li className='menu__item'>
                   <NavLink
                     exact
                     to='/staking-pool1'
@@ -89,101 +89,97 @@ const PoolsTextHeader = (props) => {
                     <FormattedMessage id='crowdfund' />
                   </NavLink>
                 </li> */}
-                <li className='menu__item'>
-                  <NavLink
-                    exact
-                    to='/'
-                    className='menu__link'
-                    onClick={handleMenuItemClick}
-                  >
-                    <FormattedMessage id='fundraisingPool' />
-                    <span className='menu__hot'></span>
-                  </NavLink>
-                </li>
-                <li className='menu__item'>
-                  <a
-                    href='https://forms.gle/n6M5tJ46KtEfEDQz9'
-                    target='_blank'
-                    className='menu__link'
-                    onClick={handleMenuItemClick}
-                  >
-                    <FormattedMessage id='projectApplication' />
-                  </a>
-                </li>
-                {/*<li className='menu__item'>*/}
-                {/*  <a*/}
-                {/*    href='https://www.baidu.com'*/}
-                {/*    target='_blank'*/}
-                {/*    className='menu__link'*/}
-                {/*    onClick={handleMenuItemClick}*/}
-                {/*  >*/}
-                {/*    Medium*/}
-                {/*  </a>*/}
-                {/*</li>*/}
-              </ul>
-            </nav>
-          </div>
+                                <li className='menu__item'>
+                                    <NavLink
+                                        exact
+                                        to='/'
+                                        className='menu__link'
+                                        onClick={handleMenuItemClick}>
+                                        <FormattedMessage id='fundraisingPool' />
+                                        <span className='menu__hot'></span>
+                                    </NavLink>
+                                </li>
+                                <li className='menu__item'>
+                                    <a
+                                        href='https://forms.gle/n6M5tJ46KtEfEDQz9'
+                                        target='_blank'
+                                        className='menu__link'
+                                        onClick={handleMenuItemClick}>
+                                        <FormattedMessage id='projectApplication' />
+                                    </a>
+                                </li>
+                                {/*<li className='menu__item'>*/}
+                                {/*  <a*/}
+                                {/*    href='https://www.baidu.com'*/}
+                                {/*    target='_blank'*/}
+                                {/*    className='menu__link'*/}
+                                {/*    onClick={handleMenuItemClick}*/}
+                                {/*  >*/}
+                                {/*    Medium*/}
+                                {/*  </a>*/}
+                                {/*</li>*/}
+                            </ul>
+                        </nav>
+                    </div>
 
-          <div className='pools_text_header__menu-wrapper'>
-            <a className='pools_text_header__menu-guide'>
-              <FormattedMessage id='guide' />
-            </a>{' '}
-            {/* <a className='download-pdf' href={WeStarterPDF} target='_blank'></a> */}
-            {active && (
-              <div className='ht-balance'>
-                <span></span>
-                <p>{formatAmount(balance)}</p>
-              </div>
-            )}
-            {active && (
-              <div className='pools_text_header-account'>
-                <div
-                  className='address'
-                  onClick={() => {
-                    dispatch({
-                      type: HANDLE_WALLET_MODAL,
-                      walletModal: 'status',
-                    })
-                  }}
-                >
-                  {formatAddress(account)}
-                  <img src={doubleLine} />
+                    <div className='pools_text_header__menu-wrapper'>
+                        <a className='pools_text_header__menu-guide'>
+                            <FormattedMessage id='guide' />
+                        </a>{' '}
+                        {/* <a className='download-pdf' href={WeStarterPDF} target='_blank'></a> */}
+                        {active && (
+                            <div className='ht-balance'>
+                                <span></span>
+                                <p>{formatAmount(balance)}</p>
+                            </div>
+                        )}
+                        {active && (
+                            <div className='pools_text_header-account'>
+                                <div
+                                    className='address'
+                                    onClick={() => {
+                                        dispatch({
+                                            type: HANDLE_WALLET_MODAL,
+                                            walletModal: 'status',
+                                        });
+                                    }}>
+                                    {formatAddress(account)}
+                                    <img src={doubleLine} />
+                                </div>
+                            </div>
+                        )}
+                        {!active && (
+                            <div className='pools_text_header__btn'>
+                                <button className='connect-btn'>
+                                    <span
+                                        onClick={() => {
+                                            dispatch({
+                                                type: HANDLE_WALLET_MODAL,
+                                                walletModal: 'connect',
+                                            });
+                                        }}>
+                                        <FormattedMessage id='linkWallet' />
+                                    </span>
+                                    <img src={dot} />
+                                </button>
+                            </div>
+                        )}
+                    </div>
+                    <div className='more'>
+                        <More
+                            onClick={() => {
+                                dispatch({
+                                    type: HANDLE_SHOW_MENUMASK_MODAL,
+                                    showMenuMaskModal: true,
+                                });
+                            }}
+                        />
+                    </div>
                 </div>
-              </div>
-            )}
-            {!active && (
-              <div className='pools_text_header__btn'>
-                <button className='connect-btn'>
-                  <span
-                    onClick={() => {
-                      dispatch({
-                        type: HANDLE_WALLET_MODAL,
-                        walletModal: 'connect',
-                      })
-                    }}
-                  >
-                    <FormattedMessage id='linkWallet' />
-                  </span>
-                  <img src={dot} />
-                </button>
-              </div>
-            )}
-          </div>
-          <div className='more'>
-            <More
-              onClick={() => {
-                dispatch({
-                  type: HANDLE_SHOW_MENUMASK_MODAL,
-                  showMenuMaskModal: true,
-                })
-              }}
-            />
-          </div>
-        </div>
-      </div>
-      {/* banner图 */}
-    </header>
-  )
-}
+            </div>
+            {/* banner图 */}
+        </header>
+    );
+};
 
-export default withRouter(PoolsTextHeader)
+export default withRouter(PoolsTextHeader);
