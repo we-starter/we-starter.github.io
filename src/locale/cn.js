@@ -60,5 +60,12 @@ const zh_CN = {
   partner: '合作伙伴',
   productManual: '产品说明',
   tutorial: '认购教程',
+  tableText1: '资产池',
+  tableText2: 'Token分配时间',
+  tableText3: '',
+  tableText4: '',
+  tableText5: '',
+  tableText6: '',
+  tableText7: '',
 }
 export default zh_CN

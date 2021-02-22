@@ -61,5 +61,12 @@ const en_US = {
   guide: 'Tutorial/Guide',
   productManual: '产品说明',
   tutorial: '认购教程',
+  tableText1: 'Pool Information',
+  tableText2: 'Token Distribution',
+  tableText3: '',
+  tableText4: '',
+  tableText5: '',
+  tableText6: '',
+  tableText7: '',
 }
 export default en_US

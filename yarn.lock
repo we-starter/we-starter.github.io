@@ -13680,8 +13680,8 @@ react-app-polyfill@^1.0.6:
 
 react-compound-timer@^1.2.0:
   version "1.2.0"
-  resolved "https://registry.npm.taobao.org/react-compound-timer/download/react-compound-timer-1.2.0.tgz#52df2980dce0b63ddaf5718235a51188cb223d1d"
-  integrity sha1-Ut8pgNzgtj3a9XGCNaURiMsiPR0=
+  resolved "https://registry.yarnpkg.com/react-compound-timer/-/react-compound-timer-1.2.0.tgz#52df2980dce0b63ddaf5718235a51188cb223d1d"
+  integrity sha512-BEFT0Z/+vusfAy4Ci1+G5lr8mI+dk3ddRJuu1DIYA5xGS+5P+M0o4krHmFMKgHuaIY9H3xx0KCvf3ilb1+HFWA==
 
 react-copy-to-clipboard@^5.0.3:
   version "5.0.3"
