@@ -86,7 +86,7 @@ export const Header = () => {
                     className='menu__link'
                     onClick={handleMenuItemClick}
                   >
-                    Pool
+                    <FormattedMessage id='fundraisingPool' />
                     <span className='menu__hot'></span>
                   </NavLink>
                 </li>

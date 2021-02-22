@@ -7,7 +7,7 @@ import { usePoolsInfo } from './Hooks'
 import { FormattedMessage } from 'react-intl'
 import Web3 from 'web3'
 import { formatAmount } from '../../utils/format'
-import Timer from "react-compound-timer";
+import Timer from 'react-compound-timer'
 
 const PoolsIndex = (props) => {
   const [listData, setListData] = useState([])
@@ -82,9 +82,9 @@ const PoolsIndex = (props) => {
     } = pool
 
     let left_time = 0
-    if(status === 0) {
+    if (status === 0) {
       left_time = start_at * 1000 - Date.now()
-    }else if(status === 1) {
+    } else if (status === 1) {
       left_time = time * 1000 - Date.now()
     }
 
@@ -97,31 +97,40 @@ const PoolsIndex = (props) => {
           </p>
           <p className='pools-type_card_title_right'>
             {renderStatus(status)}
-            {
-              status < 2 && (
-                  <span className='pools-type_time'>
-              <Timer
+            {status < 2 && (
+              <span className='pools-type_time'>
+                <Timer
                   initialTime={left_time}
-                  direction="backward"
+                  direction='backward'
                   formatValue={(number) => {
-                    if(number === 0) return '00'
-                    if(number < 10) {
+                    if (number === 0) return '00'
+                    if (number < 10) {
                       return `0${number}`
                     }
                     return number
                   }}
-              >
-                <span><Timer.Consumer>{({h, d, formatValue}) => formatValue(d * 24 + h)}</Timer.Consumer></span>&nbsp;:&nbsp;<span><Timer.Minutes/></span>&nbsp;:&nbsp;<span><Timer.Seconds/></span>
-              </Timer>
-                </span>
-              )
-            }
-
+                >
+                  <span>
+                    <Timer.Consumer>
+                      {({ h, d, formatValue }) => formatValue(d * 24 + h)}
+                    </Timer.Consumer>
+                  </span>
+                  &nbsp;:&nbsp;
+                  <span>
+                    <Timer.Minutes />
+                  </span>
+                  &nbsp;:&nbsp;
+                  <span>
+                    <Timer.Seconds />
+                  </span>
+                </Timer>
+              </span>
+            )}
           </p>
         </div>
         <div className='pools-type_title'>
           <p className='pools-type_card_ratio'>
-            Ratio
+            <FormattedMessage id='poolsIndexText1' />
             <i>{ratio}</i>
           </p>
           <p className='pools-type_card_ratio' style={{ textAlign: 'right' }}>
@@ -133,7 +142,7 @@ const PoolsIndex = (props) => {
         </div>
         <div className='pools-type_title'>
           <p className='pools-type_card_ratio' style={{ marginTop: '24px' }}>
-            Progress
+            <FormattedMessage id='poolsIndexText2' />
           </p>
         </div>
         <div className='pools-type_percentage'>
@@ -153,7 +162,7 @@ const PoolsIndex = (props) => {
             goDetail(address)
           }}
         >
-          Enter Pool
+          <FormattedMessage id='poolsIndexText3' />
         </a>
       </div>
     )
@@ -177,7 +186,7 @@ const PoolsIndex = (props) => {
               onClick={() => changeTab(1)}
               className={tabFlag === 1 ? 'tab_active' : ''}
             >
-              Top Pools
+              <FormattedMessage id='poolsIndexText4' />
             </h2>
             <h2
               onClick={() => changeTab(2)}

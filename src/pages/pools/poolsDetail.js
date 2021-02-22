@@ -82,7 +82,9 @@ export const PoolsDetail = (props) => {
       <div className='pools_card'>
         <div className='pools_card_content'>
           <div className='pools_card_content_title'>
-            <span>Swap Amount</span>
+            <span>
+              <FormattedMessage id='poolsDetailText1' />
+            </span>
             <span>{pool && pool.ratio}</span>
           </div>
           <div className='pools_card_val'>
@@ -110,7 +112,9 @@ export const PoolsDetail = (props) => {
             </div>
           )}
           <div className='pools_card_content_title'>
-            <span>Swap Progress</span>
+            <span>
+              <FormattedMessage id='poolsDetailText2' />
+            </span>
           </div>
           <div className='pools_card_progress__bar'>
             <span
@@ -158,14 +162,14 @@ export const PoolsDetail = (props) => {
             }
           }}
         >
-          Join Pool
+          <FormattedMessage id='poolsDetailText3' />
         </a>
         <a
           className='pools_detail_btn'
           href={`https://scan.hecochain.com/address/${address}`}
           target='_blank'
         >
-          View HECO
+          <FormattedMessage id='poolsDetailText4' />
         </a>
       </div>
       <div className='pools_detail_record'>
@@ -181,7 +185,7 @@ export const PoolsDetail = (props) => {
               onClick={() => setRecordTab(2)}
               className={cs(recordTab === 2 && 'active')}
             >
-              Claim
+              <FormattedMessage id='poolsDetailText5' />
             </a>
           )}
         </div>
@@ -270,7 +274,7 @@ export const PoolsDetail = (props) => {
                           className='pools_detail_record_btn'
                           onClick={() => onClaim()}
                         >
-                          Claim
+                          <FormattedMessage id='poolsDetailText5' />
                         </a>
                       )}
                     </td>
@@ -294,13 +298,13 @@ export const PoolsDetail = (props) => {
               onClick={() => setDetailTab('detail')}
               className={cs(detailTab === 'detail' && 'active')}
             >
-              Pool Details
+              <FormattedMessage id='poolsDetailText6' />
             </a>
             <a
               onClick={() => setDetailTab('project')}
               className={cs(detailTab === 'project' && 'active')}
             >
-              About the Project
+              <FormattedMessage id='poolsDetailText7' />
             </a>
           </div>
           {detailTab === 'detail' && (
@@ -308,14 +312,18 @@ export const PoolsDetail = (props) => {
               <table className='pools_detail_table pools-detail_table__left'>
                 <thead>
                   <tr>
-                    <th>Pool Information</th>
+                    <th>
+                      <FormattedMessage id='poolsDetailText8' />
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
                     <td>
                       <p>
-                        <span>Token Distribution</span>
+                        <span>
+                          <FormattedMessage id='poolsDetailText9' />
+                        </span>
                         <span>{pool && pool.pool_info.token_distribution}</span>
                       </p>
                     </td>
@@ -323,23 +331,22 @@ export const PoolsDetail = (props) => {
                   <tr>
                     <td>
                       <p>
-                        <span>Min. Allocation</span>
-                        <span>{pool && pool.pool_info.min_allocation}</span>
+                        <span>
+                          <FormattedMessage id='poolsDetailText10' />
+                        </span>
+                        <span>
+                          {pool && pool.pool_info.min_allocation}-
+                          {pool && pool.pool_info.max_allocation}
+                        </span>
                       </p>
                     </td>
                   </tr>
                   <tr>
                     <td>
                       <p>
-                        <span>Max. Allocation</span>
-                        <span>{pool && pool.pool_info.max_allocation}</span>
-                      </p>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <p>
-                        <span>Min Swap Level</span>
+                        <span>
+                          <FormattedMessage id='poolsDetailText11' />
+                        </span>
                         <span>{pool && pool.pool_info.min_swap_level}</span>
                       </p>
                     </td>
@@ -357,14 +364,18 @@ export const PoolsDetail = (props) => {
               <table className='pools_detail_table pools-detail_table__right'>
                 <thead>
                   <tr>
-                    <th>Token Information</th>
+                    <th>
+                      <FormattedMessage id='poolsDetailText12' />
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
                     <td>
                       <p>
-                        <span>Name</span>
+                        <span>
+                          <FormattedMessage id='poolsDetailText13' />
+                        </span>
                         <span>{pool && pool.underlying.name}</span>
                       </p>
                     </td>
@@ -372,7 +383,9 @@ export const PoolsDetail = (props) => {
                   <tr>
                     <td>
                       <p>
-                        <span>Address</span>
+                        <span>
+                          <FormattedMessage id='poolsDetailText14' />
+                        </span>
                         <span>{pool && pool.underlying.address}</span>
                       </p>
                     </td>
@@ -380,7 +393,9 @@ export const PoolsDetail = (props) => {
                   <tr>
                     <td>
                       <p>
-                        <span>Total Supply</span>
+                        <span>
+                          <FormattedMessage id='poolsDetailText15' />
+                        </span>
                         <span>{pool && pool.underlying.total_supply}</span>
                       </p>
                     </td>

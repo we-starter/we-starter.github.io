@@ -1,10 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { useWeb3React } from '@web3-react/core'
+import { FormattedMessage } from 'react-intl'
 
 import close from '../../assets/icon/close.png'
 import change from '../../assets/icon/change@2x.png'
-import {HANDLE_WALLET_MODAL} from "../../const";
-import {mainContext} from "../../reducer";
+import { HANDLE_WALLET_MODAL } from '../../const'
+import { mainContext } from '../../reducer'
 
 export const ChangeNetworks = ({ onClose }) => {
   const { dispatch } = useContext(mainContext)
@@ -22,36 +23,38 @@ export const ChangeNetworks = ({ onClose }) => {
                 style={{ marginRight: '16px', width: '24px', height: '24px' }}
                 src={change}
               />
-              You Must Change Networks
+              <FormattedMessage id='modalsText1' />
             </div>
 
             <p
               className='transction-submitted__tip'
               style={{ maxWidth: '100%' }}
             >
-              We've detected that you need to switch your wallet's network from
-              local to mainnet network for this Dapp.
+              <FormattedMessage id='modalsText2' />
             </p>
             <p
               className='transction-submitted__tip'
               style={{ maxWidth: '100%' }}
             >
-              *Some wallets may not support changing networks. If you can not
-              change networks in your wallet you may consider switching to a
-              different wallet.
+              <FormattedMessage id='modalsText3' />
             </p>
 
             <footer>
-              <p style={{ color: '#0f8c20', marginBottom: '0' }} onClick={() => {
-                onClose()
-                dispatch({
-                  type: HANDLE_WALLET_MODAL,
-                  walletModal: 'connect',
-                })
-              }}>
-                Switch Wallet
+              <p
+                style={{ color: '#0f8c20', marginBottom: '0' }}
+                onClick={() => {
+                  onClose()
+                  dispatch({
+                    type: HANDLE_WALLET_MODAL,
+                    walletModal: 'connect',
+                  })
+                }}
+              >
+                <FormattedMessage id='modalsText4' />
               </p>
-              <button className='btn'>Dismiss</button>
+              <button className='btn'>
+                <FormattedMessage id='modalsText4' />
+              </button>
             </footer>
 
             <img

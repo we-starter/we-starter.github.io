@@ -11,7 +11,10 @@ export const Banner = () => {
         <FormattedMessage id='bannerTitle1' />
       </h3>
       <h3 className='banner_text-title'>
-        <span>Live on : </span> <a href=''></a>
+        <span>
+          <FormattedMessage id='bannerText1' /> :{' '}
+        </span>{' '}
+        <a href=''></a>
       </h3>
       <p className='banner_dec'>
         <FormattedMessage id='bannerContent1' />
@@ -19,7 +22,10 @@ export const Banner = () => {
         <FormattedMessage id='bannerContent2' />
       </p>
       <div className='banner_link'>
-        <span>Live on : </span> <a href=''></a>
+        <span>
+          <FormattedMessage id='bannerText1' /> :{' '}
+        </span>{' '}
+        <a href=''></a>
       </div>
       <div className='banner_pdf'>
         <a href={WeStarterPDF} target='_blank'>
