@@ -214,5 +214,6 @@ const zh_CN = {
   noJoinPool: '你还没有参与的项目',
   comingSoon: '即将开放',
   htPublic: 'HT 已发布',
+  logoTitle1: 'WeStarter 已发布',
 }
 export default zh_CN

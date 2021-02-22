@@ -1,18 +1,24 @@
 import React, { useContext, useState } from 'react'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 import { mainContext } from '../../reducer'
+import { FormattedMessage } from 'react-intl'
 import { GALLERY_SELECT_WEB3_CONTEXT, HANDLE_WALLET_MODAL } from '../../const'
 import { injectIntl } from 'react-intl'
 import { message } from 'antd'
+import { useActiveWeb3React } from '../../web3'
 
 const PoolsBanner = (props) => {
+  const { active, account } = useActiveWeb3React()
   const { intl } = props
   const { address, pool } = props
   const { dispatch, state } = useContext(mainContext)
   return (
     <div className='pools_banner'>
       <div className='pools_banner_img'></div>
-      <h3 className='pools_banner_text'>WeStarter Public</h3>
+      <h3 className='pools_banner_text'>
+        {active && <FormattedMessage id='logoTitle1' />}
+        {!active && <FormattedMessage id='htPublic' />}
+      </h3>
       <p className='pools_banner_dec'>
         {address}
         <CopyToClipboard

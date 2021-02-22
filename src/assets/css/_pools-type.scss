@@ -1,12 +1,21 @@
 .pools-type {
   width: 100%;
-  min-height: 800px;
+  // min-height: 800px;
   p {
     margin-bottom: 0;
   }
 }
 @media #{$desktop} {
   .pools-type {
+    &_big_title {
+      display: block;
+      margin: 20px 0 40px;
+      height: 50px;
+      font-size: 42px;
+      color: #0f8c20 !important;
+      line-height: 50px;
+      text-align: center;
+    }
     &-top {
       width: 100%;
       min-height: 800px;
@@ -209,12 +218,25 @@
       &:hover {
         color: #fff;
       }
+    }
+    &_disable_enter {
+      color: #fff;
+      background: #b6b9bc;
     }
   }
 }
 @media #{$mdWidth} {
   .pools-type {
     min-width: 1080px;
+    &_big_title {
+      display: block;
+      margin: 20px 0 40px;
+      height: 50px;
+      font-size: 42px;
+      color: #0f8c20 !important;
+      line-height: 50px;
+      text-align: center;
+    }
     &-top {
       width: 100%;
       min-height: 800px;
@@ -418,10 +440,23 @@
         color: #fff;
       }
     }
+    &_disable_enter {
+      color: #fff;
+      background: #b6b9bc;
+    }
   }
 }
 @media #{$smWidth} {
   .pools-type {
+    &_big_title {
+      display: block;
+      margin: 20px 0 40px;
+      height: 50px;
+      font-size: 42px;
+      color: #0f8c20 !important;
+      line-height: 50px;
+      text-align: center;
+    }
     &-top {
       width: 100%;
       background: #f2f0eb;
@@ -620,10 +655,23 @@
         color: #fff;
       }
     }
+    &_disable_enter {
+      color: #fff;
+      background: #b6b9bc;
+    }
   }
 }
 @media #{$xsWidth} {
   .pools-type {
+    &_big_title {
+      display: block;
+      margin: 20px 0 40px;
+      height: 50px;
+      font-size: 42px;
+      color: #0f8c20 !important;
+      line-height: 50px;
+      text-align: center;
+    }
     &-top {
       width: 100%;
       background: #f2f0eb;
@@ -820,6 +868,10 @@
       &:hover {
         color: #fff;
       }
+    }
+    &_disable_enter {
+      color: #fff;
+      background: #b6b9bc;
     }
   }
 }

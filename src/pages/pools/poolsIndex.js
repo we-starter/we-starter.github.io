@@ -12,11 +12,13 @@ import Timer from 'react-compound-timer'
 const PoolsIndex = (props) => {
   const [listData, setListData] = useState([])
   const [tabFlag, setTabFlag] = useState(1)
+  const [disableFlag, setDisableFlag] = useState(true)
   const changeTab = (val) => {
     setTabFlag(val)
   }
 
   const pools = usePoolsInfo()
+  console.log(pools, 'pools')
   const setData = async () => {
     switch (tabFlag) {
       case 1:
@@ -172,11 +174,52 @@ const PoolsIndex = (props) => {
       <div className='pools-type_noData'>
         <img src={noDataPng} />
         <p>
-          <FormattedMessage id='noData' />
+          {tabFlag === 1 && <FormattedMessage id='noData' />}
+          {tabFlag === 2 && <FormattedMessage id='noJoinPool' />}
         </p>
       </div>
     )
   }
+  const noLogin = () => {
+    return (
+      <div className='pools-type_card_box'>
+        <h1 className='pools-type_big_title'>
+          <FormattedMessage id='comingSoon' />
+        </h1>
+        <div className='pools-type_title'>
+          <p className='pools-type_card_ratio' style={{ marginTop: '24px' }}>
+            <FormattedMessage id='poolsIndexText2' />
+          </p>
+        </div>
+        <div className='pools-type_percentage'>
+          <a>
+            <i
+              className='pools-type_progress_bar'
+              style={{
+                width: `${10}%`,
+              }}
+            ></i>
+          </a>
+          <p>10%</p>
+        </div>
+        <a
+          className={cs(
+            'pools-type_enter',
+            disableFlag && 'pools-type_disable_enter'
+          )}
+          style={{
+            marginTop: '40px',
+          }}
+          onClick={() => {
+            goDetail()
+          }}
+        >
+          <FormattedMessage id='poolsIndexText3' />
+        </a>
+      </div>
+    )
+  }
+
   return (
     <div className='pools-type'>
       <div className='pools-type-top'>
@@ -200,15 +243,16 @@ const PoolsIndex = (props) => {
               listData.map((pool) => {
                 return renderCard(pool)
               })}
-            {!listData.length && noData()}
+            {tabFlag === 2 && !listData.length && noData()}
+            {!listData.length && noLogin()}
           </div>
         </div>
       </div>
-      <div className='pools-type-bottom'>
+      {/* <div className='pools-type-bottom'>
         <h2>
           <FormattedMessage id='partner' />
         </h2>
-      </div>
+      </div> */}
     </div>
   )
 }

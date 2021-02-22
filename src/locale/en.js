@@ -215,5 +215,6 @@ const en_US = {
   noJoinPool: "You haven't joined any pool",
   comingSoon: 'Coming soon',
   htPublic: 'HT Public',
+  logoTitle1: 'WeStarter Public',
 }
 export default en_US
