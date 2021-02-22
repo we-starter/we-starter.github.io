@@ -256,7 +256,7 @@ const PoolsIndex = (props) => {
               ):
               (
                   <>
-                    {!isLogin && [1,2,3].map(noLogin)}
+                    {(!isLogin && tabFlag === 1) ?  [1,2,3].map(noLogin) : noData()}
                   </>
               )
             }
