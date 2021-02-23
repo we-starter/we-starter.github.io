@@ -438,7 +438,7 @@ export const PoolsDetail = (props) => {
                 {pool && pool.twitter}
               </a>
               <a>
-                <FormattedMessage id='aboutProject' />
+                <FormattedMessage id='bannerContent' />
               </a>
             </div>
           )}
