@@ -107,7 +107,7 @@ const PoolsIndex = (props) => {
 
     return (
       <div
-        className='pools-type_card_box'
+        className='pools-type_card_box pools-type_card_box_border'
         onClick={goFinance}
         key={pool.address}
       >

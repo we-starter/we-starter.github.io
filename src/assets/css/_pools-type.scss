@@ -5,6 +5,13 @@
     margin-bottom: 0;
   }
 }
+.pools-type_card_box_border {
+  box-sizing: border-box;
+  &:hover {
+    cursor: pointer;
+    border: 1px solid #0f8c20;
+  }
+}
 @media #{$desktop} {
   .pools-type {
     &_big_title {
@@ -83,6 +90,8 @@
     &_card {
       margin-top: 30px;
       .pools-type_card_box {
+        overflow: hidden;
+        box-sizing: border-box;
         display: inline-block;
         margin-top: 20px;
         padding: 30px 30px 40px 30px;
@@ -304,6 +313,8 @@
     &_card {
       margin-top: 30px;
       .pools-type_card_box {
+        overflow: hidden;
+        box-sizing: border-box;
         display: inline-block;
         margin-top: 20px;
         padding: 30px 30px 40px 30px;
@@ -522,6 +533,8 @@
     &_card {
       margin-top: 10px;
       .pools-type_card_box {
+        overflow: hidden;
+        box-sizing: border-box;
         display: block;
         margin: 20px auto 0;
         padding: 30px 30px 40px 30px;
@@ -737,6 +750,8 @@
     &_card {
       margin-top: 10px;
       .pools-type_card_box {
+        overflow: hidden;
+        box-sizing: border-box;
         display: block;
         margin: 20px auto 0;
         padding: 30px 30px 40px 30px;

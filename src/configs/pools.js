@@ -28,7 +28,7 @@ export default [
     twitter: '-',
     progress: 0,
     status: 4,
-    ratio: '--',
+    ratio: '1HT=/',
     time: '1614441600',
     purchasedCurrencyOf: 0,
     totalPurchasedAmount: '12500000000000000000000',
