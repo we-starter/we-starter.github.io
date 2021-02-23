@@ -251,6 +251,7 @@ const PoolsIndex = (props) => {
                           listData.map((pool) => {
                             return renderCard(pool)
                           })}
+                          {tabFlag === 1 && [1,2].map(noLogin)}
                           {tabFlag === 2 && !listData.length && noData()}
                         </>
                     ):

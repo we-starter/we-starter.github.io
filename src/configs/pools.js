@@ -19,8 +19,8 @@ export default [
     amount: '10000',
     pool_info: {
       token_distribution: '-',
-      min_allocation: '-',
-      max_allocation: '-',
+      min_allocation: '',
+      max_allocation: '',
       min_swap_level: '-',
     },
     website: '-',
