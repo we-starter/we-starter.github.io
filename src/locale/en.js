@@ -23,11 +23,11 @@ const en_US = {
   winningAmount: 'Expected Lot Winning Amounts',
   unsettlement: 'Unsettled',
   obtain: 'Obtain ',
-  comingSoon: 'coming soon',
+  comingSoon1: 'coming soon',
   recruit: 'fundraising undergoing',
   settlement: 'calculating',
   completed: 'completed',
-  totalRaised: 'total funds raised',
+  totalRaised: 'Total funds raised',
   totalMortgage: 'total assets collateralized',
   myMortgage: 'my collateral',
   balance: 'balance',
@@ -215,7 +215,7 @@ const en_US = {
   noJoinPool: "You haven't joined any pool",
   comingSoon: 'Coming soon',
   htPublic: 'HT Public',
-  logoTitle1: 'WeStarter Public',
+  logoTitle1: 'Matter Public',
   aboutProject:
     'Westarter is a platform to bridge cryptocurrency innovators and investors, any innovator can use a standardized interface to launch and manage liquidity bids without a permit.',
 }

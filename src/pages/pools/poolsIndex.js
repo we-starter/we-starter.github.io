@@ -4,6 +4,7 @@ import { withRouter } from 'react-router'
 import HUSD from '../../assets/icon/HUSD@2x.png'
 import noDataPng from '../../assets/icon/noData@2x.png'
 import { usePoolsInfo } from './Hooks'
+import pool from '../../configs/pools'
 import { FormattedMessage } from 'react-intl'
 import Web3 from 'web3'
 import { formatAmount } from '../../utils/format'
@@ -21,7 +22,8 @@ const PoolsIndex = (props) => {
 
   const { account, active, library } = useActiveWeb3React()
 
-  const pools = usePoolsInfo()
+  // const pools = usePoolsInfo()
+  const pools = pool
   console.log(pools, 'pools')
   const setData = async () => {
     switch (tabFlag) {
@@ -51,7 +53,7 @@ const PoolsIndex = (props) => {
       case 0:
         return (
           <span className='pools-type_coming_status'>
-            <FormattedMessage id='comingSoon' />
+            <FormattedMessage id='comingSoon1' />
           </span>
         )
       case 1:

@@ -23,7 +23,7 @@ const zh_CN = {
   winningAmount: '预计中签量',
   unsettlement: '未结算',
   obtain: '获取',
-  comingSoon: '即将上线',
+  comingSoon1: '即将上线',
   recruit: '募集中',
   settlement: '结算中',
   completed: '已完成',
@@ -214,7 +214,7 @@ const zh_CN = {
   noJoinPool: '你还没有参与的项目',
   comingSoon: '即将开放',
   htPublic: 'HT 已发布',
-  logoTitle1: 'WeStarter 已发布',
+  logoTitle1: 'MATTER 公开众筹池',
   aboutProject:
     'Westarter是一个连接加密货币创新者和投资者的对接平台，任何创新者都可以无需许可的使用标准化的界面来发起和管理流动性拍卖。',
 }

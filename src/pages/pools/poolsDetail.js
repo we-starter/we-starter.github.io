@@ -29,17 +29,17 @@ export const PoolsDetail = (props) => {
   const { intl } = props
 
   const { account, active, library, chainId } = useActiveWeb3React()
-  const pools = usePoolsInfo(address)
+  // const pools = usePoolsInfo(address)
 
   const [detailTab, setDetailTab] = useState('detail')
   const [recordTab, setRecordTab] = useState(1)
-  const [pool, setPool] = useState(null)
+  const [pool, setPool] = useState(pools[0])
 
   const { dispatch } = useContext(mainContext)
 
-  useEffect(() => {
-    setPool(pools.pop())
-  }, [pools, address])
+  // useEffect(() => {
+  //   setPool(pools.pop())
+  // }, [pools, address])
 
   const onClaim = () => {
     getContract(library, Starter, address)
@@ -92,7 +92,7 @@ export const PoolsDetail = (props) => {
           </div>
           {pool && pool.status === 0 && (
             <div className='pools_card_start'>
-              <FormattedMessage id='comingSoon' />
+              <FormattedMessage id='comingSoon1' />
               ...
             </div>
           )}
