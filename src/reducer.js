@@ -92,7 +92,7 @@ const ContextProvider = (props) => {
     txStatus: null,
     pool: null,
     showMenuMaskModal: false,
-    locale: 'zh',
+    locale: 'en',
     changeNetworkStatus: false,
   })
   return (

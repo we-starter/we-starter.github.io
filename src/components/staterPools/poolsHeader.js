@@ -1,5 +1,6 @@
 import React, { useEffect, useContext, useState } from 'react'
 import { useActiveWeb3React } from '../../web3'
+import globe from '../../assets/icon/globe.png'
 import { formatAddress, formatAmount } from '../../utils/format'
 import { withRouter } from 'react-router'
 import { mainContext } from '../../reducer'
@@ -13,20 +14,27 @@ import dot from '../../assets/icon/dot.png'
 import PoolsBanner from '../banner/PoolsBanner'
 import { FormattedMessage } from 'react-intl'
 import Form from 'antd/lib/form/Form'
+import { CHANGE_LOCALE } from '../../const'
 import { useHTBalance } from '../../pages/Hooks'
 
 const PoolsHeader = (props) => {
   const { active, account } = useActiveWeb3React()
-  const { dispatch } = useContext(mainContext)
+  const { dispatch, state } = useContext(mainContext)
 
   const [showMenu, setShowMenu] = useState(false)
   const [showPoolsStarter, setShowPoolsStarter] = useState(false)
   const location = useLocation()
+  const [language, setLanguage] = useState(
+    (state.locale === 'en' && 'English') || (state.locale === 'zh' && 'ZH-CH')
+  )
   const { balance } = useHTBalance(account)
   const handleMenuItemClick = () => {
     setShowMenu(false)
   }
-
+  useEffect(() => {
+    if (state.locale === 'en') setLanguage('English')
+    if (state.locale === 'zh') setLanguage('ZH-CH')
+  }, [state.locale])
   useEffect(() => {
     // if (props.history.location.pathname === '/pools') {
     //   setShowPoolsStarter(true)
@@ -34,6 +42,14 @@ const PoolsHeader = (props) => {
     //   setShowPoolsStarter(false)
     // }
   })
+  const tabLanguage = (val) => {
+    if (val === 'en') setLanguage('English')
+    if (val === 'zh') setLanguage('ZH-CH')
+    dispatch({
+      type: CHANGE_LOCALE,
+      locale: val,
+    })
+  }
 
   return (
     <header
@@ -106,25 +122,43 @@ const PoolsHeader = (props) => {
                     <FormattedMessage id='projectApplication' />
                   </a>
                 </li>
-                {/* <li className='menu__item'>
+                <li className='menu__item'>
+                  <a
+                    href='https://medium.com/@westarter'
+                    target='_blank'
+                    className='menu__link'
+                    onClick={handleMenuItemClick}
+                  >
+                    <FormattedMessage id='productManual' />
+                  </a>
+                </li>
+                <li className='menu__item'>
                   <a
                     href='https://www.baidu.com'
                     target='_blank'
                     className='menu__link'
                     onClick={handleMenuItemClick}
                   >
-                    Medium
+                    <FormattedMessage id='guide' />
                   </a>
-                </li> */}
+                </li>
               </ul>
             </nav>
           </div>
 
           <div className='pools_header__menu-wrapper'>
-            <a className='pools_header__menu-guide'>
-              <FormattedMessage id='guide' />
-            </a>{' '}
             {/* <a className='download-pdf'></a> */}
+            <div className='language' style={{ marginRight: '16px' }}>
+              <img src={globe} alt='' />
+              {language}
+              <div
+                className='language-items'
+                style={{ top: '80%', bottom: 'auto' }}
+              >
+                <p onClick={() => tabLanguage('en')}>English</p>
+                <p onClick={() => tabLanguage('zh')}>中文简体</p>
+              </div>
+            </div>
             {active && (
               <div className='ht-balance'>
                 <span></span>

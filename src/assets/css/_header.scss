@@ -333,6 +333,9 @@
       margin-right: 0;
       @media #{$mdWidth} {
         display: block;
+        .language {
+          display: none !important;
+        }
       }
 
       a {

@@ -1,5 +1,6 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useActiveWeb3React } from '../../web3'
+import globe from '../../assets/icon/globe.png'
 import { formatAddress, formatAmount } from '../../utils/format'
 import { mainContext } from '../../reducer'
 import { HANDLE_WALLET_MODAL, HANDLE_SHOW_MENUMASK_MODAL } from '../../const'
@@ -11,20 +12,38 @@ import { ReactComponent as More } from '../../assets/icon/more.svg'
 import dot from '../../assets/icon/dot.png'
 import { Banner } from '../banner/Banner'
 import { useHTBalance } from '../../pages/Hooks'
+import { CHANGE_LOCALE } from '../../const'
 
 import { FormattedMessage } from 'react-intl'
 
 export const Header = () => {
   const { active, account } = useActiveWeb3React()
-  const { dispatch } = useContext(mainContext)
+  const { dispatch, state } = useContext(mainContext)
   const { balance } = useHTBalance()
+  const [language, setLanguage] = useState(
+    (state.locale === 'en' && 'English') || (state.locale === 'zh' && 'ZH-CH')
+  )
 
   const [showMenu, setShowMenu] = useState(false)
   const [showPoolsStarter, setShowPoolsStarter] = useState(false)
   const location = useLocation()
 
+  useEffect(() => {
+    if (state.locale === 'en') setLanguage('English')
+    if (state.locale === 'zh') setLanguage('ZH-CH')
+  }, [state.locale])
+
   const handleMenuItemClick = () => {
     setShowMenu(false)
+  }
+
+  const tabLanguage = (val) => {
+    if (val === 'en') setLanguage('English')
+    if (val === 'zh') setLanguage('ZH-CH')
+    dispatch({
+      type: CHANGE_LOCALE,
+      locale: val,
+    })
   }
 
   return (
@@ -100,6 +119,26 @@ export const Header = () => {
                     <FormattedMessage id='projectApplication' />
                   </a>
                 </li>
+                <li className='menu__item'>
+                  <a
+                    href='https://medium.com/@westarter'
+                    target='_blank'
+                    className='menu__link'
+                    onClick={handleMenuItemClick}
+                  >
+                    <FormattedMessage id='productManual' />
+                  </a>
+                </li>
+                <li className='menu__item'>
+                  <a
+                    href='https://www.baidu.com'
+                    target='_blank'
+                    className='menu__link'
+                    onClick={handleMenuItemClick}
+                  >
+                    <FormattedMessage id='guide' />
+                  </a>
+                </li>
                 {/* <li className='menu__item'>
                                     <NavLink
                                         exact
@@ -141,9 +180,17 @@ export const Header = () => {
           </div>
 
           <div className='header__menu-wrapper'>
-            <a className='header__menu-guide'>
-              <FormattedMessage id='guide' />
-            </a>
+            <div className='language' style={{ marginRight: '16px' }}>
+              <img src={globe} alt='' />
+              {language}
+              <div
+                className='language-items'
+                style={{ top: '80%', bottom: 'auto' }}
+              >
+                <p onClick={() => tabLanguage('en')}>English</p>
+                <p onClick={() => tabLanguage('zh')}>中文简体</p>
+              </div>
+            </div>
             {active && (
               <div className='ht-balance'>
                 <span></span>

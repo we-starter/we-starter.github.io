@@ -8,18 +8,14 @@ import { FormattedMessage } from 'react-intl'
 import Web3 from 'web3'
 import { formatAmount } from '../../utils/format'
 import Timer from 'react-compound-timer'
-import {useActiveWeb3React} from "../../web3";
 
 const PoolsIndex = (props) => {
   const [listData, setListData] = useState([])
   const [tabFlag, setTabFlag] = useState(1)
   const [disableFlag, setDisableFlag] = useState(true)
-  const [isLogin, setIsLogin] = useState(false)
   const changeTab = (val) => {
     setTabFlag(val)
   }
-
-  const {account, active, library} = useActiveWeb3React()
 
   const pools = usePoolsInfo()
   console.log(pools, 'pools')
@@ -38,8 +34,7 @@ const PoolsIndex = (props) => {
 
   useEffect(() => {
     setData()
-    setIsLogin(active)
-  }, [tabFlag, pools, active])
+  }, [tabFlag, pools])
 
   // 列表查看详情
   const goDetail = (address) => {
@@ -185,9 +180,9 @@ const PoolsIndex = (props) => {
       </div>
     )
   }
-  const noLogin = (index) => {
+  const noLogin = () => {
     return (
-      <div className='pools-type_card_box' key={`nologin${index}`}>
+      <div className='pools-type_card_box'>
         <h1 className='pools-type_big_title'>
           <FormattedMessage id='comingSoon' />
         </h1>
@@ -201,11 +196,11 @@ const PoolsIndex = (props) => {
             <i
               className='pools-type_progress_bar'
               style={{
-                width: `0%`,
+                width: `${10}%`,
               }}
             ></i>
           </a>
-          <p>0%</p>
+          <p>10%</p>
         </div>
         <a
           className={cs(
@@ -216,7 +211,7 @@ const PoolsIndex = (props) => {
             marginTop: '40px',
           }}
           onClick={() => {
-            // goDetail()
+            goDetail()
           }}
         >
           <FormattedMessage id='poolsIndexText3' />
@@ -244,22 +239,12 @@ const PoolsIndex = (props) => {
             </h2>
           </div>
           <div className='pools-type_card'>
-            {
-              isLogin ? (
-                  <>
-                    {listData &&
-                    listData.map((pool) => {
-                      return renderCard(pool)
-                    })}
-                    {tabFlag === 2 && !listData.length && noData()}
-                  </>
-              ):
-              (
-                  <>
-                    {(!isLogin && tabFlag === 1) ?  [1,2,3].map(noLogin) : noData()}
-                  </>
-              )
-            }
+            {listData &&
+              listData.map((pool) => {
+                return renderCard(pool)
+              })}
+            {tabFlag === 2 && !listData.length && noData()}
+            {!listData.length && noLogin()}
           </div>
         </div>
       </div>

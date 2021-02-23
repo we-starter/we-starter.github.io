@@ -76,14 +76,14 @@ const Footer = (props) => {
             </a>
           </li>
         </ul>
-        <div className='language'>
+        {/* <div className='language'>
           <img src={globe} alt='' />
           {language}
           <div className='language-items'>
             <p onClick={() => tabLanguage('en')}>English</p>
             <p onClick={() => tabLanguage('zh')}>中文简体</p>
           </div>
-        </div>
+        </div> */}
       </div>
     </footer>
   )

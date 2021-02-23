@@ -216,5 +216,7 @@ const en_US = {
   comingSoon: 'Coming soon',
   htPublic: 'HT Public',
   logoTitle1: 'WeStarter Public',
+  aboutProject:
+    'Westarter is a platform to bridge cryptocurrency innovators and investors, any innovator can use a standardized interface to launch and manage liquidity bids without a permit.',
 }
 export default en_US

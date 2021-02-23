@@ -61,7 +61,7 @@ const zh_CN = {
   bannerTitle1: '更早一步发现价值',
   certik: 'Certik审计报告',
   partner: '合作伙伴',
-  productManual: '产品说明',
+  productManual: '产品简介',
   tutorial: '认购教程',
   poolsDetailText1: 'Swap Amount',
   poolsDetailText2: 'Swap Progress',
@@ -215,5 +215,7 @@ const zh_CN = {
   comingSoon: '即将开放',
   htPublic: 'HT 已发布',
   logoTitle1: 'WeStarter 已发布',
+  aboutProject:
+    'Westarter是一个连接加密货币创新者和投资者的对接平台，任何创新者都可以无需许可的使用标准化的界面来发起和管理流动性拍卖。',
 }
 export default zh_CN

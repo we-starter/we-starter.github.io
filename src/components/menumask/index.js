@@ -146,12 +146,6 @@ export const MenuMask = () => {
                 Medium
               </a>
             </li> */}
-            <li className='menumask_item'>
-              <a className='menumask_item-guide menumask_link'>
-                <FormattedMessage id='guide' />
-              </a>
-              {/* <a className='menumask_download-pdf'></a> */}
-            </li>
             {/* <li className='menumask_item'>
                             <NavLink
                                 to='/'
@@ -255,14 +249,18 @@ export const MenuMask = () => {
           <ul className='menumask_list' style={{ borderBottom: 'none' }}>
             <li className='menumask_item' style={{ margin: '10px 0' }}>
               <a
+                href='https://medium.com/@westarter'
+                target='_blank'
                 className='menumask_item-guide menumask_link'
                 style={{ color: '#7A7F82' }}
               >
-                <FormattedMessage id='guide' />
+                <FormattedMessage id='productManual' />
               </a>
             </li>
             <li className='menumask_item' style={{ margin: '10px 0' }}>
               <a
+                href='https://www.baidu.com'
+                target='_blank'
                 className='menumask_item-guide menumask_link'
                 style={{ color: '#7A7F82' }}
               >
