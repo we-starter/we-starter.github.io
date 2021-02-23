@@ -1,72 +1,61 @@
 .menu {
+  white-space: nowrap;
 
-	white-space: nowrap;
+  &__list {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 0;
 
-	&__list {
+    @media #{$mdWidth} {
+      display: block;
+    }
+  }
 
-		display: flex;
-		justify-content: center;
+  &__item {
+    margin-right: 30px;
 
-		@media #{$mdWidth} {
+    @media #{$mdWidth} {
+      margin: 36px 0;
+    }
+  }
 
-			display: block;
+  &__link {
+    position: relative;
+    font-size: 15px;
+    font-weight: 500;
+    color: inherit;
+    display: block;
+    transform: var(--transitionDefault);
 
-		}
+    &.is-current {
+      color: rgba(15, 140, 32, 1);
+      pointer-events: none;
+    }
 
-	}
+    &.router-link-exact-active,
+    &.router-link-active {
+      color: var(--yellow);
+      pointer-events: none;
+    }
 
-	&__item {
+    @media #{$desktop} {
+      &:hover {
+        color: color(var(--color) a(50%));
+      }
+    }
 
-		margin-right: 48px;
-
-		@media #{$mdWidth} {
-
-			margin: 36px 0;
-
-		}
-
-	}
-
-	&__link {
-
-		font-size: 15px;
-		font-weight: 500;
-		color: inherit;
-		display: block;
-        transform: var(--transitionDefault);
-        
-        &.is-current{
-
-			color: rgba(15, 140, 32, 1);
-			pointer-events: none;
-
-		}
-		
-		&.router-link-exact-active,
-		&.router-link-active {
-
-			color: var(--yellow);
-			pointer-events: none;
-
-		}
-
-		@media #{$desktop} {
-
-			&:hover {
-
-				color: color(var(--color) a(50%));
-
-			}
-
-		}
-
-		@media #{$mdWidth} {
-
-			font-size: 20px;
-			text-align: center;
-
-		}
-
-	}
-
+    @media #{$mdWidth} {
+      font-size: 20px;
+      text-align: center;
+    }
+  }
+  &__hot {
+    position: absolute;
+    top: -22px;
+    right: -34px;
+    width: 46px;
+    height: 26px;
+    background: url('../icon/HOT@2x.png') no-repeat;
+    background-size: 100% 100%;
+  }
 }

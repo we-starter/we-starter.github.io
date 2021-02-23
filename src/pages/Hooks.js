@@ -1,7 +1,7 @@
 import {useState, useEffect} from 'react';
 import StakingRewardsV2 from '../web3/abi/StakingRewardsV2.json'
 import ERC20 from '../web3/abi/ERC20.json'
-import {getContract, useActiveWeb3React} from "../web3";
+import {getContract, getWeb3, useActiveWeb3React} from "../web3";
 import {getGLFStakingAddress} from "../web3/address";
 
 export const useGLFBalance = () =>{
@@ -32,10 +32,11 @@ export const useBalance = (address) =>{
     const [ balance, setBalance] = useState()
 
     useEffect(()=>{
+        console.log(active)
         if(active){
             try{
                 const contract = getContract(library, ERC20.abi, address)
-                console.log('token totalSupply:',address)
+                console.log('token address:',address)
                 contract.methods.balanceOf(account).call().then(res =>{
                     console.log('token totalSupply:',res)
                     setBalance(res)
@@ -47,6 +48,36 @@ export const useBalance = (address) =>{
 
         }
     },[active])
+
+    return {balance}
+}
+
+export const useHTBalance = () =>{
+    const {account, active, library} = useActiveWeb3React()
+    const [blockNumber, setBlockNumber] = useState(0)
+    const [ balance, setBalance] = useState(0)
+
+    useEffect(() => {
+
+        const updateBlockNumber = (blockNumber) => {
+            console.log('block update')
+            setBlockNumber(blockNumber)
+        }
+
+        if(library){
+
+            library.once('block', updateBlockNumber)
+
+            const web3 = getWeb3(library);
+            web3.eth.getBalance(account).then(balance => {
+                setBalance(balance)
+            })
+        }
+
+        return () => {
+            library && library.off('block', updateBlockNumber)
+        }
+    }, [active, blockNumber])
 
     return {balance}
 }

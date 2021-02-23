@@ -1,25 +1,30 @@
-import React, { useState, useCallback } from "react";
-import { Slider, makeStyles } from "@material-ui/core";
-import Cropper from "react-easy-crop";
+import React, { useState, useCallback } from 'react';
+import { Slider, makeStyles } from '@material-ui/core';
+import Cropper from 'react-easy-crop';
+import { FormattedMessage } from 'react-intl';
 
-import { CrossModalIcon, ZoomInIcon, ZoomOutIcon } from "../../icons";
-import getCroppedImg from "../../utils/crop-image";
+import { CrossModalIcon, ZoomInIcon, ZoomOutIcon } from '../../icons';
+import getCroppedImg from '../../utils/crop-image';
 
 const useStyles = makeStyles(() => ({
     slider: {
-        color: "#fad06a"
+        color: '#fad06a',
     },
     thumb: {
-        height: "16px",
-        width: "16px",
-        marginTop: "-7px",
-        "&:hover": {
-            boxShadow: "0px 0px 0px 10px rgba(250, 208, 106, 0.24)"
-        }
-    }
+        height: '16px',
+        width: '16px',
+        marginTop: '-7px',
+        '&:hover': {
+            boxShadow: '0px 0px 0px 10px rgba(250, 208, 106, 0.24)',
+        },
+    },
 }));
 
-export const CropImageModal = ({ setCropModalOpen, tempImage, setCroppedImage }) => {
+export const CropImageModal = ({
+    setCropModalOpen,
+    tempImage,
+    setCroppedImage,
+}) => {
     const classes = useStyles();
 
     const [crop, setCrop] = useState({ x: 0, y: 0 });
@@ -32,23 +37,26 @@ export const CropImageModal = ({ setCropModalOpen, tempImage, setCroppedImage })
 
     const applyCroppedImage = useCallback(async () => {
         try {
-            const croppedImage = await getCroppedImg(tempImage, croppedAreaPixels);
+            const croppedImage = await getCroppedImg(
+                tempImage,
+                croppedAreaPixels
+            );
             setCroppedImage(croppedImage);
         } catch (e) {
-            console.error("ERROR: ", e);
+            console.error('ERROR: ', e);
         }
         setCropModalOpen(false);
     }, [croppedAreaPixels]);
 
     return (
-        <div className="modal">
-            <div className="modal__box">
-                <div className="modal__item">
-                    <div className="form-crop form-app">
-                        <h3 className="modal__title h3">
-                            Create an Artwork Preview
+        <div className='modal'>
+            <div className='modal__box'>
+                <div className='modal__item'>
+                    <div className='form-crop form-app'>
+                        <h3 className='modal__title h3'>
+                            <FormattedMessage id='modalsText17' />
                         </h3>
-                        <div className="form-crop__container">
+                        <div className='form-crop__container'>
                             <Cropper
                                 image={tempImage}
                                 crop={crop}
@@ -59,12 +67,12 @@ export const CropImageModal = ({ setCropModalOpen, tempImage, setCroppedImage })
                                 onZoomChange={setZoom}
                             />
                         </div>
-                        <div className="form-crop__slider">
+                        <div className='form-crop__slider'>
                             <ZoomOutIcon />
                             <Slider
                                 classes={{
                                     root: classes.slider,
-                                    thumb: classes.thumb
+                                    thumb: classes.thumb,
                                 }}
                                 value={zoom}
                                 min={1}
@@ -74,20 +82,18 @@ export const CropImageModal = ({ setCropModalOpen, tempImage, setCroppedImage })
                             />
                             <ZoomInIcon />
                         </div>
-                        <div className="form-app__submit">
+                        <div className='form-app__submit'>
                             <button
-                                type="button"
-                                className="btn btn--medium"
-                                onClick={applyCroppedImage}
-                            >
-                                Apply
+                                type='button'
+                                className='btn btn--medium'
+                                onClick={applyCroppedImage}>
+                                <FormattedMessage id='modalsText18' />
                             </button>
                         </div>
                         <button
-                            type="button"
-                            className="form-app__close-btn button"
-                            onClick={() => setCropModalOpen(false)}
-                        >
+                            type='button'
+                            className='form-app__close-btn button'
+                            onClick={() => setCropModalOpen(false)}>
                             <CrossModalIcon />
                         </button>
                     </div>

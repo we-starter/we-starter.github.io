@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import {formatAmount, numToWei} from '../../utils/format';
+import { formatAmount, numToWei } from '../../utils/format';
 import {
     HANDLE_SHOW_CONNECT_MODAL,
     HANDLE_SHOW_FAILED_TRANSACTION_MODAL,
@@ -18,7 +18,8 @@ import ERC20 from '../../web3/abi/ERC20.json';
 import StakingReward from '../../web3/abi/StakingReward.json';
 import { StakeModal, WithdrawModal } from '../../components/Modals';
 import WAR from '../../assets/logo/war.svg';
-import BigNumber from "bignumber.js";
+import BigNumber from 'bignumber.js';
+import { FormattedMessage } from 'react-intl';
 
 export const StakingItem = ({ info, double }) => {
     const { account, active, library } = useActiveWeb3React();
@@ -44,14 +45,19 @@ export const StakingItem = ({ info, double }) => {
         const weiAmount = numToWei(amount, info.decimals);
         try {
             if (info.address) {
-                const allowance = await tokenContract.methods.allowance(account, info.stakingAddress).call()
-                if(!new BigNumber(allowance).isGreaterThan(weiAmount)){
+                const allowance = await tokenContract.methods
+                    .allowance(account, info.stakingAddress)
+                    .call();
+                if (!new BigNumber(allowance).isGreaterThan(weiAmount)) {
                     dispatch({
                         type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
                         showWaitingWalletConfirmModal: waitingForApprove,
                     });
                     await tokenContract.methods
-                        .approve(info.stakingAddress, '0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff')
+                        .approve(
+                            info.stakingAddress,
+                            '0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff'
+                        )
                         .send({ from: account });
                 }
             }
@@ -300,25 +306,31 @@ export const StakingItem = ({ info, double }) => {
                     {info.logo}
                     {info.title}
                 </p>
-                <div className="statistics__header__mul">{info.multiple}</div>
+                <div className='statistics__header__mul'>{info.multiple}</div>
             </div>
 
             <dl className='statistics__dl'>
                 <div className='statistics__dl-column'>
-                    <dd className='statistics__dl-dd'>抵押总量</dd>
+                    <dd className='statistics__dl-dd'>
+                        <FormattedMessage id='totalMortgage' />
+                    </dd>
                     <dt className='statistics__dl-dt'>
                         {stakingInfo
-                            ? formatAmount(stakingInfo.earnedTotal, info.decimals)
+                            ? formatAmount(
+                                  stakingInfo.earnedTotal,
+                                  info.decimals
+                              )
                             : REQUESTING_DATA}
                         {stakingInfo && <p>{info.symbol}</p>}
                     </dt>
                 </div>
             </dl>
 
-
             <dl className='statistics__dl'>
                 <div className='statistics__dl-column'>
-                    <dd className='statistics__dl-dd'>我的抵押</dd>
+                    <dd className='statistics__dl-dd'>
+                        <FormattedMessage id='myMortgage' />
+                    </dd>
                     <dt className='statistics__dl-dt'>
                         {stakingInfo
                             ? formatAmount(stakingInfo.staked, info.decimals)
@@ -327,20 +339,24 @@ export const StakingItem = ({ info, double }) => {
                     </dt>
                 </div>
 
-                    <div className='statistics__dl-column'>
-                        <dd className='statistics__dl-dd'>余额</dd>
-                        <dt className='statistics__dl-dt'>
-                            {stakingInfo
-                                ? formatAmount(stakingInfo.balance, info.decimals)
-                                : REQUESTING_DATA}
-                            {stakingInfo && <p>{info.symbol}</p>}
-                        </dt>
-                    </div>
+                <div className='statistics__dl-column'>
+                    <dd className='statistics__dl-dd'>
+                        <FormattedMessage id='balance' />
+                    </dd>
+                    <dt className='statistics__dl-dt'>
+                        {stakingInfo
+                            ? formatAmount(stakingInfo.balance, info.decimals)
+                            : REQUESTING_DATA}
+                        {stakingInfo && <p>{info.symbol}</p>}
+                    </dt>
+                </div>
             </dl>
 
             <dl className='statistics__dl'>
                 <div className='statistics__dl-column'>
-                    <dd className='statistics__dl-dd'>收益</dd>
+                    <dd className='statistics__dl-dd'>
+                        <FormattedMessage id='income' />
+                    </dd>
                     <dt className='statistics__dl-dt'>
                         <img src={WAR} />
                         {stakingInfo
@@ -376,7 +392,7 @@ export const StakingItem = ({ info, double }) => {
                         }
                         setStaking(true);
                     }}>
-                    Approve Stake
+                    <FormattedMessage id='appoveStake' />
                 </button>
                 <button
                     disabled={!stakingInfo}
@@ -391,7 +407,7 @@ export const StakingItem = ({ info, double }) => {
                         }
                         onClaim();
                     }}>
-                    Claim
+                    <FormattedMessage id='claim' />
                 </button>
             </div>
 
@@ -408,7 +424,8 @@ export const StakingItem = ({ info, double }) => {
                     }
                     setWithdrawing(true);
                 }}>
-                Unstake &Claim
+                
+                <FormattedMessage id='unstakeClaim' />
             </button>
 
             {staking && (
@@ -421,11 +438,19 @@ export const StakingItem = ({ info, double }) => {
                             tokenName={'Gallery Token'}
                             balance={stakingInfo.balance}
                             onChange={(e) => {
-                                const value = e.target.value.replace(/^(.*\..{6}).*$/,"$1");
+                                const value = e.target.value.replace(
+                                    /^(.*\..{6}).*$/,
+                                    '$1'
+                                );
                                 setAmount(value);
                             }}
                             onMax={() => {
-                                setAmount(formatAmount(stakingInfo.balance, info.decimals));
+                                setAmount(
+                                    formatAmount(
+                                        stakingInfo.balance,
+                                        info.decimals
+                                    )
+                                );
                             }}
                             onConfirm={onStake}
                             onCancel={() => {

@@ -1,165 +1,192 @@
-import React, {useContext} from "react";
+import React, { useContext } from 'react';
+import { FormattedMessage } from 'react-intl';
 
-import { CrossModalIcon } from "../../icons";
-import {useBalance} from "../../pages/Hooks";
-import {getFigureSwapAddress, getGalleryAddress, getGLFStakingAddress, getPointAddress} from "../../web3/address";
-import {getContract, useActiveWeb3React} from "../../web3";
-import {formatAmount} from "../../utils/format";
-import ERC20 from "../../web3/abi/ERC20.json";
-import FigureSwap from "../../web3/abi/FigureSwap.json";
+import { CrossModalIcon } from '../../icons';
+import { useBalance } from '../../pages/Hooks';
+import {
+    getFigureSwapAddress,
+    getGalleryAddress,
+    getGLFStakingAddress,
+    getPointAddress,
+} from '../../web3/address';
+import { getContract, useActiveWeb3React } from '../../web3';
+import { formatAmount } from '../../utils/format';
+import ERC20 from '../../web3/abi/ERC20.json';
+import FigureSwap from '../../web3/abi/FigureSwap.json';
 import {
     HANDLE_SHOW_FAILED_TRANSACTION_MODAL,
     HANDLE_SHOW_TRANSACTION_MODAL,
     HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
     waitingForConfirm,
     waitingForInit,
-    waitingPending
-} from "../../const";
-import {mainContext} from "../../reducer";
+    waitingPending,
+} from '../../const';
+import { mainContext } from '../../reducer';
 
 export const RedeemArtworkModal = ({ setIsOpen, figure }) => {
+    const { account, active, library, chainId } = useActiveWeb3React();
+    const { dispatch } = useContext(mainContext);
 
-    const {account, active, library, chainId} = useActiveWeb3React()
-    const {dispatch} = useContext(mainContext);
-
-    const {balance} = useBalance(getPointAddress(chainId))
+    const { balance } = useBalance(getPointAddress(chainId));
 
     const onSwap = async () => {
-        console.log('on swap',figure.points, figure.proposalId, figure.figureId)
-        const tokenContract = getContract(library, ERC20.abi, getPointAddress(chainId))
-        const contract = getContract(library, FigureSwap.abi, getFigureSwapAddress(chainId))
+        console.log(
+            'on swap',
+            figure.points,
+            figure.proposalId,
+            figure.figureId
+        );
+        const tokenContract = getContract(
+            library,
+            ERC20.abi,
+            getPointAddress(chainId)
+        );
+        const contract = getContract(
+            library,
+            FigureSwap.abi,
+            getFigureSwapAddress(chainId)
+        );
 
-        setIsOpen(false)
+        setIsOpen(false);
         try {
             dispatch({
                 type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
-                showWaitingWalletConfirmModal: waitingForConfirm
+                showWaitingWalletConfirmModal: waitingForConfirm,
             });
-             await tokenContract.methods.approve(
-                getFigureSwapAddress(chainId),
-                figure.points,
-            )
-                .send({from: account});
+            await tokenContract.methods
+                .approve(getFigureSwapAddress(chainId), figure.points)
+                .send({ from: account });
 
             dispatch({
                 type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
-                showWaitingWalletConfirmModal: waitingForConfirm
+                showWaitingWalletConfirmModal: waitingForConfirm,
             });
 
-            await contract.methods.swap(figure.proposalId, figure.figureId)
-                .send({from: account})
-                .on('transactionHash', hash => {
+            await contract.methods
+                .swap(figure.proposalId, figure.figureId)
+                .send({ from: account })
+                .on('transactionHash', (hash) => {
                     dispatch({
                         type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
-                        showWaitingWalletConfirmModal: {...waitingPending, hash}
+                        showWaitingWalletConfirmModal: {
+                            ...waitingPending,
+                            hash,
+                        },
                     });
                 })
                 .on('receipt', (_, receipt) => {
-                    console.log('BOT staking success')
+                    console.log('BOT staking success');
                     dispatch({
                         type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
-                        showWaitingWalletConfirmModal: waitingForInit
+                        showWaitingWalletConfirmModal: waitingForInit,
                     });
                     dispatch({
                         type: HANDLE_SHOW_TRANSACTION_MODAL,
-                        showTransactionModal: true
+                        showTransactionModal: true,
                     });
                 })
                 .on('error', (err, receipt) => {
-                    console.log('BOT staking error', err)
+                    console.log('BOT staking error', err);
                     dispatch({
                         type: HANDLE_SHOW_FAILED_TRANSACTION_MODAL,
-                        showFailedTransactionModal: true
+                        showFailedTransactionModal: true,
                     });
                     dispatch({
                         type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
-                        showWaitingWalletConfirmModal: waitingForInit
+                        showWaitingWalletConfirmModal: waitingForInit,
                     });
-                })
-
+                });
         } catch (err) {
             dispatch({
                 type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
-                showWaitingWalletConfirmModal: waitingForInit
+                showWaitingWalletConfirmModal: waitingForInit,
             });
             if (err.code === 4001) {
                 dispatch({
                     type: HANDLE_SHOW_FAILED_TRANSACTION_MODAL,
-                    showFailedTransactionModal: true
+                    showFailedTransactionModal: true,
                 });
             } else {
                 dispatch({
                     type: HANDLE_SHOW_FAILED_TRANSACTION_MODAL,
-                    showFailedTransactionModal: true
+                    showFailedTransactionModal: true,
                 });
             }
             console.log('err', err);
         }
     };
 
-
     return (
-        <div className="modal">
-            <div className="modal__box">
-                <div className="modal__item modal__item--vote-img">
+        <div className='modal'>
+            <div className='modal__box'>
+                <div className='modal__item modal__item--vote-img'>
                     <form
-                        className="form-vote-new form-app"
-                        action="/"
-                        noValidate="novalidate"
-                    >
-                        <h3 className="modal__title h3">Redeem an Artwork</h3>
+                        className='form-vote-new form-app'
+                        action='/'
+                        noValidate='novalidate'>
+                        <h3 className='modal__title h3'>
+                            <FormattedMessage id='modalsText34' />
+                        </h3>
 
-                        <div className="form-vote-new__img">
+                        <div className='form-vote-new__img'>
                             <picture>
                                 <img
                                     src={figure.image}
-                                    alt=""
-                                    loading="lazy"
-                                    width="180"
-                                    height="115"
+                                    alt=''
+                                    loading='lazy'
+                                    width='180'
+                                    height='115'
                                 />
                             </picture>
                         </div>
 
-                        <table className="form-vote__table">
+                        <table className='form-vote__table'>
                             <tbody>
                                 <tr>
-                                    <th>Name:</th>
+                                    <th>
+                                        <FormattedMessage id='modalsText35' />
+                                    </th>
                                     <td>{figure.title}</td>
                                 </tr>
                                 <tr>
-                                    <th>Details:</th>
+                                    <th>
+                                        <FormattedMessage id='modalsText36' />
+                                    </th>
                                     <td>{figure.description}</td>
                                 </tr>
                             </tbody>
                         </table>
 
-                        <p className="form-app__note">
-                            <b>{balance && formatAmount(balance)}</b> Reward Points will be spent to redeem this
-                            artwork. You have <b>{ figure.points && formatAmount(figure.points)}</b> Reward Points now.
+                        <p className='form-app__note'>
+                            <b>{balance && formatAmount(balance)}</b>
+                            <FormattedMessage id='modalsText37' />
+                            <b>
+                                {figure.points && formatAmount(figure.points)}
+                            </b>
+                            <FormattedMessage id='modalsText38' />
                         </p>
-
-                        <div className="form-app__submit form-app__submit--row">
+                        <div className='form-app__submit form-app__submit--row'>
                             <button
-                                className="btn btn--outline btn--medium modal__close"
-                                type="button"
-                                onClick={() => setIsOpen(false)}
-                            >
-                                Cancel
+                                className='btn btn--outline btn--medium modal__close'
+                                type='button'
+                                onClick={() => setIsOpen(false)}>
+                                <FormattedMessage id='modalsText39' />
                             </button>
-                            <button className="btn btn--medium" type="button" onClick={onSwap}>
-                                Redeem
+                            <button
+                                className='btn btn--medium'
+                                type='button'
+                                onClick={onSwap}>
+                                <FormattedMessage id='modalsText40' />
                             </button>
                         </div>
                     </form>
                 </div>
 
                 <button
-                    type="button"
-                    className="modal__close modal__close-btn button"
-                    aria-label="Close modal"
-                    onClick={() => setIsOpen(false)}
-                >
+                    type='button'
+                    className='modal__close modal__close-btn button'
+                    aria-label='Close modal'
+                    onClick={() => setIsOpen(false)}>
                     <CrossModalIcon />
                 </button>
             </div>

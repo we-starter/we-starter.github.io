@@ -13,6 +13,7 @@ import copy from '../../assets/icon/copy.png';
 import switchIcon from '../../assets/icon/switch.png';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { useWeb3React } from '@web3-react/core';
+import { FormattedMessage } from 'react-intl';
 
 export const WalletModal = ({ onChange, onClose }) => {
     const context = useWeb3React();
@@ -36,7 +37,7 @@ export const WalletModal = ({ onChange, onClose }) => {
                         <div
                             className='form-app__inner__header'
                             style={{ maxWidth: 'inherit' }}>
-                            ACCOUNT
+                            <FormattedMessage id='modalsText59' />
                         </div>
                         <p className='form-app__inner__address'>
                             {account && formatAddress(account)}
@@ -51,7 +52,9 @@ export const WalletModal = ({ onChange, onClose }) => {
                                 className='form-app__inner__frame'
                                 style={{ marginBottom: 24 }}>
                                 <img src={copy} alt='' />
-                                <p> Copy Address</p>
+                                <p>
+                                    <FormattedMessage id='modalsText60' />
+                                </p>
                             </div>
                         </CopyToClipboard>
 
@@ -59,7 +62,9 @@ export const WalletModal = ({ onChange, onClose }) => {
                             className='form-app__inner__frame'
                             onClick={onChange}>
                             <img src={switchIcon} alt='' />
-                            <p>Switch Wallet</p>
+                            <p>
+                                <FormattedMessage id='modalsText61' />
+                            </p>
                         </div>
 
                         <button
@@ -73,12 +78,11 @@ export const WalletModal = ({ onChange, onClose }) => {
                                     walletModal: null,
                                 });
                                 window &&
-                                    window.localStorage.setItem(
-                                        GALLERY_SELECT_WEB3_CONTEXT,
-                                        null
+                                    window.localStorage.removeItem(
+                                        GALLERY_SELECT_WEB3_CONTEXT
                                     );
                             }}>
-                            Disconnect Wallet
+                            <FormattedMessage id='modalsText62' />
                         </button>
                         <img
                             src={close}
