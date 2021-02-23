@@ -397,6 +397,19 @@
       margin-right: 0;
       @media #{$mdWidth} {
         display: block;
+        .language {
+          display: none !important;
+        }
+      }
+      @media #{$smWidth} {
+        .language {
+          display: none !important;
+        }
+      }
+      @media #{$xsWidth} {
+        .language {
+          display: none !important;
+        }
       }
 
       a {

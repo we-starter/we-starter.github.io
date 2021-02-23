@@ -2,6 +2,8 @@ import React, { useEffect, useContext, useState } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import { formatAddress, formatAmount } from '../../utils/format'
 import { useActiveWeb3React } from '../../web3'
+import WeStarterGuidebookZH from '../../pdfFile/WeStarter -优质资产起跑线.pdf'
+import WeStarterGuidebookEN from '../../pdfFile/WeStarter-Introduction in English.pdf'
 import globe from '../../assets/icon/globe.png'
 import {
   HANDLE_SHOW_MENUMASK_MODAL,
@@ -244,12 +246,28 @@ export const MenuMask = () => {
                   </svg>
                 </a>
               </li>
+              <li>
+                <a
+                  title='title'
+                  href='https://www.yuque.com'
+                  target='_blank'
+                  rel='noopener'
+                >
+                  <svg width='24' height='30' viewBox='0 0 30 30'>
+                    <path d='M8.46424943,5.10249711 L8.47461061,5.109 L9.83620065,2.74070849 C9.93811703,1.90940768 9.58503922,1.02787459 8.77638646,0.0961091845 C8.76330143,0.081043992 8.75886764,0.0603157452 8.76464474,0.0412159218 C8.77042185,0.0221160985 8.78560064,0.0073200529 8.80484175,0.00203252033 L8.82023085,6.75015599e-14 L14.2087326,6.75015599e-14 L14.2093133,0.00464576982 C16.4357941,0.110046462 18.2093133,1.97125435 18.2093133,4.25203252 C18.2093133,5.4898374 17.6872459,6.6039489 16.8539126,7.38095239 C18.5287093,8.64982581 19.6088487,10.6489547 19.6088487,12.8980836 C19.6088487,16.6954123 16.5295804,19.7810685 12.7078615,19.8423345 L0.0136106136,19.8432056 L8.46424943,5.10249711 Z'></path>
+                  </svg>
+                </a>
+              </li>
             </ul>
           </div>
           <ul className='menumask_list' style={{ borderBottom: 'none' }}>
             <li className='menumask_item' style={{ margin: '10px 0' }}>
               <a
-                href='https://medium.com/@westarter'
+                href={
+                  language === 'ZH-CH'
+                    ? WeStarterGuidebookZH
+                    : WeStarterGuidebookEN
+                }
                 target='_blank'
                 className='menumask_item-guide menumask_link'
                 style={{ color: '#7A7F82' }}
@@ -259,7 +277,7 @@ export const MenuMask = () => {
             </li>
             <li className='menumask_item' style={{ margin: '10px 0' }}>
               <a
-                href='https://www.baidu.com'
+                href='https://www.yuque.com/docs/share/f89e3a8a-a918-48da-bf61-700ddcfaac95?# '
                 target='_blank'
                 className='menumask_item-guide menumask_link'
                 style={{ color: '#7A7F82' }}

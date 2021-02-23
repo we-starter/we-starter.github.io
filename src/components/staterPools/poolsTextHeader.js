@@ -1,6 +1,8 @@
 import React, { useEffect, useContext, useState } from 'react'
 import { useActiveWeb3React } from '../../web3'
 import globe from '../../assets/icon/globe.png'
+import WeStarterGuidebookZH from '../../pdfFile/WeStarter -优质资产起跑线.pdf'
+import WeStarterGuidebookEN from '../../pdfFile/WeStarter-Introduction in English.pdf'
 import { formatAddress, formatAmount } from '../../utils/format'
 import { withRouter } from 'react-router'
 import { mainContext } from '../../reducer'
@@ -130,7 +132,11 @@ const PoolsTextHeader = (props) => {
                 </li>
                 <li className='menu__item'>
                   <a
-                    href='https://medium.com/@westarter'
+                    href={
+                      language === 'ZH-CH'
+                        ? WeStarterGuidebookZH
+                        : WeStarterGuidebookEN
+                    }
                     target='_blank'
                     className='menu__link'
                     onClick={handleMenuItemClick}
@@ -140,7 +146,7 @@ const PoolsTextHeader = (props) => {
                 </li>
                 <li className='menu__item'>
                   <a
-                    href='https://www.baidu.com'
+                    href='https://www.yuque.com/docs/share/f89e3a8a-a918-48da-bf61-700ddcfaac95?# '
                     target='_blank'
                     className='menu__link'
                     onClick={handleMenuItemClick}

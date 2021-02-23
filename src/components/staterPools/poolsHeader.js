@@ -4,6 +4,8 @@ import globe from '../../assets/icon/globe.png'
 import { formatAddress, formatAmount } from '../../utils/format'
 import { withRouter } from 'react-router'
 import { mainContext } from '../../reducer'
+import WeStarterGuidebookZH from '../../pdfFile/WeStarter -优质资产起跑线.pdf'
+import WeStarterGuidebookEN from '../../pdfFile/WeStarter-Introduction in English.pdf'
 import { HANDLE_WALLET_MODAL, HANDLE_SHOW_MENUMASK_MODAL } from '../../const'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import doubleLine from '../../assets/icon/check-double-line.png'
@@ -124,7 +126,11 @@ const PoolsHeader = (props) => {
                 </li>
                 <li className='menu__item'>
                   <a
-                    href='https://medium.com/@westarter'
+                    href={
+                      language === 'ZH-CH'
+                        ? WeStarterGuidebookZH
+                        : WeStarterGuidebookEN
+                    }
                     target='_blank'
                     className='menu__link'
                     onClick={handleMenuItemClick}
@@ -134,7 +140,7 @@ const PoolsHeader = (props) => {
                 </li>
                 <li className='menu__item'>
                   <a
-                    href='https://www.baidu.com'
+                    href='https://www.yuque.com/docs/share/f89e3a8a-a918-48da-bf61-700ddcfaac95?# '
                     target='_blank'
                     className='menu__link'
                     onClick={handleMenuItemClick}
