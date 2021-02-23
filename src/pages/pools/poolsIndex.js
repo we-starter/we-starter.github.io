@@ -24,7 +24,6 @@ const PoolsIndex = (props) => {
 
   // const pools = usePoolsInfo()
   const pools = pool
-  console.log(pools, 'pools')
   const setData = async () => {
     switch (tabFlag) {
       case 1:
@@ -74,6 +73,12 @@ const PoolsIndex = (props) => {
             <FormattedMessage id='completed' />
           </span>
         )
+      case 4:
+        return (
+          <span>
+            <FormattedMessage id='willStart' />
+          </span>
+        )
     }
   }
 
@@ -89,16 +94,23 @@ const PoolsIndex = (props) => {
       start_at, // 开始时间
       time, // 结算时间
     } = pool
-
     let left_time = 0
     if (status === 0) {
       left_time = start_at * 1000 - Date.now()
-    } else if (status === 1) {
+    } else if (status === 1 || status === 4) {
       left_time = time * 1000 - Date.now()
     }
 
+    const goFinance = () => {
+      window.open('https://antimatter.finance/')
+    }
+
     return (
-      <div className='pools-type_card_box' key={pool.address}>
+      <div
+        className='pools-type_card_box'
+        onClick={goFinance}
+        key={pool.address}
+      >
         <div className='pools-type_title'>
           <p className='pools-type_card_title'>
             <img src={HUSD} />
@@ -106,7 +118,34 @@ const PoolsIndex = (props) => {
           </p>
           <p className='pools-type_card_title_right'>
             {renderStatus(status)}
-            {status < 2 && (
+            <span className='pools-type_time'>
+              <Timer
+                initialTime={left_time}
+                direction='backward'
+                formatValue={(number) => {
+                  if (number === 0) return '00'
+                  if (number < 10) {
+                    return `0${number}`
+                  }
+                  return number
+                }}
+              >
+                <span>
+                  <Timer.Consumer>
+                    {({ h, d, formatValue }) => formatValue(d * 24 + h)}
+                  </Timer.Consumer>
+                </span>
+                &nbsp;:&nbsp;
+                <span>
+                  <Timer.Minutes />
+                </span>
+                &nbsp;:&nbsp;
+                <span>
+                  <Timer.Seconds />
+                </span>
+              </Timer>
+            </span>
+            {/* {status < 2 && (
               <span className='pools-type_time'>
                 <Timer
                   initialTime={left_time}
@@ -134,7 +173,7 @@ const PoolsIndex = (props) => {
                   </span>
                 </Timer>
               </span>
-            )}
+            )} */}
           </p>
         </div>
         <div className='pools-type_title'>
@@ -166,9 +205,12 @@ const PoolsIndex = (props) => {
           <p>{progress * 100}%</p>
         </div>
         <a
-          className='pools-type_enter'
+          className={cs(
+            'pools-type_enter',
+            disableFlag && 'pools-type_disable_enter'
+          )}
           onClick={() => {
-            goDetail(address)
+            // goDetail(address)
           }}
         >
           <FormattedMessage id='poolsIndexText3' />
