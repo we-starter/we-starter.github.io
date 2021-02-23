@@ -9,12 +9,12 @@ export default [
       symbol: 'USDT',
     },
     underlying: {
-      address: '0x8F67854497218043E1f72908FFE38D0Ed7F24721',
+      address: '-',
       symbol: 'HT',
-      name: 'HT',
-      total_supply: '1000000000',
-      holders: '1000000000',
-      transfers: '',
+      name: '-',
+      total_supply: '-',
+      holders: '-',
+      transfers: '-',
     },
     amount: '10000',
     pool_info: {
