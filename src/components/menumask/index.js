@@ -187,22 +187,30 @@ export const MenuMask = () => {
                   transform: 'translate(0)',
                 }}
               >
-                <p
-                  onClick={() => tabLanguage('en')}
-                  style={{
-                    color: '#22292F',
-                  }}
-                >
-                  English
-                </p>
-                <p
-                  onClick={() => tabLanguage('zh')}
-                  style={{
-                    color: '#22292F',
-                  }}
-                >
-                  中文简体
-                </p>
+                {language === 'ZH-CH' && (
+                  <p
+                    style={{
+                      color: '#22292F',
+                      padding: '0',
+                      marginBottom: '0',
+                    }}
+                    onClick={() => tabLanguage('en')}
+                  >
+                    English
+                  </p>
+                )}
+                {language === 'English' && (
+                  <p
+                    style={{
+                      color: '#22292F',
+                      padding: '0',
+                      marginBottom: '0',
+                    }}
+                    onClick={() => tabLanguage('zh')}
+                  >
+                    中文简体
+                  </p>
+                )}
               </div>
             </div>
             <ul className='footer__links'>

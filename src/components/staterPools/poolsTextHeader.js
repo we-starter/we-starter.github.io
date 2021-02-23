@@ -166,8 +166,22 @@ const PoolsTextHeader = (props) => {
                 className='language-items'
                 style={{ top: '80%', bottom: 'auto' }}
               >
-                <p onClick={() => tabLanguage('en')}>English</p>
-                <p onClick={() => tabLanguage('zh')}>中文简体</p>
+                {language === 'ZH-CH' && (
+                  <p
+                    style={{ padding: '0', marginBottom: '0' }}
+                    onClick={() => tabLanguage('en')}
+                  >
+                    English
+                  </p>
+                )}
+                {language === 'English' && (
+                  <p
+                    style={{ padding: '0', marginBottom: '0' }}
+                    onClick={() => tabLanguage('zh')}
+                  >
+                    中文简体
+                  </p>
+                )}
               </div>
             </div>
             {/* <a className='download-pdf' href={WeStarterPDF} target='_blank'></a> */}
