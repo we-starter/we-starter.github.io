@@ -106,11 +106,9 @@ const PoolsIndex = (props) => {
     }
 
     return (
-      <div
-        className='pools-type_card_box pools-type_card_box_border'
-        onClick={goFinance}
-        key={pool.address}
-      >
+      // className = 'pools-type_card_box pools-type_card_box_border'
+      // onClick = { goFinance }
+      <div className='pools-type_card_box' key={pool.address}>
         <div className='pools-type_title'>
           <p className='pools-type_card_title'>
             <img src={HUSD} />
@@ -205,12 +203,9 @@ const PoolsIndex = (props) => {
           <p>{progress * 100}%</p>
         </div>
         <a
-          className={cs(
-            'pools-type_enter',
-            disableFlag && 'pools-type_disable_enter'
-          )}
+          className={cs('pools-type_enter')}
           onClick={() => {
-            // goDetail(address)
+            goDetail(address)
           }}
         >
           <FormattedMessage id='poolsIndexText3' />
