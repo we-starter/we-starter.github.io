@@ -24,12 +24,13 @@ export const MenuMask = () => {
   const location = useLocation()
   const { balance } = useHTBalance()
   const [language, setLanguage] = useState(
-    (state.locale === 'en' && 'English') || (state.locale === 'zh' && 'ZH-CH')
+    (state.locale === 'en' && '中文简体') ||
+      (state.locale === 'zh' && 'English')
   )
 
   useEffect(() => {
-    if (state.locale === 'en') setLanguage('English')
-    if (state.locale === 'zh') setLanguage('ZH-CH')
+    if (state.locale === 'en') setLanguage('中文简体')
+    if (state.locale === 'zh') setLanguage('English')
   }, [state.locale])
 
   const handleMenuItemClick = () => {
@@ -37,8 +38,9 @@ export const MenuMask = () => {
   }
 
   const tabLanguage = (val) => {
+    val = val === 'English' ? 'en' : 'zh'
     if (val === 'en') setLanguage('English')
-    if (val === 'zh') setLanguage('ZH-CH')
+    if (val === 'zh') setLanguage('中文简体')
     dispatch({
       type: CHANGE_LOCALE,
       locale: val,
@@ -176,10 +178,10 @@ export const MenuMask = () => {
                         </li> */}
           </ul>
           <div className='menumask_language'>
-            <div className='language'>
+            <div className='language' onClick={() => tabLanguage(language)}>
               <img src={globe} alt='' />
-              {language}
-              <div
+              {language === '中文简体' ? '中文简体' : 'English'}
+              {/* <div
                 className='language-items'
                 style={{
                   position: 'absolute',
@@ -211,7 +213,7 @@ export const MenuMask = () => {
                     中文简体
                   </p>
                 )}
-              </div>
+              </div> */}
             </div>
             <ul className='footer__links'>
               <li>

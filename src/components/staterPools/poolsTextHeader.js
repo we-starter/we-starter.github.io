@@ -27,20 +27,22 @@ const PoolsTextHeader = (props) => {
   const location = useLocation()
   const { balance } = useHTBalance()
   const [language, setLanguage] = useState(
-    (state.locale === 'en' && 'English') || (state.locale === 'zh' && 'ZH-CH')
+    (state.locale === 'en' && '中文简体') ||
+      (state.locale === 'zh' && 'English')
   )
 
   useEffect(() => {
-    if (state.locale === 'en') setLanguage('English')
-    if (state.locale === 'zh') setLanguage('ZH-CH')
+    if (state.locale === 'en') setLanguage('中文简体')
+    if (state.locale === 'zh') setLanguage('English')
   }, [state.locale])
 
   const handleMenuItemClick = () => {
     setShowMenu(false)
   }
   const tabLanguage = (val) => {
+    val = val === 'English' ? 'en' : 'zh'
     if (val === 'en') setLanguage('English')
-    if (val === 'zh') setLanguage('ZH-CH')
+    if (val === 'zh') setLanguage('中文简体')
     dispatch({
       type: CHANGE_LOCALE,
       locale: val,
@@ -159,10 +161,14 @@ const PoolsTextHeader = (props) => {
           </div>
 
           <div className='pools_text_header__menu-wrapper'>
-            <div className='language' style={{ marginRight: '16px' }}>
+            <div
+              className='language'
+              style={{ marginRight: '16px' }}
+              onClick={() => tabLanguage(language)}
+            >
               <img src={globe} alt='' />
-              {language}
-              <div
+              {language === '中文简体' ? '中文简体' : 'English'}
+              {/* <div
                 className='language-items'
                 style={{ top: '80%', bottom: 'auto' }}
               >
@@ -182,7 +188,7 @@ const PoolsTextHeader = (props) => {
                     中文简体
                   </p>
                 )}
-              </div>
+              </div> */}
             </div>
             {/* <a className='download-pdf' href={WeStarterPDF} target='_blank'></a> */}
             {active && (

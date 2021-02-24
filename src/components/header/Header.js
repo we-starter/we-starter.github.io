@@ -23,7 +23,8 @@ export const Header = () => {
   const { dispatch, state } = useContext(mainContext)
   const { balance } = useHTBalance()
   const [language, setLanguage] = useState(
-    (state.locale === 'en' && 'English') || (state.locale === 'zh' && 'ZH-CH')
+    (state.locale === 'en' && '中文简体') ||
+      (state.locale === 'zh' && 'English')
   )
 
   const [showMenu, setShowMenu] = useState(false)
@@ -31,8 +32,8 @@ export const Header = () => {
   const location = useLocation()
 
   useEffect(() => {
-    if (state.locale === 'en') setLanguage('English')
-    if (state.locale === 'zh') setLanguage('ZH-CH')
+    if (state.locale === 'en') setLanguage('中文简体')
+    if (state.locale === 'zh') setLanguage('English')
   }, [state.locale])
 
   const handleMenuItemClick = () => {
@@ -40,8 +41,9 @@ export const Header = () => {
   }
 
   const tabLanguage = (val) => {
+    val = val === 'English' ? 'en' : 'zh'
     if (val === 'en') setLanguage('English')
-    if (val === 'zh') setLanguage('ZH-CH')
+    if (val === 'zh') setLanguage('中文简体')
     dispatch({
       type: CHANGE_LOCALE,
       locale: val,
@@ -186,10 +188,14 @@ export const Header = () => {
           </div>
 
           <div className='header__menu-wrapper'>
-            <div className='language' style={{ marginRight: '16px' }}>
+            <div
+              className='language'
+              style={{ marginRight: '16px' }}
+              onClick={() => tabLanguage(language)}
+            >
               <img src={globe} alt='' />
-              {language}
-              <div
+              {language === '中文简体' ? '中文简体' : 'English'}
+              {/* <div
                 className='language-items'
                 style={{ top: '80%', bottom: 'auto' }}
               >
@@ -209,7 +215,7 @@ export const Header = () => {
                     中文简体
                   </p>
                 )}
-              </div>
+              </div> */}
             </div>
             {active && (
               <div className='ht-balance'>
