@@ -106,9 +106,11 @@ const PoolsIndex = (props) => {
     }
 
     return (
-      // className = 'pools-type_card_box pools-type_card_box_border'
-      // onClick = { goFinance }
-      <div className='pools-type_card_box' key={pool.address}>
+      <div
+        className='pools-type_card_box pools-type_card_box_border'
+        key={pool.address}
+        onClick={goFinance}
+      >
         <div className='pools-type_title'>
           <p className='pools-type_card_title'>
             <img src={HUSD} />
@@ -203,7 +205,10 @@ const PoolsIndex = (props) => {
           <p>{progress * 100}%</p>
         </div>
         <a
-          className={cs('pools-type_enter')}
+          className={cs(
+            'pools-type_enter',
+            disableFlag && 'pools-type_disable_enter'
+          )}
           onClick={() => {
             goDetail(address)
           }}
@@ -283,7 +288,7 @@ const PoolsIndex = (props) => {
             </h2>
           </div>
           <div className='pools-type_card'>
-            {isLogin ? (
+            {/* {isLogin ? (
               <>
                 {listData &&
                   listData.map((pool) => {
@@ -296,7 +301,13 @@ const PoolsIndex = (props) => {
               <>
                 {!isLogin && tabFlag === 1 ? [1, 2, 3].map(noLogin) : noData()}
               </>
-            )}
+            )} */}
+            {listData &&
+              listData.map((pool) => {
+                return renderCard(pool)
+              })}
+            {tabFlag === 1 && [1, 2].map(noLogin)}
+            {tabFlag === 2 && !listData.length && noData()}
           </div>
         </div>
       </div>
