@@ -51,11 +51,14 @@
       background: #f2f0eb;
       border-radius: 10px;
       .mask_layer {
-        display: inline-block;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         position: absolute;
         top: 0;
         left: 0;
         z-index: 1;
+        padding: 0 30px;
         width: 640px;
         height: 164px;
         font-size: 14px;
@@ -371,11 +374,14 @@
       background: #f2f0eb;
       border-radius: 10px;
       .mask_layer {
-        display: inline-block;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         position: absolute;
         top: 0;
         left: 0;
         z-index: 1;
+        padding: 0 30px;
         width: 640px;
         height: 164px;
         font-size: 14px;
@@ -685,11 +691,14 @@
       background: #f2f0eb;
       border-radius: 10px;
       .mask_layer {
-        display: inline-block;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         position: absolute;
         top: 0;
         left: 0;
         z-index: 1;
+        padding: 0 30px;
         width: 640px;
         height: 164px;
         font-size: 14px;
@@ -989,11 +998,14 @@
       background: #f2f0eb;
       border-radius: 10px;
       .mask_layer {
-        display: inline-block;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         position: absolute;
         top: 0;
         left: 0;
         z-index: 1;
+        padding: 0 30px;
         width: 640px;
         height: 164px;
         font-size: 14px;

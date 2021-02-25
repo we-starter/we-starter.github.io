@@ -81,8 +81,6 @@ export const PoolsDetail = (props) => {
   let left_time = 0
   left_time = 1614432600 * 1000 - Date.now()
 
-  console.log(pool, 111)
-
   return (
     <div style={{ background: '#fff' }}>
       <PoolsHeader address={address} pool={pool} />
@@ -191,34 +189,37 @@ export const PoolsDetail = (props) => {
       <div className='pools_detail_record'>
         {pool && pool.type === 1 && pool.quotaOf == 0 && (
           <div className='mask_layer'>
-            <FormattedMessage id='countdown' />
-            <span className='pools-type_time'>
-              <Timer
-                initialTime={left_time}
-                direction='backward'
-                formatValue={(number) => {
-                  if (number === 0) return '00'
-                  if (number < 10) {
-                    return `0${number}`
-                  }
-                  return number
-                }}
-              >
-                <span>
-                  <Timer.Consumer>
-                    {({ h, d, formatValue }) => formatValue(d * 24 + h)}
-                  </Timer.Consumer>
-                </span>
-                &nbsp;:&nbsp;
-                <span>
-                  <Timer.Minutes />
-                </span>
-                &nbsp;:&nbsp;
-                <span>
-                  <Timer.Seconds />
-                </span>
-              </Timer>
-            </span>
+            <p style={{ lineHeight: '30px', marginBottom: '0' }}>
+              <FormattedMessage id='countdown' />
+              &nbsp;
+              <span className='pools-type_time'>
+                <Timer
+                  initialTime={left_time}
+                  direction='backward'
+                  formatValue={(number) => {
+                    if (number === 0) return '00'
+                    if (number < 10) {
+                      return `0${number}`
+                    }
+                    return number
+                  }}
+                >
+                  <span>
+                    <Timer.Consumer>
+                      {({ h, d, formatValue }) => formatValue(d * 24 + h)}
+                    </Timer.Consumer>
+                  </span>
+                  &nbsp;:&nbsp;
+                  <span>
+                    <Timer.Minutes />
+                  </span>
+                  &nbsp;:&nbsp;
+                  <span>
+                    <Timer.Seconds />
+                  </span>
+                </Timer>
+              </span>
+            </p>
           </div>
         )}
         <div className='pools_detail_record_tab'>
@@ -262,10 +263,11 @@ export const PoolsDetail = (props) => {
                       {fromWei(pool.purchasedCurrencyOf).toFixed(6, 1) * 1}
                     </td>
                     <td>
-                      {pool && pool.type === 1 && pool.quotaOf > 0 && (
+                      {pool && pool.type === 1 && pool.quotaOf > 0 ? (
                         <FormattedMessage id='whiteList' />
+                      ) : (
+                        '-'
                       )}
-                      {pool && pool.type === 1 && '--'}
                       {pool &&
                         pool.type !== 1 &&
                         fromWei(pool.settleable.rate)
