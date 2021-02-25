@@ -226,8 +226,7 @@ export const PoolsDetail = (props) => {
                     <td>
                       {pool &&
                         pool.type === 1 &&
-                        pool.quotaOf > 0 && (<FormattedMessage id='whiteList' />)}
-                      {pool && pool.type === 1 && '--'}
+                        pool.quotaOf > 0 ? (<FormattedMessage id='whiteList' />) : '-'}
                       {pool &&
                         pool.type !== 1 &&
                         fromWei(pool.settleable.rate)
