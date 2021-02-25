@@ -24,7 +24,7 @@ export const WaitingWalletConfirmModal = () => {
                             {showWaitingWalletConfirmModal.title}
                         </h3>
                         {showWaitingWalletConfirmModal.hash? (
-                            <a target="_blank" href={`https://ropsten.etherscan.io/tx/${showWaitingWalletConfirmModal.hash}`} className="transction-submitted__text">
+                            <a target="_blank" href={`https://bscscan.com/tx/${showWaitingWalletConfirmModal.hash}`} className="transction-submitted__text">
                                 {showWaitingWalletConfirmModal.content}
                             </a>
                         ) :(
