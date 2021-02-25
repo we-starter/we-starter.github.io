@@ -4,6 +4,7 @@ import PoolsHeader from '../../components/staterPools/poolsHeader'
 import chromeLine from '../../assets/icon/chrome-line@2x.png'
 import bookMarkLine from '../../assets/icon/book-mark-line@2x.png'
 import Web3 from 'web3'
+import Timer from 'react-compound-timer'
 import { GALLERY_SELECT_WEB3_CONTEXT, HANDLE_WALLET_MODAL } from '../../const'
 import transitions from '@material-ui/core/styles/transitions'
 // import pools from '../../configs/pools'
@@ -76,6 +77,12 @@ export const PoolsDetail = (props) => {
         })
       })
   }
+
+  let left_time = 0
+  left_time = 1614432600 * 1000 - Date.now()
+
+  console.log(pool, 111)
+
   return (
     <div style={{ background: '#fff' }}>
       <PoolsHeader address={address} pool={pool} />
@@ -85,9 +92,13 @@ export const PoolsDetail = (props) => {
             <span>
               <FormattedMessage id='poolsDetailText1' />
             </span>
-            <span>{pool && pool.ratio}</span>
+            {/* <span>{pool && pool.ratio}</span> */}
+            <span>
+              <FormattedMessage id='myQuota' /> {pool && pool.quotaOf}{' '}
+              {pool && pool.underlying.symbol}
+            </span>
           </div>
-          <div className='pools_card_val'>
+          <div className='pools_card_content_title pools_card_val'>
             {pool && pool.amount} {pool && pool.underlying.symbol}
           </div>
           {pool && pool.status === 0 && (
@@ -152,10 +163,10 @@ export const PoolsDetail = (props) => {
           }`}
           onClick={() => {
             if (pool.status === 1) {
-              if(pool.type === 1 && pool.purchasedCurrencyOf > 0){
+              if (pool.type === 1 && pool.purchasedCurrencyOf > 0) {
                 // 如果是 已经申购过的
                 message.info('已申购过')
-              }else{
+              } else {
                 dispatch({
                   type: HANDLE_WALLET_MODAL,
                   walletModal: 'join',
@@ -179,9 +190,36 @@ export const PoolsDetail = (props) => {
       </div>
       <div className='pools_detail_record'>
         {pool && pool.type === 1 && pool.quotaOf == 0 && (
-          <span className='mask_layer'>
-            <FormattedMessage id='cannotProject' />
-          </span>
+          <div className='mask_layer'>
+            <FormattedMessage id='countdown' />
+            <span className='pools-type_time'>
+              <Timer
+                initialTime={left_time}
+                direction='backward'
+                formatValue={(number) => {
+                  if (number === 0) return '00'
+                  if (number < 10) {
+                    return `0${number}`
+                  }
+                  return number
+                }}
+              >
+                <span>
+                  <Timer.Consumer>
+                    {({ h, d, formatValue }) => formatValue(d * 24 + h)}
+                  </Timer.Consumer>
+                </span>
+                &nbsp;:&nbsp;
+                <span>
+                  <Timer.Minutes />
+                </span>
+                &nbsp;:&nbsp;
+                <span>
+                  <Timer.Seconds />
+                </span>
+              </Timer>
+            </span>
+          </div>
         )}
         <div className='pools_detail_record_tab'>
           <a
@@ -224,9 +262,9 @@ export const PoolsDetail = (props) => {
                       {fromWei(pool.purchasedCurrencyOf).toFixed(6, 1) * 1}
                     </td>
                     <td>
-                      {pool &&
-                        pool.type === 1 &&
-                        pool.quotaOf > 0 && (<FormattedMessage id='whiteList' />)}
+                      {pool && pool.type === 1 && pool.quotaOf > 0 && (
+                        <FormattedMessage id='whiteList' />
+                      )}
                       {pool && pool.type === 1 && '--'}
                       {pool &&
                         pool.type !== 1 &&
@@ -294,14 +332,17 @@ export const PoolsDetail = (props) => {
                           <FormattedMessage id='poolsDetailText5' />
                         </a>
                       )}
-                      {pool && pool.type === 1 && pool.settleable.volume > 0 && pool.settleable.claimedOf === 0 && (
+                      {pool &&
+                        pool.type === 1 &&
+                        pool.settleable.volume > 0 &&
+                        pool.settleable.claimedOf === 0 && (
                           <a
-                              className='pools_detail_record_btn'
-                              onClick={() => onClaim()}
+                            className='pools_detail_record_btn'
+                            onClick={() => onClaim()}
                           >
                             <FormattedMessage id='poolsDetailText5' />
                           </a>
-                      )}
+                        )}
                     </td>
                   </tr>
                 ) : (

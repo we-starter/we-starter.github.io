@@ -220,14 +220,15 @@ const zh_CN = {
   aboutProject:
     'Westarter是一个连接加密货币创新者和投资者的对接平台，任何创新者都可以无需许可的使用标准化的界面来发起和管理流动性拍卖。',
   willStart: '将开始于',
-  accessType: 'Access Type',
-  private: 'Private',
-  public: 'Public',
+  accessType: '进入方式',
+  private: '白名单募集池',
+  public: '无限制募集池',
   privateTips: '这是一个私有池，只有获得白名单才能认购',
   publicTips: '这是一个公有池，按照资金比例配售',
   cannotProject: '对不起，你不在白名单内，无法参与项目',
   whiteList: '白名单',
   supportWallet: '支持钱包',
   countdown: '距离募集开始还有',
+  myQuota: '我的额度',
 }
 export default zh_CN

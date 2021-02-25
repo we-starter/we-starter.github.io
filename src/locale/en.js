@@ -224,11 +224,13 @@ const en_US = {
   accessType: 'Access Type',
   private: 'Private',
   public: 'Public',
-  privateTips: '这是一个私有池，只有获得白名单才能认购',
-  publicTips: '这是一个公有池，按照资金比例配售',
-  cannotProject: '对不起，你不在白名单内，无法参与项目',
-  whiteList: '白名单',
-  supportWallet: '支持钱包',
-  countdown: '距离募集开始还有',
+  privateTips: 'Private pool, only for users in whitelist',
+  publicTips: 'Public offering pool, prorated by the amount of funds',
+  cannotProject: 'Sorry, users included in whitelist are eligible for this',
+  whiteList: 'Whitelist',
+  supportWallet: 'support wallet',
+  countdown:
+    'Sorry, you are not eligable for this project since you are not involved in the whitelist.',
+  myQuota: 'My Quota',
 }
 export default en_US

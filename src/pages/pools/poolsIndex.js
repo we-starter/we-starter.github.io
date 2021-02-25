@@ -70,13 +70,13 @@ const PoolsIndex = (props) => {
   const goDetail = (address) => {
     props.history.push(`/pools/detail/${address}`)
   }
-
+  console.log(pools, 111)
   const renderStatus = (status) => {
     switch (status) {
       case 0:
         return (
           <span className='pools-type_coming_status'>
-            <FormattedMessage id='comingSoon1' />
+            <FormattedMessage id='willStart' />
           </span>
         )
       case 1:
@@ -88,25 +88,13 @@ const PoolsIndex = (props) => {
       case 2:
         return (
           <span className='pools-type_progress_status'>
-            <FormattedMessage id='waitingSettlement' />
+            <FormattedMessage id='settlement' />
           </span>
         )
       case 3:
         return (
-          <span>
-            <FormattedMessage id='willStart' />
-          </span>
-        )
-      case 4:
-        return (
           <span className='pools-type_over_status'>
             <FormattedMessage id='settled' />
-          </span>
-        )
-      case 5:
-        return (
-          <span className='pools-type_over_status'>
-            <FormattedMessage id='settlement' />
           </span>
         )
     }
@@ -130,9 +118,10 @@ const PoolsIndex = (props) => {
     let left_time = 0
     if (status === 0) {
       left_time = start_at * 1000 - Date.now()
-    } else if (status === 1 || status === 2 || status === 3) {
+    } else if (status === 1 || status === 2) {
       left_time = time * 1000 - Date.now()
     }
+    left_time = 1614432600 * 1000 - Date.now()
 
     const goFinance = () => {
       window.open('https://antimatter.finance/')
@@ -152,8 +141,40 @@ const PoolsIndex = (props) => {
             {name}
           </p>
           <p className='pools-type_card_title_right'>
+            <span className='pools-type_coming_status'>
+              <FormattedMessage id='willStart' />
+            </span>
+            <span className='pools-type_time'>
+              <Timer
+                initialTime={left_time}
+                direction='backward'
+                formatValue={(number) => {
+                  if (number === 0) return '00'
+                  if (number < 10) {
+                    return `0${number}`
+                  }
+                  return number
+                }}
+              >
+                <span>
+                  <Timer.Consumer>
+                    {({ h, d, formatValue }) => formatValue(d * 24 + h)}
+                  </Timer.Consumer>
+                </span>
+                &nbsp;:&nbsp;
+                <span>
+                  <Timer.Minutes />
+                </span>
+                &nbsp;:&nbsp;
+                <span>
+                  <Timer.Seconds />
+                </span>
+              </Timer>
+            </span>
+          </p>
+          {/* <p className='pools-type_card_title_right'>
             {renderStatus(status)}
-            {status < 4 && (
+            {status < 3 && (
               <span className='pools-type_time'>
                 <Timer
                   initialTime={left_time}
@@ -182,7 +203,7 @@ const PoolsIndex = (props) => {
                 </Timer>
               </span>
             )}
-          </p>
+          </p> */}
         </div>
         <div className='pools-type_title'>
           <p className='pools-type_card_ratio'>
