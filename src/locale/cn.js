@@ -228,5 +228,6 @@ const zh_CN = {
   cannotProject: '对不起，你不在白名单内，无法参与项目',
   whiteList: '白名单',
   supportWallet: '支持钱包',
+  countdown: '距离募集开始还有',
 }
 export default zh_CN
