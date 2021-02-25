@@ -19,6 +19,23 @@ const PoolsIndex = (props) => {
   const changeTab = (val) => {
     setTabFlag(val)
   }
+  // const getURLStuff = (stuff) => {
+  //   let url = props.location.search
+  //   let query = url.split('?').length > 1 ? url.split('?')[1] : ''
+  //   let param = query === stuff
+  //   return param && query
+  // }
+
+  // useEffect(() => {
+  //   console.log(2222)
+  //   let anchor = getURLStuff('position')
+  //   if (!!anchor) {
+  //     let anchorElement = document.getElementById(anchor)
+  //     if (anchorElement) {
+  //       window.scrollTop(anchorElement.offsetTop)
+  //     }
+  //   }
+  // }, [props.location])
 
   const { account, active, library } = useActiveWeb3React()
 
@@ -270,7 +287,7 @@ const PoolsIndex = (props) => {
   }
 
   return (
-    <div className='pools-type'>
+    <div className='pools-type' id='position'>
       <div className='pools-type-top'>
         <div className='pools-type_content'>
           <div className='pools-type_tab'>
