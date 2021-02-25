@@ -123,10 +123,11 @@
     }
     &_card {
       margin-top: 30px;
+      display: flex;
       .pools-type_card_box {
         box-sizing: border-box;
         display: inline-block;
-        margin-top: 20px;
+        // margin-top: 20px;
         padding: 30px 30px 40px 30px;
         width: 332px;
         height: 368px;
@@ -171,14 +172,14 @@
           font-style: normal;
           display: inline-block;
           padding: 0 4px;
-          height: 16px;
+          height: 20px;
           text-align: center;
           background: #f2f0eb;
           border-radius: 3px;
           font-size: 12px;
           font-weight: 600;
           color: #22292f;
-          line-height: 16px;
+          line-height: 20px;
         }
       }
       span {
@@ -443,10 +444,11 @@
     }
     &_card {
       margin-top: 30px;
+      display: flex;
       .pools-type_card_box {
         box-sizing: border-box;
         display: inline-block;
-        margin-top: 20px;
+        // margin-top: 20px;
         padding: 30px 30px 40px 30px;
         width: 332px;
         height: 368px;
@@ -491,14 +493,14 @@
           font-style: normal;
           display: inline-block;
           padding: 0 4px;
-          height: 16px;
+          height: 20px;
           text-align: center;
           background: #f2f0eb;
           border-radius: 3px;
           font-size: 12px;
           font-weight: 600;
           color: #22292f;
-          line-height: 16px;
+          line-height: 20px;
         }
       }
       span {
@@ -802,14 +804,14 @@
           font-style: normal;
           display: inline-block;
           padding: 0 4px;
-          height: 16px;
+          height: 20px;
           text-align: center;
           background: #f2f0eb;
           border-radius: 3px;
           font-size: 12px;
           font-weight: 600;
           color: #22292f;
-          line-height: 16px;
+          line-height: 20px;
         }
       }
       span {
@@ -1112,14 +1114,14 @@
         span {
           font-style: normal;
           padding: 0 4px;
-          height: 16px;
+          height: 20px;
           text-align: center;
           background: #f2f0eb;
           border-radius: 3px;
           font-size: 12px;
           font-weight: 600;
           color: #22292f;
-          line-height: 16px;
+          line-height: 20px;
         }
       }
       span {

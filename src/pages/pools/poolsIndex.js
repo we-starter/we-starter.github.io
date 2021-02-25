@@ -26,6 +26,23 @@ const PoolsIndex = (props) => {
   const changeTab = (val) => {
     setTabFlag(val)
   }
+  // const getURLStuff = (stuff) => {
+  //   let url = props.location.search
+  //   let query = url.split('?').length > 1 ? url.split('?')[1] : ''
+  //   let param = query === stuff
+  //   return param && query
+  // }
+
+  // useEffect(() => {
+  //   console.log(2222)
+  //   let anchor = getURLStuff('position')
+  //   if (!!anchor) {
+  //     let anchorElement = document.getElementById(anchor)
+  //     if (anchorElement) {
+  //       window.scrollTop(anchorElement.offsetTop)
+  //     }
+  //   }
+  // }, [props.location])
 
   const { account, active, library } = useActiveWeb3React()
 
@@ -76,13 +93,19 @@ const PoolsIndex = (props) => {
         )
       case 3:
         return (
-          <span className='pools-type_over_status'>
-            <FormattedMessage id='settled' />
+          <span>
+            <FormattedMessage id='willStart' />
           </span>
         )
       case 4:
         return (
-          <span>
+          <span className='pools-type_over_status'>
+            <FormattedMessage id='settled' />
+          </span>
+        )
+      case 5:
+        return (
+          <span className='pools-type_over_status'>
             <FormattedMessage id='settlement' />
           </span>
         )
@@ -107,7 +130,7 @@ const PoolsIndex = (props) => {
     let left_time = 0
     if (status === 0) {
       left_time = start_at * 1000 - Date.now()
-    } else if (status === 1 || status === 2) {
+    } else if (status === 1 || status === 2 || status === 3) {
       left_time = time * 1000 - Date.now()
     }
 
@@ -130,7 +153,7 @@ const PoolsIndex = (props) => {
           </p>
           <p className='pools-type_card_title_right'>
             {renderStatus(status)}
-            {status < 3 && (
+            {status < 4 && (
               <span className='pools-type_time'>
                 <Timer
                   initialTime={left_time}
@@ -284,6 +307,20 @@ const PoolsIndex = (props) => {
           </a>
           <p>0%</p>
         </div>
+        <div className='pools-type_title'>
+          <p
+            className='pools-type_card_ratio pools-type_card_access'
+            style={{
+              color: '#7A7F82',
+            }}
+          ></p>
+          <p
+            className='pools-type_card_ratio pools-type_card_access'
+            style={{ textAlign: 'right' }}
+          >
+            <span></span>
+          </p>
+        </div>
         <a
           className={cs(
             'pools-type_enter',
@@ -303,7 +340,7 @@ const PoolsIndex = (props) => {
   }
 
   return (
-    <div className='pools-type'>
+    <div className='pools-type' id='position'>
       <div className='pools-type-top'>
         <div className='pools-type_content'>
           <div className='pools-type_tab'>
@@ -321,20 +358,26 @@ const PoolsIndex = (props) => {
             </h2>
           </div>
           <div className='pools-type_card'>
-            {isLogin ? (
+            {/* {isLogin ? (
               <>
                 {listData &&
                   listData.map((pool, index) => {
                     return renderCard(pool, index)
                   })}
-                {/* {tabFlag === 1 && [1, 2].map(noLogin)} */}
+                {tabFlag === 1 && [1, 2].map(noLogin)}
                 {tabFlag === 2 && !listData.length && noData()}
               </>
             ) : (
               <>
                 {!isLogin && tabFlag === 1 ? [1, 2, 3].map(noLogin) : noData()}
               </>
-            )}
+            )} */}
+            {listData &&
+              listData.map((pool, index) => {
+                return renderCard(pool, index)
+              })}
+            {tabFlag === 1 && [1, 2].map(noLogin)}
+            {tabFlag === 2 && !listData.length && noData()}
           </div>
         </div>
       </div>

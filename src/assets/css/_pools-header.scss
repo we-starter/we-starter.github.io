@@ -198,6 +198,10 @@
     background: #d4e9e2;
     border-radius: 5px;
 
+    @media #{$desktop} {
+      border-radius: 0 5px 5px 0;
+    }
+
     @media #{$mdWidth} {
       // display: none;
       width: 153px;

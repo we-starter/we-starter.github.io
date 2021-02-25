@@ -37,5 +37,5 @@ export default [
     purchasedCurrencyOf: 0,
     totalPurchasedAmount: '2500000000000000000000000',
     totalPurchasedCurrency: '00000000000000000000000',
-  }
+  },
 ]
