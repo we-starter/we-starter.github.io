@@ -3,6 +3,12 @@ import cs from 'classnames'
 import { withRouter } from 'react-router'
 import HUSD from '../../assets/icon/HUSD@2x.png'
 import noDataPng from '../../assets/icon/noData@2x.png'
+import HUOBI from '../../assets/icon/huobi.png'
+import Metamask from '../../assets/icon/Metamask@2x.png'
+import TokenPocket from '../../assets/icon/tokenPocket.png'
+import AoLink from '../../assets/icon/aolink.png'
+import BitKeep from '../../assets/icon/bitkeep.png'
+import HyperPay from '../../assets/icon/HyperPay-Logo@2x.png'
 import { usePoolsInfo } from './Hooks'
 import pool from '../../configs/pools'
 import { FormattedMessage } from 'react-intl'
@@ -16,6 +22,7 @@ const PoolsIndex = (props) => {
   const [tabFlag, setTabFlag] = useState(1)
   const [disableFlag, setDisableFlag] = useState(true)
   const [isLogin, setIsLogin] = useState(false)
+  const [hoverFlag, setHoverFlag] = useState(false)
   const changeTab = (val) => {
     setTabFlag(val)
   }
@@ -64,25 +71,25 @@ const PoolsIndex = (props) => {
       case 2:
         return (
           <span className='pools-type_progress_status'>
-            <FormattedMessage id='settlement' />
+            <FormattedMessage id='waitingSettlement' />
           </span>
         )
       case 3:
         return (
           <span className='pools-type_over_status'>
-            <FormattedMessage id='completed' />
+            <FormattedMessage id='settled' />
           </span>
         )
       case 4:
         return (
           <span>
-            <FormattedMessage id='willStart' />
+            <FormattedMessage id='settlement' />
           </span>
         )
     }
   }
 
-  const renderCard = (pool) => {
+  const renderCard = (pool, index) => {
     const {
       address,
       name,
@@ -93,11 +100,14 @@ const PoolsIndex = (props) => {
       currency,
       start_at, // 开始时间
       time, // 结算时间
+      icon,
+      type,
+      isPrivate,
     } = pool
     let left_time = 0
     if (status === 0) {
       left_time = start_at * 1000 - Date.now()
-    } else if (status === 1 || status === 4) {
+    } else if (status === 1 || status === 2) {
       left_time = time * 1000 - Date.now()
     }
 
@@ -106,9 +116,13 @@ const PoolsIndex = (props) => {
     }
 
     return (
-      // className = 'pools-type_card_box pools-type_card_box_border'
-      // onClick = { goFinance }
-      <div className='pools-type_card_box' key={pool.address}>
+      <div
+        className={cs(
+          'pools-type_card_box',
+          type === 1 && 'pools-type_private'
+        )}
+        key={pool.address}
+      >
         <div className='pools-type_title'>
           <p className='pools-type_card_title'>
             <img src={HUSD} />
@@ -116,34 +130,7 @@ const PoolsIndex = (props) => {
           </p>
           <p className='pools-type_card_title_right'>
             {renderStatus(status)}
-            <span className='pools-type_time'>
-              <Timer
-                initialTime={left_time}
-                direction='backward'
-                formatValue={(number) => {
-                  if (number === 0) return '00'
-                  if (number < 10) {
-                    return `0${number}`
-                  }
-                  return number
-                }}
-              >
-                <span>
-                  <Timer.Consumer>
-                    {({ h, d, formatValue }) => formatValue(d * 24 + h)}
-                  </Timer.Consumer>
-                </span>
-                &nbsp;:&nbsp;
-                <span>
-                  <Timer.Minutes />
-                </span>
-                &nbsp;:&nbsp;
-                <span>
-                  <Timer.Seconds />
-                </span>
-              </Timer>
-            </span>
-            {/* {status < 2 && (
+            {status < 3 && (
               <span className='pools-type_time'>
                 <Timer
                   initialTime={left_time}
@@ -171,7 +158,7 @@ const PoolsIndex = (props) => {
                   </span>
                 </Timer>
               </span>
-            )} */}
+            )}
           </p>
         </div>
         <div className='pools-type_title'>
@@ -201,6 +188,57 @@ const PoolsIndex = (props) => {
             ></i>
           </a>
           <p>{progress * 100}%</p>
+        </div>
+        <div className='pools-type_title'>
+          <p
+            className='pools-type_card_ratio pools-type_card_access'
+            style={{
+              color: '#7A7F82',
+            }}
+          >
+            <FormattedMessage id='accessType' />
+          </p>
+          {type === 1 && (
+            <p
+              className='pools-type_card_ratio pools-type_card_access'
+              style={{ textAlign: 'right' }}
+            >
+              <span
+                className={cs('crown', isPrivate && 'crown-highlight')}
+              ></span>
+              <FormattedMessage id='private' />
+              <span
+                className='tips'
+                onMouseOver={() => setHoverFlag(index)}
+                onMouseOut={() => setHoverFlag(null)}
+              >
+                {hoverFlag === index && (
+                  <i className='tips_content'>
+                    <FormattedMessage id='privateTips' />
+                  </i>
+                )}
+              </span>
+            </p>
+          )}
+          {type === 2 && (
+            <p
+              className='pools-type_card_ratio pools-type_card_access'
+              style={{ textAlign: 'right' }}
+            >
+              <FormattedMessage id='public' />
+              <span
+                className='tips'
+                onMouseOver={() => setHoverFlag(index)}
+                onMouseOut={() => setHoverFlag(null)}
+              >
+                {hoverFlag === index && (
+                  <i className='tips_content'>
+                    <FormattedMessage id='publicTips' />
+                  </i>
+                )}
+              </span>
+            </p>
+          )}
         </div>
         <a
           className={cs('pools-type_enter')}
@@ -286,10 +324,10 @@ const PoolsIndex = (props) => {
             {isLogin ? (
               <>
                 {listData &&
-                  listData.map((pool) => {
-                    return renderCard(pool)
+                  listData.map((pool, index) => {
+                    return renderCard(pool, index)
                   })}
-                {tabFlag === 1 && [1, 2].map(noLogin)}
+                {/* {tabFlag === 1 && [1, 2].map(noLogin)} */}
                 {tabFlag === 2 && !listData.length && noData()}
               </>
             ) : (
@@ -300,11 +338,23 @@ const PoolsIndex = (props) => {
           </div>
         </div>
       </div>
-      {/* <div className='pools-type-bottom'>
+      <div className='pools-type-bottom'>
         <h2>
-          <FormattedMessage id='partner' />
+          <FormattedMessage id='supportWallet' />
         </h2>
-      </div> */}
+        <div className='pools-type-bottom_content'>
+          <div className='pools-type-bottom_content_box'>
+            <img src={HyperPay} />
+            <img src={Metamask} />
+            <img src={AoLink} />
+          </div>
+          <div className='pools-type-bottom_content_box'>
+            <img src={HUOBI} />
+            <img src={TokenPocket} />
+            <img src={BitKeep} />
+          </div>
+        </div>
+      </div>
     </div>
   )
 }

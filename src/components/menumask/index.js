@@ -232,7 +232,7 @@ export const MenuMask = () => {
               <li>
                 <a
                   title='title'
-                  href='https://www.twitter.com/starter_we'
+                  href='https://twitter.com/antimatterdefi'
                   target='_blank'
                   rel='noopener'
                 >
@@ -244,7 +244,7 @@ export const MenuMask = () => {
               <li>
                 <a
                   title='title'
-                  href='https://t.me/galleryfinance'
+                  href='https://t.me/antimatterchat'
                   target='_blank'
                   rel='noopener'
                 >
@@ -257,7 +257,7 @@ export const MenuMask = () => {
               <li>
                 <a
                   title='title'
-                  href='https://github.com/we-starter'
+                  href='https://github.com/antimatter-finance'
                   target='_blank'
                   rel='noopener'
                 >

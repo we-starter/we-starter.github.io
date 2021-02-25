@@ -27,6 +27,8 @@ const zh_CN = {
   recruit: '募集中',
   settlement: '结算中',
   completed: '已完成',
+  settled: '已结算',
+  waitingSettlement: '等待结算',
   totalRaised: '募集总量',
   totalMortgage: '抵押总量',
   myMortgage: '我的抵押',
@@ -218,5 +220,13 @@ const zh_CN = {
   aboutProject:
     'Westarter是一个连接加密货币创新者和投资者的对接平台，任何创新者都可以无需许可的使用标准化的界面来发起和管理流动性拍卖。',
   willStart: '将开始于',
+  accessType: 'Access Type',
+  private: 'Private',
+  public: 'Public',
+  privateTips: '这是一个私有池，只有获得白名单才能认购',
+  publicTips: '这是一个公有池，按照资金比例配售',
+  cannotProject: '对不起，你不在白名单内，无法参与项目',
+  whiteList: '白名单',
+  supportWallet: '支持钱包',
 }
 export default zh_CN

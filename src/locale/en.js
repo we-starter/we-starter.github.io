@@ -27,6 +27,8 @@ const en_US = {
   recruit: 'fundraising undergoing',
   settlement: 'calculating',
   completed: 'completed',
+  settled: '已结算',
+  waitingSettlement: '等待结算',
   totalRaised: 'Total funds raised',
   totalMortgage: 'total assets collateralized',
   myMortgage: 'my collateral',
@@ -219,5 +221,13 @@ const en_US = {
   aboutProject:
     'Westarter is a platform to bridge cryptocurrency innovators and investors, any innovator can use a standardized interface to launch and manage liquidity bids without a permit.',
   willStart: 'Will start at',
+  accessType: 'Access Type',
+  private: 'Private',
+  public: 'Public',
+  privateTips: '这是一个私有池，只有获得白名单才能认购',
+  publicTips: '这是一个公有池，按照资金比例配售',
+  cannotProject: '对不起，你不在白名单内，无法参与项目',
+  whiteList: '白名单',
+  supportWallet: '支持钱包',
 }
 export default en_US

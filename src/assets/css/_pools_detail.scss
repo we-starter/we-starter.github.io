@@ -42,12 +42,29 @@
       box-shadow: 0px 4px 20px 0px rgba(#999, 0.3);
     }
     &_record {
+      position: relative;
       margin: 0 auto 0px;
       padding: 0 50px 30px;
       width: 640px;
       min-height: 164px;
       background: #f2f0eb;
       border-radius: 10px;
+      .mask_layer {
+        display: inline-block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 1;
+        width: 640px;
+        height: 164px;
+        font-size: 14px;
+        font-weight: 500;
+        color: #ffffff;
+        line-height: 164px;
+        text-align: center;
+        background: rgba(34, 41, 47, 0.7);
+        border-radius: 10px;
+      }
     }
     &_record_tab {
       a {
@@ -344,12 +361,29 @@
       box-shadow: 0px 4px 20px 0px rgba(#999, 0.3);
     }
     &_record {
+      position: relative;
       margin: 0 auto 0px;
       padding: 0 50px 30px;
       width: 640px;
       min-height: 164px;
       background: #f2f0eb;
       border-radius: 10px;
+      .mask_layer {
+        display: inline-block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 1;
+        width: 640px;
+        height: 164px;
+        font-size: 14px;
+        font-weight: 500;
+        color: #ffffff;
+        line-height: 164px;
+        text-align: center;
+        background: rgba(34, 41, 47, 0.7);
+        border-radius: 10px;
+      }
     }
     &_record_tab {
       a {
@@ -641,12 +675,29 @@
       box-shadow: 0px 4px 20px 0px rgba(#999, 0.3);
     }
     &_record {
+      position: relative;
       margin: 0 auto 20px;
       padding: 0 18px 12px;
       width: 320px;
       min-height: 164px;
       background: #f2f0eb;
       border-radius: 10px;
+      .mask_layer {
+        display: inline-block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 1;
+        width: 640px;
+        height: 164px;
+        font-size: 14px;
+        font-weight: 500;
+        color: #ffffff;
+        line-height: 164px;
+        text-align: center;
+        background: rgba(34, 41, 47, 0.7);
+        border-radius: 10px;
+      }
     }
     &_record_tab {
       a {
@@ -928,12 +979,29 @@
       box-shadow: 0px 4px 20px 0px rgba(#999, 0.3);
     }
     &_record {
+      position: relative;
       margin: 0 auto 20px;
       padding: 0 18px 12px;
       width: 320px;
       min-height: 164px;
       background: #f2f0eb;
       border-radius: 10px;
+      .mask_layer {
+        display: inline-block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 1;
+        width: 640px;
+        height: 164px;
+        font-size: 14px;
+        font-weight: 500;
+        color: #ffffff;
+        line-height: 164px;
+        text-align: center;
+        background: rgba(34, 41, 47, 0.7);
+        border-radius: 10px;
+      }
     }
     &_record_tab {
       a {

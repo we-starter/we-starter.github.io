@@ -173,6 +173,11 @@ export const PoolsDetail = (props) => {
         </a>
       </div>
       <div className='pools_detail_record'>
+        {pool && pool.type === 1 && pool.isPrivate && (
+          <span className='mask_layer'>
+            <FormattedMessage id='cannotProject' />
+          </span>
+        )}
         <div className='pools_detail_record_tab'>
           <a
             onClick={() => setRecordTab(1)}
@@ -202,9 +207,9 @@ export const PoolsDetail = (props) => {
                   <td>
                     <FormattedMessage id='winningRate' />
                   </td>
-                  {/* <td>
+                  <td>
                     <FormattedMessage id='winningAmount' />
-                  </td> */}
+                  </td>
                 </tr>
               </thead>
               <tbody>
@@ -214,14 +219,21 @@ export const PoolsDetail = (props) => {
                       {fromWei(pool.purchasedCurrencyOf).toFixed(6, 1) * 1}
                     </td>
                     <td>
-                      {fromWei(pool.settleable.rate)
-                        .multipliedBy(new BigNumber(100))
-                        .toFixed(2, 1)
-                        .toString() * 1}
-                      %
+                      {pool &&
+                        pool.type === 1 &&
+                        pool.isPrivate(<FormattedMessage id='whiteList' />)}
+                      {pool && pool.type === 1 && '--'}
+                      {pool &&
+                        pool.type !== 1 &&
+                        fromWei(pool.settleable.rate)
+                          .multipliedBy(new BigNumber(100))
+                          .toFixed(2, 1)
+                          .toString() *
+                          1 +
+                          '%'}
                     </td>
                     {/*<td>{Web3.utils.fromWei(pool.settleable.volume, 'ether')}</td>*/}
-                    {/* <td>
+                    <td>
                       {new BigNumber(
                         Web3.utils.fromWei(pool.purchasedCurrencyOf, 'ether')
                       )
@@ -233,13 +245,13 @@ export const PoolsDetail = (props) => {
                         .dividedBy(new BigNumber(pool.price))
                         .toFixed(6, 1)
                         .toString() * 1}
-                    </td> */}
+                    </td>
                   </tr>
                 ) : (
                   <tr>
                     <td>-</td>
                     <td>-</td>
-                    {/* <td>-</td> */}
+                    <td>-</td>
                   </tr>
                 )}
               </tbody>
