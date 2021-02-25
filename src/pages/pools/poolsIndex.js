@@ -10,7 +10,7 @@ import AoLink from '../../assets/icon/aolink.png'
 import BitKeep from '../../assets/icon/bitkeep.png'
 import HyperPay from '../../assets/icon/HyperPay-Logo@2x.png'
 import { usePoolsInfo } from './Hooks'
-import pool from '../../configs/pools'
+// import pool from '../../configs/pools'
 import { FormattedMessage } from 'react-intl'
 import Web3 from 'web3'
 import { formatAmount } from '../../utils/format'
@@ -29,8 +29,8 @@ const PoolsIndex = (props) => {
 
   const { account, active, library } = useActiveWeb3React()
 
-  // const pools = usePoolsInfo()
-  const pools = pool
+  const pools = usePoolsInfo()
+
   const setData = async () => {
     switch (tabFlag) {
       case 1:

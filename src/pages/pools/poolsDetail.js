@@ -173,7 +173,7 @@ export const PoolsDetail = (props) => {
         </a>
       </div>
       <div className='pools_detail_record'>
-        {pool && pool.type === 1 && pool.isPrivate && (
+        {pool && pool.type === 1 && pool.quotaOf == 0 && (
           <span className='mask_layer'>
             <FormattedMessage id='cannotProject' />
           </span>
@@ -221,7 +221,7 @@ export const PoolsDetail = (props) => {
                     <td>
                       {pool &&
                         pool.type === 1 &&
-                        pool.isPrivate(<FormattedMessage id='whiteList' />)}
+                        pool.quotaOf > 0 && (<FormattedMessage id='whiteList' />)}
                       {pool && pool.type === 1 && '--'}
                       {pool &&
                         pool.type !== 1 &&
