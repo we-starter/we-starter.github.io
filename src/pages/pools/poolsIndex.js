@@ -125,7 +125,7 @@ const PoolsIndex = (props) => {
       time, // 结算时间
       icon,
       type,
-      isPrivate,
+      quotaOf,
     } = pool
     let left_time = 0
     if (status === 0) {
@@ -227,7 +227,7 @@ const PoolsIndex = (props) => {
               style={{ textAlign: 'right' }}
             >
               <span
-                className={cs('crown', isPrivate && 'crown-highlight')}
+                className={cs('crown', quotaOf > 0 && 'crown-highlight')}
               ></span>
               <FormattedMessage id='private' />
               <span

@@ -550,7 +550,7 @@ export const usePoolsInfo = (address = '') => {
                                         totalPurchasedCurrency,
                                         totalPurchasedAmount,
                                         purchasedCurrencyOf: offeredOf,
-                                        quotaOf, // 大于0则在白名单里面
+                                        quotaOf, //最大可申购额度 大于0则在白名单里面
                                         totalSettleable: {
                                             amount: 0,
                                             volume: totalClaimed,
@@ -558,7 +558,8 @@ export const usePoolsInfo = (address = '') => {
                                         },
                                         settleable: {
                                             amount: 0,
-                                            volume: claimedOf,
+                                            volume: offeredOf,
+                                            claimedOf,
                                             rate: Web3.utils.toWei('1', 'ether'),
                                         }
                                     })

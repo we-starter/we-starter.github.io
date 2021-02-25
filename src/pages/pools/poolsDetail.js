@@ -38,7 +38,7 @@ export const PoolsDetail = (props) => {
   const { dispatch } = useContext(mainContext)
 
   useEffect(() => {
-    setPool(pools.pop())
+    setPool(pools[0])
   }, [pools, address])
 
   const onClaim = () => {
@@ -152,11 +152,16 @@ export const PoolsDetail = (props) => {
           }`}
           onClick={() => {
             if (pool.status === 1) {
-              dispatch({
-                type: HANDLE_WALLET_MODAL,
-                walletModal: 'join',
-                pool,
-              })
+              if(pool.type === 1 && pool.purchasedCurrencyOf > 0){
+                // 如果是 已经申购过的
+                message.info('已申购过')
+              }else{
+                dispatch({
+                  type: HANDLE_WALLET_MODAL,
+                  walletModal: 'join',
+                  pool,
+                })
+              }
             } else {
               message.info(intl.formatMessage({ id: 'cannotSubscribe' }))
             }
@@ -281,13 +286,21 @@ export const PoolsDetail = (props) => {
                     <td>{pool && formatAmount(pool.settleable.amount)}</td>
                     <td>{pool && formatAmount(pool.settleable.volume)}</td>
                     <td>
-                      {pool && pool.settleable.volume > 0 && (
+                      {pool && pool.type !== 1 && pool.settleable.volume > 0 && (
                         <a
                           className='pools_detail_record_btn'
                           onClick={() => onClaim()}
                         >
                           <FormattedMessage id='poolsDetailText5' />
                         </a>
+                      )}
+                      {pool && pool.type === 1 && pool.settleable.volume > 0 && pool.settleable.claimedOf === 0 && (
+                          <a
+                              className='pools_detail_record_btn'
+                              onClick={() => onClaim()}
+                          >
+                            <FormattedMessage id='poolsDetailText5' />
+                          </a>
                       )}
                     </td>
                   </tr>

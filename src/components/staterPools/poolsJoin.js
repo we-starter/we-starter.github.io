@@ -7,6 +7,7 @@ import { getPointAddress } from '../../web3/address';
 import Web3 from 'web3';
 import { getContract, useActiveWeb3React } from '../../web3';
 import Starter from '../../web3/abi/Starter.json';
+import Offering from '../../web3/abi/Offering.json';
 import { injectIntl } from 'react-intl';
 import ERC20 from '../../web3/abi/ERC20.json';
 import { FormattedMessage } from 'react-intl';
@@ -46,9 +47,11 @@ const PoolsJoin = (props) => {
     }, [pool]);
 
     const onMax = () => {
-        setAmount(
-            parseFloat(Web3.utils.fromWei(balance, 'ether')).toFixed(6) * 1
-        );
+        let max = balance
+        if(pool.type === 1 && pool.quotaOf > 0 && pool.quotaOf < balance){
+            max = pool.quotaOf
+        }
+        setAmount(new BigNumber(Web3.utils.fromWei(max, 'ether')).toFixed(6, 1) * 1)
     };
 
     const onChange = (e) => {
@@ -106,14 +109,13 @@ const PoolsJoin = (props) => {
     };
 
     const onConfirm = (e) => {
-        const pool_contract = getContract(library, Starter, pool.address);
-        if(pool.currency.is_ht) {
-            alert(pool.currency.is_ht)
+        if(pool.type === 1) {
+            const pool_contract = getContract(library, Offering, pool.address);
             pool_contract.methods
                 .offerHT()
                 .send({
                     from: account,
-                    amount: Web3.utils.toWei(`${amount}`, 'ether'),
+                    value: Web3.utils.toWei(`${amount}`, 'ether'),
                 })
                 .on('transactionHash', (hash) => {
                     dispatch({
@@ -144,6 +146,7 @@ const PoolsJoin = (props) => {
                     });
                 });
         }else{
+            const pool_contract = getContract(library, Starter, pool.address);
             pool_contract.methods
                 .purchase(Web3.utils.toWei(`${amount}`, 'ether'))
                 .send({
@@ -221,6 +224,21 @@ const PoolsJoin = (props) => {
                                 `${formatAmount(balance)} ${
                                     pool.currency.symbol
                                 }`}
+                            <br />
+                        </p>
+                        <p
+                            className='form-app__inputbox-after-text'
+                            style={{
+                                marginBottom: 0,
+                                color: '#22292F',
+                                textAlign: 'left',
+                                opacity: 1,
+                            }}>
+                            最大申购额度:
+                            {pool && pool.type === 1 && pool.quotaOf > 0 &&
+                            `${formatAmount(pool.quotaOf)} ${
+                                pool.currency.symbol
+                            }`}
                             <br />
                         </p>
                         <div className='deposit__inputbox form-app__inputbox'>
