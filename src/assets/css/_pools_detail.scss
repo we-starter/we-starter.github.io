@@ -4,6 +4,7 @@
 }
 @media #{$desktop} {
   .pools_detail {
+    margin-top: 60px;
     padding-bottom: 176px;
     &_btn_box {
       margin: 0 auto;
@@ -323,6 +324,7 @@
 }
 @media #{$mdWidth} {
   .pools_detail {
+    margin-top: 60px;
     padding-bottom: 176px;
     &_btn_box {
       margin: 0 auto;
