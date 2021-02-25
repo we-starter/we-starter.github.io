@@ -1,11 +1,11 @@
 export default [
   {
     name: 'FIX',
-    address: '10x845932023c0ec23f905e8e34f46ef8b684297310',
+    address: '0x845932023c0ec23f905e8e34f46ef8b684297310',
     start_at: new Date('2020/2/19 23:10').getTime() / 1000,
     is_top: true,
     currency: {
-      address: '10xa71edc38d189767582c38a3145b5873052c3e47a',
+      address: '0xa71edc38d189767582c38a3145b5873052c3e47a',
       symbol: 'MATTER',
     },
     icon: '',
@@ -39,11 +39,11 @@ export default [
   },
   {
     name: 'MATTER',
-    address: '20x845932023c0ec23f905e8e34f46ef8b684297310',
+    address: '0x845932023c0ec23f905e8e34f46ef8b684297310',
     start_at: new Date('2020/2/19 23:10').getTime() / 1000,
     is_top: true,
     currency: {
-      address: '20xa71edc38d189767582c38a3145b5873052c3e47a',
+      address: '0xa71edc38d189767582c38a3145b5873052c3e47a',
       symbol: 'MATTER',
     },
     icon: '',
@@ -77,11 +77,11 @@ export default [
   },
   {
     name: 'HUSD POOL',
-    address: '30x845932023c0ec23f905e8e34f46ef8b684297310',
+    address: '0x845932023c0ec23f905e8e34f46ef8b684297310',
     start_at: new Date('2020/2/19 23:10').getTime() / 1000,
     is_top: true,
     currency: {
-      address: '30xa71edc38d189767582c38a3145b5873052c3e47a',
+      address: '0xa71edc38d189767582c38a3145b5873052c3e47a',
       symbol: 'MATTER',
     },
     icon: '',

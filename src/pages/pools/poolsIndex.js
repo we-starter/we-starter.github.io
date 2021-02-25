@@ -121,7 +121,7 @@ const PoolsIndex = (props) => {
           'pools-type_card_box',
           type === 1 && 'pools-type_private'
         )}
-        key={pool.address}
+        key={index}
       >
         <div className='pools-type_title'>
           <p className='pools-type_card_title'>
