@@ -6,7 +6,7 @@ import bookMarkLine from '../../assets/icon/book-mark-line@2x.png'
 import Web3 from 'web3'
 import { GALLERY_SELECT_WEB3_CONTEXT, HANDLE_WALLET_MODAL } from '../../const'
 import transitions from '@material-ui/core/styles/transitions'
-import pools from '../../configs/pools'
+// import pools from '../../configs/pools'
 import { usePoolsInfo } from './Hooks'
 import { message } from 'antd'
 import { getContract, useActiveWeb3React } from '../../web3'
@@ -29,7 +29,7 @@ export const PoolsDetail = (props) => {
   const { intl } = props
 
   const { account, active, library, chainId } = useActiveWeb3React()
-  // const pools = usePoolsInfo(address)
+  const pools = usePoolsInfo(address)
 
   const [detailTab, setDetailTab] = useState('detail')
   const [recordTab, setRecordTab] = useState(1)
@@ -37,9 +37,9 @@ export const PoolsDetail = (props) => {
 
   const { dispatch } = useContext(mainContext)
 
-  // useEffect(() => {
-  //   setPool(pools.pop())
-  // }, [pools, address])
+  useEffect(() => {
+    setPool(pools.pop())
+  }, [pools, address])
 
   const onClaim = () => {
     getContract(library, Starter, address)
