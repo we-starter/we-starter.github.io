@@ -310,7 +310,7 @@
       }
     }
     &_enter {
-      margin-top: 42px;
+      margin-top: 24px;
       display: inline-block;
       width: 100%;
       height: 40px;
@@ -324,11 +324,16 @@
       text-align: center;
       &:hover {
         color: #fff;
+        background: #00b900;
       }
     }
     &_disable_enter {
       color: #fff;
       background: #b6b9bc;
+      &:hover {
+        color: #fff;
+        background: #b6b9bc;
+      }
     }
   }
 }
@@ -630,7 +635,7 @@
       }
     }
     &_enter {
-      margin-top: 42px;
+      margin-top: 24px;
       display: inline-block;
       width: 100%;
       height: 40px;
@@ -644,11 +649,16 @@
       text-align: center;
       &:hover {
         color: #fff;
+        background: #00b900;
       }
     }
     &_disable_enter {
       color: #fff;
       background: #b6b9bc;
+      &:hover {
+        color: #fff;
+        background: #b6b9bc;
+      }
     }
   }
 }
@@ -955,11 +965,16 @@
       text-align: center;
       &:hover {
         color: #fff;
+        background: #00b900;
       }
     }
     &_disable_enter {
       color: #fff;
       background: #b6b9bc;
+      &:hover {
+        color: #fff;
+        background: #b6b9bc;
+      }
     }
   }
 }
@@ -1265,11 +1280,16 @@
       text-align: center;
       &:hover {
         color: #fff;
+        background: #00b900;
       }
     }
     &_disable_enter {
       color: #fff;
       background: #b6b9bc;
+      &:hover {
+        color: #fff;
+        background: #b6b9bc;
+      }
     }
   }
 }

@@ -230,5 +230,6 @@ const zh_CN = {
   supportWallet: '支持钱包',
   countdown: '距离募集开始还有',
   myQuota: '我的额度',
+  alreadySubscribed: '已申购过',
 }
 export default zh_CN

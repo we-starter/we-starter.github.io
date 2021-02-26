@@ -163,7 +163,7 @@ export const PoolsDetail = (props) => {
             if (pool.status === 1) {
               if (pool.type === 1 && pool.purchasedCurrencyOf > 0) {
                 // 如果是 已经申购过的
-                message.info('已申购过')
+                message.info(intl.formatMessage({ id: 'alreadySubscribed' }))
               } else {
                 dispatch({
                   type: HANDLE_WALLET_MODAL,

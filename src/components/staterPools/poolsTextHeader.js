@@ -135,7 +135,7 @@ const PoolsTextHeader = (props) => {
                 <li className='menu__item'>
                   <a
                     href={
-                      language === 'ZH-CH'
+                      language === 'English'
                         ? WeStarterGuidebookZH
                         : WeStarterGuidebookEN
                     }
@@ -148,7 +148,11 @@ const PoolsTextHeader = (props) => {
                 </li>
                 <li className='menu__item'>
                   <a
-                    href='https://www.yuque.com/docs/share/f89e3a8a-a918-48da-bf61-700ddcfaac95?# '
+                    href={
+                      language === 'English'
+                        ? 'https://www.yuque.com/docs/share/f89e3a8a-a918-48da-bf61-700ddcfaac95?#'
+                        : 'https://www.yuque.com/docs/share/cc71c6e4-4d0d-4ef4-bcb8-0bee03bd02f3?# '
+                    }
                     target='_blank'
                     className='menu__link'
                     onClick={handleMenuItemClick}
