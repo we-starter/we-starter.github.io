@@ -233,5 +233,6 @@ const en_US = {
     'Sorry, you are not eligable for this project since you are not involved in the whitelist.',
   myQuota: 'My Quota',
   alreadySubscribed: 'Already Subscribed',
+  notInWhitelist: 'Not in whitelist',
 }
 export default en_US

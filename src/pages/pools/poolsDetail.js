@@ -166,7 +166,10 @@ const PoolsDetail = (props) => {
                 // 如果是 已经申购过的
                 // message.info('已申购过')
                 message.info(intl.formatMessage({ id: 'alreadySubscribed' }))
-              } else {
+              }else if(pool.type === 1 && pool.quotaOf == 0){
+                //不在白名单里面
+                message.info(intl.formatMessage({ id: 'notInWhitelist' }))
+              }else {
                 dispatch({
                   type: HANDLE_WALLET_MODAL,
                   walletModal: 'join',

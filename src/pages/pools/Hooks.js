@@ -514,6 +514,8 @@ export const usePoolsInfo = (address = '') => {
                                         status = 3
                                     }
 
+                                    status = 1
+
                                     const _ratio = new BigNumber(ratio).dividedBy(new BigNumber(10).pow(parseInt(underlying_decimals) - parseInt(currency_decimals) + 18))
                                     const totalPurchasedAmount = Web3.utils.toWei(new BigNumber(
                                         pool.amount
