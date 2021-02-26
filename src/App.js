@@ -20,7 +20,7 @@ import { StakingPool3 } from './pages/pools/stakingPool3'
 import StakingPool4 from './pages/pools/stakingPool4'
 import PoolsIndex from './pages/pools/poolsIndex'
 import WriteInformation from './pages/pools/writeInformation'
-import { PoolsDetail } from './pages/pools/poolsDetail'
+import PoolsDetail from './pages/pools/poolsDetail'
 import Intl from './locale/intl'
 
 function getLibrary(provider) {

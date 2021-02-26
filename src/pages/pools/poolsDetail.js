@@ -20,11 +20,11 @@ import {
 } from '../../const'
 import { mainContext } from '../../reducer'
 import Starter from '../../web3/abi/Starter.json'
-import { FormattedMessage } from 'react-intl'
+import { FormattedMessage, injectIntl } from 'react-intl'
 import BigNumber from 'bignumber.js'
 import { formatAmount, fromWei } from '../../utils/format'
 
-export const PoolsDetail = (props) => {
+const PoolsDetail = (props) => {
   const { address } = props.match.params
 
   const { intl } = props
@@ -92,7 +92,8 @@ export const PoolsDetail = (props) => {
             </span>
             {/* <span>{pool && pool.ratio}</span> */}
             <span>
-              <FormattedMessage id='myQuota' /> {pool && pool.quotaOf}{' '}
+              <FormattedMessage id='myQuota' />{' '}
+              {pool && formatAmount(pool.quotaOf)}{' '}
               {pool && pool.underlying.symbol}
             </span>
           </div>
@@ -163,6 +164,7 @@ export const PoolsDetail = (props) => {
             if (pool.status === 1) {
               if (pool.type === 1 && pool.purchasedCurrencyOf > 0) {
                 // 如果是 已经申购过的
+                // message.info('已申购过')
                 message.info(intl.formatMessage({ id: 'alreadySubscribed' }))
               } else {
                 dispatch({
@@ -528,3 +530,5 @@ const renderStatus = (status) => {
       return '已完成'
   }
 }
+
+export default injectIntl(PoolsDetail)
