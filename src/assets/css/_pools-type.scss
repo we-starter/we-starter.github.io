@@ -897,8 +897,7 @@
       .tips_content {
         position: absolute;
         bottom: 30px;
-        left: 50%;
-        transform: translateX(-50%);
+        right: 0;
         padding: 0 10px;
         margin-top: 0 !important;
         height: 24px;
@@ -914,8 +913,7 @@
           display: inline-block;
           position: absolute;
           bottom: -5px;
-          left: 50%;
-          transform: translateX(-50%);
+          right: 6px;
           width: 0;
           height: 0;
           border-top: 7px solid #e1dfd9;
@@ -1212,8 +1210,7 @@
       .tips_content {
         position: absolute;
         bottom: 30px;
-        left: 50%;
-        transform: translateX(-50%);
+        right: 0;
         padding: 0 10px;
         margin-top: 0 !important;
         height: 24px;
@@ -1229,8 +1226,7 @@
           display: inline-block;
           position: absolute;
           bottom: -5px;
-          left: 50%;
-          transform: translateX(-50%);
+          right: 6px;
           width: 0;
           height: 0;
           border-top: 7px solid #e1dfd9;

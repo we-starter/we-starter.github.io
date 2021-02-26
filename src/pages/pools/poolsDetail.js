@@ -496,22 +496,22 @@ const PoolsDetail = (props) => {
           )}
           {detailTab === 'project' && (
             <div className='pools_detail_content_link'>
-              <a>
+              <a href={pool && pool.website} target='_blank'>
                 <img src={chromeLine} />
                 {pool && pool.website}
               </a>
-              <a>
+              <a href={pool && pool.white_paper} target='_blank'>
                 <img src={bookMarkLine} />
                 {pool && pool.white_paper}
               </a>
-              <a>
+              <a href={pool && pool.twitter} target='_blank'>
                 <svg width='24' height='24' viewBox='0 0 30 30'>
                   <path d='M27.7 7.07c-.95.42-1.96.7-3 .82A5.25 5.25 0 0027 5a10.45 10.45 0 01-3.32 1.27 5.23 5.23 0 00-8.9 4.77A14.84 14.84 0 014 5.57a5.21 5.21 0 001.61 6.98 5.21 5.21 0 01-2.36-.65v.06a5.23 5.23 0 004.2 5.13c-.78.21-1.59.24-2.37.1a5.23 5.23 0 004.88 3.62 10.49 10.49 0 01-7.74 2.17 14.79 14.79 0 008.02 2.35c9.61 0 14.87-7.97 14.87-14.88 0-.22 0-.45-.02-.67 1.03-.74 1.91-1.66 2.61-2.7v-.01z' />
                 </svg>
                 {pool && pool.twitter}
               </a>
               <a>
-                <FormattedMessage id='bannerContent' />
+                <FormattedMessage id='aboutProject' />
               </a>
             </div>
           )}
