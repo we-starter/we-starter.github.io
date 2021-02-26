@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import cs from 'classnames'
 import { withRouter } from 'react-router'
-import HUSD from '../../assets/icon/HUSD@2x.png'
+import HUSD from '../../assets/icon/MATTER.png'
 import noDataPng from '../../assets/icon/noData@2x.png'
 import { usePoolsInfo } from './Hooks'
 import pool from '../../configs/pools'
@@ -111,13 +111,14 @@ const PoolsIndex = (props) => {
       start_at, // 开始时间
       time, // 结算时间
     } = pool
+    console.log(status)
     let left_time = 0
     if (status === 0) {
       left_time = start_at * 1000 - Date.now()
     } else if (status === 1 || status === 4) {
       left_time = time * 1000 - Date.now()
     }
-
+    console.log(left_time)
     const goFinance = () => {
       window.open('https://antimatter.finance/')
     }
