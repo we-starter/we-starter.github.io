@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import cs from 'classnames'
 import { withRouter } from 'react-router'
 import HUSD from '../../assets/icon/HUSD@2x.png'
+import MATTER from '../../assets/icon/MATTER@2x.png'
 import noDataPng from '../../assets/icon/noData@2x.png'
 import HUOBI from '../../assets/icon/huobi.png'
 import Metamask from '../../assets/icon/Metamask@2x.png'
@@ -137,7 +138,7 @@ const PoolsIndex = (props) => {
       >
         <div className='pools-type_title'>
           <p className='pools-type_card_title'>
-            <img src={HUSD} />
+            <img src={MATTER} />
             {name}
           </p>
           <p className='pools-type_card_title_right'>

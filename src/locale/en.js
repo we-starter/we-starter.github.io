@@ -232,5 +232,6 @@ const en_US = {
   countdown:
     'Sorry, you are not eligable for this project since you are not involved in the whitelist.',
   myQuota: 'My Quota',
+  alreadySubscribed: 'Already Subscribed',
 }
 export default en_US
