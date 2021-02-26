@@ -342,7 +342,7 @@ const PoolsDetail = (props) => {
                       {pool &&
                         pool.type === 1 &&
                         pool.settleable.volume > 0 &&
-                        pool.settleable.claimedOf === 0 && (
+                        pool.settleable.claimedOf == 0 && (
                           <a
                             className='pools_detail_record_btn'
                             onClick={() => onClaim()}
