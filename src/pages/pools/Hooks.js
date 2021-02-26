@@ -538,7 +538,7 @@ export const usePoolsInfo = (address = '') => {
                                   return Object.assign({}, pool, {
                                         ratio: `1${pool.currency.symbol} = ${_ratio}${pool.underlying.symbol}`,
                                         progress:
-                                            new BigNumber(Web3.utils.fromWei(totalQuota, "ether"))
+                                            new BigNumber(Web3.utils.fromWei(totalOffered, "ether"))
                                                 .dividedBy(new BigNumber(pool.amount))
                                                 .toNumber()
                                                 .toFixed(2) * 1,
