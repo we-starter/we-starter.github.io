@@ -237,7 +237,7 @@ const PoolsIndex = (props) => {
               </span>
             </p>
           )}
-          {type === 2 && (
+          {type !== 1 && (
             <p
               className='pools-type_card_ratio pools-type_card_access'
               style={{ textAlign: 'right' }}

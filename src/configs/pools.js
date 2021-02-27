@@ -21,7 +21,7 @@ export default [
     },
     amount: '250000',
     pool_info: {
-      token_distribution: 'MATTER',
+      token_distribution: 'February 27th 2021, 9:30PM SGT',
       min_allocation: '0',
       max_allocation: '6.6 HT',
       min_swap_level: '833 HT',
