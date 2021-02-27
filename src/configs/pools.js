@@ -4,7 +4,7 @@ export default [
     address: '0x845932023c0ec23f905e8e34f46ef8b684297310',
     start_at: new Date('2021/2/19 21:30').getTime() / 1000,
     is_top: true,
-    is_coming: true,
+    is_coming: false,
     currency: {
       address: '0x0', // 如果是0x0则是ht
       symbol: 'HT',

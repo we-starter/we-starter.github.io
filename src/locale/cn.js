@@ -231,5 +231,6 @@ const zh_CN = {
   countdown: '距离募集开始还有',
   myQuota: '我的额度',
   alreadySubscribed: '已申购过',
+  notInWhitelist: '无申购额度',
 }
 export default zh_CN

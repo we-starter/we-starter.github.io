@@ -166,7 +166,10 @@ const PoolsDetail = (props) => {
                 // 如果是 已经申购过的
                 // message.info('已申购过')
                 message.info(intl.formatMessage({ id: 'alreadySubscribed' }))
-              } else {
+              }else if(pool.type === 1 && pool.quotaOf == 0){
+                //不在白名单里面
+                message.info(intl.formatMessage({ id: 'notInWhitelist' }))
+              }else {
                 dispatch({
                   type: HANDLE_WALLET_MODAL,
                   walletModal: 'join',
@@ -339,7 +342,7 @@ const PoolsDetail = (props) => {
                       {pool &&
                         pool.type === 1 &&
                         pool.settleable.volume > 0 &&
-                        pool.settleable.claimedOf === 0 && (
+                        pool.settleable.claimedOf == 0 && (
                           <a
                             className='pools_detail_record_btn'
                             onClick={() => onClaim()}
