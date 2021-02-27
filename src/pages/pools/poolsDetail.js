@@ -43,9 +43,10 @@ const PoolsDetail = (props) => {
     setPool(pools[0])
     if(pools[0]){
       const {status,start_at, time} = pools[0]
+      console.log(status)
       if (status === 0) {
         setLeftTime(start_at * 1000 - Date.now())
-      } else if (status === 1 || status === 2) {
+      } else if (status === 1) {
         setLeftTime(time * 1000 - Date.now())
       }
     }
@@ -156,8 +157,8 @@ const PoolsDetail = (props) => {
           <div className='pools_card_content_title pools_card_schedule'>
             <span>{pool && pool.progress * 100}%</span>
             <span>
-              {pool && formatAmount(pool.totalPurchasedCurrency)}/
-              {pool && formatAmount(pool.totalPurchasedAmount)}
+              {pool && formatAmount(pool.totalPurchasedUnderlying)}/
+              {pool && pool.amount}
             </span>
           </div>
         </div>
@@ -208,6 +209,7 @@ const PoolsDetail = (props) => {
               &nbsp;
               <span className='pools-type_time'>
                 <Timer
+                  key={left_time}
                   initialTime={left_time}
                   direction='backward'
                   formatValue={(number) => {
