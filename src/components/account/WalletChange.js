@@ -69,7 +69,6 @@ export const WalletChange = ({ onClose, onCancel }) => {
     <div className='modal'>
       <div className='modal__box'>
         <form className='form-app' action='/'>
-          {account}
           <div className='form-app__inner transction-submitted'>
             <div
               onClick={() => {
