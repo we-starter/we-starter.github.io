@@ -24,6 +24,24 @@
         }
       }
     }
+    .tg {
+      display: block;
+      width: 24px;
+      height: 24px;
+      background: #7a7f82;
+      font-size: 12px;
+      color: #fff;
+      font-weight: 700;
+      line-height: 24px;
+      text-align: center;
+      transform: rotate(10deg) scale(0.9);
+      border-radius: 50%;
+      @media #{$desktop} {
+        &:hover {
+          background: #0f8c20;
+        }
+      }
+    }
   }
 }
 @media #{$desktop} {
@@ -93,6 +111,24 @@
           }
         }
       }
+      .tg {
+        display: block;
+        width: 24px;
+        height: 24px;
+        background: #7a7f82;
+        font-size: 12px;
+        color: #fff;
+        font-weight: 700;
+        line-height: 24px;
+        text-align: center;
+        transform: rotate(10deg) scale(0.9);
+        border-radius: 50%;
+        @media #{$desktop} {
+          &:hover {
+            background: #0f8c20;
+          }
+        }
+      }
     }
   }
 }
@@ -123,6 +159,24 @@
         @media #{$desktop} {
           &:hover svg {
             fill: #0f8c20;
+          }
+        }
+      }
+      .tg {
+        display: block;
+        width: 24px;
+        height: 24px;
+        background: #7a7f82;
+        font-size: 12px;
+        color: #fff;
+        font-weight: 700;
+        line-height: 24px;
+        text-align: center;
+        transform: rotate(10deg) scale(0.9);
+        border-radius: 50%;
+        @media #{$desktop} {
+          &:hover {
+            background: #0f8c20;
           }
         }
       }
