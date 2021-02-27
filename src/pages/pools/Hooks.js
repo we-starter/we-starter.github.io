@@ -551,6 +551,7 @@ export const usePoolsInfo = (address = '') => {
                                         is_join,
                                         totalPurchasedCurrency,
                                         totalPurchasedAmount,
+                                        totalPurchasedUnderlying: totalOffered,
                                         purchasedCurrencyOf: offeredOf,
                                         quotaOf, //最大可申购额度 大于0则在白名单里面
                                         totalSettleable: {
