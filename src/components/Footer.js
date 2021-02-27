@@ -57,7 +57,7 @@ const Footer = (props) => {
           <li>
             <a
               title='title'
-              href='https://twitter.com/antimatterdefi'
+              href='https://twitter.com/starter_we'
               target='_blank'
               rel='noopener'
             >
@@ -69,7 +69,7 @@ const Footer = (props) => {
           <li>
             <a
               title='title'
-              href='https://t.me/antimatterchat'
+              href='https://t.me/westarter_official'
               target='_blank'
               rel='noopener'
             >
@@ -82,7 +82,7 @@ const Footer = (props) => {
           <li>
             <a
               title='title'
-              href='https://github.com/antimatter-finance'
+              href='https://github.com/we-starter'
               target='_blank'
               rel='noopener'
             >
@@ -94,7 +94,7 @@ const Footer = (props) => {
           <li>
             <a
               title='title'
-              href='https://www.yuque.com'
+              href='https://www.yuque.com/westarter'
               target='_blank'
               rel='noopener'
             >
