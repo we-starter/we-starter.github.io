@@ -336,10 +336,16 @@ export const useStakingPoolInfo = () => {
 export const usePoolsInfo = (address = '') => {
     const {account, active, library, chainId} = useActiveWeb3React()
 
+    const now = parseInt(Date.now() / 1000)
+
+    const [poolsInfo, setPoolsInfo] = useState(pools)
+
+    const [blockNumber, setBlockNumber] = useState(0)
     // 数据预处理
     pools.map(item => {
         Object.assign(item, {
             quotaOf: 0, //设置默认不在白名单
+            status: now < item.start_at ? 0 : (now < item.time ? 1 : 2),
             currency: {
                 is_ht: item.currency.address === '0x0',
                 ...item.currency
@@ -347,10 +353,6 @@ export const usePoolsInfo = (address = '') => {
         })
     })
 
-    const [poolsInfo, setPoolsInfo] = useState(pools)
-
-    const [blockNumber, setBlockNumber] = useState(0)
-    const now = parseInt(Date.now() / 1000)
 
     useEffect(() => {
         const updateBlockNumber = (blockNumber) => {

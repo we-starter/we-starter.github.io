@@ -31,7 +31,7 @@ export default [
     twitter: 'https://twitter.com/antimatterdefi',
     progress: 0,
     status: 0,
-    ratio: '1HT=XXX MATTER',
+    ratio: '1HT=1MATTER',
     time: '1614441600',
     purchasedCurrencyOf: 0,
     totalPurchasedAmount: '2500000000000000000000000',
