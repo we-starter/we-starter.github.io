@@ -95,7 +95,7 @@ const PoolsIndex = (props) => {
       case 3:
         return (
           <span className='pools-type_over_status'>
-            <FormattedMessage id='settled' />
+            <FormattedMessage id='completed' />
           </span>
         )
     }
@@ -140,7 +140,7 @@ const PoolsIndex = (props) => {
             <img src={MATTER} />
             {name}
           </p>
-          
+
           <p className='pools-type_card_title_right'>
             {renderStatus(status)}
             {status < 3 && (

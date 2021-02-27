@@ -226,11 +226,11 @@ const en_US = {
   public: 'Public',
   privateTips: 'Private pool, only for users in whitelist',
   publicTips: 'Public offering pool, prorated by the amount of funds',
-  cannotProject: 'Sorry, users included in whitelist are eligible for this',
+  cannotProject:
+    'Sorry, you are not eligable for this project since you are not involved in the whitelist.',
   whiteList: 'Whitelist',
   supportWallet: 'support wallet',
-  countdown:
-    'Sorry, you are not eligable for this project since you are not involved in the whitelist.',
+  countdown: 'Fundraising Countdown:',
   myQuota: 'My Quota',
   alreadySubscribed: 'Already Subscribed',
   notInWhitelist: 'Not in whitelist',
