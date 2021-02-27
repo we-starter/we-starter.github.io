@@ -27,20 +27,22 @@ const PoolsTextHeader = (props) => {
   const location = useLocation()
   const { balance } = useHTBalance()
   const [language, setLanguage] = useState(
-    (state.locale === 'en' && 'English') || (state.locale === 'zh' && 'ZH-CH')
+    (state.locale === 'en' && '中文简体') ||
+      (state.locale === 'zh' && 'English')
   )
 
   useEffect(() => {
-    if (state.locale === 'en') setLanguage('English')
-    if (state.locale === 'zh') setLanguage('ZH-CH')
+    if (state.locale === 'en') setLanguage('中文简体')
+    if (state.locale === 'zh') setLanguage('English')
   }, [state.locale])
 
   const handleMenuItemClick = () => {
     setShowMenu(false)
   }
   const tabLanguage = (val) => {
+    val = val === 'English' ? 'en' : 'zh'
     if (val === 'en') setLanguage('English')
-    if (val === 'zh') setLanguage('ZH-CH')
+    if (val === 'zh') setLanguage('中文简体')
     dispatch({
       type: CHANGE_LOCALE,
       locale: val,
@@ -133,7 +135,7 @@ const PoolsTextHeader = (props) => {
                 <li className='menu__item'>
                   <a
                     href={
-                      language === 'ZH-CH'
+                      language === 'English'
                         ? WeStarterGuidebookZH
                         : WeStarterGuidebookEN
                     }
@@ -146,7 +148,11 @@ const PoolsTextHeader = (props) => {
                 </li>
                 <li className='menu__item'>
                   <a
-                    href='https://www.yuque.com/docs/share/f89e3a8a-a918-48da-bf61-700ddcfaac95?# '
+                    href={
+                      language === 'English'
+                        ? 'https://www.yuque.com/docs/share/f89e3a8a-a918-48da-bf61-700ddcfaac95?#'
+                        : 'https://www.yuque.com/docs/share/cc71c6e4-4d0d-4ef4-bcb8-0bee03bd02f3?# '
+                    }
                     target='_blank'
                     className='menu__link'
                     onClick={handleMenuItemClick}
@@ -159,16 +165,34 @@ const PoolsTextHeader = (props) => {
           </div>
 
           <div className='pools_text_header__menu-wrapper'>
-            <div className='language' style={{ marginRight: '16px' }}>
+            <div
+              className='language'
+              style={{ marginRight: '16px' }}
+              onClick={() => tabLanguage(language)}
+            >
               <img src={globe} alt='' />
-              {language}
-              <div
+              {language === '中文简体' ? '中文简体' : 'English'}
+              {/* <div
                 className='language-items'
                 style={{ top: '80%', bottom: 'auto' }}
               >
-                <p onClick={() => tabLanguage('en')}>English</p>
-                <p onClick={() => tabLanguage('zh')}>中文简体</p>
-              </div>
+                {language === 'ZH-CH' && (
+                  <p
+                    style={{ padding: '0', marginBottom: '0' }}
+                    onClick={() => tabLanguage('en')}
+                  >
+                    English
+                  </p>
+                )}
+                {language === 'English' && (
+                  <p
+                    style={{ padding: '0', marginBottom: '0' }}
+                    onClick={() => tabLanguage('zh')}
+                  >
+                    中文简体
+                  </p>
+                )}
+              </div> */}
             </div>
             {/* <a className='download-pdf' href={WeStarterPDF} target='_blank'></a> */}
             {active && (

@@ -18,6 +18,15 @@
       svg {
         fill: #7a7f82;
       }
+      img {
+        width: 18px;
+        height: 24px;
+        &:hover {
+          svg {
+            fill: #0f8c20;
+          }
+        }
+      }
       @media #{$desktop} {
         &:hover svg {
           fill: #0f8c20;

@@ -35,12 +35,22 @@ export const useBalance = (address) =>{
         console.log(active)
         if(active){
             try{
-                const contract = getContract(library, ERC20.abi, address)
-                console.log('token address:',address)
-                contract.methods.balanceOf(account).call().then(res =>{
-                    console.log('token totalSupply:',res)
-                    setBalance(res)
-                })
+                if(address === '0x0'){
+                    // 0x0是HT
+                    const web3 = getWeb3(library);
+                    web3.eth.getBalance(account).then(balance => {
+                        setBalance(balance)
+                    })
+
+                }else{
+                    const contract = getContract(library, ERC20.abi, address)
+                    console.log('token address:',address)
+                    contract.methods.balanceOf(account).call().then(res =>{
+                        console.log('token totalSupply:',res)
+                        setBalance(res)
+                    })
+                }
+
             }catch (e) {
                 console.log('load token balance error:',e)
 

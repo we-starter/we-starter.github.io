@@ -27,15 +27,16 @@ const PoolsHeader = (props) => {
   const [showPoolsStarter, setShowPoolsStarter] = useState(false)
   const location = useLocation()
   const [language, setLanguage] = useState(
-    (state.locale === 'en' && 'English') || (state.locale === 'zh' && 'ZH-CH')
+    (state.locale === 'en' && '中文简体') ||
+      (state.locale === 'zh' && 'English')
   )
   const { balance } = useHTBalance(account)
   const handleMenuItemClick = () => {
     setShowMenu(false)
   }
   useEffect(() => {
-    if (state.locale === 'en') setLanguage('English')
-    if (state.locale === 'zh') setLanguage('ZH-CH')
+    if (state.locale === 'en') setLanguage('中文简体')
+    if (state.locale === 'zh') setLanguage('English')
   }, [state.locale])
   useEffect(() => {
     // if (props.history.location.pathname === '/pools') {
@@ -45,8 +46,9 @@ const PoolsHeader = (props) => {
     // }
   })
   const tabLanguage = (val) => {
+    val = val === 'English' ? 'en' : 'zh'
     if (val === 'en') setLanguage('English')
-    if (val === 'zh') setLanguage('ZH-CH')
+    if (val === 'zh') setLanguage('中文简体')
     dispatch({
       type: CHANGE_LOCALE,
       locale: val,
@@ -127,7 +129,7 @@ const PoolsHeader = (props) => {
                 <li className='menu__item'>
                   <a
                     href={
-                      language === 'ZH-CH'
+                      language === 'English'
                         ? WeStarterGuidebookZH
                         : WeStarterGuidebookEN
                     }
@@ -140,7 +142,11 @@ const PoolsHeader = (props) => {
                 </li>
                 <li className='menu__item'>
                   <a
-                    href='https://www.yuque.com/docs/share/f89e3a8a-a918-48da-bf61-700ddcfaac95?# '
+                    href={
+                      language === 'English'
+                        ? 'https://www.yuque.com/docs/share/f89e3a8a-a918-48da-bf61-700ddcfaac95?#'
+                        : 'https://www.yuque.com/docs/share/cc71c6e4-4d0d-4ef4-bcb8-0bee03bd02f3?# '
+                    }
                     target='_blank'
                     className='menu__link'
                     onClick={handleMenuItemClick}
@@ -154,16 +160,34 @@ const PoolsHeader = (props) => {
 
           <div className='pools_header__menu-wrapper'>
             {/* <a className='download-pdf'></a> */}
-            <div className='language' style={{ marginRight: '16px' }}>
+            <div
+              className='language'
+              style={{ marginRight: '16px' }}
+              onClick={() => tabLanguage(language)}
+            >
               <img src={globe} alt='' />
-              {language}
-              <div
+              {language === '中文简体' ? '中文简体' : 'English'}
+              {/* <div
                 className='language-items'
                 style={{ top: '80%', bottom: 'auto' }}
               >
-                <p onClick={() => tabLanguage('en')}>English</p>
-                <p onClick={() => tabLanguage('zh')}>中文简体</p>
-              </div>
+                {language === 'ZH-CH' && (
+                  <p
+                    style={{ padding: '0', marginBottom: '0' }}
+                    onClick={() => tabLanguage('en')}
+                  >
+                    English
+                  </p>
+                )}
+                {language === 'English' && (
+                  <p
+                    style={{ padding: '0', marginBottom: '0' }}
+                    onClick={() => tabLanguage('zh')}
+                  >
+                    中文简体
+                  </p>
+                )}
+              </div> */}
             </div>
             {active && (
               <div className='ht-balance'>

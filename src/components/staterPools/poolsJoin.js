@@ -7,6 +7,7 @@ import { getPointAddress } from '../../web3/address';
 import Web3 from 'web3';
 import { getContract, useActiveWeb3React } from '../../web3';
 import Starter from '../../web3/abi/Starter.json';
+import Offering from '../../web3/abi/Offering.json';
 import { injectIntl } from 'react-intl';
 import ERC20 from '../../web3/abi/ERC20.json';
 import { FormattedMessage } from 'react-intl';
@@ -29,9 +30,10 @@ const PoolsJoin = (props) => {
     const { dispatch } = useContext(mainContext);
     const [approve, setApprove] = useState(true);
     const [amount, setAmount] = useState('');
+
     const currency_address = pool
         ? pool.currency.address
-        : '0x0000000000000000000000000000000000000000';
+        : '0x0';
     const { balance = 0 } = useBalance(currency_address);
 
     const handleChange = (value) => {
@@ -39,15 +41,17 @@ const PoolsJoin = (props) => {
     };
 
     useEffect(() => {
-        if (pool && pool.currency.allowance > 0) {
+        if (pool && (pool.currency.allowance > 0 || pool.currency.is_ht)) {
             setApprove(false);
         }
     }, [pool]);
 
     const onMax = () => {
-        setAmount(
-            parseFloat(Web3.utils.fromWei(balance, 'ether')).toFixed(6) * 1
-        );
+        let max = balance
+        if(pool.type === 1 && pool.quotaOf > 0 && pool.quotaOf < balance){
+            max = pool.quotaOf
+        }
+        setAmount(new BigNumber(Web3.utils.fromWei(max, 'ether')).toFixed(6, 1) * 1)
     };
 
     const onChange = (e) => {
@@ -105,40 +109,78 @@ const PoolsJoin = (props) => {
     };
 
     const onConfirm = (e) => {
-        const pool_contract = getContract(library, Starter, pool.address);
-        pool_contract.methods
-            .purchase(Web3.utils.toWei(`${amount}`, 'ether'))
-            .send({
-                from: account,
-            })
-            .on('transactionHash', (hash) => {
-                dispatch({
-                    type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
-                    showWaitingWalletConfirmModal: { ...waitingPending, hash },
+        if(pool.type === 1) {
+            const pool_contract = getContract(library, Offering, pool.address);
+            pool_contract.methods
+                .offerHT()
+                .send({
+                    from: account,
+                    value: Web3.utils.toWei(`${amount}`, 'ether'),
+                })
+                .on('transactionHash', (hash) => {
+                    dispatch({
+                        type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
+                        showWaitingWalletConfirmModal: { ...waitingPending, hash },
+                    });
+                })
+                .on('receipt', (_, receipt) => {
+                    console.log('BOT staking success');
+                    dispatch({
+                        type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
+                        showWaitingWalletConfirmModal: waitingForInit,
+                    });
+                    dispatch({
+                        type: HANDLE_SHOW_TRANSACTION_MODAL,
+                        showTransactionModal: true,
+                    });
+                })
+                .on('error', (err, receipt) => {
+                    console.log('BOT staking error', err);
+                    dispatch({
+                        type: HANDLE_SHOW_FAILED_TRANSACTION_MODAL,
+                        showFailedTransactionModal: true,
+                    });
+                    dispatch({
+                        type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
+                        showWaitingWalletConfirmModal: waitingForInit,
+                    });
                 });
-            })
-            .on('receipt', (_, receipt) => {
-                console.log('BOT staking success');
-                dispatch({
-                    type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
-                    showWaitingWalletConfirmModal: waitingForInit,
+        }else{
+            const pool_contract = getContract(library, Starter, pool.address);
+            pool_contract.methods
+                .purchase(Web3.utils.toWei(`${amount}`, 'ether'))
+                .send({
+                    from: account,
+                })
+                .on('transactionHash', (hash) => {
+                    dispatch({
+                        type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
+                        showWaitingWalletConfirmModal: { ...waitingPending, hash },
+                    });
+                })
+                .on('receipt', (_, receipt) => {
+                    console.log('BOT staking success');
+                    dispatch({
+                        type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
+                        showWaitingWalletConfirmModal: waitingForInit,
+                    });
+                    dispatch({
+                        type: HANDLE_SHOW_TRANSACTION_MODAL,
+                        showTransactionModal: true,
+                    });
+                })
+                .on('error', (err, receipt) => {
+                    console.log('BOT staking error', err);
+                    dispatch({
+                        type: HANDLE_SHOW_FAILED_TRANSACTION_MODAL,
+                        showFailedTransactionModal: true,
+                    });
+                    dispatch({
+                        type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
+                        showWaitingWalletConfirmModal: waitingForInit,
+                    });
                 });
-                dispatch({
-                    type: HANDLE_SHOW_TRANSACTION_MODAL,
-                    showTransactionModal: true,
-                });
-            })
-            .on('error', (err, receipt) => {
-                console.log('BOT staking error', err);
-                dispatch({
-                    type: HANDLE_SHOW_FAILED_TRANSACTION_MODAL,
-                    showFailedTransactionModal: true,
-                });
-                dispatch({
-                    type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
-                    showWaitingWalletConfirmModal: waitingForInit,
-                });
-            });
+        }
         onClose();
     };
 
@@ -182,6 +224,21 @@ const PoolsJoin = (props) => {
                                 `${formatAmount(balance)} ${
                                     pool.currency.symbol
                                 }`}
+                            <br />
+                        </p>
+                        <p
+                            className='form-app__inputbox-after-text'
+                            style={{
+                                marginBottom: 0,
+                                color: '#22292F',
+                                textAlign: 'left',
+                                opacity: 1,
+                            }}>
+                            最大申购额度:
+                            {pool && pool.type === 1 && pool.quotaOf > 0 &&
+                            `${formatAmount(pool.quotaOf)} ${
+                                pool.currency.symbol
+                            }`}
                             <br />
                         </p>
                         <div className='deposit__inputbox form-app__inputbox'>

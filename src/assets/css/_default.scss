@@ -234,7 +234,7 @@ a[href^='tel'],
   font-size: 14px;
   font-family: HelveticaNeue;
   color: #22292f;
-  padding: 10px;
+  padding: 8px;
   cursor: pointer;
   z-index: 999;
   display: flex;
@@ -272,6 +272,7 @@ a[href^='tel'],
 
   &:hover {
     display: flex;
+    background: #f2f0eb;
     .language-items {
       display: flex;
     }
@@ -336,6 +337,7 @@ a[href^='tel'],
 
     &:hover {
       display: flex;
+      background: #F2F0EB;
       .language-items {
         display: flex;
       }
