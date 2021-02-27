@@ -217,7 +217,7 @@ const en_US = {
   noJoinPool: "You haven't joined any pool",
   comingSoon: 'Coming soon',
   htPublic: 'HT Public',
-  logoTitle1: 'Matter Public',
+  logoTitle1: 'MATTER Private Pool',
   aboutProject:
     'Westarter is a platform to bridge cryptocurrency innovators and investors, any innovator can use a standardized interface to launch and manage liquidity bids without a permit.',
   willStart: 'Will start in',
