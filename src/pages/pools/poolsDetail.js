@@ -45,6 +45,7 @@ const PoolsDetail = (props) => {
       const { status, start_at, time } = pools[0]
       if (status === 0) {
         setLeftTime(start_at * 1000 - Date.now())
+        console.log(left_time, 11111)
       } else if (status === 1) {
         setLeftTime(time * 1000 - Date.now())
       }
@@ -198,7 +199,7 @@ const PoolsDetail = (props) => {
         </a>
       </div>
       <div className='pools_detail_record'>
-        {pool && pool.type === 1 && pool.quotaOf == 0 && (
+        {pool && pool.type === 1 && pool.quotaOf == 0 && left_time > 0 && (
           <div className='mask_layer'>
             <p style={{ lineHeight: '30px', marginBottom: '0' }}>
               <FormattedMessage id='countdown' />
@@ -231,6 +232,13 @@ const PoolsDetail = (props) => {
                   </span>
                 </Timer>
               </span>
+            </p>
+          </div>
+        )}
+        {pool && pool.type === 1 && pool.quotaOf == 0 && left_time == 0 && (
+          <div className='mask_layer'>
+            <p style={{ lineHeight: '30px', marginBottom: '0' }}>
+              <FormattedMessage id='cannotProject' />
             </p>
           </div>
         )}
