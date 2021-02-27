@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import cs from 'classnames'
 import { withRouter } from 'react-router'
-import HUSD from '../../assets/icon/MATTER.png'
+import HUSD from '../../assets/icon/HUSD@2x.png'
+import MATTER from '../../assets/icon/MATTER@2x.png'
 import noDataPng from '../../assets/icon/noData@2x.png'
 import HUOBI from '../../assets/icon/huobi.png'
 import Metamask from '../../assets/icon/Metamask@2x.png'
@@ -115,14 +116,14 @@ const PoolsIndex = (props) => {
       type,
       quotaOf,
     } = pool
-    console.log(status)
     let left_time = 0
     if (status === 0) {
       left_time = start_at * 1000 - Date.now()
     } else if (status === 1 || status === 2) {
       left_time = time * 1000 - Date.now()
     }
-    console.log(left_time)
+    left_time = 1614432600 * 1000 - Date.now()
+
     const goFinance = () => {
       window.open('https://antimatter.finance/')
     }
@@ -137,7 +138,7 @@ const PoolsIndex = (props) => {
       >
         <div className='pools-type_title'>
           <p className='pools-type_card_title'>
-            <img src={HUSD} />
+            <img src={MATTER} />
             {name}
           </p>
           <p className='pools-type_card_title_right'>

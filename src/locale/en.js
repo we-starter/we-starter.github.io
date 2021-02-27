@@ -220,7 +220,7 @@ const en_US = {
   logoTitle1: 'Matter Public',
   aboutProject:
     'Westarter is a platform to bridge cryptocurrency innovators and investors, any innovator can use a standardized interface to launch and manage liquidity bids without a permit.',
-  willStart: 'Will start at',
+  willStart: 'Will start in',
   accessType: 'Access Type',
   private: 'Private',
   public: 'Public',
