@@ -22,13 +22,9 @@ const injected = new InjectedConnector({
 })
 
 const POLLING_INTERVAL = 12000
-const RPC_URLS = {
-  1: 'https://eth-mainnet.alchemyapi.io/v2/k2--UT_xVVXMOvAyoxJYqtKhlmyBbqnX',
-  4: 'https://rinkeby.infura.io/v3/8f6d3d5d7a1442a38d9e8050c31c1884',
-}
 
 const walletChange = new WalletConnectConnector({
-  rpc: { 1: RPC_URLS[1] },
+  rpc: { 128: 'https://http-mainnet-node.huobichain.com'},
   bridge: 'https://bridge.walletconnect.org',
   qrcode: true,
   pollingInterval: POLLING_INTERVAL,
