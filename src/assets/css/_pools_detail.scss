@@ -281,6 +281,12 @@
       }
     }
     &_content_link {
+      .no_link {
+        &:hover {
+          cursor: text;
+          color: #22292f;
+        }
+      }
       a {
         margin-top: 20px;
         display: flex;
@@ -605,6 +611,12 @@
       }
     }
     &_content_link {
+      .no_link {
+        &:hover {
+          cursor: text;
+          color: #22292f;
+        }
+      }
       a {
         margin-top: 20px;
         display: flex;
@@ -920,6 +932,12 @@
       }
     }
     &_content_link {
+      .no_link {
+        &:hover {
+          cursor: text;
+          color: #22292f;
+        }
+      }
       a {
         margin-top: 20px;
         display: flex;
@@ -1234,6 +1252,12 @@
       }
     }
     &_content_link {
+      .no_link {
+        &:hover {
+          cursor: text;
+          color: #22292f;
+        }
+      }
       a {
         margin-top: 20px;
         display: flex;
