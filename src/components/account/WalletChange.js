@@ -33,7 +33,7 @@ const RPC_URLS = {
 }
 
 const walletChange = new WalletConnectConnector({
-  rpc: { 128: 'https://http-mainnet.hecochain.com' },
+  rpc: { 128: 'https://http-mainnet-node.huobichain.com' },
   bridge: 'https://bridge.walletconnect.org',
   qrcode: true,
   pollingInterval: POLLING_INTERVAL,

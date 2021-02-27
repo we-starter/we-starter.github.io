@@ -37,7 +37,7 @@ export default [
     ratio: '1HT=300MATTER',
     time: '1614435600',
     purchasedCurrencyOf: 0,
-    totalPurchasedAmount: '83333333000000000000',
+    totalPurchasedAmount: '833333330000000000000',
     totalPurchasedUnderlying: '0',
     totalPurchasedCurrency: '0',
   },
