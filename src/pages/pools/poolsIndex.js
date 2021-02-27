@@ -182,7 +182,11 @@ const PoolsIndex = (props) => {
           <p className='pools-type_card_ratio' style={{ textAlign: 'right' }}>
             <FormattedMessage id='totalRaised' />
             <i>
-              {formatAmount(totalPurchasedAmount)} {currency.symbol}
+              {formatAmount(totalPurchasedAmount).slice(
+                0,
+                formatAmount(totalPurchasedAmount).indexOf('.') + 3
+              )}{' '}
+              {currency.symbol}
             </i>
           </p>
         </div>

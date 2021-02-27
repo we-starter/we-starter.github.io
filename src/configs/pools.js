@@ -1,6 +1,6 @@
 export default [
   {
-    name: 'MATTER Private Pool',
+    name: 'MATTER',
     address: '0x4F7d4aCF1A2d92C5b64a7365e3cD2185c91F9e40',
     start_at: '1614432600',
     is_top: true,
@@ -19,7 +19,7 @@ export default [
       holders: '-',
       transfers: '-',
     },
-    amount: '25000',
+    amount: '250000',
     pool_info: {
       token_distribution: 'MATTER',
       min_allocation: '0',
