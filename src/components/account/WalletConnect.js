@@ -67,7 +67,17 @@ export const WalletConnect = ({ onClose, onCancel }) => {
             <div className='form-app__inner__wallets'>
               <div
                 onClick={() => {
-                  activate(injected, (e) => {
+                  activate(injected, (e) => {}, true).then((e) => {
+                    dispatch({
+                      type: HANDLE_WALLET_MODAL,
+                      walletModal: null,
+                    })
+                    window &&
+                      window.localStorage.setItem(
+                        GALLERY_SELECT_WEB3_CONTEXT,
+                        'MetaMask'
+                      )
+                  }).catch(e => {
                     // 钱包无法连接
                     if (e instanceof UnsupportedChainIdError) {
                       // TODO网络不支持
@@ -82,16 +92,6 @@ export const WalletConnect = ({ onClose, onCancel }) => {
                         walletModal: 'connecting',
                       })
                     }
-                  }).then((e) => {
-                    dispatch({
-                      type: HANDLE_WALLET_MODAL,
-                      walletModal: null,
-                    })
-                    window &&
-                      window.localStorage.setItem(
-                        GALLERY_SELECT_WEB3_CONTEXT,
-                        'MetaMask'
-                      )
                   })
                 }}
                 className='form-app__inner__wallets__item'
@@ -107,29 +107,22 @@ export const WalletConnect = ({ onClose, onCancel }) => {
 
               <div
                 onClick={() => {
-                  activate(walletChange)
+                  activate(walletChange, (e) => {}, true)
                     .then(() => {
                       // 验证链接之后
-                      walletChange.isAuthorized().then((is_authorized) => {
-                        if (is_authorized) {
-                          dispatch({
-                            type: HANDLE_WALLET_MODAL,
-                            walletModal: null,
-                          })
-                          window &&
-                            window.localStorage.setItem(
-                              GALLERY_SELECT_WEB3_CONTEXT,
-                              'WalletConnect'
-                            )
-                        } else {
-                          dispatch({
-                            type: HANDLE_WALLET_MODAL,
-                            walletModal: 'connecting',
-                          })
-                        }
+                      dispatch({
+                        type: HANDLE_WALLET_MODAL,
+                        walletModal: null,
                       })
+                      window &&
+                      window.localStorage.setItem(
+                          GALLERY_SELECT_WEB3_CONTEXT,
+                          'WalletConnect'
+                      )
                     })
-                    .catch(() => {})
+                    .catch((e) => {
+                      console.log(e)
+                    })
                 }}
                 className='form-app__inner__wallets__item'
               >

@@ -4,7 +4,6 @@ export default [
     address: '0x18f932f4f52A3ad9442C3e3f8a20cA594AbAeA39',
     start_at: '1614394800',
     is_top: true,
-    is_coming: false,
     currency: {
       address: '0x0', // 如果是0x0则是ht
       symbol: 'HT',
@@ -34,8 +33,8 @@ export default [
     Github: 'https://github.com/antimatter-finance',
     yuque: '-',
     progress: 0,
-    status: 1,
-    ratio: '1HT=XXX MATTER',
+    status: 0,
+    ratio: '1HT=1MATTER',
     time: '1614441600',
     purchasedCurrencyOf: 0,
     totalPurchasedAmount: '2500000000000000000000000',
