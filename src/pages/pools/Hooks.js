@@ -347,7 +347,7 @@ export const usePoolsInfo = (address = '') => {
         })
     })
 
-    const [poolsInfo, setPoolsInfo] = useState(pools.filter(o => o.is_coming))
+    const [poolsInfo, setPoolsInfo] = useState(pools)
 
     const [blockNumber, setBlockNumber] = useState(0)
     const now = parseInt(Date.now() / 1000)
