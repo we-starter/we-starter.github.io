@@ -71,7 +71,7 @@ const PoolsIndex = (props) => {
   const goDetail = (address) => {
     props.history.push(`/pools/detail/${address}`)
   }
-  console.log(pools, 111)
+
   const renderStatus = (status) => {
     switch (status) {
       case 0:
@@ -122,7 +122,6 @@ const PoolsIndex = (props) => {
     } else if (status === 1 || status === 2) {
       left_time = time * 1000 - Date.now()
     }
-    left_time = 1614432600 * 1000 - Date.now()
 
     const goFinance = () => {
       window.open('https://antimatter.finance/')
@@ -141,39 +140,8 @@ const PoolsIndex = (props) => {
             <img src={MATTER} />
             {name}
           </p>
+          
           <p className='pools-type_card_title_right'>
-            <span className='pools-type_coming_status'>
-              <FormattedMessage id='willStart' />
-            </span>
-            <span className='pools-type_time'>
-              <Timer
-                initialTime={left_time}
-                direction='backward'
-                formatValue={(number) => {
-                  if (number === 0) return '00'
-                  if (number < 10) {
-                    return `0${number}`
-                  }
-                  return number
-                }}
-              >
-                <span>
-                  <Timer.Consumer>
-                    {({ h, d, formatValue }) => formatValue(d * 24 + h)}
-                  </Timer.Consumer>
-                </span>
-                &nbsp;:&nbsp;
-                <span>
-                  <Timer.Minutes />
-                </span>
-                &nbsp;:&nbsp;
-                <span>
-                  <Timer.Seconds />
-                </span>
-              </Timer>
-            </span>
-          </p>
-          {/* <p className='pools-type_card_title_right'>
             {renderStatus(status)}
             {status < 3 && (
               <span className='pools-type_time'>
@@ -204,7 +172,7 @@ const PoolsIndex = (props) => {
                 </Timer>
               </span>
             )}
-          </p> */}
+          </p>
         </div>
         <div className='pools-type_title'>
           <p className='pools-type_card_ratio'>
