@@ -194,7 +194,7 @@ const PoolsDetail = (props) => {
         </a>
         <a
           className='pools_detail_btn'
-          href={`https://scan.hecochain.com/address/${address}`}
+          href={`https://hecoinfo.com/address/${address}`}
           target='_blank'
         >
           <FormattedMessage id='poolsDetailText4' />
