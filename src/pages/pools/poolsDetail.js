@@ -35,11 +35,21 @@ const PoolsDetail = (props) => {
   const [detailTab, setDetailTab] = useState('detail')
   const [recordTab, setRecordTab] = useState(1)
   const [pool, setPool] = useState(pools[0])
+  const [left_time, setLeftTime] = useState(0)
 
   const { dispatch } = useContext(mainContext)
 
   useEffect(() => {
     setPool(pools[0])
+    if(pools[0]){
+      const {status,start_at, time} = pools[0]
+      if (status === 0) {
+        setLeftTime(start_at * 1000 - Date.now())
+      } else if (status === 1 || status === 2) {
+        setLeftTime(time * 1000 - Date.now())
+      }
+    }
+
   }, [pools, address])
 
   const onClaim = () => {
@@ -78,8 +88,7 @@ const PoolsDetail = (props) => {
       })
   }
 
-  let left_time = 0
-  left_time = 1614432600 * 1000 - Date.now()
+
 
   return (
     <div style={{ background: '#fff' }}>
@@ -185,7 +194,7 @@ const PoolsDetail = (props) => {
         </a>
         <a
           className='pools_detail_btn'
-          href={`https://scan.hecochain.com/address/${address}`}
+          href={`https://hecoinfo.com/address/${address}`}
           target='_blank'
         >
           <FormattedMessage id='poolsDetailText4' />
