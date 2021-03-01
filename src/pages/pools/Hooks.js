@@ -367,6 +367,9 @@ export const usePoolsInfo = (address = '') => {
                     .filter((o) => address === '' || o.address === address)
                     .map((pool) => {
 
+                        // 如果还未开始，则不调用合约
+                        if(pool.is_coming) return pool
+
                         const currency_token = pool.currency.is_ht ? null : getContract(
                             library,
                             ERC20,
@@ -407,18 +410,18 @@ export const usePoolsInfo = (address = '') => {
                                      logs,
                                      currency_allowance,
                                  ]) => {
-                                    let status = 0 // 即将上线
-                                    if (pool.start_at < now) {
+                                    let status = pool.status || 0 // 即将上线
+                                    if (pool.start_at < now && status < 1) {
                                         // 募集中
                                         status = 1
                                     }
 
-                                    if (time < now) {
+                                    if (time < now && status < 2) {
                                         // 结算中
                                         status = 2
                                     }
 
-                                    if (totalSettleable.completed_) {
+                                    if (totalSettleable.completed_ && status < 3) {
                                         status = 3
                                     }
 
@@ -501,13 +504,13 @@ export const usePoolsInfo = (address = '') => {
                                      claimedOf,
                                      underlying_decimals,
                                  ]) => {
-                                    let status = 0 // 即将上线
-                                    if (start_at < now) {
+                                    let status = pool.status || 0 // 即将上线
+                                    if (start_at < now && status < 1) {
                                         // 募集中
                                         status = 1
                                     }
 
-                                    if (time < now) {
+                                    if (time < now && status < 2) {
                                         // 结算中
                                         status = 2
                                     }
@@ -515,8 +518,6 @@ export const usePoolsInfo = (address = '') => {
                                     if (status === 2 && totalOffered === totalClaimed) {
                                         status = 3
                                     }
-
-                                    status = 2
 
                                     const _ratio = new BigNumber(ratio).dividedBy(new BigNumber(10).pow(parseInt(underlying_decimals) - parseInt(currency_decimals) + 18))
                                     const totalPurchasedAmount = Web3.utils.toWei(new BigNumber(
