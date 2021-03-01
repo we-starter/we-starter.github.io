@@ -29,7 +29,7 @@ const en_US = {
   completed: 'Finished',
   settled: '已结算',
   waitingSettlement: '等待结算',
-  totalRaised: 'Total funds raised',
+  totalRaised: 'Total funds will be raised',
   totalMortgage: 'total assets collateralized',
   myMortgage: 'my collateral',
   balance: 'balance',

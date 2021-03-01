@@ -101,7 +101,7 @@ const PoolsDetail = (props) => {
             <span>
               <FormattedMessage id='myQuota' />{' '}
               {pool && formatAmount(pool.quotaOf)}{' '}
-              {pool && pool.underlying.symbol}
+              {pool && pool.currency.symbol}
             </span>
           </div>
           <div className='pools_card_content_title pools_card_val'>
@@ -154,7 +154,7 @@ const PoolsDetail = (props) => {
           <div className='pools_card_content_title pools_card_schedule'>
             <span>{pool && pool.progress * 100}%</span>
             <span>
-              {pool && formatAmount(pool.totalPurchasedUnderlying)}/
+              {pool && formatAmount(pool.totalPurchasedUnderlying, 18, 2)}/
               {pool && pool.amount}
             </span>
           </div>
@@ -299,17 +299,7 @@ const PoolsDetail = (props) => {
                     </td>
                     {/*<td>{Web3.utils.fromWei(pool.settleable.volume, 'ether')}</td>*/}
                     <td>
-                      {new BigNumber(
-                        Web3.utils.fromWei(pool.purchasedCurrencyOf, 'ether')
-                      )
-                        .multipliedBy(
-                          new BigNumber(
-                            Web3.utils.fromWei(pool.settleable.rate, 'ether')
-                          )
-                        )
-                        .dividedBy(new BigNumber(pool.price))
-                        .toFixed(6, 1)
-                        .toString() * 1}
+                      {pool && formatAmount(pool.settleable.volume)}
                     </td>
                   </tr>
                 ) : (
