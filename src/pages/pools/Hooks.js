@@ -516,6 +516,8 @@ export const usePoolsInfo = (address = '') => {
                                         status = 3
                                     }
 
+                                    status = 2
+
                                     const _ratio = new BigNumber(ratio).dividedBy(new BigNumber(10).pow(parseInt(underlying_decimals) - parseInt(currency_decimals) + 18))
                                     const totalPurchasedAmount = Web3.utils.toWei(new BigNumber(
                                         pool.amount
@@ -552,7 +554,7 @@ export const usePoolsInfo = (address = '') => {
                                         totalPurchasedCurrency,
                                         totalPurchasedAmount,
                                         totalPurchasedUnderlying: totalOffered,
-                                        purchasedCurrencyOf: offeredOf,
+                                        purchasedCurrencyOf: Web3.utils.toWei(new BigNumber(Web3.utils.fromWei(offeredOf, 'ether')).dividedBy(new BigNumber(_ratio)).toFixed(6, 1).toString(),'ether'),
                                         quotaOf, //最大可申购额度 大于0则在白名单里面
                                         totalSettleable: {
                                             amount: 0,
