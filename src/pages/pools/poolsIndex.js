@@ -56,10 +56,6 @@ const PoolsIndex = (props) => {
     setTabFlag(null)
   }
 
-  useEffect(() => {
-    setTabFlag(1)
-  }, [])
-
   const setData = async () => {
     switch (tabFlag) {
       case 1:
