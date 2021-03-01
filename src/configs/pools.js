@@ -85,6 +85,6 @@ export default [
     totalPurchasedAmount: '833333330000000000000',
     totalPurchasedUnderlying: '0',
     totalPurchasedCurrency: '0',
-    is_flash: false,
+    is_flash: true,
   }
 ]
