@@ -50,20 +50,7 @@ const PoolsIndex = (props) => {
   const pools = usePoolsInfo()
 
   const changeTab = (val) => {
-    pools.map((item) => {
-      Object.assign(item, {
-        is_flash: false,
-      })
-    })
     setTabFlag(val)
-  }
-  const isFlash = (val) => {
-    pools.map((item) => {
-      Object.assign(item, {
-        is_flash: val,
-      })
-    })
-    setTabFlag(null)
   }
 
   const setData = async () => {
@@ -73,6 +60,9 @@ const PoolsIndex = (props) => {
         break
       case 2:
         setListData(pools.filter((o) => o.is_join))
+        break
+      case 3:
+        setListData(pools.filter((o) => o.is_flash))
         break
       default:
         setListData(pools.filter((o) => o.is_top))
@@ -144,6 +134,7 @@ const PoolsIndex = (props) => {
       type,
       quotaOf,
     } = pool
+    console.log(pool)
     let left_time = 0
     if (status === 0) {
       left_time = start_at * 1000 - Date.now()
@@ -156,14 +147,15 @@ const PoolsIndex = (props) => {
         className={cs(
           'pools-type_card_box',
           type === 1 && 'pools-type_private',
-          pools[0] && pools[0].is_flash && 'pools-type_flashPool'
+          tabFlag === 3 && 'pools-type_flashPool'
         )}
         onClick={goFinance}
-        key={index}
+        key={pool.address}
       >
         <div className='pools-type_title'>
           <p className='pools-type_card_title'>
-            <img src={pools[0] && pools[0].is_flash ? DFT : MATTER} />
+            {pool && pool.underlying.symbol === "MATTER" && (<img src={MATTER} />)}
+            {pool && pool.underlying.symbol === "DFT" && (<img src={DFT} />)}
             {name}
           </p>
           <p className='pools-type_card_title_right'>
@@ -207,10 +199,7 @@ const PoolsIndex = (props) => {
           <p className='pools-type_card_ratio' style={{ textAlign: 'right' }}>
             <FormattedMessage id='totalRaised' />
             <i>
-              {formatAmount(totalPurchasedAmount).slice(
-                0,
-                formatAmount(totalPurchasedAmount).indexOf('.') + 3
-              )}{' '}
+              {formatAmount(totalPurchasedAmount, pool.currency.decimal, 2)}{' '}
               {currency.symbol}
             </i>
           </p>
@@ -376,8 +365,8 @@ const PoolsIndex = (props) => {
             </h2>
 
             <h2
-              onClick={() => isFlash(true)}
-              className={pools[0] && pools[0].is_flash ? 'tab_active' : ''}
+              onClick={() => changeTab(3)}
+              className={changeTab === 3 ? 'tab_active' : ''}
             >
               <img className='flashPool_png' src={FlashPoolPng} />
               <FormattedMessage id='flashPool' />
@@ -409,7 +398,7 @@ const PoolsIndex = (props) => {
                 return renderCard(pool, index)
               })}
             {tabFlag === 1 && [1, 2].map(noLogin)}
-            {(tabFlag === 2 || pools.is_flash) && !listData.length && noData()}
+            {([1,2].includes(tabFlag)) && !listData.length && noData()}
           </div>
         </div>
       </div>

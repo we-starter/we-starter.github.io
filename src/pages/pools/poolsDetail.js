@@ -98,15 +98,21 @@ const PoolsDetail = (props) => {
               <FormattedMessage id='poolsDetailText1' />
             </span>
             {/* <span>{pool && pool.ratio}</span> */}
-            <span>
-              <FormattedMessage id='myQuota' />{' '}
-              {pool && formatAmount(pool.quotaOf)}{' '}
-              {pool && pool.currency.symbol}
-            </span>
+            {
+              pool && pool.type === 1 && (
+                  <span>
+                    <FormattedMessage id='myQuota' />{' '}
+                    {pool && formatAmount(pool.quotaOf)}{' '}
+                    {pool && pool.currency.symbol}
+                  </span>
+              )
+            }
           </div>
+
           <div className='pools_card_content_title pools_card_val'>
             {pool && pool.amount} {pool && pool.underlying.symbol}
           </div>
+
           {pool && pool.status === 0 && (
             <div className='pools_card_start'>
               <FormattedMessage id='comingSoon1' />

@@ -8,12 +8,14 @@ export default [
     currency: {
       address: '0x0', // 如果是0x0则是ht
       symbol: 'HT',
+      decimal: 18
     },
     icon: '',
     type: 1,
     isPrivate: true,
     underlying: {
       address: '0x1C9491865a1DE77C5b6e19d2E6a5F1D7a6F2b25F',
+      decimal: 18,
       symbol: 'MATTER',
       name: 'MATTER ',
       total_supply: '100,000,000.00',
@@ -51,6 +53,7 @@ export default [
     is_coming: true,
     currency: {
       address: '0xa71edc38d189767582c38a3145b5873052c3e47a', // 如果是0x0则是ht
+      decimal: 6,
       symbol: 'USDT',
     },
     icon: '',
@@ -58,6 +61,7 @@ export default [
     isPrivate: false,
     underlying: {
       address: '0x42712dF5009c20fee340B245b510c0395896cF6e',
+      decimal: 18,
       symbol: 'DFT',
       name: 'Dfuture',
       total_supply: '100,000,000.00',
@@ -82,7 +86,7 @@ export default [
     ratio: '1USDT=3.33DFT',
     time: '1614693600',
     purchasedCurrencyOf: 0,
-    totalPurchasedAmount: '833333330000000000000',
+    totalPurchasedAmount: '50000000000',
     totalPurchasedUnderlying: '0',
     totalPurchasedCurrency: '0',
     is_flash: true,
