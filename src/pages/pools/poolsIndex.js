@@ -75,7 +75,7 @@ const PoolsIndex = (props) => {
   }, [tabFlag, pools, active])
 
   const goFinance = () => {
-    if (!pools[0].is_flash) {
+    if (tabFlag !== 3) {
       return
     }
     window.open('https://heco.dfuture.com/home')
@@ -84,7 +84,7 @@ const PoolsIndex = (props) => {
 
   // 列表查看详情
   const goDetail = (address) => {
-    if (pools[0] && pools[0].is_flash) {
+    if (tabFlag === 3) {
       return
     }
     props.history.push(`/pools/detail/${address}`)
@@ -154,8 +154,10 @@ const PoolsIndex = (props) => {
       >
         <div className='pools-type_title'>
           <p className='pools-type_card_title'>
-            {pool && pool.underlying.symbol === "MATTER" && (<img src={MATTER} />)}
-            {pool && pool.underlying.symbol === "DFT" && (<img src={DFT} />)}
+            {pool && pool.underlying.symbol === 'MATTER' && (
+              <img src={MATTER} />
+            )}
+            {pool && pool.underlying.symbol === 'DFT' && <img src={DFT} />}
             {name}
           </p>
           <p className='pools-type_card_title_right'>
@@ -274,7 +276,7 @@ const PoolsIndex = (props) => {
         <a
           className={cs(
             'pools-type_enter',
-            pools[0] && pools[0].is_flash && 'pools-type_disable_enter'
+            tabFlag === 3 && 'pools-type_disable_enter'
           )}
           onClick={() => {
             goDetail(address)
@@ -366,7 +368,7 @@ const PoolsIndex = (props) => {
 
             <h2
               onClick={() => changeTab(3)}
-              className={changeTab === 3 ? 'tab_active' : ''}
+              className={tabFlag === 3 ? 'tab_active' : ''}
             >
               <img className='flashPool_png' src={FlashPoolPng} />
               <FormattedMessage id='flashPool' />
@@ -398,7 +400,7 @@ const PoolsIndex = (props) => {
                 return renderCard(pool, index)
               })}
             {tabFlag === 1 && [1, 2].map(noLogin)}
-            {([1,2].includes(tabFlag)) && !listData.length && noData()}
+            {[1, 2].includes(tabFlag) && !listData.length && noData()}
           </div>
         </div>
       </div>
