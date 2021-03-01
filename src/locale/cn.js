@@ -232,5 +232,6 @@ const zh_CN = {
   myQuota: '我的额度',
   alreadySubscribed: '已申购过',
   notInWhitelist: '无申购额度',
+  flashPool: '闪购池',
 }
 export default zh_CN

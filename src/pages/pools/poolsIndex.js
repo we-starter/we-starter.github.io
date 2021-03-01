@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import cs from 'classnames'
 import { withRouter } from 'react-router'
 import HUSD from '../../assets/icon/HUSD@2x.png'
+import DFT from '../../assets/icon/DFT@2x.png'
+import FlashPoolPng from '../../assets/icon/Flash pool@2x.png'
 import MATTER from '../../assets/icon/MATTER@2x.png'
 import noDataPng from '../../assets/icon/noData@2x.png'
 import HUOBI from '../../assets/icon/huobi.png'
@@ -24,9 +26,7 @@ const PoolsIndex = (props) => {
   const [disableFlag, setDisableFlag] = useState(true)
   const [isLogin, setIsLogin] = useState(false)
   const [hoverFlag, setHoverFlag] = useState(false)
-  const changeTab = (val) => {
-    setTabFlag(val)
-  }
+
   // const getURLStuff = (stuff) => {
   //   let url = props.location.search
   //   let query = url.split('?').length > 1 ? url.split('?')[1] : ''
@@ -48,6 +48,27 @@ const PoolsIndex = (props) => {
   const { account, active, library } = useActiveWeb3React()
 
   const pools = usePoolsInfo()
+
+  const changeTab = (val) => {
+    pools.map((item) => {
+      Object.assign(item, {
+        is_flash: false,
+      })
+    })
+    setTabFlag(val)
+  }
+  const isFlash = (val) => {
+    pools.map((item) => {
+      Object.assign(item, {
+        is_flash: val,
+      })
+    })
+    setTabFlag(null)
+  }
+
+  useEffect(() => {
+    // console.log(pools[0], pools[0].is_flash, 11111)
+  }, [pools[0].is_flash])
 
   const setData = async () => {
     switch (tabFlag) {
@@ -131,16 +152,16 @@ const PoolsIndex = (props) => {
       <div
         className={cs(
           'pools-type_card_box',
-          type === 1 && 'pools-type_private'
+          type === 1 && 'pools-type_private',
+          pools[0].is_flash && 'pools-type_flashPool'
         )}
         key={index}
       >
         <div className='pools-type_title'>
           <p className='pools-type_card_title'>
-            <img src={MATTER} />
+            <img src={pools[0] && pools[0].is_flash ? DFT : MATTER} />
             {name}
           </p>
-
           <p className='pools-type_card_title_right'>
             {renderStatus(status)}
             {status < 3 && (
@@ -273,7 +294,9 @@ const PoolsIndex = (props) => {
       <div className='pools-type_noData'>
         <img src={noDataPng} />
         <p>
-          {tabFlag === 1 && <FormattedMessage id='noData' />}
+          {(tabFlag === 1 || pools.is_flash) && (
+            <FormattedMessage id='noData' />
+          )}
           {tabFlag === 2 && <FormattedMessage id='noJoinPool' />}
         </p>
       </div>
@@ -344,6 +367,14 @@ const PoolsIndex = (props) => {
             >
               <FormattedMessage id='poolsIndexText4' />
             </h2>
+
+            <h2
+              onClick={() => isFlash(true)}
+              className={pools && pools[0].is_flash ? 'tab_active' : ''}
+            >
+              <img className='flashPool_png' src={FlashPoolPng} />
+              <FormattedMessage id='flashPool' />
+            </h2>
             <h2
               onClick={() => changeTab(2)}
               className={tabFlag === 2 ? 'tab_active' : ''}
@@ -371,7 +402,7 @@ const PoolsIndex = (props) => {
                 return renderCard(pool, index)
               })}
             {tabFlag === 1 && [1, 2].map(noLogin)}
-            {tabFlag === 2 && !listData.length && noData()}
+            {(tabFlag === 2 || pools.is_flash) && !listData.length && noData()}
           </div>
         </div>
       </div>

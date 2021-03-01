@@ -234,5 +234,6 @@ const en_US = {
   myQuota: 'My Quota',
   alreadySubscribed: 'Already Subscribed',
   notInWhitelist: 'Not in whitelist',
+  flashPool: 'Flash Pool',
 }
 export default en_US
