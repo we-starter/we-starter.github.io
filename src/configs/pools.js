@@ -64,7 +64,7 @@ export default [
       decimal: 18,
       symbol: 'DFT',
       name: 'Dfuture',
-      total_supply: '100,000,000.00',
+      total_supply: '400,000,000.00',
       holders: '-',
       transfers: '-',
     },
