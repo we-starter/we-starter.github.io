@@ -84,9 +84,9 @@ const PoolsIndex = (props) => {
 
   // 列表查看详情
   const goDetail = (address) => {
-    if (tabFlag === 3) {
-      return
-    }
+    // if (tabFlag === 3) {
+    //   return
+    // }
     props.history.push(`/pools/detail/${address}`)
   }
 
@@ -149,7 +149,7 @@ const PoolsIndex = (props) => {
           type === 1 && 'pools-type_private',
           tabFlag === 3 && 'pools-type_flashPool'
         )}
-        onClick={goFinance}
+        // onClick={goFinance}
         key={pool.address}
       >
         <div className='pools-type_title'>
@@ -276,7 +276,6 @@ const PoolsIndex = (props) => {
         <a
           className={cs(
             'pools-type_enter',
-            tabFlag === 3 && 'pools-type_disable_enter'
           )}
           onClick={() => {
             goDetail(address)

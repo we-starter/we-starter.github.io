@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { usage } from 'browserslist';
-import { formatAmount } from '../../utils/format';
+import {formatAmount, numToWei} from '../../utils/format';
 import { Select } from 'antd';
 import { useBalance } from '../../pages/Hooks';
 import { getPointAddress } from '../../web3/address';
@@ -51,7 +51,8 @@ const PoolsJoin = (props) => {
         if(pool.type === 1 && pool.quotaOf > 0 && pool.quotaOf < balance){
             max = pool.quotaOf
         }
-        setAmount(new BigNumber(Web3.utils.fromWei(max, 'ether')).toFixed(6, 1) * 1)
+        setAmount(formatAmount(max, pool.currency.decimal, 6))
+        // setAmount(new BigNumber(Web3.utils.fromWei(max, 'ether')).toFixed(6, 1) * 1)
     };
 
     const onChange = (e) => {
@@ -109,6 +110,12 @@ const PoolsJoin = (props) => {
     };
 
     const onConfirm = (e) => {
+        if(!amount) {
+            return false
+        }
+        if(isNaN(parseInt(amount))){
+            return  false
+        }
         if(pool.type === 1) {
             const pool_contract = getContract(library, Offering, pool.address);
             pool_contract.methods
@@ -147,8 +154,9 @@ const PoolsJoin = (props) => {
                 });
         }else{
             const pool_contract = getContract(library, Starter, pool.address);
+            const _amount = numToWei(amount, pool.currency.decimal)
             pool_contract.methods
-                .purchase(Web3.utils.toWei(`${amount}`, 'ether'))
+                .purchase(_amount)
                 .send({
                     from: account,
                 })
@@ -226,21 +234,24 @@ const PoolsJoin = (props) => {
                                 }`}
                             <br />
                         </p>
-                        <p
-                            className='form-app__inputbox-after-text'
-                            style={{
-                                marginBottom: 0,
-                                color: '#22292F',
-                                textAlign: 'left',
-                                opacity: 1,
-                            }}>
-                            最大申购额度:
-                            {pool && pool.type === 1 && pool.quotaOf > 0 &&
-                            `${formatAmount(pool.quotaOf)} ${
-                                pool.currency.symbol
-                            }`}
-                            <br />
-                        </p>
+                        {
+                            pool && pool.type === 1 && (<p
+                                className='form-app__inputbox-after-text'
+                                style={{
+                                    marginBottom: 0,
+                                    color: '#22292F',
+                                    textAlign: 'left',
+                                    opacity: 1,
+                                }}>
+                                最大申购额度:
+                                {pool && pool.type === 1 && pool.quotaOf > 0 &&
+                                `${formatAmount(pool.quotaOf)} ${
+                                    pool.currency.symbol
+                                }`}
+                                <br />
+                            </p>)
+                        }
+
                         <div className='deposit__inputbox form-app__inputbox'>
                             <div className='form-app__inputbox-control'>
                                 <div className='form-app__inputbox-input'>

@@ -4,7 +4,7 @@ export default [
     address: '0x4F7d4aCF1A2d92C5b64a7365e3cD2185c91F9e40',
     start_at: '1614432600',
     is_top: true,
-    is_coming: false,
+    is_coming: true,
     currency: {
       address: '0x0', // 如果是0x0则是ht
       symbol: 'HT',
@@ -47,20 +47,20 @@ export default [
   },
   {
     name: 'Dfuture',
-    address: '0xd9019793189E12ac91892b4D4622E3A315a289Fc',
-    start_at: '1614690000',
+    address: '0xC00933AAba57D910f63b8617f31aFC5Fd49A5F20',
+    start_at: '1614607200',
     is_top: false,
-    is_coming: true,
+    is_coming: false,
     currency: {
-      address: '0xa71edc38d189767582c38a3145b5873052c3e47a', // 如果是0x0则是ht
-      decimal: 6,
+      address: '0xaD6D458402F60fD3Bd25163575031ACDce07538D', // 如果是0x0则是ht
+      decimal: 18,
       symbol: 'USDT',
     },
     icon: '',
     type: 0,
     isPrivate: false,
     underlying: {
-      address: '0x42712dF5009c20fee340B245b510c0395896cF6e',
+      address: '0x880bd31775d97Ce7006D1Cc72EbCC36E412E663C',
       decimal: 18,
       symbol: 'DFT',
       name: 'Dfuture',
@@ -68,7 +68,7 @@ export default [
       holders: '-',
       transfers: '-',
     },
-    amount: '166666',
+    amount: '3',
     pool_info: {
       token_distribution: 'Tuesday 2th 2021, 9:00PM SGT',
       min_allocation: '0',
@@ -90,5 +90,51 @@ export default [
     totalPurchasedUnderlying: '0',
     totalPurchasedCurrency: '0',
     is_flash: true,
-  }
+  },
+  // {
+  //   name: 'Dfuture',
+  //   address: '0xd9019793189E12ac91892b4D4622E3A315a289Fc',
+  //   start_at: '1614690000',
+  //   is_top: false,
+  //   is_coming: true,
+  //   currency: {
+  //     address: '0xa71edc38d189767582c38a3145b5873052c3e47a', // 如果是0x0则是ht
+  //     decimal: 18,
+  //     symbol: 'USDT',
+  //   },
+  //   icon: '',
+  //   type: 0,
+  //   isPrivate: false,
+  //   underlying: {
+  //     address: '0x42712dF5009c20fee340B245b510c0395896cF6e',
+  //     decimal: 18,
+  //     symbol: 'DFT',
+  //     name: 'Dfuture',
+  //     total_supply: '400,000,000.00',
+  //     holders: '-',
+  //     transfers: '-',
+  //   },
+  //   amount: '166666',
+  //   pool_info: {
+  //     token_distribution: 'Tuesday 2th 2021, 9:00PM SGT',
+  //     min_allocation: '0',
+  //     max_allocation: '5 USDT',
+  //     min_swap_level: '50000 USDT',
+  //   },
+  //   website: 'https://www.dfuture.com',
+  //   white_paper: '-',
+  //   twitter: 'https://twitter.com/dFuture_finance',
+  //   Telegram_Channel: 'https://t.me/dfutureglobal',
+  //   Github: '-',
+  //   yuque: '-',
+  //   progress: 0,
+  //   status: 0,
+  //   ratio: '1USDT=3.33DFT',
+  //   time: '1614693600',
+  //   purchasedCurrencyOf: 0,
+  //   totalPurchasedAmount: '50000000000',
+  //   totalPurchasedUnderlying: '0',
+  //   totalPurchasedCurrency: '0',
+  //   is_flash: true,
+  // }
 ]
