@@ -50,25 +50,15 @@ const PoolsIndex = (props) => {
   const pools = usePoolsInfo()
 
   const changeTab = (val) => {
-    pools.map((item) => {
-      Object.assign(item, {
-        is_flash: false,
-      })
-    })
     setTabFlag(val)
   }
   const isFlash = (val) => {
-    pools.map((item) => {
-      Object.assign(item, {
-        is_flash: val,
-      })
-    })
     setTabFlag(null)
   }
 
   useEffect(() => {
-    // console.log(pools[0], pools[0].is_flash, 11111)
-  }, [pools[0].is_flash])
+    setTabFlag(1)
+  }, [])
 
   const setData = async () => {
     switch (tabFlag) {
@@ -88,8 +78,17 @@ const PoolsIndex = (props) => {
     setIsLogin(active)
   }, [tabFlag, pools, active])
 
+  const goFinance = () => {
+    window.open('https://heco.dfuture.com/home')
+    // window.open('https://antimatter.finance/')
+  }
+
   // 列表查看详情
   const goDetail = (address) => {
+    if (tabFlag === 3) {
+      goFinance()
+      return
+    }
     props.history.push(`/pools/detail/${address}`)
   }
 
@@ -144,22 +143,18 @@ const PoolsIndex = (props) => {
       left_time = time * 1000 - Date.now()
     }
 
-    const goFinance = () => {
-      window.open('https://antimatter.finance/')
-    }
-
     return (
       <div
         className={cs(
           'pools-type_card_box',
           type === 1 && 'pools-type_private',
-          pools[0].is_flash && 'pools-type_flashPool'
+          tabFlag === 3 && 'pools-type_flashPool'
         )}
         key={index}
       >
         <div className='pools-type_title'>
           <p className='pools-type_card_title'>
-            <img src={pools[0] && pools[0].is_flash ? DFT : MATTER} />
+            <img src={tabFlag === 3 ? DFT : MATTER} />
             {name}
           </p>
           <p className='pools-type_card_title_right'>
@@ -279,7 +274,10 @@ const PoolsIndex = (props) => {
           )}
         </div>
         <a
-          className={cs('pools-type_enter')}
+          className={cs(
+            'pools-type_enter',
+            tabFlag === 3 && 'pools-type_disable_enter'
+          )}
           onClick={() => {
             goDetail(address)
           }}
@@ -369,8 +367,8 @@ const PoolsIndex = (props) => {
             </h2>
 
             <h2
-              onClick={() => isFlash(true)}
-              className={pools && pools[0].is_flash ? 'tab_active' : ''}
+              onClick={() => changeTab(3)}
+              className={tabFlag === 3 ? 'tab_active' : ''}
             >
               <img className='flashPool_png' src={FlashPoolPng} />
               <FormattedMessage id='flashPool' />
