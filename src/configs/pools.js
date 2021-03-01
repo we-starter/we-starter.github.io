@@ -8,7 +8,7 @@ export default [
     currency: {
       address: '0x0', // 如果是0x0则是ht
       symbol: 'HT',
-      decimal: 18
+      decimal: 18,
     },
     icon: '',
     type: 1,
@@ -44,6 +44,7 @@ export default [
     totalPurchasedUnderlying: '0',
     totalPurchasedCurrency: '0',
     is_flash: false,
+    link_url: '',
   },
   {
     name: 'Dfuture',
@@ -90,5 +91,6 @@ export default [
     totalPurchasedUnderlying: '0',
     totalPurchasedCurrency: '0',
     is_flash: true,
-  }
+    link_url: 'https://heco.dfuture.com/home',
+  },
 ]
