@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import cs from 'classnames'
 import { withRouter } from 'react-router'
 import HUSD from '../../assets/icon/HUSD@2x.png'
+import DFT from '../../assets/icon/DFT@2x.png'
+import FlashPoolPng from '../../assets/icon/Flash pool@2x.png'
 import MATTER from '../../assets/icon/MATTER@2x.png'
 import noDataPng from '../../assets/icon/noData@2x.png'
 import HUOBI from '../../assets/icon/huobi.png'
@@ -24,9 +26,7 @@ const PoolsIndex = (props) => {
   const [disableFlag, setDisableFlag] = useState(true)
   const [isLogin, setIsLogin] = useState(false)
   const [hoverFlag, setHoverFlag] = useState(false)
-  const changeTab = (val) => {
-    setTabFlag(val)
-  }
+
   // const getURLStuff = (stuff) => {
   //   let url = props.location.search
   //   let query = url.split('?').length > 1 ? url.split('?')[1] : ''
@@ -49,6 +49,10 @@ const PoolsIndex = (props) => {
 
   const pools = usePoolsInfo()
 
+  const changeTab = (val) => {
+    setTabFlag(val)
+  }
+
   const setData = async () => {
     switch (tabFlag) {
       case 1:
@@ -56,6 +60,9 @@ const PoolsIndex = (props) => {
         break
       case 2:
         setListData(pools.filter((o) => o.is_join))
+        break
+      case 3:
+        setListData(pools.filter((o) => o.is_flash))
         break
       default:
         setListData(pools.filter((o) => o.is_top))
@@ -67,8 +74,19 @@ const PoolsIndex = (props) => {
     setIsLogin(active)
   }, [tabFlag, pools, active])
 
+  const goFinance = () => {
+    if (tabFlag !== 3) {
+      return
+    }
+    window.open('https://heco.dfuture.com/home')
+    // window.open('https://antimatter.finance/')
+  }
+
   // 列表查看详情
   const goDetail = (address) => {
+    if (tabFlag === 3) {
+      return
+    }
     props.history.push(`/pools/detail/${address}`)
   }
 
@@ -116,6 +134,7 @@ const PoolsIndex = (props) => {
       type,
       quotaOf,
     } = pool
+    console.log(pool)
     let left_time = 0
     if (status === 0) {
       left_time = start_at * 1000 - Date.now()
@@ -123,24 +142,24 @@ const PoolsIndex = (props) => {
       left_time = time * 1000 - Date.now()
     }
 
-    const goFinance = () => {
-      window.open('https://antimatter.finance/')
-    }
-
     return (
       <div
         className={cs(
           'pools-type_card_box',
-          type === 1 && 'pools-type_private'
+          type === 1 && 'pools-type_private',
+          tabFlag === 3 && 'pools-type_flashPool'
         )}
-        key={index}
+        onClick={goFinance}
+        key={pool.address}
       >
         <div className='pools-type_title'>
           <p className='pools-type_card_title'>
-            <img src={MATTER} />
+            {pool && pool.underlying.symbol === 'MATTER' && (
+              <img src={MATTER} />
+            )}
+            {pool && pool.underlying.symbol === 'DFT' && <img src={DFT} />}
             {name}
           </p>
-
           <p className='pools-type_card_title_right'>
             {renderStatus(status)}
             {status < 3 && (
@@ -182,10 +201,7 @@ const PoolsIndex = (props) => {
           <p className='pools-type_card_ratio' style={{ textAlign: 'right' }}>
             <FormattedMessage id='totalRaised' />
             <i>
-              {formatAmount(totalPurchasedAmount).slice(
-                0,
-                formatAmount(totalPurchasedAmount).indexOf('.') + 3
-              )}{' '}
+              {formatAmount(totalPurchasedAmount, pool.currency.decimal, 2)}{' '}
               {currency.symbol}
             </i>
           </p>
@@ -258,7 +274,10 @@ const PoolsIndex = (props) => {
           )}
         </div>
         <a
-          className={cs('pools-type_enter')}
+          className={cs(
+            'pools-type_enter',
+            tabFlag === 3 && 'pools-type_disable_enter'
+          )}
           onClick={() => {
             goDetail(address)
           }}
@@ -273,7 +292,9 @@ const PoolsIndex = (props) => {
       <div className='pools-type_noData'>
         <img src={noDataPng} />
         <p>
-          {tabFlag === 1 && <FormattedMessage id='noData' />}
+          {(tabFlag === 1 || pools.is_flash) && (
+            <FormattedMessage id='noData' />
+          )}
           {tabFlag === 2 && <FormattedMessage id='noJoinPool' />}
         </p>
       </div>
@@ -344,6 +365,14 @@ const PoolsIndex = (props) => {
             >
               <FormattedMessage id='poolsIndexText4' />
             </h2>
+
+            <h2
+              onClick={() => changeTab(3)}
+              className={tabFlag === 3 ? 'tab_active' : ''}
+            >
+              <img className='flashPool_png' src={FlashPoolPng} />
+              <FormattedMessage id='flashPool' />
+            </h2>
             <h2
               onClick={() => changeTab(2)}
               className={tabFlag === 2 ? 'tab_active' : ''}
@@ -371,7 +400,7 @@ const PoolsIndex = (props) => {
                 return renderCard(pool, index)
               })}
             {tabFlag === 1 && [1, 2].map(noLogin)}
-            {tabFlag === 2 && !listData.length && noData()}
+            {[1, 2].includes(tabFlag) && !listData.length && noData()}
           </div>
         </div>
       </div>

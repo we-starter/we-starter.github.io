@@ -78,6 +78,12 @@
       display: flex;
       width: 100%;
       border-bottom: 2px solid #ebe9e3;
+      .flashPool_png {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        vertical-align: text-top;
+      }
       h2 {
         position: relative;
         margin-bottom: 0;
@@ -140,6 +146,16 @@
       }
       .pools-type_private {
         background: #fffbfa;
+      }
+      .pools-type_flashPool {
+        background: url('../icon/shandian@2x.png') no-repeat;
+        background-position: right bottom;
+        background-size: 110px 150px;
+        background-color: #fffaf2;
+        &:hover {
+          cursor: pointer;
+          border: 1px solid #0f8c20;
+        }
       }
     }
     &_title {
@@ -405,6 +421,12 @@
       display: flex;
       width: 100%;
       border-bottom: 2px solid #ebe9e3;
+      .flashPool_png {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        vertical-align: text-top;
+      }
       h2 {
         position: relative;
         margin-bottom: 0;
@@ -467,6 +489,16 @@
       }
       .pools-type_private {
         background: #fffbfa;
+      }
+      .pools-type_flashPool {
+        background: url('../icon/shandian@2x.png') no-repeat;
+        background-position: right bottom;
+        background-size: 110px 150px;
+        background-color: #fffaf2;
+        &:hover {
+          cursor: pointer;
+          border: 1px solid #0f8c20;
+        }
       }
     }
     &_title {
@@ -726,10 +758,16 @@
       display: flex;
       width: 100%;
       border-bottom: 2px solid #ebe9e3;
+      .flashPool_png {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        vertical-align: text-top;
+      }
       h2 {
         position: relative;
         margin-bottom: 0;
-        margin-right: 50px;
+        margin-right: 30px;
         height: 60px;
         font-size: 16px;
         font-weight: 500;
@@ -783,6 +821,16 @@
       }
       .pools-type_private {
         background: #fffbfa;
+      }
+      .pools-type_flashPool {
+        background: url('../icon/shandian@2x.png') no-repeat;
+        background-position: right bottom;
+        background-size: 110px 150px;
+        background-color: #fffaf2;
+        &:hover {
+          cursor: pointer;
+          border: 1px solid #0f8c20;
+        }
       }
     }
     &_title {
@@ -1040,10 +1088,16 @@
       display: flex;
       width: 100%;
       border-bottom: 2px solid #ebe9e3;
+      .flashPool_png {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        vertical-align: text-top;
+      }
       h2 {
         position: relative;
         margin-bottom: 0;
-        margin-right: 50px;
+        margin-right: 30px;
         height: 60px;
         font-size: 16px;
         font-weight: 500;
@@ -1097,6 +1151,16 @@
       }
       .pools-type_private {
         background: #fffbfa;
+      }
+      .pools-type_flashPool {
+        background: url('../icon/shandian@2x.png') no-repeat;
+        background-position: right bottom;
+        background-size: 110px 150px;
+        background-color: #fffaf2;
+        &:hover {
+          cursor: pointer;
+          border: 1px solid #0f8c20;
+        }
       }
     }
     &_title {
