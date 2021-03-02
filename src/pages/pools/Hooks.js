@@ -353,7 +353,7 @@ export const usePoolsInfo = (address = '') => {
         Object.assign(item, {
             quotaOf: 0, //设置默认不在白名单
             status: status,
-            progress: status === 3 ? 100 : 0,
+            progress: status === 3 ? 1 : 0,
             totalPurchasedUnderlying: status === 3 ? Web3.utils.toWei(item.amount) : 0,
             currency: {
                 is_ht: item.currency.address === '0x0',
