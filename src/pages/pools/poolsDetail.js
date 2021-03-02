@@ -353,7 +353,7 @@ const PoolsDetail = (props) => {
                     <td>{pool && formatAmount(pool.settleable.amount)}</td>
                     <td>{pool && formatAmount(pool.settleable.volume)}</td>
                     <td>
-                      {pool && pool.type !== 1 && pool.settleable.volume > 0 && (
+                      {pool && pool.type !== 1 && pool.settleable.volume > 0 && !pool.settleable.completed_ && (
                         <a
                           className='pools_detail_record_btn'
                           onClick={() => onClaim()}
