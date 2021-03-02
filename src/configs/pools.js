@@ -45,6 +45,7 @@ export default [
     totalPurchasedCurrency: '0',
     is_flash: false,
     link_url: '',
+    project_introduction: '',
   },
   {
     name: 'Dfuture',
@@ -73,7 +74,7 @@ export default [
     pool_info: {
       token_distribution: 'Tuesday 2th 2021, 9:00PM SGT',
       min_allocation: '0',
-      max_allocation: '5 USDT',
+      max_allocation: '50000 USDT',
       min_swap_level: '50000 USDT',
     },
     website: 'https://www.dfuture.com',
@@ -92,6 +93,8 @@ export default [
     totalPurchasedCurrency: '0',
     is_flash: true,
     link_url: 'https://heco.dfuture.com/home',
+    project_introduction:
+      'dFuture is an experimental derivative trading protocol initiated and incubated by Mix Lab of the Mix group. As a decentralized derivatives exchange, Dfuture is based on external quotation, enabling traders to execute long / short trading with leverage safely and efficiently at better price. Compared to the centralized exchanges, traders will also enjoy far better trading depth. Meanwhile LP (liquidity provider) only needs to stake single settlement currency (currently USDT), which can obtain stable, risk-free, high return without any impermanent loss.',
   },
   // {
   //   name: 'Dfuture',

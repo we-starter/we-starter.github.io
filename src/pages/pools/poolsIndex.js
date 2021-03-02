@@ -365,7 +365,7 @@ const PoolsIndex = (props) => {
 
             <h2
               onClick={() => changeTab(3)}
-              className={tabFlag === 3 ? 'tab_active' : ''}
+              className={cs('new_flag', tabFlag === 3 ? 'tab_active' : '')}
             >
               <img className='flashPool_png' src={timePng} />
               <FormattedMessage id='flashPool' />

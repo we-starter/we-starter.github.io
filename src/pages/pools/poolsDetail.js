@@ -97,15 +97,13 @@ const PoolsDetail = (props) => {
               <FormattedMessage id='poolsDetailText1' />
             </span>
             {/* <span>{pool && pool.ratio}</span> */}
-            {
-              pool && pool.type === 1 && (
-                  <span>
-                    <FormattedMessage id='myQuota' />{' '}
-                    {pool && formatAmount(pool.quotaOf)}{' '}
-                    {pool && pool.currency.symbol}
-                  </span>
-              )
-            }
+            {pool && pool.type === 1 && (
+              <span>
+                <FormattedMessage id='myQuota' />{' '}
+                {pool && formatAmount(pool.quotaOf)}{' '}
+                {pool && pool.currency.symbol}
+              </span>
+            )}
           </div>
 
           <div className='pools_card_content_title pools_card_val'>
@@ -302,19 +300,23 @@ const PoolsDetail = (props) => {
                     </td>
                     {/*<td>{Web3.utils.fromWei(pool.settleable.volume, 'ether')}</td>*/}
                     <td>
-                      {pool && pool.type !== 1 && new BigNumber(
-                            Web3.utils.fromWei(pool.purchasedCurrencyOf, 'ether')
+                      {pool &&
+                        pool.type !== 1 &&
+                        new BigNumber(
+                          Web3.utils.fromWei(pool.purchasedCurrencyOf, 'ether')
                         )
-                            .multipliedBy(
-                                new BigNumber(
-                                    Web3.utils.fromWei(pool.settleable.rate, 'ether')
-                                )
+                          .multipliedBy(
+                            new BigNumber(
+                              Web3.utils.fromWei(pool.settleable.rate, 'ether')
                             )
-                            .dividedBy(new BigNumber(pool.price))
-                            .toFixed(6, 1)
-                            .toString() * 1}
+                          )
+                          .dividedBy(new BigNumber(pool.price))
+                          .toFixed(6, 1)
+                          .toString() * 1}
 
-                      {pool && pool.type === 1 && formatAmount(pool.settleable.volume)}
+                      {pool &&
+                        pool.type === 1 &&
+                        formatAmount(pool.settleable.volume)}
                     </td>
                   </tr>
                 ) : (
@@ -557,9 +559,14 @@ const PoolsDetail = (props) => {
                 </svg>
                 {pool && pool.yuque}
               </a>
-              <a className='no_link'>
-                <FormattedMessage id='aboutProject' />
-              </a>
+              {pool && pool.underlying.symbol === 'MATTER' && (
+                <a className='no_link'>
+                  <FormattedMessage id='aboutProject' />
+                </a>
+              )}
+              {pool && pool.underlying.symbol === 'DFT' && (
+                <a className='no_link'>{pool && pool.project_introduction}</a>
+              )}
             </div>
           )}
         </div>

@@ -236,7 +236,7 @@ a[href^='tel'],
   color: #22292f;
   padding: 8px;
   cursor: pointer;
-  z-index: 999;
+  z-index: 1;
   display: flex;
   align-items: center;
   position: relative;
@@ -301,7 +301,7 @@ a[href^='tel'],
     color: #22292f;
     padding: 10px;
     cursor: pointer;
-    z-index: 999;
+    z-index: 1;
     display: flex;
     align-items: center;
     position: relative;
@@ -337,7 +337,7 @@ a[href^='tel'],
 
     &:hover {
       display: flex;
-      background: #F2F0EB;
+      background: #f2f0eb;
       .language-items {
         display: flex;
       }
