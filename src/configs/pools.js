@@ -88,7 +88,7 @@ export default [
     ratio: '1USDT=3.33DFT',
     time: '1614693600',
     purchasedCurrencyOf: 0,
-    totalPurchasedAmount: '50000000000',
+    totalPurchasedAmount: '50000000000000000000000',
     totalPurchasedUnderlying: '0',
     totalPurchasedCurrency: '0',
     is_flash: true,

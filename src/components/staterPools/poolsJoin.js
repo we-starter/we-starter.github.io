@@ -33,7 +33,6 @@ const PoolsJoin = (props) => {
 
   const currency_address = pool ? pool.currency.address : '0x0'
   const { balance = 0 } = useBalance(currency_address)
-
   const handleChange = (value) => {
     console.log(`selected ${value}`)
   }
@@ -54,16 +53,17 @@ const PoolsJoin = (props) => {
   }
 
   const onChange = (e) => {
-    const { value } = e.target
-    const re = /^[0-9]+([.|,][0-9]+)?$/g
+    const { value } = e.target;
+    const re = /^[0-9]+([.|,][0-9]+)?$/g;
     if (
-      value === '' ||
-      re.test(value) ||
-      (value.split('.').length === 2 && value.slice(value.length - 1) === '.')
+        value === '' ||
+        re.test(value) ||
+        (value.split('.').length === 2 &&
+            value.slice(value.length - 1) === '.')
     ) {
-      setAmount(splitFormat(value, 2))
+      setAmount(value);
     }
-  }
+  };
 
   const onApprove = (e) => {
     const contract = getContract(library, ERC20.abi, pool.currency.address)
