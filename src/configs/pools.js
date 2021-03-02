@@ -4,7 +4,7 @@ export default [
     address: '0x4F7d4aCF1A2d92C5b64a7365e3cD2185c91F9e40',
     start_at: '1614432600',
     is_top: true,
-    is_coming: true,
+    is_coming: false,
     currency: {
       address: '0x0', // 如果是0x0则是ht
       symbol: 'HT',
@@ -49,12 +49,12 @@ export default [
   },
   {
     name: 'Dfuture',
-    address: '0x2BD0d3ed3C4e2CfB0bB1d32290Ade443dd142577',
-    start_at: '1614661200',
+    address: '0xd9019793189E12ac91892b4D4622E3A315a289Fc',
+    start_at: '1614690000',
     is_top: false,
-    is_coming: false,
+    is_coming: true,
     currency: {
-      address: '0xaD6D458402F60fD3Bd25163575031ACDce07538D', // 如果是0x0则是ht
+      address: '0xa71edc38d189767582c38a3145b5873052c3e47a', // 如果是0x0则是ht
       decimal: 18,
       symbol: 'USDT',
     },
@@ -62,7 +62,7 @@ export default [
     type: 0,
     isPrivate: false,
     underlying: {
-      address: '0x880bd31775d97Ce7006D1Cc72EbCC36E412E663C',
+      address: '0x42712dF5009c20fee340B245b510c0395896cF6e',
       decimal: 18,
       symbol: 'DFT',
       name: 'Dfuture',
@@ -70,7 +70,7 @@ export default [
       holders: '-',
       transfers: '-',
     },
-    amount: '16.667',
+    amount: '166667',
     pool_info: {
       token_distribution: 'Tuesday 2th 2021, 9:00PM SGT',
       min_allocation: '0',
@@ -86,61 +86,13 @@ export default [
     progress: 0,
     status: 0,
     ratio: '1USDT=3.33DFT',
-    time: '1614664800',
+    time: '1614693600',
     purchasedCurrencyOf: 0,
     totalPurchasedAmount: '50000000000',
     totalPurchasedUnderlying: '0',
     totalPurchasedCurrency: '0',
     is_flash: true,
     link_url: 'https://heco.dfuture.com/home',
-    project_introduction:
-      'dFuture is an experimental derivative trading protocol initiated and incubated by Mix Lab of the Mix group. As a decentralized derivatives exchange, Dfuture is based on external quotation, enabling traders to execute long / short trading with leverage safely and efficiently at better price. Compared to the centralized exchanges, traders will also enjoy far better trading depth. Meanwhile LP (liquidity provider) only needs to stake single settlement currency (currently USDT), which can obtain stable, risk-free, high return without any impermanent loss.',
-  },
-  // {
-  //   name: 'Dfuture',
-  //   address: '0xd9019793189E12ac91892b4D4622E3A315a289Fc',
-  //   start_at: '1614690000',
-  //   is_top: false,
-  //   is_coming: true,
-  //   currency: {
-  //     address: '0xa71edc38d189767582c38a3145b5873052c3e47a', // 如果是0x0则是ht
-  //     decimal: 18,
-  //     symbol: 'USDT',
-  //   },
-  //   icon: '',
-  //   type: 0,
-  //   isPrivate: false,
-  //   underlying: {
-  //     address: '0x42712dF5009c20fee340B245b510c0395896cF6e',
-  //     decimal: 18,
-  //     symbol: 'DFT',
-  //     name: 'Dfuture',
-  //     total_supply: '400,000,000.00',
-  //     holders: '-',
-  //     transfers: '-',
-  //   },
-  //   amount: '166666',
-  //   pool_info: {
-  //     token_distribution: 'Tuesday 2th 2021, 9:00PM SGT',
-  //     min_allocation: '0',
-  //     max_allocation: '5 USDT',
-  //     min_swap_level: '50000 USDT',
-  //   },
-  //   website: 'https://www.dfuture.com',
-  //   white_paper: '-',
-  //   twitter: 'https://twitter.com/dFuture_finance',
-  //   Telegram_Channel: 'https://t.me/dfutureglobal',
-  //   Github: '-',
-  //   yuque: '-',
-  //   progress: 0,
-  //   status: 0,
-  //   ratio: '1USDT=3.33DFT',
-  //   time: '1614693600',
-  //   purchasedCurrencyOf: 0,
-  //   totalPurchasedAmount: '50000000000',
-  //   totalPurchasedUnderlying: '0',
-  //   totalPurchasedCurrency: '0',
-  //   is_flash: true,
-  //   link_url: 'https://heco.dfuture.com/home',
-  // }
+    project_introduction: 'dFuture is an experimental derivative trading protocol initiated and incubated by Mix Lab of the Mix group. As a decentralized derivatives exchange, Dfuture is based on external quotation, enabling traders to execute long / short trading with leverage safely and efficiently at better price. Compared to the centralized exchanges, traders will also enjoy far better trading depth. Meanwhile LP (liquidity provider) only needs to stake single settlement currency (currently USDT), which can obtain stable, risk-free, high return without any impermanent loss.',
+  }
 ]
