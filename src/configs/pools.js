@@ -48,7 +48,7 @@ export default [
     project_introduction: '',
   },
   {
-    name: 'Dfuture',
+    name: 'dFuture',
     address: '0x2BD0d3ed3C4e2CfB0bB1d32290Ade443dd142577',
     start_at: '1614661200',
     is_top: false,
@@ -65,7 +65,7 @@ export default [
       address: '0x880bd31775d97Ce7006D1Cc72EbCC36E412E663C',
       decimal: 18,
       symbol: 'DFT',
-      name: 'Dfuture',
+      name: 'dFuture',
       total_supply: '400,000,000.00',
       holders: '-',
       transfers: '-',
@@ -73,8 +73,8 @@ export default [
     amount: '16.667',
     pool_info: {
       token_distribution: 'Tuesday 2th 2021, 9:00PM SGT',
-      min_allocation: '0',
-      max_allocation: '50000 USDT',
+      min_allocation: '-',
+      max_allocation: '',
       min_swap_level: '50000 USDT',
     },
     website: 'https://www.dfuture.com',
@@ -94,7 +94,7 @@ export default [
     is_flash: true,
     link_url: 'https://heco.dfuture.com/home',
     project_introduction:
-      'dFuture is an experimental derivative trading protocol initiated and incubated by Mix Lab of the Mix group. As a decentralized derivatives exchange, Dfuture is based on external quotation, enabling traders to execute long / short trading with leverage safely and efficiently at better price. Compared to the centralized exchanges, traders will also enjoy far better trading depth. Meanwhile LP (liquidity provider) only needs to stake single settlement currency (currently USDT), which can obtain stable, risk-free, high return without any impermanent loss.',
+      'dFuture is an experimental derivative trading protocol initiated and incubated by Mix Lab of the Mix group. As a decentralized derivatives exchange, dFuture is based on external quotation, enabling traders to execute long / short trading with leverage safely and efficiently at better price. Compared to the centralized exchanges, traders will also enjoy far better trading depth. Meanwhile LP (liquidity provider) only needs to stake single settlement currency (currently USDT), which can obtain stable, risk-free, high return without any impermanent loss.',
   },
   // {
   //   name: 'Dfuture',
