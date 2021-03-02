@@ -158,7 +158,7 @@ const PoolsIndex = (props) => {
               <img src={MATTER} />
             )}
             {pool && pool.underlying.symbol === 'DFT' && <img src={DFT} />}
-            {name}
+            {pool && pool.underlying.name}
           </p>
           <p className='pools-type_card_title_right'>
             {renderStatus(status)}
