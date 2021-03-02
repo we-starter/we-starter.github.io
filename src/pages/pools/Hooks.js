@@ -345,9 +345,16 @@ export const usePoolsInfo = (address = '') => {
     const [blockNumber, setBlockNumber] = useState(0)
     // 数据预处理
     pools.map(item => {
+        let status = item.status
+        if(status === 0){
+            status = now < item.start_at ? 0 : (now < item.time ? 1 : 2)
+        }
+
         Object.assign(item, {
             quotaOf: 0, //设置默认不在白名单
-            status: now < item.start_at ? 0 : (now < item.time ? 1 : 2),
+            status: status,
+            progress: status === 3 ? 100 : 0,
+            totalPurchasedUnderlying: status === 3 ? Web3.utils.toWei(item.amount) : 0,
             currency: {
                 is_ht: item.currency.address === '0x0',
                 ...item.currency

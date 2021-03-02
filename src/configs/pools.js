@@ -35,7 +35,7 @@ export default [
     Telegram_Channel: 'https://t.me/antimatterchat',
     Github: 'https://github.com/antimatter-finance',
     yuque: '-',
-    progress: 0,
+    progress: 1,
     status: 3,
     ratio: '1HT=300MATTER',
     time: '1614435600',
