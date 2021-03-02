@@ -3,7 +3,7 @@ import cs from 'classnames'
 import { withRouter } from 'react-router'
 import HUSD from '../../assets/icon/HUSD@2x.png'
 import DFT from '../../assets/icon/DFT@2x.png'
-import TimePng from '../../assets/icon/time@2x.png'
+import timePng from '../../assets/icon/time@2x.png'
 import MATTER from '../../assets/icon/MATTER@2x.png'
 import noDataPng from '../../assets/icon/noData@2x.png'
 import HUOBI from '../../assets/icon/huobi.png'
@@ -367,7 +367,7 @@ const PoolsIndex = (props) => {
               onClick={() => changeTab(3)}
               className={tabFlag === 3 ? 'tab_active' : ''}
             >
-              <img className='flashPool_png' src={TimePng} />
+              <img className='flashPool_png' src={timePng} />
               <FormattedMessage id='flashPool' />
             </h2>
             <h2
