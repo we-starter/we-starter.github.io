@@ -48,8 +48,8 @@ export default [
   },
   {
     name: 'Dfuture',
-    address: '0xC00933AAba57D910f63b8617f31aFC5Fd49A5F20',
-    start_at: '1614607200',
+    address: '0x2BD0d3ed3C4e2CfB0bB1d32290Ade443dd142577',
+    start_at: '1614661200',
     is_top: false,
     is_coming: false,
     currency: {
@@ -69,7 +69,7 @@ export default [
       holders: '-',
       transfers: '-',
     },
-    amount: '3',
+    amount: '16.667',
     pool_info: {
       token_distribution: 'Tuesday 2th 2021, 9:00PM SGT',
       min_allocation: '0',
@@ -85,7 +85,7 @@ export default [
     progress: 0,
     status: 0,
     ratio: '1USDT=3.33DFT',
-    time: '1614693600',
+    time: '1614664800',
     purchasedCurrencyOf: 0,
     totalPurchasedAmount: '50000000000',
     totalPurchasedUnderlying: '0',
