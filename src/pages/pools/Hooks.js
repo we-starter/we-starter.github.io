@@ -5,7 +5,7 @@ import StakingReward from '../../web3/abi/StakingReward.json'
 import Starter from '../../web3/abi/Starter.json'
 import Offering from '../../web3/abi/Offering.json'
 import {abi as ERC20} from '../../web3/abi/ERC20.json'
-import pools from '../../configs/pools'
+import Pools from '../../configs/pools'
 import Web3 from 'web3'
 import {ReactComponent as HUSD} from '../../assets/logo/HUSD.svg'
 import {ReactComponent as HT} from '../../assets/logo/HT.svg'
@@ -338,14 +338,23 @@ export const usePoolsInfo = (address = '') => {
 
     const now = parseInt(Date.now() / 1000)
 
+    const pools = Pools.filter((o) => address === '' || o.address === address)
+
     const [poolsInfo, setPoolsInfo] = useState(pools)
 
     const [blockNumber, setBlockNumber] = useState(0)
     // 数据预处理
     pools.map(item => {
+        let status = item.status
+        if(status === 0){
+            status = now < item.start_at ? 0 : (now < item.time ? 1 : 2)
+        }
+
         Object.assign(item, {
             quotaOf: 0, //设置默认不在白名单
-            status: now < item.start_at ? 0 : (now < item.time ? 1 : 2),
+            status: status,
+            progress: status === 3 ? 100 : 0,
+            totalPurchasedUnderlying: status === 3 ? Web3.utils.toWei(item.amount) : 0,
             currency: {
                 is_ht: item.currency.address === '0x0',
                 ...item.currency
@@ -364,7 +373,6 @@ export const usePoolsInfo = (address = '') => {
 
             Promise.all(
                 pools
-                    .filter((o) => address === '' || o.address === address)
                     .map((pool) => {
 
                         // 如果还未开始，则不调用合约
@@ -431,6 +439,9 @@ export const usePoolsInfo = (address = '') => {
                                         .multipliedBy(new BigNumber(price))
                                         .div(new BigNumber(Web3.utils.toWei('1', 'ether')))
 
+                                    const totalPurchasedUnderlying = Web3.utils.toWei(new BigNumber(totalPurchasedCurrency)
+                                        .dividedBy(new BigNumber(price)).toFixed(0, 1), "ether")
+
                                     let is_join = false
                                     if (purchasedCurrencyOf > 0) {
                                         is_join = true
@@ -446,8 +457,7 @@ export const usePoolsInfo = (address = '') => {
                                         ratio: `1${pool.currency.symbol} = ${
                                             new BigNumber(Web3.utils.toWei('1', 'ether'))
                                                 .div(new BigNumber(price))
-                                                .toNumber()
-                                                .toFixed(6) * 1
+                                                .toFixed(2, 1) * 1
                                         }${pool.underlying.symbol}`,
                                         progress:
                                             new BigNumber(totalPurchasedCurrency)
@@ -460,6 +470,7 @@ export const usePoolsInfo = (address = '') => {
                                         is_join,
                                         totalPurchasedCurrency,
                                         totalPurchasedAmount: totalPurchasedAmount.toString(),
+                                        totalPurchasedUnderlying,
                                         purchasedCurrencyOf,
                                         totalSettleable,
                                         settleable,
@@ -469,7 +480,7 @@ export const usePoolsInfo = (address = '') => {
                             )
                         } else {
                             // TODO 默认HT，后面需要根据通货来查询进度
-                            let currency_decimals = 18;
+                            let currency_decimals = pool.currency.decimal;
 
                             const underlying_token = getContract(
                                 library,

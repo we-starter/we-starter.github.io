@@ -12,11 +12,17 @@ const PoolsBanner = (props) => {
   const { intl } = props
   const { address, pool } = props
   const { dispatch, state } = useContext(mainContext)
+
   return (
     <div className='pools_banner'>
       <div className='pools_banner_img'></div>
       <h3 className='pools_banner_text'>
-        {active && <FormattedMessage id='logoTitle1' />}
+        {active && pool && pool.underlying.symbol === 'MATTER' && (
+          <FormattedMessage id='logoTitle1' />
+        )}
+        {active && pool && pool.underlying.symbol === 'DFT' && (
+          <FormattedMessage id='logoTitle2' />
+        )}
         {!active && <FormattedMessage id='htPublic' />}
       </h3>
       <p className='pools_banner_dec'>

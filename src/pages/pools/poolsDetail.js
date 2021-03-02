@@ -45,7 +45,6 @@ const PoolsDetail = (props) => {
       const { status, start_at, time } = pools[0]
       if (status === 0) {
         setLeftTime(start_at * 1000 - Date.now())
-        console.log(left_time, 11111)
       } else if (status === 1) {
         setLeftTime(time * 1000 - Date.now())
       }
@@ -98,15 +97,13 @@ const PoolsDetail = (props) => {
               <FormattedMessage id='poolsDetailText1' />
             </span>
             {/* <span>{pool && pool.ratio}</span> */}
-            {
-              pool && pool.type === 1 && (
-                  <span>
-                    <FormattedMessage id='myQuota' />{' '}
-                    {pool && formatAmount(pool.quotaOf)}{' '}
-                    {pool && pool.currency.symbol}
-                  </span>
-              )
-            }
+            {pool && pool.type === 1 && (
+              <span>
+                <FormattedMessage id='myQuota' />{' '}
+                {pool && formatAmount(pool.quotaOf)}{' '}
+                {pool && pool.currency.symbol}
+              </span>
+            )}
           </div>
 
           <div className='pools_card_content_title pools_card_val'>
@@ -161,7 +158,7 @@ const PoolsDetail = (props) => {
             <span>{pool && pool.progress * 100}%</span>
             <span>
               {pool && formatAmount(pool.totalPurchasedUnderlying, 18, 2)}/
-              {pool && pool.amount}
+              {pool && pool.amount} {pool && pool.underlying.symbol}
             </span>
           </div>
         </div>
@@ -289,10 +286,8 @@ const PoolsDetail = (props) => {
                       {fromWei(pool.purchasedCurrencyOf).toFixed(6, 1) * 1}
                     </td>
                     <td>
-                      {pool && pool.type === 1 && pool.quotaOf > 0 ? (
+                      {pool && pool.type === 1 && pool.quotaOf > 0 && (
                         <FormattedMessage id='whiteList' />
-                      ) : (
-                        '-'
                       )}
                       {pool &&
                         pool.type !== 1 &&
@@ -305,7 +300,23 @@ const PoolsDetail = (props) => {
                     </td>
                     {/*<td>{Web3.utils.fromWei(pool.settleable.volume, 'ether')}</td>*/}
                     <td>
-                      {pool && formatAmount(pool.settleable.volume)}
+                      {pool &&
+                        pool.type !== 1 &&
+                        new BigNumber(
+                          Web3.utils.fromWei(pool.purchasedCurrencyOf, 'ether')
+                        )
+                          .multipliedBy(
+                            new BigNumber(
+                              Web3.utils.fromWei(pool.settleable.rate, 'ether')
+                            )
+                          )
+                          .dividedBy(new BigNumber(pool.price))
+                          .toFixed(6, 1)
+                          .toString() * 1}
+
+                      {pool &&
+                        pool.type === 1 &&
+                        formatAmount(pool.settleable.volume)}
                     </td>
                   </tr>
                 ) : (
@@ -342,7 +353,7 @@ const PoolsDetail = (props) => {
                     <td>{pool && formatAmount(pool.settleable.amount)}</td>
                     <td>{pool && formatAmount(pool.settleable.volume)}</td>
                     <td>
-                      {pool && pool.type !== 1 && pool.settleable.volume > 0 && (
+                      {pool && pool.type !== 1 && pool.settleable.volume > 0 && !pool.settleable.completed_ && (
                         <a
                           className='pools_detail_record_btn'
                           onClick={() => onClaim()}
@@ -548,9 +559,14 @@ const PoolsDetail = (props) => {
                 </svg>
                 {pool && pool.yuque}
               </a>
-              <a className='no_link'>
-                <FormattedMessage id='aboutProject' />
-              </a>
+              {pool && pool.underlying.symbol === 'MATTER' && (
+                <a className='no_link'>
+                  <FormattedMessage id='aboutProject' />
+                </a>
+              )}
+              {pool && pool.underlying.symbol === 'DFT' && (
+                <a className='no_link'>{pool && pool.project_introduction}</a>
+              )}
             </div>
           )}
         </div>

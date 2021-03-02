@@ -84,9 +84,9 @@ const PoolsIndex = (props) => {
 
   // 列表查看详情
   const goDetail = (address) => {
-    if (tabFlag === 3) {
-      return
-    }
+    // if (tabFlag === 3) {
+    //   return
+    // }
     props.history.push(`/pools/detail/${address}`)
   }
 
@@ -149,7 +149,7 @@ const PoolsIndex = (props) => {
           type === 1 && 'pools-type_private',
           tabFlag === 3 && 'pools-type_flashPool'
         )}
-        onClick={goFinance}
+        // onClick={goFinance}
         key={pool.address}
       >
         <div className='pools-type_title'>
@@ -158,7 +158,7 @@ const PoolsIndex = (props) => {
               <img src={MATTER} />
             )}
             {pool && pool.underlying.symbol === 'DFT' && <img src={DFT} />}
-            {name}
+            {pool && pool.underlying.name}
           </p>
           <p className='pools-type_card_title_right'>
             {renderStatus(status)}
@@ -274,10 +274,7 @@ const PoolsIndex = (props) => {
           )}
         </div>
         <a
-          className={cs(
-            'pools-type_enter',
-            tabFlag === 3 && 'pools-type_disable_enter'
-          )}
+          className={cs('pools-type_enter')}
           onClick={() => {
             goDetail(address)
           }}
@@ -368,7 +365,7 @@ const PoolsIndex = (props) => {
 
             <h2
               onClick={() => changeTab(3)}
-              className={tabFlag === 3 ? 'tab_active' : ''}
+              className={cs('new_flag', tabFlag === 3 ? 'tab_active' : '')}
             >
               <img className='flashPool_png' src={timePng} />
               <FormattedMessage id='flashPool' />

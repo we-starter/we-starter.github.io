@@ -110,6 +110,22 @@
           }
         }
       }
+      .new_flag {
+        &:before {
+          position: absolute;
+          content: 'NEW';
+          top: 8px;
+          right: -30px;
+          padding: 0 4px;
+          height: 16px;
+          line-height: 16px;
+          color: #fff;
+          font-size: 12px;
+          transform: scale(0.8);
+          border-radius: 3px;
+          background: #f43900;
+        }
+      }
     }
     &_noData {
       padding-top: 120px;
@@ -153,10 +169,6 @@
         background-position: right bottom;
         background-size: 110px 150px;
         background-color: #fffaf2;
-        &:hover {
-          cursor: pointer;
-          border: 1px solid #0f8c20;
-        }
       }
     }
     &_title {
@@ -454,6 +466,22 @@
           }
         }
       }
+      .new_flag {
+        &:before {
+          position: absolute;
+          content: 'NEW';
+          top: 8px;
+          right: -30px;
+          padding: 0 4px;
+          height: 16px;
+          line-height: 16px;
+          color: #fff;
+          font-size: 12px;
+          transform: scale(0.8);
+          border-radius: 3px;
+          background: #f43900;
+        }
+      }
     }
     &_noData {
       padding-top: 120px;
@@ -497,10 +525,6 @@
         background-position: right bottom;
         background-size: 110px 150px;
         background-color: #fffaf2;
-        &:hover {
-          cursor: pointer;
-          border: 1px solid #0f8c20;
-        }
       }
     }
     &_title {
@@ -792,6 +816,22 @@
           }
         }
       }
+      .new_flag {
+        &:before {
+          position: absolute;
+          content: 'NEW';
+          top: 8px;
+          right: -30px;
+          padding: 0 4px;
+          height: 16px;
+          line-height: 16px;
+          color: #fff;
+          font-size: 12px;
+          transform: scale(0.8);
+          border-radius: 3px;
+          background: #f43900;
+        }
+      }
     }
     &_noData {
       padding-top: 40px;
@@ -830,10 +870,6 @@
         background-position: right bottom;
         background-size: 110px 150px;
         background-color: #fffaf2;
-        &:hover {
-          cursor: pointer;
-          border: 1px solid #0f8c20;
-        }
       }
     }
     &_title {
@@ -1123,6 +1159,22 @@
           }
         }
       }
+      .new_flag {
+        &:before {
+          position: absolute;
+          content: 'NEW';
+          top: 8px;
+          right: -30px;
+          padding: 0 4px;
+          height: 16px;
+          line-height: 16px;
+          color: #fff;
+          font-size: 12px;
+          transform: scale(0.8);
+          border-radius: 3px;
+          background: #f43900;
+        }
+      }
     }
     &_noData {
       padding-top: 40px;
@@ -1161,10 +1213,6 @@
         background-position: right bottom;
         background-size: 110px 150px;
         background-color: #fffaf2;
-        &:hover {
-          cursor: pointer;
-          border: 1px solid #0f8c20;
-        }
       }
     }
     &_title {

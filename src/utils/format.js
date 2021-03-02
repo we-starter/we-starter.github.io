@@ -51,3 +51,25 @@ export const weiDiv = (value1, value2) => {
     .multipliedBy(100)
     .toString()
 }
+
+export const splitFormat = (num, fractionDigits) => {
+  if (!fractionDigits) fractionDigits = 0
+  if (isNaN(num)) return num
+  if (num) {
+    if (num === '0') {
+      return num
+    }
+    if (fractionDigits === 0) {
+      return parseInt(num)
+    }
+    if (num.toString().indexOf('.') > -1) {
+      let digit = num.toString().split('.')
+      if (digit[1].length > fractionDigits) {
+        let digitResult = digit[1].substring(0, fractionDigits)
+        return digit[0] + '.' + digitResult
+      }
+    }
+  } else {
+    return num
+  }
+}
