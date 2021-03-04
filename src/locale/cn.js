@@ -234,5 +234,6 @@ const zh_CN = {
   alreadySubscribed: '已申购过',
   notInWhitelist: '无申购额度',
   flashPool: '“24小时”池',
+  withdrawTip: '这是兑换池合约地址，请不要向合约地址直接转币',
 }
 export default zh_CN
