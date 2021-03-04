@@ -63,7 +63,10 @@
             border: 1px solid #0f8c20;
           }
         }
-        &:last-child {
+        &:nth-child(2) {
+          margin-top: 80px;
+        }
+        &:nth-child(3) {
           margin-top: 80px;
         }
       }
@@ -419,7 +422,10 @@
             border: 1px solid #0f8c20;
           }
         }
-        &:last-child {
+        &:nth-child(2) {
+          margin-top: 80px;
+        }
+        &:nth-child(3) {
           margin-top: 80px;
         }
       }
@@ -770,7 +776,10 @@
             border: 1px solid #0f8c20;
           }
         }
-        &:last-child {
+        &:nth-child(2) {
+          margin-top: 0;
+        }
+        &:nth-child(3) {
           margin-top: 0;
         }
       }
@@ -1113,7 +1122,10 @@
             border: 1px solid #0f8c20;
           }
         }
-        &:last-child {
+        &:nth-child(2) {
+          margin-top: 0;
+        }
+        &:nth-child(3) {
           margin-top: 0;
         }
       }

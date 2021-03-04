@@ -36,6 +36,9 @@ const PoolsBanner = (props) => {
           <a></a>
         </CopyToClipboard>
       </p>
+      <p className='pools_banner_withdraw_tip'>
+        <FormattedMessage id='withdrawTip' />
+      </p>
       {/* <div>
         <a
           className={`pools_banner_btn ${

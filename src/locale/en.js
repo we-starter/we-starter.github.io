@@ -236,5 +236,7 @@ const en_US = {
   alreadySubscribed: 'Already Subscribed',
   notInWhitelist: 'Not in whitelist',
   flashPool: 'Flash Pool',
+  withdrawTip:
+    'This is a smart contract address, please do not transfer any token into it.',
 }
 export default en_US

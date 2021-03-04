@@ -11,6 +11,7 @@ import Metamask from '../../assets/icon/Metamask@2x.png'
 import TokenPocket from '../../assets/icon/tokenPocket.png'
 import AoLink from '../../assets/icon/aolink.png'
 import BitKeep from '../../assets/icon/bitkeep.png'
+import Bingoo from '../../assets/icon/bingoo.png'
 import HyperPay from '../../assets/icon/HyperPay-Logo@2x.png'
 import { usePoolsInfo } from './Hooks'
 // import pool from '../../configs/pools'
@@ -415,6 +416,12 @@ const PoolsIndex = (props) => {
             <img src={HUOBI} />
             <img src={TokenPocket} />
             <img src={BitKeep} />
+          </div>
+          <div
+            className='pools-type-bottom_content_box'
+            style={{ justifyContent: 'center' }}
+          >
+            <img src={Bingoo} />
           </div>
         </div>
       </div>
