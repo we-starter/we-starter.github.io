@@ -352,8 +352,8 @@ const PoolsDetail = (props) => {
                   <tr>
                     <td>{pool && formatAmount(pool.settleable.amount)}</td>
                     <td>{pool && formatAmount(pool.settleable.volume)}</td>
-                    {/* && pool.settleable.volume > 0 && !pool.settleable.completed_ */}
                     <td>
+                      {/* && pool.settleable.volume > 0 && !pool.settleable.completed_ */}
                       {pool && pool.type !== 1 && (
                         <a
                           className='pools_detail_record_btn'
