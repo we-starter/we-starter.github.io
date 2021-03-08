@@ -157,7 +157,7 @@ export default [
       symbol: 'USDT',
     },
     icon: '',
-    type: 0,
+    type: 1,
     isPrivate: false,
     underlying: {
       address: '0x000000000000000000000000000000000000',
