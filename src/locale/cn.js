@@ -235,5 +235,7 @@ const zh_CN = {
   notInWhitelist: '无申购额度',
   flashPool: '“24小时”池',
   withdrawTip: '这是兑换池合约地址，请不要向合约地址直接转币',
+  fixAboutProject:
+    'Fixed-Rate Protocol （官网：fixed.finance）是基于HECO开发的首个智能化稳定保底产品投资协议。实时链上数据监测+产品发掘智能聚合策略，平衡风险的同时挖掘更高收益，为不同的用户群体提供了固定收益和浮动收益相对稳定的产品选择。FIX结合挖矿、NFT、社区治理DAO等多种运营模式，充分发挥平台币的价值，打造HECO生态最强、最稳定的固定收益应用.',
 }
 export default zh_CN

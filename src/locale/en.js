@@ -238,5 +238,7 @@ const en_US = {
   flashPool: 'Flash Pool',
   withdrawTip:
     'This is a smart contract address, please do not transfer any token into it.',
+  fixAboutProject:
+    'Fixed-Rate Protocol (official Site：fixed.finance) is the first and the best stable yield investment protocol on HECO. The all-time monitoring of on-chain data and the intelligent aggregating strategy of savings provide the various investment options for distinctive users along with balancing risks and earnings mechanically. By combining liquidity mining, NFT, and community governance(DAO), FIX Token endowed with intrinsic value which will support Fixed-Rate Protocol to become one of the most stable and the most fruitful application among HECO.',
 }
 export default en_US

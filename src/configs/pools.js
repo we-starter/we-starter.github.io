@@ -101,7 +101,7 @@ export default [
     address: '0x000000000000000000000000000000000000',
     start_at: '1615377600',
     is_top: true,
-    is_coming: true,
+    is_coming: true, // is_coming 为 true 则不请求合约
     currency: {
       address: '0x0', // 如果是0x0则是ht
       decimal: 18,
@@ -126,10 +126,10 @@ export default [
       max_allocation: '-',
       min_swap_level: '50000 USDT',
     },
-    website: 'https://www.dfuture.com',
+    website: 'https://www.fixed.finance',
     white_paper: '-',
-    twitter: 'https://twitter.com/dFuture_finance',
-    Telegram_Channel: 'https://t.me/dfutureglobal',
+    twitter: 'https://twitter.com/ProtocolFixed',
+    Telegram_Channel: 'https://t.me/FixedRateProtocol',
     Github: '-',
     yuque: '-',
     progress: 0,
@@ -140,10 +140,10 @@ export default [
     totalPurchasedAmount: '50000000000000000000000',
     totalPurchasedUnderlying: '0',
     totalPurchasedCurrency: '0',
-    is_flash: true,
-    link_url: 'https://heco.dfuture.com/home',
+    is_flash: false,
+    link_url: 'https://fixed.finance/home', // 跳转外链接
     project_introduction:
-        'Fixed-Rate Protocol (official Site：fixed.finance) is the first and the best stable yield investment protocol on HECO. The all-time monitoring of on-chain data and the intelligent aggregating strategy of savings provide the various investment options for distinctive users along with balancing risks and earnings mechanically. By combining liquidity mining, NFT, and community governance(DAO), FIX Token endowed with intrinsic value which will support Fixed-Rate Protocol to become one of the most stable and the most fruitful application among HECO.',
+      'Fixed-Rate Protocol (official Site：fixed.finance) is the first and the best stable yield investment protocol on HECO. The all-time monitoring of on-chain data and the intelligent aggregating strategy of savings provide the various investment options for distinctive users along with balancing risks and earnings mechanically. By combining liquidity mining, NFT, and community governance(DAO), FIX Token endowed with intrinsic value which will support Fixed-Rate Protocol to become one of the most stable and the most fruitful application among HECO.',
   },
   {
     name: 'FIX',
@@ -175,10 +175,10 @@ export default [
       max_allocation: '-',
       min_swap_level: '50000 USDT',
     },
-    website: 'https://www.dfuture.com',
+    website: 'https://www.fixed.finance',
     white_paper: '-',
-    twitter: 'https://twitter.com/dFuture_finance',
-    Telegram_Channel: 'https://t.me/dfutureglobal',
+    twitter: 'https://twitter.com/ProtocolFixed',
+    Telegram_Channel: 'https://t.me/FixedRateProtocol',
     Github: '-',
     yuque: '-',
     progress: 0,
@@ -189,9 +189,9 @@ export default [
     totalPurchasedAmount: '50000000000000000000000',
     totalPurchasedUnderlying: '0',
     totalPurchasedCurrency: '0',
-    is_flash: true,
-    link_url: 'https://heco.dfuture.com/home',
+    is_flash: false,
+    link_url: 'https://fixed.finance/home', // 跳转外链接
     project_introduction:
-        'Fixed-Rate Protocol (official Site：fixed.finance) is the first and the best stable yield investment protocol on HECO. The all-time monitoring of on-chain data and the intelligent aggregating strategy of savings provide the various investment options for distinctive users along with balancing risks and earnings mechanically. By combining liquidity mining, NFT, and community governance(DAO), FIX Token endowed with intrinsic value which will support Fixed-Rate Protocol to become one of the most stable and the most fruitful application among HECO.',
+      'Fixed-Rate Protocol (official Site：fixed.finance) is the first and the best stable yield investment protocol on HECO. The all-time monitoring of on-chain data and the intelligent aggregating strategy of savings provide the various investment options for distinctive users along with balancing risks and earnings mechanically. By combining liquidity mining, NFT, and community governance(DAO), FIX Token endowed with intrinsic value which will support Fixed-Rate Protocol to become one of the most stable and the most fruitful application among HECO.',
   },
 ]
