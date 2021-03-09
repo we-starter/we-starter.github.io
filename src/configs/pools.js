@@ -94,24 +94,24 @@ export default [
     is_flash: true,
     link_url: 'https://heco.dfuture.com/home',
     project_introduction:
-      'dFuture is an experimental derivative trading protocol initiated and incubated by Mix Lab of the Mix group. As a decentralized derivatives exchange, dFuture is based on external quotation, enabling traders to execute long / short trading with leverage safely and efficiently at better price. Compared to the centralized exchanges, traders will also enjoy far better trading depth. Meanwhile LP (liquidity provider) only needs to stake single settlement currency (currently USDT), which can obtain stable, risk-free, high return without any impermanent loss.',
+        'dFuture is an experimental derivative trading protocol initiated and incubated by Mix Lab of the Mix group. As a decentralized derivatives exchange, dFuture is based on external quotation, enabling traders to execute long / short trading with leverage safely and efficiently at better price. Compared to the centralized exchanges, traders will also enjoy far better trading depth. Meanwhile LP (liquidity provider) only needs to stake single settlement currency (currently USDT), which can obtain stable, risk-free, high return without any impermanent loss.',
   },
   {
     name: 'FIX',
-    address: '0x000000000000000000000000000000000000',
+    address: '0x24DE0C0F84Ca06D9A8225e031D294dfF405bC6aB',
     start_at: '1615377600',
     is_top: true,
-    is_coming: true, // is_coming 为 true 则不请求合约
+    is_coming: false, // is_coming 为 true 则不请求合约
     currency: {
       address: '0x0', // 如果是0x0则是ht
       decimal: 18,
-      symbol: 'USDT',
+      symbol: 'HT',
     },
     icon: '',
     type: 1,
     isPrivate: true,
     underlying: {
-      address: '0x000000000000000000000000000000000000',
+      address: '0xDe9495De889996404b14dDBf05f66Db7401F0733',
       decimal: 18,
       symbol: 'FIX',
       name: 'FIX',
@@ -122,9 +122,9 @@ export default [
     amount: '6000',
     pool_info: {
       token_distribution: 'Tuesday 10th 2021, 8:00PM SGT',
-      min_allocation: '-',
-      max_allocation: '-',
-      min_swap_level: '50000 USDT',
+      min_allocation: '0',
+      max_allocation: '18.54 HT',
+      min_swap_level: '3708 HT',
     },
     website: 'https://www.fixed.finance',
     white_paper: '-',
@@ -134,8 +134,8 @@ export default [
     yuque: '-',
     progress: 0,
     status: 0,
-    ratio: '1HT= ?FIX',
-    time: '1615381200',
+    ratio: '1HT=1.618FIX', // 兑换比例需要确认
+    time: '1615384800',
     purchasedCurrencyOf: 0,
     totalPurchasedAmount: '60000000000000000000000',
     totalPurchasedUnderlying: '0',
@@ -143,24 +143,24 @@ export default [
     is_flash: false,
     link_url: 'https://fixed.finance/home', // 跳转外链接
     project_introduction:
-      'Fixed-Rate Protocol (official Site：fixed.finance) is the first and the best stable yield investment protocol on HECO. The all-time monitoring of on-chain data and the intelligent aggregating strategy of savings provide the various investment options for distinctive users along with balancing risks and earnings mechanically. By combining liquidity mining, NFT, and community governance(DAO), FIX Token endowed with intrinsic value which will support Fixed-Rate Protocol to become one of the most stable and the most fruitful application among HECO.',
+        'Fixed-Rate Protocol (official Site：fixed.finance) is the first and the best stable yield investment protocol on HECO. The all-time monitoring of on-chain data and the intelligent aggregating strategy of savings provide the various investment options for distinctive users along with balancing risks and earnings mechanically. By combining liquidity mining, NFT, and community governance(DAO), FIX Token endowed with intrinsic value which will support Fixed-Rate Protocol to become one of the most stable and the most fruitful application among HECO.',
   },
   {
     name: 'FIX',
-    address: '0x000000000000000000000000000000000001',
-    start_at: '1615377600',
+    address: '0x1bCaC989BA76C293f56b2Ae7490d5375977F6eb4',
+    start_at: '1615381200',
     is_top: true,
-    is_coming: true,
+    is_coming: false,
     currency: {
       address: '0x0', // 如果是0x0则是ht
       decimal: 18,
-      symbol: 'USDT',
+      symbol: 'HT',
     },
     icon: '',
-    type: 2,
+    type: 0,
     isPrivate: false,
     underlying: {
-      address: '0x000000000000000000000000000000000000',
+      address: '0xDe9495De889996404b14dDBf05f66Db7401F0733',
       decimal: 18,
       symbol: 'FIX',
       name: 'FIX',
@@ -173,7 +173,7 @@ export default [
       token_distribution: 'Tuesday 10th 2021, 8:00PM SGT',
       min_allocation: '-',
       max_allocation: '-',
-      min_swap_level: '50000 USDT',
+      min_swap_level: '2472 HT',
     },
     website: 'https://www.fixed.finance',
     white_paper: '-',
@@ -183,8 +183,8 @@ export default [
     yuque: '-',
     progress: 0,
     status: 0,
-    ratio: '1HT= ?FIX',
-    time: '1615381200',
+    ratio: '1HT=1.618FIX',
+    time: '1615384800',
     purchasedCurrencyOf: 0,
     totalPurchasedAmount: '40000000000000000000000',
     totalPurchasedUnderlying: '0',
@@ -192,6 +192,6 @@ export default [
     is_flash: false,
     link_url: 'https://fixed.finance/home', // 跳转外链接
     project_introduction:
-      'Fixed-Rate Protocol (official Site：fixed.finance) is the first and the best stable yield investment protocol on HECO. The all-time monitoring of on-chain data and the intelligent aggregating strategy of savings provide the various investment options for distinctive users along with balancing risks and earnings mechanically. By combining liquidity mining, NFT, and community governance(DAO), FIX Token endowed with intrinsic value which will support Fixed-Rate Protocol to become one of the most stable and the most fruitful application among HECO.',
+        'Fixed-Rate Protocol (official Site：fixed.finance) is the first and the best stable yield investment protocol on HECO. The all-time monitoring of on-chain data and the intelligent aggregating strategy of savings provide the various investment options for distinctive users along with balancing risks and earnings mechanically. By combining liquidity mining, NFT, and community governance(DAO), FIX Token endowed with intrinsic value which will support Fixed-Rate Protocol to become one of the most stable and the most fruitful application among HECO.',
   },
 ]

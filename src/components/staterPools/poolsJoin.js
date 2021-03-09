@@ -82,7 +82,7 @@ const PoolsJoin = (props) => {
       //   })
       // }
     }
-    
+
     setAmount(formatAmount(max, pool.currency.decimal, 6))
     // setAmount(new BigNumber(Web3.utils.fromWei(max, 'ether')).toFixed(6, 1) * 1)
   }
