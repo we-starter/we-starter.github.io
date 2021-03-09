@@ -405,6 +405,7 @@ export const usePoolsInfo = (address = '') => {
                                     topics: [null, Web3.utils.padLeft(account, 64)],
                                 }),
                                 currency_token ? currency_token.methods.allowance(account, pool.address).call() : 0,
+                                pool_contract.methods.totalSettledUnderlying().call(),
                                 // underlying_token.methods.balanceOf(pool.address).call(),
                             ]
                             return Promise.all(promise_list).then(
@@ -417,6 +418,7 @@ export const usePoolsInfo = (address = '') => {
                                      settleable,
                                      logs,
                                      currency_allowance,
+                                     totalSettledUnderlying,
                                  ]) => {
                                     let status = pool.status || 0 // 即将上线
                                     if (pool.start_at < now && status < 1) {
@@ -429,7 +431,7 @@ export const usePoolsInfo = (address = '') => {
                                         status = 2
                                     }
 
-                                    if (totalSettleable.volume == 0) {
+                                    if (totalSettleable.volume == totalSettledUnderlying) {
                                         status = 3
                                     }
 
@@ -473,6 +475,7 @@ export const usePoolsInfo = (address = '') => {
                                         totalPurchasedUnderlying,
                                         purchasedCurrencyOf,
                                         totalSettleable,
+                                        totalSettledUnderlying,
                                         settleable,
                                         logs
                                     })
