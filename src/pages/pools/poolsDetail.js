@@ -568,6 +568,11 @@ const PoolsDetail = (props) => {
               {pool && pool.underlying.symbol === 'DFT' && (
                 <a className='no_link'>{pool && pool.project_introduction}</a>
               )}
+              {pool && pool.underlying.symbol === 'FIX' && (
+                <a className='no_link'>
+                  <FormattedMessage id='fixAboutProject' />
+                </a>
+              )}
             </div>
           )}
         </div>

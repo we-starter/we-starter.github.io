@@ -5,6 +5,7 @@ import HUSD from '../../assets/icon/HUSD@2x.png'
 import DFT from '../../assets/icon/DFT@2x.png'
 import timePng from '../../assets/icon/time@2x.png'
 import MATTER from '../../assets/icon/MATTER@2x.png'
+import FIX from '../../assets/icon/FIX@2x.png'
 import noDataPng from '../../assets/icon/noData@2x.png'
 import HUOBI from '../../assets/icon/huobi.png'
 import Metamask from '../../assets/icon/Metamask@2x.png'
@@ -75,19 +76,20 @@ const PoolsIndex = (props) => {
     setIsLogin(active)
   }, [tabFlag, pools, active])
 
-  const goFinance = () => {
-    if (tabFlag !== 3) {
+  const goFinance = (e, flag, url) => {
+    e.stopPropagation()
+    if (!flag) {
       return
     }
-    window.open('https://heco.dfuture.com/home')
-    // window.open('https://antimatter.finance/')
+    window.open(url)
   }
 
   // 列表查看详情
-  const goDetail = (address) => {
-    // if (tabFlag === 3) {
-    //   return
-    // }
+  const goDetail = (e, flag, address) => {
+    e.stopPropagation()
+    if (flag) {
+      return
+    }
     props.history.push(`/pools/detail/${address}`)
   }
 
@@ -147,10 +149,14 @@ const PoolsIndex = (props) => {
       <div
         className={cs(
           'pools-type_card_box',
-          type === 1 && 'pools-type_private',
+          ((pool && pool.underlying.symbol === 'FIX') || type === 1) &&
+            'pools-type_private',
+          pool && pool.is_coming && 'pools-type_hover_style',
           tabFlag === 3 && 'pools-type_flashPool'
         )}
-        // onClick={goFinance}
+        onClick={(e) =>
+          goFinance(e, pool && pool.is_coming, pool && pool.link_url)
+        }
         key={pool.address}
       >
         <div className='pools-type_title'>
@@ -159,6 +165,7 @@ const PoolsIndex = (props) => {
               <img src={MATTER} />
             )}
             {pool && pool.underlying.symbol === 'DFT' && <img src={DFT} />}
+            {pool && pool.underlying.symbol === 'FIX' && <img src={FIX} />}
             {pool && pool.underlying.name}
           </p>
           <p className='pools-type_card_title_right'>
@@ -275,9 +282,12 @@ const PoolsIndex = (props) => {
           )}
         </div>
         <a
-          className={cs('pools-type_enter')}
-          onClick={() => {
-            goDetail(address)
+          className={cs(
+            'pools-type_enter',
+            pool && pool.is_coming && 'pools-type_disable_enter'
+          )}
+          onClick={(e) => {
+            goDetail(e, pool && pool.is_coming, address)
           }}
         >
           <FormattedMessage id='poolsIndexText3' />

@@ -149,9 +149,9 @@
       }
     }
     &_card {
-      margin-top: 30px;
-      display: flex;
+      // display: flex;
       .pools-type_card_box {
+        margin-top: 30px;
         box-sizing: border-box;
         display: inline-block;
         // margin-top: 20px;
@@ -160,12 +160,19 @@
         height: 368px;
         background: #fafffc;
         border-radius: 20px;
+        vertical-align: top;
         &:nth-child(3n-1) {
-          margin: 0 40px;
+          margin: 30px 40px 0;
         }
       }
       .pools-type_private {
         background: #fffbfa;
+      }
+      .pools-type_hover_style {
+        &:hover {
+          cursor: pointer;
+          border: 1px solid #0f8c20;
+        }
       }
       .pools-type_flashPool {
         background: url('../icon/shandian@2x.png') no-repeat;
@@ -508,9 +515,9 @@
       }
     }
     &_card {
-      margin-top: 30px;
-      display: flex;
+      // display: flex;
       .pools-type_card_box {
+        margin-top: 30px;
         box-sizing: border-box;
         display: inline-block;
         // margin-top: 20px;
@@ -519,12 +526,19 @@
         height: 368px;
         background: #fff;
         border-radius: 20px;
+        vertical-align: top;
         &:nth-child(3n-1) {
-          margin: 0 40px;
+          margin: 30px 40px 0;
         }
       }
       .pools-type_private {
         background: #fffbfa;
+      }
+      .pools-type_hover_style {
+        &:hover {
+          cursor: pointer;
+          border: 1px solid #0f8c20;
+        }
       }
       .pools-type_flashPool {
         background: url('../icon/shandian@2x.png') no-repeat;
@@ -870,9 +884,16 @@
         height: 368px;
         background: #fff;
         border-radius: 20px;
+        vertical-align: top;
       }
       .pools-type_private {
         background: #fffbfa;
+      }
+      .pools-type_hover_style {
+        &:hover {
+          cursor: pointer;
+          border: 1px solid #0f8c20;
+        }
       }
       .pools-type_flashPool {
         background: url('../icon/shandian@2x.png') no-repeat;
@@ -1216,9 +1237,16 @@
         height: 368px;
         background: #fff;
         border-radius: 20px;
+        vertical-align: top;
       }
       .pools-type_private {
         background: #fffbfa;
+      }
+      .pools-type_hover_style {
+        &:hover {
+          cursor: pointer;
+          border: 1px solid #0f8c20;
+        }
       }
       .pools-type_flashPool {
         background: url('../icon/shandian@2x.png') no-repeat;
