@@ -100,6 +100,10 @@
     "type": "event"
   },
   {
+    "stateMutability": "nonpayable",
+    "type": "fallback"
+  },
+  {
     "inputs": [
       {
         "internalType": "address",
@@ -171,6 +175,19 @@
     "name": "__Starter_init_unchained",
     "outputs": [],
     "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "completed",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
     "type": "function"
   },
   {
@@ -293,6 +310,13 @@
     "type": "function"
   },
   {
+    "inputs": [],
+    "name": "purchaseHT",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
     "inputs": [
       {
         "internalType": "address",
@@ -314,6 +338,24 @@
   {
     "inputs": [],
     "name": "renounceGovernorship",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_token",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "_dst",
+        "type": "address"
+      }
+    ],
+    "name": "rescueTokens",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -387,6 +429,19 @@
     "name": "settle",
     "outputs": [],
     "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "settleRate",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
     "type": "function"
   },
   {
@@ -538,7 +593,7 @@
   {
     "inputs": [
       {
-        "internalType": "address",
+        "internalType": "address payable",
         "name": "to",
         "type": "address"
       },
@@ -560,6 +615,46 @@
   },
   {
     "inputs": [],
+    "name": "withdrawHT",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address payable",
+        "name": "_dst",
+        "type": "address"
+      }
+    ],
+    "name": "withdrawHT",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_dst",
+        "type": "address"
+      }
+    ],
+    "name": "withdrawToken",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "withdrawToken",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
     "name": "withdrawable",
     "outputs": [
       {
@@ -575,5 +670,9 @@
     ],
     "stateMutability": "view",
     "type": "function"
+  },
+  {
+    "stateMutability": "payable",
+    "type": "receive"
   }
 ]

@@ -404,7 +404,7 @@ export const usePoolsInfo = (address = '') => {
                                     address: pool.address,
                                     topics: [null, Web3.utils.padLeft(account, 64)],
                                 }),
-                                currency_token.methods.allowance(account, pool.address).call(),
+                                currency_token ? currency_token.methods.allowance(account, pool.address).call() : 0,
                                 // underlying_token.methods.balanceOf(pool.address).call(),
                             ]
                             return Promise.all(promise_list).then(
