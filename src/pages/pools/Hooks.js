@@ -459,7 +459,7 @@ export const usePoolsInfo = (address = '') => {
                                         ratio: `1${pool.currency.symbol} = ${
                                             new BigNumber(Web3.utils.toWei('1', 'ether'))
                                                 .div(new BigNumber(price))
-                                                .toFixed(2, 1) * 1
+                                                .toFixed(3, 1) * 1
                                         }${pool.underlying.symbol}`,
                                         progress:
                                             new BigNumber(totalPurchasedCurrency)
@@ -555,7 +555,7 @@ export const usePoolsInfo = (address = '') => {
 
                                     console.log('update pools')
                                   return Object.assign({}, pool, {
-                                        ratio: `1${pool.currency.symbol} = ${_ratio}${pool.underlying.symbol}`,
+                                        ratio: `1${pool.currency.symbol} = ${_ratio.toFixed(3, 1).toString() * 1}${pool.underlying.symbol}`,
                                         progress:
                                             new BigNumber(Web3.utils.fromWei(totalOffered, "ether"))
                                                 .dividedBy(new BigNumber(pool.amount))
