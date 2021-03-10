@@ -62,9 +62,9 @@ const PoolsJoin = (props) => {
       max = pool.quotaOf
     }
 
-    if(pool.currency.is_ht && max === balance){
-      // 如果是ht,留部分手续费\
-      max = maxB.minus(new BigNumber(fee)).toString()
+    if(pool.currency.is_ht && max == balance){
+      // 如果是ht,留部分手续费
+      max = max > fee ? maxB.minus(new BigNumber(fee)).toString() : 0
       // if(pool.type === 1) {
       //   // offering 合约
       //   const pool_contract = getContract(library, Offering, pool.address)

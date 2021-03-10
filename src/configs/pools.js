@@ -137,7 +137,7 @@ export default [
     ratio: '1HT=1.618FIX', // 兑换比例需要确认
     time: '1615384800',
     purchasedCurrencyOf: 0,
-    totalPurchasedAmount: '60000000000000000000000',
+    totalPurchasedAmount: '3708280000000000000000',
     totalPurchasedUnderlying: '0',
     totalPurchasedCurrency: '0',
     is_flash: false,
@@ -186,7 +186,7 @@ export default [
     ratio: '1HT=1.618FIX',
     time: '1615384800',
     purchasedCurrencyOf: 0,
-    totalPurchasedAmount: '40000000000000000000000',
+    totalPurchasedAmount: '2472000000000000000000',
     totalPurchasedUnderlying: '0',
     totalPurchasedCurrency: '0',
     is_flash: false,

@@ -431,7 +431,7 @@ export const usePoolsInfo = (address = '') => {
                                         status = 2
                                     }
 
-                                    if (totalSettleable.volume == totalSettledUnderlying) {
+                                    if (totalSettleable.volume == totalSettledUnderlying && totalSettleable.volume > 0) {
                                         status = 3
                                     }
 
