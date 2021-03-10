@@ -58,7 +58,7 @@ const PoolsJoin = (props) => {
     const maxB = new BigNumber(max)
     const balanceB = new BigNumber(balance)
     const quotaOfB = new BigNumber(pool.quotaOf)
-    if (pool.type === 1 && pool.quotaOf > 0 && quotaOfB.lt(balanceB)) {
+    if (pool.type === 1 && quotaOfB.lt(balanceB)) {
       max = pool.quotaOf
     }
 
