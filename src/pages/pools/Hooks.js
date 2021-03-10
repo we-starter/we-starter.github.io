@@ -404,7 +404,8 @@ export const usePoolsInfo = (address = '') => {
                                     address: pool.address,
                                     topics: [null, Web3.utils.padLeft(account, 64)],
                                 }),
-                                currency_token.methods.allowance(account, pool.address).call(),
+                                currency_token ? currency_token.methods.allowance(account, pool.address).call() : 0,
+                                pool_contract.methods.totalSettledUnderlying().call(),
                                 // underlying_token.methods.balanceOf(pool.address).call(),
                             ]
                             return Promise.all(promise_list).then(
@@ -417,6 +418,7 @@ export const usePoolsInfo = (address = '') => {
                                      settleable,
                                      logs,
                                      currency_allowance,
+                                     totalSettledUnderlying,
                                  ]) => {
                                     let status = pool.status || 0 // 即将上线
                                     if (pool.start_at < now && status < 1) {
@@ -429,7 +431,7 @@ export const usePoolsInfo = (address = '') => {
                                         status = 2
                                     }
 
-                                    if (totalSettleable.completed_ && status < 3) {
+                                    if (totalSettleable.volume == totalSettledUnderlying && totalSettleable.volume > 0) {
                                         status = 3
                                     }
 
@@ -457,13 +459,13 @@ export const usePoolsInfo = (address = '') => {
                                         ratio: `1${pool.currency.symbol} = ${
                                             new BigNumber(Web3.utils.toWei('1', 'ether'))
                                                 .div(new BigNumber(price))
-                                                .toFixed(2, 1) * 1
+                                                .toFixed(3, 1) * 1
                                         }${pool.underlying.symbol}`,
                                         progress:
                                             new BigNumber(totalPurchasedCurrency)
                                                 .dividedBy(totalPurchasedAmount)
-                                                .toNumber()
-                                                .toFixed(2) * 1,
+                                                .toFixed(2, 1)
+                                                .toString() * 1,
                                         status: status,
                                         time: time,
                                         price: Web3.utils.fromWei(price, 'ether'),
@@ -473,6 +475,7 @@ export const usePoolsInfo = (address = '') => {
                                         totalPurchasedUnderlying,
                                         purchasedCurrencyOf,
                                         totalSettleable,
+                                        totalSettledUnderlying,
                                         settleable,
                                         logs
                                     })
@@ -526,7 +529,7 @@ export const usePoolsInfo = (address = '') => {
                                         status = 2
                                     }
 
-                                    if (status === 2 && totalOffered === totalClaimed) {
+                                    if (status === 2 && totalOffered === totalClaimed && totalClaimed > 0) {
                                         status = 3
                                     }
 
@@ -552,7 +555,7 @@ export const usePoolsInfo = (address = '') => {
 
                                     console.log('update pools')
                                   return Object.assign({}, pool, {
-                                        ratio: `1${pool.currency.symbol} = ${_ratio}${pool.underlying.symbol}`,
+                                        ratio: `1${pool.currency.symbol} = ${_ratio.toFixed(3, 1).toString() * 1}${pool.underlying.symbol}`,
                                         progress:
                                             new BigNumber(Web3.utils.fromWei(totalOffered, "ether"))
                                                 .dividedBy(new BigNumber(pool.amount))
