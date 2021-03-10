@@ -464,8 +464,8 @@ export const usePoolsInfo = (address = '') => {
                                         progress:
                                             new BigNumber(totalPurchasedCurrency)
                                                 .dividedBy(totalPurchasedAmount)
-                                                .toNumber()
-                                                .toFixed(2) * 1,
+                                                .toFixed(2, 1)
+                                                .toString() * 1,
                                         status: status,
                                         time: time,
                                         price: Web3.utils.fromWei(price, 'ether'),
