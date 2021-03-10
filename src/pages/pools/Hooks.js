@@ -529,7 +529,7 @@ export const usePoolsInfo = (address = '') => {
                                         status = 2
                                     }
 
-                                    if (status === 2 && totalOffered === totalClaimed) {
+                                    if (status === 2 && totalOffered === totalClaimed && totalClaimed > 0) {
                                         status = 3
                                     }
 
