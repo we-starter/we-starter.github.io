@@ -1,0 +1,41 @@
+name: Deployement
+
+on:
+  push:
+    branches: 
+      - master
+  pull_request:
+    branches: 
+      - master
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v2
+    
+    - uses: actions/setup-node@v2
+      with:
+        node-version: '12'
+        
+    - name: node version
+      run: node -v
+    
+    - name: npm version
+      run: npm -v
+      
+    - name: build
+      run: yarn && yarn build
+      env: 
+        CI: false
+      
+    - name: Deploy to GitHub Pages
+      uses: Cecilapp/GitHub-Pages-deploy@v3
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        email: westarter@protonmail.com
+        build_dir: build
+        branch: gh-pages
