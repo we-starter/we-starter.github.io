@@ -3,6 +3,7 @@ import cs from 'classnames'
 import { withRouter } from 'react-router'
 import HUSD from '../../assets/icon/HUSD@2x.png'
 import DFT from '../../assets/icon/DFT@2x.png'
+import DORA from '../../assets/icon/DoraFactory@2x.png'
 import timePng from '../../assets/icon/time@2x.png'
 import MATTER from '../../assets/icon/MATTER@2x.png'
 import FIX from '../../assets/icon/FIX@2x.png'
@@ -50,6 +51,9 @@ const PoolsIndex = (props) => {
   const { account, active, library } = useActiveWeb3React()
 
   const pools = usePoolsInfo()
+  pools.sort(function (x, y) {
+    return y.start_at - x.start_at
+  })
 
   const changeTab = (val) => {
     setTabFlag(val)
@@ -166,6 +170,7 @@ const PoolsIndex = (props) => {
             )}
             {pool && pool.underlying.symbol === 'DFT' && <img src={DFT} />}
             {pool && pool.underlying.symbol === 'FIX' && <img src={FIX} />}
+            {pool && pool.underlying.symbol === 'DORA' && <img src={DORA} />}
             {pool && pool.underlying.name}
           </p>
           <p className='pools-type_card_title_right'>

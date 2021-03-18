@@ -94,7 +94,7 @@ export default [
     is_flash: true,
     link_url: 'https://heco.dfuture.com/home',
     project_introduction:
-        'dFuture is an experimental derivative trading protocol initiated and incubated by Mix Lab of the Mix group. As a decentralized derivatives exchange, dFuture is based on external quotation, enabling traders to execute long / short trading with leverage safely and efficiently at better price. Compared to the centralized exchanges, traders will also enjoy far better trading depth. Meanwhile LP (liquidity provider) only needs to stake single settlement currency (currently USDT), which can obtain stable, risk-free, high return without any impermanent loss.',
+      'dFuture is an experimental derivative trading protocol initiated and incubated by Mix Lab of the Mix group. As a decentralized derivatives exchange, dFuture is based on external quotation, enabling traders to execute long / short trading with leverage safely and efficiently at better price. Compared to the centralized exchanges, traders will also enjoy far better trading depth. Meanwhile LP (liquidity provider) only needs to stake single settlement currency (currently USDT), which can obtain stable, risk-free, high return without any impermanent loss.',
   },
   {
     name: 'FIX',
@@ -143,7 +143,7 @@ export default [
     is_flash: false,
     link_url: 'https://fixed.finance/home', // 跳转外链接
     project_introduction:
-        'Fixed-Rate Protocol (official Site：fixed.finance) is the first and the best stable yield investment protocol on HECO. The all-time monitoring of on-chain data and the intelligent aggregating strategy of savings provide the various investment options for distinctive users along with balancing risks and earnings mechanically. By combining liquidity mining, NFT, and community governance(DAO), FIX Token endowed with intrinsic value which will support Fixed-Rate Protocol to become one of the most stable and the most fruitful application among HECO.',
+      'Fixed-Rate Protocol (official Site：fixed.finance) is the first and the best stable yield investment protocol on HECO. The all-time monitoring of on-chain data and the intelligent aggregating strategy of savings provide the various investment options for distinctive users along with balancing risks and earnings mechanically. By combining liquidity mining, NFT, and community governance(DAO), FIX Token endowed with intrinsic value which will support Fixed-Rate Protocol to become one of the most stable and the most fruitful application among HECO.',
   },
   {
     name: 'FIX',
@@ -192,7 +192,7 @@ export default [
     is_flash: false,
     link_url: 'https://fixed.finance/home', // 跳转外链接
     project_introduction:
-        'Fixed-Rate Protocol (official Site：fixed.finance) is the first and the best stable yield investment protocol on HECO. The all-time monitoring of on-chain data and the intelligent aggregating strategy of savings provide the various investment options for distinctive users along with balancing risks and earnings mechanically. By combining liquidity mining, NFT, and community governance(DAO), FIX Token endowed with intrinsic value which will support Fixed-Rate Protocol to become one of the most stable and the most fruitful application among HECO.',
+      'Fixed-Rate Protocol (official Site：fixed.finance) is the first and the best stable yield investment protocol on HECO. The all-time monitoring of on-chain data and the intelligent aggregating strategy of savings provide the various investment options for distinctive users along with balancing risks and earnings mechanically. By combining liquidity mining, NFT, and community governance(DAO), FIX Token endowed with intrinsic value which will support Fixed-Rate Protocol to become one of the most stable and the most fruitful application among HECO.',
   },
   {
     name: 'DoraFactory',
@@ -203,7 +203,7 @@ export default [
     currency: {
       address: '0x0', // 如果是0x0则是ht
       decimal: 18,
-      symbol: 'HT',
+      symbol: 'USDT',
     },
     icon: '',
     type: 1,
@@ -235,12 +235,12 @@ export default [
     ratio: '1USDT=0.1DORA',
     time: '1616587200',
     purchasedCurrencyOf: 0,
-    totalPurchasedAmount: '2472000000000000000000',
+    totalPurchasedAmount: '50000000000000000000000',
     totalPurchasedUnderlying: '0',
     totalPurchasedCurrency: '0',
     is_flash: false,
     link_url: 'https://dorafactory.org', // 跳转外链接
     project_introduction:
-        'Fixed-Rate Protocol (official Site：fixed.finance) is the first and the best stable yield investment protocol on HECO. The all-time monitoring of on-chain data and the intelligent aggregating strategy of savings provide the various investment options for distinctive users along with balancing risks and earnings mechanically. By combining liquidity mining, NFT, and community governance(DAO), FIX Token endowed with intrinsic value which will support Fixed-Rate Protocol to become one of the most stable and the most fruitful application among HECO.',
-  }
+      'Fixed-Rate Protocol (official Site：fixed.finance) is the first and the best stable yield investment protocol on HECO. The all-time monitoring of on-chain data and the intelligent aggregating strategy of savings provide the various investment options for distinctive users along with balancing risks and earnings mechanically. By combining liquidity mining, NFT, and community governance(DAO), FIX Token endowed with intrinsic value which will support Fixed-Rate Protocol to become one of the most stable and the most fruitful application among HECO.',
+  },
 ]
