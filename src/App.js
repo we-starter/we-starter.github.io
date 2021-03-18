@@ -26,6 +26,7 @@ import Intl from './locale/intl'
 function getLibrary(provider) {
   const library = new Web3Provider(provider)
   library.pollingInterval = 8000
+  console.log(library, 'library')
   return library
 }
 
