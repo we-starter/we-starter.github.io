@@ -203,7 +203,7 @@ export default [
     currency: {
       address: '0x0', // 如果是0x0则是ht
       decimal: 18,
-      symbol: 'USDT',
+      symbol: 'USD',
     },
     icon: '',
     type: 1,
@@ -232,7 +232,7 @@ export default [
     yuque: '-',
     progress: 0,
     status: 0,
-    ratio: '1USDT=0.1DORA',
+    ratio: '1 HT= ? DORA',
     time: '1616587200',
     purchasedCurrencyOf: 0,
     totalPurchasedAmount: '50000000000000000000000',

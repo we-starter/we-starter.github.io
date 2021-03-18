@@ -16,6 +16,8 @@ import BitKeep from '../../assets/icon/bitkeep.png'
 import Bingoo from '../../assets/icon/bingoo.png'
 import HyperPay from '../../assets/icon/HyperPay-Logo@2x.png'
 import { usePoolsInfo } from './Hooks'
+// 处理格式 千位符
+import { formatNumber } from 'accounting'
 // import pool from '../../configs/pools'
 import { FormattedMessage } from 'react-intl'
 import Web3 from 'web3'
@@ -214,7 +216,9 @@ const PoolsIndex = (props) => {
           <p className='pools-type_card_ratio' style={{ textAlign: 'right' }}>
             <FormattedMessage id='totalRaised' />
             <i>
-              {formatAmount(totalPurchasedAmount, pool.currency.decimal, 2)}{' '}
+              {formatNumber(
+                formatAmount(totalPurchasedAmount, pool.currency.decimal, 2)
+              )}{' '}
               {currency.symbol}
             </i>
           </p>
