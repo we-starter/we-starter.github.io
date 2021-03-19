@@ -31,6 +31,7 @@ const PoolsIndex = (props) => {
   const [disableFlag, setDisableFlag] = useState(true)
   const [isLogin, setIsLogin] = useState(false)
   const [hoverFlag, setHoverFlag] = useState(false)
+  const [poolSum, setPoolSum] = useState(0)
 
   // const getURLStuff = (stuff) => {
   //   let url = props.location.search
@@ -76,6 +77,15 @@ const PoolsIndex = (props) => {
         setListData(pools.filter((o) => o.is_top))
     }
   }
+
+  useEffect(() => {
+    if (tabFlag !== 1) return
+    setPoolSum(
+      listData.filter((o) => {
+        return o.is_top && (o.status === 0 || o.status === 1 || o.status === 2)
+      }).length
+    )
+  }, [listData])
 
   useEffect(() => {
     setData()
@@ -143,7 +153,6 @@ const PoolsIndex = (props) => {
       type,
       quotaOf,
     } = pool
-    console.log(pool)
     let left_time = 0
     if (status === 0) {
       left_time = start_at * 1000 - Date.now()
@@ -378,14 +387,15 @@ const PoolsIndex = (props) => {
           <div className='pools-type_tab'>
             <h2
               onClick={() => changeTab(1)}
-              className={tabFlag === 1 ? 'tab_active' : ''}
+              className={cs('new_flag', tabFlag === 1 ? 'tab_active' : '')}
             >
               <FormattedMessage id='poolsIndexText4' />
+              <span className='pools_sum'>{poolSum}</span>
             </h2>
 
             <h2
               onClick={() => changeTab(3)}
-              className={cs('new_flag', tabFlag === 3 ? 'tab_active' : '')}
+              className={cs(tabFlag === 3 ? 'tab_active' : '')}
             >
               <img className='flashPool_png' src={timePng} />
               <FormattedMessage id='flashPool' />
