@@ -248,6 +248,11 @@
         font-weight: bold;
         color: #22292f;
         line-height: 14px;
+
+        &:last-child {
+          flex: 1;
+        }
+
         i {
           margin-top: 10px;
           display: block;

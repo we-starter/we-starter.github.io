@@ -239,5 +239,9 @@ const zh_CN = {
   withdrawTip: '这是兑换池合约地址，请不要向合约地址直接转币',
   fixAboutProject:
     'Fixed-Rate Protocol （官网：fixed.finance）是基于HECO开发的首个智能化稳定保底产品投资协议。实时链上数据监测+产品发掘智能聚合策略，平衡风险的同时挖掘更高收益，为不同的用户群体提供了固定收益和浮动收益相对稳定的产品选择。FIX结合挖矿、NFT、社区治理DAO等多种运营模式，充分发挥平台币的价值，打造HECO生态最强、最稳定的固定收益应用.',
+  doraAboutProjectP1:
+    'Dora Factory （官网：DoraFactory.org）是基于波卡的 DAO 即服务基础设施，基于 Substrate 的开放、可编程的链上治理协议平台，为新一代去中心化组织和开发者提供二次方投票、曲线拍卖、Bounty 激励、跨链资产管理等可插拔的治理功能。同时，开发者可以向这个 DAO 即服务平台提交新的治理模块，并获得持续的激励。',
+  doraAboutProjectP2:
+      ' ',
 }
 export default zh_CN
