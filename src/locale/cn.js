@@ -220,6 +220,7 @@ const zh_CN = {
   logoTitle2: 'dFuture 公开兑换池',
   logoTitle3: 'FIX 白名单兑换池',
   logoTitle4: 'FIX 公开兑换池',
+  logoTitle5: 'DORA 白名单兑换池',
   aboutProject:
     'Westarter是一个连接加密货币创新者和投资者的对接平台，任何创新者都可以无需许可的使用标准化的界面来发起和管理流动性拍卖。',
   willStart: '将开始于',
