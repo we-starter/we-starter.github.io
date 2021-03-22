@@ -213,7 +213,7 @@ export default [
       decimal: 18,
       symbol: 'DORA',
       name: 'DORA',
-      total_supply: '10,00,000.00',
+      total_supply: '10,000,000.00',
       holders: '-',
       transfers: '-',
     },

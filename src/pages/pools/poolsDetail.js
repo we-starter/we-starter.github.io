@@ -202,7 +202,7 @@ const PoolsDetail = (props) => {
         </a>
       </div>
       <div className='pools_detail_record'>
-        {pool && pool.type === 1 && pool.quotaOf == 0 && left_time > 0 && (
+        {pool && pool.type === 1 && pool.quotaOf == 0 && left_time > 0 && pool.status == 0 && (
           <div className='mask_layer'>
             <p style={{ lineHeight: '30px', marginBottom: '0' }}>
               <FormattedMessage id='countdown' />
@@ -238,7 +238,7 @@ const PoolsDetail = (props) => {
             </p>
           </div>
         )}
-        {pool && pool.type === 1 && pool.quotaOf == 0 && left_time == 0 && (
+        {pool && pool.type === 1 && pool.quotaOf == 0 && pool.status > 0 && (
           <div className='mask_layer'>
             <p style={{ lineHeight: '30px', marginBottom: '0' }}>
               <FormattedMessage id='cannotProject' />
