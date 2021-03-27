@@ -390,7 +390,9 @@ const PoolsIndex = (props) => {
               className={cs('new_flag', tabFlag === 1 ? 'tab_active' : '')}
             >
               <FormattedMessage id='poolsIndexText4' />
-              <span className='pools_sum'>{poolSum}</span>
+              {
+                poolSum > 0 && <span className='pools_sum'>{poolSum}</span>
+              }
             </h2>
 
             <h2
