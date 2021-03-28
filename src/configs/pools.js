@@ -72,7 +72,7 @@ export default [
     },
     amount: '166667',
     pool_info: {
-      token_distribution: 'Tuesday 2th 2021, 9:00PM SGT',
+      token_distribution: 'March 2th 2021, 9:00PM SGT',
       min_allocation: '-',
       max_allocation: '',
       min_swap_level: '50000 USDT',
@@ -121,7 +121,7 @@ export default [
     },
     amount: '6000',
     pool_info: {
-      token_distribution: 'Tuesday 10th 2021, 8:00PM SGT',
+      token_distribution: 'March 10th 2021, 8:00PM SGT',
       min_allocation: '0',
       max_allocation: '18.54 HT',
       min_swap_level: '3708 HT',
@@ -170,7 +170,7 @@ export default [
     },
     amount: '4000',
     pool_info: {
-      token_distribution: 'Tuesday 10th 2021, 8:00PM SGT',
+      token_distribution: 'March 10th 2021, 8:00PM SGT',
       min_allocation: '-',
       max_allocation: '-',
       min_swap_level: '2472 HT',
@@ -219,7 +219,7 @@ export default [
     },
     amount: '5000',
     pool_info: {
-      token_distribution: 'Monday 22th 2021, 2:00PM SGT',
+      token_distribution: 'March 22th 2021, 2:00PM SGT',
       min_allocation: '0',
       max_allocation: '7.14 HT',
       min_swap_level: '3571 HT',
@@ -242,5 +242,103 @@ export default [
     link_url: 'https://dorafactory.org', // 跳转外链接
     project_introduction:
       'Fixed-Rate Protocol (official Site：fixed.finance) is the first and the best stable yield investment protocol on HECO. The all-time monitoring of on-chain data and the intelligent aggregating strategy of savings provide the various investment options for distinctive users along with balancing risks and earnings mechanically. By combining liquidity mining, NFT, and community governance(DAO), FIX Token endowed with intrinsic value which will support Fixed-Rate Protocol to become one of the most stable and the most fruitful application among HECO.',
+  },
+  {
+    name: 'Cook',
+    address: '0x0000000000000000000000000000000000000000',
+    start_at: '1617084000',
+    is_top: true,
+    is_coming: true, // is_coming 为 true 则不请求合约
+    currency: {
+      address: '0x0', // 如果是0x0则是ht
+      decimal: 18,
+      symbol: 'USDT',
+    },
+    icon: '',
+    type: 1,
+    isPrivate: true,
+    underlying: {
+      address: '0xff75ced57419bcaebe5f05254983b013b0646ef5', // 地址有问题
+      decimal: 18,
+      symbol: 'COOK',
+      name: 'COOK',
+      total_supply: '10,000,000,000',
+      holders: '-',
+      transfers: '-',
+    },
+    amount: '6000',
+    pool_info: {
+      token_distribution: 'March 30th 2021, 2:00PM SGT',
+      min_allocation: '0',
+      max_allocation: '18.54 HT',
+      min_swap_level: '3708 HT',
+    },
+    website: 'https://www.cook.finance',
+    white_paper: '-',
+    twitter: 'https://twitter.com/cook_finance',
+    Telegram_Channel: 'https://t.me/cook_english',
+    Github: 'https://github.com/CookFinance',
+    yuque: '-',
+    progress: 0,
+    status: 0,
+    ratio: '1HT=?COOK', // 兑换比例需要确认
+    time: '1617087600',
+    purchasedCurrencyOf: 0,
+    totalPurchasedAmount: '60000000000000000000000',
+    totalPurchasedUnderlying: '0',
+    totalPurchasedCurrency: '0',
+    is_flash: false,
+    link_url: 'https://www.cook.finance', // 跳转外链接
+    project_introduction:
+        'Cook Protocol is a completely decentralized asset management platform in the DeFi space built on top of the Ethereum blockchain.',
+  },
+  {
+    name: 'Cook',
+    address: '0x0000000000000000000000000000000000000001',
+    start_at: '1617084000',
+    is_top: true,
+    is_coming: true,
+    currency: {
+      address: '0x0', // 如果是0x0则是ht
+      decimal: 18,
+      symbol: 'USDT',
+    },
+    icon: '',
+    type: 0,
+    isPrivate: false,
+    underlying: {
+      address: '0xff75ced57419bcaebe5f05254983b013b0646ef5',
+      decimal: 18,
+      symbol: 'COOK',
+      name: 'COOK',
+      total_supply: '10,000,000,000',
+      holders: '-',
+      transfers: '-',
+    },
+    amount: '4000',
+    pool_info: {
+      token_distribution: 'March 30th 2021, 2:00PM SGT',
+      min_allocation: '-',
+      max_allocation: '-',
+      min_swap_level: '2472 HT',
+    },
+    website: 'https://www.cook.finance',
+    white_paper: '-',
+    twitter: 'https://twitter.com/cook_finance',
+    Telegram_Channel: 'https://t.me/cook_english',
+    Github: 'https://github.com/CookFinance',
+    yuque: '-',
+    progress: 0,
+    status: 0,
+    ratio: '1HT=?COOK',
+    time: '1617087600',
+    purchasedCurrencyOf: 0,
+    totalPurchasedAmount: '40000000000000000000000',
+    totalPurchasedUnderlying: '0',
+    totalPurchasedCurrency: '0',
+    is_flash: false,
+    link_url: 'https://www.cook.finance', // 跳转外链接
+    project_introduction:
+        'Cook Protocol is a completely decentralized asset management platform in the DeFi space built on top of the Ethereum blockchain.',
   },
 ]
