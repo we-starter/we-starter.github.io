@@ -255,11 +255,11 @@ export default [
   },
   {
     name: 'Cook',
-    address: '0x0000000000000000000000000000000000000000',
+    address: '0x746ED583756026c5340Fdc8026D2EA7E44b93De0',
     abi: OfferingV2,
     start_at: '1617199200',
     is_top: true,
-    is_coming: true, // is_coming 为 true 则不请求合约
+    is_coming: false, // is_coming 为 true 则不请求合约
     currency: {
       address: '0xa71edc38d189767582c38a3145b5873052c3e47a', // 如果是0x0则是ht
       decimal: 18,
@@ -269,7 +269,7 @@ export default [
     type: 1,
     isPrivate: true,
     underlying: {
-      address: '0xff75ced57419bcaebe5f05254983b013b0646ef5', // 地址有问题
+      address: '0x74189862B069e2Be5f7c8E6ff08eA8E1B1948519', // 地址有问题
       decimal: 18,
       symbol: 'COOK',
       name: 'COOK',
@@ -305,11 +305,11 @@ export default [
   },
   {
     name: 'Cook',
-    address: '0x0000000000000000000000000000000000000001',
+    address: '0xFC5405759Fb8dDB3f90c2d3d238ea50eEbE5618B',
     abi: StarterV2,
     start_at: '1617200400',
     is_top: true,
-    is_coming: true,
+    is_coming: false,
     currency: {
       address: '0xa71edc38d189767582c38a3145b5873052c3e47a', // 如果是0x0则是ht
       decimal: 18,
@@ -319,7 +319,7 @@ export default [
     type: 0,
     isPrivate: false,
     underlying: {
-      address: '0xff75ced57419bcaebe5f05254983b013b0646ef5',
+      address: '0x74189862B069e2Be5f7c8E6ff08eA8E1B1948519',
       decimal: 18,
       symbol: 'COOK',
       name: 'COOK',
