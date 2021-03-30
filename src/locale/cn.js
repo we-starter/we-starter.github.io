@@ -25,6 +25,7 @@ const zh_CN = {
   obtain: '获取',
   comingSoon1: '即将上线',
   recruit: '募集中',
+  recruitOver: '等待中',
   settlement: '结算中',
   completed: '已完成',
   settled: '已结算',
@@ -221,6 +222,8 @@ const zh_CN = {
   logoTitle3: 'FIX 白名单兑换池',
   logoTitle4: 'FIX 公开兑换池',
   logoTitle5: 'DORA 白名单兑换池',
+  logoTitle6: 'COOK 白名单兑换池',
+  logoTitle7: 'COOK 公开兑换池',
   aboutProject:
     'Westarter是一个连接加密货币创新者和投资者的对接平台，任何创新者都可以无需许可的使用标准化的界面来发起和管理流动性拍卖。',
   willStart: '将开始于',
@@ -236,6 +239,7 @@ const zh_CN = {
   myQuota: '我的额度',
   alreadySubscribed: '已申购过',
   notInWhitelist: '无申购额度',
+  undergoingOver: '申购结束，请等待结算',
   flashPool: '“24小时”池',
   withdrawTip: '这是兑换池合约地址，请不要向合约地址直接转币',
   fixAboutProject:
@@ -244,5 +248,7 @@ const zh_CN = {
     'Dora Factory （官网：DoraFactory.org）是基于波卡的 DAO 即服务基础设施，基于 Substrate 的开放、可编程的链上治理协议平台，为新一代去中心化组织和开发者提供二次方投票、曲线拍卖、Bounty 激励、跨链资产管理等可插拔的治理功能。同时，开发者可以向这个 DAO 即服务平台提交新的治理模块，并获得持续的激励。',
   doraAboutProjectP2:
       ' ',
+  cookAboutProject:
+      '库克协议是一个基于区块链搭建的，无需信任的、透明的和具有良好激励机制的财富管理服务市场协议。该协议将为投资者提供多种资产管理服务选择，并且为资产管理机构提供资金和多元化投资工具。',
 }
 export default zh_CN

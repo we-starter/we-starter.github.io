@@ -32,6 +32,12 @@ const PoolsBanner = (props) => {
           {pool && pool.underlying.symbol === 'DORA' && (
               <FormattedMessage id='logoTitle5' />
           )}
+          {pool && pool.underlying.symbol === 'COOK' && pool.type == 1 && (
+              <FormattedMessage id='logoTitle6' />
+          )}
+          {pool && pool.underlying.symbol === 'COOK' && pool.type == 0 && (
+              <FormattedMessage id='logoTitle7' />
+          )}
         {/*{!active && <FormattedMessage id='htPublic' />}*/}
       </h3>
       <p className='pools_banner_dec'>

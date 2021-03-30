@@ -2,8 +2,6 @@ import React, {useState, useEffect} from 'react'
 import {getContract, getLogs, useActiveWeb3React} from '../../web3'
 import {WETH_ADDRESS} from '../../web3/address'
 import StakingReward from '../../web3/abi/StakingReward.json'
-import Starter from '../../web3/abi/Starter.json'
-import Offering from '../../web3/abi/Offering.json'
 import {abi as ERC20} from '../../web3/abi/ERC20.json'
 import Pools from '../../configs/pools'
 import Web3 from 'web3'
@@ -343,6 +341,8 @@ export const usePoolsInfo = (address = '') => {
     const [poolsInfo, setPoolsInfo] = useState(pools)
 
     const [blockNumber, setBlockNumber] = useState(0)
+
+    console.log(pools)
     // 数据预处理
     pools.map(item => {
         let status = item.status
@@ -391,16 +391,17 @@ export const usePoolsInfo = (address = '') => {
                         // )
 
                         if (pool.type !== 1) {
-                            const pool_contract = getContract(library, Starter, pool.address)
+                            const pool_contract = getContract(library, pool.abi, pool.address)
                             const promise_list = [
-                                pool_contract.methods.time().call(), // 结算时间点
+                                pool_contract.methods.time ? pool_contract.methods.time().call() : 0, // 结算时间点
+                                pool_contract.methods.timeSettle ? pool_contract.methods.timeSettle().call() : 0, // 结算时间点 V2版本提供
                                 pool_contract.methods.price().call(), // 结算时间点
                                 pool_contract.methods.totalPurchasedCurrency().call(), //总申购的量
                                 pool_contract.methods.purchasedCurrencyOf(account).call(),
                                 pool_contract.methods.totalSettleable().call(),
                                 pool_contract.methods.settleable(account).call(),
                                 // getLogs(library, Starter, {fromBlock: 0, toBlock: 'latest', address: pool.address, topics: [null, Web3.utils.padLeft(account, 64)]}),
-                                getLogs(library, Starter, {
+                                getLogs(library, pool.abi, {
                                     address: pool.address,
                                     topics: [null, Web3.utils.padLeft(account, 64)],
                                 }),
@@ -411,6 +412,7 @@ export const usePoolsInfo = (address = '') => {
                             return Promise.all(promise_list).then(
                                 ([
                                      time,
+                                     timeSettle,
                                      price,
                                      totalPurchasedCurrency,
                                      purchasedCurrencyOf,
@@ -421,6 +423,12 @@ export const usePoolsInfo = (address = '') => {
                                      totalSettledUnderlying,
                                  ]) => {
                                     let status = pool.status || 0 // 即将上线
+                                    const timeClose = time
+                                    if(timeSettle){
+                                        // time 如果没有的话，使用timeSettle填充
+                                        time = timeSettle
+                                    }
+
                                     if (pool.start_at < now && status < 1) {
                                         // 募集中
                                         status = 1
@@ -468,6 +476,7 @@ export const usePoolsInfo = (address = '') => {
                                                 .toString() * 1,
                                         status: status,
                                         time: time,
+                                        timeClose,
                                         price: Web3.utils.fromWei(price, 'ether'),
                                         is_join,
                                         totalPurchasedCurrency,
@@ -492,7 +501,7 @@ export const usePoolsInfo = (address = '') => {
                             )
 
                             // 白名单是offering合约
-                            const pool_contract = getContract(library, Offering, pool.address);
+                            const pool_contract = getContract(library, pool.abi, pool.address);
                             const promise_list = [
                                 pool_contract.methods.timeOffer().call(), // 结算时间点
                                 pool_contract.methods.timeClaim().call(), // 结算时间点
@@ -564,6 +573,7 @@ export const usePoolsInfo = (address = '') => {
                                         status: status,
                                         start_at,
                                         time: time,
+                                        timeClose: 0,
                                         price: new BigNumber(Web3.utils.toWei('1', 'ether')).dividedBy(new BigNumber(ratio)).toFixed(6, 1) * 1,
                                         is_join,
                                         totalPurchasedCurrency,
