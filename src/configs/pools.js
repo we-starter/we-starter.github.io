@@ -307,7 +307,7 @@ export default [
     name: 'Cook',
     address: '0x0000000000000000000000000000000000000001',
     abi: StarterV2,
-    start_at: '1617199200',
+    start_at: '1617200400',
     is_top: true,
     is_coming: true,
     currency: {
