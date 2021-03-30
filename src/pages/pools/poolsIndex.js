@@ -248,7 +248,7 @@ const PoolsIndex = (props) => {
               }}
             ></i>
           </a>
-          <p>{progress * 100}%</p>
+          <p>{(progress * 100).toFixed(0)}%</p>
         </div>
         <div className='pools-type_title'>
           <p

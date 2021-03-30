@@ -7,8 +7,6 @@ import { useBalance } from '../../pages/Hooks'
 import { getPointAddress } from '../../web3/address'
 import Web3 from 'web3'
 import { getContract, useActiveWeb3React } from '../../web3'
-import Starter from '../../web3/abi/Starter.json'
-import Offering from '../../web3/abi/Offering.json'
 import { injectIntl } from 'react-intl'
 import ERC20 from '../../web3/abi/ERC20.json'
 import { FormattedMessage } from 'react-intl'
@@ -150,44 +148,81 @@ const PoolsJoin = (props) => {
       return false
     }
     if (pool.type === 1) {
-      const pool_contract = getContract(library, Offering, pool.address)
-      pool_contract.methods
-        .offerHT()
-        .send({
-          from: account,
-          value: Web3.utils.toWei(`${amount}`, 'ether'),
-        })
-        .on('transactionHash', (hash) => {
-          dispatch({
-            type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
-            showWaitingWalletConfirmModal: { ...waitingPending, hash },
-          })
-        })
-        .on('receipt', (_, receipt) => {
-          console.log('BOT staking success')
-          dispatch({
-            type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
-            showWaitingWalletConfirmModal: waitingForInit,
-          })
-          dispatch({
-            type: HANDLE_SHOW_TRANSACTION_MODAL,
-            showTransactionModal: true,
-          })
-        })
-        .on('error', (err, receipt) => {
-          console.log('BOT staking error', err)
-          dispatch({
-            type: HANDLE_SHOW_FAILED_TRANSACTION_MODAL,
-            showFailedTransactionModal: true,
-          })
-          dispatch({
-            type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
-            showWaitingWalletConfirmModal: waitingForInit,
-          })
-        })
+      const pool_contract = getContract(library, pool.abi, pool.address)
+      if(pool.currency.is_ht){
+        pool_contract.methods
+            .offerHT()
+            .send({
+              from: account,
+              value: Web3.utils.toWei(`${amount}`, 'ether'),
+            })
+            .on('transactionHash', (hash) => {
+              dispatch({
+                type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
+                showWaitingWalletConfirmModal: { ...waitingPending, hash },
+              })
+            })
+            .on('receipt', (_, receipt) => {
+              console.log('BOT staking success')
+              dispatch({
+                type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
+                showWaitingWalletConfirmModal: waitingForInit,
+              })
+              dispatch({
+                type: HANDLE_SHOW_TRANSACTION_MODAL,
+                showTransactionModal: true,
+              })
+            })
+            .on('error', (err, receipt) => {
+              console.log('BOT staking error', err)
+              dispatch({
+                type: HANDLE_SHOW_FAILED_TRANSACTION_MODAL,
+                showFailedTransactionModal: true,
+              })
+              dispatch({
+                type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
+                showWaitingWalletConfirmModal: waitingForInit,
+              })
+            })
+      }else {
+        pool_contract.methods
+            .offer(Web3.utils.toWei(`${amount}`, 'ether'))
+            .send({
+              from: account
+            })
+            .on('transactionHash', (hash) => {
+              dispatch({
+                type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
+                showWaitingWalletConfirmModal: { ...waitingPending, hash },
+              })
+            })
+            .on('receipt', (_, receipt) => {
+              console.log('BOT staking success')
+              dispatch({
+                type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
+                showWaitingWalletConfirmModal: waitingForInit,
+              })
+              dispatch({
+                type: HANDLE_SHOW_TRANSACTION_MODAL,
+                showTransactionModal: true,
+              })
+            })
+            .on('error', (err, receipt) => {
+              console.log('BOT staking error', err)
+              dispatch({
+                type: HANDLE_SHOW_FAILED_TRANSACTION_MODAL,
+                showFailedTransactionModal: true,
+              })
+              dispatch({
+                type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
+                showWaitingWalletConfirmModal: waitingForInit,
+              })
+            })
+      }
+
     } else {
 
-      const pool_contract = getContract(library, Starter, pool.address)
+      const pool_contract = getContract(library, pool.abi, pool.address)
       const _amount = numToWei(amount, pool.currency.decimal)
 
       if(pool.currency.is_ht){

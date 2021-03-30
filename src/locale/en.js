@@ -25,6 +25,7 @@ const en_US = {
   obtain: 'Obtain ',
   comingSoon1: 'coming soon',
   recruit: 'Undergoing',
+  recruitOver: 'Waiting',
   settlement: 'Calculating',
   completed: 'Finished',
   settled: '已结算',
@@ -222,6 +223,8 @@ const en_US = {
   logoTitle3: 'FIX Private Pool',
   logoTitle4: 'FIX Public Pool',
   logoTitle5: 'DORA Private Pool',
+  logoTitle6: 'COOK Private Pool',
+  logoTitle7: 'COOK Public Pool',
   aboutProject:
     'Westarter is a platform to bridge cryptocurrency innovators and investors, any innovator can use a standardized interface to launch and manage liquidity bids without a permit.',
   willStart: 'Will start in',
@@ -238,6 +241,7 @@ const en_US = {
   myQuota: 'My Quota',
   alreadySubscribed: 'Already Subscribed',
   notInWhitelist: 'Not in whitelist',
+  undergoingOver: 'The subscription is over, please wait for settlement',
   flashPool: 'Flash Pool',
   withdrawTip:
     'This is a smart contract address, please do not transfer any token into it.',
@@ -247,5 +251,7 @@ const en_US = {
       'Dora Factory is an open-source, community-driven venture builder with the mission to empower hackers by creating tools for decentralized venture organizations to thrive.',
   doraAboutProjectP2:
       'The vision of Dora Factory is to build a DAO-as-a-Service infrastructure that empowers every DAO with the right toolkits to better engage with and incentivize open-source developers and hackers on their way of building the next venture.',
+  cookAboutProject:
+      'Cook Protocol is a completely decentralized asset management platform in the DeFi space built on top of the Ethereum blockchain.',
 }
 export default en_US
