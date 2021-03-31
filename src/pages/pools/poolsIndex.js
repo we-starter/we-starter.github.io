@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 import cs from 'classnames'
 import { withRouter } from 'react-router'
 import HUSD from '../../assets/icon/HUSD@2x.png'
@@ -25,6 +25,7 @@ import Web3 from 'web3'
 import { formatAmount } from '../../utils/format'
 import Timer from 'react-compound-timer'
 import { useActiveWeb3React } from '../../web3'
+import {mainContext} from "../../reducer";
 
 const PoolsIndex = (props) => {
   const [listData, setListData] = useState([])
@@ -33,6 +34,18 @@ const PoolsIndex = (props) => {
   const [isLogin, setIsLogin] = useState(false)
   const [hoverFlag, setHoverFlag] = useState(false)
   const [poolSum, setPoolSum] = useState(0)
+
+  const [now, setNow] = useState(parseInt(Date.now()/1000))
+
+  useEffect(() => {
+    const timerId = setTimeout(() => {
+      const now = parseInt(Date.now()/1000)
+      setNow(now)
+    }, 1000)
+    return () => {
+      clearTimeout(timerId)
+    }
+  }, [now])
 
   // const getURLStuff = (stuff) => {
   //   let url = props.location.search
@@ -110,7 +123,8 @@ const PoolsIndex = (props) => {
     props.history.push(`/pools/detail/${address}`)
   }
 
-  const renderStatus = (status) => {
+  const renderStatus = (pool) => {
+    const {status, timeClose = 0} = pool
     switch (status) {
       case 0:
         return (
@@ -119,11 +133,19 @@ const PoolsIndex = (props) => {
           </span>
         )
       case 1:
-        return (
+        if(timeClose === 0 || timeClose > now) {
+          return (
+              <span className='pools-type_progress_status'>
+                <FormattedMessage id='recruit' />
+              </span>
+          )
+        }else {
+          return (
           <span className='pools-type_progress_status'>
-            <FormattedMessage id='recruit' />
+              <FormattedMessage id='recruitOver' />
           </span>
-        )
+        )}
+
       case 2:
         return (
           <span className='pools-type_progress_status'>
@@ -187,7 +209,7 @@ const PoolsIndex = (props) => {
             {pool && pool.underlying.name}
           </p>
           <p className='pools-type_card_title_right'>
-            {renderStatus(status)}
+            {renderStatus(pool)}
             {status < 3 && (
               <span className='pools-type_time'>
                 <Timer
