@@ -101,7 +101,7 @@ export default [
     is_flash: true,
     link_url: 'https://heco.dfuture.com/home',
     project_introduction:
-        'dFuture is an experimental derivative trading protocol initiated and incubated by Mix Lab of the Mix group. As a decentralized derivatives exchange, dFuture is based on external quotation, enabling traders to execute long / short trading with leverage safely and efficiently at better price. Compared to the centralized exchanges, traders will also enjoy far better trading depth. Meanwhile LP (liquidity provider) only needs to stake single settlement currency (currently USDT), which can obtain stable, risk-free, high return without any impermanent loss.',
+      'dFuture is an experimental derivative trading protocol initiated and incubated by Mix Lab of the Mix group. As a decentralized derivatives exchange, dFuture is based on external quotation, enabling traders to execute long / short trading with leverage safely and efficiently at better price. Compared to the centralized exchanges, traders will also enjoy far better trading depth. Meanwhile LP (liquidity provider) only needs to stake single settlement currency (currently USDT), which can obtain stable, risk-free, high return without any impermanent loss.',
   },
   {
     name: 'FIX',
@@ -151,7 +151,7 @@ export default [
     is_flash: false,
     link_url: 'https://fixed.finance/home', // 跳转外链接
     project_introduction:
-        'Fixed-Rate Protocol (official Site：fixed.finance) is the first and the best stable yield investment protocol on HECO. The all-time monitoring of on-chain data and the intelligent aggregating strategy of savings provide the various investment options for distinctive users along with balancing risks and earnings mechanically. By combining liquidity mining, NFT, and community governance(DAO), FIX Token endowed with intrinsic value which will support Fixed-Rate Protocol to become one of the most stable and the most fruitful application among HECO.',
+      'Fixed-Rate Protocol (official Site：fixed.finance) is the first and the best stable yield investment protocol on HECO. The all-time monitoring of on-chain data and the intelligent aggregating strategy of savings provide the various investment options for distinctive users along with balancing risks and earnings mechanically. By combining liquidity mining, NFT, and community governance(DAO), FIX Token endowed with intrinsic value which will support Fixed-Rate Protocol to become one of the most stable and the most fruitful application among HECO.',
   },
   {
     name: 'FIX',
@@ -201,7 +201,7 @@ export default [
     is_flash: false,
     link_url: 'https://fixed.finance/home', // 跳转外链接
     project_introduction:
-        'Fixed-Rate Protocol (official Site：fixed.finance) is the first and the best stable yield investment protocol on HECO. The all-time monitoring of on-chain data and the intelligent aggregating strategy of savings provide the various investment options for distinctive users along with balancing risks and earnings mechanically. By combining liquidity mining, NFT, and community governance(DAO), FIX Token endowed with intrinsic value which will support Fixed-Rate Protocol to become one of the most stable and the most fruitful application among HECO.',
+      'Fixed-Rate Protocol (official Site：fixed.finance) is the first and the best stable yield investment protocol on HECO. The all-time monitoring of on-chain data and the intelligent aggregating strategy of savings provide the various investment options for distinctive users along with balancing risks and earnings mechanically. By combining liquidity mining, NFT, and community governance(DAO), FIX Token endowed with intrinsic value which will support Fixed-Rate Protocol to become one of the most stable and the most fruitful application among HECO.',
   },
   {
     name: 'DoraFactory',
@@ -245,13 +245,13 @@ export default [
     ratio: '1 HT= 1.4 DORA',
     time: '1616587200',
     purchasedCurrencyOf: 0,
-    totalPurchasedAmount: "3571428571000000000000",
-    totalPurchasedUnderlying: "4999989419600000000000",
-    totalPurchasedCurrency: "3571421014000000000000",
+    totalPurchasedAmount: '3571428571000000000000',
+    totalPurchasedUnderlying: '4999989419600000000000',
+    totalPurchasedCurrency: '3571421014000000000000',
     is_flash: false,
     link_url: 'https://dorafactory.org', // 跳转外链接
     project_introduction:
-        'Fixed-Rate Protocol (official Site：fixed.finance) is the first and the best stable yield investment protocol on HECO. The all-time monitoring of on-chain data and the intelligent aggregating strategy of savings provide the various investment options for distinctive users along with balancing risks and earnings mechanically. By combining liquidity mining, NFT, and community governance(DAO), FIX Token endowed with intrinsic value which will support Fixed-Rate Protocol to become one of the most stable and the most fruitful application among HECO.',
+      'Fixed-Rate Protocol (official Site：fixed.finance) is the first and the best stable yield investment protocol on HECO. The all-time monitoring of on-chain data and the intelligent aggregating strategy of savings provide the various investment options for distinctive users along with balancing risks and earnings mechanically. By combining liquidity mining, NFT, and community governance(DAO), FIX Token endowed with intrinsic value which will support Fixed-Rate Protocol to become one of the most stable and the most fruitful application among HECO.',
   },
   {
     name: 'Cook',
@@ -291,7 +291,7 @@ export default [
     Github: 'https://github.com/CookFinance',
     yuque: '-',
     progress: 0,
-    status: 0,
+    status: 3,
     ratio: '1USDT=33.3COOK', // 兑换比例需要确认
     time: '1617208320',
     purchasedCurrencyOf: 0,
@@ -301,7 +301,7 @@ export default [
     is_flash: false,
     link_url: 'https://www.cook.finance', // 跳转外链接
     project_introduction:
-        'Cook Protocol is a completely decentralized asset management platform in the DeFi space built on top of the Ethereum blockchain.',
+      'Cook Protocol is a completely decentralized asset management platform in the DeFi space built on top of the Ethereum blockchain.',
   },
   {
     name: 'Cook',
@@ -341,7 +341,7 @@ export default [
     Github: 'https://github.com/CookFinance',
     yuque: '-',
     progress: 0,
-    status: 0,
+    status: 3,
     ratio: '1USDT=33.3COOK',
     time: '1617208320',
     purchasedCurrencyOf: 0,
@@ -351,6 +351,6 @@ export default [
     is_flash: false,
     link_url: 'https://www.cook.finance', // 跳转外链接
     project_introduction:
-        'Cook Protocol is a completely decentralized asset management platform in the DeFi space built on top of the Ethereum blockchain.',
+      'Cook Protocol is a completely decentralized asset management platform in the DeFi space built on top of the Ethereum blockchain.',
   },
 ]
