@@ -419,13 +419,13 @@ const PoolsIndex = (props) => {
               }
             </h2>
 
-            <h2
-              onClick={() => changeTab(3)}
-              className={cs(tabFlag === 3 ? 'tab_active' : '')}
-            >
-              <img className='flashPool_png' src={timePng} />
-              <FormattedMessage id='flashPool' />
-            </h2>
+            {/*<h2*/}
+            {/*  onClick={() => changeTab(3)}*/}
+            {/*  className={cs(tabFlag === 3 ? 'tab_active' : '')}*/}
+            {/*>*/}
+            {/*  <img className='flashPool_png' src={timePng} />*/}
+            {/*  <FormattedMessage id='flashPool' />*/}
+            {/*</h2>*/}
             <h2
               onClick={() => changeTab(2)}
               className={tabFlag === 2 ? 'tab_active' : ''}
