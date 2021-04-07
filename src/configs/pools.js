@@ -58,7 +58,7 @@ export default [
     address: '0xd9019793189E12ac91892b4D4622E3A315a289Fc',
     abi: Starter,
     start_at: '1614690000',
-    is_top: false,
+    is_top: true,
     is_coming: false,
     currency: {
       address: '0xa71edc38d189767582c38a3145b5873052c3e47a', // 如果是0x0则是ht
@@ -98,7 +98,7 @@ export default [
     totalPurchasedAmount: '50000000000000000000000',
     totalPurchasedUnderlying: '0',
     totalPurchasedCurrency: '0',
-    is_flash: true,
+    is_flash: false,
     link_url: 'https://heco.dfuture.com/home',
     project_introduction:
       'dFuture is an experimental derivative trading protocol initiated and incubated by Mix Lab of the Mix group. As a decentralized derivatives exchange, dFuture is based on external quotation, enabling traders to execute long / short trading with leverage safely and efficiently at better price. Compared to the centralized exchanges, traders will also enjoy far better trading depth. Meanwhile LP (liquidity provider) only needs to stake single settlement currency (currently USDT), which can obtain stable, risk-free, high return without any impermanent loss.',
