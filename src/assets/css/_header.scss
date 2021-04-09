@@ -42,19 +42,23 @@
     }
   }
   @media #{$desktop} {
+    padding-bottom: 58px;
     background-image: url('../image/weBanner.png');
     background-repeat: no-repeat;
-    background-size: contain;
+    background-size: 100% 500px;
     background-position: top;
     height: auto;
+    min-width: 1080px;
   }
   @media #{$mdWidth} {
+    padding-bottom: 58px;
     background: #fff;
     background-image: url('../image/weBanner.png');
     background-repeat: no-repeat;
-    background-size: contain;
+    background-size: 100% 500px;
     background-position: top;
     height: auto;
+    min-width: 1080px;
   }
   @media #{$smWidth} {
     background: #fff;

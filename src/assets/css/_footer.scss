@@ -36,6 +36,9 @@
   }
 }
 @media #{$desktop} {
+  .footer {
+    display: none;
+  }
   .footer_wrap {
     width: 1280px;
     display: flex;

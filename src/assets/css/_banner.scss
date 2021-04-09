@@ -24,6 +24,20 @@
     &_text-title {
       display: none;
     }
+    &_small_img {
+      display: none;
+    }
+    &_text_img {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    &_big_img {
+      width: 400px;
+      height: 200px;
+      border-radius: 10px;
+      border: 1px solid #979797;
+    }
     &_dec {
       width: 522px;
       font-size: 18px;
@@ -38,20 +52,48 @@
       margin-top: 20px;
       padding-bottom: 52px;
       span {
-        font-size: 20px;
+        font-size: 16px;
         font-family: PTMono-Regular, PTMono !important;
         font-weight: 400;
         color: #22292f;
         line-height: 20px;
       }
-      a {
+      .huobi_logo {
         display: inline-block;
         background-image: url('../icon/huobi-logo.svg');
         background-repeat: no-repeat;
         background-size: 100% 100%;
-        width: 220px;
-        height: 26px;
-        margin-left: 8px;
+        width: 168px;
+        height: 20px;
+        margin: 0 20px 0 8px;
+      }
+    }
+    &_svg__links {
+      display: flex;
+      margin-bottom: 0;
+      li {
+        margin: 0 10px;
+        height: 21px;
+      }
+
+      a {
+        display: block;
+        width: 24px;
+        svg {
+          fill: #22292f;
+          &:hover {
+            fill: #0f8c20;
+          }
+        }
+        img {
+          width: 18px;
+          height: 24px;
+          &:hover {
+            svg {
+              fill: #0f8c20;
+            }
+          }
+        }
       }
     }
     &_pdf {
@@ -90,6 +132,48 @@
         height: 24px;
         background: url('../icon/folder-download@2x.png') no-repeat;
         background-size: 100% 100%;
+      }
+    }
+    &_related {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 100px;
+      margin: 42px auto 0;
+      width: 1080px;
+      height: 140px;
+      background: url('../../assets/icon/related_bg@2x.png') no-repeat;
+      background-size: 100% 100%;
+    }
+    &_related_data {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      img {
+        display: inline-block;
+        margin-right: 10px;
+        width: 46px;
+        height: 46px;
+      }
+      p {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 0;
+      }
+      .banner_related_data_title {
+        display: inline-block;
+        font-size: 12px;
+        font-weight: 400;
+        color: rgba(255, 255, 255, 0.8);
+        line-height: 18px;
+      }
+      .banner_related_data_val {
+        display: inline-block;
+        margin-top: 2px;
+        font-size: 20px;
+        font-weight: 500;
+        color: #ffffff;
+        line-height: 20px;
       }
     }
   }
@@ -117,6 +201,20 @@
     &_text-title {
       display: none;
     }
+    &_small_img {
+      display: none;
+    }
+    &_text_img {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    &_big_img {
+      width: 400px;
+      height: 200px;
+      border-radius: 10px;
+      border: 1px solid #979797;
+    }
     &_dec {
       width: 522px;
       font-size: 18px;
@@ -131,20 +229,48 @@
       margin-top: 20px;
       padding-bottom: 42px;
       span {
-        font-size: 20px;
+        font-size: 16px;
         font-family: PTMono-Regular, PTMono !important;
         font-weight: 400;
         color: #22292f;
         line-height: 20px;
       }
-      a {
+      .huobi_logo {
         display: inline-block;
         background-image: url('../icon/huobi-logo.svg');
         background-repeat: no-repeat;
         background-size: 100% 100%;
-        width: 220px;
-        height: 26px;
-        margin-left: 8px;
+        width: 168px;
+        height: 20px;
+        margin: 0 20px 0 8px;
+      }
+    }
+    &_svg__links {
+      display: flex;
+      margin-bottom: 0;
+      li {
+        margin: 0 10px;
+        height: 24px;
+      }
+
+      a {
+        display: block;
+        width: 24px;
+        svg {
+          fill: #22292f;
+          &:hover {
+            fill: #0f8c20;
+          }
+        }
+        img {
+          width: 18px;
+          height: 24px;
+          &:hover {
+            svg {
+              fill: #0f8c20;
+            }
+          }
+        }
       }
     }
     &_pdf {
@@ -185,11 +311,54 @@
         background-size: 100% 100%;
       }
     }
+    &_related {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 100px;
+      margin: 42px auto 0;
+      width: 1080px;
+      height: 140px;
+      background: url('../../assets/icon/related_bg@2x.png') no-repeat;
+      background-size: 100% 100%;
+    }
+    &_related_data {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      img {
+        display: inline-block;
+        margin-right: 10px;
+        width: 46px;
+        height: 46px;
+      }
+      p {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 0;
+      }
+      .banner_related_data_title {
+        display: inline-block;
+        font-size: 12px;
+        font-weight: 400;
+        color: rgba(255, 255, 255, 0.8);
+        line-height: 18px;
+      }
+      .banner_related_data_val {
+        display: inline-block;
+        margin-top: 2px;
+        font-size: 20px;
+        font-weight: 500;
+        color: #ffffff;
+        line-height: 20px;
+      }
+    }
   }
 }
 @media #{$smWidth} {
   .banner {
     width: 100%;
+    padding-bottom: 20px;
     // padding: 0 15px;
     &_img {
       display: none;
@@ -210,8 +379,9 @@
     }
     &_text-title {
       display: flex;
-      justify-content: center;
+      justify-content: space-between;
       align-items: center;
+      padding: 0 22px;
       width: 100%;
       height: 40px;
       background: #d4e9e2;
@@ -223,7 +393,7 @@
         font-weight: 400;
         color: #22292f;
       }
-      a {
+      .huobi_logo {
         display: inline-block;
         background-image: url('../icon/huobi-logo.svg');
         background-repeat: no-repeat;
@@ -232,6 +402,9 @@
         height: 12px;
         margin-left: 4px;
       }
+    }
+    &_text_img {
+      display: none;
     }
     &_dec {
       display: none;
@@ -247,6 +420,7 @@
       align-items: center;
       margin-top: 20px;
       padding-bottom: 42px;
+      display: none;
       span {
         font-size: 20px;
         font-family: PTMono-Regular, PTMono !important;
@@ -263,41 +437,43 @@
         height: 26px;
         margin-left: 8px;
       }
-      @media #{$xsWidth} {
-        display: none;
-      }
-      @media #{$smWidth} {
-        display: none;
-      }
     }
-    &_pdf {
+    &_svg__links {
+      display: none;
+    }
+    &_small_img {
+      margin: 20px auto 0;
+      width: 350px;
+      height: 140px;
+      border-radius: 10px;
+      border: 1px solid #979797;
+    }
+    &_small_pdf {
       display: flex;
       justify-content: center;
       align-items: center;
-      padding: 20px 0;
       a {
         display: flex;
         justify-content: center;
         align-items: center;
-        margin-right: 16px;
-        padding: 0 14px;
-        height: 40px;
+        padding: 0 8px;
+        height: 24px;
         background: #0f8c20;
-        border-radius: 24px;
+        border-radius: 14px;
         &:hover {
           background: #00b900;
         }
       }
       .pdf-icon {
-        width: 18px;
-        height: 18px;
+        width: 12px;
+        height: 12px;
         background: url('../icon/CTK@2x.png') no-repeat;
         background-size: 100% 100%;
       }
       .pdf-text {
-        margin-left: 8px;
+        margin-left: 2px;
         margin-bottom: 0;
-        font-size: 16px;
+        font-size: 12px;
         font-weight: 300;
         color: #ffffff;
       }
@@ -309,12 +485,56 @@
         background-size: 100% 100%;
       }
     }
+    &_related {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      margin: 20px auto 0;
+      padding: 40px 10px 40px 40px;
+      width: 350px;
+      height: 280px;
+      background: url('../../assets/icon/related_bg_h5@2x.png') no-repeat;
+      background-size: 100% 100%;
+    }
+    &_related_data {
+      display: flex;
+      align-items: center;
+      img {
+        display: inline-block;
+        margin-right: 10px;
+        width: 46px;
+        height: 46px;
+      }
+      p {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 0;
+      }
+      .banner_related_data_title {
+        display: inline-block;
+        font-size: 12px;
+        font-weight: 400;
+        color: rgba(255, 255, 255, 0.8);
+        line-height: 18px;
+      }
+      .banner_related_data_val {
+        display: inline-block;
+        margin-top: 2px;
+        font-size: 20px;
+        font-weight: 500;
+        color: #ffffff;
+        line-height: 20px;
+      }
+    }
+    &_pdf {
+      display: none;
+    }
   }
 }
 @media #{$xsWidth} {
   .banner {
     width: 100%;
-    // padding: 0 15px;
+    padding-bottom: 20px;
     &_img {
       display: none;
       // display: block;
@@ -347,7 +567,7 @@
         font-weight: 400;
         color: #22292f;
       }
-      a {
+      .huobi_logo {
         display: inline-block;
         background-image: url('../icon/huobi-logo.svg');
         background-repeat: no-repeat;
@@ -356,6 +576,9 @@
         height: 12px;
         margin-left: 4px;
       }
+    }
+    &_text_img {
+      display: none;
     }
     &_dec {
       display: none;
@@ -371,6 +594,7 @@
       align-items: center;
       margin-top: 20px;
       padding-bottom: 42px;
+      display: none;
       span {
         font-size: 20px;
         font-family: PTMono-Regular, PTMono !important;
@@ -388,34 +612,42 @@
         margin-left: 8px;
       }
     }
-    &_pdf {
+    &_svg__links {
+      display: none;
+    }
+    &_small_img {
+      margin: 20px auto 0;
+      width: 350px;
+      height: 140px;
+      border-radius: 10px;
+      border: 1px solid #979797;
+    }
+    &_small_pdf {
       display: flex;
       justify-content: center;
       align-items: center;
-      padding: 20px 0;
       a {
         display: flex;
         justify-content: center;
         align-items: center;
-        margin-right: 16px;
-        padding: 0 14px;
-        height: 40px;
+        padding: 0 8px;
+        height: 24px;
         background: #0f8c20;
-        border-radius: 24px;
+        border-radius: 14px;
         &:hover {
           background: #00b900;
         }
       }
       .pdf-icon {
-        width: 18px;
-        height: 18px;
+        width: 12px;
+        height: 12px;
         background: url('../icon/CTK@2x.png') no-repeat;
         background-size: 100% 100%;
       }
       .pdf-text {
-        margin-left: 8px;
+        margin-left: 2px;
         margin-bottom: 0;
-        font-size: 16px;
+        font-size: 12px;
         font-weight: 300;
         color: #ffffff;
       }
@@ -425,6 +657,50 @@
         height: 24px;
         background: url('../icon/folder-download@2x.png') no-repeat;
         background-size: 100% 100%;
+      }
+    }
+    &_pdf {
+      display: none;
+    }
+    &_related {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      margin: 20px auto 0;
+      padding: 40px 10px 40px 40px;
+      width: 350px;
+      height: 280px;
+      background: url('../../assets/icon/related_bg_h5@2x.png') no-repeat;
+      background-size: 100% 100%;
+    }
+    &_related_data {
+      display: flex;
+      align-items: center;
+      img {
+        display: inline-block;
+        margin-right: 10px;
+        width: 46px;
+        height: 46px;
+      }
+      p {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 0;
+      }
+      .banner_related_data_title {
+        display: inline-block;
+        font-size: 12px;
+        font-weight: 400;
+        color: rgba(255, 255, 255, 0.8);
+        line-height: 18px;
+      }
+      .banner_related_data_val {
+        display: inline-block;
+        margin-top: 2px;
+        font-size: 20px;
+        font-weight: 500;
+        color: #ffffff;
+        line-height: 20px;
       }
     }
   }
