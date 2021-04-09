@@ -248,10 +248,13 @@ const en_US = {
   fixAboutProject:
     'Fixed-Rate Protocol (official Site：fixed.finance) is the first and the best stable yield investment protocol on HECO. The all-time monitoring of on-chain data and the intelligent aggregating strategy of savings provide the various investment options for distinctive users along with balancing risks and earnings mechanically. By combining liquidity mining, NFT, and community governance(DAO), FIX Token endowed with intrinsic value which will support Fixed-Rate Protocol to become one of the most stable and the most fruitful application among HECO.',
   doraAboutProjectP1:
-      'Dora Factory is an open-source, community-driven venture builder with the mission to empower hackers by creating tools for decentralized venture organizations to thrive.',
+    'Dora Factory is an open-source, community-driven venture builder with the mission to empower hackers by creating tools for decentralized venture organizations to thrive.',
   doraAboutProjectP2:
-      'The vision of Dora Factory is to build a DAO-as-a-Service infrastructure that empowers every DAO with the right toolkits to better engage with and incentivize open-source developers and hackers on their way of building the next venture.',
+    'The vision of Dora Factory is to build a DAO-as-a-Service infrastructure that empowers every DAO with the right toolkits to better engage with and incentivize open-source developers and hackers on their way of building the next venture.',
   cookAboutProject:
-      'Cook Protocol is a completely decentralized asset management platform in the DeFi space built on top of the Ethereum blockchain.',
+    'Cook Protocol is a completely decentralized asset management platform in the DeFi space built on top of the Ethereum blockchain.',
+  related_title1: 'Total raised funds',
+  related_title2: 'Total participated addresses',
+  related_title3: 'Total established pools',
 }
 export default en_US

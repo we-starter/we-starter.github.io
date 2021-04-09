@@ -48,6 +48,7 @@
     background-size: contain;
     background-position: top;
     height: auto;
+    min-width: 1080px;
   }
   @media #{$mdWidth} {
     padding-bottom: 58px;
@@ -57,6 +58,7 @@
     background-size: contain;
     background-position: top;
     height: auto;
+    min-width: 1080px;
   }
   @media #{$smWidth} {
     background: #fff;
