@@ -32,14 +32,14 @@ export const Banner = () => {
         </div>
       </div>
       {/* <div className='banner_small_img'>缺少banner图</div> */}
-      {/* <div className='banner_text_img'>
+      <div className='banner_text_img'>
         <p className='banner_dec'>
           <FormattedMessage id='bannerContent1' />
           <br />
           <FormattedMessage id='bannerContent2' />
         </p>
-        <div className='banner_big_img'>缺少banner图</div>
-      </div> */}
+        {/* <div className='banner_big_img'>缺少banner图</div> */}
+      </div>
 
       <div className='banner_link'>
         <span>
