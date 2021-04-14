@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import cs from 'classnames'
 import { withRouter } from 'react-router'
 import HUSD from '../../assets/icon/HUSD@2x.png'
@@ -25,7 +25,7 @@ import Web3 from 'web3'
 import { formatAmount } from '../../utils/format'
 import Timer from 'react-compound-timer'
 import { useActiveWeb3React } from '../../web3'
-import {mainContext} from "../../reducer";
+import { mainContext } from '../../reducer'
 
 const PoolsIndex = (props) => {
   const [listData, setListData] = useState([])
@@ -35,11 +35,11 @@ const PoolsIndex = (props) => {
   const [hoverFlag, setHoverFlag] = useState(false)
   const [poolSum, setPoolSum] = useState(0)
 
-  const [now, setNow] = useState(parseInt(Date.now()/1000))
+  const [now, setNow] = useState(parseInt(Date.now() / 1000))
 
   useEffect(() => {
     const timerId = setTimeout(() => {
-      const now = parseInt(Date.now()/1000)
+      const now = parseInt(Date.now() / 1000)
       setNow(now)
     }, 1000)
     return () => {
@@ -124,7 +124,7 @@ const PoolsIndex = (props) => {
   }
 
   const renderStatus = (pool) => {
-    const {status, timeClose = 0} = pool
+    const { status, timeClose = 0 } = pool
     switch (status) {
       case 0:
         return (
@@ -133,18 +133,19 @@ const PoolsIndex = (props) => {
           </span>
         )
       case 1:
-        if(timeClose === 0 || timeClose > now) {
+        if (timeClose === 0 || timeClose > now) {
           return (
-              <span className='pools-type_progress_status'>
-                <FormattedMessage id='recruit' />
-              </span>
+            <span className='pools-type_progress_status'>
+              <FormattedMessage id='recruit' />
+            </span>
           )
-        }else {
+        } else {
           return (
-          <span className='pools-type_progress_status'>
+            <span className='pools-type_progress_status'>
               <FormattedMessage id='recruitOver' />
-          </span>
-        )}
+            </span>
+          )
+        }
 
       case 2:
         return (
@@ -414,9 +415,7 @@ const PoolsIndex = (props) => {
               className={cs('new_flag', tabFlag === 1 ? 'tab_active' : '')}
             >
               <FormattedMessage id='poolsIndexText4' />
-              {
-                poolSum > 0 && <span className='pools_sum'>{poolSum}</span>
-              }
+              {poolSum > 0 && <span className='pools_sum'>{poolSum}</span>}
             </h2>
 
             {/*<h2*/}
@@ -457,7 +456,7 @@ const PoolsIndex = (props) => {
           </div>
         </div>
       </div>
-      <div className='pools-type-bottom'>
+      {/* <div className='pools-type-bottom'>
         <h2>
           <FormattedMessage id='supportWallet' />
         </h2>
@@ -479,7 +478,7 @@ const PoolsIndex = (props) => {
             <img src={Bingoo} />
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   )
 }
