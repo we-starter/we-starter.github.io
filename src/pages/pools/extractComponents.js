@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { Header } from '../../components/header/Header'
-import { PoolTab } from '../../components/pooltab/PoolTab'
 import { withRouter } from 'react-router'
 
 const ExtractComponents = (props) => {
@@ -16,12 +15,7 @@ const ExtractComponents = (props) => {
       setShowComponents(true)
     }
   })
-  return (
-    <div>
-      {showComponents && <Header />}
-      {/* {showComponents && <PoolTab />} */}
-    </div>
-  )
+  return <div>{showComponents && <Header />}</div>
 }
 
 export default withRouter(ExtractComponents)
