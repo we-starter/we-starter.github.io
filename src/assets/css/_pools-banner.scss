@@ -23,6 +23,9 @@
       color: #22292f;
       line-height: 78px;
       margin-top: 100px;
+      p {
+        margin-bottom: 0;
+      }
     }
     &_dec {
       display: flex;
@@ -198,7 +201,7 @@
       font-size: 12px;
       font-weight: 700;
       color: #0f8c20;
-      line-height: 32px;
+      line-height: 18px;
       margin-top: 6px;
       word-break: break-word;
       margin-bottom: 0;
@@ -277,12 +280,15 @@
       font-weight: 600;
       color: #22292f;
       line-height: 42px;
+      p {
+        margin-bottom: 0;
+      }
     }
     &_dec {
       font-size: 12px;
       font-weight: 700;
       color: #0f8c20;
-      line-height: 36px;
+      line-height: 18px;
       word-break: break-word;
       margin-bottom: 0;
       a {

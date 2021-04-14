@@ -8,6 +8,7 @@ import timePng from '../../assets/icon/time@2x.png'
 import MATTER from '../../assets/icon/MATTER@2x.png'
 import FIX from '../../assets/icon/FIX@2x.png'
 import COOK from '../../assets/icon/COOK@2x.png'
+import CHAINSWAP from '../../assets/icon/chainswap.png'
 import noDataPng from '../../assets/icon/noData@2x.png'
 import HUOBI from '../../assets/icon/huobi.png'
 import Metamask from '../../assets/icon/Metamask@2x.png'
@@ -207,6 +208,9 @@ const PoolsIndex = (props) => {
             {pool && pool.underlying.symbol === 'FIX' && <img src={FIX} />}
             {pool && pool.underlying.symbol === 'DORA' && <img src={DORA} />}
             {pool && pool.underlying.symbol === 'COOK' && <img src={COOK} />}
+            {pool && pool.underlying.symbol === 'TOKEN' && (
+              <img src={CHAINSWAP} />
+            )}
             {pool && pool.underlying.name}
           </p>
           <p className='pools-type_card_title_right'>

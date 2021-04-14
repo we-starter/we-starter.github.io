@@ -17,27 +17,17 @@ const PoolsBanner = (props) => {
     <div className='pools_banner'>
       <div className='pools_banner_img'></div>
       <h3 className='pools_banner_text'>
-        {pool && pool.underlying.symbol === 'MATTER' && (
-          <FormattedMessage id='logoTitle1' />
+        {pool && pool.type == 0 && (
+          <p>
+            {pool.underlying.symbol} <FormattedMessage id='detailTitlePublic' />
+          </p>
         )}
-        {pool && pool.underlying.symbol === 'DFT' && (
-          <FormattedMessage id='logoTitle2' />
+        {pool && pool.type == 1 && (
+          <p>
+            {pool.underlying.symbol}{' '}
+            <FormattedMessage id='detailTitlePrivate' />
+          </p>
         )}
-          {pool && pool.underlying.symbol === 'FIX' && pool.type == 1 && (
-              <FormattedMessage id='logoTitle3' />
-          )}
-          {pool && pool.underlying.symbol === 'FIX' && pool.type == 0 && (
-              <FormattedMessage id='logoTitle4' />
-          )}
-          {pool && pool.underlying.symbol === 'DORA' && (
-              <FormattedMessage id='logoTitle5' />
-          )}
-          {pool && pool.underlying.symbol === 'COOK' && pool.type == 1 && (
-              <FormattedMessage id='logoTitle6' />
-          )}
-          {pool && pool.underlying.symbol === 'COOK' && pool.type == 0 && (
-              <FormattedMessage id='logoTitle7' />
-          )}
         {/*{!active && <FormattedMessage id='htPublic' />}*/}
       </h3>
       <p className='pools_banner_dec'>

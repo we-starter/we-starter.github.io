@@ -17,7 +17,7 @@ export default [
       decimal: 18,
     },
     icon: '',
-    type: 1,
+    type: 1, // 非1 则为公有池，为1 则为私有池
     isPrivate: true,
     underlying: {
       address: '0x1C9491865a1DE77C5b6e19d2E6a5F1D7a6F2b25F',
@@ -42,13 +42,13 @@ export default [
     Github: 'https://github.com/antimatter-finance',
     yuque: '-',
     progress: 1,
-    status: 3,
-    ratio: '1HT=300MATTER',
-    time: '1614435600',
-    purchasedCurrencyOf: 0,
-    totalPurchasedAmount: '833333330000000000000',
-    totalPurchasedUnderlying: '0',
-    totalPurchasedCurrency: '0',
+    status: 3, // 状态
+    ratio: '1HT=300MATTER', // 比例
+    time: '1614435600', // 结算时间点
+    purchasedCurrencyOf: 0, // 已购买币种
+    totalPurchasedAmount: '833333330000000000000', // 总购买数量
+    totalPurchasedUnderlying: '0', // 总购买金额
+    totalPurchasedCurrency: '0', // 总购买币种
     is_flash: false,
     link_url: '',
     project_introduction: '',
@@ -352,5 +352,54 @@ export default [
     link_url: 'https://www.cook.finance', // 跳转外链接
     project_introduction:
       'Cook Protocol is a completely decentralized asset management platform in the DeFi space built on top of the Ethereum blockchain.',
+  },
+  {
+    name: 'TOKEN',
+    address: '0x74189862B069e2Be5f7c8E6ff08eA8E1B1948519',
+    abi: StarterV2,
+    start_at: '1619092800',
+    is_top: true,
+    is_coming: true,
+    currency: {
+      address: '0xa71edc38d189767582c38a3145b5873052c3e47a', // 如果是0x0则是ht
+      decimal: 18,
+      symbol: 'USDT',
+    },
+    icon: '',
+    type: 0,
+    isPrivate: false,
+    underlying: {
+      address: '0x74189862B069e2Be5f7c8E6ff08eA8E1B1948519',
+      decimal: 18,
+      symbol: 'TOKEN',
+      name: 'TOKEN',
+      total_supply: '100,000,000',
+      holders: '-',
+      transfers: '-',
+    },
+    amount: '100000',
+    pool_info: {
+      token_distribution: 'SGT 04/22/2021 8pm',
+      min_allocation: '-',
+      max_allocation: '-',
+      min_swap_level: '100000 USDT',
+    },
+    website: 'https://www.cook.finance',
+    white_paper: '-',
+    twitter: 'https://twitter.com/chain_swap',
+    Telegram_Channel: 'https://t.me/chainswapann',
+    Github: 'https://github.com/chainswap',
+    yuque: '-',
+    progress: 0,
+    status: 0,
+    ratio: '1 TOKEN = 0.3 USDT',
+    time: '1617208320',
+    purchasedCurrencyOf: 0,
+    totalPurchasedAmount: '100000000000000000000000000',
+    totalPurchasedUnderlying: '0',
+    totalPurchasedCurrency: '0',
+    is_flash: false,
+    link_url: 'https://www.chainswap.com', // 跳转外链接
+    project_introduction: 'Chainswap is the hub for all smart chains.',
   },
 ]

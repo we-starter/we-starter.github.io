@@ -217,6 +217,8 @@ const zh_CN = {
   noJoinPool: '你还没有参与的项目',
   comingSoon: '即将开放',
   htPublic: 'HT 已发布',
+  detailTitlePrivate: '白名单兑换池',
+  detailTitlePublic: '公开兑换池',
   logoTitle1: 'MATTER 白名单兑换池',
   logoTitle2: 'dFuture 公开兑换池',
   logoTitle3: 'FIX 白名单兑换池',
@@ -249,6 +251,7 @@ const zh_CN = {
   doraAboutProjectP2: ' ',
   cookAboutProject:
     '库克协议是一个基于区块链搭建的，无需信任的、透明的和具有良好激励机制的财富管理服务市场协议。该协议将为投资者提供多种资产管理服务选择，并且为资产管理机构提供资金和多元化投资工具。',
+  chainswapAboutProject: 'Chainswap is the hub for all smart chains.',
   related_title1: '累计融资金额',
   related_title2: '参与地址总数',
   related_title3: '总成立的池子数',
