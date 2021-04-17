@@ -12,9 +12,9 @@ const zh_CN = {
   cannotSubscribe: '当前无法申购',
   bannerTitle: '流动性价值发现平台',
   bannerContent1:
-    'WeStarter是基于Heco网络的代币分发平台，通过产品的创新与充足的行业资源，承载多种类型资产的资金与资源需求，连接链上的一级与二级市场，打造DeFi项目加速器，成为优质项目的起跑线。',
+    'WeStarter是跨链代币初始兑换平台，起步于HECO网络，通过资产跨链桥和多链部署为ETH、HECO、BSC等多条网络上的项目资产进行初始兑换。',
   bannerContent2:
-    'WeStarter可支持跨链代币的分发，并持续发掘多领域方向如STO、NFT等，提供多种方式给开发者与投资者选择。',
+    'WeStarter通过流畅的产品与充足的行业资源，承载多种类型资产的资金与资源需求。以守门人的角色职责，通过代币的去中心化激励与治理机制，实现甄选优质资产的目标。',
   money: '输入投资金额',
   FundraisingRecord: '兑换记录',
   invest: '抵押',
