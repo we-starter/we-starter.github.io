@@ -17,6 +17,7 @@ import {
   HANDLE_WALLET_MODAL,
   HANDLE_SHOW_MENUMASK_MODAL,
   HANDLE_CHANGE_NETWORKS,
+  TOOL_DATA,
 } from '../const'
 import {
   InjectedConnector,
@@ -31,6 +32,7 @@ import { LoginModal } from '../components/Modals/LoginModl'
 import { ChangeNetworks } from '../components/Modals/ChangeNetworks'
 import { TXStatusModal } from '../components/Modals/TXStatusModal'
 import satellite from '../assets/image/satellite.png'
+import toolApi from '../apis/toolApi'
 
 const injected = new InjectedConnector({
   supportedChainIds: [3, 128],
@@ -83,6 +85,22 @@ export const InitPage = () => {
     showMenuMaskModal,
     changeNetworkStatus,
   } = state
+
+  useEffect(() => {
+    toolApi
+      .getTotalNumAddresses(1)
+      .then((res) => {
+        if (res.data.data) {
+          dispatch({
+            type: TOOL_DATA,
+            toolData: res.data.data,
+          })
+        }
+      })
+      .catch((e) => {
+        console.log(e)
+      })
+  }, [])
 
   useEffect(() => {
     const localContent =
