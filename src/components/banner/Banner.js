@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import { FormattedMessage } from 'react-intl'
 import Icon1 from '../../assets/icon/icon1@2x.png'
@@ -10,7 +10,9 @@ import WeStarterPDF from '../../pdfFile/Security Assessment for WeStarter - Star
 
 export const Banner = () => {
   const { dispatch, state } = useContext(mainContext)
+  console.log(state, 'state')
   const pools = usePoolsInfo()
+
   return (
     <div className='banner'>
       <div className='banner_img'></div>
@@ -166,7 +168,9 @@ export const Banner = () => {
             <span className='banner_related_data_title'>
               <FormattedMessage id='related_title2' />
             </span>
-            <span className='banner_related_data_val'>4918</span>
+            <span className='banner_related_data_val'>
+              {(state.toolData && state.toolData.address_count) || 0}
+            </span>
           </p>
         </div>
         <div className='banner_related_data'>
