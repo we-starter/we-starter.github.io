@@ -169,7 +169,7 @@ export const Banner = () => {
               <FormattedMessage id='related_title2' />
             </span>
             <span className='banner_related_data_val'>
-              {(state.toolData && state.toolData.address_count) || 0}
+              {(state.toolData && state.toolData.address_count) || '-'}
             </span>
           </p>
         </div>
