@@ -16,6 +16,7 @@ import {
   HANDLE_SHOW_MENUMASK_MODAL,
   CHANGE_LOCALE,
   HANDLE_CHANGE_NETWORKS,
+  TOOL_DATA,
 } from './const'
 
 const mainContext = React.createContext()
@@ -72,6 +73,11 @@ const reducer = (state, action) => {
         ...state,
         changeNetworkStatus: action.changeNetworkStatus,
       }
+    case TOOL_DATA:
+      return {
+        ...state,
+        toolData: action.toolData,
+      }
     default:
       return state
   }
@@ -94,6 +100,7 @@ const ContextProvider = (props) => {
     showMenuMaskModal: false,
     locale: 'en',
     changeNetworkStatus: false,
+    toolData: null,
   })
   return (
     <mainContext.Provider value={{ state, dispatch }}>

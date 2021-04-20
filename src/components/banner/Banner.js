@@ -1,14 +1,18 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import { FormattedMessage } from 'react-intl'
 import Icon1 from '../../assets/icon/icon1@2x.png'
 import Icon2 from '../../assets/icon/icon2@2x.png'
 import Icon3 from '../../assets/icon/icon3@2x.png'
 import { usePoolsInfo } from '../../pages/pools/Hooks'
+import { mainContext } from '../../reducer'
 import WeStarterPDF from '../../pdfFile/Security Assessment for WeStarter - Starter.pdf'
 
 export const Banner = () => {
+  const { dispatch, state } = useContext(mainContext)
+  console.log(state, 'state')
   const pools = usePoolsInfo()
+
   return (
     <div className='banner'>
       <div className='banner_img'></div>
@@ -36,7 +40,7 @@ export const Banner = () => {
         <p className='banner_dec'>
           <FormattedMessage id='bannerContent1' />
           <br />
-          <FormattedMessage id='bannerContent2' />
+          {state.locale == 'zh' && <FormattedMessage id='bannerContent2' />}
         </p>
         {/* <div className='banner_big_img'>缺少banner图</div> */}
       </div>
@@ -50,7 +54,7 @@ export const Banner = () => {
           <li>
             <a
               title='title'
-              href='https://twitter.com/starter_we'
+              href='https://twitter.com/westarter_org'
               target='_blank'
               rel='noopener'
             >
@@ -164,7 +168,9 @@ export const Banner = () => {
             <span className='banner_related_data_title'>
               <FormattedMessage id='related_title2' />
             </span>
-            <span className='banner_related_data_val'>4918</span>
+            <span className='banner_related_data_val'>
+              {(state.toolData && state.toolData.address_count) || '-'}
+            </span>
           </p>
         </div>
         <div className='banner_related_data'>

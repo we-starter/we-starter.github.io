@@ -12,9 +12,8 @@ const en_US = {
   cannotSubscribe: 'Unavailable to purchase currently',
   bannerTitle: 'Liquidity Valuation Discovery Platform',
   bannerContent1:
-    'WeStarter is a token distribution platform based on the Heco network(Huobi eco-chain). By virtue of innovative produces and sufficient resources, it supports transactions of multiple types of assets and connects with both primary and secondary markets, which make WeStarter an accelerator for DeFi projects.',
-  bannerContent2:
-    'WeStarter platform supports token distribution of cross-chain assets, and continues to explore the connection with other fields, such as STO and NFT assets so to provide a variety of distribution choices for both developers and investors.',
+    'WeStarter is a cross-chain token initial swap platform which based on HECO network. Through the fluency of the product and sufficient industry resources, it carries the requirement of funds and resources for a variety of asset types. With the role of gatekeeper, through the decentralized incentive and governance mechanism of tokens, to achieve the goal of selecting high-quality assets.',
+  bannerContent2: '',
   money: 'input investment amount',
   FundraisingRecord: 'Fundraising Record',
   invest: 'Investment ',
