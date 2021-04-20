@@ -471,7 +471,6 @@ export const usePoolsInfo = (address = '') => {
                 })
 
                 console.log('update pools')
-
                 return Object.assign({}, pool, {
                   ratio: `1${pool.currency.symbol} = ${
                     new BigNumber(Web3.utils.toWei('1', 'ether'))
