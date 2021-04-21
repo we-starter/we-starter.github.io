@@ -183,7 +183,8 @@ const PoolsIndex = (props) => {
     if (status === 0) {
       left_time = start_at * 1000 - Date.now()
     } else if (status === 1) {
-      left_time = timeClose * 1000 - Date.now()
+      left_time =
+        type !== 1 ? timeClose * 1000 - Date.now() : time * 1000 - Date.now()
     }
 
     return (

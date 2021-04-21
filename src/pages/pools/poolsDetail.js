@@ -52,11 +52,14 @@ const PoolsDetail = (props) => {
   useEffect(() => {
     setPool(pools[0])
     if (pools[0]) {
-      const { status, start_at, time, timeClose } = pools[0]
+      const { status, start_at, time, timeClose, type } = pools[0]
+      console.log(type, 'type')
       if (status === 0) {
         setLeftTime(start_at * 1000 - Date.now())
       } else if (status === 1) {
-        setLeftTime(timeClose * 1000 - Date.now())
+        type !== 1
+          ? setLeftTime(timeClose * 1000 - Date.now())
+          : setLeftTime(time * 1000 - Date.now())
       }
     }
   }, [pools, address])
