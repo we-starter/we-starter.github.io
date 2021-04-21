@@ -383,7 +383,7 @@ export default [
       token_distribution: 'April 22th 2021, 8:00PM SGT',
       min_allocation: '-',
       max_allocation: '-',
-      min_swap_level: '30000 USDT',
+      min_swap_level: '30,000 USDT',
     },
     website: 'https://www.chainswap.com',
     white_paper: '-',
