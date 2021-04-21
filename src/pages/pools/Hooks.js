@@ -472,7 +472,7 @@ export const usePoolsInfo = (address = '') => {
                 Object.assign(pool.currency, {
                   allowance: currency_allowance,
                 })
-                console.log('update pools')
+                console.log('update pools', status)
                 return Object.assign({}, pool, {
                   ratio: `1${pool.underlying.symbol}=${Web3.utils.fromWei(
                     price,
