@@ -44,7 +44,7 @@ export default [
     yuque: '-',
     progress: 1,
     status: 3, // 状态
-    ratio: '1HT=300MATTER', // 比例
+    ratio: '1MATTER=0.003HT', // 比例
     time: '1614435600', // 结算时间点
     purchasedCurrencyOf: 0, // 已购买币种
     totalPurchasedAmount: '833333330000000000000', // 总购买数量
@@ -93,7 +93,7 @@ export default [
     yuque: '-',
     progress: 1,
     status: 3,
-    ratio: '1USDT=3.33DFT',
+    ratio: '1DFT=0.3USDT',
     time: '1614693600',
     purchasedCurrencyOf: 0,
     totalPurchasedAmount: '50000000000000000000000',
@@ -143,7 +143,7 @@ export default [
     yuque: '-',
     progress: 1,
     status: 3,
-    ratio: '1HT=1.618FIX', // 兑换比例需要确认
+    ratio: '1FIX=0.618HT', // 兑换比例需要确认
     time: '1615384800',
     purchasedCurrencyOf: 0,
     totalPurchasedAmount: '3708280000000000000000',
@@ -193,7 +193,7 @@ export default [
     yuque: '-',
     progress: 1,
     status: 3,
-    ratio: '1HT=1.618FIX',
+    ratio: '1FIX=0.618HT',
     time: '1615384800',
     purchasedCurrencyOf: 0,
     totalPurchasedAmount: '2472000000000000000000',
@@ -243,7 +243,7 @@ export default [
     yuque: '-',
     progress: 1,
     status: 3,
-    ratio: '1HT=1.4DORA',
+    ratio: '1DORA=0.714HT',
     time: '1616587200',
     purchasedCurrencyOf: 0,
     totalPurchasedAmount: '3571428571000000000000',
@@ -293,7 +293,7 @@ export default [
     yuque: '-',
     progress: 0,
     status: 3,
-    ratio: '1USDT=33.3COOK', // 兑换比例需要确认
+    ratio: '1COOK=0.03USDT', // 兑换比例需要确认
     time: '1617208320',
     purchasedCurrencyOf: 0,
     totalPurchasedAmount: '60000000000000000000000',
@@ -343,7 +343,7 @@ export default [
     yuque: '-',
     progress: 0,
     status: 3,
-    ratio: '1USDT=33.3COOK',
+    ratio: '1COOK=0.03USDT',
     time: '1617208320',
     purchasedCurrencyOf: 0,
     totalPurchasedAmount: '40000000000000000000000',
