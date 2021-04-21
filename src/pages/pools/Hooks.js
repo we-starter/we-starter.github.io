@@ -353,7 +353,8 @@ export const usePoolsInfo = (address = '') => {
     Object.assign(item, {
       quotaOf: 0, //设置默认不在白名单
       status: status,
-      timeClose: '1619095500',
+      // timeClose: '1619095500',
+      timeClose: '1619017200',
       progress: status === 3 ? 1 : 0,
       totalPurchasedUnderlying:
         status === 3 ? Web3.utils.toWei(item.amount) : 0,
