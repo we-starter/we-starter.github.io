@@ -8,6 +8,7 @@ import timePng from '../../assets/icon/time@2x.png'
 import MATTER from '../../assets/icon/MATTER@2x.png'
 import FIX from '../../assets/icon/FIX@2x.png'
 import COOK from '../../assets/icon/COOK@2x.png'
+import CHAINSWAP from '../../assets/icon/chainswap.png'
 import noDataPng from '../../assets/icon/noData@2x.png'
 import HUOBI from '../../assets/icon/huobi.png'
 import Metamask from '../../assets/icon/Metamask@2x.png'
@@ -173,6 +174,7 @@ const PoolsIndex = (props) => {
       currency,
       start_at, // 开始时间
       time, // 结算时间
+      timeClose, // 募资结束时间
       icon,
       type,
       quotaOf,
@@ -181,7 +183,8 @@ const PoolsIndex = (props) => {
     if (status === 0) {
       left_time = start_at * 1000 - Date.now()
     } else if (status === 1) {
-      left_time = time * 1000 - Date.now()
+      left_time =
+        type !== 1 ? timeClose * 1000 - Date.now() : time * 1000 - Date.now()
     }
 
     return (
@@ -207,6 +210,9 @@ const PoolsIndex = (props) => {
             {pool && pool.underlying.symbol === 'FIX' && <img src={FIX} />}
             {pool && pool.underlying.symbol === 'DORA' && <img src={DORA} />}
             {pool && pool.underlying.symbol === 'COOK' && <img src={COOK} />}
+            {pool && pool.underlying.symbol === 'TOKEN' && (
+              <img src={CHAINSWAP} />
+            )}
             {pool && pool.underlying.name}
           </p>
           <p className='pools-type_card_title_right'>
@@ -451,7 +457,7 @@ const PoolsIndex = (props) => {
               listData.map((pool, index) => {
                 return renderCard(pool, index)
               })}
-            {tabFlag === 1 && [1, 2].map(noLogin)}
+            {/* {tabFlag === 1 && [1, 2].map(noLogin)} */}
             {[1, 2].includes(tabFlag) && !listData.length && noData()}
           </div>
         </div>

@@ -10,7 +10,6 @@ import WeStarterPDF from '../../pdfFile/Security Assessment for WeStarter - Star
 
 export const Banner = () => {
   const { dispatch, state } = useContext(mainContext)
-  console.log(state, 'state')
   const pools = usePoolsInfo()
 
   return (

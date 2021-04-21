@@ -217,6 +217,8 @@ const en_US = {
   noJoinPool: "You haven't joined any pool",
   comingSoon: 'Coming soon',
   htPublic: 'HT Public',
+  detailTitlePrivate: 'Private Pool',
+  detailTitlePublic: 'Public Pool',
   logoTitle1: 'MATTER Private Pool',
   logoTitle2: 'dFuture Public Pool',
   logoTitle3: 'FIX Private Pool',
@@ -252,6 +254,7 @@ const en_US = {
     'The vision of Dora Factory is to build a DAO-as-a-Service infrastructure that empowers every DAO with the right toolkits to better engage with and incentivize open-source developers and hackers on their way of building the next venture.',
   cookAboutProject:
     'Cook Protocol is a completely decentralized asset management platform in the DeFi space built on top of the Ethereum blockchain.',
+  chainswapAboutProject: 'Chainswap is the hub for all smart chains.',
   related_title1: 'Total raised funds',
   related_title2: 'Total participated addresses',
   related_title3: 'Total established pools',

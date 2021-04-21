@@ -34,14 +34,14 @@ const PoolsDetail = (props) => {
   const [detailTab, setDetailTab] = useState('detail')
   const [recordTab, setRecordTab] = useState(1)
   const [pool, setPool] = useState(pools[0])
-  const [now, setNow] = useState(parseInt(Date.now()/1000))
+  const [now, setNow] = useState(parseInt(Date.now() / 1000))
   const [left_time, setLeftTime] = useState(0)
 
   const { dispatch } = useContext(mainContext)
 
   useEffect(() => {
     const timerId = setTimeout(() => {
-      const now = parseInt(Date.now()/1000)
+      const now = parseInt(Date.now() / 1000)
       setNow(now)
     }, 1000)
     return () => {
@@ -52,86 +52,88 @@ const PoolsDetail = (props) => {
   useEffect(() => {
     setPool(pools[0])
     if (pools[0]) {
-      const { status, start_at, time } = pools[0]
+      const { status, start_at, time, timeClose, type } = pools[0]
       if (status === 0) {
         setLeftTime(start_at * 1000 - Date.now())
       } else if (status === 1) {
-        setLeftTime(time * 1000 - Date.now())
+        type !== 1
+          ? setLeftTime(timeClose * 1000 - Date.now())
+          : setLeftTime(time * 1000 - Date.now())
       }
     }
   }, [pools, address])
 
   const onClaim = () => {
     const contract = getContract(library, pool.abi, address)
-    if(pool.type === 1){
-      contract.methods.claim()
-          .send({
-            from: account,
+    if (pool.type === 1) {
+      contract.methods
+        .claim()
+        .send({
+          from: account,
+        })
+        .on('transactionHash', (hash) => {
+          dispatch({
+            type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
+            showWaitingWalletConfirmModal: { ...waitingPending, hash },
           })
-          .on('transactionHash', (hash) => {
-            dispatch({
-              type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
-              showWaitingWalletConfirmModal: { ...waitingPending, hash },
-            })
+        })
+        .on('receipt', (_, receipt) => {
+          console.log('BOT staking success')
+          dispatch({
+            type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
+            showWaitingWalletConfirmModal: waitingForInit,
           })
-          .on('receipt', (_, receipt) => {
-            console.log('BOT staking success')
-            dispatch({
-              type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
-              showWaitingWalletConfirmModal: waitingForInit,
-            })
-            dispatch({
-              type: HANDLE_SHOW_TRANSACTION_MODAL,
-              showTransactionModal: true,
-            })
+          dispatch({
+            type: HANDLE_SHOW_TRANSACTION_MODAL,
+            showTransactionModal: true,
           })
-          .on('error', (err, receipt) => {
-            console.log('BOT staking error', err)
-            dispatch({
-              type: HANDLE_SHOW_FAILED_TRANSACTION_MODAL,
-              showFailedTransactionModal: true,
-            })
-            dispatch({
-              type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
-              showWaitingWalletConfirmModal: waitingForInit,
-            })
+        })
+        .on('error', (err, receipt) => {
+          console.log('BOT staking error', err)
+          dispatch({
+            type: HANDLE_SHOW_FAILED_TRANSACTION_MODAL,
+            showFailedTransactionModal: true,
           })
-    }else{
-      contract.methods.settle()
-          .send({
-            from: account,
+          dispatch({
+            type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
+            showWaitingWalletConfirmModal: waitingForInit,
           })
-          .on('transactionHash', (hash) => {
-            dispatch({
-              type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
-              showWaitingWalletConfirmModal: { ...waitingPending, hash },
-            })
+        })
+    } else {
+      contract.methods
+        .settle()
+        .send({
+          from: account,
+        })
+        .on('transactionHash', (hash) => {
+          dispatch({
+            type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
+            showWaitingWalletConfirmModal: { ...waitingPending, hash },
           })
-          .on('receipt', (_, receipt) => {
-            console.log('BOT staking success')
-            dispatch({
-              type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
-              showWaitingWalletConfirmModal: waitingForInit,
-            })
-            dispatch({
-              type: HANDLE_SHOW_TRANSACTION_MODAL,
-              showTransactionModal: true,
-            })
+        })
+        .on('receipt', (_, receipt) => {
+          console.log('BOT staking success')
+          dispatch({
+            type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
+            showWaitingWalletConfirmModal: waitingForInit,
           })
-          .on('error', (err, receipt) => {
-            console.log('BOT staking error', err)
-            dispatch({
-              type: HANDLE_SHOW_FAILED_TRANSACTION_MODAL,
-              showFailedTransactionModal: true,
-            })
-            dispatch({
-              type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
-              showWaitingWalletConfirmModal: waitingForInit,
-            })
+          dispatch({
+            type: HANDLE_SHOW_TRANSACTION_MODAL,
+            showTransactionModal: true,
           })
+        })
+        .on('error', (err, receipt) => {
+          console.log('BOT staking error', err)
+          dispatch({
+            type: HANDLE_SHOW_FAILED_TRANSACTION_MODAL,
+            showFailedTransactionModal: true,
+          })
+          dispatch({
+            type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
+            showWaitingWalletConfirmModal: waitingForInit,
+          })
+        })
     }
-
-
   }
 
   return (
@@ -163,16 +165,21 @@ const PoolsDetail = (props) => {
               ...
             </div>
           )}
-          {pool && pool.status === 1 && (pool.timeClose === 0 || pool.timeClose > now) && (
-            <div className='pools_card_start'>
-              <FormattedMessage id='recruit' />
-            </div>
-          )}
-          {pool && pool.status === 1 && (pool.timeClose > 0 && pool.timeClose < now) && (
+          {pool &&
+            pool.status === 1 &&
+            (pool.timeClose === 0 || pool.timeClose > now) && (
+              <div className='pools_card_start'>
+                <FormattedMessage id='recruit' />
+              </div>
+            )}
+          {pool &&
+            pool.status === 1 &&
+            pool.timeClose > 0 &&
+            pool.timeClose < now && (
               <div className='pools_card_start'>
                 <FormattedMessage id='recruitOver' />
               </div>
-          )}
+            )}
           {pool && pool.status === 2 && (
             <div className='pools_card_start'>
               <FormattedMessage id='settlement' />
@@ -218,7 +225,9 @@ const PoolsDetail = (props) => {
       <div className='pools_detail_btn_box'>
         <a
           className={`pools_detail_btn ${
-            pool && pool.status === 1 && (pool.timeClose === 0 || pool.timeClose * 1 > now)
+            pool &&
+            pool.status === 1 &&
+            (pool.timeClose === 0 || pool.timeClose * 1 > now)
               ? 'pools_detail_btn_active'
               : 'pools_detail_btn_disable'
           }`}
@@ -232,9 +241,9 @@ const PoolsDetail = (props) => {
                 //不在白名单里面
                 message.info(intl.formatMessage({ id: 'notInWhitelist' }))
               } else {
-                if(pool.timeClose > 0 && pool.timeClose * 1 < now){
+                if (pool.timeClose > 0 && pool.timeClose * 1 < now) {
                   message.info(intl.formatMessage({ id: 'undergoingOver' }))
-                }else{
+                } else {
                   dispatch({
                     type: HANDLE_WALLET_MODAL,
                     walletModal: 'join',
@@ -258,42 +267,46 @@ const PoolsDetail = (props) => {
         </a>
       </div>
       <div className='pools_detail_record'>
-        {pool && pool.type === 1 && pool.quotaOf == 0 && left_time > 0 && pool.status == 0 && (
-          <div className='mask_layer'>
-            <p style={{ lineHeight: '30px', marginBottom: '0' }}>
-              <FormattedMessage id='countdown' />
-              &nbsp;
-              <span className='pools-type_time'>
-                <Timer
-                  key={left_time}
-                  initialTime={left_time}
-                  direction='backward'
-                  formatValue={(number) => {
-                    if (number === 0) return '00'
-                    if (number < 10) {
-                      return `0${number}`
-                    }
-                    return number
-                  }}
-                >
-                  <span>
-                    <Timer.Consumer>
-                      {({ h, d, formatValue }) => formatValue(d * 24 + h)}
-                    </Timer.Consumer>
-                  </span>
-                  &nbsp;:&nbsp;
-                  <span>
-                    <Timer.Minutes />
-                  </span>
-                  &nbsp;:&nbsp;
-                  <span>
-                    <Timer.Seconds />
-                  </span>
-                </Timer>
-              </span>
-            </p>
-          </div>
-        )}
+        {pool &&
+          pool.type === 1 &&
+          pool.quotaOf == 0 &&
+          left_time > 0 &&
+          pool.status == 0 && (
+            <div className='mask_layer'>
+              <p style={{ lineHeight: '30px', marginBottom: '0' }}>
+                <FormattedMessage id='countdown' />
+                &nbsp;
+                <span className='pools-type_time'>
+                  <Timer
+                    key={left_time}
+                    initialTime={left_time}
+                    direction='backward'
+                    formatValue={(number) => {
+                      if (number === 0) return '00'
+                      if (number < 10) {
+                        return `0${number}`
+                      }
+                      return number
+                    }}
+                  >
+                    <span>
+                      <Timer.Consumer>
+                        {({ h, d, formatValue }) => formatValue(d * 24 + h)}
+                      </Timer.Consumer>
+                    </span>
+                    &nbsp;:&nbsp;
+                    <span>
+                      <Timer.Minutes />
+                    </span>
+                    &nbsp;:&nbsp;
+                    <span>
+                      <Timer.Seconds />
+                    </span>
+                  </Timer>
+                </span>
+              </p>
+            </div>
+          )}
         {pool && pool.type === 1 && pool.quotaOf == 0 && pool.status > 0 && (
           <div className='mask_layer'>
             <p style={{ lineHeight: '30px', marginBottom: '0' }}>
@@ -308,7 +321,7 @@ const PoolsDetail = (props) => {
           >
             <FormattedMessage id='FundraisingRecord' />
           </a>
-          {pool && pool.status >= 2 && (
+          {pool && pool.status >= 1 && (
             <a
               onClick={() => setRecordTab(2)}
               className={cs(recordTab === 2 && 'active')}
@@ -406,25 +419,49 @@ const PoolsDetail = (props) => {
               <tbody>
                 {(pool && pool.purchasedCurrencyOf.toString()) > 0 ? (
                   <tr>
-                    <td>{pool && formatAmount(pool.settleable.amount)}</td>
                     <td>
-                      {pool && pool.type === 1 && pool.settleable.claimedOf > 0 ? 0 : formatAmount(pool.settleable.volume)}
-                      {pool && pool.type === 0 && formatAmount(pool.settleable.volume)}
-                    </td>
-                    <td>
-                      {/*  && !pool.settleable.completed_ */}
-                      {pool && pool.type !== 1 && pool.settleable.volume > 0 && (
+                      {pool && formatAmount(pool.settleable.amount)}
+                      {/* 当 当前时间大于募资结束时间 && 小于结算开始时间则可以领回 */}
+                      {pool && now >= pool.timeClose && now < pool.time && (
                         <a
+                          style={{ marginLeft: '4px' }}
                           className='pools_detail_record_btn'
                           onClick={() => onClaim()}
                         >
                           <FormattedMessage id='poolsDetailText5' />
                         </a>
                       )}
+                    </td>
+                    <td>
+                      {pool && pool.type === 1 && pool.settleable.claimedOf > 0
+                        ? 0
+                        : formatAmount(pool.settleable.volume)}
+                      {pool &&
+                        pool.type === 0 &&
+                        formatAmount(pool.settleable.volume)}
+                    </td>
+                    <td>
+                      {/*  && !pool.settleable.completed_ */}
+                      {pool &&
+                        pool.type !== 1 &&
+                        pool.settleable.volume > 0 &&
+                        pool.status == 2 &&
+                        now > pool.timeClose &&
+                        now >= pool.time && (
+                          <a
+                            className='pools_detail_record_btn'
+                            onClick={() => onClaim()}
+                          >
+                            <FormattedMessage id='poolsDetailText5' />
+                          </a>
+                        )}
                       {pool &&
                         pool.type === 1 &&
                         pool.settleable.volume > 0 &&
-                        pool.settleable.claimedOf == 0 && (
+                        pool.settleable.claimedOf == 0 &&
+                        pool.status == 2 &&
+                        now > pool.timeClose &&
+                        now >= pool.time && (
                           <a
                             className='pools_detail_record_btn'
                             onClick={() => onClaim()}
@@ -633,16 +670,21 @@ const PoolsDetail = (props) => {
                 </a>
               )}
               {pool && pool.underlying.symbol === 'DORA' && (
-                  <a className='no_link'>
-                    <FormattedMessage id='doraAboutProjectP1' />
-                    <br/>
-                    <FormattedMessage id='doraAboutProjectP2' />
-                  </a>
+                <a className='no_link'>
+                  <FormattedMessage id='doraAboutProjectP1' />
+                  <br />
+                  <FormattedMessage id='doraAboutProjectP2' />
+                </a>
               )}
               {pool && pool.underlying.symbol === 'COOK' && (
-                  <a className='no_link'>
-                    <FormattedMessage id='cookAboutProject' />
-                  </a>
+                <a className='no_link'>
+                  <FormattedMessage id='cookAboutProject' />
+                </a>
+              )}
+              {pool && pool.underlying.symbol === 'TOKEN' && (
+                <a className='no_link'>
+                  <FormattedMessage id='chainswapAboutProject' />
+                </a>
               )}
             </div>
           )}

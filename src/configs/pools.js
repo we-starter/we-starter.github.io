@@ -1,6 +1,7 @@
 import Offering from '../web3/abi/Offering.json'
 import Starter from '../web3/abi/Starter.json'
 import StarterV2 from '../web3/abi/StarterV2.json'
+import StarterV3 from '../web3/abi/StarterV3.json'
 import OfferingV2 from '../web3/abi/OfferingV2.json'
 
 export default [
@@ -17,7 +18,7 @@ export default [
       decimal: 18,
     },
     icon: '',
-    type: 1,
+    type: 1, // 非1 则为公有池，为1 则为私有池
     isPrivate: true,
     underlying: {
       address: '0x1C9491865a1DE77C5b6e19d2E6a5F1D7a6F2b25F',
@@ -42,13 +43,13 @@ export default [
     Github: 'https://github.com/antimatter-finance',
     yuque: '-',
     progress: 1,
-    status: 3,
-    ratio: '1HT=300MATTER',
-    time: '1614435600',
-    purchasedCurrencyOf: 0,
-    totalPurchasedAmount: '833333330000000000000',
-    totalPurchasedUnderlying: '0',
-    totalPurchasedCurrency: '0',
+    status: 3, // 状态
+    ratio: '1MATTER=0.003HT', // 比例
+    time: '1614435600', // 结算时间点
+    purchasedCurrencyOf: 0, // 已购买币种
+    totalPurchasedAmount: '833333330000000000000', // 总购买数量
+    totalPurchasedUnderlying: '0', // 总购买金额
+    totalPurchasedCurrency: '0', // 总购买币种
     is_flash: false,
     link_url: '',
     project_introduction: '',
@@ -92,7 +93,7 @@ export default [
     yuque: '-',
     progress: 1,
     status: 3,
-    ratio: '1USDT=3.33DFT',
+    ratio: '1DFT=0.3USDT',
     time: '1614693600',
     purchasedCurrencyOf: 0,
     totalPurchasedAmount: '50000000000000000000000',
@@ -142,7 +143,7 @@ export default [
     yuque: '-',
     progress: 1,
     status: 3,
-    ratio: '1HT=1.618FIX', // 兑换比例需要确认
+    ratio: '1FIX=0.618HT', // 兑换比例需要确认
     time: '1615384800',
     purchasedCurrencyOf: 0,
     totalPurchasedAmount: '3708280000000000000000',
@@ -192,7 +193,7 @@ export default [
     yuque: '-',
     progress: 1,
     status: 3,
-    ratio: '1HT=1.618FIX',
+    ratio: '1FIX=0.618HT',
     time: '1615384800',
     purchasedCurrencyOf: 0,
     totalPurchasedAmount: '2472000000000000000000',
@@ -242,7 +243,7 @@ export default [
     yuque: '-',
     progress: 1,
     status: 3,
-    ratio: '1 HT= 1.4 DORA',
+    ratio: '1DORA=0.714HT',
     time: '1616587200',
     purchasedCurrencyOf: 0,
     totalPurchasedAmount: '3571428571000000000000',
@@ -292,7 +293,7 @@ export default [
     yuque: '-',
     progress: 0,
     status: 3,
-    ratio: '1USDT=33.3COOK', // 兑换比例需要确认
+    ratio: '1COOK=0.03USDT', // 兑换比例需要确认
     time: '1617208320',
     purchasedCurrencyOf: 0,
     totalPurchasedAmount: '60000000000000000000000',
@@ -342,7 +343,7 @@ export default [
     yuque: '-',
     progress: 0,
     status: 3,
-    ratio: '1USDT=33.3COOK',
+    ratio: '1COOK=0.03USDT',
     time: '1617208320',
     purchasedCurrencyOf: 0,
     totalPurchasedAmount: '40000000000000000000000',
@@ -352,5 +353,54 @@ export default [
     link_url: 'https://www.cook.finance', // 跳转外链接
     project_introduction:
       'Cook Protocol is a completely decentralized asset management platform in the DeFi space built on top of the Ethereum blockchain.',
+  },
+  {
+    name: 'ChainSwap',
+    address: '0x8972fB598FC89BB321D68f20733f0a2927422848', // 超募合约地址
+    abi: StarterV3,
+    start_at: '1619092800',
+    is_top: true,
+    is_coming: true,
+    currency: {
+      address: '0xa71edc38d189767582c38a3145b5873052c3e47a', // 如果是0x0则是ht
+      decimal: 18,
+      symbol: 'USDT',
+    },
+    icon: '',
+    type: 0,
+    isPrivate: false,
+    underlying: {
+      address: '0x3B73c1B2ea59835cbfcADade5462b6aB630D9890',
+      decimal: 18,
+      symbol: 'TOKEN',
+      name: 'TOKEN',
+      total_supply: '100,000,000',
+      holders: '-',
+      transfers: '-',
+    },
+    amount: '100000',
+    pool_info: {
+      token_distribution: 'April 22th 2021, 8:00PM SGT',
+      min_allocation: '-',
+      max_allocation: '-',
+      min_swap_level: '30000 USDT',
+    },
+    website: 'https://www.chainswap.com',
+    white_paper: '-',
+    twitter: 'https://twitter.com/chain_swap',
+    Telegram_Channel: 'https://t.me/chainswapann',
+    Github: 'https://github.com/chainswap',
+    yuque: '-',
+    progress: 0,
+    status: 0,
+    ratio: '1TOKEN=0.3USDT',
+    time: '1619182800',
+    purchasedCurrencyOf: 0,
+    totalPurchasedAmount: '30000000000000000000000',
+    totalPurchasedUnderlying: '0',
+    totalPurchasedCurrency: '0',
+    is_flash: false,
+    link_url: 'https://www.chainswap.com', // 跳转外链接
+    project_introduction: 'Chainswap is the hub for all smart chains.',
   },
 ]
