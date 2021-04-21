@@ -353,6 +353,7 @@ export const usePoolsInfo = (address = '') => {
     Object.assign(item, {
       quotaOf: 0, //设置默认不在白名单
       status: status,
+      timeClose: '1619095500',
       progress: status === 3 ? 1 : 0,
       totalPurchasedUnderlying:
         status === 3 ? Web3.utils.toWei(item.amount) : 0,
@@ -391,10 +392,10 @@ export const usePoolsInfo = (address = '') => {
             const promise_list = [
               pool_contract.methods.time
                 ? pool_contract.methods.time().call()
-                : 0, // 结算时间点
+                : 0, // 募资结束时间点
               pool_contract.methods.timeSettle
                 ? pool_contract.methods.timeSettle().call()
-                : 0, // 结算时间点 V2版本提供
+                : 0, // 结算开始时间点 V2版本提供
               pool_contract.methods.price().call(), // 结算时间点
               pool_contract.methods.totalPurchasedCurrency().call(), //总申购的量
               pool_contract.methods.purchasedCurrencyOf(account).call(),
@@ -430,12 +431,10 @@ export const usePoolsInfo = (address = '') => {
                   // time 如果没有的话，使用timeSettle填充
                   time = timeSettle
                 }
-
                 if (pool.start_at < now && status < 1) {
                   // 募集中
                   status = 1
                 }
-
                 if (time < now && status < 2) {
                   // 结算中
                   status = 2
@@ -469,8 +468,7 @@ export const usePoolsInfo = (address = '') => {
                 Object.assign(pool.currency, {
                   allowance: currency_allowance,
                 })
-
-                console.log('update pools')
+                console.log('update pools', time)
                 return Object.assign({}, pool, {
                   ratio: `1${pool.currency.symbol} = ${
                     new BigNumber(Web3.utils.toWei('1', 'ether'))

@@ -174,6 +174,7 @@ const PoolsIndex = (props) => {
       currency,
       start_at, // 开始时间
       time, // 结算时间
+      timeClose, // 募资结束时间
       icon,
       type,
       quotaOf,
@@ -182,7 +183,7 @@ const PoolsIndex = (props) => {
     if (status === 0) {
       left_time = start_at * 1000 - Date.now()
     } else if (status === 1) {
-      left_time = time * 1000 - Date.now()
+      left_time = timeClose * 1000 - Date.now()
     }
 
     return (

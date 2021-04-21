@@ -1,6 +1,7 @@
 import Offering from '../web3/abi/Offering.json'
 import Starter from '../web3/abi/Starter.json'
 import StarterV2 from '../web3/abi/StarterV2.json'
+import StarterV3 from '../web3/abi/StarterV3.json'
 import OfferingV2 from '../web3/abi/OfferingV2.json'
 
 export default [
@@ -355,21 +356,21 @@ export default [
   },
   {
     name: 'ChainSwap',
-    address: '0x03160470860A552301d3C152E88b4076f90b2241',
-    abi: StarterV2,
+    address: '0x8972fB598FC89BB321D68f20733f0a2927422848', // 超募合约地址
+    abi: StarterV3,
     start_at: '1619092800',
     is_top: true,
     is_coming: true,
     currency: {
-      address: '0x0', // 如果是0x0则是ht
+      address: '0xa71edc38d189767582c38a3145b5873052c3e47a', // 如果是0x0则是ht
       decimal: 18,
-      symbol: 'HT',
+      symbol: 'USDT',
     },
     icon: '',
     type: 0,
     isPrivate: false,
     underlying: {
-      address: '0x03160470860A552301d3C152E88b4076f90b2241',
+      address: '0x3B73c1B2ea59835cbfcADade5462b6aB630D9890',
       decimal: 18,
       symbol: 'TOKEN',
       name: 'TOKEN',
@@ -393,7 +394,7 @@ export default [
     progress: 0,
     status: 0,
     ratio: '1TOKEN = 0.3USDT',
-    time: '1617208320',
+    time: '1619182800',
     purchasedCurrencyOf: 0,
     totalPurchasedAmount: '100000000000000000000000000',
     totalPurchasedUnderlying: '0',

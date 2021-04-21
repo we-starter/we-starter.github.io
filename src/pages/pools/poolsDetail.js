@@ -52,11 +52,11 @@ const PoolsDetail = (props) => {
   useEffect(() => {
     setPool(pools[0])
     if (pools[0]) {
-      const { status, start_at, time } = pools[0]
+      const { status, start_at, time, timeClose } = pools[0]
       if (status === 0) {
         setLeftTime(start_at * 1000 - Date.now())
       } else if (status === 1) {
-        setLeftTime(time * 1000 - Date.now())
+        setLeftTime(timeClose * 1000 - Date.now())
       }
     }
   }, [pools, address])
@@ -319,15 +319,7 @@ const PoolsDetail = (props) => {
           >
             <FormattedMessage id='FundraisingRecord' />
           </a>
-          {pool && pool.status >= 2 && pool.underlying.symbol !== 'TOKEN' && (
-            <a
-              onClick={() => setRecordTab(2)}
-              className={cs(recordTab === 2 && 'active')}
-            >
-              <FormattedMessage id='poolsDetailText5' />
-            </a>
-          )}
-          {pool && pool.status >= 1 && pool.underlying.symbol == 'TOKEN' && (
+          {pool && pool.status >= 1 && (
             <a
               onClick={() => setRecordTab(2)}
               className={cs(recordTab === 2 && 'active')}
@@ -427,17 +419,16 @@ const PoolsDetail = (props) => {
                   <tr>
                     <td>
                       {pool && formatAmount(pool.settleable.amount)}
-                      {pool &&
-                        pool.status == 1 &&
-                        pool.underlying.symbol == 'TOKEN' && (
-                          <a
-                            style={{ marginLeft: '4px' }}
-                            className='pools_detail_record_btn'
-                            onClick={() => onClaim()}
-                          >
-                            <FormattedMessage id='poolsDetailText5' />
-                          </a>
-                        )}
+                      {/* 当 当前时间大于募资结束时间 && 小于结算开始时间则可以领回 */}
+                      {pool && now >= pool.timeClose && now < pool.time && (
+                        <a
+                          style={{ marginLeft: '4px' }}
+                          className='pools_detail_record_btn'
+                          onClick={() => onClaim()}
+                        >
+                          <FormattedMessage id='poolsDetailText5' />
+                        </a>
+                      )}
                     </td>
                     <td>
                       {pool && pool.type === 1 && pool.settleable.claimedOf > 0
@@ -449,18 +440,26 @@ const PoolsDetail = (props) => {
                     </td>
                     <td>
                       {/*  && !pool.settleable.completed_ */}
-                      {pool && pool.type !== 1 && pool.settleable.volume > 0 && (
-                        <a
-                          className='pools_detail_record_btn'
-                          onClick={() => onClaim()}
-                        >
-                          <FormattedMessage id='poolsDetailText5' />
-                        </a>
-                      )}
+                      {pool &&
+                        pool.type !== 1 &&
+                        pool.settleable.volume > 0 &&
+                        pool.status == 2 &&
+                        now > pool.timeClose &&
+                        now >= pool.time && (
+                          <a
+                            className='pools_detail_record_btn'
+                            onClick={() => onClaim()}
+                          >
+                            <FormattedMessage id='poolsDetailText5' />
+                          </a>
+                        )}
                       {pool &&
                         pool.type === 1 &&
                         pool.settleable.volume > 0 &&
-                        pool.settleable.claimedOf == 0 && (
+                        pool.settleable.claimedOf == 0 &&
+                        pool.status == 2 &&
+                        now > pool.timeClose &&
+                        now >= pool.time && (
                           <a
                             className='pools_detail_record_btn'
                             onClick={() => onClaim()}
