@@ -468,13 +468,12 @@ export const usePoolsInfo = (address = '') => {
                 Object.assign(pool.currency, {
                   allowance: currency_allowance,
                 })
-                console.log('update pools', time)
+                console.log('update pools')
                 return Object.assign({}, pool, {
-                  ratio: `1${pool.currency.symbol} = ${
-                    new BigNumber(Web3.utils.toWei('1', 'ether'))
-                      .div(new BigNumber(price))
-                      .toFixed(3, 1) * 1
-                  }${pool.underlying.symbol}`,
+                  ratio: `1${pool.underlying.symbol}=${Web3.utils.fromWei(
+                    price,
+                    'ether'
+                  )}${pool.currency.symbol}`,
                   progress:
                     new BigNumber(totalPurchasedCurrency)
                       .dividedBy(totalPurchasedAmount)
@@ -559,6 +558,15 @@ export const usePoolsInfo = (address = '') => {
                       18
                   )
                 )
+                const __ratio = new BigNumber(1).dividedBy(
+                  new BigNumber(ratio).dividedBy(
+                    new BigNumber(10).pow(
+                      parseInt(underlying_decimals) -
+                        parseInt(currency_decimals) +
+                        18
+                    )
+                  )
+                )
                 const totalPurchasedAmount = Web3.utils.toWei(
                   new BigNumber(pool.amount)
                     .dividedBy(new BigNumber(_ratio))
@@ -586,9 +594,9 @@ export const usePoolsInfo = (address = '') => {
 
                 console.log('update pools')
                 return Object.assign({}, pool, {
-                  ratio: `1${pool.currency.symbol} = ${
-                    _ratio.toFixed(3, 1).toString() * 1
-                  }${pool.underlying.symbol}`,
+                  ratio: `1${pool.underlying.symbol}=${
+                    __ratio.toFixed(3, 1).toString() * 1
+                  }${pool.currency.symbol}`,
                   progress:
                     new BigNumber(Web3.utils.fromWei(totalOffered, 'ether'))
                       .dividedBy(new BigNumber(pool.amount))

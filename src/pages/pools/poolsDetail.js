@@ -53,7 +53,6 @@ const PoolsDetail = (props) => {
     setPool(pools[0])
     if (pools[0]) {
       const { status, start_at, time, timeClose, type } = pools[0]
-      console.log(type, 'type')
       if (status === 0) {
         setLeftTime(start_at * 1000 - Date.now())
       } else if (status === 1) {
