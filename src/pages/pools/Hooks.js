@@ -353,8 +353,7 @@ export const usePoolsInfo = (address = '') => {
       return Object.assign({}, item, {
         quotaOf: 0, //设置默认不在白名单
         status: status,
-        // timeClose: '1619095500'
-        timeClose: '0',
+        timeClose: item.timeClose || '0',
         progress: status === 3 ? 1 : 0,
         totalPurchasedUnderlying:
           status === 3 ? Web3.utils.toWei(item.amount) : 0,
@@ -644,7 +643,6 @@ export const usePoolsInfo = (address = '') => {
         })
       ).then((pools) => {
         console.log(pools)
-        console.log(pools[0].timeClose)
         setPoolsInfo(pools)
       })
     }

@@ -183,15 +183,15 @@ const PoolsIndex = (props) => {
     if (status === 0) {
       left_time = start_at * 1000 - Date.now()
     } else if (status === 1) {
-      if(type !== 1){
-        if(now >= timeClose) {
+      if (type !== 1) {
+        if (now >= timeClose) {
           // 等待中
-          left_time = 0
-        }else{
+          left_time = (time - now) * 1000
+        } else {
           // 募资中
           left_time = (timeClose - now) * 1000
         }
-      }else{
+      } else {
         left_time = (time - now) * 1000
       }
     }
