@@ -183,8 +183,17 @@ const PoolsIndex = (props) => {
     if (status === 0) {
       left_time = start_at * 1000 - Date.now()
     } else if (status === 1) {
-      left_time =
-        type !== 1 ? timeClose * 1000 - Date.now() : time * 1000 - Date.now()
+      if (type !== 1) {
+        if (now >= timeClose) {
+          // 等待中
+          left_time = (time - now) * 1000
+        } else {
+          // 募资中
+          left_time = (timeClose - now) * 1000
+        }
+      } else {
+        left_time = (time - now) * 1000
+      }
     }
 
     return (
@@ -217,10 +226,11 @@ const PoolsIndex = (props) => {
           </p>
           <p className='pools-type_card_title_right'>
             {renderStatus(pool)}
-            {status < 3 && (
+            {status < 3 && left_time > 0 && (
               <span className='pools-type_time'>
                 <Timer
                   initialTime={left_time}
+                  key={left_time}
                   direction='backward'
                   formatValue={(number) => {
                     if (number === 0) return '00'

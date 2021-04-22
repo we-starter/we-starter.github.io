@@ -342,7 +342,6 @@ export const usePoolsInfo = (address = '') => {
 
   const [blockNumber, setBlockNumber] = useState(0)
 
-  console.log(pools)
   // 数据预处理
   pools.map((item) => {
     let status = item.status
@@ -350,10 +349,10 @@ export const usePoolsInfo = (address = '') => {
       status = now < item.start_at ? 0 : now < item.time ? 1 : 2
     }
 
-    Object.assign(item, {
+    return Object.assign(item, {
       quotaOf: 0, //设置默认不在白名单
       status: status,
-      timeClose: '1619095500',
+      timeClose: item.timeClose || '0',
       progress: status === 3 ? 1 : 0,
       totalPurchasedUnderlying:
         status === 3 ? Web3.utils.toWei(item.amount) : 0,
@@ -363,6 +362,7 @@ export const usePoolsInfo = (address = '') => {
       },
     })
   })
+  console.log('pools', pools)
 
   useEffect(() => {
     const updateBlockNumber = (blockNumber) => {
@@ -468,7 +468,7 @@ export const usePoolsInfo = (address = '') => {
                 Object.assign(pool.currency, {
                   allowance: currency_allowance,
                 })
-                console.log('update pools')
+                console.log('update pools', status)
                 return Object.assign({}, pool, {
                   ratio: `1${pool.underlying.symbol}=${Web3.utils.fromWei(
                     price,

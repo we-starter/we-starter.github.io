@@ -56,9 +56,17 @@ const PoolsDetail = (props) => {
       if (status === 0) {
         setLeftTime(start_at * 1000 - Date.now())
       } else if (status === 1) {
-        type !== 1
-          ? setLeftTime(timeClose * 1000 - Date.now())
-          : setLeftTime(time * 1000 - Date.now())
+        if (type !== 1) {
+          if (now >= timeClose) {
+            // 等待中
+            setLeftTime((time - now) * 1000)
+          } else {
+            // 募资中
+            setLeftTime((timeClose - now) * 1000)
+          }
+        } else {
+          setLeftTime((time - now) * 1000)
+        }
       }
     }
   }, [pools, address])
@@ -422,24 +430,21 @@ const PoolsDetail = (props) => {
                     <td>
                       {pool && formatAmount(pool.settleable.amount)}
                       {/* 当 当前时间大于募资结束时间 && 小于结算开始时间则可以领回 */}
-                      {pool && now >= pool.timeClose && now < pool.time && (
-                        <a
-                          style={{ marginLeft: '4px' }}
-                          className='pools_detail_record_btn'
-                          onClick={() => onClaim()}
-                        >
-                          <FormattedMessage id='poolsDetailText5' />
-                        </a>
-                      )}
-                    </td>
-                    <td>
-                      {pool && pool.type === 1 && pool.settleable.claimedOf > 0
-                        ? 0
-                        : formatAmount(pool.settleable.volume)}
                       {pool &&
-                        pool.type === 0 &&
-                        formatAmount(pool.settleable.volume)}
+                        pool.settleable.amount > 0 &&
+                        pool.status == 1 &&
+                        now >= pool.timeClose &&
+                        now < pool.time && (
+                          <a
+                            style={{ marginLeft: '4px' }}
+                            className='pools_detail_record_btn'
+                            onClick={() => onClaim()}
+                          >
+                            <FormattedMessage id='poolsDetailText5' />
+                          </a>
+                        )}
                     </td>
+                    <td>{pool && formatAmount(pool.settleable.volume)}</td>
                     <td>
                       {/*  && !pool.settleable.completed_ */}
                       {pool &&
@@ -673,6 +678,7 @@ const PoolsDetail = (props) => {
                 <a className='no_link'>
                   <FormattedMessage id='doraAboutProjectP1' />
                   <br />
+                  <br />
                   <FormattedMessage id='doraAboutProjectP2' />
                 </a>
               )}
@@ -683,7 +689,16 @@ const PoolsDetail = (props) => {
               )}
               {pool && pool.underlying.symbol === 'TOKEN' && (
                 <a className='no_link'>
-                  <FormattedMessage id='chainswapAboutProject' />
+                  <FormattedMessage id='chainswapAboutProject1' />
+                  <br />
+                  <br />
+                  <FormattedMessage id='chainswapAboutProject2' />
+                  <br />
+                  <br />
+                  <FormattedMessage id='chainswapAboutProject3' />
+                  <br />
+                  <br />
+                  <FormattedMessage id='chainswapAboutProject4' />
                 </a>
               )}
             </div>

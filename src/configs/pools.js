@@ -356,11 +356,11 @@ export default [
   },
   {
     name: 'ChainSwap',
-    address: '0x8972fB598FC89BB321D68f20733f0a2927422848', // 超募合约地址
+    address: '0x543A2aE552D993342A92e87AeFc966B69534A798', // 超募合约地址
     abi: StarterV3,
     start_at: '1619092800',
     is_top: true,
-    is_coming: true,
+    is_coming: false,
     currency: {
       address: '0xa71edc38d189767582c38a3145b5873052c3e47a', // 如果是0x0则是ht
       decimal: 18,
@@ -383,18 +383,19 @@ export default [
       token_distribution: 'April 22th 2021, 8:00PM SGT',
       min_allocation: '-',
       max_allocation: '-',
-      min_swap_level: '30000 USDT',
+      min_swap_level: '30,000 USDT',
     },
     website: 'https://www.chainswap.com',
     white_paper: '-',
     twitter: 'https://twitter.com/chain_swap',
-    Telegram_Channel: 'https://t.me/chainswapann',
+    Telegram_Channel: 'https://t.me/chainswap',
     Github: 'https://github.com/chainswap',
     yuque: '-',
     progress: 0,
     status: 0,
     ratio: '1TOKEN=0.3USDT',
     time: '1619182800',
+    timeClose: '1619095500',
     purchasedCurrencyOf: 0,
     totalPurchasedAmount: '30000000000000000000000',
     totalPurchasedUnderlying: '0',
