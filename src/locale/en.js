@@ -76,7 +76,7 @@ const en_US = {
   poolsDetailText8: 'Pool Information',
   poolsDetailText9: 'Token Distribution',
   poolsDetailText10: 'Allocation(Min)-Allocation(Max)',
-  poolsDetailText11: 'Min Swap Level',
+  poolsDetailText11: 'Hard Cap',
   poolsDetailText12: 'Token Information',
   poolsDetailText13: 'Name',
   poolsDetailText14: 'Address',

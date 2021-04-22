@@ -342,30 +342,27 @@ export const usePoolsInfo = (address = '') => {
 
   const [blockNumber, setBlockNumber] = useState(0)
 
-  useEffect(() => {
-    // 数据预处理
-    const _pools = poolsInfo.map((item) => {
-      let status = item.status
-      if (status === 0) {
-        status = now < item.start_at ? 0 : now < item.time ? 1 : 2
-      }
+  // 数据预处理
+  pools.map((item) => {
+    let status = item.status
+    if (status === 0) {
+      status = now < item.start_at ? 0 : now < item.time ? 1 : 2
+    }
 
-      return Object.assign({}, item, {
-        quotaOf: 0, //设置默认不在白名单
-        status: status,
-        timeClose: item.timeClose || '0',
-        progress: status === 3 ? 1 : 0,
-        totalPurchasedUnderlying:
-          status === 3 ? Web3.utils.toWei(item.amount) : 0,
-        currency: {
-          is_ht: item.currency.address === '0x0',
-          ...item.currency,
-        },
-      })
+    return Object.assign(item, {
+      quotaOf: 0, //设置默认不在白名单
+      status: status,
+      timeClose: item.timeClose || '0',
+      progress: status === 3 ? 1 : 0,
+      totalPurchasedUnderlying:
+        status === 3 ? Web3.utils.toWei(item.amount) : 0,
+      currency: {
+        is_ht: item.currency.address === '0x0',
+        ...item.currency,
+      },
     })
-    console.log('_pools', _pools)
-    setPoolsInfo(_pools)
-  }, [])
+  })
+  console.log('pools', pools)
 
   useEffect(() => {
     const updateBlockNumber = (blockNumber) => {
@@ -376,7 +373,7 @@ export const usePoolsInfo = (address = '') => {
       library.once('block', updateBlockNumber)
 
       Promise.all(
-        poolsInfo.map((pool) => {
+        pools.map((pool) => {
           // 如果还未开始，则不调用合约
           if (pool.is_coming) return pool
 
