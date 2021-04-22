@@ -388,7 +388,7 @@ export default [
     website: 'https://www.chainswap.com',
     white_paper: '-',
     twitter: 'https://twitter.com/chain_swap',
-    Telegram_Channel: 'https://t.me/chainswapann',
+    Telegram_Channel: 'https://t.me/chainswap',
     Github: 'https://github.com/chainswap',
     yuque: '-',
     progress: 0,

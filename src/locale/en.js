@@ -254,7 +254,13 @@ const en_US = {
     'The vision of Dora Factory is to build a DAO-as-a-Service infrastructure that empowers every DAO with the right toolkits to better engage with and incentivize open-source developers and hackers on their way of building the next venture.',
   cookAboutProject:
     'Cook Protocol is a completely decentralized asset management platform in the DeFi space built on top of the Ethereum blockchain.',
-  chainswapAboutProject: 'Chainswap is the hub for all smart chains.',
+  chainswapAboutProject1:
+    'ChainSwap is a cross-chain asset bridge & application hub for smart chains. ChainSwap allows projects to seamlessly bridge between ETH, BSC and HECO. In the future ChainSwap will be integrating chains and provide full cross-chain solutions between BTC, DOT, SOL and more.',
+  chainswapAboutProject2:
+    'ChainSwap has closed a $3M strategic funding round with participation from Alameda Research, OK Block Dream Fund (OKEx), NGC Ventures, Spark Digital Capital, Metaconstant Ventures, CMS Holdings, Rarestone Captial, Monday Capital, Continue Capital, SRC Capital, DAO Ventures, Mask network, Particle and Power Law Capital.',
+  chainswapAboutProject3: 'Token distribution:',
+  chainswapAboutProject4:
+    'TOKEN is the token of the ChainSwap platform.The total amount is 100M, 2% of the total amount is 100% unlock token, and will be distributed to public sale and airdrop.Public sale will be held as IDO on 5 different platforms with a total amount of 1M.Airdrop that is given to users is also 1M.',
   related_title1: 'Total raised funds',
   related_title2: 'Total participated addresses',
   related_title3: 'Total established pools',

@@ -678,6 +678,7 @@ const PoolsDetail = (props) => {
                 <a className='no_link'>
                   <FormattedMessage id='doraAboutProjectP1' />
                   <br />
+                  <br />
                   <FormattedMessage id='doraAboutProjectP2' />
                 </a>
               )}
@@ -688,7 +689,16 @@ const PoolsDetail = (props) => {
               )}
               {pool && pool.underlying.symbol === 'TOKEN' && (
                 <a className='no_link'>
-                  <FormattedMessage id='chainswapAboutProject' />
+                  <FormattedMessage id='chainswapAboutProject1' />
+                  <br />
+                  <br />
+                  <FormattedMessage id='chainswapAboutProject2' />
+                  <br />
+                  <br />
+                  <FormattedMessage id='chainswapAboutProject3' />
+                  <br />
+                  <br />
+                  <FormattedMessage id='chainswapAboutProject4' />
                 </a>
               )}
             </div>
