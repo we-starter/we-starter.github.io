@@ -38,12 +38,18 @@
       line-height: 36px;
       margin-top: 16px;
       margin-bottom: 0;
-      a {
-        display: inline-block;
-        width: 24px;
-        height: 24px;
-        background: url('../image/file-copy-line@2x.png') no-repeat;
-        background-size: 100% 100%;
+      &:hover {
+        color: #00b900;
+        svg {
+          fill: #00b900;
+        }
+      }
+      svg {
+        margin-left: 4px;
+        fill: #0f8c20;
+        &:hover {
+          fill: #00b900;
+        }
       }
     }
     &_withdraw_tip {
@@ -121,12 +127,18 @@
       line-height: 36px;
       margin-top: 16px;
       margin-bottom: 0;
-      a {
-        display: inline-block;
-        width: 24px;
-        height: 24px;
-        background: url('../image/file-copy-line@2x.png') no-repeat;
-        background-size: 100% 100%;
+      &:hover {
+        color: #00b900;
+        svg {
+          fill: #00b900;
+        }
+      }
+      svg {
+        margin-left: 4px;
+        fill: #0f8c20;
+        &:hover {
+          fill: #00b900;
+        }
       }
     }
     &_withdraw_tip {
@@ -205,12 +217,20 @@
       margin-top: 6px;
       word-break: break-word;
       margin-bottom: 0;
-      a {
+      &:hover {
+        color: #00b900;
+        svg {
+          fill: #00b900;
+        }
+      }
+      svg {
+        margin-left: 4px;
         display: inline-block;
-        width: 12px;
-        height: 12px;
-        background: url('../image/file-copy-line@2x.png') no-repeat;
-        background-size: 100% 100%;
+        vertical-align: bottom;
+        fill: #0f8c20;
+        &:hover {
+          fill: #00b900;
+        }
       }
     }
     &_withdraw_tip {
@@ -291,12 +311,20 @@
       line-height: 18px;
       word-break: break-word;
       margin-bottom: 0;
-      a {
+      &:hover {
+        color: #00b900;
+        svg {
+          fill: #00b900;
+        }
+      }
+      svg {
+        margin-left: 4px;
         display: inline-block;
-        width: 12px;
-        height: 12px;
-        background: url('../image/file-copy-line@2x.png') no-repeat;
-        background-size: 100% 100%;
+        vertical-align: bottom;
+        fill: #0f8c20;
+        &:hover {
+          fill: #00b900;
+        }
       }
     }
     &_withdraw_tip {
