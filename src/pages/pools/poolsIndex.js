@@ -85,6 +85,7 @@ const PoolsIndex = (props) => {
         break
       case 2:
         setListData(pools.filter((o) => o.is_join))
+        console.log(listData, 'listData')
         break
       case 3:
         setListData(pools.filter((o) => o.is_flash))
