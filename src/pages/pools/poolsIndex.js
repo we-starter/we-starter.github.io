@@ -67,6 +67,7 @@ const PoolsIndex = (props) => {
   // }, [props.location])
 
   const { account, active, library } = useActiveWeb3React()
+  console.log(active, 'active')
 
   const pools = usePoolsInfo()
   pools.sort(function (x, y) {
@@ -340,13 +341,45 @@ const PoolsIndex = (props) => {
             </p>
           )}
         </div>
+        {/* 
+            pool.settleable.volume > 0 获取数量大于0
+            pool.settleable.amount > 0 未结算数量大于0
+            pool.settleable.claimedOf == 0 如果是白名单的话 需要判断获取募资币种数量(已经领取的量) == 0 
+        */}
         <a
           className={cs(
             'pools-type_enter',
-            pool && pool.is_coming && 'pools-type_disable_enter'
+            pool &&
+              (pool.is_coming ||
+                (status === 3 &&
+                  ((pool.settleable && pool.settleable.amount == 0) ||
+                    (pool.settleable &&
+                      pool.type === 1 &&
+                      pool.settleable.claimedOf !== 0 &&
+                      pool.settleable.volume == 0) ||
+                    (pool.settleable &&
+                      pool.type !== 1 &&
+                      pool.settleable.volume == 0))) ||
+                (!active && status === 3)) &&
+              'pools-type_disable_enter'
           )}
           onClick={(e) => {
-            goDetail(e, pool && pool.is_coming, address)
+            goDetail(
+              e,
+              pool &&
+                (pool.is_coming ||
+                  (status === 3 &&
+                    ((pool.settleable && pool.settleable.amount == 0) ||
+                      (pool.settleable &&
+                        pool.type === 1 &&
+                        pool.settleable.claimedOf !== 0 &&
+                        pool.settleable.volume == 0) ||
+                      (pool.settleable &&
+                        pool.type !== 1 &&
+                        pool.settleable.volume == 0))) ||
+                  (!active && status === 3)),
+              address
+            )
           }}
         >
           <FormattedMessage id='poolsIndexText3' />

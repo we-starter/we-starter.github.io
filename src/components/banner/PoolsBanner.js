@@ -30,17 +30,38 @@ const PoolsBanner = (props) => {
         )}
         {/*{!active && <FormattedMessage id='htPublic' />}*/}
       </h3>
-      <p className='pools_banner_dec'>
+      <a
+        className='pools_banner_dec'
+        href={'https://hecoinfo.com/address/' + address}
+        target='_blank'
+      >
         {address}
-        <CopyToClipboard
+        {/* <CopyToClipboard
           text={address}
           onCopy={() => {
             message.success('copy success')
           }}
         >
           <a></a>
-        </CopyToClipboard>
-      </p>
+        </CopyToClipboard> */}
+        <a>
+          <svg
+            t='1619095072712'
+            class='icon'
+            viewBox='0 0 1024 1024'
+            version='1.1'
+            xmlns='http://www.w3.org/2000/svg'
+            p-id='1281'
+            width='20'
+            height='20'
+          >
+            <path
+              d='M424.96 128v87.04H215.04v599.04h599.04v-215.04h87.04v256c0 25.6-20.48 40.96-40.96 40.96H168.96c-25.6 0-40.96-20.48-40.96-40.96V168.96c0-25.6 20.48-40.96 40.96-40.96h256z m327.68 87.04h-194.56V128h343.04v343.04h-87.04V271.36L512 573.44 450.56 512l302.08-296.96z'
+              p-id='1282'
+            ></path>
+          </svg>
+        </a>
+      </a>
       <p className='pools_banner_withdraw_tip'>
         <FormattedMessage id='withdrawTip' />
       </p>

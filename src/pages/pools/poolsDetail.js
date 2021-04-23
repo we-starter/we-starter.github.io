@@ -345,7 +345,6 @@ const PoolsDetail = (props) => {
                 <tr>
                   <td>
                     <FormattedMessage id='invest' />
-                    {pool && pool.currency.symbol + ' '}
                     <FormattedMessage id='num' />
                   </td>
                   <td>
@@ -361,6 +360,8 @@ const PoolsDetail = (props) => {
                   <tr>
                     <td>
                       {fromWei(pool.purchasedCurrencyOf).toFixed(6, 1) * 1}
+                      &nbsp;
+                      {pool && pool.currency.symbol}
                     </td>
                     <td>
                       {pool && pool.type === 1 && pool.quotaOf > 0 && (
@@ -390,10 +391,11 @@ const PoolsDetail = (props) => {
                           .dividedBy(new BigNumber(pool.price))
                           .toFixed(6, 1)
                           .toString() * 1}
-
                       {pool &&
                         pool.type === 1 &&
                         formatAmount(pool.settleable.volume)}
+                      &nbsp;
+                      {pool && pool.underlying.symbol}
                     </td>
                   </tr>
                 ) : (
@@ -414,11 +416,9 @@ const PoolsDetail = (props) => {
                 <tr>
                   <td>
                     <FormattedMessage id='unsettlement' />
-                    {pool && pool.currency.symbol}
                   </td>
                   <td>
                     <FormattedMessage id='obtain' />
-                    {pool && pool.underlying.symbol + ' '}
                     <FormattedMessage id='num' />
                   </td>
                   <td></td>
@@ -428,7 +428,8 @@ const PoolsDetail = (props) => {
                 {(pool && pool.purchasedCurrencyOf.toString()) > 0 ? (
                   <tr>
                     <td>
-                      {pool && formatAmount(pool.settleable.amount)}
+                      {pool && formatAmount(pool.settleable.amount)}&nbsp;
+                      {pool && pool.currency.symbol}
                       {/* 当 当前时间大于募资结束时间 && 小于结算开始时间则可以领回 */}
                       {pool &&
                         pool.settleable.amount > 0 &&
@@ -444,7 +445,10 @@ const PoolsDetail = (props) => {
                           </a>
                         )}
                     </td>
-                    <td>{pool && formatAmount(pool.settleable.volume)}</td>
+                    <td>
+                      {pool && formatAmount(pool.settleable.volume)}&nbsp;
+                      {pool && pool.underlying.symbol}
+                    </td>
                     <td>
                       {/*  && !pool.settleable.completed_ */}
                       {pool &&
