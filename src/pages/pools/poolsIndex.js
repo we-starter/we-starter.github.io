@@ -353,14 +353,16 @@ const PoolsIndex = (props) => {
             pool &&
               (pool.is_coming ||
                 (status === 3 &&
-                  ((pool.settleable && pool.settleable.amount == 0) ||
-              ((pool.settleable &&
-                pool.type === 1 &&
-                pool.settleable.claimedOf !== 0 &&
-                pool.settleable.volume == 0) ||
-                (pool.settleable &&
-                  pool.type !== 1 &&
-                  pool.settleable.volume == 0)))) ||
+                  ((pool.type !== 1 &&
+                    pool.settleable &&
+                    pool.settleable.amount == 0) ||
+                    (pool.settleable &&
+                      pool.type === 1 &&
+                      pool.settleable.claimedOf !== 0 &&
+                      pool.settleable.volume == 0) ||
+                    (pool.settleable &&
+                      pool.type !== 1 &&
+                      pool.settleable.volume == 0))) ||
                 (!active && status === 3)) &&
               'pools-type_disable_enter'
           )}
@@ -370,7 +372,9 @@ const PoolsIndex = (props) => {
               pool &&
                 (pool.is_coming ||
                   (status === 3 &&
-                    ((pool.settleable && pool.settleable.amount == 0) ||
+                    ((pool.type !== 1 &&
+                      pool.settleable &&
+                      pool.settleable.amount == 0) ||
                       (pool.settleable &&
                         pool.type === 1 &&
                         pool.settleable.claimedOf !== 0 &&
