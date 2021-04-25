@@ -16,8 +16,12 @@ import TokenPocket from '../../assets/icon/tokenPocket.png'
 import AoLink from '../../assets/icon/aolink.png'
 import BitKeep from '../../assets/icon/bitkeep.png'
 import Bingoo from '../../assets/icon/bingoo.png'
+import WARPNG from '../../assets/icon/WAR@2x.png'
+import WARLBP from '../../assets/image/W@2x.png'
+
 import HyperPay from '../../assets/icon/HyperPay-Logo@2x.png'
 import { usePoolsInfo } from './Hooks'
+import { usePoolsLBPInfo } from '../useLBP/Hooks'
 // 处理格式 千位符
 import { formatNumber } from 'accounting'
 // import pool from '../../configs/pools'
@@ -67,10 +71,16 @@ const PoolsIndex = (props) => {
   // }, [props.location])
 
   const { account, active, library } = useActiveWeb3React()
-  console.log(active, 'active')
 
   const pools = usePoolsInfo()
-  pools.sort(function (x, y) {
+  const poolsLBP = usePoolsLBPInfo()
+  poolsLBP.map((item) => {
+    pools.push(item)
+  })
+  const newPools = Array.from(new Set(pools))
+  console.log(newPools, Array.from(new Set(pools)), 'pools')
+
+  newPools.sort(function (x, y) {
     return y.start_at - x.start_at
   })
 
@@ -81,17 +91,16 @@ const PoolsIndex = (props) => {
   const setData = async () => {
     switch (tabFlag) {
       case 1:
-        setListData(pools.filter((o) => o.is_top))
+        setListData(newPools.filter((o) => o.is_top))
         break
       case 2:
-        setListData(pools.filter((o) => o.is_join))
-        console.log(listData, 'listData')
+        setListData(newPools.filter((o) => o.is_join))
         break
       case 3:
-        setListData(pools.filter((o) => o.is_flash))
+        setListData(newPools.filter((o) => o.is_flash))
         break
       default:
-        setListData(pools.filter((o) => o.is_top))
+        setListData(newPools.filter((o) => o.is_top))
     }
   }
 
@@ -107,7 +116,7 @@ const PoolsIndex = (props) => {
   useEffect(() => {
     setData()
     setIsLogin(active)
-  }, [tabFlag, pools, active])
+  }, [tabFlag, newPools, active])
 
   const goFinance = (e, flag, url) => {
     e.stopPropagation()
@@ -118,12 +127,16 @@ const PoolsIndex = (props) => {
   }
 
   // 列表查看详情
-  const goDetail = (e, flag, address) => {
+  const goDetail = (e, flag, address, symbol) => {
     e.stopPropagation()
     if (flag) {
       return
     }
-    props.history.push(`/pools/detail/${address}`)
+    if (symbol == 'WARLBP') {
+      props.history.push(`/pools/detailLBP/${address}`)
+    } else {
+      props.history.push(`/pools/detail/${address}`)
+    }
   }
 
   const renderStatus = (pool) => {
@@ -224,6 +237,7 @@ const PoolsIndex = (props) => {
             {pool && pool.underlying.symbol === 'TOKEN' && (
               <img src={CHAINSWAP} />
             )}
+            {pool && pool.underlying.symbol === 'WAR' && <img src={WARPNG} />}
             {pool && pool.underlying.name}
           </p>
           <p className='pools-type_card_title_right'>
@@ -275,22 +289,30 @@ const PoolsIndex = (props) => {
             </i>
           </p>
         </div>
-        <div className='pools-type_title'>
-          <p className='pools-type_card_ratio' style={{ marginTop: '24px' }}>
-            <FormattedMessage id='poolsIndexText2' />
-          </p>
-        </div>
-        <div className='pools-type_percentage'>
-          <a>
-            <i
-              className='pools-type_progress_bar'
-              style={{
-                width: `${pool.progress > 1 ? 100 : pool.progress * 100}%`,
-              }}
-            ></i>
-          </a>
-          <p>{(progress * 100).toFixed(0)}%</p>
-        </div>
+        {pool && pool.underlying.name !== 'WARLBP' && (
+          <>
+            <div className='pools-type_title'>
+              <p
+                className='pools-type_card_ratio'
+                style={{ marginTop: '24px' }}
+              >
+                <FormattedMessage id='poolsIndexText2' />
+              </p>
+            </div>
+            <div className='pools-type_percentage'>
+              <a>
+                <i
+                  className='pools-type_progress_bar'
+                  style={{
+                    width: `${pool.progress > 1 ? 100 : pool.progress * 100}%`,
+                  }}
+                ></i>
+              </a>
+              <p>{(progress * 100).toFixed(0)}%</p>
+            </div>
+          </>
+        )}
+
         <div className='pools-type_title'>
           <p
             className='pools-type_card_ratio pools-type_card_access'
@@ -342,6 +364,9 @@ const PoolsIndex = (props) => {
             </p>
           )}
         </div>
+        {pool && pool.underlying.name === 'WARLBP' && (
+          <img className='w_bg' src={WARLBP} />
+        )}
         {/* 
             pool.settleable.volume > 0 获取数量大于0
             pool.settleable.amount > 0 未结算数量大于0
@@ -350,6 +375,7 @@ const PoolsIndex = (props) => {
         <a
           className={cs(
             'pools-type_enter',
+            pool && pool.underlying.name === 'WARLBP' && 'pools-type_lbp_enter',
             pool &&
               (pool.is_coming ||
                 (status === 3 &&
@@ -383,7 +409,8 @@ const PoolsIndex = (props) => {
                         pool.type !== 1 &&
                         pool.settleable.volume == 0))) ||
                   (!active && status === 3)),
-              address
+              address,
+              pool && pool.underlying.name
             )
           }}
         >
@@ -397,7 +424,7 @@ const PoolsIndex = (props) => {
       <div className='pools-type_noData'>
         <img src={noDataPng} />
         <p>
-          {(tabFlag === 1 || pools.is_flash) && (
+          {(tabFlag === 1 || newPools.is_flash) && (
             <FormattedMessage id='noData' />
           )}
           {tabFlag === 2 && <FormattedMessage id='noJoinPool' />}

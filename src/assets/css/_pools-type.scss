@@ -147,6 +147,7 @@
     &_card {
       // display: flex;
       .pools-type_card_box {
+        position: relative;
         margin-top: 30px;
         box-sizing: border-box;
         display: inline-block;
@@ -371,6 +372,16 @@
         background: #b6b9bc;
       }
     }
+    &_lbp_enter {
+      margin-top: 0;
+    }
+    .w_bg {
+      display: inline-block;
+      margin-top: 0;
+      float: right;
+      width: 182px;
+      height: 100px;
+    }
   }
 }
 @media #{$mdWidth} {
@@ -509,6 +520,7 @@
     &_card {
       // display: flex;
       .pools-type_card_box {
+        position: relative;
         margin-top: 30px;
         box-sizing: border-box;
         display: inline-block;
@@ -732,6 +744,16 @@
         background: #b6b9bc;
       }
     }
+    &_lbp_enter {
+      margin-top: 0;
+    }
+    .w_bg {
+      display: inline-block;
+      margin-top: 0;
+      float: right;
+      width: 182px;
+      height: 100px;
+    }
   }
 }
 @media #{$smWidth} {
@@ -864,6 +886,7 @@
     &_card {
       margin-top: 10px;
       .pools-type_card_box {
+        position: relative;
         box-sizing: border-box;
         display: block;
         margin: 20px auto 0;
@@ -1081,6 +1104,16 @@
         background: #b6b9bc;
       }
     }
+    &_lbp_enter {
+      margin-top: 0;
+    }
+    .w_bg {
+      display: inline-block;
+      margin-top: 0;
+      float: right;
+      width: 182px;
+      height: 100px;
+    }
   }
 }
 @media #{$xsWidth} {
@@ -1213,6 +1246,7 @@
     &_card {
       margin-top: 10px;
       .pools-type_card_box {
+        position: relative;
         box-sizing: border-box;
         display: block;
         margin: 20px auto 0;
@@ -1428,6 +1462,16 @@
         color: #fff;
         background: #b6b9bc;
       }
+    }
+    &_lbp_enter {
+      margin-top: 0;
+    }
+    .w_bg {
+      display: inline-block;
+      margin-top: 0;
+      float: right;
+      width: 182px;
+      height: 100px;
     }
   }
 }
