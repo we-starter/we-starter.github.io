@@ -3,6 +3,8 @@ import cs from 'classnames'
 import { withRouter } from 'react-router'
 import HUSD from '../../assets/icon/HUSD@2x.png'
 import DFT from '../../assets/icon/DFT@2x.png'
+import WAR from '../../assets/icon/WAR@2x.png'
+import BLACK from '../../assets/icon/BLACK@2x.png'
 import DORA from '../../assets/icon/DoraFactory@2x.png'
 import timePng from '../../assets/icon/time@2x.png'
 import MATTER from '../../assets/icon/MATTER@2x.png'
@@ -223,7 +225,9 @@ const PoolsIndex = (props) => {
             {pool && pool.underlying.symbol === 'TOKEN' && (
               <img src={CHAINSWAP} />
             )}
-            {pool && pool.underlying.name}
+            {pool && pool.underlying.symbol === 'WAR' && <img src={WAR} />}
+            {pool && pool.underlying.symbol === 'BLACK' && <img src={BLACK} />}
+            {pool && pool.name}
           </p>
           <p className='pools-type_card_title_right'>
             {renderStatus(pool)}
