@@ -21,8 +21,7 @@ import Bingoo from '../../assets/icon/bingoo.png'
 import WARLBP from '../../assets/image/W@2x.png'
 
 import HyperPay from '../../assets/icon/HyperPay-Logo@2x.png'
-import { usePoolsInfo } from './Hooks'
-import { usePoolsLBPInfo } from '../useLBP/Hooks'
+import { usePoolsInfo, usePoolsLBPInfo } from './Hooks'
 // 处理格式 千位符
 import { formatNumber } from 'accounting'
 // import pool from '../../configs/pools'

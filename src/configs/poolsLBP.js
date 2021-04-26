@@ -1,10 +1,10 @@
-import Starter from '../web3/abi/Starter.json'
+import LBP from '../web3/abi/LBP.json'
 
 export default [
   {
-    name: 'WAR LBP',
+    name: 'BLACK LBP',
     address: '0x1bCaC989BA76C293f56b2Ae7490d5375977F6eb9', // 超募合约地址
-    abi: Starter,
+    abi: LBP,
     start_at: '1619492400',
     is_top: true,
     is_coming: true,
@@ -16,10 +16,11 @@ export default [
     icon: '',
     type: 2,
     isPrivate: false,
+    ratio: '1BLACK=?HT', // 兑换比例需要确认
     underlying: {
       address: '0xDe9495De889996404b14dDBf05f66Db7401F0733',
       decimal: 18,
-      symbol: 'WAR',
+      symbol: 'BLACK',
       name: 'LBP',
       total_supply: '100,000,000',
       holders: '-',
@@ -32,23 +33,15 @@ export default [
       max_allocation: '-',
       min_swap_level: '30,000 USDT',
     },
-    website: 'https://www.chainswap.com',
+    website: 'https://www.blackhole.black',
     white_paper: '-',
-    twitter: 'https://twitter.com/chain_swap',
-    Telegram_Channel: 'https://t.me/chainswap',
-    Github: 'https://github.com/chainswap',
+    twitter: 'https://twitter.com/BlackHoleBurn',
+    Telegram_Channel: 'https://t.me/BlackholeProtocolOfficial',
+    Github: 'https://github.com/black-hole-finance',
     yuque: '-',
-    progress: 0,
     status: 0,
-    ratio: '1WAR=1HT',
     time: '1619611200',
-    timeClose: '0',
-    purchasedCurrencyOf: 0,
-    totalPurchasedAmount: '30000000000000000000000',
-    totalPurchasedUnderlying: '0',
-    totalPurchasedCurrency: '0',
-    is_flash: false,
-    link_url: 'https://www.chainswap.com', // 跳转外链接
-    project_introduction: 'Chainswap is the hub for all smart chains.',
+    link_url: 'https://www.blackhole.black', // 跳转外链接
+    project_introduction: 'An approval-free decentralized & cross-chain burning protocol, innovator of perpetual deflationary blockchain ecosystem.',
   },
 ]

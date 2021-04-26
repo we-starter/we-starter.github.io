@@ -23,6 +23,7 @@ import { ReactComponent as X10 } from '../../assets/logo/10X.svg'
 import BigNumber from 'bignumber.js'
 import BN from 'bn.js'
 import { formatAmount } from '../../utils/format'
+import PoolsLBP from "../../configs/poolsLBP";
 
 export const useStakingInfo = (stakingInfo) => {
   const { account, library, chainId } = useActiveWeb3React()
@@ -331,16 +332,34 @@ export const useStakingPoolInfo = () => {
   return stakingInfos
 }
 
+export function useBlockHeight() {
+  const { account, active, library } = useActiveWeb3React()
+  const [blockNumber, setBlockNumber] = useState(0)
+
+  const updateBlockNumber = (blockNumber) => {
+    setBlockNumber(blockNumber)
+  }
+
+  useEffect(() => {
+    library && library.once('block', updateBlockNumber)
+    return () => {
+      library && library.off('block', updateBlockNumber)
+    }
+  }, [blockNumber, library])
+
+  return blockNumber
+}
+
+
 export const usePoolsInfo = (address = '') => {
   const { account, active, library, chainId } = useActiveWeb3React()
+  const blockHeight = useBlockHeight()
 
   const now = parseInt(Date.now() / 1000)
 
   const pools = Pools.filter((o) => address === '' || o.address === address)
 
   const [poolsInfo, setPoolsInfo] = useState(pools)
-
-  const [blockNumber, setBlockNumber] = useState(0)
 
   // 数据预处理
   pools.map((item) => {
@@ -365,13 +384,7 @@ export const usePoolsInfo = (address = '') => {
   console.log('pools', pools)
 
   useEffect(() => {
-    const updateBlockNumber = (blockNumber) => {
-      console.log('block update')
-      setBlockNumber(blockNumber)
-    }
     if (library) {
-      library.once('block', updateBlockNumber)
-
       Promise.all(
         pools.map((pool) => {
           // 如果还未开始，则不调用合约
@@ -646,8 +659,101 @@ export const usePoolsInfo = (address = '') => {
     }
 
     return () => {
-      library && library.off('block', updateBlockNumber)
+
     }
-  }, [account, address, blockNumber])
+  }, [account, address, blockHeight])
   return poolsInfo
+}
+
+export const usePoolsLBPInfo = (address = '') => {
+  const { account, active, library, chainId } = useActiveWeb3React()
+  const blockHeight = useBlockHeight()
+
+  const now = parseInt(Date.now() / 1000)
+
+  const poolsLBP = PoolsLBP.filter(
+    (o) => address === '' || o.address === address
+  )
+
+  const [poolsLBPInfo, setPoolsLBPInfo] = useState(poolsLBP)
+
+  // 数据预处理
+  poolsLBP.map((item) => {
+    let status = item.status
+    if (status === 0) {
+      status = now < item.start_at ? 0 : now < item.time ? 1 : 3
+    }
+
+    return Object.assign(item, {
+      status: status,
+      currency: {
+        is_ht: item.currency.address === '0x0',
+        ...item.currency,
+      },
+    })
+  })
+  console.log('poolsLBP', poolsLBP)
+
+  useEffect(() => {
+    if (library) {
+      Promise.all(
+        poolsLBP.map((pool) => {
+          // 如果还未开始，则不调用合约
+          if (pool.is_coming) return pool
+
+          const currency_token = pool.currency.is_ht
+            ? null
+            : getContract(library, ERC20, pool.currency.address)
+
+
+          const pool_contract = getContract(library, pool.abi, pool.address)
+          const promise_list = [
+            pool_contract.methods.begin().call(), // 开始时间
+            pool_contract.methods.span().call(), // lbp持续时间
+            pool_contract.methods.priceLBP().call(),// 价格
+          ]
+          return Promise.all(promise_list).then(
+            ([
+               begin,
+               span,
+               priceLBP,
+             ]) => {
+              const start_at = begin  // 开始时间
+              const time = begin + span // 结束时间
+              let status = pool.status
+              if (start_at < now && status < 1) {
+                // 募集中
+                status = 1
+              }
+              if (time < now && status < 3) {
+                // 结束
+                status = 3
+              }
+
+              console.log('update poolsLBP', status)
+              const is_join = true
+              const price = Web3.utils.fromWei(priceLBP, 'ether')
+              return Object.assign({}, pool, {
+                ratio: `1${pool.underlying.symbol}= ${Web3.utils.fromWei(
+                  price,
+                  'ether'
+                )}${pool.currency.symbol}`,
+                status: status,
+                time: time,
+                price: Web3.utils.fromWei(priceLBP, 'ether'),
+                is_join,
+              })
+            }
+          )
+        })
+      ).then((pools) => {
+        console.log(pools)
+        setPoolsLBPInfo(pools)
+      })
+    }
+    return () => {
+
+    }
+  }, [account, address, blockHeight])
+  return poolsLBPInfo
 }

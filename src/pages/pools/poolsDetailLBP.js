@@ -10,7 +10,7 @@ import Timer from 'react-compound-timer'
 import { HANDLE_WALLET_MODAL } from '../../const'
 import transitions from '@material-ui/core/styles/transitions'
 // import pools from '../../configs/pools'
-import { usePoolsLBPInfo } from '../useLBP/Hooks'
+import { usePoolsLBPInfo } from './Hooks'
 import { message } from 'antd'
 import { getContract, useActiveWeb3React } from '../../web3'
 import { mainContext } from '../../reducer'
@@ -57,17 +57,7 @@ const PoolsDetailLBP = (props) => {
       if (status === 0) {
         setLeftTime(start_at * 1000 - Date.now())
       } else if (status === 1) {
-        if (type === 2) {
-          if (now >= timeClose) {
-            // 等待中
-            setLeftTime((time - now) * 1000)
-          } else {
-            // 募资中
-            setLeftTime((timeClose - now) * 1000)
-          }
-        } else {
-          setLeftTime((time - now) * 1000)
-        }
+        setLeftTime((time - now) * 1000)
       }
     }
   }, [pools, address])
