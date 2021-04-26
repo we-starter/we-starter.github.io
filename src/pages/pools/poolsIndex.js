@@ -3,6 +3,8 @@ import cs from 'classnames'
 import { withRouter } from 'react-router'
 import HUSD from '../../assets/icon/HUSD@2x.png'
 import DFT from '../../assets/icon/DFT@2x.png'
+import WAR from '../../assets/icon/WAR@2x.png'
+import BLACK from '../../assets/icon/BLACK@2x.png'
 import DORA from '../../assets/icon/DoraFactory@2x.png'
 import timePng from '../../assets/icon/time@2x.png'
 import MATTER from '../../assets/icon/MATTER@2x.png'
@@ -16,7 +18,6 @@ import TokenPocket from '../../assets/icon/tokenPocket.png'
 import AoLink from '../../assets/icon/aolink.png'
 import BitKeep from '../../assets/icon/bitkeep.png'
 import Bingoo from '../../assets/icon/bingoo.png'
-import WARPNG from '../../assets/icon/WAR@2x.png'
 import WARLBP from '../../assets/image/W@2x.png'
 
 import HyperPay from '../../assets/icon/HyperPay-Logo@2x.png'
@@ -50,7 +51,7 @@ const PoolsIndex = (props) => {
       return filterItem.address === item.address
     })
     if (count.length > 0) return
-    pools.push(item && item)
+    pools.push(item)
   })
 
   const [now, setNow] = useState(parseInt(Date.now() / 1000))
@@ -84,7 +85,11 @@ const PoolsIndex = (props) => {
   // }, [props.location])
 
   pools.sort(function (x, y) {
-    return y.start_at - x.start_at
+    if (x.status < 3 && y.status < 3) {
+      return x.start_at - y.start_at
+    } else {
+      return y.start_at - x.start_at
+    }
   })
 
   const changeTab = (val) => {
@@ -94,7 +99,6 @@ const PoolsIndex = (props) => {
   const setData = async () => {
     switch (tabFlag) {
       case 1:
-        console.log(pools, '===-----------------====')
         setListData(pools.filter((o) => o.is_top))
         break
       case 2:
@@ -222,7 +226,10 @@ const PoolsIndex = (props) => {
           ((pool && pool.underlying.symbol === 'FIX') || type === 1) &&
             'pools-type_private',
           pool && pool.is_coming && 'pools-type_hover_style',
-          tabFlag === 3 && 'pools-type_flashPool'
+          tabFlag === 3 && 'pools-type_flashPool',
+          pool &&
+            pool.underlying.symbol === 'WAR' &&
+            'pools-type_breathing_light'
         )}
         onClick={(e) =>
           goFinance(e, pool && pool.is_coming, pool && pool.link_url)
@@ -241,8 +248,9 @@ const PoolsIndex = (props) => {
             {pool && pool.underlying.symbol === 'TOKEN' && (
               <img src={CHAINSWAP} />
             )}
-            {pool && pool.underlying.symbol === 'WAR' && <img src={WARPNG} />}
-            {pool && pool.underlying.name}
+            {pool && pool.underlying.symbol === 'WAR' && <img src={WAR} />}
+            {pool && pool.underlying.symbol === 'BLACK' && <img src={BLACK} />}
+            {pool && pool.name}
           </p>
           <p className='pools-type_card_title_right'>
             {renderStatus(pool)}
@@ -293,7 +301,7 @@ const PoolsIndex = (props) => {
             </i>
           </p>
         </div>
-        {pool && pool.name !== 'WARLBP' && (
+        {pool && pool.underlying.name !== 'LBP' && (
           <>
             <div className='pools-type_title'>
               <p
@@ -368,7 +376,7 @@ const PoolsIndex = (props) => {
             </p>
           )}
         </div>
-        {pool && pool.name === 'WARLBP' && (
+        {pool && pool.underlying.name === 'LBP' && (
           <img className='w_bg' src={WARLBP} />
         )}
         {/* 
@@ -379,7 +387,7 @@ const PoolsIndex = (props) => {
         <a
           className={cs(
             'pools-type_enter',
-            pool && pool.name === 'WARLBP' && 'pools-type_lbp_enter',
+            pool && pool.underlying.name === 'LBP' && 'pools-type_lbp_enter',
             pool &&
               (pool.is_coming ||
                 (status === 3 &&
@@ -414,7 +422,7 @@ const PoolsIndex = (props) => {
                         pool.settleable.volume == 0))) ||
                   (!active && status === 3)),
               address,
-              pool && pool.name
+              pool && pool.underlying.name
             )
           }}
         >

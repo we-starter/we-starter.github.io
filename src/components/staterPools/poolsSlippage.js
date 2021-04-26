@@ -14,7 +14,10 @@ const PoolsSlippage = (props) => {
 
   useEffect(() => {
     if (slippageVal) {
-      slippageVal == 0.5 || slippageVal == 5 || slippageVal == 10
+      slippageVal == 0.5 ||
+      slippageVal == 1 ||
+      slippageVal == 5 ||
+      slippageVal == 10
         ? setPercentageVal(slippageVal)
         : setAmount(slippageVal)
     }
@@ -81,6 +84,15 @@ const PoolsSlippage = (props) => {
                 <a
                   className={cs(
                     'pools_slippage_percentage_value',
+                    percentageVal == 1 && 'pools_slippage_percentage_active'
+                  )}
+                  onClick={() => setPercentageVal(1)}
+                >
+                  1%
+                </a>
+                <a
+                  className={cs(
+                    'pools_slippage_percentage_value',
                     percentageVal == 5 && 'pools_slippage_percentage_active'
                   )}
                   onClick={() => setPercentageVal(5)}
@@ -96,7 +108,7 @@ const PoolsSlippage = (props) => {
                 >
                   10%
                 </a>
-                <div className='pools_slippage_percentage_box'>
+                {/* <div className='pools_slippage_percentage_box'>
                   <input
                     value={amount}
                     onChange={onChange}
@@ -106,7 +118,7 @@ const PoolsSlippage = (props) => {
                     )}
                   />
                   <span>%</span>
-                </div>
+                </div> */}
               </div>
               <div className='form-app__submit form-app__submit--row'>
                 <button

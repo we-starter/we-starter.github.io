@@ -1,13 +1,13 @@
-import StarterV3 from '../web3/abi/StarterV3.json'
+import Starter from '../web3/abi/Starter.json'
 
 export default [
   {
-    name: 'LBP',
-    address: '0x1bCaC989BA76C293f56b2Ae7490d5375977F6eb4', // 超募合约地址
-    abi: StarterV3,
+    name: 'WAR LBP',
+    address: '0x1bCaC989BA76C293f56b2Ae7490d5375977F6eb9', // 超募合约地址
+    abi: Starter,
     start_at: '1619492400',
     is_top: true,
-    is_coming: false,
+    is_coming: true,
     currency: {
       address: '0x0', // 如果是0x0则是ht
       decimal: 18,
@@ -17,10 +17,10 @@ export default [
     type: 2,
     isPrivate: false,
     underlying: {
-      address: '0x3B73c1B2ea59835cbfcADade5462b6aB630D9890',
+      address: '0xDe9495De889996404b14dDBf05f66Db7401F0733',
       decimal: 18,
       symbol: 'WAR',
-      name: 'WAR LBP',
+      name: 'LBP',
       total_supply: '100,000,000',
       holders: '-',
       transfers: '-',

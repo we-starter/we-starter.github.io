@@ -269,5 +269,7 @@ const en_US = {
   warLBP3: 'Your Balance: ',
   warLBP4: 'Transaction Settings',
   warLBP5: 'Slippage tolerance',
+  warLBP6: 'Succeed',
+  warLBP7: 'Please visit MDEX for trading',
 }
 export default en_US

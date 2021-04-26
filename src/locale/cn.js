@@ -266,5 +266,7 @@ const zh_CN = {
   warLBP3: 'Your Balance: ',
   warLBP4: 'Transaction Settings',
   warLBP5: 'Slippage tolerance',
+  warLBP6: '交易成功',
+  warLBP7: '请前往 MDEX 查看详情',
 }
 export default zh_CN
