@@ -142,7 +142,7 @@ const PoolsDetailLBP = (props) => {
 
   const purchaseBtn = () => {
     // 当设置滑点后，进行
-    console.log('买入')
+    console.log('=== 买入 ===')
     // 买入成功后弹框提示
     dispatch({
       type: HANDLE_WALLET_MODAL,
