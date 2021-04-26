@@ -4,11 +4,13 @@ import PoolsHeader from '../../components/staterPools/poolsHeader'
 import chromeLine from '../../assets/icon/chrome-line@2x.png'
 import bookMarkLine from '../../assets/icon/book-mark-line@2x.png'
 import Web3 from 'web3'
+import { useBalance } from '../../pages/Hooks'
+import { getRandomIntInclusive } from '../../utils/index'
 import Timer from 'react-compound-timer'
 import { HANDLE_WALLET_MODAL } from '../../const'
 import transitions from '@material-ui/core/styles/transitions'
 // import pools from '../../configs/pools'
-import { usePoolsInfo } from './Hooks'
+import { usePoolsLBPInfo } from '../useLBP/Hooks'
 import { message } from 'antd'
 import { getContract, useActiveWeb3React } from '../../web3'
 import { mainContext } from '../../reducer'
@@ -19,19 +21,24 @@ import { formatAmount, fromWei } from '../../utils/format'
 const PoolsDetailLBP = (props) => {
   const { address } = props.match.params
 
-  const { intl, onChange, onMax, amount } = props
+  const { intl } = props
 
   const { account, active, library, chainId } = useActiveWeb3React()
-  const pools = usePoolsInfo(address)
+  const pools = usePoolsLBPInfo(address)
 
   const [detailTab, setDetailTab] = useState('detail')
   const [pool, setPool] = useState(pools[0])
   const [now, setNow] = useState(parseInt(Date.now() / 1000))
   const [left_time, setLeftTime] = useState(0)
+  const [amount, setAmount] = useState('')
+  const [fee, setFee] = useState(0)
 
   const { dispatch, state } = useContext(mainContext)
 
   const { slippageVal } = state
+
+  const currency_address = pool ? pool.currency.address : '0x0'
+  const { balance = 0 } = useBalance(currency_address)
 
   useEffect(() => {
     const timerId = setTimeout(() => {
@@ -65,6 +72,70 @@ const PoolsDetailLBP = (props) => {
     }
   }, [pools, address])
 
+  const renderStatus = (pool) => {
+    const { status, timeClose = 0 } = pool
+    switch (status) {
+      case 0:
+        return (
+          <span className='pools_LBP_coming_status'>
+            <FormattedMessage id='willStart' />
+          </span>
+        )
+      case 1:
+        if (timeClose === 0 || timeClose > now) {
+          return (
+            <span className='pools_LBP_progress_status'>
+              <FormattedMessage id='recruit' />
+            </span>
+          )
+        } else {
+          return (
+            <span className='pools_LBP_progress_status'>
+              <FormattedMessage id='recruitOver' />
+            </span>
+          )
+        }
+      case 3:
+        return (
+          <span className='pools_LBP_over_status'>
+            <FormattedMessage id='completed' />
+          </span>
+        )
+    }
+  }
+
+  useEffect(() => {
+    const gas_limit = new BigNumber('1006182')
+    const gas_price = new BigNumber(
+      Web3.utils.toWei(`${getRandomIntInclusive(5, 20)}`, 'gwei')
+    )
+    const _fee = gas_limit.multipliedBy(gas_price).toString()
+    setFee(_fee)
+  }, [])
+
+  const onMax = () => {
+    let max = balance
+    const maxB = new BigNumber(max)
+    if (pool.currency.is_ht && max == balance) {
+      // 如果是ht,留部分手续费
+      const feeB = new BigNumber(fee)
+      max = maxB.gt(feeB) ? maxB.minus(feeB).toString() : 0
+    }
+    setAmount(formatAmount(max, pool.currency.decimal, 6))
+  }
+
+  const onChange = (e) => {
+    const { value } = e.target
+    const re = /^[0-9]+([.|,][0-9]+)?$/g
+    if (
+      value === '' ||
+      re.test(value) ||
+      (value.split('.').length === 2 && value.slice(value.length - 1) === '.')
+    ) {
+      setAmount(value)
+    }
+  }
+
   useEffect(() => {
     console.log(slippageVal, 'slippageValslippageValslippageVal')
   }, [slippageVal])
@@ -78,16 +149,54 @@ const PoolsDetailLBP = (props) => {
       <PoolsHeader address={address} pool={pool} LBPFlag='LBP' />
       <div className='pools_LBP_card'>
         <div className='pools_LBP_card_title'>
-          <h2 className='LBP_title'>Participate Chainswap Token</h2>
+          <h2 className='LBP_title'>
+            <FormattedMessage id='warLBP1' />
+          </h2>
           <p className='pools_LBP_card_title_right'>
-            <span className='pools_LBP_coming_status'>即将上线</span>
-            <span className='pools_LBP_time'>11:11:11</span>
+            {renderStatus(pool)}
+            {pool && pool.status < 3 && left_time > 0 && (
+              <span className='pools_LBP_time'>
+                <Timer
+                  initialTime={left_time}
+                  key={left_time}
+                  direction='backward'
+                  formatValue={(number) => {
+                    if (number === 0) return '00'
+                    if (number < 10) {
+                      return `0${number}`
+                    }
+                    return number
+                  }}
+                >
+                  <span>
+                    <Timer.Consumer>
+                      {({ h, d, formatValue }) => formatValue(d * 24 + h)}
+                    </Timer.Consumer>
+                  </span>
+                  &nbsp;:&nbsp;
+                  <span>
+                    <Timer.Minutes />
+                  </span>
+                  &nbsp;:&nbsp;
+                  <span>
+                    <Timer.Seconds />
+                  </span>
+                </Timer>
+              </span>
+            )}
           </p>
         </div>
-        <p className='pools_LBP_card_ratio'>1WAR =143.22 USDT</p>
+        <p className='pools_LBP_card_ratio'>{pool && pool.ratio}</p>
         <div className='pools_LBP_card_purchase'>
-          <span className='purchase_title'>Purchase</span>
-          <span className='balance'>Your Balance: 0.000000ETH</span>
+          <span className='purchase_title'>
+            <FormattedMessage id='warLBP2' />
+          </span>
+          <span className='balance'>
+            <FormattedMessage id='warLBP3' />
+            {balance &&
+              pool &&
+              `${formatAmount(balance)} ${pool.currency.symbol}`}
+          </span>
         </div>
         <div className='deposit__inputbox form-app__inputbox'>
           <div className='form-app__inputbox-control'>
@@ -137,8 +246,7 @@ const PoolsDetailLBP = (props) => {
           </div>
         </div>
         <button className='btn' type='button' onClick={purchaseBtn}>
-          Purchase
-          {/* <FormattedMessage id='poolText20' /> */}
+          <FormattedMessage id='warLBP2' />
         </button>
       </div>
       <div className='pools_detail'>

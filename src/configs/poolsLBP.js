@@ -3,15 +3,15 @@ import StarterV3 from '../web3/abi/StarterV3.json'
 export default [
   {
     name: 'WARLBP',
-    address: '0x543A2aE552D993342A92e87AeFc966B69534A799', // 超募合约地址
+    address: '0x637567F333f3C13Ee8d3814563476F848De86A39', // 超募合约地址
     abi: StarterV3,
-    start_at: '1619092800',
+    start_at: '1619492400',
     is_top: true,
-    is_coming: true,
+    is_coming: false,
     currency: {
-      address: '0xa71edc38d189767582c38a3145b5873052c3e47a', // 如果是0x0则是ht
+      address: '0x0', // 如果是0x0则是ht
       decimal: 18,
-      symbol: 'USDT',
+      symbol: 'HT',
     },
     icon: '',
     type: 0,
@@ -41,8 +41,8 @@ export default [
     progress: 0,
     status: 0,
     ratio: '1WAR=1HT',
-    time: '1619182800',
-    timeClose: '1619095500',
+    time: '1619611200',
+    timeClose: '0',
     purchasedCurrencyOf: 0,
     totalPurchasedAmount: '30000000000000000000000',
     totalPurchasedUnderlying: '0',

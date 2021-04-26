@@ -264,5 +264,10 @@ const en_US = {
   related_title1: 'Total raised funds',
   related_title2: 'Total participated addresses',
   related_title3: 'Total established pools',
+  warLBP1: 'Participate Chainswap Token',
+  warLBP2: 'Purchase',
+  warLBP3: 'Your Balance: ',
+  warLBP4: 'Transaction Settings',
+  warLBP5: 'Slippage tolerance',
 }
 export default en_US

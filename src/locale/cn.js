@@ -261,5 +261,10 @@ const zh_CN = {
   related_title1: '累计融资金额',
   related_title2: '参与地址总数',
   related_title3: '总成立的池子数',
+  warLBP1: 'Participate Chainswap Token',
+  warLBP2: 'Purchase',
+  warLBP3: 'Your Balance: ',
+  warLBP4: 'Transaction Settings',
+  warLBP5: 'Slippage tolerance',
 }
 export default zh_CN

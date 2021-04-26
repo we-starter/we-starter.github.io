@@ -77,7 +77,7 @@ const PoolsIndex = (props) => {
   poolsLBP.map((item) => {
     pools.push(item)
   })
-  const newPools = Array.from(new Set(pools))
+  const newPools = pools
   console.log(newPools, Array.from(new Set(pools)), 'pools')
 
   newPools.sort(function (x, y) {

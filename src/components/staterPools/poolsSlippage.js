@@ -8,8 +8,18 @@ const PoolsSlippage = (props) => {
   const { intl, icon, onClose, pool } = props
   const [amount, setAmount] = useState('')
   const [percentageVal, setPercentageVal] = useState(0.5)
-  const [slippageVal, setSlippageVal] = useState(null)
-  const { dispatch } = useContext(mainContext)
+  const [slippageInputVal, setSlippageInputVal] = useState(null)
+  const { dispatch, state } = useContext(mainContext)
+  const { slippageVal } = state
+
+  useEffect(() => {
+    if (slippageVal) {
+      slippageVal == 0.5 || slippageVal == 5 || slippageVal == 10
+        ? setPercentageVal(slippageVal)
+        : setAmount(slippageVal)
+    }
+  }, [])
+
   const onChange = (e) => {
     const { value } = e.target
     const re = /^[0-9]+([.|,][0-9]+)?$/g
@@ -19,7 +29,7 @@ const PoolsSlippage = (props) => {
       (value.split('.').length === 2 && value.slice(value.length - 1) === '.')
     ) {
       setAmount(value)
-      setSlippageVal(amount)
+      setSlippageInputVal(amount)
       setPercentageVal(null)
     }
   }
@@ -28,14 +38,14 @@ const PoolsSlippage = (props) => {
   const onConfirm = () => {
     dispatch({
       type: CHANGE_SLIPPAGE,
-      slippageVal: slippageVal,
+      slippageVal: slippageInputVal,
     })
     onClose()
   }
   useEffect(() => {
     if (percentageVal) {
       setAmount('')
-      setSlippageVal(percentageVal)
+      setSlippageInputVal(percentageVal)
     }
   }, [percentageVal])
   return (
@@ -45,7 +55,7 @@ const PoolsSlippage = (props) => {
           <form className='form-app' action='/'>
             <div className='form-app__inner deposit'>
               <h1 className='form-app__title h3' style={{ marginTop: 0 }}>
-                Transaction Settings
+                <FormattedMessage id='warLBP4' />
               </h1>
               <p
                 className='form-app__inputbox-after-text'
@@ -56,7 +66,7 @@ const PoolsSlippage = (props) => {
                   opacity: 1,
                 }}
               >
-                Slippage tolerance
+                <FormattedMessage id='warLBP5' />
               </p>
               <div className='pools_slippage_percentage'>
                 <a
