@@ -141,7 +141,10 @@ const PoolsDetailLBP = (props) => {
   }, [slippageVal])
 
   const purchaseBtn = () => {
+    // let strapVal = amount
     // 当设置滑点后，进行
+    // const contract = getContract(library, pool.abi, address)
+    // contract.methods.strap()
     console.log('=== 买入 ===')
     // 买入成功后弹框提示
     dispatch({
