@@ -387,7 +387,7 @@ export const usePoolsInfo = (address = '') => {
           //     pool.underlying.address,
           // )
 
-          if (pool.type !== 1) {
+          if (pool.type === 0) {
             const pool_contract = getContract(library, pool.abi, pool.address)
             const promise_list = [
               pool_contract.methods.time
@@ -469,6 +469,7 @@ export const usePoolsInfo = (address = '') => {
                   allowance: currency_allowance,
                 })
                 console.log('update pools', status)
+
                 return Object.assign({}, pool, {
                   ratio: `1${pool.underlying.symbol}=${Web3.utils.fromWei(
                     price,
@@ -495,7 +496,7 @@ export const usePoolsInfo = (address = '') => {
                 })
               }
             )
-          } else {
+          } else if (pool.type === 1) {
             // TODO 默认HT，后面需要根据通货来查询进度
             let currency_decimals = pool.currency.decimal
 

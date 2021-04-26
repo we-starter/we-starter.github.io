@@ -56,7 +56,7 @@ const PoolsDetail = (props) => {
       if (status === 0) {
         setLeftTime(start_at * 1000 - Date.now())
       } else if (status === 1) {
-        if (type !== 1) {
+        if (type === 0) {
           if (now >= timeClose) {
             // 等待中
             setLeftTime((time - now) * 1000)
@@ -368,7 +368,7 @@ const PoolsDetail = (props) => {
                         <FormattedMessage id='whiteList' />
                       )}
                       {pool &&
-                        pool.type !== 1 &&
+                        pool.type === 0 &&
                         fromWei(pool.settleable.rate)
                           .multipliedBy(new BigNumber(100))
                           .toFixed(2, 1)
@@ -379,7 +379,7 @@ const PoolsDetail = (props) => {
                     {/*<td>{Web3.utils.fromWei(pool.settleable.volume, 'ether')}</td>*/}
                     <td>
                       {pool &&
-                        pool.type !== 1 &&
+                        pool.type === 0 &&
                         new BigNumber(
                           Web3.utils.fromWei(pool.purchasedCurrencyOf, 'ether')
                         )
@@ -452,7 +452,7 @@ const PoolsDetail = (props) => {
                     <td>
                       {/*  && !pool.settleable.completed_ */}
                       {pool &&
-                        pool.type !== 1 &&
+                        pool.type === 0 &&
                         pool.settleable.volume > 0 &&
                         pool.status >= 2 &&
                         now > pool.timeClose &&

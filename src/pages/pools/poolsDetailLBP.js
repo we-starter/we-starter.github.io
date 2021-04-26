@@ -57,7 +57,7 @@ const PoolsDetailLBP = (props) => {
       if (status === 0) {
         setLeftTime(start_at * 1000 - Date.now())
       } else if (status === 1) {
-        if (type !== 1) {
+        if (type === 2) {
           if (now >= timeClose) {
             // 等待中
             setLeftTime((time - now) * 1000)

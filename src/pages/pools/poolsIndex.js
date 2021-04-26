@@ -39,6 +39,19 @@ const PoolsIndex = (props) => {
   const [isLogin, setIsLogin] = useState(false)
   const [hoverFlag, setHoverFlag] = useState(false)
   const [poolSum, setPoolSum] = useState(0)
+  const { account, active, library } = useActiveWeb3React()
+
+  const pools = usePoolsInfo()
+  const poolsLBP = usePoolsLBPInfo()
+
+  poolsLBP.map((item) => {
+    let count = 0
+    count = pools.filter((filterItem) => {
+      return filterItem.address === item.address
+    })
+    if (count.length > 0) return
+    pools.push(item && item)
+  })
 
   const [now, setNow] = useState(parseInt(Date.now() / 1000))
 
@@ -70,17 +83,7 @@ const PoolsIndex = (props) => {
   //   }
   // }, [props.location])
 
-  const { account, active, library } = useActiveWeb3React()
-
-  const pools = usePoolsInfo()
-  const poolsLBP = usePoolsLBPInfo()
-  poolsLBP.map((item) => {
-    pools.push(item)
-  })
-  const newPools = pools
-  console.log(newPools, Array.from(new Set(pools)), 'pools')
-
-  newPools.sort(function (x, y) {
+  pools.sort(function (x, y) {
     return y.start_at - x.start_at
   })
 
@@ -91,16 +94,17 @@ const PoolsIndex = (props) => {
   const setData = async () => {
     switch (tabFlag) {
       case 1:
-        setListData(newPools.filter((o) => o.is_top))
+        console.log(pools, '===-----------------====')
+        setListData(pools.filter((o) => o.is_top))
         break
       case 2:
-        setListData(newPools.filter((o) => o.is_join))
+        setListData(pools.filter((o) => o.is_join))
         break
       case 3:
-        setListData(newPools.filter((o) => o.is_flash))
+        setListData(pools.filter((o) => o.is_flash))
         break
       default:
-        setListData(newPools.filter((o) => o.is_top))
+        setListData(pools.filter((o) => o.is_top))
     }
   }
 
@@ -116,7 +120,7 @@ const PoolsIndex = (props) => {
   useEffect(() => {
     setData()
     setIsLogin(active)
-  }, [tabFlag, newPools, active])
+  }, [tabFlag, pools, active, poolsLBP])
 
   const goFinance = (e, flag, url) => {
     e.stopPropagation()
@@ -132,7 +136,7 @@ const PoolsIndex = (props) => {
     if (flag) {
       return
     }
-    if (symbol == 'WARLBP') {
+    if (symbol == 'LBP') {
       props.history.push(`/pools/detailLBP/${address}`)
     } else {
       props.history.push(`/pools/detail/${address}`)
@@ -198,7 +202,7 @@ const PoolsIndex = (props) => {
     if (status === 0) {
       left_time = start_at * 1000 - Date.now()
     } else if (status === 1) {
-      if (type !== 1) {
+      if (type === 0) {
         if (now >= timeClose) {
           // 等待中
           left_time = (time - now) * 1000
@@ -289,7 +293,7 @@ const PoolsIndex = (props) => {
             </i>
           </p>
         </div>
-        {pool && pool.underlying.name !== 'WARLBP' && (
+        {pool && pool.name !== 'WARLBP' && (
           <>
             <div className='pools-type_title'>
               <p
@@ -344,7 +348,7 @@ const PoolsIndex = (props) => {
               </span>
             </p>
           )}
-          {type !== 1 && (
+          {(type === 0 || type === 2) && (
             <p
               className='pools-type_card_ratio pools-type_card_access'
               style={{ textAlign: 'right' }}
@@ -364,7 +368,7 @@ const PoolsIndex = (props) => {
             </p>
           )}
         </div>
-        {pool && pool.underlying.name === 'WARLBP' && (
+        {pool && pool.name === 'WARLBP' && (
           <img className='w_bg' src={WARLBP} />
         )}
         {/* 
@@ -375,11 +379,11 @@ const PoolsIndex = (props) => {
         <a
           className={cs(
             'pools-type_enter',
-            pool && pool.underlying.name === 'WARLBP' && 'pools-type_lbp_enter',
+            pool && pool.name === 'WARLBP' && 'pools-type_lbp_enter',
             pool &&
               (pool.is_coming ||
                 (status === 3 &&
-                  ((pool.type !== 1 &&
+                  ((pool.type === 0 &&
                     pool.settleable &&
                     pool.settleable.amount == 0) ||
                     (pool.settleable &&
@@ -387,7 +391,7 @@ const PoolsIndex = (props) => {
                       pool.settleable.claimedOf !== 0 &&
                       pool.settleable.volume == 0) ||
                     (pool.settleable &&
-                      pool.type !== 1 &&
+                      pool.type === 0 &&
                       pool.settleable.volume == 0))) ||
                 (!active && status === 3)) &&
               'pools-type_disable_enter'
@@ -398,7 +402,7 @@ const PoolsIndex = (props) => {
               pool &&
                 (pool.is_coming ||
                   (status === 3 &&
-                    ((pool.type !== 1 &&
+                    ((pool.type === 0 &&
                       pool.settleable &&
                       pool.settleable.amount == 0) ||
                       (pool.settleable &&
@@ -406,11 +410,11 @@ const PoolsIndex = (props) => {
                         pool.settleable.claimedOf !== 0 &&
                         pool.settleable.volume == 0) ||
                       (pool.settleable &&
-                        pool.type !== 1 &&
+                        pool.type === 0 &&
                         pool.settleable.volume == 0))) ||
                   (!active && status === 3)),
               address,
-              pool && pool.underlying.name
+              pool && pool.name
             )
           }}
         >
@@ -424,7 +428,7 @@ const PoolsIndex = (props) => {
       <div className='pools-type_noData'>
         <img src={noDataPng} />
         <p>
-          {(tabFlag === 1 || newPools.is_flash) && (
+          {(tabFlag === 1 || pools.is_flash) && (
             <FormattedMessage id='noData' />
           )}
           {tabFlag === 2 && <FormattedMessage id='noJoinPool' />}

@@ -28,6 +28,11 @@ const PoolsBanner = (props) => {
             <FormattedMessage id='detailTitlePrivate' />
           </p>
         )}
+        {pool && pool.type == 2 && (
+          <p>
+            {pool.name} <FormattedMessage id='detailTitlePublic' />
+          </p>
+        )}
         {/*{!active && <FormattedMessage id='htPublic' />}*/}
       </h3>
       {LBPFlag !== 'LBP' && (
