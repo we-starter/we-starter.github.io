@@ -134,14 +134,31 @@ const PoolsDetailLBP = (props) => {
     // 买入金额 / (比例 - 比例 * 滑点)
     // let minOut = amount / (比例 - 比例 * slippageVal)
     // 当设置滑点后，进行
-    // const contract = getContract(library, pool.abi, address)
-    // contract.methods.strap(minOut)
+    const contract = getContract(library, pool.abi, address)
+    contract.methods
+      .getStrapOut(amount)
+      .send({
+        from: account,
+      })
+      .on('confirmation', (confirmationNumber, receipt) => {
+        //confirmationNumber 收到确认时触发 返回为零
+        console.log(confirmationNumber, receipt)
+        let minOut = confirmationNumber * (1 - 1 / slippageVal)
+        contract.methods
+          .strap(minOut)
+          .send({ from: account })
+          .on('confirmation', (confirmationNumber, receipt) => {
+            // 买入成功后弹框提示
+            dispatch({
+              type: HANDLE_WALLET_MODAL,
+              walletModal: 'slippageSuccess',
+            })
+          })
+      })
+      .on('error', (err) => {
+        console.log(err)
+      })
     console.log('=== 买入 ===')
-    // 买入成功后弹框提示
-    dispatch({
-      type: HANDLE_WALLET_MODAL,
-      walletModal: 'slippageSuccess',
-    })
   }
 
   return (
