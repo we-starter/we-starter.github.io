@@ -131,8 +131,7 @@ const PoolsDetailLBP = (props) => {
   }, [slippageVal])
 
   const purchaseBtn = () => {
-    // 买入金额 / (比例 - 比例 * 滑点)
-    // let minOut = amount / (比例 - 比例 * slippageVal)
+    // 买入数量 * （(100 - 滑点) / 100）
     // 当设置滑点后，进行
     const contract = getContract(library, pool.abi, address)
     contract.methods
