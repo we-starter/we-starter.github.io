@@ -102,7 +102,13 @@ const PoolsIndex = (props) => {
         setListData(pools.filter((o) => o.is_top))
         break
       case 2:
-        setListData(pools.filter((o) => o.is_join))
+        setListData(
+          pools.filter(
+            (o) =>
+              o.is_join ||
+              (window.localStorage.is_join && o.underlying.name === 'LBP')
+          )
+        )
         break
       case 3:
         setListData(pools.filter((o) => o.is_flash))

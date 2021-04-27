@@ -156,6 +156,7 @@ const PoolsDetailLBP = (props) => {
             .on('confirmation', (confirmationNumber, receipt) => {
               // 买入成功后弹框提示
               if (confirmationNumber - 0 === 0) {
+                localStorage.setItem('is_join', true)
                 dispatch({
                   type: HANDLE_WALLET_MODAL,
                   walletModal: 'slippageSuccess',
