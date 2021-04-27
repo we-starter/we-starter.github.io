@@ -141,10 +141,11 @@ const PoolsDetailLBP = (props) => {
   }, [slippageVal])
 
   const purchaseBtn = () => {
-    // let strapVal = amount
+    // 买入金额 / (比例 - 比例 * 滑点)
+    // let minOut = amount / (比例 - 比例 * slippageVal)
     // 当设置滑点后，进行
     // const contract = getContract(library, pool.abi, address)
-    // contract.methods.strap()
+    // contract.methods.strap(minOut)
     console.log('=== 买入 ===')
     // 买入成功后弹框提示
     dispatch({
