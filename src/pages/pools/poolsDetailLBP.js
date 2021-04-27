@@ -16,7 +16,7 @@ import { getContract, useActiveWeb3React } from '../../web3'
 import { mainContext } from '../../reducer'
 import { FormattedMessage, injectIntl } from 'react-intl'
 import BigNumber from 'bignumber.js'
-import { formatAmount, fromWei } from '../../utils/format'
+import {formatAmount, fromWei, numToWei} from '../../utils/format'
 
 const PoolsDetailLBP = (props) => {
   const { address } = props.match.params
@@ -130,43 +130,43 @@ const PoolsDetailLBP = (props) => {
     console.log(slippageVal, 'slippageValslippageValslippageVal')
   }, [slippageVal])
 
-  const purchaseBtn = () => {
+  const purchaseBtn =async () => {
+    // TODO 校验amount 合法性
+    if(!(amount * 1 > 0)){
+      return false
+    }
+    const contract = getContract(library, pool.abi, address)
+
     // 买入数量 * （(100 - 滑点) / 100）
     // 当设置滑点后，进行
-    const contract = getContract(library, pool.abi, address)
-    contract.methods
-      .getStrapOut(amount)
-      .send({
+    const strapOut = await contract.methods.getStrapOut(numToWei(amount))
+      .call({
         from: account,
       })
-      .on('confirmation', (confirmationNumber, receipt) => {
-        //confirmationNumber 收到确认时触发 返回为零
-        console.log(confirmationNumber, receipt)
-        if (confirmationNumber - 0 === 0) {
-          let minOut = new BigNumber(10)
-            .multipliedBy(
-              new BigNumber(100)
-                .minus(new BigNumber(slippageVal))
-                .dividedBy(new BigNumber(100))
-            )
-            .toString()
-          return contract.methods
-            .strap(minOut)
-            .send({ from: account })
-            .on('confirmation', (confirmationNumber, receipt) => {
-              // 买入成功后弹框提示
-              if (confirmationNumber - 0 === 0) {
-                localStorage.setItem('is_join', true)
-                dispatch({
-                  type: HANDLE_WALLET_MODAL,
-                  walletModal: 'slippageSuccess',
-                })
-              }
-            })
-        }
+
+    let minOut = new BigNumber(strapOut)
+      .multipliedBy(
+        new BigNumber(100)
+          .minus(new BigNumber(slippageVal))
+          .dividedBy(new BigNumber(100))
+      )
+      .toString()
+    return contract.methods
+      .strap(minOut)
+      .send({
+        from: account,
+        value: numToWei(amount)
       })
-      .on('error', (err) => {
-        console.log(err)
+      .on('confirmation', (confirmationNumber, receipt) => {
+        // 买入成功后弹框提示
+        if (confirmationNumber - 0 === 0) {
+          //根据池子的address
+          localStorage.setItem(`is_join_${pool.address}`, true)
+          dispatch({
+            type: HANDLE_WALLET_MODAL,
+            walletModal: 'slippageSuccess',
+          })
+        }
       })
   }
 
