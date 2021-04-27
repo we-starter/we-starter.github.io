@@ -414,7 +414,7 @@ export default [
     currency: {
       address: '0xa71edc38d189767582c38a3145b5873052c3e47a', // 如果是0x0则是ht
       decimal: 18,
-      symbol: 'USDT',
+      symbol: 'HT',
     },
     icon: '',
     type: 1,
@@ -433,7 +433,7 @@ export default [
       token_distribution: 'April 29th 2021, 8:00PM SGT',
       min_allocation: '0',
       max_allocation: '300 USDT',
-      min_swap_level: '30,000 USDT',
+      min_swap_level: '1,600 HT',
     },
     website: 'https://www.westarter.org',
     white_paper: '-',
@@ -446,7 +446,7 @@ export default [
     ratio: '1WAR=?HT',
     time: '1619787600',
     purchasedCurrencyOf: 0,
-    totalPurchasedAmount: '30000000000000000000000',
+    totalPurchasedAmount: '1600000000000000000000',
     totalPurchasedUnderlying: '0',
     totalPurchasedCurrency: '0',
     is_flash: false,
@@ -464,7 +464,7 @@ export default [
     currency: {
       address: '0xa71edc38d189767582c38a3145b5873052c3e47a', // 如果是0x0则是ht
       decimal: 18,
-      symbol: 'USDT',
+      symbol: 'HT',
     },
     icon: '',
     type: 1,
@@ -483,7 +483,7 @@ export default [
       token_distribution: 'April 29th 2021, 8:00PM SGT',
       min_allocation: '0',
       max_allocation: '100 USDT',
-      min_swap_level: '30,000 USDT',
+      min_swap_level: '1,600 HT',
     },
     website: 'https://www.westarter.org',
     white_paper: '-',
@@ -496,7 +496,7 @@ export default [
     ratio: '1WAR=?HT', // 兑换比例需要确认
     time: '1619787600',
     purchasedCurrencyOf: 0,
-    totalPurchasedAmount: '30000000000000000000000',
+    totalPurchasedAmount: '1600000000000000000000',
     totalPurchasedUnderlying: '0',
     totalPurchasedCurrency: '0',
     is_flash: false,
@@ -514,7 +514,7 @@ export default [
     currency: {
       address: '0xa71edc38d189767582c38a3145b5873052c3e47a', // 如果是0x0则是ht
       decimal: 18,
-      symbol: 'USDT',
+      symbol: 'HT',
     },
     icon: '',
     type: 0,
@@ -533,7 +533,7 @@ export default [
       token_distribution: 'April 29th 2021, 8:20PM SGT',
       min_allocation: '',
       max_allocation: '',
-      min_swap_level: '30,000 USDT',
+      min_swap_level: '1,600 HT',
     },
     website: 'https://www.westarter.org',
     white_paper: '-',
@@ -546,7 +546,7 @@ export default [
     ratio: '1WAR=?HT',
     time: '1619787600',
     purchasedCurrencyOf: 0,
-    totalPurchasedAmount: '30000000000000000000000',
+    totalPurchasedAmount: '1600000000000000000000',
     totalPurchasedUnderlying: '0',
     totalPurchasedCurrency: '0',
     is_flash: false,
@@ -564,7 +564,7 @@ export default [
     currency: {
       address: '0x0', // 如果是0x0则是ht
       decimal: 18,
-      symbol: 'USDT',
+      symbol: 'HT',
     },
     icon: '',
     type: 1,
@@ -583,7 +583,7 @@ export default [
       token_distribution: 'April 28th 2021, 8:00PM SGT',
       min_allocation: '0',
       max_allocation: '100 USDT',
-      min_swap_level: '30,000 USDT',
+      min_swap_level: '1,600 HT',
     },
     website: 'https://www.blackhole.black',
     white_paper: '-',
@@ -596,7 +596,7 @@ export default [
     ratio: '1BLACK=?HT', // 兑换比例需要确认
     time: '1619701200',
     purchasedCurrencyOf: 0,
-    totalPurchasedAmount: '30000000000000000000000',
+    totalPurchasedAmount: '1600000000000000000000',
     totalPurchasedUnderlying: '0',
     totalPurchasedCurrency: '0',
     is_flash: false,
@@ -614,7 +614,7 @@ export default [
     currency: {
       address: '0x0', // 如果是0x0则是ht
       decimal: 18,
-      symbol: 'USDT',
+      symbol: 'HT',
     },
     icon: '',
     type: 0,
@@ -633,7 +633,7 @@ export default [
       token_distribution: 'April 28th 2021, 8:00PM SGT',
       min_allocation: '',
       max_allocation: '',
-      min_swap_level: '10,000 USDT',
+      min_swap_level: '540 HT',
     },
     website: 'https://www.blackhole.black',
     white_paper: '-',
@@ -646,7 +646,7 @@ export default [
     ratio: '1BLACK=?HT',
     time: '1619701200',
     purchasedCurrencyOf: 0,
-    totalPurchasedAmount: '10000000000000000000000',
+    totalPurchasedAmount: '540000000000000000000',
     totalPurchasedUnderlying: '0',
     totalPurchasedCurrency: '0',
     is_flash: false,
