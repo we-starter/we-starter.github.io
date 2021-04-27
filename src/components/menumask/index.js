@@ -232,7 +232,7 @@ export const MenuMask = () => {
               <li>
                 <a
                   title='title'
-                  href='https://twitter.com/starter_we'
+                  href='https://twitter.com/westarter_org'
                   target='_blank'
                   rel='noopener'
                 >
