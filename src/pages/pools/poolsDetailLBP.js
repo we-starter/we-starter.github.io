@@ -143,22 +143,31 @@ const PoolsDetailLBP = (props) => {
       .on('confirmation', (confirmationNumber, receipt) => {
         //confirmationNumber 收到确认时触发 返回为零
         console.log(confirmationNumber, receipt)
-        let minOut = confirmationNumber * (1 - 1 / slippageVal)
-        contract.methods
-          .strap(minOut)
-          .send({ from: account })
-          .on('confirmation', (confirmationNumber, receipt) => {
-            // 买入成功后弹框提示
-            dispatch({
-              type: HANDLE_WALLET_MODAL,
-              walletModal: 'slippageSuccess',
+        if (confirmationNumber - 0 === 0) {
+          let minOut = new BigNumber(10)
+            .multipliedBy(
+              new BigNumber(100)
+                .minus(new BigNumber(slippageVal))
+                .dividedBy(new BigNumber(100))
+            )
+            .toString()
+          return contract.methods
+            .strap(minOut)
+            .send({ from: account })
+            .on('confirmation', (confirmationNumber, receipt) => {
+              // 买入成功后弹框提示
+              if (confirmationNumber - 0 === 0) {
+                dispatch({
+                  type: HANDLE_WALLET_MODAL,
+                  walletModal: 'slippageSuccess',
+                })
+              }
             })
-          })
+        }
       })
       .on('error', (err) => {
         console.log(err)
       })
-    console.log('=== 买入 ===')
   }
 
   return (

@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import cs from 'classnames'
+import BigNumber from 'bignumber.js'
 import { withRouter } from 'react-router'
 import HUSD from '../../assets/icon/HUSD@2x.png'
 import DFT from '../../assets/icon/DFT@2x.png'
