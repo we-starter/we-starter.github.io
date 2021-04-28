@@ -3,11 +3,11 @@ import LBP from '../web3/abi/LBP.json'
 export default [
   {
     name: 'BLACK LBP',
-    address: '0x1bCaC989BA76C293f56b2Ae7490d5375977F6eb9', // 超募合约地址
+    address: '0xA711626c8b92e37CDD598205f4aaf75e0633B27e', // 超募合约地址
     abi: LBP,
     start_at: '1619614800',
     is_top: true,
-    is_coming: true,
+    is_coming: false,
     currency: {
       address: '0x0', // 如果是0x0则是ht
       decimal: 18,
@@ -16,9 +16,9 @@ export default [
     icon: '',
     type: 2,
     isPrivate: false,
-    ratio: '1BLACK=?HT', // 兑换比例需要确认
+    ratio: '-', // 兑换比例需要确认
     underlying: {
-      address: '0xDe9495De889996404b14dDBf05f66Db7401F0733',
+      address: '0xd714d91A169127e11D8FAb3665d72E8b7ef9Dbe2',
       decimal: 18,
       symbol: 'BLACK',
       name: 'LBP',
