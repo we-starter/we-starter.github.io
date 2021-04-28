@@ -114,26 +114,34 @@ const PoolsDetailLBP = (props) => {
 
     const contract = getContract(library, pool.abi, pool.address)
 
-    // 估算一下gas费
-    const strapOut = await contract.methods
-      .getStrapOut(max)
-      .call({ from: account })
-    let minOut = new BigNumber(strapOut)
-      .multipliedBy(
-        new BigNumber(100)
-          .minus(new BigNumber(slippageVal))
-          .dividedBy(new BigNumber(100))
+    let gas_fee = 0
+    try {
+      // 估算一下gas费
+      const strapOut = await contract.methods
+        .getStrapOut(max)
+        .call({ from: account })
+      let minOut = new BigNumber(strapOut)
+        .multipliedBy(
+          new BigNumber(100)
+            .minus(new BigNumber(slippageVal))
+            .dividedBy(new BigNumber(100))
+        )
+        .toFixed(0, 1)
+        .toString()
+      const gas_limit = await contract.methods.strap(minOut).estimateGas({
+        from: account,
+        value: max,
+      })
+      const gas_price = Web3.utils.toWei('100', 'gwei')
+      gas_fee = new BigNumber(gas_limit).multipliedBy(
+        new BigNumber(gas_price)
       )
-      .toFixed(0, 1)
-      .toString()
-    const gas_limit = await contract.methods.strap(minOut).estimateGas({
-      from: account,
-      value: max,
-    })
-    const gas_price = Web3.utils.toWei('100', 'gwei')
-    const gas_fee = new BigNumber(gas_limit).multipliedBy(
-      new BigNumber(gas_price)
-    )
+    }catch (e) {
+      const gas_limit = new BigNumber('1006182')
+      const gas_price = new BigNumber(Web3.utils.toWei(`${getRandomIntInclusive(5, 20)}`, 'gwei'))
+      gas_fee =  gas_limit.multipliedBy(gas_price).toString()
+    }
+
 
     max = maxB.gt(gas_fee) ? maxB.minus(gas_fee).toString() : 0
 

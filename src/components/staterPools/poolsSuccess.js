@@ -20,6 +20,8 @@ const PoolsSuccess = (props) => {
               </h1>
               <a
                 className='pools_slippage_success_text'
+                href="https://ht.mdex.com/#/swap?outputCurrency=0xd714d91A169127e11D8FAb3665d72E8b7ef9Dbe2"
+                target="_blank"
                 style={{
                   opacity: 1,
                 }}
