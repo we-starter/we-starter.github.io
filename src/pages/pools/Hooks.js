@@ -709,7 +709,7 @@ export const usePoolsLBPInfo = (address = '') => {
           ]
           return Promise.all(promise_list).then(([begin, span, priceLBP]) => {
             const start_at = begin // 开始时间
-            const time = begin + span // 结束时间
+            const time = parseInt(begin) + parseInt(span) // 结束时间
             let status = pool.status
             if (start_at < now && status < 1) {
               // 募集中
@@ -724,10 +724,7 @@ export const usePoolsLBPInfo = (address = '') => {
             const is_join = localStorage.getItem(`is_join_${pool.address}`) || false
             const price = Web3.utils.fromWei(priceLBP, 'ether')
             return Object.assign({}, pool, {
-              ratio: `1${pool.underlying.symbol}= ${Web3.utils.fromWei(
-                price,
-                'ether'
-              )}${pool.currency.symbol}`,
+              ratio: `1${pool.underlying.symbol}=${formatAmount(priceLBP)}${pool.currency.symbol}`,
               status: status,
               time: time,
               price: Web3.utils.fromWei(priceLBP, 'ether'),

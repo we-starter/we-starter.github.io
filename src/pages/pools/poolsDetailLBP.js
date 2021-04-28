@@ -103,14 +103,40 @@ const PoolsDetailLBP = (props) => {
     setFee(_fee)
   }, [])
 
-  const onMax = () => {
+  const onMax = async () => {
+    if (balance <= 0) {
+      setAmount(0)
+      return false
+    }
+
     let max = balance
     const maxB = new BigNumber(max)
-    if (pool.currency.is_ht && max == balance) {
-      // 如果是ht,留部分手续费
-      const feeB = new BigNumber(fee)
-      max = maxB.gt(feeB) ? maxB.minus(feeB).toString() : 0
-    }
+
+    const contract = getContract(library, pool.abi, pool.address)
+
+    // 估算一下gas费
+    const strapOut = await contract.methods
+      .getStrapOut(max)
+      .call({ from: account })
+    let minOut = new BigNumber(strapOut)
+      .multipliedBy(
+        new BigNumber(100)
+          .minus(new BigNumber(slippageVal))
+          .dividedBy(new BigNumber(100))
+      )
+      .toFixed(0, 1)
+      .toString()
+    const gas_limit = await contract.methods.strap(minOut).estimateGas({
+      from: account,
+      value: max,
+    })
+    const gas_price = Web3.utils.toWei('100', 'gwei')
+    const gas_fee = new BigNumber(gas_limit).multipliedBy(
+      new BigNumber(gas_price)
+    )
+
+    max = maxB.gt(gas_fee) ? maxB.minus(gas_fee).toString() : 0
+
     setAmount(formatAmount(max, pool.currency.decimal, 6))
   }
 
@@ -149,6 +175,7 @@ const PoolsDetailLBP = (props) => {
           .minus(new BigNumber(slippageVal))
           .dividedBy(new BigNumber(100))
       )
+      .toFixed(0, 1)
       .toString()
     return contract.methods
       .strap(minOut)
