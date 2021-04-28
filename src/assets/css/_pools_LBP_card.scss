@@ -130,6 +130,11 @@
       background: #0f8c20;
       border-radius: 20px;
     }
+    .btn_disable {
+      color: #fff;
+      background: #999;
+      box-shadow: 0px 4px 20px 0px rgba(#999, 0.3);
+    }
   }
 }
 @media #{$mdWidth} {
@@ -263,6 +268,11 @@
       color: #ffffff;
       background: #0f8c20;
       border-radius: 20px;
+    }
+    .btn_disable {
+      color: #fff;
+      background: #999;
+      box-shadow: 0px 4px 20px 0px rgba(#999, 0.3);
     }
   }
 }
@@ -405,6 +415,11 @@
       background: #0f8c20;
       border-radius: 18px;
     }
+    .btn_disable {
+      color: #fff;
+      background: #999;
+      box-shadow: 0px 4px 20px 0px rgba(#999, 0.3);
+    }
   }
 }
 @media #{$xsWidth} {
@@ -545,6 +560,11 @@
       color: #ffffff;
       background: #0f8c20;
       border-radius: 18px;
+    }
+    .btn_disable {
+      color: #fff;
+      background: #999;
+      box-shadow: 0px 4px 20px 0px rgba(#999, 0.3);
     }
   }
 }

@@ -31,7 +31,7 @@ export default [
       token_distribution: 'April 28th 2021, 9:00PM SGT',
       min_allocation: '-',
       max_allocation: '-',
-      min_swap_level: '30,000 USDT',
+      min_swap_level: '1,500,000 BLACK',
     },
     totalPurchasedAmount: '1500000000000000000000000',
     website: 'https://www.blackhole.black',

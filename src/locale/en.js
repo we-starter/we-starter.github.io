@@ -235,6 +235,7 @@ const en_US = {
   public: 'Public',
   privateTips: 'Private pool, only for users in whitelist',
   publicTips: 'Public offering pool, prorated by the amount of funds',
+  publicTips1: 'Public offering pool',
   cannotProject:
     'Sorry, you are not eligable for this project since you are not involved in the whitelist.',
   whiteList: 'Whitelist',

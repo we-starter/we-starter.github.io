@@ -235,6 +235,7 @@ const zh_CN = {
   public: '无限制兑换池',
   privateTips: '这是一个私有池，只有获得白名单才能兑换',
   publicTips: '这是一个公有池，按照资金比例配售',
+  publicTips1: '这是一个公有池',
   cannotProject: '对不起，你不在白名单内，无法参与项目',
   whiteList: '白名单',
   supportWallet: '支持钱包',

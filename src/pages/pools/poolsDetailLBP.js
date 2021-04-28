@@ -157,6 +157,7 @@ const PoolsDetailLBP = (props) => {
   }, [slippageVal])
 
   const purchaseBtn = async () => {
+    if (pool.status === 3) return
     // TODO 校验amount 合法性
     if (!(amount * 1 > 0)) {
       return false
@@ -300,7 +301,11 @@ const PoolsDetailLBP = (props) => {
             </a>
           </div>
         </div>
-        <button className='btn' type='button' onClick={purchaseBtn}>
+        <button
+          className={cs('btn', pool.status === 3 && 'btn_disable')}
+          type='button'
+          onClick={purchaseBtn}
+        >
           <FormattedMessage id='warLBP2' />
         </button>
       </div>
@@ -381,7 +386,7 @@ const PoolsDetailLBP = (props) => {
                         <span>
                           <FormattedMessage id='poolsDetailText13' />
                         </span>
-                        <span>{pool && pool.underlying.name}</span>
+                        <span>{pool && pool.underlying.symbol}</span>
                       </p>
                     </td>
                   </tr>
