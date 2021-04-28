@@ -20,6 +20,7 @@ import AoLink from '../../assets/icon/aolink.png'
 import BitKeep from '../../assets/icon/bitkeep.png'
 import Bingoo from '../../assets/icon/bingoo.png'
 import WARLBP from '../../assets/image/W@2x.png'
+import BLACKLBP from '../../assets/image/B@2x.png'
 
 import HyperPay from '../../assets/icon/HyperPay-Logo@2x.png'
 import { usePoolsInfo, usePoolsLBPInfo } from './Hooks'
@@ -330,7 +331,6 @@ const PoolsIndex = (props) => {
             </div>
           </>
         )}
-
         <div className='pools-type_title'>
           <p
             className='pools-type_card_ratio pools-type_card_access'
@@ -382,9 +382,13 @@ const PoolsIndex = (props) => {
             </p>
           )}
         </div>
-        {pool && pool.underlying.name === 'LBP' && (
+        {pool && pool.name === 'WAR LBP' && (
           <img className='w_bg' src={WARLBP} />
         )}
+        {pool && pool.name === 'BLACK LBP' && (
+          <img className='w_bg' src={BLACKLBP} />
+        )}
+
         {/* 
             pool.settleable.volume > 0 获取数量大于0
             pool.settleable.amount > 0 未结算数量大于0
