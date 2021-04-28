@@ -33,6 +33,7 @@ export default [
       max_allocation: '-',
       min_swap_level: '30,000 USDT',
     },
+    totalPurchasedAmount: '1500000000000000000000000',
     website: 'https://www.blackhole.black',
     white_paper: '-',
     twitter: 'https://twitter.com/BlackHoleBurn',
@@ -42,6 +43,7 @@ export default [
     status: 0,
     time: '1619701200',
     link_url: 'https://www.blackhole.black', // 跳转外链接
-    project_introduction: 'An approval-free decentralized & cross-chain burning protocol, innovator of perpetual deflationary blockchain ecosystem.',
+    project_introduction:
+      'An approval-free decentralized & cross-chain burning protocol, innovator of perpetual deflationary blockchain ecosystem.',
   },
 ]

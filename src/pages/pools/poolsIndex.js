@@ -298,15 +298,28 @@ const PoolsIndex = (props) => {
             <FormattedMessage id='poolsIndexText1' />
             <i>{ratio}</i>
           </p>
-          <p className='pools-type_card_ratio' style={{ textAlign: 'right' }}>
-            <FormattedMessage id='totalRaised' />
-            <i>
-              {formatNumber(
-                formatAmount(totalPurchasedAmount, pool.currency.decimal, 2)
-              )}{' '}
-              {currency.symbol}
-            </i>
-          </p>
+          {pool && pool.underlying.name === 'LBP' && (
+            <p className='pools-type_card_ratio' style={{ textAlign: 'right' }}>
+              <FormattedMessage id='LBPSupply' />
+              <i>
+                {formatNumber(
+                  formatAmount(totalPurchasedAmount, pool.currency.decimal, 2)
+                )}{' '}
+                {pool.underlying.symbol}
+              </i>
+            </p>
+          )}
+          {pool && pool.underlying.name !== 'LBP' && (
+            <p className='pools-type_card_ratio' style={{ textAlign: 'right' }}>
+              <FormattedMessage id='totalRaised' />
+              <i>
+                {formatNumber(
+                  formatAmount(totalPurchasedAmount, pool.currency.decimal, 2)
+                )}{' '}
+                {currency.symbol}
+              </i>
+            </p>
+          )}
         </div>
         {pool && pool.underlying.name !== 'LBP' && (
           <>

@@ -16,7 +16,7 @@ import { getContract, useActiveWeb3React } from '../../web3'
 import { mainContext } from '../../reducer'
 import { FormattedMessage, injectIntl } from 'react-intl'
 import BigNumber from 'bignumber.js'
-import {formatAmount, fromWei, numToWei} from '../../utils/format'
+import { formatAmount, fromWei, numToWei } from '../../utils/format'
 
 const PoolsDetailLBP = (props) => {
   const { address } = props.match.params
@@ -130,19 +130,18 @@ const PoolsDetailLBP = (props) => {
     console.log(slippageVal, 'slippageValslippageValslippageVal')
   }, [slippageVal])
 
-  const purchaseBtn =async () => {
+  const purchaseBtn = async () => {
     // TODO 校验amount 合法性
-    if(!(amount * 1 > 0)){
+    if (!(amount * 1 > 0)) {
       return false
     }
     const contract = getContract(library, pool.abi, address)
 
     // 买入数量 * （(100 - 滑点) / 100）
     // 当设置滑点后，进行
-    const strapOut = await contract.methods.getStrapOut(numToWei(amount))
-      .call({
-        from: account,
-      })
+    const strapOut = await contract.methods.getStrapOut(numToWei(amount)).call({
+      from: account,
+    })
 
     let minOut = new BigNumber(strapOut)
       .multipliedBy(
@@ -155,7 +154,7 @@ const PoolsDetailLBP = (props) => {
       .strap(minOut)
       .send({
         from: account,
-        value: numToWei(amount)
+        value: numToWei(amount),
       })
       .on('confirmation', (confirmationNumber, receipt) => {
         // 买入成功后弹框提示
@@ -176,7 +175,10 @@ const PoolsDetailLBP = (props) => {
       <div className='pools_LBP_card'>
         <div className='pools_LBP_card_title'>
           <h2 className='LBP_title'>
-            <FormattedMessage id='warLBP1' />
+            <FormattedMessage
+              id='warLBP1'
+              values={{ LBPType: pool && pool.underlying.symbol }}
+            />
           </h2>
           <p className='pools_LBP_card_title_right'>
             {renderStatus(pool)}
