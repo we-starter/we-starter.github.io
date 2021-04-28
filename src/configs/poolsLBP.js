@@ -7,7 +7,7 @@ export default [
     abi: LBP,
     start_at: '1619614800',
     is_top: true,
-    is_coming: true,
+    is_coming: false,
     currency: {
       address: '0x0', // 如果是0x0则是ht
       decimal: 18,
