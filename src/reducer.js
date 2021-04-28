@@ -17,6 +17,7 @@ import {
   CHANGE_LOCALE,
   HANDLE_CHANGE_NETWORKS,
   TOOL_DATA,
+  CHANGE_SLIPPAGE,
 } from './const'
 
 const mainContext = React.createContext()
@@ -78,6 +79,11 @@ const reducer = (state, action) => {
         ...state,
         toolData: action.toolData,
       }
+    case CHANGE_SLIPPAGE:
+      return {
+        ...state,
+        slippageVal: action.slippageVal,
+      }
     default:
       return state
   }
@@ -101,6 +107,7 @@ const ContextProvider = (props) => {
     locale: 'en',
     changeNetworkStatus: false,
     toolData: null,
+    slippageVal: 10, // 滑点值
   })
   return (
     <mainContext.Provider value={{ state, dispatch }}>

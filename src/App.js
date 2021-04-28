@@ -21,6 +21,7 @@ import StakingPool4 from './pages/pools/stakingPool4'
 import PoolsIndex from './pages/pools/poolsIndex'
 import WriteInformation from './pages/pools/writeInformation'
 import PoolsDetail from './pages/pools/poolsDetail'
+import PoolsDetailLBP from './pages/pools/poolsDetailLBP'
 import Intl from './locale/intl'
 
 function getLibrary(provider) {
@@ -70,6 +71,11 @@ function App() {
                 exact
                 path='/pools/detail/:address'
                 component={PoolsDetail}
+              ></Route>
+              <Route
+                exact
+                path='/pools/detailLBP/:address'
+                component={PoolsDetailLBP}
               ></Route>
               {/* <Route
                 exact

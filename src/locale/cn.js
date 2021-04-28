@@ -31,6 +31,7 @@ const zh_CN = {
   settled: '已结算',
   waitingSettlement: '等待结算',
   totalRaised: '可兑换总量',
+  LBPSupply: 'LBP 供给量',
   totalMortgage: '抵押总量',
   myMortgage: '我的抵押',
   balance: '余额',
@@ -234,6 +235,7 @@ const zh_CN = {
   public: '无限制兑换池',
   privateTips: '这是一个私有池，只有获得白名单才能兑换',
   publicTips: '这是一个公有池，按照资金比例配售',
+  publicTips1: '这是一个公有池',
   cannotProject: '对不起，你不在白名单内，无法参与项目',
   whiteList: '白名单',
   supportWallet: '支持钱包',
@@ -258,8 +260,19 @@ const zh_CN = {
   chainswapAboutProject3: 'Token distribution:',
   chainswapAboutProject4:
     'TOKEN is the token of the ChainSwap platform.The total amount is 100M, 2% of the total amount is 100% unlock token, and will be distributed to public sale and airdrop.Public sale will be held as IDO on 5 different platforms with a total amount of 1M.Airdrop that is given to users is also 1M.',
+  blackAboutProject1:
+    'BlackHole is an approval-free decentralized & cross-chain burning protocol, innovator of perpetual deflationary blockchain ecosystem.',
+  westarterAboutProject1:
+    'WeStarter是跨链代币初始兑换平台，起步于HECO网络，通过资产跨链桥和多链部署为ETH、HECO、BSC等多条网络上的项目资产进行初始兑换。',
   related_title1: '累计融资金额',
   related_title2: '参与地址总数',
   related_title3: '总成立的池子数',
+  warLBP1: '参与 {LBPType} LBP',
+  warLBP2: '购买',
+  warLBP3: '我的余额: ',
+  warLBP4: '交易设置',
+  warLBP5: '最大滑点',
+  warLBP6: '成功',
+  warLBP7: '请到 MDEX 上进行交易',
 }
 export default zh_CN

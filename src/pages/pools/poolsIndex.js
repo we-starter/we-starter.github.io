@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import cs from 'classnames'
+import BigNumber from 'bignumber.js'
 import { withRouter } from 'react-router'
 import HUSD from '../../assets/icon/HUSD@2x.png'
 import DFT from '../../assets/icon/DFT@2x.png'
@@ -18,8 +19,11 @@ import TokenPocket from '../../assets/icon/tokenPocket.png'
 import AoLink from '../../assets/icon/aolink.png'
 import BitKeep from '../../assets/icon/bitkeep.png'
 import Bingoo from '../../assets/icon/bingoo.png'
+import WARLBP from '../../assets/image/W@2x.png'
+import BLACKLBP from '../../assets/image/B@2x.png'
+
 import HyperPay from '../../assets/icon/HyperPay-Logo@2x.png'
-import { usePoolsInfo } from './Hooks'
+import { usePoolsInfo, usePoolsLBPInfo } from './Hooks'
 // 处理格式 千位符
 import { formatNumber } from 'accounting'
 // import pool from '../../configs/pools'
@@ -37,6 +41,19 @@ const PoolsIndex = (props) => {
   const [isLogin, setIsLogin] = useState(false)
   const [hoverFlag, setHoverFlag] = useState(false)
   const [poolSum, setPoolSum] = useState(0)
+  const { account, active, library } = useActiveWeb3React()
+
+  const pools = usePoolsInfo()
+  const poolsLBP = usePoolsLBPInfo()
+
+  poolsLBP.map((item) => {
+    let count = []
+    count = pools.filter((filterItem) => {
+      return filterItem.address === item.address
+    })
+    if (count.length > 0) return
+    pools.push(item && item)
+  })
 
   const [now, setNow] = useState(parseInt(Date.now() / 1000))
 
@@ -68,12 +85,12 @@ const PoolsIndex = (props) => {
   //   }
   // }, [props.location])
 
-  const { account, active, library } = useActiveWeb3React()
-  console.log(active, 'active')
-
-  const pools = usePoolsInfo()
   pools.sort(function (x, y) {
-    return y.start_at - x.start_at
+    if (x.status < 3 && y.status < 3) {
+      return x.start_at - y.start_at
+    } else {
+      return y.start_at - x.start_at
+    }
   })
 
   const changeTab = (val) => {
@@ -86,7 +103,13 @@ const PoolsIndex = (props) => {
         setListData(pools.filter((o) => o.is_top))
         break
       case 2:
-        setListData(pools.filter((o) => o.is_join))
+        setListData(
+          pools.filter(
+            (o) =>
+              o.is_join ||
+              (window.localStorage.is_join && o.underlying.name === 'LBP')
+          )
+        )
         break
       case 3:
         setListData(pools.filter((o) => o.is_flash))
@@ -108,7 +131,7 @@ const PoolsIndex = (props) => {
   useEffect(() => {
     setData()
     setIsLogin(active)
-  }, [tabFlag, pools, active])
+  }, [tabFlag, pools, active, poolsLBP])
 
   const goFinance = (e, flag, url) => {
     e.stopPropagation()
@@ -119,12 +142,16 @@ const PoolsIndex = (props) => {
   }
 
   // 列表查看详情
-  const goDetail = (e, flag, address) => {
+  const goDetail = (e, flag, address, symbol) => {
     e.stopPropagation()
     if (flag) {
       return
     }
-    props.history.push(`/pools/detail/${address}`)
+    if (symbol == 'LBP') {
+      props.history.push(`/pools/detailLBP/${address}`)
+    } else {
+      props.history.push(`/pools/detail/${address}`)
+    }
   }
 
   const renderStatus = (pool) => {
@@ -186,7 +213,7 @@ const PoolsIndex = (props) => {
     if (status === 0) {
       left_time = start_at * 1000 - Date.now()
     } else if (status === 1) {
-      if (type !== 1) {
+      if (type === 0) {
         if (now >= timeClose) {
           // 等待中
           left_time = (time - now) * 1000
@@ -271,32 +298,52 @@ const PoolsIndex = (props) => {
             <FormattedMessage id='poolsIndexText1' />
             <i>{ratio}</i>
           </p>
-          <p className='pools-type_card_ratio' style={{ textAlign: 'right' }}>
-            <FormattedMessage id='totalRaised' />
-            <i>
-              {formatNumber(
-                formatAmount(totalPurchasedAmount, pool.currency.decimal, 2)
-              )}{' '}
-              {currency.symbol}
-            </i>
-          </p>
+          {pool && pool.underlying.name === 'LBP' && (
+            <p className='pools-type_card_ratio' style={{ textAlign: 'right' }}>
+              <FormattedMessage id='LBPSupply' />
+              <i>
+                {formatNumber(
+                  formatAmount(totalPurchasedAmount, pool.currency.decimal, 2)
+                )}{' '}
+                {pool.underlying.symbol}
+              </i>
+            </p>
+          )}
+          {pool && pool.underlying.name !== 'LBP' && (
+            <p className='pools-type_card_ratio' style={{ textAlign: 'right' }}>
+              <FormattedMessage id='totalRaised' />
+              <i>
+                {formatNumber(
+                  formatAmount(totalPurchasedAmount, pool.currency.decimal, 2)
+                )}{' '}
+                {currency.symbol}
+              </i>
+            </p>
+          )}
         </div>
-        <div className='pools-type_title'>
-          <p className='pools-type_card_ratio' style={{ marginTop: '24px' }}>
-            <FormattedMessage id='poolsIndexText2' />
-          </p>
-        </div>
-        <div className='pools-type_percentage'>
-          <a>
-            <i
-              className='pools-type_progress_bar'
-              style={{
-                width: `${pool.progress > 1 ? 100 : pool.progress * 100}%`,
-              }}
-            ></i>
-          </a>
-          <p>{(progress * 100).toFixed(0)}%</p>
-        </div>
+        {pool && pool.underlying.name !== 'LBP' && (
+          <>
+            <div className='pools-type_title'>
+              <p
+                className='pools-type_card_ratio'
+                style={{ marginTop: '24px' }}
+              >
+                <FormattedMessage id='poolsIndexText2' />
+              </p>
+            </div>
+            <div className='pools-type_percentage'>
+              <a>
+                <i
+                  className='pools-type_progress_bar'
+                  style={{
+                    width: `${pool.progress > 1 ? 100 : pool.progress * 100}%`,
+                  }}
+                ></i>
+              </a>
+              <p>{(progress * 100).toFixed(0)}%</p>
+            </div>
+          </>
+        )}
         <div className='pools-type_title'>
           <p
             className='pools-type_card_ratio pools-type_card_access'
@@ -328,7 +375,7 @@ const PoolsIndex = (props) => {
               </span>
             </p>
           )}
-          {type !== 1 && (
+          {(type === 0 || type === 2) && (
             <p
               className='pools-type_card_ratio pools-type_card_access'
               style={{ textAlign: 'right' }}
@@ -339,15 +386,27 @@ const PoolsIndex = (props) => {
                 onMouseOver={() => setHoverFlag(index)}
                 onMouseOut={() => setHoverFlag(null)}
               >
-                {hoverFlag === index && (
+                {hoverFlag === index && pool && pool.underlying.name !== 'LBP' && (
                   <i className='tips_content'>
                     <FormattedMessage id='publicTips' />
+                  </i>
+                )}
+                {hoverFlag === index && pool && pool.underlying.name === 'LBP' && (
+                  <i className='tips_content'>
+                    <FormattedMessage id='publicTips1' />
                   </i>
                 )}
               </span>
             </p>
           )}
         </div>
+        {pool && pool.name === 'WAR LBP' && (
+          <img className='w_bg' src={WARLBP} />
+        )}
+        {pool && pool.name === 'BLACK LBP' && (
+          <img className='w_bg' src={BLACKLBP} />
+        )}
+
         {/* 
             pool.settleable.volume > 0 获取数量大于0
             pool.settleable.amount > 0 未结算数量大于0
@@ -356,10 +415,11 @@ const PoolsIndex = (props) => {
         <a
           className={cs(
             'pools-type_enter',
+            pool && pool.underlying.name === 'LBP' && 'pools-type_lbp_enter',
             pool &&
               (pool.is_coming ||
                 (status === 3 &&
-                  ((pool.type !== 1 &&
+                  ((pool.type === 0 &&
                     pool.settleable &&
                     pool.settleable.amount == 0) ||
                     (pool.settleable &&
@@ -367,7 +427,7 @@ const PoolsIndex = (props) => {
                       pool.settleable.claimedOf !== 0 &&
                       pool.settleable.volume == 0) ||
                     (pool.settleable &&
-                      pool.type !== 1 &&
+                      pool.type === 0 &&
                       pool.settleable.volume == 0))) ||
                 (!active && status === 3)) &&
               'pools-type_disable_enter'
@@ -378,7 +438,7 @@ const PoolsIndex = (props) => {
               pool &&
                 (pool.is_coming ||
                   (status === 3 &&
-                    ((pool.type !== 1 &&
+                    ((pool.type === 0 &&
                       pool.settleable &&
                       pool.settleable.amount == 0) ||
                       (pool.settleable &&
@@ -386,10 +446,11 @@ const PoolsIndex = (props) => {
                         pool.settleable.claimedOf !== 0 &&
                         pool.settleable.volume == 0) ||
                       (pool.settleable &&
-                        pool.type !== 1 &&
+                        pool.type === 0 &&
                         pool.settleable.volume == 0))) ||
                   (!active && status === 3)),
-              address
+              address,
+              pool && pool.underlying.name
             )
           }}
         >

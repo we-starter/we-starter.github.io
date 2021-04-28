@@ -27,6 +27,8 @@ import { WalletConnectConnector } from '@web3-react/walletconnect-connector'
 import { LedgerConnector } from '@web3-react/ledger-connector'
 import { WalletModal } from '../components/Modals/WalletModal'
 import PoolsJoin from '../components/staterPools/poolsJoin'
+import PoolsSlippage from '../components/staterPools/poolsSlippage'
+import PoolsSuccess from '../components/staterPools/poolsSuccess'
 import { WalletChange } from '../components/account/WalletChange'
 import { LoginModal } from '../components/Modals/LoginModl'
 import { ChangeNetworks } from '../components/Modals/ChangeNetworks'
@@ -263,6 +265,40 @@ export const InitPage = () => {
         <div className='modal-show'>
           <div className='wrapper' style={{ zIndex: 10 }}>
             <PoolsJoin
+              pool={pool}
+              onClose={() =>
+                dispatch({
+                  type: HANDLE_WALLET_MODAL,
+                  walletModal: null,
+                })
+              }
+              onChange={() => {}}
+            />
+          </div>
+        </div>
+      )}
+
+      {walletModal === 'slippageSuccess' && (
+        <div className='modal-show'>
+          <div className='wrapper' style={{ zIndex: 10 }}>
+            <PoolsSuccess
+              pool={pool}
+              onClose={() =>
+                dispatch({
+                  type: HANDLE_WALLET_MODAL,
+                  walletModal: null,
+                })
+              }
+              onChange={() => {}}
+            />
+          </div>
+        </div>
+      )}
+
+      {walletModal === 'slippage' && (
+        <div className='modal-show'>
+          <div className='wrapper' style={{ zIndex: 10 }}>
+            <PoolsSlippage
               pool={pool}
               onClose={() =>
                 dispatch({
