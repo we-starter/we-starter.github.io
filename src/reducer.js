@@ -107,7 +107,7 @@ const ContextProvider = (props) => {
     locale: 'en',
     changeNetworkStatus: false,
     toolData: null,
-    slippageVal: null, // 滑点值
+    slippageVal: 10, // 滑点值
   })
   return (
     <mainContext.Provider value={{ state, dispatch }}>
