@@ -62,7 +62,7 @@ const PoolsHeader = (props) => {
     >
       <div className='center'>
         <div className='pools_header__box'>
-          <a href="http://www.westarter.org"  className='pools_header__logo'>
+          <a href='/' className='pools_header__logo'>
             <LogoText />
           </a>
           {/*<Link to='/' className='pools_header__logo'>*/}
@@ -110,7 +110,7 @@ const PoolsHeader = (props) => {
                   </NavLink>
                 </li> */}
                 <li className='menu__item'>
-                  <a href="http://www.westarter.org"  className='menu__link'>
+                  <a href='/' className='menu__link'>
                     <FormattedMessage id='fundraisingPool' />
                     <span className='menu__hot'></span>
                   </a>
