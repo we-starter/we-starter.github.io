@@ -380,7 +380,6 @@ export const usePoolsInfo = (address = '') => {
       },
     })
   })
-  console.log('pools', pools)
 
   useEffect(() => {
     if (library) {
@@ -608,7 +607,7 @@ export const usePoolsInfo = (address = '') => {
                 console.log('update pools')
                 return Object.assign({}, pool, {
                   ratio: `1${pool.underlying.symbol}=${
-                    __ratio.toFixed(3, 1).toString() * 1
+                    __ratio.toFixed(4, 1).toString() * 1
                   }${pool.currency.symbol}`,
                   progress:
                     new BigNumber(Web3.utils.fromWei(totalOffered, 'ether'))

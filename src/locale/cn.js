@@ -258,6 +258,8 @@ const zh_CN = {
   chainswapAboutProject3: 'Token distribution:',
   chainswapAboutProject4:
     'TOKEN is the token of the ChainSwap platform.The total amount is 100M, 2% of the total amount is 100% unlock token, and will be distributed to public sale and airdrop.Public sale will be held as IDO on 5 different platforms with a total amount of 1M.Airdrop that is given to users is also 1M.',
+  blackAboutProject1: 'BlackHole is an approval-free decentralized & cross-chain burning protocol, innovator of perpetual deflationary blockchain ecosystem.',
+  westarterAboutProject1: 'WeStarter是跨链代币初始兑换平台，起步于HECO网络，通过资产跨链桥和多链部署为ETH、HECO、BSC等多条网络上的项目资产进行初始兑换。',
   related_title1: '累计融资金额',
   related_title2: '参与地址总数',
   related_title3: '总成立的池子数',

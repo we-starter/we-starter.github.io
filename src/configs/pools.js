@@ -556,11 +556,11 @@ export default [
   },
   {
     name: 'BLACK',
-    address: '0x04',
+    address: '0x60c393C658904B102C12041055fcA36B5C72e038',
     abi: OfferingV2,
     start_at: '1619611200',
     is_top: true,
-    is_coming: true, // is_coming 为 true 则不请求合约
+    is_coming: false, // is_coming 为 true 则不请求合约
     currency: {
       address: '0x0', // 如果是0x0则是ht
       decimal: 18,
@@ -570,7 +570,7 @@ export default [
     type: 1,
     isPrivate: true,
     underlying: {
-      address: '0x002', // 地址有问题
+      address: '0xd714d91A169127e11D8FAb3665d72E8b7ef9Dbe2', // 地址有问题
       decimal: 18,
       symbol: 'BLACK',
       name: 'BLACK',
@@ -582,7 +582,7 @@ export default [
     pool_info: {
       token_distribution: 'April 28th 2021, 8:00PM SGT',
       min_allocation: '0',
-      max_allocation: '100 USDT',
+      max_allocation: '5.33 HT',
       min_swap_level: '1,600 HT',
     },
     website: 'https://www.blackhole.black',
@@ -593,7 +593,7 @@ export default [
     yuque: '-',
     progress: 0,
     status: 0,
-    ratio: '1BLACK=?HT', // 兑换比例需要确认
+    ratio: '1BLACK=0.0026HT', // 兑换比例需要确认
     time: '1619701200',
     purchasedCurrencyOf: 0,
     totalPurchasedAmount: '1600000000000000000000',
@@ -602,15 +602,15 @@ export default [
     is_flash: false,
     link_url: 'https://www.blackhole.black', // 跳转外链接
     project_introduction:
-      'An approval-free decentralized & cross-chain burning protocol, innovator of perpetual deflationary blockchain ecosystem.',
+      'BlackHole is an approval-free decentralized & cross-chain burning protocol, innovator of perpetual deflationary blockchain ecosystem.',
   },
   {
     name: 'BLACK',
-    address: '0x05',
+    address: '0xB616eBb93262B51143962e6826Ec0552915A13c2',
     abi: StarterV2,
     start_at: '1619611200',
     is_top: true,
-    is_coming: true,
+    is_coming: false,
     currency: {
       address: '0x0', // 如果是0x0则是ht
       decimal: 18,
@@ -620,7 +620,7 @@ export default [
     type: 0,
     isPrivate: false,
     underlying: {
-      address: '0x002', // 地址有问题
+      address: ' 0xd714d91A169127e11D8FAb3665d72E8b7ef9Dbe2', // 地址有问题
       decimal: 18,
       symbol: 'BLACK',
       name: 'BLACK',
@@ -643,7 +643,7 @@ export default [
     yuque: '-',
     progress: 0,
     status: 0,
-    ratio: '1BLACK=?HT',
+    ratio: '1BLACK=0.0027HT',
     time: '1619701200',
     purchasedCurrencyOf: 0,
     totalPurchasedAmount: '540000000000000000000',
@@ -652,6 +652,6 @@ export default [
     is_flash: false,
     link_url: 'https://www.blackhole.black', // 跳转外链接
     project_introduction:
-      'WeStarter is a cross-chain token initial swap platform which based on HECO network. Through the fluency of the product and sufficient industry resources, it carries the requirement of funds and resources for a variety of asset types. With the role of gatekeeper, through the decentralized incentive and governance mechanism of tokens, to achieve the goal of selecting high-quality assets.',
+      'BlackHole is an approval-free decentralized & cross-chain burning protocol, innovator of perpetual deflationary blockchain ecosystem.',
   },
 ]

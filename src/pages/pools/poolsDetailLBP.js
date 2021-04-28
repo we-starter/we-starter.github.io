@@ -423,44 +423,14 @@ const PoolsDetailLBP = (props) => {
                 </svg>
                 {pool && pool.yuque}
               </a>
-              {pool && pool.underlying.symbol === 'MATTER' && (
+              {pool && pool.underlying.symbol === 'WAR' && (
                 <a className='no_link'>
-                  <FormattedMessage id='aboutProject' />
+                  <FormattedMessage id='westarterAboutProject1' />
                 </a>
               )}
-              {pool && pool.underlying.symbol === 'DFT' && (
-                <a className='no_link'>{pool && pool.project_introduction}</a>
-              )}
-              {pool && pool.underlying.symbol === 'FIX' && (
+              {pool && pool.underlying.symbol === 'BLACK' && (
                 <a className='no_link'>
-                  <FormattedMessage id='fixAboutProject' />
-                </a>
-              )}
-              {pool && pool.underlying.symbol === 'DORA' && (
-                <a className='no_link'>
-                  <FormattedMessage id='doraAboutProjectP1' />
-                  <br />
-                  <br />
-                  <FormattedMessage id='doraAboutProjectP2' />
-                </a>
-              )}
-              {pool && pool.underlying.symbol === 'COOK' && (
-                <a className='no_link'>
-                  <FormattedMessage id='cookAboutProject' />
-                </a>
-              )}
-              {pool && pool.underlying.symbol === 'TOKEN' && (
-                <a className='no_link'>
-                  <FormattedMessage id='chainswapAboutProject1' />
-                  <br />
-                  <br />
-                  <FormattedMessage id='chainswapAboutProject2' />
-                  <br />
-                  <br />
-                  <FormattedMessage id='chainswapAboutProject3' />
-                  <br />
-                  <br />
-                  <FormattedMessage id='chainswapAboutProject4' />
+                  <FormattedMessage id='blackAboutProject1' />
                 </a>
               )}
             </div>

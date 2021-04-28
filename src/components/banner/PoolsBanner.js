@@ -54,7 +54,7 @@ const PoolsBanner = (props) => {
             <a>
               <svg
                 t='1619095072712'
-                class='icon'
+                className='icon'
                 viewBox='0 0 1024 1024'
                 version='1.1'
                 xmlns='http://www.w3.org/2000/svg'

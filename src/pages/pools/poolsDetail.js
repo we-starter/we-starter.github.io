@@ -705,6 +705,16 @@ const PoolsDetail = (props) => {
                   <FormattedMessage id='chainswapAboutProject4' />
                 </a>
               )}
+              {pool && pool.underlying.symbol === 'WAR' && (
+                <a className='no_link'>
+                  <FormattedMessage id='westarterAboutProject1' />
+                </a>
+              )}
+              {pool && pool.underlying.symbol === 'BLACK' && (
+                <a className='no_link'>
+                  <FormattedMessage id='blackAboutProject1' />
+                </a>
+              )}
             </div>
           )}
         </div>

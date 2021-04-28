@@ -261,6 +261,8 @@ const en_US = {
   chainswapAboutProject3: 'Token distribution:',
   chainswapAboutProject4:
     'TOKEN is the token of the ChainSwap platform.The total amount is 100M, 2% of the total amount is 100% unlock token, and will be distributed to public sale and airdrop.Public sale will be held as IDO on 5 different platforms with a total amount of 1M.Airdrop that is given to users is also 1M.',
+  blackAboutProject1: 'BlackHole is an approval-free decentralized & cross-chain burning protocol, innovator of perpetual deflationary blockchain ecosystem.',
+  westarterAboutProject1: 'WeStarter is a cross-chain token initial swap platform which based on HECO network. Through the fluency of the product and sufficient industry resources, it carries the requirement of funds and resources for a variety of asset types. With the role of gatekeeper, through the decentralized incentive and governance mechanism of tokens, to achieve the goal of selecting high-quality assets.',
   related_title1: 'Total raised funds',
   related_title2: 'Total participated addresses',
   related_title3: 'Total established pools',

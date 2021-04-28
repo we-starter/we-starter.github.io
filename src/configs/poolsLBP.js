@@ -5,7 +5,7 @@ export default [
     name: 'BLACK LBP',
     address: '0x1bCaC989BA76C293f56b2Ae7490d5375977F6eb9', // 超募合约地址
     abi: LBP,
-    start_at: '1619492400',
+    start_at: '1619614800',
     is_top: true,
     is_coming: true,
     currency: {
@@ -40,7 +40,7 @@ export default [
     Github: 'https://github.com/black-hole-finance',
     yuque: '-',
     status: 0,
-    time: '1619611200',
+    time: '1619701200',
     link_url: 'https://www.blackhole.black', // 跳转外链接
     project_introduction: 'An approval-free decentralized & cross-chain burning protocol, innovator of perpetual deflationary blockchain ecosystem.',
   },
