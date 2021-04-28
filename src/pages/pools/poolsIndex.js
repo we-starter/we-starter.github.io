@@ -47,12 +47,12 @@ const PoolsIndex = (props) => {
   const poolsLBP = usePoolsLBPInfo()
 
   poolsLBP.map((item) => {
-    let count = 0
+    let count = []
     count = pools.filter((filterItem) => {
       return filterItem.address === item.address
     })
     if (count.length > 0) return
-    pools.push(item)
+    pools.push(item && item)
   })
 
   const [now, setNow] = useState(parseInt(Date.now() / 1000))
@@ -386,9 +386,14 @@ const PoolsIndex = (props) => {
                 onMouseOver={() => setHoverFlag(index)}
                 onMouseOut={() => setHoverFlag(null)}
               >
-                {hoverFlag === index && (
+                {hoverFlag === index && pool && pool.underlying.name !== 'LBP' && (
                   <i className='tips_content'>
                     <FormattedMessage id='publicTips' />
+                  </i>
+                )}
+                {hoverFlag === index && pool && pool.underlying.name === 'LBP' && (
+                  <i className='tips_content'>
+                    <FormattedMessage id='publicTips1' />
                   </i>
                 )}
               </span>
