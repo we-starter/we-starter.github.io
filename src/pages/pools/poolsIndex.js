@@ -46,14 +46,18 @@ const PoolsIndex = (props) => {
   const pools = usePoolsInfo()
   const poolsLBP = usePoolsLBPInfo()
 
-  poolsLBP.map((item) => {
-    let count = []
-    count = pools.filter((filterItem) => {
-      return filterItem.address === item.address
-    })
-    if (count.length > 0) return
-    pools.push(item && item)
-  })
+  const _poolsIDO= JSON.parse(JSON.stringify(pools))
+  const _poolsLBP = JSON.parse(JSON.stringify(poolsLBP))
+
+  const _pools = [..._poolsIDO, ..._poolsLBP];
+  // poolsLBP.map((item) => {
+  //   let count = []
+  //   count = pools.filter((filterItem) => {
+  //     return filterItem.address === item.address
+  //   })
+  //   if (count.length > 0) return
+  //   pools.push(item && item)
+  // })
 
   const [now, setNow] = useState(parseInt(Date.now() / 1000))
 
@@ -85,7 +89,7 @@ const PoolsIndex = (props) => {
   //   }
   // }, [props.location])
 
-  pools.sort(function (x, y) {
+  _pools.sort(function (x, y) {
     if (x.status < 3 && y.status < 3) {
       return x.start_at - y.start_at
     } else {
@@ -100,11 +104,11 @@ const PoolsIndex = (props) => {
   const setData = async () => {
     switch (tabFlag) {
       case 1:
-        setListData(pools.filter((o) => o.is_top))
+        setListData(_pools.filter((o) => o.is_top))
         break
       case 2:
         setListData(
-          pools.filter(
+          _pools.filter(
             (o) =>
               o.is_join ||
               (window.localStorage.is_join && o.underlying.name === 'LBP')
@@ -112,10 +116,10 @@ const PoolsIndex = (props) => {
         )
         break
       case 3:
-        setListData(pools.filter((o) => o.is_flash))
+        setListData(_pools.filter((o) => o.is_flash))
         break
       default:
-        setListData(pools.filter((o) => o.is_top))
+        setListData(_pools.filter((o) => o.is_top))
     }
   }
 
