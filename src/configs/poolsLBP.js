@@ -3,11 +3,11 @@ import LBP from '../web3/abi/LBP.json'
 export default [
   {
     name: 'BLACK LBP',
-    address: '0xA711626c8b92e37CDD598205f4aaf75e0633B27e', // 超募合约地址
+    address: '0x7DA996Bcca3a947EB05a3477d5D4dCF59B042d99', // 超募合约地址
     abi: LBP,
     start_at: '1619614800',
     is_top: true,
-    is_coming: false,
+    is_coming: true,
     currency: {
       address: '0x0', // 如果是0x0则是ht
       decimal: 18,
@@ -28,7 +28,7 @@ export default [
     },
     amount: '100000',
     pool_info: {
-      token_distribution: 'April 22th 2021, 8:00PM SGT',
+      token_distribution: 'April 28th 2021, 9:00PM SGT',
       min_allocation: '-',
       max_allocation: '-',
       min_swap_level: '30,000 USDT',
