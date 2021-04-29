@@ -406,7 +406,7 @@ export default [
   },
   {
     name: 'WAR KOL',
-    address: '0x77968c29755794ABABbD58661E9Ee55A1c900e1F',
+    address: '0x2E9d797e1A0342630938aE28B6A32DA7D04B525B',
     abi: OfferingV2,
     start_at: '1619697600',
     is_top: true,
@@ -456,7 +456,7 @@ export default [
   },
   {
     name: 'WAR',
-    address: '0x2E9d797e1A0342630938aE28B6A32DA7D04B525B',
+    address: '0x77968c29755794ABABbD58661E9Ee55A1c900e1F',
     abi: OfferingV2,
     start_at: '1619697600',
     is_top: true,

@@ -482,7 +482,11 @@ export const usePoolsInfo = (address = '') => {
                 console.log('update pools', status)
 
                 return Object.assign({}, pool, {
-                  ratio: `1${pool.underlying.symbol}=${formatAmount(price, 18 , 4)}${pool.currency.symbol}`,
+                  ratio: `1${pool.underlying.symbol}=${formatAmount(
+                    price,
+                    18,
+                    4
+                  )}${pool.currency.symbol}`,
                   progress:
                     new BigNumber(totalPurchasedCurrency)
                       .dividedBy(totalPurchasedAmount)
@@ -717,10 +721,13 @@ export const usePoolsLBPInfo = (address = '') => {
             }
 
             console.log('update poolsLBP', status)
-            const is_join = localStorage.getItem(`is_join_${pool.address}`) || false
+            const is_join =
+              localStorage.getItem(`is_join_${pool.address}`) || false
             const price = Web3.utils.fromWei(priceLBP, 'ether')
             return Object.assign({}, pool, {
-              ratio: `1${pool.underlying.symbol}=${formatAmount(priceLBP)}${pool.currency.symbol}`,
+              ratio: `1${pool.underlying.symbol}=${formatAmount(priceLBP)}${
+                pool.currency.symbol
+              }`,
               status: status,
               time: time,
               price: Web3.utils.fromWei(priceLBP, 'ether'),
