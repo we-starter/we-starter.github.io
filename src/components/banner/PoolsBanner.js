@@ -51,7 +51,6 @@ const PoolsBanner = (props) => {
         >
           <a></a>
         </CopyToClipboard> */}
-            <a>
               <svg
                 t='1619095072712'
                 className='icon'
@@ -67,7 +66,6 @@ const PoolsBanner = (props) => {
                   p-id='1282'
                 ></path>
               </svg>
-            </a>
           </a>
           <p className='pools_banner_withdraw_tip'>
             <FormattedMessage id='withdrawTip' />
