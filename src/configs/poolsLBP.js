@@ -40,7 +40,7 @@ export default [
     Telegram_Channel: 'https://t.me/BlackholeProtocolOfficial',
     Github: 'https://github.com/black-hole-finance',
     yuque: '-',
-    status: 0,
+    status: 3,
     time: '1619701200',
     link_url: 'https://www.blackhole.black', // 跳转外链接
     project_introduction:
