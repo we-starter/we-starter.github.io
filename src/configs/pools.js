@@ -405,7 +405,7 @@ export default [
     project_introduction: 'Chainswap is the hub for all smart chains.',
   },
   {
-    name: 'WAR KOL',
+    name: 'WAR(Influencer)',
     address: '0x2E9d797e1A0342630938aE28B6A32DA7D04B525B',
     abi: OfferingV2,
     start_at: '1619697600',
