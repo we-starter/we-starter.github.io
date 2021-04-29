@@ -91,7 +91,8 @@ const PoolsIndex = (props) => {
 
   _pools.sort(function (x, y) {
     if (x.status < 3 && y.status < 3) {
-      return x.start_at - y.start_at
+      // return x.start_at - y.start_at
+      return y.start_at - x.start_at
     } else {
       return y.start_at - x.start_at
     }

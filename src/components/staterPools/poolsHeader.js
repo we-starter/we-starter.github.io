@@ -62,12 +62,9 @@ const PoolsHeader = (props) => {
     >
       <div className='center'>
         <div className='pools_header__box'>
-          <a href="http://www.westarter.org"  className='pools_header__logo'>
+          <Link to='/' className='pools_header__logo'>
             <LogoText />
-          </a>
-          {/*<Link to='/' className='pools_header__logo'>*/}
-          {/*  <LogoText />*/}
-          {/*</Link>*/}
+          </Link>
 
           <Link
             to='/'
@@ -110,18 +107,14 @@ const PoolsHeader = (props) => {
                   </NavLink>
                 </li> */}
                 <li className='menu__item'>
-                  <a href="http://www.westarter.org"  className='menu__link'>
+                  <NavLink
+                    to='/'
+                    className='menu__link'
+                    onClick={handleMenuItemClick}
+                  >
                     <FormattedMessage id='fundraisingPool' />
                     <span className='menu__hot'></span>
-                  </a>
-                  {/*<NavLink*/}
-                  {/*  to='/'*/}
-                  {/*  className='menu__link'*/}
-                  {/*  onClick={handleMenuItemClick}*/}
-                  {/*>*/}
-                  {/*  <FormattedMessage id='fundraisingPool' />*/}
-                  {/*  <span className='menu__hot'></span>*/}
-                  {/*</NavLink>*/}
+                  </NavLink>
                 </li>
                 <li className='menu__item'>
                   <a

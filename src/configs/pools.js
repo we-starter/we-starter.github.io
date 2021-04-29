@@ -406,13 +406,13 @@ export default [
   },
   {
     name: 'WAR KOL',
-    address: '0x01',
+    address: '0x77968c29755794ABABbD58661E9Ee55A1c900e1F',
     abi: OfferingV2,
     start_at: '1619697600',
     is_top: true,
-    is_coming: true, // is_coming 为 true 则不请求合约
+    is_coming: false, // is_coming 为 true 则不请求合约
     currency: {
-      address: '0xa71edc38d189767582c38a3145b5873052c3e47a', // 如果是0x0则是ht
+      address: '0x0', // 如果是0x0则是ht
       decimal: 18,
       symbol: 'HT',
     },
@@ -420,7 +420,7 @@ export default [
     type: 1,
     isPrivate: true,
     underlying: {
-      address: '0x001', // 地址有问题
+      address: '0x910651F81a605a6Ef35d05527d24A72fecef8bF0', // 地址有问题
       decimal: 18,
       symbol: 'WAR',
       name: 'WAR',
@@ -432,7 +432,7 @@ export default [
     pool_info: {
       token_distribution: 'April 29th 2021, 8:00PM SGT',
       min_allocation: '0',
-      max_allocation: '300 USDT',
+      max_allocation: '16 HT',
       min_swap_level: '1,600 HT',
     },
     website: 'https://www.westarter.org',
@@ -443,8 +443,8 @@ export default [
     yuque: '-',
     progress: 0,
     status: 0,
-    ratio: '1WAR=?HT',
-    time: '1619787600',
+    ratio: '1WAR=0.0133HT',
+    time: '1619701200',
     purchasedCurrencyOf: 0,
     totalPurchasedAmount: '1600000000000000000000',
     totalPurchasedUnderlying: '0',
@@ -456,13 +456,13 @@ export default [
   },
   {
     name: 'WAR',
-    address: '0x02',
+    address: '0x2E9d797e1A0342630938aE28B6A32DA7D04B525B',
     abi: OfferingV2,
     start_at: '1619697600',
     is_top: true,
-    is_coming: true, // is_coming 为 true 则不请求合约
+    is_coming: false, // is_coming 为 true 则不请求合约
     currency: {
-      address: '0xa71edc38d189767582c38a3145b5873052c3e47a', // 如果是0x0则是ht
+      address: '0x0', // 如果是0x0则是ht
       decimal: 18,
       symbol: 'HT',
     },
@@ -470,7 +470,7 @@ export default [
     type: 1,
     isPrivate: true,
     underlying: {
-      address: '0x001', // 地址有问题
+      address: '0x910651F81a605a6Ef35d05527d24A72fecef8bF0', // 地址有问题
       decimal: 18,
       symbol: 'WAR',
       name: 'WAR',
@@ -482,7 +482,7 @@ export default [
     pool_info: {
       token_distribution: 'April 29th 2021, 8:00PM SGT',
       min_allocation: '0',
-      max_allocation: '100 USDT',
+      max_allocation: '5.33 HT',
       min_swap_level: '1,600 HT',
     },
     website: 'https://www.westarter.org',
@@ -493,8 +493,8 @@ export default [
     yuque: '-',
     progress: 0,
     status: 0,
-    ratio: '1WAR=?HT', // 兑换比例需要确认
-    time: '1619787600',
+    ratio: '1WAR=0.0133HT', // 兑换比例需要确认
+    time: '1619701200',
     purchasedCurrencyOf: 0,
     totalPurchasedAmount: '1600000000000000000000',
     totalPurchasedUnderlying: '0',
@@ -506,13 +506,13 @@ export default [
   },
   {
     name: 'WAR',
-    address: '0x03',
+    address: '0xC36C08879EfbAdDbEbaF8D1EF878E660476E3905',
     abi: StarterV2,
     start_at: '1619698800',
     is_top: true,
-    is_coming: true,
+    is_coming: false,
     currency: {
-      address: '0xa71edc38d189767582c38a3145b5873052c3e47a', // 如果是0x0则是ht
+      address: '0x0', // 如果是0x0则是ht
       decimal: 18,
       symbol: 'HT',
     },
@@ -520,7 +520,7 @@ export default [
     type: 0,
     isPrivate: false,
     underlying: {
-      address: '0x001', // 地址有问题
+      address: '0x910651F81a605a6Ef35d05527d24A72fecef8bF0', // 地址有问题
       decimal: 18,
       symbol: 'WAR',
       name: 'WAR',
@@ -543,8 +543,8 @@ export default [
     yuque: '-',
     progress: 0,
     status: 0,
-    ratio: '1WAR=?HT',
-    time: '1619787600',
+    ratio: '1WAR=0.0133HT',
+    time: '1619701200',
     purchasedCurrencyOf: 0,
     totalPurchasedAmount: '1600000000000000000000',
     totalPurchasedUnderlying: '0',

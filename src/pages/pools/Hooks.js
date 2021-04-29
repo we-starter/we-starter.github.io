@@ -482,10 +482,7 @@ export const usePoolsInfo = (address = '') => {
                 console.log('update pools', status)
 
                 return Object.assign({}, pool, {
-                  ratio: `1${pool.underlying.symbol}=${Web3.utils.fromWei(
-                    price,
-                    'ether'
-                  )}${pool.currency.symbol}`,
+                  ratio: `1${pool.underlying.symbol}=${formatAmount(price, 18 , 4)}${pool.currency.symbol}`,
                   progress:
                     new BigNumber(totalPurchasedCurrency)
                       .dividedBy(totalPurchasedAmount)
@@ -688,7 +685,6 @@ export const usePoolsLBPInfo = (address = '') => {
       },
     })
   })
-  console.log('poolsLBP', poolsLBP)
 
   useEffect(() => {
     if (library) {
