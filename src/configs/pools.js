@@ -432,7 +432,7 @@ export default [
     pool_info: {
       token_distribution: 'April 29th 2021, 8:00PM SGT',
       min_allocation: '0',
-      max_allocation: '300 USDT',
+      max_allocation: '16 HT',
       min_swap_level: '1,600 HT',
     },
     website: 'https://www.westarter.org',
@@ -482,7 +482,7 @@ export default [
     pool_info: {
       token_distribution: 'April 29th 2021, 8:00PM SGT',
       min_allocation: '0',
-      max_allocation: '100 USDT',
+      max_allocation: '5.33 HT',
       min_swap_level: '1,600 HT',
     },
     website: 'https://www.westarter.org',
