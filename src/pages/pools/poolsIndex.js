@@ -238,10 +238,7 @@ const PoolsIndex = (props) => {
           ((pool && pool.underlying.symbol === 'FIX') || type === 1) &&
             'pools-type_private',
           pool && pool.is_coming && 'pools-type_hover_style',
-          tabFlag === 3 && 'pools-type_flashPool',
-          pool &&
-            pool.underlying.symbol === 'WAR' &&
-            'pools-type_breathing_light'
+          tabFlag === 3 && 'pools-type_flashPool'
         )}
         onClick={(e) =>
           goFinance(e, pool && pool.is_coming, pool && pool.link_url)
