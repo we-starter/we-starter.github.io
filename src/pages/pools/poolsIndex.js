@@ -46,10 +46,10 @@ const PoolsIndex = (props) => {
   const pools = usePoolsInfo()
   const poolsLBP = usePoolsLBPInfo()
 
-  const _poolsIDO= JSON.parse(JSON.stringify(pools))
+  const _poolsIDO = JSON.parse(JSON.stringify(pools))
   const _poolsLBP = JSON.parse(JSON.stringify(poolsLBP))
 
-  const _pools = [..._poolsIDO, ..._poolsLBP];
+  const _pools = [..._poolsIDO, ..._poolsLBP]
   // poolsLBP.map((item) => {
   //   let count = []
   //   count = pools.filter((filterItem) => {
@@ -238,10 +238,7 @@ const PoolsIndex = (props) => {
           ((pool && pool.underlying.symbol === 'FIX') || type === 1) &&
             'pools-type_private',
           pool && pool.is_coming && 'pools-type_hover_style',
-          tabFlag === 3 && 'pools-type_flashPool',
-          pool &&
-            pool.underlying.symbol === 'WAR' &&
-            'pools-type_breathing_light'
+          tabFlag === 3 && 'pools-type_flashPool'
         )}
         onClick={(e) =>
           goFinance(e, pool && pool.is_coming, pool && pool.link_url)
@@ -434,7 +431,8 @@ const PoolsIndex = (props) => {
                     (pool.settleable &&
                       pool.type === 0 &&
                       pool.settleable.volume == 0))) ||
-                (!active && status === 3)) &&
+                (!active && status === 3) ||
+                (status === 3 && pool.underlying.name === 'LBP')) &&
               'pools-type_disable_enter'
           )}
           onClick={(e) => {
@@ -453,7 +451,8 @@ const PoolsIndex = (props) => {
                       (pool.settleable &&
                         pool.type === 0 &&
                         pool.settleable.volume == 0))) ||
-                  (!active && status === 3)),
+                  (!active && status === 3) ||
+                  (status === 3 && pool.underlying.name === 'LBP')),
               address,
               pool && pool.underlying.name
             )

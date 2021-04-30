@@ -371,7 +371,7 @@ export const usePoolsInfo = (address = '') => {
       quotaOf: 0, //设置默认不在白名单
       status: status,
       timeClose: item.timeClose || '0',
-      progress: status === 3 ? 1 : 0,
+      // progress: status === 3 ? 1 : 0,
       totalPurchasedUnderlying:
         status === 3 ? Web3.utils.toWei(item.amount) : 0,
       currency: {
