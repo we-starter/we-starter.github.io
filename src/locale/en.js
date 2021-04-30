@@ -267,6 +267,10 @@ const en_US = {
     'BlackHole is an approval-free decentralized & cross-chain burning protocol, innovator of perpetual deflationary blockchain ecosystem.',
   westarterAboutProject1:
     'WeStarter is a cross-chain token initial swap platform which based on HECO network. Through the fluency of the product and sufficient industry resources, it carries the requirement of funds and resources for a variety of asset types. With the role of gatekeeper, through the decentralized incentive and governance mechanism of tokens, to achieve the goal of selecting high-quality assets.',
+  leverAboutProject1:
+    'Lever is developed to bridge the gap between lending protocols and DEXs, increasing capital efficiency in DeFi.Lever is an open-source margin trading platform where you can lend, borrow and perform leveraged trading to either buy long/sell short an asset in just one place.',
+  yfxAboutProject1:
+    'YFX.COM is a trading platform provide up to 100x leverage to trade on BTC, ETH and other crypto assets support by ETH, Tron, BSC , Heco,OKEx Chain,Polkadot .By invent QIC-AMM, YFX.COM provide high liquidity and low slippage.',
   related_title1: 'Total raised funds',
   related_title2: 'Total participated addresses',
   related_title3: 'Total established pools',

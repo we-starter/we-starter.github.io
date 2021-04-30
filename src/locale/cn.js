@@ -264,6 +264,10 @@ const zh_CN = {
     'BlackHole is an approval-free decentralized & cross-chain burning protocol, innovator of perpetual deflationary blockchain ecosystem.',
   westarterAboutProject1:
     'WeStarter是跨链代币初始兑换平台，起步于HECO网络，通过资产跨链桥和多链部署为ETH、HECO、BSC等多条网络上的项目资产进行初始兑换。',
+  leverAboutProject1:
+    'Lever 旨在打造 DeFi 世界中首个基于 AMM （自动做市商模式）的杠杆交易经纪平台，支持用户在 DeFi 中进行现货等资产的杠杆交易，以提高 DeFi 的资产使用效率。可以让用户一气呵成地进行抵押、借贷、杠杆交易，做多或做空任何标的资产。',
+  yfxAboutProject1:
+    'YFX.COM是一个基于以太坊、波场、币安智能链、火币生态链、OKEx公链、波卡的跨链去中心化的永续合约交易平台，提供高达100倍杠杆交易BTC、ETH等资产。平台采用领先的QIC-AMM做市商池交易方式，为用户提供极高的流动性、极低的交易滑点。',
   related_title1: '累计融资金额',
   related_title2: '参与地址总数',
   related_title3: '总成立的池子数',

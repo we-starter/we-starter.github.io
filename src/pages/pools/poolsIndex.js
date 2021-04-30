@@ -423,13 +423,11 @@ const PoolsIndex = (props) => {
                 (status === 3 &&
                   ((pool.type === 0 &&
                     pool.settleable &&
-                    pool.settleable.amount == 0) ||
+                    pool.settleable.amount == 0 &&
+                    pool.settleable.volume == 0) ||
                     (pool.settleable &&
                       pool.type === 1 &&
                       pool.settleable.claimedOf !== 0 &&
-                      pool.settleable.volume == 0) ||
-                    (pool.settleable &&
-                      pool.type === 0 &&
                       pool.settleable.volume == 0))) ||
                 (!active && status === 3) ||
                 (status === 3 && pool.underlying.name === 'LBP')) &&
@@ -443,13 +441,11 @@ const PoolsIndex = (props) => {
                   (status === 3 &&
                     ((pool.type === 0 &&
                       pool.settleable &&
-                      pool.settleable.amount == 0) ||
+                      pool.settleable.amount == 0 &&
+                      pool.settleable.volume == 0) ||
                       (pool.settleable &&
                         pool.type === 1 &&
                         pool.settleable.claimedOf !== 0 &&
-                        pool.settleable.volume == 0) ||
-                      (pool.settleable &&
-                        pool.type === 0 &&
                         pool.settleable.volume == 0))) ||
                   (!active && status === 3) ||
                   (status === 3 && pool.underlying.name === 'LBP')),
