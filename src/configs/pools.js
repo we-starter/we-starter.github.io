@@ -656,7 +656,7 @@ export default [
   },
   {
     name: 'Lever',
-    address: '0xB616eBb93262B51143962e6826Ec0552915A13c8',
+    address: '0x00',
     abi: StarterV2,
     start_at: '1620054000',
     is_top: true,
@@ -706,18 +706,18 @@ export default [
   },
   {
     name: 'YFX.COM',
-    address: '0xB616eBb93262B51143962e6826Ec0552915A13c9',
-    abi: StarterV2,
-    start_at: '1620555600',
+    address: '0x01',
+    abi: OfferingV2,
+    start_at: '1620295200',
     is_top: true,
     is_coming: true,
     currency: {
       address: '0x0', // 如果是0x0则是ht
       decimal: 18,
-      symbol: 'HT',
+      symbol: 'USDT',
     },
     icon: '',
-    type: 0,
+    type: 1,
     isPrivate: false,
     underlying: {
       address: '0xF55a93b613D172b86c2Ba3981a849DaE2aeCDE2f', // 地址有问题
@@ -743,10 +743,10 @@ export default [
     yuque: '-',
     progress: 0,
     status: 0,
-    ratio: '1YFX=0.8USDT',
+    ratio: '1YFX=?HT',
     time: '1620554400',
     purchasedCurrencyOf: 0,
-    totalPurchasedAmount: '30000000000000000000000',
+    totalPurchasedAmount: '50000000000000000000000',
     totalPurchasedUnderlying: '0',
     totalPurchasedCurrency: '0',
     is_flash: false,
@@ -755,18 +755,18 @@ export default [
   },
   {
     name: 'YFX.COM',
-    address: '0xB616eBb93262B51143962e6826Ec0552915A13c7',
+    address: '0x02',
     abi: StarterV2,
-    start_at: '1620295200',
+    start_at: '1620296400',
     is_top: true,
     is_coming: true,
     currency: {
       address: '0x0', // 如果是0x0则是ht
       decimal: 18,
-      symbol: 'HT',
+      symbol: 'USDT'
     },
     icon: '',
-    type: 1,
+    type: 0,
     isPrivate: false,
     underlying: {
       address: '0xF55a93b613D172b86c2Ba3981a849DaE2aeCDE2f', // 地址有问题
@@ -792,10 +792,10 @@ export default [
     yuque: '-',
     progress: 0,
     status: 0,
-    ratio: '1YFX=0.8USDT',
+    ratio: '1YFX=?HT',
     time: '1620554400',
     purchasedCurrencyOf: 0,
-    totalPurchasedAmount: '30000000000000000000000',
+    totalPurchasedAmount: '50000000000000000000000',
     totalPurchasedUnderlying: '0',
     totalPurchasedCurrency: '0',
     is_flash: false,
