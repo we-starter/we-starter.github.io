@@ -21,6 +21,7 @@ import BitKeep from '../../assets/icon/bitkeep.png'
 import Bingoo from '../../assets/icon/bingoo.png'
 import WARLBP from '../../assets/image/W@2x.png'
 import BLACKLBP from '../../assets/image/B@2x.png'
+import FX from '../../assets/icon/FX.png'
 
 import HyperPay from '../../assets/icon/HyperPay-Logo@2x.png'
 import { usePoolsInfo, usePoolsLBPInfo } from './Hooks'
@@ -259,6 +260,7 @@ const PoolsIndex = (props) => {
             )}
             {pool && pool.underlying.symbol === 'WAR' && <img src={WAR} />}
             {pool && pool.underlying.symbol === 'BLACK' && <img src={BLACK} />}
+            {pool && pool.underlying.symbol === 'YFX' && <img src={FX} />}
             {pool && pool.name}
           </p>
           <p className='pools-type_card_title_right'>
@@ -427,8 +429,9 @@ const PoolsIndex = (props) => {
                     pool.settleable.volume == 0) ||
                     (pool.settleable &&
                       pool.type === 1 &&
-                      pool.settleable.claimedOf !== 0 &&
-                      pool.settleable.volume == 0))) ||
+                      (pool.settleable.claimedOf !== 0 ||
+                      pool.settleable.volume == 0)
+                    ))) ||
                 (!active && status === 3) ||
                 (status === 3 && pool.underlying.name === 'LBP')) &&
               'pools-type_disable_enter'
@@ -445,7 +448,7 @@ const PoolsIndex = (props) => {
                       pool.settleable.volume == 0) ||
                       (pool.settleable &&
                         pool.type === 1 &&
-                        pool.settleable.claimedOf !== 0 &&
+                        pool.settleable.claimedOf !== 0 ||
                         pool.settleable.volume == 0))) ||
                   (!active && status === 3) ||
                   (status === 3 && pool.underlying.name === 'LBP')),
