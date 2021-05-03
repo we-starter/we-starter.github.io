@@ -34,7 +34,7 @@ export const useGLFBalance = () => {
 
 export const useBalance = (address) => {
   const { account, active, library } = useActiveWeb3React()
-  const [balance, setBalance] = useState()
+  const [balance, setBalance] = useState(0)
 
   useEffect(() => {
     console.log(active)

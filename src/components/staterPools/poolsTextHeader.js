@@ -16,7 +16,7 @@ import { FormattedMessage } from 'react-intl'
 import dot from '../../assets/icon/dot.png'
 import { CHANGE_LOCALE } from '../../const'
 import WeStarterPDF from '../../pdfFile/Security Assessment for WeStarter - Starter.pdf'
-import { useHTBalance } from '../../pages/Hooks'
+import { useHTBalance, useBalance } from '../../pages/Hooks'
 
 const PoolsTextHeader = (props) => {
   const { active, account } = useActiveWeb3React()
@@ -25,7 +25,7 @@ const PoolsTextHeader = (props) => {
   const [showMenu, setShowMenu] = useState(false)
   const [showPoolsStarter, setShowPoolsStarter] = useState(false)
   const location = useLocation()
-  const { balance } = useHTBalance()
+  const { balance } = useBalance('0x910651F81a605a6Ef35d05527d24A72fecef8bF0')
   const [language, setLanguage] = useState(
     (state.locale === 'en' && '中文简体') ||
       (state.locale === 'zh' && 'English')
