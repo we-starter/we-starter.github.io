@@ -656,13 +656,13 @@ export default [
   },
   {
     name: 'Lever',
-    address: '0x00',
-    abi: StarterV2,
+    address: '0xa09dcb3b2066da2f17e2a1657c347a34038b8946',
+    abi: StarterV3,
     start_at: '1620054000',
     is_top: true,
-    is_coming: true,
+    is_coming: false,
     currency: {
-      address: '0x0', // 如果是0x0则是ht
+      address: '0xa71edc38d189767582c38a3145b5873052c3e47a', // 如果是0x0则是ht
       decimal: 18,
       symbol: 'USDT',
     },
@@ -756,7 +756,7 @@ export default [
   {
     name: 'YFX.COM',
     address: '0x02',
-    abi: StarterV2,
+    abi: StarterV3,
     start_at: '1620296400',
     is_top: true,
     is_coming: true,
