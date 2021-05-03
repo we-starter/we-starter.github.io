@@ -13,15 +13,14 @@ import { ReactComponent as LogoText } from '../../assets/image/logo-text.svg'
 import { ReactComponent as More } from '../../assets/icon/more.svg'
 import dot from '../../assets/icon/dot.png'
 import { Banner } from '../banner/Banner'
-import { useHTBalance } from '../../pages/Hooks'
+import { useHTBalance, useBalance } from '../../pages/Hooks'
 import { CHANGE_LOCALE } from '../../const'
-
 import { FormattedMessage } from 'react-intl'
 
 export const Header = () => {
-  const { active, account } = useActiveWeb3React()
+  const { active, account, chainId } = useActiveWeb3React()
   const { dispatch, state } = useContext(mainContext)
-  const { balance } = useHTBalance()
+  const { balance } = useBalance('0x910651F81a605a6Ef35d05527d24A72fecef8bF0')
   const [language, setLanguage] = useState(
     (state.locale === 'en' && '中文简体') ||
       (state.locale === 'zh' && 'English')

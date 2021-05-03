@@ -17,7 +17,7 @@ import PoolsBanner from '../banner/PoolsBanner'
 import { FormattedMessage } from 'react-intl'
 import Form from 'antd/lib/form/Form'
 import { CHANGE_LOCALE } from '../../const'
-import { useHTBalance } from '../../pages/Hooks'
+import { useHTBalance, useBalance } from '../../pages/Hooks'
 
 const PoolsHeader = (props) => {
   const { active, account } = useActiveWeb3React()
@@ -30,7 +30,8 @@ const PoolsHeader = (props) => {
     (state.locale === 'en' && '中文简体') ||
       (state.locale === 'zh' && 'English')
   )
-  const { balance } = useHTBalance(account)
+  const { balance } = useBalance('0x910651F81a605a6Ef35d05527d24A72fecef8bF0')
+  console.log(balance, 'balance')
   const handleMenuItemClick = () => {
     setShowMenu(false)
   }

@@ -15,14 +15,14 @@ import doubleLine from '../../assets/icon/check-double-line.png'
 
 import { mainContext } from '../../reducer'
 import { FormattedMessage } from 'react-intl'
-import { useHTBalance } from '../../pages/Hooks'
+import { useHTBalance, useBalance } from '../../pages/Hooks'
 
 export const MenuMask = () => {
   const { active, account } = useActiveWeb3React()
   const [showMenu, setShowMenu] = useState(false)
   const { dispatch, state } = useContext(mainContext)
   const location = useLocation()
-  const { balance } = useHTBalance()
+  const { balance } = useBalance('0x910651F81a605a6Ef35d05527d24A72fecef8bF0')
   const [language, setLanguage] = useState(
     (state.locale === 'en' && '中文简体') ||
       (state.locale === 'zh' && 'English')
