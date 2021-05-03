@@ -2,6 +2,7 @@ import React, { useEffect, useContext, useState } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import { formatAddress, formatAmount } from '../../utils/format'
 import { useActiveWeb3React } from '../../web3'
+import { WAR_ADDRESS } from '../../web3/address'
 import WeStarterGuidebookZH from '../../pdfFile/WeStarter -优质资产起跑线.pdf'
 import WeStarterGuidebookEN from '../../pdfFile/WeStarter-Introduction in English.pdf'
 import globe from '../../assets/icon/globe.png'
@@ -18,11 +19,11 @@ import { FormattedMessage } from 'react-intl'
 import { useHTBalance, useBalance } from '../../pages/Hooks'
 
 export const MenuMask = () => {
-  const { active, account } = useActiveWeb3React()
+  const { active, account, chainId } = useActiveWeb3React()
   const [showMenu, setShowMenu] = useState(false)
   const { dispatch, state } = useContext(mainContext)
   const location = useLocation()
-  const { balance } = useBalance('0x910651F81a605a6Ef35d05527d24A72fecef8bF0')
+  const { balance } = useBalance(WAR_ADDRESS(chainId))
   const [language, setLanguage] = useState(
     (state.locale === 'en' && '中文简体') ||
       (state.locale === 'zh' && 'English')

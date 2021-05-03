@@ -1,5 +1,6 @@
 import React, { useEffect, useContext, useState } from 'react'
 import { useActiveWeb3React } from '../../web3'
+import { WAR_ADDRESS } from '../../web3/address'
 import globe from '../../assets/icon/globe.png'
 import WeStarterGuidebookZH from '../../pdfFile/WeStarter -优质资产起跑线.pdf'
 import WeStarterGuidebookEN from '../../pdfFile/WeStarter-Introduction in English.pdf'
@@ -19,13 +20,13 @@ import WeStarterPDF from '../../pdfFile/Security Assessment for WeStarter - Star
 import { useHTBalance, useBalance } from '../../pages/Hooks'
 
 const PoolsTextHeader = (props) => {
-  const { active, account } = useActiveWeb3React()
+  const { active, account, chainId } = useActiveWeb3React()
   const { dispatch, state } = useContext(mainContext)
   const { styleVal } = props
   const [showMenu, setShowMenu] = useState(false)
   const [showPoolsStarter, setShowPoolsStarter] = useState(false)
   const location = useLocation()
-  const { balance } = useBalance('0x910651F81a605a6Ef35d05527d24A72fecef8bF0')
+  const { balance } = useBalance(WAR_ADDRESS(chainId))
   const [language, setLanguage] = useState(
     (state.locale === 'en' && '中文简体') ||
       (state.locale === 'zh' && 'English')
