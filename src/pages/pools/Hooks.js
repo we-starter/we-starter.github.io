@@ -563,7 +563,9 @@ export const usePoolsInfo = (address = '') => {
                 ) {
                   status = 3
                 }
-
+                if (!(ratio - 0) && pool.defaultRatio) {
+                  ratio = pool.defaultRatio
+                }
                 const _ratio = new BigNumber(ratio).dividedBy(
                   new BigNumber(10).pow(
                     parseInt(underlying_decimals) -
