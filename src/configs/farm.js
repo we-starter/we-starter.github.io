@@ -3,7 +3,7 @@ import { getRemainTime } from '../utils/time'
 
 export default [
   {
-    name: 'WAR-WHT MLP',
+    name: 'WAR-HT MLP',
     rewards1: 'WAR',
     rewards2: 'MDX',
     address: '0x2B8ab0f074114CC570626A1140219B4A4453d90b', // 超募合约地址

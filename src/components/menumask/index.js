@@ -64,7 +64,7 @@ export const MenuMask = () => {
         <nav className='menumask_nav'>
           <ul className='menumask_list'>
             <div className='menumask__menu-wrapper'>
-              {active && <img className='exchange' src={Exchange} />}
+              {/* {active && <img className='exchange' src={Exchange} />} */}
               {active && (
                 <div className='menumask_ht-balance'>
                   <span></span>
