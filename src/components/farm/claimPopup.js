@@ -41,6 +41,7 @@ const ClaimPopup = (props) => {
   }, [])
 
   const onMax = () => {
+    return
     let max = balance
     setAmount(formatAmount(max, farmPools && farmPools.decimal, 6))
   }
@@ -66,7 +67,7 @@ const ClaimPopup = (props) => {
     }
     const contract = getContract(library, farmPools.abi, farmPools.address)
     contract.methods
-      .exit()
+      .withdraw(Web3.utils.toWei(`${amount}`, 'ether'))
       .send({
         from: account,
       })
@@ -110,7 +111,7 @@ const ClaimPopup = (props) => {
     }
     const contract = getContract(library, farmPools.abi, farmPools.address)
     contract.methods
-      .exit()
+      .getDoubleReward()
       .send({
         from: account,
       })
@@ -170,9 +171,10 @@ const ClaimPopup = (props) => {
               <div className='form-app__inputbox-control'>
                 <div className='form-app__inputbox-input'>
                   <input
-                    value={amount}
+                    value={(farmPools && farmPools.balanceOf) || 0}
                     onChange={onChange}
                     className='input'
+                    disabled
                     placeholder={intl.formatMessage({
                       id: 'farm15',
                     })}

@@ -788,17 +788,6 @@ export const useFarmInfo = (address = '') => {
               balanceOf,
               currency_allowance,
             ]) => {
-              console.log(
-                Object.assign({}, pool, {
-                  start_at: begin,
-                  earned,
-                  earned2,
-                  totalSupply,
-                  balanceOf: Web3.utils.fromWei(balanceOf, 'ether'),
-                  allowance: currency_allowance,
-                }),
-                'farm888888888'
-              )
               return Object.assign({}, pool, {
                 start_at: begin,
                 earned,

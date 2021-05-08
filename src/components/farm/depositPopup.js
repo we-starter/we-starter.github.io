@@ -107,7 +107,7 @@ const DepositPopup = (props) => {
     }
     const pool_contract = getContract(library, farmPools.abi, farmPools.address)
     pool_contract.methods
-      .offer(Web3.utils.toWei(`${amount}`, 'ether'))
+      .stake(Web3.utils.toWei(`${amount}`, 'ether'))
       .send({
         from: account,
       })
