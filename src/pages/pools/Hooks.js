@@ -770,7 +770,7 @@ export const useFarmInfo = (address = '') => {
       Promise.all(
         Farm.map((pool) => {
           const pool_contract = getContract(library, pool.abi, pool.address)
-          const currency_token = getContract(library, ERC20, pool.address)
+          const currency_token = getContract(library, ERC20, pool.MLP)
           const promise_list = [
             pool_contract.methods.begin().call(), // 开始时间
             pool_contract.methods.earned(account).call(), // 奖励1
@@ -822,14 +822,14 @@ export const useTotalRewards = (address, abi) => {
       setTotal(_total)
     }
   }, [active, library])
-  return total;
+  return total
 }
 
 export const useSpan = (address, abi) => {
   const { account, active, library, chainId } = useActiveWeb3React()
   const [span, setSpan] = useState(0)
-  useEffect(async() => {
-    if(library){
+  useEffect(async () => {
+    if (library) {
       const contract = getContract(library, abi, address)
       const _total = await contract.methods.rewards(ADDRESS_0).call()
       setSpan(_total)
@@ -861,7 +861,11 @@ export const useAPR = (
     new BigNumber(unClaimReward)
   )
 
-  const reward1 = useRewardsValue(reward1_address, WAR_ADDRESS(chainId), reward1_vol)
+  const reward1 = useRewardsValue(
+    reward1_address,
+    WAR_ADDRESS(chainId),
+    reward1_vol
+  )
 }
 
 export const useMdxARP = () => {

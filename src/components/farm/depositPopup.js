@@ -72,7 +72,7 @@ const DepositPopup = (props) => {
     if (isNaN(parseInt(amount))) {
       return false
     }
-    const contract = getContract(library, ERC20.abi, farmPools.address)
+    const contract = getContract(library, ERC20.abi, farmPools.MLP)
     contract.methods
       .approve(
         farmPools.address,
