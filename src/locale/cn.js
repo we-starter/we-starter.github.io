@@ -279,9 +279,8 @@ const zh_CN = {
   warLBP5: '最大滑点',
   warLBP6: '成功',
   warLBP7: '请到 MDEX 上进行交易',
-  farm1: '农场',
-  farm2:
-    'You could farm different policy with the notice of expiration date.Flash Mining is a short-term policy mining campaign.',
+  farm1: 'Farms',
+  farm2: 'Stake Liquidity Pool Tokens(LPT) to look for more "sweeties"',
   farm3: '抵押',
   farm4: '可用',
   farm5: '赎回 & 领取奖励',

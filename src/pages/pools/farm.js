@@ -84,7 +84,7 @@ const Farm = (props) => {
             <FormattedMessage id='farm12' />
             <span>
               {farmPools && farmPools.balanceOf
-                ? formatAmount(farmPools.balanceOf) + ' ' + farmPools.rewards
+                ? farmPools.balanceOf + ' ' + farmPools.rewards
                 : '--'}
             </span>
           </p>
@@ -172,7 +172,7 @@ const Farm = (props) => {
               <FormattedMessage id='farm3' />
             </a>
             <a className='claim_btn disable_btn'>
-              <FormattedMessage id='claim' />
+              <FormattedMessage id='farm16' />
             </a>
           </div>
         </div>
@@ -218,7 +218,7 @@ const Farm = (props) => {
               <FormattedMessage id='farm3' />
             </a>
             <a className='claim_btn disable_btn'>
-              <FormattedMessage id='claim' />
+              <FormattedMessage id='farm16' />
             </a>
           </div>
         </div>

@@ -283,8 +283,7 @@ const en_US = {
   warLBP6: 'Succeed',
   warLBP7: 'Please visit MDEX for trading',
   farm1: 'Farms',
-  farm2:
-    'You could farm different policy with the notice of expiration date.Flash Mining is a short-term policy mining campaign.',
+  farm2: 'Stake Liquidity Pool Tokens(LPT) to look for more "sweeties"',
   farm3: 'Stake',
   farm4: 'Available',
   farm5: 'Unstake & Claim Rewards',

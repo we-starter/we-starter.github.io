@@ -59,15 +59,15 @@ const ClaimPopup = (props) => {
   }
 
   const onConfirmAll = (e) => {
-    if (!amount) {
+    if (!farmPools && farmPools.balanceOf) {
       return false
     }
-    if (isNaN(parseInt(amount))) {
+    if (isNaN(parseInt(farmPools && farmPools.balanceOf))) {
       return false
     }
     const contract = getContract(library, farmPools.abi, farmPools.address)
     contract.methods
-      .withdraw(Web3.utils.toWei(`${amount}`, 'ether'))
+      .exit()
       .send({
         from: account,
       })
@@ -87,6 +87,7 @@ const ClaimPopup = (props) => {
           type: HANDLE_SHOW_TRANSACTION_MODAL,
           showTransactionModal: true,
         })
+        onClose()
       })
       .on('error', (err, receipt) => {
         console.log('BOT staking error', err)
@@ -99,14 +100,13 @@ const ClaimPopup = (props) => {
           showWaitingWalletConfirmModal: waitingForInit,
         })
       })
-    onClose()
   }
 
   const onConfirm = (e) => {
-    if (!amount) {
+    if (!farmPools && farmPools.balanceOf) {
       return false
     }
-    if (isNaN(parseInt(amount))) {
+    if (isNaN(parseInt(farmPools && farmPools.balanceOf))) {
       return false
     }
     const contract = getContract(library, farmPools.abi, farmPools.address)
@@ -131,6 +131,7 @@ const ClaimPopup = (props) => {
           type: HANDLE_SHOW_TRANSACTION_MODAL,
           showTransactionModal: true,
         })
+        onClose()
       })
       .on('error', (err, receipt) => {
         console.log('BOT staking error', err)
@@ -143,7 +144,6 @@ const ClaimPopup = (props) => {
           showWaitingWalletConfirmModal: waitingForInit,
         })
       })
-    onClose()
   }
 
   return (
@@ -151,10 +151,7 @@ const ClaimPopup = (props) => {
       <div className='modal__box'>
         <form className='form-app farm_popup' action='/'>
           <div className='form-app__inner deposit'>
-            <h1
-              className='form-app__title h3'
-              style={{ marginTop: 0, marginBottom: '10px' }}
-            >
+            <h1 className='form-app__title h1' style={{ marginTop: 0 }}>
               <FormattedMessage id='farm16' />
               <a className='farm_popup_close_btn' onClick={onClose}></a>
             </h1>
@@ -162,7 +159,7 @@ const ClaimPopup = (props) => {
               <FormattedMessage id='farm12' />
               <span>
                 {farmPools && farmPools.balanceOf
-                  ? formatAmount(farmPools.balanceOf) + ' ' + farmPools.rewards
+                  ? farmPools.balanceOf + ' ' + farmPools.rewards
                   : '--'}
               </span>
             </p>
@@ -171,9 +168,7 @@ const ClaimPopup = (props) => {
               <div className='form-app__inputbox-control'>
                 <div className='form-app__inputbox-input'>
                   <input
-                    value={
-                      (farmPools && formatAmount(farmPools.balanceOf)) || 0
-                    }
+                    value={(farmPools && farmPools.balanceOf) || 0}
                     onChange={onChange}
                     className='input'
                     disabled

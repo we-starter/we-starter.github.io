@@ -205,7 +205,11 @@ export const Banner = () => {
           </p>
         </div>
       </div>
-      <a className='banner_address'>
+      <a
+        className='banner_address'
+        href={'https://hecoinfo.com/address/' + WAR_ADDRESS(chainId)}
+        target='_blank'
+      >
         <FormattedMessage id='farm19' /> {WAR_ADDRESS(chainId)}
         <svg
           t='1619095072712'

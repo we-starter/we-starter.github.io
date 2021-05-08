@@ -788,6 +788,7 @@ export const useFarmInfo = (address = '') => {
               balanceOf,
               currency_allowance,
             ]) => {
+              console.log(balanceOf, 'balanceOfbalanceOf')
               return Object.assign({}, pool, {
                 start_at: begin,
                 earned,
