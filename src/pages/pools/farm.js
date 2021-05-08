@@ -30,7 +30,7 @@ const Farm = (props) => {
     }
   }, [apr])
   return (
-    <div style={{ minHeight: '100%', background: '#fff' }}>
+    <div className='farm_box' style={{ minHeight: '100%', background: '#fff' }}>
       <FarmHeader />
       <div className='farm_index'>
         <div className='farm_index_card'>
