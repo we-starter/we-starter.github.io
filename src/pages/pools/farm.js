@@ -6,7 +6,7 @@ import Footer from '../../components/Footer'
 import { HANDLE_WALLET_MODAL } from '../../const'
 import { mainContext } from '../../reducer'
 import { formatAmount } from '../../utils/format'
-import { useFarmInfo } from './Hooks'
+import {useAPR, useFarmInfo} from './Hooks'
 import WARHT_Small from '../../assets/icon/farm/WAR HT_small@2x.png'
 import Coming_Small from '../../assets/icon/farm/coming_small@2x.png'
 import { useBalance } from '../Hooks'
@@ -16,6 +16,7 @@ const Farm = (props) => {
   const pools = useFarmInfo()
   const farmPools = pools[0]
   const { balance } = useBalance(farmPools && farmPools.MLP)
+  const apr = useAPR(farmPools.address, farmPools.abi, farmPools.MLP, farmPools.rewards1Address)
 
   return (
     <div style={{ minHeight: '100%', background: '#fff' }}>

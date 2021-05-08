@@ -9,6 +9,7 @@ import {
 } from '../../web3/address'
 import StakingReward from '../../web3/abi/StakingReward.json'
 import { abi as ERC20 } from '../../web3/abi/ERC20.json'
+import LPT from '../../web3/abi/LPT.json'
 import MDexFactory from '../../web3/abi/MDexFactory.json'
 import Pools from '../../configs/pools'
 import Farm from '../../configs/farm'
@@ -821,6 +822,7 @@ export const useTotalRewards = (address, abi) => {
       const _total = await contract.methods.rewards(ADDRESS_0).call()
       setTotal(_total)
     }
+    return () => {}
   }, [active, library])
   return total
 }
@@ -831,9 +833,10 @@ export const useSpan = (address, abi) => {
   useEffect(async () => {
     if (library) {
       const contract = getContract(library, abi, address)
-      const _total = await contract.methods.rewards(ADDRESS_0).call()
-      setSpan(_total)
+      const _span = await contract.methods.rewardsDuration().call()
+      setSpan(_span)
     }
+    return () => {}
   }, [active, library])
   return span
 }
@@ -847,6 +850,8 @@ export const useAPR = (
   reward3_address = ''
 ) => {
   const { account, active, library, chainId } = useActiveWeb3React()
+  const [yearReward, setYearReward] = useState(0)
+  const [arp, setArp] = useState(0)
 
   // 获取奖励1在矿山的总量
   const allowance = useAllowance(
@@ -854,18 +859,38 @@ export const useAPR = (
     pool_address,
     MINE_MOUNTAIN_ADDRESS(chainId)
   )
+
   // 获取奖励1未发放的量
   const unClaimReward = useTotalRewards(pool_address, pool_abi)
 
-  const reward1_vol = new BigNumber(allowance).minus(
-    new BigNumber(unClaimReward)
-  )
+  const span = useSpan(pool_address, pool_abi)
 
-  const reward1 = useRewardsValue(
-    reward1_address,
-    WAR_ADDRESS(chainId),
-    reward1_vol
-  )
+  // 奖励1的价值
+  const reward1 = useRewardsValue(reward1_address, WAR_ADDRESS(chainId), yearReward)
+
+  // 矿池总的LPT的价值
+  const lptValue = useLTPValue(lpt_address, WAR_ADDRESS[chainId])
+
+  useEffect(() => {
+    if(library && reward1 && allowance && span){
+      const dayRate = new BigNumber(1).div(new BigNumber(span).div(new BigNumber(86400)))
+
+      const reward1_vol = new BigNumber(allowance).minus(
+        new BigNumber(unClaimReward)
+      )
+
+      // 奖励的war
+      const yearReward = dayRate.multipliedBy(reward1_vol).multipliedBy(new BigNumber(365)).toFixed(0, 1)
+      setYearReward(yearReward)
+
+      if(yearReward > 0) {
+        const arp = new BigNumber(reward1).div(new BigNumber(lptValue)).toString()
+        setArp(arp)
+      }
+    }
+    return () => {}
+  }, [library, reward1, allowance, span, unClaimReward])
+  return arp
 }
 
 export const useMdxARP = () => {
@@ -878,18 +903,23 @@ export const useMDexPrice = (address1, address2) => {
   useEffect(async () => {
     if (library) {
       if (Web3.utils.isAddress(address1)) {
+
+        // 先取pair
         const factory = getContract(
           library,
           MDexFactory,
           MDEX_FACTORY_ADDRESS(chainId)
         )
-        const [num1, num2] = await factory.methods
-          .getReserves(address1, address2)
+        const pair_address = await factory.methods
+          .getPair(address1, address2)
           .call()
+        const pair_contract = getContract(library, LPT, pair_address)
+        const [num1, num2] = await pair_contract.methods.getReserves()
         const _price = num2 / num1
         setPrice(_price)
       }
     }
+    return () => {}
   }, [library, account])
   return price
 }
@@ -898,7 +928,30 @@ export const useMDexPrice = (address1, address2) => {
  * 获取ltp的价值
  * @param address
  */
-export const useLTPValue = (address, vol) => {}
+export const useLTPValue = (address, token_address) => {
+  const { account, active, library, chainId } = useActiveWeb3React()
+  const [value, setValue] = useState(0)
+  useEffect(async () => {
+    if(library){
+      const contract = getContract(
+        library,
+        LPT,
+        address
+      )
+      const token0_address = await contract.methods.token0().call()
+      const token1_address = await contract.methods.token1().call()
+
+      const [num0, num1] = await contract.methods.getReserves().call()
+      if(token_address == token0_address){
+        setValue(new BigNumber(num0).multipliedBy(new BigNumber(2)))
+      }else if(token_address == token1_address) {
+        setValue(new BigNumber(num1).multipliedBy(new BigNumber(2)))
+      }
+    }
+    return () => {}
+  }, [library])
+  return value
+}
 
 /**
  * 获取奖励的价值
@@ -910,7 +963,9 @@ export const useRewardsValue = (address1, address2, vol) => {
   const price = useMDexPrice(address1, address2)
   const [value, setValue] = useState(0)
   useEffect(() => {
-    const _value = price * vol
+    const _value = new BigNumber(price).multipliedBy(new BigNumber(vol))
     setValue(_value)
+    return () => {}
   }, [price])
+  return value
 }
