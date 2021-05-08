@@ -1,41 +1,6 @@
-.pools_header {
+.farm_header {
   position: relative;
   background: #fff;
-  .download-pdf {
-    margin-right: 30px;
-    display: inline-block;
-    width: 24px;
-    height: 24px;
-    background: url('../icon/file-shield-fill@2x.png') no-repeat;
-    background-size: 100% 100%;
-    @media #{$mdWidth} {
-      display: none;
-      position: absolute;
-      top: 28px;
-      right: 328px;
-    }
-    @media #{$smWidth} {
-      display: none;
-    }
-    @media #{$xsWidth} {
-      display: none;
-    }
-    @media (max-width: 470px) {
-      right: unset;
-      // left: 20px;
-    }
-  }
-  &__menu-guide {
-    @media #{$mdWidth} {
-      display: none;
-    }
-    @media #{$smWidth} {
-      display: none;
-    }
-    @media #{$xsWidth} {
-      display: none;
-    }
-  }
   .exchange {
     display: inline-block;
     margin-right: 10px;
@@ -90,68 +55,36 @@
       display: none;
     }
   }
-  @media #{$desktop} {
-    background-image: url('../image/pools-banner@2x.png');
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position: center;
-    height: 378px;
-  }
-  @media #{$mdWidth} {
-    background: #fff;
-    background-image: url('../image/pools-banner@2x.png');
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position: center;
-    height: 378px;
-  }
-  @media #{$smWidth} {
-    background-image: url('../image/pools-banner-h5@2x.png');
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-    background-position: top;
-    height: 214px;
-  }
-  @media #{$xsWidth} {
-    background-image: url('../image/pools-banner-h5@2x.png');
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-    background-position: top;
-    height: 214px;
-  }
   .center {
     padding: 0;
     @media #{$desktop} {
-      width: 1200px;
+      width: 1080px;
     }
     @media #{$mdWidth} {
-      width: 1200px;
+      padding: 0 20px;
+      width: 1080px;
     }
     @media #{$smWidth} {
+      padding: 0 20px;
       width: 100%;
     }
     @media #{$xsWidth} {
+      padding: 0 20px;
       width: 100%;
     }
   }
 
   @media #{$mdWidth} {
-    padding: 0 15px;
-
     &__adv {
       display: none;
     }
   }
   @media #{$smWidth} {
-    padding: 0 15px;
-
     &__adv {
       display: none;
     }
   }
   @media #{$xsWidth} {
-    padding: 0 15px;
-
     &__adv {
       display: none;
     }
@@ -195,7 +128,7 @@
   &.menu-show {
     border-bottom: transparent;
 
-    .pools_header__menu {
+    .farm_header__menu {
       display: block;
     }
   }
@@ -581,12 +514,12 @@
       display: none;
     }
 
-    .pools_header {
+    .farm_header {
       flex-grow: 1;
       border-bottom: 0;
     }
 
-    .pools_header__menu {
+    .farm_header__menu {
       display: block !important;
     }
 

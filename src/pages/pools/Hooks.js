@@ -4,6 +4,7 @@ import { WETH_ADDRESS } from '../../web3/address'
 import StakingReward from '../../web3/abi/StakingReward.json'
 import { abi as ERC20 } from '../../web3/abi/ERC20.json'
 import Pools from '../../configs/pools'
+import Farm from '../../configs/farm'
 import Web3 from 'web3'
 import { ReactComponent as HUSD } from '../../assets/logo/HUSD.svg'
 import { ReactComponent as HT } from '../../assets/logo/HT.svg'
@@ -745,4 +746,38 @@ export const usePoolsLBPInfo = (address = '') => {
     return () => {}
   }, [account, address, blockHeight])
   return poolsLBPInfo
+}
+
+export const useFarmInfo = (address = '') => {
+  const { account, active, library, chainId } = useActiveWeb3React()
+  const blockHeight = useBlockHeight()
+
+  const now = parseInt(Date.now() / 1000)
+
+  useEffect(() => {
+    if (library) {
+      Promise.all(
+        Farm.map((pool) => {
+          const pool_contract = getContract(library, pool.abi, pool.address)
+          const promise_list = [
+            pool_contract.methods.begin().call(), // 开始时间
+            pool_contract.methods.rewardsToken().call(), // token1 地址
+            pool_contract.methods.totalSupply().call(), // 总抵押
+            pool_contract.methods.balanceOf(account).call(), // 我的抵押
+          ]
+          return Promise.all(promise_list).then(
+            ([begin, rewardsToken, totalSupply, balanceOf]) => {
+              console.log(begin, rewardsToken, totalSupply, balanceOf, 111111)
+            }
+          )
+        })
+      )
+        .then((res) => {
+          console.log(res)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    }
+  }, [account, address, blockHeight])
 }

@@ -9,18 +9,17 @@ import WeStarterGuidebookEN from '../../pdfFile/WeStarter-Introduction in Englis
 import { HANDLE_WALLET_MODAL, HANDLE_SHOW_MENUMASK_MODAL } from '../../const'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import doubleLine from '../../assets/icon/check-double-line.png'
-import { Logoicon, LogoSmallIcon } from '../../icons'
 import { ReactComponent as LogoText } from '../../assets/image/logo-text.svg'
 import { ReactComponent as More } from '../../assets/icon/more.svg'
 import dot from '../../assets/icon/dot.png'
-import PoolsBanner from '../banner/PoolsBanner'
-import Exchange from '../../assets/icon/exchange@2x.png'
 import { FormattedMessage } from 'react-intl'
 import Form from 'antd/lib/form/Form'
 import { CHANGE_LOCALE } from '../../const'
 import { useHTBalance, useBalance } from '../../pages/Hooks'
+import { FarmBanner } from './farmBanner'
+import Exchange from '../../assets/icon/exchange@2x.png'
 
-const PoolsHeader = (props) => {
+const FarmHeader = (props) => {
   const { active, account } = useActiveWeb3React()
   const { dispatch, state } = useContext(mainContext)
 
@@ -59,57 +58,28 @@ const PoolsHeader = (props) => {
 
   return (
     <header
-      className={`pools_header ${showMenu ? 'menu-show' : ''}`}
+      className={`farm_header ${showMenu ? 'menu-show' : ''}`}
       style={location.pathname === '/' ? { borderBottom: 'transparent' } : {}}
     >
       <div className='center'>
-        <div className='pools_header__box'>
-          <Link to='/' className='pools_header__logo'>
+        <div className='farm_header__box'>
+          <Link to='/' className='farm_header__logo'>
             <LogoText />
           </Link>
 
           <Link
             to='/'
-            className={`pools_header__logo--small ${active ? 'active' : ''}`}
+            className={`farm_header__logo--small ${active ? 'active' : ''}`}
           >
             <LogoText />
           </Link>
 
-          <div className='pools_header__menu'>
+          <div className='farm_header__menu'>
             <nav className='menu'>
               <ul className='menu__list'>
-                {/* <li className='menu__item'>
-                  <NavLink
-                    exact
-                    to='/staking-pool1'
-                    className='menu__link'
-                    onClick={handleMenuItemClick}
-                  >
-                    <FormattedMessage id='mortgage' />
-                  </NavLink>
-                </li>
                 <li className='menu__item'>
                   <NavLink
                     exact
-                    to='/staking-pool2'
-                    className='menu__link'
-                    onClick={handleMenuItemClick}
-                  >
-                    <FormattedMessage id='liquidityPool' />
-                  </NavLink>
-                </li>
-                <li className='menu__item'>
-                  <NavLink
-                    exact
-                    to=''
-                    className='menu__link'
-                    onClick={handleMenuItemClick}
-                  >
-                    <FormattedMessage id='crowdfund' />
-                  </NavLink>
-                </li> */}
-                <li className='menu__item'>
-                  <NavLink
                     to='/'
                     className='menu__link'
                     onClick={handleMenuItemClick}
@@ -121,6 +91,7 @@ const PoolsHeader = (props) => {
 
                 <li className='menu__item'>
                   <NavLink
+                    exact
                     to='/farm'
                     className='menu__link'
                     onClick={handleMenuItemClick}
@@ -170,7 +141,7 @@ const PoolsHeader = (props) => {
             </nav>
           </div>
 
-          <div className='pools_header__menu-wrapper'>
+          <div className='farm_header__menu-wrapper'>
             {/* <a className='download-pdf'></a> */}
             <div
               className='language'
@@ -179,27 +150,6 @@ const PoolsHeader = (props) => {
             >
               <img src={globe} alt='' />
               {language === '中文简体' ? '中文简体' : 'English'}
-              {/* <div
-                className='language-items'
-                style={{ top: '80%', bottom: 'auto' }}
-              >
-                {language === 'ZH-CH' && (
-                  <p
-                    style={{ padding: '0', marginBottom: '0' }}
-                    onClick={() => tabLanguage('en')}
-                  >
-                    English
-                  </p>
-                )}
-                {language === 'English' && (
-                  <p
-                    style={{ padding: '0', marginBottom: '0' }}
-                    onClick={() => tabLanguage('zh')}
-                  >
-                    中文简体
-                  </p>
-                )}
-              </div> */}
             </div>
             {active && <img className='exchange' src={Exchange} />}
             {active && (
@@ -210,7 +160,7 @@ const PoolsHeader = (props) => {
             )}
             {/* <a>Guide</a> */}
             {active && (
-              <div className='pools_header-account'>
+              <div className='farm_header-account'>
                 <div
                   className='address'
                   onClick={() => {
@@ -226,7 +176,7 @@ const PoolsHeader = (props) => {
               </div>
             )}
             {!active && (
-              <div className='pools_header__btn'>
+              <div className='farm_header__btn'>
                 <button className='connect-btn'>
                   <span
                     onClick={() => {
@@ -255,10 +205,9 @@ const PoolsHeader = (props) => {
           </div>
         </div>
       </div>
-      {/* banner图 */}
-      <PoolsBanner {...props} />
+      <FarmBanner />
     </header>
   )
 }
 
-export default withRouter(PoolsHeader)
+export default withRouter(FarmHeader)

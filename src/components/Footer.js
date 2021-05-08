@@ -44,19 +44,6 @@ const Footer = (props) => {
           <li>
             <a
               title='title'
-              href='https://medium.com/@westarter'
-              target='_blank'
-              rel='noopener noreferrer'
-            >
-              <svg width='24' height='24' viewBox='0 0 30 30'>
-                <path d='M5 3.75h20A1.25 1.25 0 0126.25 5v20A1.25 1.25 0 0125 26.25H5A1.25 1.25 0 013.75 25V5A1.25 1.25 0 015 3.75zm16.63 16.18c-.13-.07-.2-.25-.2-.38V10c0-.13.07-.31.2-.44l1.19-1.38v-.06h-4.27l-3.2 8.1-3.64-8.1H7.3v.06l1.13 1.57c.26.25.32.63.32.94v6.9c.06.38 0 .82-.19 1.2l-1.7 2.32v.06h4.52v-.06L9.7 18.86a1.93 1.93 0 01-.19-1.2V11.4c.06.12.13.12.19.37l4.27 9.54h.06l4.15-10.35c-.07.38-.07.82-.07 1.13v7.4c0 .2-.06.32-.18.45l-1.26 1.19v.06h6.15v-.06l-1.2-1.2z' />
-              </svg>
-            </a>
-          </li>
-
-          <li>
-            <a
-              title='title'
               href='https://twitter.com/westarter_org'
               target='_blank'
               rel='noopener'
@@ -66,6 +53,7 @@ const Footer = (props) => {
               </svg>
             </a>
           </li>
+
           <li>
             <a
               title='title'
@@ -103,6 +91,20 @@ const Footer = (props) => {
           {/*    </svg>*/}
           {/*  </a>*/}
           {/*</li>*/}
+
+          <li>
+            <a
+              title='title'
+              href='https://medium.com/@westarter'
+              target='_blank'
+              rel='noopener noreferrer'
+            >
+              <svg width='24' height='24' viewBox='0 0 30 30'>
+                <path d='M5 3.75h20A1.25 1.25 0 0126.25 5v20A1.25 1.25 0 0125 26.25H5A1.25 1.25 0 013.75 25V5A1.25 1.25 0 015 3.75zm16.63 16.18c-.13-.07-.2-.25-.2-.38V10c0-.13.07-.31.2-.44l1.19-1.38v-.06h-4.27l-3.2 8.1-3.64-8.1H7.3v.06l1.13 1.57c.26.25.32.63.32.94v6.9c.06.38 0 .82-.19 1.2l-1.7 2.32v.06h4.52v-.06L9.7 18.86a1.93 1.93 0 01-.19-1.2V11.4c.06.12.13.12.19.37l4.27 9.54h.06l4.15-10.35c-.07.38-.07.82-.07 1.13v7.4c0 .2-.06.32-.18.45l-1.26 1.19v.06h6.15v-.06l-1.2-1.2z' />
+              </svg>
+            </a>
+          </li>
+
           <li>
             <a
               title='title'

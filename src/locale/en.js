@@ -1,5 +1,6 @@
 const en_US = {
   fundraisingPool: 'Pool',
+  farm: 'Farm',
   mortgage: 'collateral mining',
   liquidityPool: 'liquidity mining',
   crowdfund: 'Crowdfunding Pool',
@@ -281,5 +282,13 @@ const en_US = {
   warLBP5: 'Slippage tolerance',
   warLBP6: 'Succeed',
   warLBP7: 'Please visit MDEX for trading',
+  farm1: 'FARMS',
+  farm2:
+    'You could farm different policy with the notice of expiration date.Flash Mining is a short-term policy mining campaign.',
+  farm3: 'Deposit',
+  farm4: 'Available',
+  farm5: '赎回质押 & 领取奖励',
+  farm6: '{coin} Rewards',
+  farm7: 'Claim Rewards',
 }
 export default en_US

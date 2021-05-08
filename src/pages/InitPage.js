@@ -26,6 +26,8 @@ import {
 import { WalletConnectConnector } from '@web3-react/walletconnect-connector'
 import { LedgerConnector } from '@web3-react/ledger-connector'
 import { WalletModal } from '../components/Modals/WalletModal'
+import DepositPopup from '../components/farm/depositPopup'
+import ClaimPopup from '../components/farm/claimPopup'
 import PoolsJoin from '../components/staterPools/poolsJoin'
 import PoolsSlippage from '../components/staterPools/poolsSlippage'
 import PoolsSuccess from '../components/staterPools/poolsSuccess'
@@ -322,6 +324,38 @@ export const InitPage = () => {
                   walletModal: false,
                 })
               }
+            />
+          </div>
+        </div>
+      )}
+      {walletModal === 'deposit' && (
+        <div className='modal-show'>
+          <div className='wrapper' style={{ zIndex: 10 }}>
+            <DepositPopup
+              pool={pool}
+              onClose={() =>
+                dispatch({
+                  type: HANDLE_WALLET_MODAL,
+                  walletModal: null,
+                })
+              }
+              onChange={() => {}}
+            />
+          </div>
+        </div>
+      )}
+      {walletModal === 'claim' && (
+        <div className='modal-show'>
+          <div className='wrapper' style={{ zIndex: 10 }}>
+            <ClaimPopup
+              pool={pool}
+              onClose={() =>
+                dispatch({
+                  type: HANDLE_WALLET_MODAL,
+                  walletModal: null,
+                })
+              }
+              onChange={() => { }}
             />
           </div>
         </div>

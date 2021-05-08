@@ -5,6 +5,7 @@ import { useActiveWeb3React } from '../../web3'
 import WeStarterGuidebookZH from '../../pdfFile/WeStarter -优质资产起跑线.pdf'
 import WeStarterGuidebookEN from '../../pdfFile/WeStarter-Introduction in English.pdf'
 import globe from '../../assets/icon/globe.png'
+import Exchange from '../../assets/icon/exchange@2x.png'
 import {
   HANDLE_SHOW_MENUMASK_MODAL,
   HANDLE_WALLET_MODAL,
@@ -62,10 +63,11 @@ export const MenuMask = () => {
         <nav className='menumask_nav'>
           <ul className='menumask_list'>
             <div className='menumask__menu-wrapper'>
+              {active && <img className='exchange' src={Exchange} />}
               {active && (
                 <div className='menumask_ht-balance'>
                   <span></span>
-                  <p>{formatAmount(balance)}</p>
+                  <p>{formatAmount(balance)} WAR</p>
                 </div>
               )}
             </div>
@@ -128,6 +130,20 @@ export const MenuMask = () => {
               >
                 <FormattedMessage id='fundraisingPool' />
                 <span className='menumask__hot'></span>
+              </NavLink>
+            </li>
+            <li className='menumask_item'>
+              <NavLink
+                to='/farm'
+                className='menumask_link'
+                onClick={() =>
+                  dispatch({
+                    type: HANDLE_SHOW_MENUMASK_MODAL,
+                    showMenuMaskModal: false,
+                  })
+                }
+              >
+                <FormattedMessage id='farm' />
               </NavLink>
             </li>
             <li className='menumask_item'>

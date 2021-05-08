@@ -22,6 +22,7 @@ import PoolsIndex from './pages/pools/poolsIndex'
 import WriteInformation from './pages/pools/writeInformation'
 import PoolsDetail from './pages/pools/poolsDetail'
 import PoolsDetailLBP from './pages/pools/poolsDetailLBP'
+import Farm from './pages/pools/farm'
 import Intl from './locale/intl'
 
 function getLibrary(provider) {
@@ -67,6 +68,7 @@ function App() {
                 component={StakingPool3}
               ></Route> */}
               <Route exact path={['/']} component={PoolsIndex}></Route>
+              <Route exact path='/farm' component={Farm}></Route>
               <Route
                 exact
                 path='/pools/detail/:address'
@@ -84,7 +86,7 @@ function App() {
               ></Route> */}
             </Switch>
             <InitPage />
-            <Footer />
+            {/* <Footer /> */}
           </Router>
         </Intl>
       </Web3ReactProvider>
