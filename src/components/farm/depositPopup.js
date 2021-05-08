@@ -163,7 +163,7 @@ const DepositPopup = (props) => {
                     onChange={onChange}
                     className='input'
                     placeholder={intl.formatMessage({
-                      id: 'money',
+                      id: 'farm15',
                     })}
                   />
                 </div>
