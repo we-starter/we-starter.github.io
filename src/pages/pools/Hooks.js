@@ -820,9 +820,12 @@ export const useTotalRewards = (address, abi) => {
   useEffect(() => {
     if (library) {
       const contract = getContract(library, abi, address)
-      contract.methods.rewards(ADDRESS_0).call().then(_total => {
-        setTotal(_total)
-      })
+      contract.methods
+        .rewards(ADDRESS_0)
+        .call()
+        .then((_total) => {
+          setTotal(_total)
+        })
     }
     return () => {}
   }, [active, library])
@@ -835,9 +838,12 @@ export const useSpan = (address, abi) => {
   useEffect(() => {
     if (library) {
       const contract = getContract(library, abi, address)
-      contract.methods.rewardsDuration().call().then(_span => {
-        setSpan(_span)
-      })
+      contract.methods
+        .rewardsDuration()
+        .call()
+        .then((_span) => {
+          setSpan(_span)
+        })
     }
     return () => {}
   }, [active, library])
@@ -869,25 +875,36 @@ export const useAPR = (
   const span = useSpan(pool_address, pool_abi)
 
   // 奖励1的价值
-  const reward1 = useRewardsValue(reward1_address, WAR_ADDRESS(chainId), yearReward)
+  const reward1 = useRewardsValue(
+    reward1_address,
+    WAR_ADDRESS(chainId),
+    yearReward
+  )
 
   // 矿池总的LPT的价值
   const lptValue = useLTPValue(lpt_address, WAR_ADDRESS[chainId])
 
   useEffect(() => {
-    if(library && reward1 && allowance && span){
-      const dayRate = new BigNumber(1).div(new BigNumber(span).div(new BigNumber(86400)))
+    if (library && reward1 && allowance && span) {
+      const dayRate = new BigNumber(1).div(
+        new BigNumber(span).div(new BigNumber(86400))
+      )
 
       const reward1_vol = new BigNumber(allowance).minus(
         new BigNumber(unClaimReward)
       )
 
       // 奖励的war
-      const yearReward = dayRate.multipliedBy(reward1_vol).multipliedBy(new BigNumber(365)).toFixed(0, 1)
+      const yearReward = dayRate
+        .multipliedBy(reward1_vol)
+        .multipliedBy(new BigNumber(365))
+        .toFixed(0, 1)
       setYearReward(yearReward)
 
-      if(yearReward > 0) {
-        const arp = new BigNumber(reward1).div(new BigNumber(lptValue)).toString()
+      if (yearReward > 0) {
+        const arp = new BigNumber(reward1)
+          .div(new BigNumber(lptValue))
+          .toString()
         setArp(arp)
       }
     }
@@ -906,7 +923,6 @@ export const useMDexPrice = (address1, address2) => {
   useEffect(() => {
     if (library) {
       if (Web3.utils.isAddress(address1)) {
-
         // 先取pair
         const factory = getContract(
           library,
@@ -915,14 +931,17 @@ export const useMDexPrice = (address1, address2) => {
         )
         factory.methods
           .getPair(address1, address2)
-          .call().then(pair_address => {
+          .call()
+          .then((pair_address) => {
             const pair_contract = getContract(library, LPT, pair_address)
-            pair_contract.methods.getReserves().call().then(([num1, num2]) => {
-              const _price = num2 / num1
-              setPrice(_price)
-            })
+            pair_contract.methods
+              .getReserves()
+              .call()
+              .then(([num1, num2]) => {
+                const _price = num2 / num1
+                setPrice(_price)
+              })
           })
-
       }
     }
     return () => {}
@@ -938,12 +957,8 @@ export const useLTPValue = (address, token_address) => {
   const { account, active, library, chainId } = useActiveWeb3React()
   const [value, setValue] = useState(0)
   useEffect(() => {
-    if(library){
-      const contract = getContract(
-        library,
-        LPT,
-        address
-      )
+    if (library) {
+      const contract = getContract(library, LPT, address)
       const promise_list = [
         contract.methods.token0().call(),
         contract.methods.token1().call(),

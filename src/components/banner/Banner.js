@@ -3,11 +3,16 @@ import { Link, NavLink, useLocation } from 'react-router-dom'
 import { FormattedMessage } from 'react-intl'
 import { useActiveWeb3React } from '../../web3'
 import { WAR_ADDRESS } from '../../web3/address'
+import { useMDexPrice } from '../../pages/pools/Hooks'
 import Icon1 from '../../assets/icon/icon1@2x.png'
 import Icon2 from '../../assets/icon/icon2@2x.png'
 import Icon3 from '../../assets/icon/icon3@2x.png'
 import Icon4 from '../../assets/icon/icon4@2x.png'
-import { usePoolsInfo, usePoolsLBPInfo } from '../../pages/pools/Hooks'
+import {
+  usePoolsInfo,
+  usePoolsLBPInfo,
+  useFarmInfo,
+} from '../../pages/pools/Hooks'
 import { mainContext } from '../../reducer'
 import WeStarterPDF from '../../pdfFile/Security Assessment for WeStarter - Starter.pdf'
 
@@ -16,6 +21,12 @@ export const Banner = () => {
   const { dispatch, state } = useContext(mainContext)
   const pools = usePoolsInfo()
   const poolsLBP = usePoolsLBPInfo()
+  const farmPools = useFarmInfo()
+  const realTimePrice = useMDexPrice(
+    farmPools && farmPools[0].rewards1Address,
+    farmPools && farmPools[0].rewards2Address
+  )
+  console.log(realTimePrice, 'realTimePrice')
 
   return (
     <div className='banner'>
