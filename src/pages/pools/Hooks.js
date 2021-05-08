@@ -817,6 +817,7 @@ export const useFarmInfo = (address = '') => {
 export const useTotalRewards = (address, abi) => {
   const { account, active, library, chainId } = useActiveWeb3React()
   const [total, setTotal] = useState(0)
+  const blockHeight = useBlockHeight()
   useEffect(() => {
     if (library) {
       const contract = getContract(library, abi, address)
@@ -828,13 +829,14 @@ export const useTotalRewards = (address, abi) => {
         })
     }
     return () => {}
-  }, [active, library])
+  }, [active, library, blockHeight])
   return total
 }
 
 export const useSpan = (address, abi) => {
   const { account, active, library, chainId } = useActiveWeb3React()
   const [span, setSpan] = useState(0)
+  const blockHeight = useBlockHeight()
   useEffect(() => {
     if (library) {
       const contract = getContract(library, abi, address)
@@ -846,7 +848,7 @@ export const useSpan = (address, abi) => {
         })
     }
     return () => {}
-  }, [active, library])
+  }, [active, library, blockHeight])
   return span
 }
 
@@ -859,6 +861,7 @@ export const useAPR = (
   reward3_address = ''
 ) => {
   const { account, active, library, chainId } = useActiveWeb3React()
+  const blockHeight = useBlockHeight()
   // const [yearReward, setYearReward] = useState(0)
   const [apr, setApr] = useState(0)
 
@@ -903,7 +906,7 @@ export const useAPR = (
       }
     }
     return () => {}
-  }, [library , allowance, span, unClaimReward, lptValue])
+  }, [library , allowance, span, unClaimReward, lptValue, blockHeight])
 
   return apr
 }
@@ -914,6 +917,7 @@ export const useMdxARP = () => {
 
 export const useMDexPrice = (address1, address2) => {
   const { account, active, library, chainId } = useActiveWeb3React()
+  const blockHeight = useBlockHeight()
   const [price, setPrice] = useState(0)
   useEffect(() => {
     if (library) {
@@ -941,7 +945,7 @@ export const useMDexPrice = (address1, address2) => {
       }
     }
     return () => {}
-  }, [library, account])
+  }, [library, account, blockHeight])
   return price
 }
 
@@ -952,6 +956,7 @@ export const useMDexPrice = (address1, address2) => {
 export const useLTPValue = (address, token_address, pool_address, pool_abi) => {
   const { account, active, library, chainId } = useActiveWeb3React()
   const [value, setValue] = useState(0)
+  const blockHeight = useBlockHeight()
   useEffect(() => {
     if(library){
       const contract = getContract(
@@ -990,7 +995,7 @@ export const useLTPValue = (address, token_address, pool_address, pool_abi) => {
       })
     }
     return () => {}
-  }, [library])
+  }, [library, blockHeight])
   return value
 }
 
