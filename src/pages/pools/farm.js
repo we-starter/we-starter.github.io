@@ -6,7 +6,7 @@ import Footer from '../../components/Footer'
 import { HANDLE_WALLET_MODAL } from '../../const'
 import { mainContext } from '../../reducer'
 import { formatAmount } from '../../utils/format'
-import {useAPR, useFarmInfo} from './Hooks'
+import { useAPR, useFarmInfo } from './Hooks'
 import WARHT_Small from '../../assets/icon/farm/WAR HT_small@2x.png'
 import Coming_Small from '../../assets/icon/farm/coming_small@2x.png'
 import { useBalance } from '../Hooks'
@@ -91,14 +91,15 @@ const Farm = (props) => {
             <FormattedMessage id='farm12' />
             <span>
               {farmPools && farmPools.balanceOf
-                ? formatAmount(farmPools.balanceOf) + ' ' + farmPools.rewards
+                ? farmPools.balanceOf + ' ' + farmPools.rewards
                 : '--'}
             </span>
           </p>
           <p className='farm_index_card_value'>
             <FormattedMessage id='farm4' />
+            {/* 为了和 farmPools.balanceOf 展示同步 */}
             <span>
-              {farmPools && balance - 0
+              {farmPools && farmPools.balanceOf
                 ? formatAmount(balance) + ' ' + farmPools.rewards
                 : '--'}
             </span>
@@ -179,7 +180,7 @@ const Farm = (props) => {
               <FormattedMessage id='farm3' />
             </a>
             <a className='claim_btn disable_btn'>
-              <FormattedMessage id='claim' />
+              <FormattedMessage id='farm16' />
             </a>
           </div>
         </div>
@@ -225,7 +226,7 @@ const Farm = (props) => {
               <FormattedMessage id='farm3' />
             </a>
             <a className='claim_btn disable_btn'>
-              <FormattedMessage id='claim' />
+              <FormattedMessage id='farm16' />
             </a>
           </div>
         </div>

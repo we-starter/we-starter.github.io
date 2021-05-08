@@ -122,6 +122,7 @@ const DepositPopup = (props) => {
           type: HANDLE_SHOW_TRANSACTION_MODAL,
           showTransactionModal: true,
         })
+        onClose()
       })
       .on('error', (err, receipt) => {
         console.log('BOT staking error', err)
@@ -134,7 +135,6 @@ const DepositPopup = (props) => {
           showWaitingWalletConfirmModal: waitingForInit,
         })
       })
-    onClose()
   }
 
   return (
@@ -142,18 +142,15 @@ const DepositPopup = (props) => {
       <div className='modal__box'>
         <form className='form-app farm_popup' action='/'>
           <div className='form-app__inner deposit'>
-            <h1
-              className='form-app__title h3'
-              style={{ marginTop: 0, marginBottom: '10px' }}
-            >
+            <h1 className='form-app__title h1' style={{ marginTop: 0 }}>
               <FormattedMessage id='farm3' />
               <a className='farm_popup_close_btn' onClick={onClose}></a>
             </h1>
             <p className='form-app__inputbox-after-text farm_popup_avaliable'>
               <FormattedMessage id='farm4' />
               <span>
-                {farmPools && balance - 0
-                  ? formatAmount(balance) + farmPools.rewards
+                {farmPools
+                  ? formatAmount(balance) + ' ' + farmPools.rewards
                   : '--'}
               </span>
             </p>

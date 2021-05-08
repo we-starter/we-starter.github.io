@@ -789,6 +789,7 @@ export const useFarmInfo = (address = '') => {
               balanceOf,
               currency_allowance,
             ]) => {
+              console.log(balanceOf, 'balanceOfbalanceOf')
               return Object.assign({}, pool, {
                 start_at: begin,
                 earned,
@@ -819,9 +820,12 @@ export const useTotalRewards = (address, abi) => {
   useEffect(() => {
     if (library) {
       const contract = getContract(library, abi, address)
-      contract.methods.rewards(ADDRESS_0).call().then(_total => {
-        setTotal(_total)
-      })
+      contract.methods
+        .rewards(ADDRESS_0)
+        .call()
+        .then((_total) => {
+          setTotal(_total)
+        })
     }
     return () => {}
   }, [active, library])
@@ -834,9 +838,12 @@ export const useSpan = (address, abi) => {
   useEffect(() => {
     if (library) {
       const contract = getContract(library, abi, address)
-      contract.methods.rewardsDuration().call().then(_span => {
-        setSpan(_span)
-      })
+      contract.methods
+        .rewardsDuration()
+        .call()
+        .then((_span) => {
+          setSpan(_span)
+        })
     }
     return () => {}
   }, [active, library])
@@ -913,7 +920,6 @@ export const useMDexPrice = (address1, address2) => {
   useEffect(() => {
     if (library) {
       if (Web3.utils.isAddress(address1)) {
-
         // 先取pair
         const factory = getContract(
           library,
@@ -925,12 +931,14 @@ export const useMDexPrice = (address1, address2) => {
           .call().then(pair_address => {
             console.log(pair_address)
             const pair_contract = getContract(library, LPT, pair_address)
-            pair_contract.methods.getReserves().call().then(([num1, num2]) => {
-              const _price = num2 / num1
-              setPrice(_price)
-            })
+            pair_contract.methods
+              .getReserves()
+              .call()
+              .then(([num1, num2]) => {
+                const _price = num2 / num1
+                setPrice(_price)
+              })
           })
-
       }
     }
     return () => {}

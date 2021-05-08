@@ -1,178 +1,150 @@
 .modal {
-	z-index: 999;
-	flex-grow: 1;
-    position: fixed;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-	-webkit-overflow-scrolling: touch;
-	z-index: 10;
-	display: none;
-	width: 100%;
-	justify-content: center;
-	align-items: center;
-	padding: 20px;
+  z-index: 999;
+  flex-grow: 1;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  -webkit-overflow-scrolling: touch;
+  z-index: 10;
+  display: none;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
 
-	&__box {
-        max-height: 100%;
-		max-width: 100%;
-        position: relative;
-        margin: 0 auto;
-	}
+  &__box {
+    max-height: 100%;
+    max-width: 100%;
+    position: relative;
+    margin: 0 auto;
+  }
 
-	&__item {
+  &__item {
+    position: relative;
+    padding: 60px;
+    border-radius: 12px;
+    background-color: #fff;
 
-		position: relative;
-		padding: 60px;
-		border-radius: 12px;
-		background-color: #fff;
+    @media #{(max-width: 747px)} {
+      padding: 20px;
+    }
+  }
 
-		@media #{(max-width: 747px)} {
+  &__close-btn {
+    position: absolute;
+    top: 24px;
+    right: 36px;
 
-			padding: 20px;
-
-		}
-
-	}
-
-	&__close-btn {
-
-		position: absolute;
-		top: 24px;
-		right: 24px;
-
-		svg {
-
-			fill: #000;
-
-		}
-
-	}
-
+    svg {
+      fill: #000;
+    }
+  }
 }
 
 .modal-show {
-    z-index: 10;
+  z-index: 10;
 
-	.modal {
-        display: flex;
-        align-items: center;
-        overflow-y: auto;
-	}
+  .modal {
+    display: flex;
+    align-items: center;
+    overflow-y: auto;
+  }
 
-	.wrapper {
-        z-index: 2;
-		position: fixed;
-		top: 0;
-		left: 0;
-		right: 0;
-		bottom: 0;
+  .wrapper {
+    z-index: 2;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
 
-		&::after {
-			position: absolute;
-			top: 0;
-			left: 0;
-			right: 0;
-			bottom: 0;
-			content: '';
-			opacity: 1;
-			z-index: 9;
-			background-color: #000000;
-
-		}
-
-	}
-
+    &::after {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      content: '';
+      opacity: 1;
+      z-index: 9;
+      background-color: #000000;
+    }
+  }
 }
 
 .form-recieve {
+  &__title {
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 36px;
+    margin-bottom: 36px;
+    color: #000;
+  }
 
-	&__title {
+  &__input {
+    display: flex;
+    position: relative;
+    align-items: center;
+    cursor: pointer;
+  }
 
-		font-size: 24px;
-		font-style: normal;
-		font-weight: 400;
-		line-height: 36px;
-		margin-bottom: 36px;
-		color: #000;
+  &__input input:checked ~ &__image::after {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='7' viewBox='0 0 10 7'%3E%3Cpath d='M4.17 7L0 3.11l1.67-1.55 2.5 2.33L8.33 0 10 1.56 4.17 7z' fill='%231D1D1D'/%3E%3C/svg%3E");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: var(--yellow);
+    border: 2px solid #fff;
+    border-radius: 50%;
+    top: -4px;
+    right: -2px;
+    content: '';
+  }
 
-	}
+  &__input input:checked ~ &__label::after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    content: 'selected';
+    text-decoration: underline;
+    margin: auto;
+    font-size: 14px;
+    line-height: 20px;
+    height: 20px;
+    font-weight: 400;
+  }
 
-	&__input {
+  &__image {
+    width: 60px;
+    height: 60px;
+    background-color: rgba(250, 208, 106, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 12px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    position: relative;
+  }
 
-		display: flex;
-		position: relative;
-		align-items: center;
-		cursor: pointer;
+  &__label {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 36px;
+    color: #000;
+  }
 
-	}
-
-	&__input input:checked ~ &__image::after {
-
-		position: absolute;
-		width: 20px;
-		height: 20px;
-		background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='7' viewBox='0 0 10 7'%3E%3Cpath d='M4.17 7L0 3.11l1.67-1.55 2.5 2.33L8.33 0 10 1.56 4.17 7z' fill='%231D1D1D'/%3E%3C/svg%3E");
-		background-position: center;
-		background-repeat: no-repeat;
-		background-color: var(--yellow);
-		border: 2px solid #fff;
-		border-radius: 50%;
-		top: -4px;
-		right: -2px;
-		content: '';
-
-	}
-
-	&__input input:checked ~ &__label::after {
-
-		position: absolute;
-		top: 0;
-		right: 0;
-		bottom: 0;
-		content: 'selected';
-		text-decoration: underline;
-		margin: auto;
-		font-size: 14px;
-		line-height: 20px;
-		height: 20px;
-		font-weight: 400;
-
-	}
-
-	&__image {
-
-		width: 60px;
-		height: 60px;
-		background-color: rgba(250,208,106,.3);
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		margin-right: 12px;
-		border-radius: 50%;
-		flex-shrink: 0;
-		position: relative;
-
-	}
-
-	&__label {
-
-		font-weight: 600;
-		font-size: 16px;
-		line-height: 36px;
-		color: #000;
-
-	}
-
-	hr {
-
-		margin: 12px 0;
-		background-color: #c4c4c4;
-		opacity: .2;
-
-	}
-
+  hr {
+    margin: 12px 0;
+    background-color: #c4c4c4;
+    opacity: 0.2;
+  }
 }
 
 .form-vote-new {
@@ -223,9 +195,9 @@
     margin: 24px 0 36px;
     background-color: #c4c4c4;
 
-	  img{
-		  object-fit: cover;
-	  }
+    img {
+      object-fit: cover;
+    }
 
     &::after {
       position: absolute;
@@ -267,30 +239,30 @@
 }
 
 .form-crop {
-    &__container {
-        position: relative;
-        height: 408px;
-        margin: 32px 0;
+  &__container {
+    position: relative;
+    height: 408px;
+    margin: 32px 0;
+  }
+
+  &__slider {
+    display: flex;
+    align-items: center;
+
+    .reactEasyCrop_Container {
+      border-radius: 8px;
     }
 
-    &__slider {
-        display: flex;
-        align-items: center;
+    svg {
+      &:first-child {
+        margin-right: 20px;
+      }
 
-        .reactEasyCrop_Container {
-            border-radius: 8px;
-        }
-
-        svg {
-            &:first-child {
-                margin-right: 20px;
-            }
-
-            &:last-child {
-                margin-left: 20px;
-            }
-        }
+      &:last-child {
+        margin-left: 20px;
+      }
     }
+  }
 }
 
 #modal-gallery {
