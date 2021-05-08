@@ -1,6 +1,6 @@
 const zh_CN = {
   fundraisingPool: '兑换池',
-  farm: '挖矿',
+  farm: '农场',
   mortgage: '抵押挖矿',
   liquidityPool: '流动性挖矿',
   crowdfund: '众筹池',
@@ -279,7 +279,7 @@ const zh_CN = {
   warLBP5: '最大滑点',
   warLBP6: '成功',
   warLBP7: '请到 MDEX 上进行交易',
-  farm1: '挖矿',
+  farm1: '农场',
   farm2:
     'You could farm different policy with the notice of expiration date.Flash Mining is a short-term policy mining campaign.',
   farm3: '抵押',
@@ -300,6 +300,6 @@ const zh_CN = {
   farm15: '请输入抵押数量',
   farm17: '购买',
   farm18: '当前价',
-  farm19: 'WAR 合约地址:',
+  farm19: 'WAR合约地址:',
 }
 export default zh_CN

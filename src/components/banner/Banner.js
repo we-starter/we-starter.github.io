@@ -1,6 +1,8 @@
 import React, { useContext, useState, useEffect } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import { FormattedMessage } from 'react-intl'
+import { useActiveWeb3React } from '../../web3'
+import { WAR_ADDRESS } from '../../web3/address'
 import Icon1 from '../../assets/icon/icon1@2x.png'
 import Icon2 from '../../assets/icon/icon2@2x.png'
 import Icon3 from '../../assets/icon/icon3@2x.png'
@@ -10,6 +12,7 @@ import { mainContext } from '../../reducer'
 import WeStarterPDF from '../../pdfFile/Security Assessment for WeStarter - Starter.pdf'
 
 export const Banner = () => {
+  const { chainId } = useActiveWeb3React()
   const { dispatch, state } = useContext(mainContext)
   const pools = usePoolsInfo()
   const poolsLBP = usePoolsLBPInfo()
@@ -203,8 +206,7 @@ export const Banner = () => {
         </div>
       </div>
       <a className='banner_address'>
-        <FormattedMessage id='farm19' />{' '}
-        0x2B8ab0f074114CC570626A1140219B4A4453d90b
+        <FormattedMessage id='farm19' /> {WAR_ADDRESS(chainId)}
         <svg
           t='1619095072712'
           className='icon'
