@@ -303,7 +303,7 @@ const en_US = {
   farm15: 'Staking Amounts',
   farm16: 'Unstake',
   farm17: 'Buy',
-  farm18: '当前价',
+  farm18: 'Real-time Price',
   farm19: 'WAR Contract Address:',
 }
 export default en_US

@@ -1,6 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { getContract, getLogs, useActiveWeb3React } from '../../web3'
-import {ADDRESS_0, MDEX_FACTORY_ADDRESS, MINE_MOUNTAIN_ADDRESS, WAR_ADDRESS, WETH_ADDRESS} from '../../web3/address'
+import {
+  ADDRESS_0,
+  MDEX_FACTORY_ADDRESS,
+  MINE_MOUNTAIN_ADDRESS,
+  WAR_ADDRESS,
+  WETH_ADDRESS,
+} from '../../web3/address'
 import StakingReward from '../../web3/abi/StakingReward.json'
 import { abi as ERC20 } from '../../web3/abi/ERC20.json'
 import MDexFactory from '../../web3/abi/MDexFactory.json'
@@ -26,7 +32,7 @@ import BigNumber from 'bignumber.js'
 import BN from 'bn.js'
 import { formatAmount } from '../../utils/format'
 import PoolsLBP from '../../configs/poolsLBP'
-import {useAllowance, useTokenAllowance} from "../Hooks";
+import { useAllowance, useTokenAllowance } from '../Hooks'
 
 export const useStakingInfo = (stakingInfo) => {
   const { account, library, chainId } = useActiveWeb3React()
@@ -820,8 +826,8 @@ export const useFarmInfo = (address = '') => {
 export const useTotalRewards = (address, abi) => {
   const { account, active, library, chainId } = useActiveWeb3React()
   const [total, setTotal] = useState(0)
-  useEffect(async() => {
-    if(library){
+  useEffect(async () => {
+    if (library) {
       const contract = getContract(library, abi, address)
       const _total = await contract.methods.rewards(ADDRESS_0).call()
       setTotal(_total)
@@ -829,38 +835,58 @@ export const useTotalRewards = (address, abi) => {
   }, [active, library])
 }
 
-export const useAPR = (pool_address, pool_abi, lpt_address, reward1_address, reward2_address = '', reward3_address = '') => {
+export const useAPR = (
+  pool_address,
+  pool_abi,
+  lpt_address,
+  reward1_address,
+  reward2_address = '',
+  reward3_address = ''
+) => {
   const { account, active, library, chainId } = useActiveWeb3React()
 
   // 获取奖励1在矿山的总量
-  const allowance = useAllowance(reward1_address ,pool_address, MINE_MOUNTAIN_ADDRESS(chainId))
+  const allowance = useAllowance(
+    reward1_address,
+    pool_address,
+    MINE_MOUNTAIN_ADDRESS(chainId)
+  )
   // 获取奖励1未发放的量
   const unClaimReward = useTotalRewards(pool_address, pool_abi)
 
-  const reward1_vol = new BigNumber(allowance).minus(new BigNumber(unClaimReward))
+  const reward1_vol = new BigNumber(allowance).minus(
+    new BigNumber(unClaimReward)
+  )
 
-  const reward1 = useRewardsValue(reward1_address, WAR_ADDRESS(chainId), reward1_vol)
+  const reward1 = useRewardsValue(
+    reward1_address,
+    WAR_ADDRESS(chainId),
+    reward1_vol
+  )
 
   // 挖MDEX币比较特殊
-  if(true){
-
+  if (true) {
   }
 }
 
 export const useMdx = () => {
   // mdx 年释放总量 * 价值 /
-
 }
-
 
 export const useMDexPrice = (address1, address2) => {
   const { account, active, library, chainId } = useActiveWeb3React()
   const [price, setPrice] = useState(0)
   useEffect(async () => {
-    if(library){
-      if(Web3.utils.isAddress(address1)){
-        const factory = getContract(library, MDexFactory, MDEX_FACTORY_ADDRESS(chainId))
-        const [num1, num2] = await factory.methods.getReserves(address1, address2).call()
+    if (library) {
+      if (Web3.utils.isAddress(address1)) {
+        const factory = getContract(
+          library,
+          MDexFactory,
+          MDEX_FACTORY_ADDRESS(chainId)
+        )
+        const [num1, num2] = await factory.methods
+          .getReserves(address1, address2)
+          .call()
         const _price = num2 / num1
         setPrice(_price)
       }
@@ -873,9 +899,7 @@ export const useMDexPrice = (address1, address2) => {
  * 获取ltp的价值
  * @param address
  */
-export const useLTPValue = (address, vol) => {
-
-}
+export const useLTPValue = (address, vol) => {}
 
 /**
  * 获取奖励的价值
@@ -887,7 +911,7 @@ export const useRewardsValue = (address1, address2, vol) => {
   const price = useMDexPrice(address1, address2)
   const [value, setValue] = useState(0)
   useEffect(() => {
-    const _value = price * vol;
+    const _value = price * vol
     setValue(_value)
   }, [price])
 }

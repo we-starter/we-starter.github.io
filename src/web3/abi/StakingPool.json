@@ -108,64 +108,29 @@
     "type": "event"
   },
   {
-    "inputs": [
+    "inputs": [],
+    "name": "APY",
+    "outputs": [
       {
-        "internalType": "address",
-        "name": "_governor",
-        "type": "address"
-      },
-      {
-        "internalType": "address",
-        "name": "_rewardsDistribution",
-        "type": "address"
-      },
-      {
-        "internalType": "address",
-        "name": "_rewardsToken",
-        "type": "address"
-      },
-      {
-        "internalType": "address",
-        "name": "_stakingToken",
-        "type": "address"
-      },
-      {
-        "internalType": "address",
-        "name": "_ecoAddr",
-        "type": "address"
-      },
-      {
-        "internalType": "address",
-        "name": "_stakingPool2",
-        "type": "address"
-      },
-      {
-        "internalType": "address",
-        "name": "_rewardsToken2",
-        "type": "address"
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
       }
     ],
-    "name": "__DoublePool_init",
-    "outputs": [],
-    "stateMutability": "nonpayable",
+    "stateMutability": "view",
     "type": "function"
   },
   {
-    "inputs": [
+    "inputs": [],
+    "name": "TVL",
+    "outputs": [
       {
-        "internalType": "address",
-        "name": "_stakingPool2",
-        "type": "address"
-      },
-      {
-        "internalType": "address",
-        "name": "_rewardsToken2",
-        "type": "address"
+        "internalType": "uint256",
+        "name": "tvl",
+        "type": "uint256"
       }
     ],
-    "name": "__DoublePool_init_unchained",
-    "outputs": [],
-    "stateMutability": "nonpayable",
+    "stateMutability": "view",
     "type": "function"
   },
   {
@@ -207,6 +172,77 @@
         "internalType": "address",
         "name": "_ecoAddr",
         "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "_stakingPool2",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "_rewardsToken2",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_pid2",
+        "type": "uint256"
+      }
+    ],
+    "name": "__NestMasterChef_init",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_stakingPool2",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "_rewardsToken2",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_pid2",
+        "type": "uint256"
+      }
+    ],
+    "name": "__NestMasterChef_init_unchained",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_governor",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "_rewardsDistribution",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "_rewardsToken",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "_stakingToken",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "_ecoAddr",
+        "type": "address"
       }
     ],
     "name": "__StakingPool_init",
@@ -216,6 +252,21 @@
   },
   {
     "inputs": [
+      {
+        "internalType": "address",
+        "name": "_rewardsDistribution",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "_rewardsToken",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "_stakingToken",
+        "type": "address"
+      },
       {
         "internalType": "address",
         "name": "_ecoAddr",
@@ -303,13 +354,6 @@
       }
     ],
     "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "compound",
-    "outputs": [],
-    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
@@ -446,6 +490,19 @@
     "type": "function"
   },
   {
+    "inputs": [
+      {
+        "internalType": "address payable",
+        "name": "acct",
+        "type": "address"
+      }
+    ],
+    "name": "getRewardA",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
     "inputs": [],
     "name": "getRewardForDuration",
     "outputs": [
@@ -514,6 +571,68 @@
     "inputs": [
       {
         "internalType": "uint256",
+        "name": "vol",
+        "type": "uint256"
+      }
+    ],
+    "name": "lptValue",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "lptValueTotal",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "migrate",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_rewards2Token",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_ratio",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_begin",
+        "type": "uint256"
+      }
+    ],
+    "name": "notifyReward2",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
         "name": "reward",
         "type": "uint256"
       }
@@ -528,11 +647,6 @@
       {
         "internalType": "uint256",
         "name": "_lep",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "_period",
         "type": "uint256"
       },
       {
@@ -552,8 +666,14 @@
     "type": "function"
   },
   {
-    "inputs": [],
-    "name": "period",
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "name": "paid",
     "outputs": [
       {
         "internalType": "uint256",
@@ -567,6 +687,19 @@
   {
     "inputs": [],
     "name": "periodFinish",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "pid2",
     "outputs": [
       {
         "internalType": "uint256",
@@ -682,6 +815,32 @@
         "internalType": "uint256",
         "name": "",
         "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "rewards2Ratio",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "rewards2Token",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
       }
     ],
     "stateMutability": "view",
@@ -806,6 +965,29 @@
   {
     "inputs": [
       {
+        "internalType": "address",
+        "name": "swapFactory_",
+        "type": "address"
+      },
+      {
+        "internalType": "address[]",
+        "name": "pathTVL_",
+        "type": "address[]"
+      },
+      {
+        "internalType": "address[]",
+        "name": "pathAPY_",
+        "type": "address[]"
+      }
+    ],
+    "name": "setPath",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
         "internalType": "uint256",
         "name": "amount",
         "type": "uint256"
@@ -854,7 +1036,7 @@
     "name": "stakingPool2",
     "outputs": [
       {
-        "internalType": "contract IStakingRewards",
+        "internalType": "contract IMasterChef",
         "name": "",
         "type": "address"
       }
@@ -870,6 +1052,30 @@
         "internalType": "contract IERC20",
         "name": "",
         "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "vol",
+        "type": "uint256"
+      },
+      {
+        "internalType": "address[]",
+        "name": "path",
+        "type": "address[]"
+      }
+    ],
+    "name": "swapValue",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "v",
+        "type": "uint256"
       }
     ],
     "stateMutability": "view",
