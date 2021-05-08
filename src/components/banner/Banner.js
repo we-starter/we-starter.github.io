@@ -24,21 +24,25 @@ export const Banner = () => {
   const farmPools = useFarmInfo()
   const [realTimePrice, setRealTimePrice] = useState('-')
 
-  const _tmp_price_ht = useMDexPrice(
+  const _tmp_price_war2ht = useMDexPrice(
     chainId && WHT_ADDRESS(chainId),
     chainId && WAR_ADDRESS(chainId)
   )
 
-  const _tmp_price_ht2usdt = useMDexPrice(
+  const _tmp_price_usdt2ht = useMDexPrice(
     chainId && USDT_ADDRESS(chainId),
     chainId && WHT_ADDRESS(chainId)
   )
 
   useEffect(() => {
-    console.log('_tmp_price_ht', _tmp_price_ht)
-    console.log('_tmp_price_ht2usdt', _tmp_price_ht2usdt)
-  }, [_tmp_price_ht, _tmp_price_ht2usdt])
-  console.log(realTimePrice, 'realTimePrice')
+    console.log('_tmp_price_war2ht', _tmp_price_war2ht)
+    console.log('_tmp_price_usdt2ht', _tmp_price_usdt2ht)
+    const price = (_tmp_price_war2ht/_tmp_price_usdt2ht)
+    if(!isNaN(price) && price > 0){
+      setRealTimePrice(price.toFixed(3))
+    }
+
+  }, [_tmp_price_war2ht, _tmp_price_usdt2ht])
 
   return (
     <div className='banner'>
@@ -186,7 +190,7 @@ export const Banner = () => {
             <span className='banner_related_data_title'>
               <FormattedMessage id='farm18' />
             </span>
-            <span className='banner_related_data_val'>$4.12</span>
+            <span className='banner_related_data_val'>${realTimePrice}</span>
           </p>
           <a
             className='banner_related_data_buy'

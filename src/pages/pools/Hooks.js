@@ -913,8 +913,6 @@ export const useMdxARP = () => {
 }
 
 export const useMDexPrice = (address1, address2) => {
-  console.log('address1', address1)
-  console.log('address2', address2)
   const { account, active, library, chainId } = useActiveWeb3React()
   const [price, setPrice] = useState(0)
   useEffect(() => {
@@ -936,7 +934,7 @@ export const useMDexPrice = (address1, address2) => {
               .call()
               .then(data => {
                 const {_reserve0, _reserve1} = data
-                const _price = _reserve1 / _reserve0
+                const _price = _reserve0 / _reserve1
                 setPrice(_price)
               })
           })
