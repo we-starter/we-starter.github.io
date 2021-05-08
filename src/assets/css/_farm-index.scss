@@ -159,7 +159,8 @@
     justify-content: space-between;
     align-items: center;
     width: 1080px;
-    margin: 74px auto 112px;
+    margin: 74px auto 0;
+    padding-bottom: 112px;
     &_card {
       position: relative;
       padding: 42px 30px 30px;

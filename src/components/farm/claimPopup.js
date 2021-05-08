@@ -168,7 +168,7 @@ const ClaimPopup = (props) => {
               <div className='form-app__inputbox-control'>
                 <div className='form-app__inputbox-input'>
                   <input
-                    value={(farmPools && farmPools.balanceOf) || 0}
+                    value={(farmPools && farmPools.balanceOf) || ''}
                     onChange={onChange}
                     className='input'
                     disabled
