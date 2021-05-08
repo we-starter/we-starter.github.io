@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import StakingRewardsV2 from '../web3/abi/StakingRewardsV2.json'
 import ERC20 from '../web3/abi/ERC20.json'
-import { useFarmInfo } from './pools/Hooks'
+import {useBlockHeight, useFarmInfo} from './pools/Hooks'
 import { getContract, getWeb3, useActiveWeb3React } from '../web3'
 import { getGLFStakingAddress } from '../web3/address'
 
@@ -101,6 +101,7 @@ export const useHTBalance = () => {
 export const useAllowance = (contract_address, address, owner_address) => {
   const { account, active, library } = useActiveWeb3React()
   const [allowance, setAllowance] = useState(0)
+  const blockHeight = useBlockHeight()
   useEffect(() => {
     if (active) {
       try {
@@ -117,6 +118,6 @@ export const useAllowance = (contract_address, address, owner_address) => {
       }
     }
     return () => {}
-  }, [account, library, active])
+  }, [account, library, active, blockHeight])
   return allowance
 }
