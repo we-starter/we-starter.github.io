@@ -817,11 +817,12 @@ export const useFarmInfo = (address = '') => {
 export const useTotalRewards = (address, abi) => {
   const { account, active, library, chainId } = useActiveWeb3React()
   const [total, setTotal] = useState(0)
-  useEffect(async () => {
+  useEffect(() => {
     if (library) {
       const contract = getContract(library, abi, address)
-      const _total = await contract.methods.rewards(ADDRESS_0).call()
-      setTotal(_total)
+      contract.methods.rewards(ADDRESS_0).call().then(_total => {
+        setTotal(_total)
+      })
     }
     return () => {}
   }, [active, library])
@@ -831,11 +832,12 @@ export const useTotalRewards = (address, abi) => {
 export const useSpan = (address, abi) => {
   const { account, active, library, chainId } = useActiveWeb3React()
   const [span, setSpan] = useState(0)
-  useEffect(async () => {
+  useEffect(() => {
     if (library) {
       const contract = getContract(library, abi, address)
-      const _span = await contract.methods.rewardsDuration().call()
-      setSpan(_span)
+      contract.methods.rewardsDuration().call().then(_span => {
+        setSpan(_span)
+      })
     }
     return () => {}
   }, [active, library])
@@ -901,7 +903,7 @@ export const useMdxARP = () => {
 export const useMDexPrice = (address1, address2) => {
   const { account, active, library, chainId } = useActiveWeb3React()
   const [price, setPrice] = useState(0)
-  useEffect(async () => {
+  useEffect(() => {
     if (library) {
       if (Web3.utils.isAddress(address1)) {
 
@@ -911,13 +913,16 @@ export const useMDexPrice = (address1, address2) => {
           MDexFactory,
           MDEX_FACTORY_ADDRESS(chainId)
         )
-        const pair_address = await factory.methods
+        factory.methods
           .getPair(address1, address2)
-          .call()
-        const pair_contract = getContract(library, LPT, pair_address)
-        const [num1, num2] = await pair_contract.methods.getReserves()
-        const _price = num2 / num1
-        setPrice(_price)
+          .call().then(pair_address => {
+            const pair_contract = getContract(library, LPT, pair_address)
+            pair_contract.methods.getReserves().call().then(([num1, num2]) => {
+              const _price = num2 / num1
+              setPrice(_price)
+            })
+          })
+
       }
     }
     return () => {}
@@ -932,22 +937,25 @@ export const useMDexPrice = (address1, address2) => {
 export const useLTPValue = (address, token_address) => {
   const { account, active, library, chainId } = useActiveWeb3React()
   const [value, setValue] = useState(0)
-  useEffect(async () => {
+  useEffect(() => {
     if(library){
       const contract = getContract(
         library,
         LPT,
         address
       )
-      const token0_address = await contract.methods.token0().call()
-      const token1_address = await contract.methods.token1().call()
-
-      const [num0, num1] = await contract.methods.getReserves().call()
-      if(token_address == token0_address){
-        setValue(new BigNumber(num0).multipliedBy(new BigNumber(2)))
-      }else if(token_address == token1_address) {
-        setValue(new BigNumber(num1).multipliedBy(new BigNumber(2)))
-      }
+      const promise_list = [
+        contract.methods.token0().call(),
+        contract.methods.token1().call(),
+        contract.methods.getReserves().call(),
+      ]
+      // Promise.all(promise_list).then(([token0_address, token1_address, [num0, num1]]) => {
+      //   if(token_address == token0_address){
+      //     setValue(new BigNumber(num0).multipliedBy(new BigNumber(2)))
+      //   }else if(token_address == token1_address) {
+      //     setValue(new BigNumber(num1).multipliedBy(new BigNumber(2)))
+      //   }
+      // })
     }
     return () => {}
   }, [library])
