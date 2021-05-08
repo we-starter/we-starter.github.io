@@ -1,0 +1,152 @@
+@media #{$desktop} {
+  .farm_banner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 1080px;
+    margin: 0 auto;
+    &_left {
+      padding-left: 40px;
+      padding-bottom: 40px;
+      width: 480px;
+      .farm_banner_title {
+        margin-bottom: 18px;
+        font-size: 100px;
+        font-family: HelveticaNeue-Bold, HelveticaNeue;
+        font-weight: bold;
+        color: #22292f;
+        line-height: 120px;
+      }
+      .farm_banner_content {
+        margin: 0 auto;
+        font-size: 24px;
+        font-family: HelveticaNeue;
+        color: #22292f;
+        line-height: 40px;
+      }
+    }
+    &_right {
+      background: #fff;
+      background-image: url('../image/fram_banner@2x.png');
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-position: right;
+      width: 500px;
+      height: 364px;
+    }
+  }
+}
+@media #{$mdWidth} {
+  .farm_banner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 1080px;
+    margin: 0 auto;
+    &_left {
+      padding-left: 40px;
+      padding-bottom: 40px;
+      width: 480px;
+      .farm_banner_title {
+        margin-bottom: 18px;
+        font-size: 100px;
+        font-family: HelveticaNeue-Bold, HelveticaNeue;
+        font-weight: bold;
+        color: #22292f;
+        line-height: 120px;
+      }
+      .farm_banner_content {
+        margin: 0 auto;
+        font-size: 24px;
+        font-family: HelveticaNeue;
+        color: #22292f;
+        line-height: 40px;
+      }
+    }
+    &_right {
+      background: #fff;
+      background-image: url('../image/fram_banner@2x.png');
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-position: right;
+      width: 500px;
+      height: 364px;
+    }
+  }
+}
+@media #{$smWidth} {
+  .farm_banner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin: 0 auto;
+    padding-left: 20px;
+    &_left {
+      padding-bottom: 26px;
+      width: 176px;
+      .farm_banner_title {
+        margin-bottom: 16px;
+        font-size: 42px;
+        font-family: HelveticaNeue-Bold, HelveticaNeue;
+        font-weight: bold;
+        color: #22292f;
+        line-height: 60px;
+      }
+      .farm_banner_content {
+        margin: 0 auto;
+        font-size: 12px;
+        font-family: HelveticaNeue;
+        color: #22292f;
+        line-height: 18px;
+      }
+    }
+    &_right {
+      background: #fff;
+      background-image: url('../image/fram_banner_small@2x.png');
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-position: right;
+      width: 220px;
+      height: 160px;
+    }
+  }
+}
+@media #{$xsWidth} {
+  .farm_banner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin: 0 auto;
+    padding-left: 15px;
+    &_left {
+      padding-bottom: 26px;
+      width: 176px;
+      .farm_banner_title {
+        margin-bottom: 16px;
+        font-size: 42px;
+        font-family: HelveticaNeue-Bold, HelveticaNeue;
+        font-weight: bold;
+        color: #22292f;
+        line-height: 60px;
+      }
+      .farm_banner_content {
+        margin: 0 auto;
+        font-size: 12px;
+        font-family: HelveticaNeue;
+        color: #22292f;
+        line-height: 18px;
+      }
+    }
+    &_right {
+      background: #fff;
+      background-image: url('../image/fram_banner_small@2x.png');
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-position: right;
+      width: 220px;
+      height: 160px;
+    }
+  }
+}

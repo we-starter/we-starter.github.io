@@ -1,45 +1,51 @@
 import React, { useEffect, useContext, useState } from 'react'
 import { useActiveWeb3React } from '../../web3'
-import { WAR_ADDRESS } from '../../web3/address'
 import globe from '../../assets/icon/globe.png'
-import WeStarterGuidebookZH from '../../pdfFile/WeStarter -优质资产起跑线.pdf'
-import WeStarterGuidebookEN from '../../pdfFile/WeStarter-Introduction in English.pdf'
 import { formatAddress, formatAmount } from '../../utils/format'
 import { withRouter } from 'react-router'
 import { mainContext } from '../../reducer'
+import WeStarterGuidebookZH from '../../pdfFile/WeStarter -优质资产起跑线.pdf'
+import WeStarterGuidebookEN from '../../pdfFile/WeStarter-Introduction in English.pdf'
 import { HANDLE_WALLET_MODAL, HANDLE_SHOW_MENUMASK_MODAL } from '../../const'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import doubleLine from '../../assets/icon/check-double-line.png'
-import { Logoicon, LogoSmallIcon } from '../../icons'
 import { ReactComponent as LogoText } from '../../assets/image/logo-text.svg'
 import { ReactComponent as More } from '../../assets/icon/more.svg'
-import { FormattedMessage } from 'react-intl'
 import dot from '../../assets/icon/dot.png'
+import { FormattedMessage } from 'react-intl'
+import Form from 'antd/lib/form/Form'
 import { CHANGE_LOCALE } from '../../const'
-import WeStarterPDF from '../../pdfFile/Security Assessment for WeStarter - Starter.pdf'
 import { useHTBalance, useBalance } from '../../pages/Hooks'
+import { WAR_ADDRESS } from '../../web3/address'
+import { FarmBanner } from './farmBanner'
+import Exchange from '../../assets/icon/exchange@2x.png'
 
-const PoolsTextHeader = (props) => {
+const FarmHeader = (props) => {
   const { active, account, chainId } = useActiveWeb3React()
   const { dispatch, state } = useContext(mainContext)
-  const { styleVal } = props
+
   const [showMenu, setShowMenu] = useState(false)
   const [showPoolsStarter, setShowPoolsStarter] = useState(false)
   const location = useLocation()
-  const { balance } = useBalance(WAR_ADDRESS(chainId))
   const [language, setLanguage] = useState(
     (state.locale === 'en' && '中文简体') ||
       (state.locale === 'zh' && 'English')
   )
-
+  const { balance } = useBalance(WAR_ADDRESS(chainId))
+  const handleMenuItemClick = () => {
+    setShowMenu(false)
+  }
   useEffect(() => {
     if (state.locale === 'en') setLanguage('中文简体')
     if (state.locale === 'zh') setLanguage('English')
   }, [state.locale])
-
-  const handleMenuItemClick = () => {
-    setShowMenu(false)
-  }
+  useEffect(() => {
+    // if (props.history.location.pathname === '/pools') {
+    //   setShowPoolsStarter(true)
+    // } else {
+    //   setShowPoolsStarter(false)
+    // }
+  })
   const tabLanguage = (val) => {
     val = val === 'English' ? 'en' : 'zh'
     if (val === 'en') setLanguage('English')
@@ -50,68 +56,27 @@ const PoolsTextHeader = (props) => {
     })
   }
 
-  useEffect(() => {
-    // if (props.history.location.pathname === '/pools') {
-    //   setShowPoolsStarter(true)
-    // } else {
-    //   setShowPoolsStarter(false)
-    // }
-  })
-
   return (
     <header
-      className={`pools_text_header ${showMenu ? 'menu-show' : ''}`}
+      className={`farm_header ${showMenu ? 'menu-show' : ''}`}
       style={location.pathname === '/' ? { borderBottom: 'transparent' } : {}}
-      style={styleVal && { background: styleVal }}
     >
       <div className='center'>
-        <div className='pools_text_header__box'>
-          <Link to='/' className='pools_text_header__logo'>
+        <div className='farm_header__box'>
+          <Link to='/' className='farm_header__logo'>
             <LogoText />
           </Link>
 
           <Link
             to='/'
-            className={`pools_text_header__logo--small ${
-              active ? 'active' : ''
-            }`}
+            className={`farm_header__logo--small ${active ? 'active' : ''}`}
           >
             <LogoText />
           </Link>
 
-          <div className='pools_text_header__menu'>
+          <div className='farm_header__menu'>
             <nav className='menu'>
               <ul className='menu__list'>
-                {/* <li className='menu__item'>
-                  <NavLink
-                    exact
-                    to='/staking-pool1'
-                    className='menu__link'
-                    onClick={handleMenuItemClick}
-                  >
-                    <FormattedMessage id='mortgage' />
-                  </NavLink>
-                </li>
-                <li className='menu__item'>
-                  <NavLink
-                    exact
-                    to='/staking-pool2'
-                    className='menu__link'
-                    onClick={handleMenuItemClick}
-                  >
-                    <FormattedMessage id='liquidityPool' />
-                  </NavLink>
-                </li>
-                <li className='menu__item'>
-                  <NavLink
-                    exact
-                    to=''
-                    className='menu__link'
-                    onClick={handleMenuItemClick}
-                  >
-                    <FormattedMessage id='crowdfund' />
-                  </NavLink>
-                </li> */}
                 <li className='menu__item'>
                   <NavLink
                     exact
@@ -121,6 +86,17 @@ const PoolsTextHeader = (props) => {
                   >
                     <FormattedMessage id='fundraisingPool' />
                     <span className='menu__hot'></span>
+                  </NavLink>
+                </li>
+
+                <li className='menu__item'>
+                  <NavLink
+                    exact
+                    to='/farm'
+                    className='menu__link'
+                    onClick={handleMenuItemClick}
+                  >
+                    <FormattedMessage id='farm' />
                   </NavLink>
                 </li>
                 <li className='menu__item'>
@@ -165,7 +141,8 @@ const PoolsTextHeader = (props) => {
             </nav>
           </div>
 
-          <div className='pools_text_header__menu-wrapper'>
+          <div className='farm_header__menu-wrapper'>
+            {/* <a className='download-pdf'></a> */}
             <div
               className='language'
               style={{ marginRight: '16px' }}
@@ -173,37 +150,17 @@ const PoolsTextHeader = (props) => {
             >
               <img src={globe} alt='' />
               {language === '中文简体' ? '中文简体' : 'English'}
-              {/* <div
-                className='language-items'
-                style={{ top: '80%', bottom: 'auto' }}
-              >
-                {language === 'ZH-CH' && (
-                  <p
-                    style={{ padding: '0', marginBottom: '0' }}
-                    onClick={() => tabLanguage('en')}
-                  >
-                    English
-                  </p>
-                )}
-                {language === 'English' && (
-                  <p
-                    style={{ padding: '0', marginBottom: '0' }}
-                    onClick={() => tabLanguage('zh')}
-                  >
-                    中文简体
-                  </p>
-                )}
-              </div> */}
             </div>
-            {/* <a className='download-pdf' href={WeStarterPDF} target='_blank'></a> */}
+            {/* {active && <img className='exchange' src={Exchange} />} */}
             {active && (
               <div className='ht-balance'>
                 <span></span>
-                <p>{formatAmount(balance)}</p>
+                <p>{formatAmount(balance)} WAR</p>
               </div>
             )}
+            {/* <a>Guide</a> */}
             {active && (
-              <div className='pools_text_header-account'>
+              <div className='farm_header-account'>
                 <div
                   className='address'
                   onClick={() => {
@@ -219,7 +176,7 @@ const PoolsTextHeader = (props) => {
               </div>
             )}
             {!active && (
-              <div className='pools_text_header__btn'>
+              <div className='farm_header__btn'>
                 <button className='connect-btn'>
                   <span
                     onClick={() => {
@@ -248,9 +205,9 @@ const PoolsTextHeader = (props) => {
           </div>
         </div>
       </div>
-      {/* banner图 */}
+      <FarmBanner />
     </header>
   )
 }
 
-export default withRouter(PoolsTextHeader)
+export default withRouter(FarmHeader)

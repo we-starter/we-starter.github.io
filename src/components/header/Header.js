@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { useActiveWeb3React } from '../../web3'
+import { WAR_ADDRESS } from '../../web3/address'
 import globe from '../../assets/icon/globe.png'
 import WeStarterGuidebookZH from '../../pdfFile/WeStarter -优质资产起跑线.pdf'
 import WeStarterGuidebookEN from '../../pdfFile/WeStarter-Introduction in English.pdf'
@@ -13,6 +14,7 @@ import { ReactComponent as LogoText } from '../../assets/image/logo-text.svg'
 import { ReactComponent as More } from '../../assets/icon/more.svg'
 import dot from '../../assets/icon/dot.png'
 import { Banner } from '../banner/Banner'
+import Exchange from '../../assets/icon/exchange@2x.png'
 import { useHTBalance, useBalance } from '../../pages/Hooks'
 import { CHANGE_LOCALE } from '../../const'
 import { FormattedMessage } from 'react-intl'
@@ -20,7 +22,7 @@ import { FormattedMessage } from 'react-intl'
 export const Header = () => {
   const { active, account, chainId } = useActiveWeb3React()
   const { dispatch, state } = useContext(mainContext)
-  const { balance } = useBalance('0x910651F81a605a6Ef35d05527d24A72fecef8bF0')
+  const { balance } = useBalance(WAR_ADDRESS(chainId))
   const [language, setLanguage] = useState(
     (state.locale === 'en' && '中文简体') ||
       (state.locale === 'zh' && 'English')
@@ -52,7 +54,11 @@ export const Header = () => {
   return (
     <header
       className={`header ${showMenu ? 'menu-show' : ''}`}
-      style={location.pathname === '/' ? { borderBottom: 'transparent' } : {}}
+      style={
+        location.pathname === '/'
+          ? { borderBottom: 'transparent' }
+          : { display: 'none' }
+      }
     >
       <div className='center'>
         <div className='header__box'>
@@ -110,6 +116,15 @@ export const Header = () => {
                   >
                     <FormattedMessage id='fundraisingPool' />
                     <span className='menu__hot'></span>
+                  </NavLink>
+                </li>
+                <li className='menu__item'>
+                  <NavLink
+                    to='/farm'
+                    className='menu__link'
+                    onClick={handleMenuItemClick}
+                  >
+                    <FormattedMessage id='farm' />
                   </NavLink>
                 </li>
                 <li className='menu__item'>
@@ -220,10 +235,11 @@ export const Header = () => {
                 )}
               </div> */}
             </div>
+            {/* {active && <img className='exchange' src={Exchange} />} */}
             {active && (
               <div className='ht-balance'>
                 <span></span>
-                <p>{formatAmount(balance)}</p>
+                <p>{formatAmount(balance)} WAR</p>
               </div>
             )}
             {active && (

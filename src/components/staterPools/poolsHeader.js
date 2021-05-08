@@ -1,5 +1,6 @@
 import React, { useEffect, useContext, useState } from 'react'
 import { useActiveWeb3React } from '../../web3'
+import { WAR_ADDRESS } from '../../web3/address'
 import globe from '../../assets/icon/globe.png'
 import { formatAddress, formatAmount } from '../../utils/format'
 import { withRouter } from 'react-router'
@@ -14,13 +15,14 @@ import { ReactComponent as LogoText } from '../../assets/image/logo-text.svg'
 import { ReactComponent as More } from '../../assets/icon/more.svg'
 import dot from '../../assets/icon/dot.png'
 import PoolsBanner from '../banner/PoolsBanner'
+import Exchange from '../../assets/icon/exchange@2x.png'
 import { FormattedMessage } from 'react-intl'
 import Form from 'antd/lib/form/Form'
 import { CHANGE_LOCALE } from '../../const'
 import { useHTBalance, useBalance } from '../../pages/Hooks'
 
 const PoolsHeader = (props) => {
-  const { active, account } = useActiveWeb3React()
+  const { active, account, chainId } = useActiveWeb3React()
   const { dispatch, state } = useContext(mainContext)
 
   const [showMenu, setShowMenu] = useState(false)
@@ -30,7 +32,7 @@ const PoolsHeader = (props) => {
     (state.locale === 'en' && '中文简体') ||
       (state.locale === 'zh' && 'English')
   )
-  const { balance } = useBalance('0x910651F81a605a6Ef35d05527d24A72fecef8bF0')
+  const { balance } = useBalance(WAR_ADDRESS(chainId))
   console.log(balance, 'balance')
   const handleMenuItemClick = () => {
     setShowMenu(false)
@@ -117,6 +119,16 @@ const PoolsHeader = (props) => {
                     <span className='menu__hot'></span>
                   </NavLink>
                 </li>
+
+                <li className='menu__item'>
+                  <NavLink
+                    to='/farm'
+                    className='menu__link'
+                    onClick={handleMenuItemClick}
+                  >
+                    <FormattedMessage id='farm' />
+                  </NavLink>
+                </li>
                 <li className='menu__item'>
                   <a
                     href='https://forms.gle/n6M5tJ46KtEfEDQz9'
@@ -190,10 +202,11 @@ const PoolsHeader = (props) => {
                 )}
               </div> */}
             </div>
+            {/* {active && <img className='exchange' src={Exchange} />} */}
             {active && (
               <div className='ht-balance'>
                 <span></span>
-                <p>{formatAmount(balance)}</p>
+                <p>{formatAmount(balance)} WAR</p>
               </div>
             )}
             {/* <a>Guide</a> */}

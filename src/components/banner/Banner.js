@@ -1,17 +1,48 @@
 import React, { useContext, useState, useEffect } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import { FormattedMessage } from 'react-intl'
+import { useActiveWeb3React } from '../../web3'
+import {USDT_ADDRESS, WAR_ADDRESS, WHT_ADDRESS} from '../../web3/address'
+import { useMDexPrice } from '../../pages/pools/Hooks'
 import Icon1 from '../../assets/icon/icon1@2x.png'
 import Icon2 from '../../assets/icon/icon2@2x.png'
 import Icon3 from '../../assets/icon/icon3@2x.png'
-import { usePoolsInfo, usePoolsLBPInfo } from '../../pages/pools/Hooks'
+import Icon4 from '../../assets/icon/icon4@2x.png'
+import {
+  usePoolsInfo,
+  usePoolsLBPInfo,
+  useFarmInfo,
+} from '../../pages/pools/Hooks'
 import { mainContext } from '../../reducer'
 import WeStarterPDF from '../../pdfFile/Security Assessment for WeStarter - Starter.pdf'
 
 export const Banner = () => {
+  const { chainId } = useActiveWeb3React()
   const { dispatch, state } = useContext(mainContext)
   const pools = usePoolsInfo()
   const poolsLBP = usePoolsLBPInfo()
+  const farmPools = useFarmInfo()
+  const [realTimePrice, setRealTimePrice] = useState('-')
+
+  const _tmp_price_war2ht = useMDexPrice(
+    chainId && WHT_ADDRESS(chainId),
+    chainId && WAR_ADDRESS(chainId)
+  )
+
+  const _tmp_price_usdt2ht = useMDexPrice(
+    chainId && USDT_ADDRESS(chainId),
+    chainId && WHT_ADDRESS(chainId)
+  )
+
+  useEffect(() => {
+    console.log('_tmp_price_war2ht', _tmp_price_war2ht)
+    console.log('_tmp_price_usdt2ht', _tmp_price_usdt2ht)
+    const price = (_tmp_price_war2ht/_tmp_price_usdt2ht)
+    if(!isNaN(price) && price > 0){
+      setRealTimePrice(price.toFixed(3))
+    }
+
+  }, [_tmp_price_war2ht, _tmp_price_usdt2ht])
 
   return (
     <div className='banner'>
@@ -154,12 +185,28 @@ export const Banner = () => {
       </div>
       <div className='banner_related'>
         <div className='banner_related_data'>
+          <img src={Icon4} />
+          <p>
+            <span className='banner_related_data_title'>
+              <FormattedMessage id='farm18' />
+            </span>
+            <span className='banner_related_data_val'>${realTimePrice}</span>
+          </p>
+          <a
+            className='banner_related_data_buy'
+            href='https://ht.mdex.com/#/swap?outputCurrency=0x910651f81a605a6ef35d05527d24a72fecef8bf0'
+            target='_blank'
+          >
+            <FormattedMessage id='farm17' />
+          </a>
+        </div>
+        <div className='banner_related_data'>
           <img src={Icon1} />
           <p>
             <span className='banner_related_data_title'>
               <FormattedMessage id='related_title1' />
             </span>
-            <span className='banner_related_data_val'>$634,340,250</span>
+            <span className='banner_related_data_val'>$954,121,300</span>
           </p>
         </div>
         <div className='banner_related_data'>
@@ -185,6 +232,28 @@ export const Banner = () => {
           </p>
         </div>
       </div>
+      <a
+        className='banner_address'
+        href={'https://hecoinfo.com/address/' + WAR_ADDRESS(chainId)}
+        target='_blank'
+      >
+        <FormattedMessage id='farm19' /> {WAR_ADDRESS(chainId)}
+        <svg
+          t='1619095072712'
+          className='icon'
+          viewBox='0 0 1024 1024'
+          version='1.1'
+          xmlns='http://www.w3.org/2000/svg'
+          p-id='1281'
+          width='20'
+          height='20'
+        >
+          <path
+            d='M424.96 128v87.04H215.04v599.04h599.04v-215.04h87.04v256c0 25.6-20.48 40.96-40.96 40.96H168.96c-25.6 0-40.96-20.48-40.96-40.96V168.96c0-25.6 20.48-40.96 40.96-40.96h256z m327.68 87.04h-194.56V128h343.04v343.04h-87.04V271.36L512 573.44 450.56 512l302.08-296.96z'
+            p-id='1282'
+          ></path>
+        </svg>
+      </a>
     </div>
   )
 }

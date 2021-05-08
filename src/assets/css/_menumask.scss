@@ -8,6 +8,10 @@
   top: 0;
   touch-action: none;
   z-index: 99;
+  &__menu-wrapper {
+    display: flex;
+    align-items: center;
+  }
   &_left {
     width: 20%;
     height: 100%;
@@ -36,6 +40,12 @@
       color: #0f8c20;
     }
   }
+  .exchange {
+    display: inline-block;
+    margin-right: 10px;
+    width: 22px;
+    height: 22px;
+  }
   &_ht-balance {
     display: flex;
     justify-content: center;
@@ -48,8 +58,8 @@
     span {
       margin-right: 8px;
       display: inline-block;
-      width: 24px;
-      height: 24px;
+      width: 22px;
+      height: 22px;
       background: url('../icon/WAR_logo@2x.png') no-repeat;
       background-size: 100% 100%;
     }

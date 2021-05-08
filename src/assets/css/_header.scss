@@ -2,6 +2,21 @@
   position: relative;
   background: #fff;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  .exchange {
+    display: inline-block;
+    margin-right: 10px;
+    width: 22px;
+    height: 22px;
+    @media #{$mdWidth} {
+      display: none;
+    }
+    @media #{$smWidth} {
+      display: none;
+    }
+    @media #{$xsWidth} {
+      display: none;
+    }
+  }
   .ht-balance {
     display: flex;
     align-items: center;
@@ -12,8 +27,8 @@
     span {
       margin-right: 8px;
       display: inline-block;
-      width: 24px;
-      height: 24px;
+      width: 22px;
+      height: 22px;
       background: url('../icon/WAR_logo@2x.png') no-repeat;
       background-size: 100% 100%;
     }
