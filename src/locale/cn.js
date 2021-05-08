@@ -287,5 +287,15 @@ const zh_CN = {
   farm5: '赎回质押 & 领取奖励',
   farm6: '{coin} Rewards',
   farm7: 'Claim Rewards',
+  farm8: 'Countdown',
+  farm9: 'POOL',
+  farm10: 'Earned',
+  farm11: 'Total Deposited',
+  farm12: 'My Deposited',
+  farm13: 'Get',
+  DayM: '天',
+  HourM: '时',
+  MinM: '分',
+  SecondM: '秒',
 }
 export default zh_CN

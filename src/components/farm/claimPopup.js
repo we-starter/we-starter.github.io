@@ -24,18 +24,14 @@ import BigNumber from 'bignumber.js'
 const { Option } = Select
 
 const ClaimPopup = (props) => {
-  const { intl, icon, onClose, pool } = props
+  const { intl, icon, onClose, farmPools } = props
   const { account, active, library, chainId } = useActiveWeb3React()
   const { dispatch } = useContext(mainContext)
   const [approve, setApprove] = useState(true)
   const [amount, setAmount] = useState('')
   const [fee, setFee] = useState(0)
 
-  const currency_address = pool ? pool.currency.address : '0x0'
-  const { balance = 0 } = useBalance(currency_address)
-  const handleChange = (value) => {
-    console.log(`selected ${value}`)
-  }
+  const { balance = 0 } = useBalance(farmPools && farmPools.address)
 
   useEffect(() => {
     const gas_limit = new BigNumber('1006182')
@@ -47,27 +43,14 @@ const ClaimPopup = (props) => {
   }, [])
 
   useEffect(() => {
-    if (pool && (pool.currency.allowance > 0 || pool.currency.is_ht)) {
+    if (farmPools && farmPools.allowance > 0) {
       setApprove(false)
     }
-  }, [pool])
+  }, [farmPools])
 
   const onMax = () => {
     let max = balance
-    const maxB = new BigNumber(max)
-    const balanceB = new BigNumber(balance)
-    const quotaOfB = new BigNumber(pool.quotaOf)
-    if (pool.type === 1 && quotaOfB.lt(balanceB)) {
-      max = pool.quotaOf
-    }
-
-    if (pool.currency.is_ht && max == balance) {
-      // 如果是ht,留部分手续费
-      const feeB = new BigNumber(fee)
-      max = maxB.gt(feeB) ? maxB.minus(feeB).toString() : 0
-    }
-
-    setAmount(formatAmount(max, pool.currency.decimal, 6))
+    setAmount(formatAmount(max, farmPools && farmPools.decimal, 6))
   }
 
   const onChange = (e) => {
@@ -82,7 +65,79 @@ const ClaimPopup = (props) => {
     }
   }
 
+  const onConfirmAll = (e) => {
+    const contract = getContract(library, farmPools.abi, farmPools.address)
+    contract.methods
+      .exit()
+      .send({
+        from: account,
+      })
+      .on('transactionHash', (hash) => {
+        dispatch({
+          type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
+          showWaitingWalletConfirmModal: { ...waitingPending, hash },
+        })
+      })
+      .on('receipt', (_, receipt) => {
+        console.log('BOT staking success')
+        dispatch({
+          type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
+          showWaitingWalletConfirmModal: waitingForInit,
+        })
+        dispatch({
+          type: HANDLE_SHOW_TRANSACTION_MODAL,
+          showTransactionModal: true,
+        })
+      })
+      .on('error', (err, receipt) => {
+        console.log('BOT staking error', err)
+        dispatch({
+          type: HANDLE_SHOW_FAILED_TRANSACTION_MODAL,
+          showFailedTransactionModal: true,
+        })
+        dispatch({
+          type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
+          showWaitingWalletConfirmModal: waitingForInit,
+        })
+      })
+    onClose()
+  }
+
   const onConfirm = (e) => {
+    const contract = getContract(library, farmPools.abi, farmPools.address)
+    contract.methods
+      .exit()
+      .send({
+        from: account,
+      })
+      .on('transactionHash', (hash) => {
+        dispatch({
+          type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
+          showWaitingWalletConfirmModal: { ...waitingPending, hash },
+        })
+      })
+      .on('receipt', (_, receipt) => {
+        console.log('BOT staking success')
+        dispatch({
+          type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
+          showWaitingWalletConfirmModal: waitingForInit,
+        })
+        dispatch({
+          type: HANDLE_SHOW_TRANSACTION_MODAL,
+          showTransactionModal: true,
+        })
+      })
+      .on('error', (err, receipt) => {
+        console.log('BOT staking error', err)
+        dispatch({
+          type: HANDLE_SHOW_FAILED_TRANSACTION_MODAL,
+          showFailedTransactionModal: true,
+        })
+        dispatch({
+          type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
+          showWaitingWalletConfirmModal: waitingForInit,
+        })
+      })
     onClose()
   }
 
@@ -99,8 +154,12 @@ const ClaimPopup = (props) => {
               <a className='farm_popup_close_btn' onClick={onClose}></a>
             </h1>
             <p className='form-app__inputbox-after-text farm_popup_avaliable'>
-              <FormattedMessage id='farm4' />
-              <span>999 WAR</span>
+              <FormattedMessage id='farm12' />
+              <span>
+                {farmPools && farmPools.balanceOf
+                  ? farmPools.balanceOf + ' ' + farmPools.rewards
+                  : '--'}
+              </span>
             </p>
 
             <div className='deposit__inputbox form-app__inputbox'>
@@ -128,18 +187,24 @@ const ClaimPopup = (props) => {
               <button
                 type='button'
                 className='btn btn--medium'
-                onClick={onConfirm}
+                onClick={onConfirmAll}
               >
                 <FormattedMessage id='farm5' />
               </button>
             </div>
             <p className='form-app__inputbox-after-text farm_popup_avaliable'>
               <FormattedMessage id='farm6' values={{ coin: 'WAR' }} />
-              <span>999 WAR</span>
+              <span>
+                {farmPools ? farmPools.earned + ' ' + farmPools.rewards1 : '--'}
+              </span>
             </p>
             <p className='form-app__inputbox-after-text farm_popup_avaliable'>
               <FormattedMessage id='farm6' values={{ coin: 'LEV' }} />
-              <span>999 LEV</span>
+              <span>
+                {farmPools
+                  ? farmPools.earned2 + ' ' + farmPools.rewards2
+                  : '--'}
+              </span>
             </p>
             <div className='form-app__submit form-app__submit--row'>
               <button

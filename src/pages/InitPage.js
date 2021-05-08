@@ -86,6 +86,7 @@ export const InitPage = () => {
     walletModal,
     txStatus,
     pool,
+    farmPools,
     showMenuMaskModal,
     changeNetworkStatus,
   } = state
@@ -332,7 +333,7 @@ export const InitPage = () => {
         <div className='modal-show'>
           <div className='wrapper' style={{ zIndex: 10 }}>
             <DepositPopup
-              pool={pool}
+              pool={farmPools}
               onClose={() =>
                 dispatch({
                   type: HANDLE_WALLET_MODAL,
@@ -348,14 +349,14 @@ export const InitPage = () => {
         <div className='modal-show'>
           <div className='wrapper' style={{ zIndex: 10 }}>
             <ClaimPopup
-              pool={pool}
+              pool={farmPools}
               onClose={() =>
                 dispatch({
                   type: HANDLE_WALLET_MODAL,
                   walletModal: null,
                 })
               }
-              onChange={() => { }}
+              onChange={() => {}}
             />
           </div>
         </div>

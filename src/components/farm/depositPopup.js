@@ -10,7 +10,7 @@ import { getContract, useActiveWeb3React } from '../../web3'
 import { injectIntl } from 'react-intl'
 import ERC20 from '../../web3/abi/ERC20.json'
 import { FormattedMessage } from 'react-intl'
-
+import { useFarmInfo } from '../../pages/pools/Hooks'
 import {
   HANDLE_SHOW_FAILED_TRANSACTION_MODAL,
   HANDLE_SHOW_TRANSACTION_MODAL,
@@ -24,15 +24,14 @@ import BigNumber from 'bignumber.js'
 const { Option } = Select
 
 const DepositPopup = (props) => {
-  const { intl, icon, onClose, pool } = props
+  const { intl, icon, onClose, farmPools } = props
   const { account, active, library, chainId } = useActiveWeb3React()
   const { dispatch } = useContext(mainContext)
   const [approve, setApprove] = useState(true)
   const [amount, setAmount] = useState('')
   const [fee, setFee] = useState(0)
 
-  const currency_address = pool ? pool.currency.address : '0x0'
-  const { balance = 0 } = useBalance(currency_address)
+  const { balance } = useBalance(farmPools && farmPools.MLP)
   const handleChange = (value) => {
     console.log(`selected ${value}`)
   }
@@ -47,27 +46,15 @@ const DepositPopup = (props) => {
   }, [])
 
   useEffect(() => {
-    if (pool && (pool.currency.allowance > 0 || pool.currency.is_ht)) {
+    if (farmPools && farmPools.allowance > 0) {
       setApprove(false)
     }
-  }, [pool])
+  }, [farmPools])
 
   const onMax = () => {
     let max = balance
-    const maxB = new BigNumber(max)
-    const balanceB = new BigNumber(balance)
-    const quotaOfB = new BigNumber(pool.quotaOf)
-    if (pool.type === 1 && quotaOfB.lt(balanceB)) {
-      max = pool.quotaOf
-    }
 
-    if (pool.currency.is_ht && max == balance) {
-      // 如果是ht,留部分手续费
-      const feeB = new BigNumber(fee)
-      max = maxB.gt(feeB) ? maxB.minus(feeB).toString() : 0
-    }
-
-    setAmount(formatAmount(max, pool.currency.decimal, 6))
+    setAmount(formatAmount(max, farmPools && farmPools.decimal, 6))
   }
 
   const onChange = (e) => {
@@ -82,7 +69,68 @@ const DepositPopup = (props) => {
     }
   }
 
+  const onApprove = (e) => {
+    const contract = getContract(library, ERC20.abi, farmPools.address)
+    contract.methods
+      .approve(
+        farmPools.address,
+        '0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff'
+      )
+      .send({
+        from: account,
+      })
+      .on('receipt', (_, receipt) => {
+        console.log('approve success')
+        setApprove(false)
+      })
+      .on('error', (err, receipt) => {
+        console.log('approve error', err)
+        dispatch({
+          type: HANDLE_SHOW_FAILED_TRANSACTION_MODAL,
+          showFailedTransactionModal: true,
+        })
+        dispatch({
+          type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
+          showWaitingWalletConfirmModal: waitingForInit,
+        })
+      })
+  }
+
   const onConfirm = (e) => {
+    if (!amount) {
+      return false
+    }
+    if (isNaN(parseInt(amount))) {
+      return false
+    }
+    const pool_contract = getContract(library, farmPools.abi, farmPools.address)
+    pool_contract.methods
+      .offer(Web3.utils.toWei(`${amount}`, 'ether'))
+      .send({
+        from: account,
+      })
+      .on('receipt', (_, receipt) => {
+        console.log('BOT staking success')
+        dispatch({
+          type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
+          showWaitingWalletConfirmModal: waitingForInit,
+        })
+        dispatch({
+          type: HANDLE_SHOW_TRANSACTION_MODAL,
+          showTransactionModal: true,
+        })
+      })
+      .on('error', (err, receipt) => {
+        console.log('BOT staking error', err)
+        dispatch({
+          type: HANDLE_SHOW_FAILED_TRANSACTION_MODAL,
+          showFailedTransactionModal: true,
+        })
+        dispatch({
+          type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
+          showWaitingWalletConfirmModal: waitingForInit,
+        })
+      })
     onClose()
   }
 
@@ -100,7 +148,9 @@ const DepositPopup = (props) => {
             </h1>
             <p className='form-app__inputbox-after-text farm_popup_avaliable'>
               <FormattedMessage id='farm4' />
-              <span>999 WAR</span>
+              <span>
+                {farmPools && balance - 0 ? balance + farmPools.rewards : '--'}
+              </span>
             </p>
 
             <div className='deposit__inputbox form-app__inputbox'>
@@ -125,13 +175,24 @@ const DepositPopup = (props) => {
             </div>
 
             <div className='form-app__submit form-app__submit--row'>
-              <button
-                type='button'
-                className='btn btn--medium'
-                onClick={onConfirm}
-              >
-                <FormattedMessage id='farm3' />
-              </button>
+              {approve && (
+                <button
+                  type='button'
+                  className='btn btn--medium'
+                  onClick={onApprove}
+                >
+                  <FormattedMessage id='poolText21' />
+                </button>
+              )}
+              {!approve && (
+                <button
+                  type='button'
+                  className='btn btn--medium'
+                  onClick={onConfirm}
+                >
+                  <FormattedMessage id='farm3' />
+                </button>
+              )}
             </div>
           </div>
         </form>

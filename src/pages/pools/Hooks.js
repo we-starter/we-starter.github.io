@@ -754,30 +754,53 @@ export const useFarmInfo = (address = '') => {
 
   const now = parseInt(Date.now() / 1000)
 
+  const [farmPoolsInfo, setFarmPoolsInfo] = useState(Farm)
+
   useEffect(() => {
     if (library) {
+      console.log(Farm, 'Farm')
       Promise.all(
         Farm.map((pool) => {
           const pool_contract = getContract(library, pool.abi, pool.address)
+          const currency_token = getContract(library, ERC20, pool.address)
           const promise_list = [
             pool_contract.methods.begin().call(), // 开始时间
-            pool_contract.methods.rewardsToken().call(), // token1 地址
+            pool_contract.methods.earned(account).call(), // 奖励1
+            pool_contract.methods.earned2(account).call(), // 奖励2
             pool_contract.methods.totalSupply().call(), // 总抵押
             pool_contract.methods.balanceOf(account).call(), // 我的抵押
+            currency_token.methods.allowance(account, pool.address).call(),
           ]
           return Promise.all(promise_list).then(
-            ([begin, rewardsToken, totalSupply, balanceOf]) => {
-              console.log(begin, rewardsToken, totalSupply, balanceOf, 111111)
+            ([
+              begin,
+              earned,
+              earned2,
+              totalSupply,
+              balanceOf,
+              currency_allowance,
+            ]) => {
+              return Object.assign({}, pool, {
+                start_at: begin,
+                earned,
+                earned2,
+                totalSupply,
+                balanceOf: Web3.utils.fromWei(balanceOf, 'ether'),
+                allowance: currency_allowance,
+              })
             }
           )
         })
       )
-        .then((res) => {
-          console.log(res)
+        .then((pools) => {
+          console.log(pools)
+          setFarmPoolsInfo(pools)
         })
         .catch((err) => {
-          console.log(err)
+          console.log(err, 'farm')
         })
     }
   }, [account, address, blockHeight])
+  console.log(farmPoolsInfo, 'farmPoolsInfo')
+  return farmPoolsInfo
 }

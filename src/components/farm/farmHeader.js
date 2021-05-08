@@ -16,11 +16,12 @@ import { FormattedMessage } from 'react-intl'
 import Form from 'antd/lib/form/Form'
 import { CHANGE_LOCALE } from '../../const'
 import { useHTBalance, useBalance } from '../../pages/Hooks'
+import { WAR_ADDRESS } from '../../web3/address'
 import { FarmBanner } from './farmBanner'
 import Exchange from '../../assets/icon/exchange@2x.png'
 
 const FarmHeader = (props) => {
-  const { active, account } = useActiveWeb3React()
+  const { active, account, chainId } = useActiveWeb3React()
   const { dispatch, state } = useContext(mainContext)
 
   const [showMenu, setShowMenu] = useState(false)
@@ -30,8 +31,7 @@ const FarmHeader = (props) => {
     (state.locale === 'en' && '中文简体') ||
       (state.locale === 'zh' && 'English')
   )
-  const { balance } = useBalance('0x910651F81a605a6Ef35d05527d24A72fecef8bF0')
-  console.log(balance, 'balance')
+  const { balance } = useBalance(WAR_ADDRESS(chainId))
   const handleMenuItemClick = () => {
     setShowMenu(false)
   }

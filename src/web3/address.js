@@ -318,5 +318,7 @@ export function WAR_ADDRESS(chainId) {
   switch (chainId) {
     case 128:
       return '0x910651F81a605a6Ef35d05527d24A72fecef8bF0'
+    case 3:
+      return '0x910651F81a605a6Ef35d05527d24A72fecef8bF0'
   }
 }
