@@ -1,11 +1,15 @@
 @media #{$desktop} {
+  .farm_box {
+    min-width: 1080px;
+    background: #fff;
+  }
   .farm_index {
     position: relative;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 1080px;
     margin: 74px auto 112px;
+    width: 1080px;
     &_card {
       position: relative;
       padding: 42px 30px 30px;
@@ -153,14 +157,18 @@
   }
 }
 @media #{$mdWidth} {
+  .farm_box {
+    min-width: 1080px;
+    background: #fff;
+  }
   .farm_index {
     position: relative;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 1080px;
     margin: 74px auto 0;
     padding-bottom: 112px;
+    width: 1080px;
     &_card {
       position: relative;
       padding: 42px 30px 30px;
