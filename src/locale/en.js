@@ -1,6 +1,6 @@
 const en_US = {
   fundraisingPool: 'Pool',
-  farm: 'Farm',
+  farm: 'Farms',
   mortgage: 'collateral mining',
   liquidityPool: 'liquidity mining',
   crowdfund: 'Crowdfunding Pool',

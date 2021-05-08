@@ -1,12 +1,11 @@
 @media #{$desktop} {
   .farm_index {
     position: relative;
-    top: -18px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 1080px;
-    margin: 0 auto 112px;
+    margin: 74px auto 112px;
     &_card {
       position: relative;
       padding: 42px 30px 30px;
@@ -156,12 +155,11 @@
 @media #{$mdWidth} {
   .farm_index {
     position: relative;
-    top: -18px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 1080px;
-    margin: 0 auto;
+    margin: 74px auto 112px;
     &_card {
       position: relative;
       padding: 42px 30px 30px;

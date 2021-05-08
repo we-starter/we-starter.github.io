@@ -6,7 +6,7 @@ import Footer from '../../components/Footer'
 import { HANDLE_WALLET_MODAL } from '../../const'
 import { mainContext } from '../../reducer'
 import { formatAmount } from '../../utils/format'
-import {useAPR, useFarmInfo} from './Hooks'
+import { useAPR, useFarmInfo } from './Hooks'
 import WARHT_Small from '../../assets/icon/farm/WAR HT_small@2x.png'
 import Coming_Small from '../../assets/icon/farm/coming_small@2x.png'
 import { useBalance } from '../Hooks'
@@ -16,7 +16,12 @@ const Farm = (props) => {
   const pools = useFarmInfo()
   const farmPools = pools[0]
   const { balance } = useBalance(farmPools && farmPools.MLP)
-  const apr = useAPR(farmPools.address, farmPools.abi, farmPools.MLP, farmPools.rewards1Address)
+  const apr = useAPR(
+    farmPools.address,
+    farmPools.abi,
+    farmPools.MLP,
+    farmPools.rewards1Address
+  )
 
   return (
     <div style={{ minHeight: '100%', background: '#fff' }}>
@@ -91,8 +96,9 @@ const Farm = (props) => {
           </p>
           <p className='farm_index_card_value'>
             <FormattedMessage id='farm4' />
+            {/* 为了和 farmPools.balanceOf 展示同步 */}
             <span>
-              {farmPools && balance - 0
+              {farmPools && farmPools.balanceOf
                 ? formatAmount(balance) + ' ' + farmPools.rewards
                 : '--'}
             </span>

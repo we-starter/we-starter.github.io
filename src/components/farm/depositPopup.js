@@ -149,7 +149,7 @@ const DepositPopup = (props) => {
             <p className='form-app__inputbox-after-text farm_popup_avaliable'>
               <FormattedMessage id='farm4' />
               <span>
-                {farmPools && balance - 0
+                {farmPools && farmPools.balanceOf
                   ? formatAmount(balance) + ' ' + farmPools.rewards
                   : '--'}
               </span>

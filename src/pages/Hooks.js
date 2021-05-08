@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import StakingRewardsV2 from '../web3/abi/StakingRewardsV2.json'
 import ERC20 from '../web3/abi/ERC20.json'
+import { useFarmInfo } from './pools/Hooks'
 import { getContract, getWeb3, useActiveWeb3React } from '../web3'
 import { getGLFStakingAddress } from '../web3/address'
 
@@ -35,6 +36,7 @@ export const useGLFBalance = () => {
 export const useBalance = (address) => {
   const { account, active, library } = useActiveWeb3React()
   const [balance, setBalance] = useState(0)
+  const pools = useFarmInfo()
 
   useEffect(() => {
     console.log(active)
@@ -62,7 +64,7 @@ export const useBalance = (address) => {
         console.log('load token balance error:', e)
       }
     }
-  }, [active])
+  }, [active, pools])
 
   return { balance }
 }
@@ -94,7 +96,6 @@ export const useHTBalance = () => {
 
   return { balance }
 }
-
 
 export const useAllowance = (contract_address, address) => {
   const { account, active, library } = useActiveWeb3React()
