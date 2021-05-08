@@ -2,6 +2,7 @@ const NETWORK_ID_ETHEREUM_MAINNET = 1
 const NETWORK_ID_ETHEREUM_ROPSTEN = 3
 const NETWORK_ID_HUOBI_ECO_CHAIN_MAINNET = 128
 
+export const ADDRESS_0 = '0x0000000000000000000000000000000000000000'
 // GLF token
 export function getGalleryAddress(chainId) {
   switch (chainId) {
@@ -320,5 +321,24 @@ export function WAR_ADDRESS(chainId) {
       return '0x910651F81a605a6Ef35d05527d24A72fecef8bF0'
     case 3:
       return '0x910651F81a605a6Ef35d05527d24A72fecef8bF0'
+  }
+}
+
+
+export function MDEX_FACTORY_ADDRESS(chainId) {
+  switch (chainId) {
+    case 128:
+      return '0xb0b670fc1F7724119963018DB0BfA86aDb22d941'
+    case 3:
+      return '0xb0b670fc1F7724119963018DB0BfA86aDb22d941'
+  }
+}
+
+export function MINE_MOUNTAIN_ADDRESS(chainId) {
+  switch (chainId) {
+    case 128:
+      return '0xEEC6169616d6E50560E52460A2C74f74Cdf57b6F'
+    case 3:
+      return '0xEEC6169616d6E50560E52460A2C74f74Cdf57b6F'
   }
 }

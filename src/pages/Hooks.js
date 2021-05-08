@@ -94,3 +94,25 @@ export const useHTBalance = () => {
 
   return { balance }
 }
+
+
+export const useAllowance = (contract_address, address) => {
+  const { account, active, library } = useActiveWeb3React()
+  const [allowance, setAllowance] = useState(0)
+  useEffect(() => {
+    if (active) {
+      try {
+        const contract = getContract(library, ERC20.abi, contract_address)
+        contract.methods
+          .allowance(address)
+          .call()
+          .then((res) => {
+            console.log('token allowance:', res)
+            setAllowance(res)
+          })
+      } catch (e) {
+        console.log('load token allowance error:', e)
+      }
+    }
+  }, [account, library, active])
+}
