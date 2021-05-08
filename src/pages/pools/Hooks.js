@@ -822,6 +822,20 @@ export const useTotalRewards = (address, abi) => {
       setTotal(_total)
     }
   }, [active, library])
+  return total;
+}
+
+export const useSpan = (address, abi) => {
+  const { account, active, library, chainId } = useActiveWeb3React()
+  const [span, setSpan] = useState(0)
+  useEffect(async() => {
+    if(library){
+      const contract = getContract(library, abi, address)
+      const _total = await contract.methods.rewards(ADDRESS_0).call()
+      setSpan(_total)
+    }
+  }, [active, library])
+  return span
 }
 
 export const useAPR = (
@@ -847,18 +861,10 @@ export const useAPR = (
     new BigNumber(unClaimReward)
   )
 
-  const reward1 = useRewardsValue(
-    reward1_address,
-    WAR_ADDRESS(chainId),
-    reward1_vol
-  )
-
-  // 挖MDEX币比较特殊
-  if (true) {
-  }
+  const reward1 = useRewardsValue(reward1_address, WAR_ADDRESS(chainId), reward1_vol)
 }
 
-export const useMdx = () => {
+export const useMdxARP = () => {
   // mdx 年释放总量 * 价值 /
 }
 
