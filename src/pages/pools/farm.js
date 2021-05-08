@@ -16,11 +16,16 @@ const Farm = (props) => {
   const pools = useFarmInfo()
   const farmPools = pools[0]
   const { balance } = useBalance(farmPools && farmPools.MLP)
-  const apr = useAPR(farmPools.address, farmPools.abi, farmPools.MLP, farmPools.rewards1Address)
+  const apr = useAPR(
+    farmPools.address,
+    farmPools.abi,
+    farmPools.MLP,
+    farmPools.rewards1Address
+  )
   const [aprPercentage, setPercentage] = useState('-')
   useEffect(() => {
     console.log('apr', apr)
-    if(!isNaN(apr) && apr > 0){
+    if (!isNaN(apr) && apr > 0) {
       setPercentage((apr * 100).toFixed(2))
     }
   }, [apr])
@@ -173,9 +178,9 @@ const Farm = (props) => {
             <span>--</span>
           </p>
           <p className='farm_index_card_getMLP'>
-            <FormattedMessage id='farm13' /> -- {farmPools && farmPools.rewards}
+            {/* <FormattedMessage id='farm13' /> -- {farmPools && farmPools.rewards} */}
           </p>
-          <div className='farm_index_card_btn'>
+          <div className='farm_index_card_btn' style={{ marginTop: '34px' }}>
             <a className='deposit_btn disable_btn'>
               <FormattedMessage id='farm3' />
             </a>
@@ -219,9 +224,9 @@ const Farm = (props) => {
             <span>--</span>
           </p>
           <p className='farm_index_card_getMLP'>
-            <FormattedMessage id='farm13' /> -- {farmPools && farmPools.rewards}
+            {/* <FormattedMessage id='farm13' /> -- {farmPools && farmPools.rewards} */}
           </p>
-          <div className='farm_index_card_btn'>
+          <div className='farm_index_card_btn' style={{ marginTop: '34px' }}>
             <a className='deposit_btn disable_btn'>
               <FormattedMessage id='farm3' />
             </a>
