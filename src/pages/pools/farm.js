@@ -17,7 +17,13 @@ const Farm = (props) => {
   const farmPools = pools[0]
   const { balance } = useBalance(farmPools && farmPools.MLP)
   const apr = useAPR(farmPools.address, farmPools.abi, farmPools.MLP, farmPools.rewards1Address)
-
+  const [aprPercentage, setPercentage] = useState('-')
+  useEffect(() => {
+    console.log('apr', apr)
+    if(!isNaN(apr) && apr > 0){
+      setPercentage((apr * 100).toFixed(2))
+    }
+  }, [apr])
   return (
     <div style={{ minHeight: '100%', background: '#fff' }}>
       <FarmHeader />
@@ -28,7 +34,7 @@ const Farm = (props) => {
           </h3>
           <div className='farm_index_card_content'>
             <p className='apr'>
-              222.89%
+              {aprPercentage}%
               <span className='content_name'>
                 {farmPools && farmPools.earnName}
               </span>

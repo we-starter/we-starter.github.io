@@ -96,7 +96,7 @@ export const useHTBalance = () => {
 }
 
 
-export const useAllowance = (contract_address, address) => {
+export const useAllowance = (contract_address, address, owner_address) => {
   const { account, active, library } = useActiveWeb3React()
   const [allowance, setAllowance] = useState(0)
   useEffect(() => {
@@ -104,7 +104,7 @@ export const useAllowance = (contract_address, address) => {
       try {
         const contract = getContract(library, ERC20.abi, contract_address)
         contract.methods
-          .allowance(address)
+          .allowance(owner_address, address)
           .call()
           .then((res) => {
             console.log('token allowance:', res)

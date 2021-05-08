@@ -852,8 +852,8 @@ export const useAPR = (
   reward3_address = ''
 ) => {
   const { account, active, library, chainId } = useActiveWeb3React()
-  const [yearReward, setYearReward] = useState(0)
-  const [arp, setArp] = useState(0)
+  // const [yearReward, setYearReward] = useState(0)
+  const [apr, setApr] = useState(0)
 
   // 获取奖励1在矿山的总量
   const allowance = useAllowance(
@@ -868,31 +868,37 @@ export const useAPR = (
   const span = useSpan(pool_address, pool_abi)
 
   // 奖励1的价值
-  const reward1 = useRewardsValue(reward1_address, WAR_ADDRESS(chainId), yearReward)
+  // const reward1 = useRewardsValue(reward1_address, WAR_ADDRESS(chainId), yearReward)
 
   // 矿池总的LPT的价值
-  const lptValue = useLTPValue(lpt_address, WAR_ADDRESS[chainId])
+  const lptValue = useLTPValue(lpt_address, chainId && WAR_ADDRESS(chainId), pool_address, pool_abi)
 
   useEffect(() => {
-    if(library && reward1 && allowance && span){
+    console.log('allowance',allowance)
+    console.log('span',span)
+    if(library && allowance && span && lptValue > 0){
       const dayRate = new BigNumber(1).div(new BigNumber(span).div(new BigNumber(86400)))
-
+      console.log('dayRate', dayRate.toString())
       const reward1_vol = new BigNumber(allowance).minus(
         new BigNumber(unClaimReward)
       )
 
+      console.log('reward1_vol',reward1_vol)
+
       // 奖励的war
       const yearReward = dayRate.multipliedBy(reward1_vol).multipliedBy(new BigNumber(365)).toFixed(0, 1)
-      setYearReward(yearReward)
-
+      // setYearReward(yearReward)
+      console.log('yearReward', yearReward)
+      console.log('lptValue', lptValue)
       if(yearReward > 0) {
-        const arp = new BigNumber(reward1).div(new BigNumber(lptValue)).toString()
-        setArp(arp)
+        const _arp = new BigNumber(yearReward).div(new BigNumber(lptValue)).toString()
+        setApr(_arp * 1 + 2.5)
       }
     }
     return () => {}
-  }, [library, reward1, allowance, span, unClaimReward])
-  return arp
+  }, [library , allowance, span, unClaimReward, lptValue])
+
+  return apr
 }
 
 export const useMdxARP = () => {
@@ -900,6 +906,8 @@ export const useMdxARP = () => {
 }
 
 export const useMDexPrice = (address1, address2) => {
+  console.log('address1', address1)
+  console.log('address2', address2)
   const { account, active, library, chainId } = useActiveWeb3React()
   const [price, setPrice] = useState(0)
   useEffect(() => {
@@ -915,6 +923,7 @@ export const useMDexPrice = (address1, address2) => {
         factory.methods
           .getPair(address1, address2)
           .call().then(pair_address => {
+            console.log(pair_address)
             const pair_contract = getContract(library, LPT, pair_address)
             pair_contract.methods.getReserves().call().then(([num1, num2]) => {
               const _price = num2 / num1
@@ -933,7 +942,7 @@ export const useMDexPrice = (address1, address2) => {
  * 获取ltp的价值
  * @param address
  */
-export const useLTPValue = (address, token_address) => {
+export const useLTPValue = (address, token_address, pool_address, pool_abi) => {
   const { account, active, library, chainId } = useActiveWeb3React()
   const [value, setValue] = useState(0)
   useEffect(() => {
@@ -943,18 +952,35 @@ export const useLTPValue = (address, token_address) => {
         LPT,
         address
       )
+      const pool_contract = getContract(
+        library,
+        pool_abi,
+        pool_address
+      )
       const promise_list = [
         contract.methods.token0().call(),
         contract.methods.token1().call(),
         contract.methods.getReserves().call(),
+        contract.methods.totalSupply().call(),
+        pool_contract.methods.totalSupply().call(),
       ]
-      // Promise.all(promise_list).then(([token0_address, token1_address, [num0, num1]]) => {
-      //   if(token_address == token0_address){
-      //     setValue(new BigNumber(num0).multipliedBy(new BigNumber(2)))
-      //   }else if(token_address == token1_address) {
-      //     setValue(new BigNumber(num1).multipliedBy(new BigNumber(2)))
-      //   }
-      // })
+      Promise.all(promise_list).then(data => {
+        console.log(data)
+        console.log('#############')
+        const [token0_address, token1_address, {_reserve0, _reserve1}, totalSupply, poolTotalSupply] = data
+        console.log('_reserve0', _reserve0)
+        console.log('_reserve1', _reserve1)
+        console.log('token0_address', token0_address)
+        console.log('token1_address', token1_address)
+        console.log('token_address', token_address)
+        console.log('totalSupply', totalSupply)
+        console.log('poolTotalSupply', poolTotalSupply)
+        if(token_address == token0_address){
+          setValue(new BigNumber(_reserve0).multipliedBy(new BigNumber(2)).multipliedBy(new BigNumber(poolTotalSupply).div(new BigNumber(totalSupply))))
+        }else if(token_address == token1_address) {
+          setValue(new BigNumber(_reserve1).multipliedBy(new BigNumber(2)).multipliedBy(new BigNumber(poolTotalSupply).div(new BigNumber(totalSupply))))
+        }
+      })
     }
     return () => {}
   }, [library])
@@ -971,6 +997,7 @@ export const useRewardsValue = (address1, address2, vol) => {
   const price = useMDexPrice(address1, address2)
   const [value, setValue] = useState(0)
   useEffect(() => {
+    console.log('price', price)
     const _value = new BigNumber(price).multipliedBy(new BigNumber(vol))
     setValue(_value)
     return () => {}
