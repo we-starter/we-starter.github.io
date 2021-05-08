@@ -21,13 +21,11 @@ import {
 import { mainContext } from '../../reducer'
 import BigNumber from 'bignumber.js'
 
-const { Option } = Select
-
 const ClaimPopup = (props) => {
-  const { intl, icon, onClose, farmPools } = props
+  const { intl, icon, onClose, pool } = props
+  const farmPools = pool
   const { account, active, library, chainId } = useActiveWeb3React()
   const { dispatch } = useContext(mainContext)
-  const [approve, setApprove] = useState(true)
   const [amount, setAmount] = useState('')
   const [fee, setFee] = useState(0)
 
@@ -41,12 +39,6 @@ const ClaimPopup = (props) => {
     const _fee = gas_limit.multipliedBy(gas_price).toString()
     setFee(_fee)
   }, [])
-
-  useEffect(() => {
-    if (farmPools && farmPools.allowance > 0) {
-      setApprove(false)
-    }
-  }, [farmPools])
 
   const onMax = () => {
     let max = balance
@@ -66,6 +58,12 @@ const ClaimPopup = (props) => {
   }
 
   const onConfirmAll = (e) => {
+    if (!amount) {
+      return false
+    }
+    if (isNaN(parseInt(amount))) {
+      return false
+    }
     const contract = getContract(library, farmPools.abi, farmPools.address)
     contract.methods
       .exit()
@@ -104,6 +102,12 @@ const ClaimPopup = (props) => {
   }
 
   const onConfirm = (e) => {
+    if (!amount) {
+      return false
+    }
+    if (isNaN(parseInt(amount))) {
+      return false
+    }
     const contract = getContract(library, farmPools.abi, farmPools.address)
     contract.methods
       .exit()
@@ -150,7 +154,7 @@ const ClaimPopup = (props) => {
               className='form-app__title h3'
               style={{ marginTop: 0, marginBottom: '10px' }}
             >
-              <FormattedMessage id='claim' />
+              <FormattedMessage id='farm16' />
               <a className='farm_popup_close_btn' onClick={onClose}></a>
             </h1>
             <p className='form-app__inputbox-after-text farm_popup_avaliable'>
@@ -170,7 +174,7 @@ const ClaimPopup = (props) => {
                     onChange={onChange}
                     className='input'
                     placeholder={intl.formatMessage({
-                      id: 'money',
+                      id: 'farm15',
                     })}
                   />
                 </div>
@@ -195,13 +199,15 @@ const ClaimPopup = (props) => {
             <p className='form-app__inputbox-after-text farm_popup_avaliable'>
               <FormattedMessage id='farm6' values={{ coin: 'WAR' }} />
               <span>
-                {farmPools ? farmPools.earned + ' ' + farmPools.rewards1 : '--'}
+                {farmPools && farmPools.earned
+                  ? farmPools.earned + ' ' + farmPools.rewards1
+                  : '--'}
               </span>
             </p>
             <p className='form-app__inputbox-after-text farm_popup_avaliable'>
               <FormattedMessage id='farm6' values={{ coin: 'LEV' }} />
               <span>
-                {farmPools
+                {farmPools && farmPools.earned2
                   ? farmPools.earned2 + ' ' + farmPools.rewards2
                   : '--'}
               </span>

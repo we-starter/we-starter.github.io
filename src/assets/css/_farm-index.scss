@@ -56,7 +56,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 16px;
+      margin-bottom: 12px;
       border-bottom: 1px solid #b3d7cb;
       .apr,
       .countdown {
@@ -102,10 +102,13 @@
     &_card_getMLP {
       margin-bottom: 0;
       font-size: 14px;
-      line-height: 28px;
+      line-height: 26px;
       font-family: IBMPlexSans;
       font-weight: 600;
       color: #0f8c20;
+      &:hover {
+        color: #00b900;
+      }
     }
     &_card_btn {
       display: flex;
@@ -208,7 +211,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 16px;
+      margin-bottom: 12px;
       border-bottom: 1px solid #b3d7cb;
       .apr,
       .countdown {
@@ -254,10 +257,13 @@
     &_card_getMLP {
       margin-bottom: 0;
       font-size: 14px;
-      line-height: 28px;
+      line-height: 26px;
       font-family: IBMPlexSans;
       font-weight: 600;
       color: #0f8c20;
+      &:hover {
+        color: #00b900;
+      }
     }
     &_card_btn {
       display: flex;
@@ -361,7 +367,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 16px;
+      margin-bottom: 12px;
       border-bottom: 1px solid #b3d7cb;
       .apr,
       .countdown {
@@ -407,10 +413,13 @@
     &_card_getMLP {
       margin-bottom: 0;
       font-size: 14px;
-      line-height: 28px;
+      line-height: 26px;
       font-family: IBMPlexSans;
       font-weight: 600;
       color: #0f8c20;
+      &:hover {
+        color: #00b900;
+      }
     }
     &_card_btn {
       display: flex;
@@ -514,7 +523,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 16px;
+      margin-bottom: 12px;
       border-bottom: 1px solid #b3d7cb;
       .apr,
       .countdown {
@@ -560,10 +569,13 @@
     &_card_getMLP {
       margin-bottom: 0;
       font-size: 14px;
-      line-height: 28px;
+      line-height: 26px;
       font-family: IBMPlexSans;
       font-weight: 600;
       color: #0f8c20;
+      &:hover {
+        color: #00b900;
+      }
     }
     &_card_btn {
       display: flex;

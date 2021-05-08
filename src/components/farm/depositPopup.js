@@ -21,10 +21,9 @@ import {
 import { mainContext } from '../../reducer'
 import BigNumber from 'bignumber.js'
 
-const { Option } = Select
-
 const DepositPopup = (props) => {
-  const { intl, icon, onClose, farmPools } = props
+  const { intl, icon, onClose, pool } = props
+  const farmPools = pool
   const { account, active, library, chainId } = useActiveWeb3React()
   const { dispatch } = useContext(mainContext)
   const [approve, setApprove] = useState(true)
@@ -32,9 +31,6 @@ const DepositPopup = (props) => {
   const [fee, setFee] = useState(0)
 
   const { balance } = useBalance(farmPools && farmPools.MLP)
-  const handleChange = (value) => {
-    console.log(`selected ${value}`)
-  }
 
   useEffect(() => {
     const gas_limit = new BigNumber('1006182')
@@ -70,6 +66,12 @@ const DepositPopup = (props) => {
   }
 
   const onApprove = (e) => {
+    if (!amount) {
+      return false
+    }
+    if (isNaN(parseInt(amount))) {
+      return false
+    }
     const contract = getContract(library, ERC20.abi, farmPools.address)
     contract.methods
       .approve(
@@ -149,7 +151,9 @@ const DepositPopup = (props) => {
             <p className='form-app__inputbox-after-text farm_popup_avaliable'>
               <FormattedMessage id='farm4' />
               <span>
-                {farmPools && balance - 0 ? balance + farmPools.rewards : '--'}
+                {farmPools && balance - 0
+                  ? formatAmount(balance) + farmPools.rewards
+                  : '--'}
               </span>
             </p>
 
