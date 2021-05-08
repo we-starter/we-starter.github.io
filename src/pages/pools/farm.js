@@ -77,7 +77,7 @@ const Farm = (props) => {
             <FormattedMessage id='farm11' />
             <span>
               {farmPools && farmPools.totalSupply
-                ? farmPools.totalSupply + ' ' + farmPools.rewards
+                ? formatAmount(farmPools.totalSupply) + ' ' + farmPools.rewards
                 : '--'}
             </span>
           </p>
@@ -85,7 +85,7 @@ const Farm = (props) => {
             <FormattedMessage id='farm12' />
             <span>
               {farmPools && farmPools.balanceOf
-                ? farmPools.balanceOf + ' ' + farmPools.rewards
+                ? formatAmount(farmPools.balanceOf) + ' ' + farmPools.rewards
                 : '--'}
             </span>
           </p>

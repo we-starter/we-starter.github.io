@@ -162,7 +162,7 @@ const ClaimPopup = (props) => {
               <FormattedMessage id='farm12' />
               <span>
                 {farmPools && farmPools.balanceOf
-                  ? farmPools.balanceOf + ' ' + farmPools.rewards
+                  ? formatAmount(farmPools.balanceOf) + ' ' + farmPools.rewards
                   : '--'}
               </span>
             </p>
@@ -171,7 +171,9 @@ const ClaimPopup = (props) => {
               <div className='form-app__inputbox-control'>
                 <div className='form-app__inputbox-input'>
                   <input
-                    value={(farmPools && farmPools.balanceOf) || 0}
+                    value={
+                      (farmPools && formatAmount(farmPools.balanceOf)) || 0
+                    }
                     onChange={onChange}
                     className='input'
                     disabled
@@ -199,18 +201,24 @@ const ClaimPopup = (props) => {
               </button>
             </div>
             <p className='form-app__inputbox-after-text farm_popup_avaliable'>
-              <FormattedMessage id='farm6' values={{ coin: 'WAR' }} />
+              <FormattedMessage
+                id='farm6'
+                values={{ coin: farmPools && farmPools.rewards1 }}
+              />
               <span>
                 {farmPools && farmPools.earned
-                  ? farmPools.earned + ' ' + farmPools.rewards1
+                  ? formatAmount(farmPools.earned) + ' ' + farmPools.rewards1
                   : '--'}
               </span>
             </p>
             <p className='form-app__inputbox-after-text farm_popup_avaliable'>
-              <FormattedMessage id='farm6' values={{ coin: 'LEV' }} />
+              <FormattedMessage
+                id='farm6'
+                values={{ coin: farmPools && farmPools.rewards2 }}
+              />
               <span>
                 {farmPools && farmPools.earned2
-                  ? farmPools.earned2 + ' ' + farmPools.rewards2
+                  ? formatAmount(farmPools.earned2) + ' ' + farmPools.rewards2
                   : '--'}
               </span>
             </p>
