@@ -235,7 +235,7 @@ export const Header = () => {
                 )}
               </div> */}
             </div>
-            {active && <img className='exchange' src={Exchange} />}
+            {/* {active && <img className='exchange' src={Exchange} />} */}
             {active && (
               <div className='ht-balance'>
                 <span></span>

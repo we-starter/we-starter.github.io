@@ -282,7 +282,7 @@ const en_US = {
   warLBP5: 'Slippage tolerance',
   warLBP6: 'Succeed',
   warLBP7: 'Please visit MDEX for trading',
-  farm1: 'FARMS',
+  farm1: 'Farms',
   farm2:
     'You could farm different policy with the notice of expiration date.Flash Mining is a short-term policy mining campaign.',
   farm3: 'Stake',
@@ -302,5 +302,8 @@ const en_US = {
   farm14: 'Ongoing',
   farm15: 'Staking Amounts',
   farm16: 'Unstake',
+  farm17: 'Buy',
+  farm18: '当前价',
+  farm19: 'WAR Contract Address:',
 }
 export default en_US

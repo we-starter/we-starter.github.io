@@ -298,5 +298,8 @@ const zh_CN = {
   SecondM: '秒',
   farm14: '永久有效',
   farm15: '请输入抵押数量',
+  farm17: '购买',
+  farm18: '当前价',
+  farm19: 'WAR 合约地址:',
 }
 export default zh_CN

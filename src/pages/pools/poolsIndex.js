@@ -45,11 +45,8 @@ const PoolsIndex = (props) => {
   const [poolSum, setPoolSum] = useState(0)
   const { account, active, library } = useActiveWeb3React()
 
-  // const pools = usePoolsInfo()
-  // const poolsLBP = usePoolsLBPInfo()
-
-  const pools = []
-  const poolsLBP = []
+  const pools = usePoolsInfo()
+  const poolsLBP = usePoolsLBPInfo()
 
   const _poolsIDO = JSON.parse(JSON.stringify(pools))
   const _poolsLBP = JSON.parse(JSON.stringify(poolsLBP))
