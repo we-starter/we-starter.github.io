@@ -342,3 +342,4 @@ export function MINE_MOUNTAIN_ADDRESS(chainId) {
       return '0xEEC6169616d6E50560E52460A2C74f74Cdf57b6F'
   }
 }
+
