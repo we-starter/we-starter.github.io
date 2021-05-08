@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { usage } from 'browserslist'
 import { formatAmount, numToWei, splitFormat } from '../../utils/format'
 import { getRandomIntInclusive } from '../../utils/index'
-import { Select } from 'antd'
+import { Button } from 'antd'
 import { useBalance } from '../../pages/Hooks'
 import { getPointAddress } from '../../web3/address'
 import Web3 from 'web3'
@@ -29,6 +29,7 @@ const DepositPopup = (props) => {
   const [approve, setApprove] = useState(true)
   const [amount, setAmount] = useState('')
   const [fee, setFee] = useState(0)
+  const [loadFlag, setLoadFlag] = useState(false)
 
   const { balance } = useBalance(farmPools && farmPools.MLP)
 
@@ -72,8 +73,9 @@ const DepositPopup = (props) => {
     if (isNaN(parseInt(amount))) {
       return false
     }
+    if (loadFlag) return
+    setLoadFlag(true)
     const contract = getContract(library, ERC20.abi, farmPools.MLP)
-
     contract.methods
       .approve(
         farmPools.address,
@@ -84,6 +86,7 @@ const DepositPopup = (props) => {
       })
       .on('receipt', (_, receipt) => {
         console.log('approve success')
+        setLoadFlag(false)
         setApprove(false)
       })
       .on('error', (err, receipt) => {
@@ -96,6 +99,7 @@ const DepositPopup = (props) => {
           type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
           showWaitingWalletConfirmModal: waitingForInit,
         })
+        setLoadFlag(false)
       })
   }
 
@@ -106,6 +110,8 @@ const DepositPopup = (props) => {
     if (isNaN(parseInt(amount))) {
       return false
     }
+    if (loadFlag) return
+    setLoadFlag(true)
     const pool_contract = getContract(library, farmPools.abi, farmPools.address)
     pool_contract.methods
       .stake(Web3.utils.toWei(`${amount}`, 'ether'))
@@ -122,6 +128,7 @@ const DepositPopup = (props) => {
           type: HANDLE_SHOW_TRANSACTION_MODAL,
           showTransactionModal: true,
         })
+        setLoadFlag(false)
         onClose()
       })
       .on('error', (err, receipt) => {
@@ -134,6 +141,7 @@ const DepositPopup = (props) => {
           type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
           showWaitingWalletConfirmModal: waitingForInit,
         })
+        setLoadFlag(false)
       })
   }
 
@@ -178,22 +186,15 @@ const DepositPopup = (props) => {
 
             <div className='form-app__submit form-app__submit--row'>
               {approve && (
-                <button
-                  type='button'
-                  className='btn btn--medium'
-                  onClick={onApprove}
-                >
-                  <FormattedMessage id='poolText21' />
-                </button>
+                <Button type='primary' onClick={onApprove} loading={loadFlag}>
+                  <FormattedMessage id='farm20' />
+                </Button>
               )}
+
               {!approve && (
-                <button
-                  type='button'
-                  className='btn btn--medium'
-                  onClick={onConfirm}
-                >
+                <Button type='primary' onClick={onConfirm} loading={loadFlag}>
                   <FormattedMessage id='farm3' />
-                </button>
+                </Button>
               )}
             </div>
           </div>

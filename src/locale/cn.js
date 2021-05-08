@@ -301,5 +301,6 @@ const zh_CN = {
   farm17: '购买',
   farm18: '当前价',
   farm19: 'WAR合约地址:',
+  farm20: '授权',
 }
 export default zh_CN

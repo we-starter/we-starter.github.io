@@ -304,5 +304,6 @@ const en_US = {
   farm17: 'Buy',
   farm18: 'Real-time Price',
   farm19: 'WAR Contract Address:',
+  farm20: 'Approve',
 }
 export default en_US

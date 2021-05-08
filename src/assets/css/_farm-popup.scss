@@ -2,6 +2,25 @@
   max-width: 100%;
   width: 100%;
 }
+.ant-btn-primary {
+  padding: 0 16px;
+  width: 100%;
+  height: 40px;
+  font-size: 14px;
+  font-family: HelveticaNeue-Medium, HelveticaNeue;
+  font-weight: 500;
+  line-height: 40px;
+  border-radius: 100px;
+  background: #0f8c20 !important;
+  color: #ffffff;
+  border-color: #0f8c20 !important;
+  box-shadow: none;
+  text-shadow: none;
+  &:hover {
+    background: #00b900 !important;
+    border-color: #0f8c20 !important;
+  }
+}
 @media #{$desktop} {
   .farm_popup {
     h1 {
@@ -33,6 +52,10 @@
       &:hover {
         background: #22292f;
       }
+    }
+    svg {
+      fill: #fff !important;
+      margin-right: 10px;
     }
   }
 }

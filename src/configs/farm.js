@@ -3,7 +3,7 @@ import { getRemainTime } from '../utils/time'
 
 export default [
   {
-    name: 'WAR-HT MLP',
+    name: 'WAR-HT HMDX',
     rewards1: 'WAR',
     rewards2: 'MDX',
     address: '0xE22da09d0B847291076bF5691a9D3908eB8CbAFe', // 超募合约地址
@@ -17,7 +17,7 @@ export default [
     openDate: getRemainTime('2021/05/11 22:00 UTC+8'),
     earnName: 'APR',
     status: 0,
-    rewards: 'MLP',
+    rewards: 'HMDX',
     decimal: 18,
   },
 ]
