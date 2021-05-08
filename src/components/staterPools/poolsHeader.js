@@ -1,5 +1,6 @@
 import React, { useEffect, useContext, useState } from 'react'
 import { useActiveWeb3React } from '../../web3'
+import { WAR_ADDRESS } from '../../web3/address'
 import globe from '../../assets/icon/globe.png'
 import { formatAddress, formatAmount } from '../../utils/format'
 import { withRouter } from 'react-router'
@@ -21,7 +22,7 @@ import { CHANGE_LOCALE } from '../../const'
 import { useHTBalance, useBalance } from '../../pages/Hooks'
 
 const PoolsHeader = (props) => {
-  const { active, account } = useActiveWeb3React()
+  const { active, account, chainId } = useActiveWeb3React()
   const { dispatch, state } = useContext(mainContext)
 
   const [showMenu, setShowMenu] = useState(false)
@@ -31,7 +32,7 @@ const PoolsHeader = (props) => {
     (state.locale === 'en' && '中文简体') ||
       (state.locale === 'zh' && 'English')
   )
-  const { balance } = useBalance('0x910651F81a605a6Ef35d05527d24A72fecef8bF0')
+  const { balance } = useBalance(WAR_ADDRESS(chainId))
   console.log(balance, 'balance')
   const handleMenuItemClick = () => {
     setShowMenu(false)
