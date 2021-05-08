@@ -5,6 +5,7 @@ import FarmHeader from '../../components/farm/farmHeader'
 import Footer from '../../components/Footer'
 import { HANDLE_WALLET_MODAL } from '../../const'
 import { mainContext } from '../../reducer'
+import { formatAmount } from '../../utils/format'
 import { useFarmInfo } from './Hooks'
 import WARHT_Small from '../../assets/icon/farm/WAR HT_small@2x.png'
 import Coming_Small from '../../assets/icon/farm/coming_small@2x.png'
@@ -22,7 +23,7 @@ const Farm = (props) => {
       <div className='farm_index'>
         <div className='farm_index_card'>
           <h3 className='farm_index_card_title'>
-            {farmPools && farmPools.name} <FormattedMessage id='farm9' />
+            {farmPools && farmPools.name}
           </h3>
           <div className='farm_index_card_content'>
             <p className='apr'>
@@ -32,7 +33,7 @@ const Farm = (props) => {
               </span>
             </p>
             <p className='countdown'>
-              {farmPools && typeof farmPools.openDate == 'object' ? (
+              {/* {farmPools && typeof farmPools.openDate == 'object' ? (
                 <span>
                   {farmPools.openDate.hour}
                   <b>
@@ -57,7 +58,11 @@ const Farm = (props) => {
                 </span>
               ) : (
                 <span>{farmPools.dueDate}</span>
-              )}
+              )} */}
+              <span>
+                {' '}
+                <FormattedMessage id='farm14' />
+              </span>
               <span className='content_name'>
                 <FormattedMessage id='farm8' />
               </span>
@@ -87,13 +92,17 @@ const Farm = (props) => {
             <FormattedMessage id='farm4' />
             <span>
               {farmPools && balance - 0
-                ? balance + ' ' + farmPools.rewards
+                ? formatAmount(balance) + ' ' + farmPools.rewards
                 : '--'}
             </span>
           </p>
-          <p className='farm_index_card_getMLP'>
+          <a
+            className='farm_index_card_getMLP'
+            href='https://ht.mdex.com/#/add/0x5545153ccfca01fbd7dd11c0b23ba694d9509a6f/0x910651f81a605a6ef35d05527d24a72fecef8bf0'
+            target='_black'
+          >
             <FormattedMessage id='farm13' /> {farmPools && farmPools.name}
-          </p>
+          </a>
           <div className='farm_index_card_btn'>
             <a
               className='deposit_btn'
@@ -101,6 +110,7 @@ const Farm = (props) => {
                 dispatch({
                   type: HANDLE_WALLET_MODAL,
                   walletModal: 'deposit',
+                  pool: farmPools && farmPools,
                 })
               }}
             >
@@ -112,10 +122,11 @@ const Farm = (props) => {
                 dispatch({
                   type: HANDLE_WALLET_MODAL,
                   walletModal: 'claim',
+                  pool: farmPools && farmPools,
                 })
               }}
             >
-              <FormattedMessage id='claim' />
+              <FormattedMessage id='farm16' />
             </a>
           </div>
         </div>

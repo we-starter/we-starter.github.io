@@ -86,11 +86,11 @@ export const InitPage = () => {
     walletModal,
     txStatus,
     pool,
-    farmPools,
     showMenuMaskModal,
     changeNetworkStatus,
   } = state
 
+  console.log(state, 'state')
   useEffect(() => {
     toolApi
       .getTotalNumAddresses(1)
@@ -333,7 +333,7 @@ export const InitPage = () => {
         <div className='modal-show'>
           <div className='wrapper' style={{ zIndex: 10 }}>
             <DepositPopup
-              pool={farmPools}
+              pool={pool}
               onClose={() =>
                 dispatch({
                   type: HANDLE_WALLET_MODAL,
@@ -349,7 +349,7 @@ export const InitPage = () => {
         <div className='modal-show'>
           <div className='wrapper' style={{ zIndex: 10 }}>
             <ClaimPopup
-              pool={farmPools}
+              pool={pool}
               onClose={() =>
                 dispatch({
                   type: HANDLE_WALLET_MODAL,

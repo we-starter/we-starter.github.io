@@ -151,7 +151,7 @@ const FarmHeader = (props) => {
               <img src={globe} alt='' />
               {language === '中文简体' ? '中文简体' : 'English'}
             </div>
-            {active && <img className='exchange' src={Exchange} />}
+            {/* {active && <img className='exchange' src={Exchange} />} */}
             {active && (
               <div className='ht-balance'>
                 <span></span>
