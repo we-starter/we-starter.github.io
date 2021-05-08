@@ -114,5 +114,7 @@ export const useAllowance = (contract_address, address) => {
         console.log('load token allowance error:', e)
       }
     }
+    return () => {}
   }, [account, library, active])
+  return allowance
 }

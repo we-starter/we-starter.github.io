@@ -73,6 +73,7 @@ const DepositPopup = (props) => {
       return false
     }
     const contract = getContract(library, ERC20.abi, farmPools.MLP)
+
     contract.methods
       .approve(
         farmPools.address,
