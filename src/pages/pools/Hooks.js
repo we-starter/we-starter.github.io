@@ -899,7 +899,7 @@ export const useAPR = (
       console.log('lptValue', lptValue)
       if(yearReward > 0) {
         const _arp = new BigNumber(yearReward).div(new BigNumber(lptValue)).toString()
-        setApr(_arp * 1 + 2.5)
+        setApr(_arp * 1 + 2.37)
       }
     }
     return () => {}
