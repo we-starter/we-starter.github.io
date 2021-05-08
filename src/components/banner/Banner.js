@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import { FormattedMessage } from 'react-intl'
 import { useActiveWeb3React } from '../../web3'
-import { WAR_ADDRESS } from '../../web3/address'
+import {USDT_ADDRESS, WAR_ADDRESS, WHT_ADDRESS} from '../../web3/address'
 import { useMDexPrice } from '../../pages/pools/Hooks'
 import Icon1 from '../../assets/icon/icon1@2x.png'
 import Icon2 from '../../assets/icon/icon2@2x.png'
@@ -22,10 +22,22 @@ export const Banner = () => {
   const pools = usePoolsInfo()
   const poolsLBP = usePoolsLBPInfo()
   const farmPools = useFarmInfo()
-  const realTimePrice = useMDexPrice(
-    farmPools && farmPools[0].rewards1Address,
-    farmPools && farmPools[0].rewards2Address
+  const [realTimePrice, setRealTimePrice] = useState('-')
+
+  const _tmp_price_ht = useMDexPrice(
+    chainId && WHT_ADDRESS(chainId),
+    chainId && WAR_ADDRESS(chainId)
   )
+
+  const _tmp_price_ht2usdt = useMDexPrice(
+    chainId && USDT_ADDRESS(chainId),
+    chainId && WHT_ADDRESS(chainId)
+  )
+
+  useEffect(() => {
+    console.log('_tmp_price_ht', _tmp_price_ht)
+    console.log('_tmp_price_ht2usdt', _tmp_price_ht2usdt)
+  }, [_tmp_price_ht, _tmp_price_ht2usdt])
   console.log(realTimePrice, 'realTimePrice')
 
   return (

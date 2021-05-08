@@ -343,3 +343,22 @@ export function MINE_MOUNTAIN_ADDRESS(chainId) {
   }
 }
 
+
+export function USDT_ADDRESS(chainId) {
+  switch (chainId) {
+    case 128:
+      return '0xa71edc38d189767582c38a3145b5873052c3e47a'
+    case 3:
+      return '0xa71edc38d189767582c38a3145b5873052c3e47a'
+  }
+}
+
+export function WHT_ADDRESS(chainId) {
+  switch (chainId) {
+    case 128:
+      return '0x5545153ccfca01fbd7dd11c0b23ba694d9509a6f'
+    case 3:
+      return ''
+  }
+}
+

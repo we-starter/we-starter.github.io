@@ -934,8 +934,9 @@ export const useMDexPrice = (address1, address2) => {
             pair_contract.methods
               .getReserves()
               .call()
-              .then(([num1, num2]) => {
-                const _price = num2 / num1
+              .then(data => {
+                const {_reserve0, _reserve1} = data
+                const _price = _reserve1 / _reserve0
                 setPrice(_price)
               })
           })
