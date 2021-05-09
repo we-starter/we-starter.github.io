@@ -140,7 +140,8 @@ const Farm = (props) => {
             href='https://ht.mdex.com/#/add/0x5545153ccfca01fbd7dd11c0b23ba694d9509a6f/0x910651f81a605a6ef35d05527d24a72fecef8bf0'
             target='_black'
           >
-            <FormattedMessage id='farm13' /> {farmPools && farmPools.name}
+            <FormattedMessage id='farm13' /> {farmPools && farmPools.name}(MDEX
+            LP Token)
           </a>
           <div className='farm_index_card_btn'>
             <a

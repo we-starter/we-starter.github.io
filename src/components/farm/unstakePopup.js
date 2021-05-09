@@ -103,7 +103,7 @@ const UnstakePopup = (props) => {
   }
 
   return (
-    <div style={{paddingTop: '30px'}}>
+    <div style={{ paddingTop: '30px' }}>
       <p className='form-app__inputbox-after-text farm_popup_avaliable'>
         <FormattedMessage id='farm12' />
         <span>
@@ -127,18 +127,18 @@ const UnstakePopup = (props) => {
             />
           </div>
 
-          <div className='form-app__inputbox-up' onClick={onMax}>
+          {/* <div className='form-app__inputbox-up' onClick={onMax}>
             <div className='form-app__inputbox-up-pref'>
               <FormattedMessage id='poolText19' />
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
 
       <div className='form-app__submit form-app__submit--row'>
         <button
           type='button'
-          className='btn btn--medium'
+          className='btn btn--medium compound_claim'
           onClick={onConfirmAll}
         >
           <FormattedMessage id='farm5' />
