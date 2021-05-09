@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import { FormattedMessage } from 'react-intl'
 import { useActiveWeb3React } from '../../web3'
-import {USDT_ADDRESS, WAR_ADDRESS, WHT_ADDRESS} from '../../web3/address'
+import { USDT_ADDRESS, WAR_ADDRESS, WHT_ADDRESS } from '../../web3/address'
 import { useMDexPrice } from '../../pages/pools/Hooks'
 import Icon1 from '../../assets/icon/icon1@2x.png'
 import Icon2 from '../../assets/icon/icon2@2x.png'
@@ -23,10 +23,12 @@ export const Banner = () => {
   const poolsLBP = usePoolsLBPInfo()
   const farmPools = useFarmInfo()
   const [realTimePrice, setRealTimePrice] = useState('-')
+  const WarTokenAddress =
+    WAR_ADDRESS[chainId] || '0x910651F81a605a6Ef35d05527d24A72fecef8bF0'
 
   const _tmp_price_war2ht = useMDexPrice(
-    chainId && WHT_ADDRESS(chainId),
-    chainId && WAR_ADDRESS(chainId)
+    chainId && WAR_ADDRESS(chainId),
+    chainId && WHT_ADDRESS(chainId)
   )
 
   const _tmp_price_usdt2ht = useMDexPrice(
@@ -37,11 +39,10 @@ export const Banner = () => {
   useEffect(() => {
     console.log('_tmp_price_war2ht', _tmp_price_war2ht)
     console.log('_tmp_price_usdt2ht', _tmp_price_usdt2ht)
-    const price = (_tmp_price_war2ht/_tmp_price_usdt2ht)
-    if(!isNaN(price) && price > 0){
+    const price = _tmp_price_war2ht / _tmp_price_usdt2ht
+    if (!isNaN(price) && price > 0) {
       setRealTimePrice(price.toFixed(3))
     }
-
   }, [_tmp_price_war2ht, _tmp_price_usdt2ht])
 
   return (
@@ -234,10 +235,10 @@ export const Banner = () => {
       </div>
       <a
         className='banner_address'
-        href={'https://hecoinfo.com/address/' + WAR_ADDRESS(chainId)}
+        href={'https://hecoinfo.com/address/' + WarTokenAddress}
         target='_blank'
       >
-        <FormattedMessage id='farm19' /> {WAR_ADDRESS(chainId)}
+        <FormattedMessage id='farm19' /> {WarTokenAddress}
         <svg
           t='1619095072712'
           className='icon'

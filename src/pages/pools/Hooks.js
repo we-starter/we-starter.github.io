@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { getContract, getLogs, useActiveWeb3React } from '../../web3'
 import {
-  ADDRESS_0,
-  MDEX_FACTORY_ADDRESS,
+  ADDRESS_0, MDEX_ADDRESS,
+  MDEX_FACTORY_ADDRESS, MDEX_POOL_ADDRESS,
   MINE_MOUNTAIN_ADDRESS,
   WAR_ADDRESS,
   WETH_ADDRESS,
@@ -11,6 +11,7 @@ import StakingReward from '../../web3/abi/StakingReward.json'
 import { abi as ERC20 } from '../../web3/abi/ERC20.json'
 import LPT from '../../web3/abi/LPT.json'
 import MDexFactory from '../../web3/abi/MDexFactory.json'
+import MDexPool from '../../web3/abi/MDexPool.json'
 import Pools from '../../configs/pools'
 import Farm from '../../configs/farm'
 import Web3 from 'web3'
@@ -857,8 +858,6 @@ export const useAPR = (
   pool_abi,
   lpt_address,
   reward1_address,
-  reward2_address = '',
-  reward3_address = ''
 ) => {
   const { account, active, library, chainId } = useActiveWeb3React()
   const blockHeight = useBlockHeight()
@@ -902,7 +901,7 @@ export const useAPR = (
       console.log('lptValue', lptValue)
       if(yearReward > 0) {
         const _arp = new BigNumber(yearReward).div(new BigNumber(lptValue)).toString()
-        setApr(_arp * 1 + 2.37)
+        setApr(_arp)
       }
     }
     return () => {}
@@ -911,8 +910,54 @@ export const useAPR = (
   return apr
 }
 
-export const useMdxARP = () => {
+export const useMdxARP = (pool_address,pool_abi,lpt_address,reward1_address) => {
   // mdx 年释放总量 * 价值 /
+
+  // cagefreedom:
+  //   收益/质押金额=（每日产出的MDX价值+每日产出的war价值）/总抵押价值 *365*100%
+  //
+  // cagefreedom:
+  //   MDEX每日产量可以写死
+  //
+  // cagefreedom:
+  //   价值=产量*价格
+  //
+  // cagefreedom:
+  //   3,510.72  MDX每日产出
+  // 13500 WAR每日产出
+
+  const { account, active, library, chainId } = useActiveWeb3React()
+  const [apr, setApr] = useState(0)
+  const blockHeight = useBlockHeight()
+  const lptValue = useLTPValue(lpt_address, chainId && WAR_ADDRESS(chainId), pool_address, pool_abi)
+  const mdex2warPrice = useMDexPrice(MDEX_ADDRESS, chainId && WAR_ADDRESS(chainId))
+  useEffect(() => {
+    if(library && lptValue > 0 && mdex2warPrice > 0){
+      const contract = getContract(library, MDexPool, MDEX_POOL_ADDRESS)
+      const pool_contract = getContract(library, pool_abi, pool_address)
+      const poolId = '0x4c'
+      const promiseList = [
+        contract.methods.poolInfo(poolId).call(),
+        pool_contract.methods.totalSupply().call(),
+      ]
+      Promise.all(promiseList).then(data => {
+        const [poolInfo, totalSupply] = data
+        const {totalAmount} = poolInfo
+        console.log('totalAmount', totalAmount)
+        console.log('totalSupply', totalSupply)
+        console.log('mdex2warPrice', mdex2warPrice)
+        const radio = new BigNumber(totalSupply).div(new BigNumber(totalAmount))
+        console.log('radio', radio.toString())
+        const totalRewardValue = new BigNumber(Web3.utils.toWei('3510.72', 'ether')).multipliedBy(radio).multipliedBy(new BigNumber(mdex2warPrice)).multipliedBy(new BigNumber(365))
+        console.log('totalRewardValue', totalRewardValue.toString())
+        console.log('lptValue', lptValue.toString())
+        const apr = totalRewardValue.div(lptValue).toString()
+        console.log('apr', apr)
+        setApr(apr)
+      })
+    }
+  }, [library, lptValue, mdex2warPrice, blockHeight])
+  return apr
 }
 
 export const useMDexPrice = (address1, address2) => {
@@ -932,15 +977,23 @@ export const useMDexPrice = (address1, address2) => {
           .getPair(address1, address2)
           .call().then(pair_address => {
             console.log(pair_address)
-            const pair_contract = getContract(library, LPT, pair_address)
-            pair_contract.methods
-              .getReserves()
-              .call()
-              .then(data => {
-                const {_reserve0, _reserve1} = data
+          const pair_contract = getContract(library, LPT, pair_address)
+            const promiseList = [
+              pair_contract.methods.token0().call(),
+              pair_contract.methods.token1().call(),
+              pair_contract.methods.getReserves().call()
+            ]
+            Promise.all(promiseList).then(data => {
+              const [token0, token1, getReserves] = data
+              const {_reserve0, _reserve1} = getReserves
+              if(token0.toLowerCase() == address2.toLowerCase()){
                 const _price = _reserve0 / _reserve1
                 setPrice(_price)
-              })
+              }else if(token1.toLowerCase() == address2.toLowerCase()) {
+                const _price = _reserve1 / _reserve0
+                setPrice(_price)
+              }
+            })
           })
       }
     }

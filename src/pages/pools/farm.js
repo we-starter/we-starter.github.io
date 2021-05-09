@@ -6,7 +6,7 @@ import Footer from '../../components/Footer'
 import { HANDLE_WALLET_MODAL } from '../../const'
 import { mainContext } from '../../reducer'
 import { formatAmount } from '../../utils/format'
-import { useAPR, useFarmInfo } from './Hooks'
+import {useAPR, useFarmInfo, useMdxARP} from './Hooks'
 import WARHT_Small from '../../assets/icon/farm/WAR HT_small@2x.png'
 import Coming_Small from '../../assets/icon/farm/coming_small@2x.png'
 import { useBalance } from '../Hooks'
@@ -22,13 +22,20 @@ const Farm = (props) => {
     farmPools.MLP,
     farmPools.rewards1Address
   )
+  const mdexApr = useMdxARP(
+    farmPools.address,
+    farmPools.abi,
+    farmPools.MLP,
+    farmPools.rewards1Address
+  )
   const [aprPercentage, setPercentage] = useState('-')
   useEffect(() => {
     console.log('apr', apr)
-    if (!isNaN(apr) && apr > 0) {
-      setPercentage((apr * 100).toFixed(2))
+    console.log('mdexApr', mdexApr)
+    if (!isNaN(apr) && apr > 0 && mdexApr > 0) {
+      setPercentage((apr * 100 + mdexApr * 100).toFixed(2))
     }
-  }, [apr])
+  }, [apr, mdexApr])
   return (
     <div className='farm_box' style={{ minHeight: '100%', background: '#fff' }}>
       <FarmHeader />

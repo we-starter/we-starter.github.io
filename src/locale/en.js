@@ -300,7 +300,7 @@ const en_US = {
   SecondM: 's',
   farm14: 'Ongoing',
   farm15: 'Staking Amounts',
-  farm16: 'Unstake',
+  farm16: 'Claim & Unstake',
   farm17: 'Buy',
   farm18: 'Real-time Price',
   farm19: 'WAR Contract Address:',
