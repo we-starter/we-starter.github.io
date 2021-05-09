@@ -59,7 +59,10 @@ const UnstakePopup = (props) => {
   }
 
   const onConfirmAll = (e) => {
-    if (!farmPools && farmPools.balanceOf) {
+    if (!active) {
+      return false
+    }
+    if (!(farmPools && farmPools.balanceOf)) {
       return false
     }
     if (isNaN(parseInt(farmPools && farmPools.balanceOf))) {

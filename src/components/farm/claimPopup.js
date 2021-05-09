@@ -28,7 +28,10 @@ const ClaimPopup = (props) => {
   const { dispatch } = useContext(mainContext)
 
   const onConfirm = (e) => {
-    if (!farmPools && farmPools.balanceOf) {
+    if (!active) {
+      return false
+    }
+    if (!(farmPools && farmPools.balanceOf)) {
       return false
     }
     if (isNaN(parseInt(farmPools && farmPools.balanceOf))) {

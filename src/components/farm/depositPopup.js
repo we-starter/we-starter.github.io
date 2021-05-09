@@ -67,6 +67,9 @@ const DepositPopup = (props) => {
   }
 
   const onApprove = (e) => {
+    if (!active) {
+      return false
+    }
     if (!amount) {
       return false
     }
@@ -104,6 +107,9 @@ const DepositPopup = (props) => {
   }
 
   const onConfirm = (e) => {
+    if (!active) {
+      return false
+    }
     if (!amount) {
       return false
     }
