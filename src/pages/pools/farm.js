@@ -3,10 +3,11 @@ import cs from 'classnames'
 import { FormattedMessage, injectIntl } from 'react-intl'
 import FarmHeader from '../../components/farm/farmHeader'
 import Footer from '../../components/Footer'
+import BigNumber from 'bignumber.js'
 import { HANDLE_WALLET_MODAL } from '../../const'
 import { mainContext } from '../../reducer'
-import { formatAmount } from '../../utils/format'
-import {useAPR, useFarmInfo, useMdxARP} from './Hooks'
+import { formatAmount, fromWei } from '../../utils/format'
+import { useAPR, useFarmInfo, useMdxARP } from './Hooks'
 import WARHT_Small from '../../assets/icon/farm/WAR HT_small@2x.png'
 import Coming_Small from '../../assets/icon/farm/coming_small@2x.png'
 import { useBalance } from '../Hooks'
@@ -16,6 +17,8 @@ const Farm = (props) => {
   const pools = useFarmInfo()
   const farmPools = pools[0]
   const { balance } = useBalance(farmPools && farmPools.MLP)
+  const [balanceProportion, setBalanceProportion] = useState(0)
+
   const apr = useAPR(
     farmPools.address,
     farmPools.abi,
@@ -36,6 +39,21 @@ const Farm = (props) => {
       setPercentage((apr * 100 + mdexApr * 100).toFixed(2))
     }
   }, [apr, mdexApr])
+
+  useEffect(() => {
+    if (farmPools && farmPools.balanceOf && farmPools.totalSupply) {
+      setBalanceProportion(
+        new BigNumber(farmPools.balanceOf)
+          .dividedBy(new BigNumber(formatAmount(farmPools.totalSupply)))
+          .multipliedBy(new BigNumber(100))
+          .toNumber()
+          .toFixed(2) * 1
+      )
+    } else {
+      setBalanceProportion(0)
+    }
+  }, [farmPools, farmPools.balanceOf, farmPools.totalSupply])
+
   return (
     <div className='farm_box' style={{ minHeight: '100%', background: '#fff' }}>
       <FarmHeader />
@@ -95,7 +113,7 @@ const Farm = (props) => {
             <FormattedMessage id='farm11' />
             <span>
               {farmPools && farmPools.totalSupply
-                ? formatAmount(farmPools.totalSupply) + ' ' + farmPools.rewards
+                ? formatAmount(farmPools.totalSupply)
                 : '--'}
             </span>
           </p>
@@ -103,7 +121,10 @@ const Farm = (props) => {
             <FormattedMessage id='farm12' />
             <span>
               {farmPools && farmPools.balanceOf
-                ? farmPools.balanceOf + ' ' + farmPools.rewards
+                ? farmPools.balanceOf +
+                  '(' +
+                  (balanceProportion - 0 === 0 ? '0.00' : balanceProportion) +
+                  '%)'
                 : '--'}
             </span>
           </p>
@@ -111,9 +132,7 @@ const Farm = (props) => {
             <FormattedMessage id='farm4' />
             {/* 为了和 farmPools.balanceOf 展示同步 */}
             <span>
-              {farmPools && farmPools.balanceOf
-                ? formatAmount(balance) + ' ' + farmPools.rewards
-                : '--'}
+              {farmPools && farmPools.balanceOf ? formatAmount(balance) : '--'}
             </span>
           </p>
           <a
@@ -121,7 +140,8 @@ const Farm = (props) => {
             href='https://ht.mdex.com/#/add/0x5545153ccfca01fbd7dd11c0b23ba694d9509a6f/0x910651f81a605a6ef35d05527d24a72fecef8bf0'
             target='_black'
           >
-            <FormattedMessage id='farm13' /> {farmPools && farmPools.name}
+            <FormattedMessage id='farm13' /> {farmPools && farmPools.name}(MDEX
+            LP Token)
           </a>
           <div className='farm_index_card_btn'>
             <a
@@ -148,6 +168,30 @@ const Farm = (props) => {
             >
               <FormattedMessage id='farm16' />
             </a>
+          </div>
+          <div className='farm_index_card_rewards'>
+            <p className='form-app__inputbox-after-text farm_popup_avaliable'>
+              <FormattedMessage
+                id='farm6'
+                values={{ coin: farmPools && farmPools.rewards1 }}
+              />
+              <span>
+                {farmPools && farmPools.earned
+                  ? formatAmount(farmPools.earned)
+                  : '--'}
+              </span>
+            </p>
+            <p className='form-app__inputbox-after-text farm_popup_avaliable'>
+              <FormattedMessage
+                id='farm6'
+                values={{ coin: farmPools && farmPools.rewards2 }}
+              />
+              <span>
+                {farmPools && farmPools.earned2
+                  ? formatAmount(farmPools.earned2)
+                  : '--'}
+              </span>
+            </p>
           </div>
         </div>
         <div className='farm_index_card farm_index_coming'>

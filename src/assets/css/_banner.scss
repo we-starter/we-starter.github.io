@@ -187,11 +187,15 @@
         border-radius: 5px;
       }
     }
-    &_address {
+    &_address_box {
       display: flex;
       justify-content: center;
       align-items: center;
       margin-top: 18px;
+    }
+    &_address {
+      display: flex;
+      align-items: center;
       font-size: 16px;
       font-weight: 700;
       line-height: 24px;
@@ -206,6 +210,31 @@
       svg {
         margin-left: 4px;
         fill: #7a7f82;
+      }
+    }
+    &_address_metaMask {
+      display: flex;
+      align-items: center;
+      margin-left: 16px;
+      padding: 0 10px;
+      height: 32px;
+      font-size: 12px;
+      font-family: PingFangSC-Semibold, PingFang SC;
+      font-weight: 600;
+      color: #0f8c20;
+      line-height: 32px;
+      background: #f2f0eb;
+      border-radius: 24px;
+      &:hover {
+        color: #00b900;
+      }
+      .metaMask_logo {
+        display: inline-block;
+        margin-left: 8px;
+        width: 16px;
+        height: 16px;
+        background: url('../icon/MetaMask_logo@2x.png') no-repeat;
+        background-size: 100% 100%;
       }
     }
   }
@@ -396,11 +425,15 @@
         border-radius: 5px;
       }
     }
-    &_address {
+    &_address_box {
       display: flex;
       justify-content: center;
       align-items: center;
       margin-top: 18px;
+    }
+    &_address {
+      display: flex;
+      align-items: center;
       font-size: 16px;
       font-weight: 700;
       line-height: 24px;
@@ -415,6 +448,31 @@
       svg {
         margin-left: 4px;
         fill: #7a7f82;
+      }
+    }
+    &_address_metaMask {
+      display: flex;
+      align-items: center;
+      margin-left: 16px;
+      padding: 0 10px;
+      height: 32px;
+      font-size: 12px;
+      font-family: PingFangSC-Semibold, PingFang SC;
+      font-weight: 600;
+      color: #0f8c20;
+      line-height: 32px;
+      background: #f2f0eb;
+      border-radius: 24px;
+      &:hover {
+        color: #00b900;
+      }
+      .metaMask_logo {
+        display: inline-block;
+        margin-left: 8px;
+        width: 16px;
+        height: 16px;
+        background: url('../icon/MetaMask_logo@2x.png') no-repeat;
+        background-size: 100% 100%;
       }
     }
   }
@@ -601,16 +659,17 @@
         border-radius: 5px;
       }
     }
+    &_address_box {
+      margin-top: 18px;
+      padding: 0 36px;
+    }
     &_address {
       display: flex;
       justify-content: flex-start;
-      padding: 0 36px;
-      margin-top: 16px;
       font-size: 14px;
       font-weight: 700;
       line-height: 20px;
       color: #7a7f82;
-      text-align: center;
       word-break: break-all;
       &:hover {
         color: #22292f;
@@ -621,6 +680,31 @@
       svg {
         margin-left: 4px;
         fill: #7a7f82;
+      }
+    }
+    &_address_metaMask {
+      display: inline-block;
+      margin-top: 8px;
+      padding: 0 10px;
+      height: 32px;
+      font-size: 12px;
+      font-family: PingFangSC-Semibold, PingFang SC;
+      font-weight: 600;
+      color: #0f8c20;
+      line-height: 32px;
+      background: #f2f0eb;
+      border-radius: 24px;
+      &:hover {
+        color: #00b900;
+      }
+      .metaMask_logo {
+        display: inline-block;
+        margin-left: 8px;
+        width: 16px;
+        height: 16px;
+        background: url('../icon/MetaMask_logo@2x.png') no-repeat;
+        background-size: 100% 100%;
+        vertical-align: sub;
       }
     }
     &_pdf {
@@ -811,16 +895,17 @@
         border-radius: 5px;
       }
     }
+    &_address_box {
+      margin-top: 18px;
+      padding: 0 36px;
+    }
     &_address {
       display: flex;
       justify-content: flex-start;
-      padding: 0 36px;
-      margin-top: 16px;
       font-size: 14px;
       font-weight: 700;
       line-height: 20px;
       color: #7a7f82;
-      text-align: center;
       word-break: break-all;
       &:hover {
         color: #22292f;
@@ -831,6 +916,31 @@
       svg {
         margin-left: 4px;
         fill: #7a7f82;
+      }
+    }
+    &_address_metaMask {
+      display: inline-block;
+      margin-top: 8px;
+      padding: 0 10px;
+      height: 32px;
+      font-size: 12px;
+      font-family: PingFangSC-Semibold, PingFang SC;
+      font-weight: 600;
+      color: #0f8c20;
+      line-height: 32px;
+      background: #f2f0eb;
+      border-radius: 24px;
+      &:hover {
+        color: #00b900;
+      }
+      .metaMask_logo {
+        display: inline-block;
+        margin-left: 8px;
+        width: 16px;
+        height: 16px;
+        background: url('../icon/MetaMask_logo@2x.png') no-repeat;
+        background-size: 100% 100%;
+        vertical-align: sub;
       }
     }
   }
