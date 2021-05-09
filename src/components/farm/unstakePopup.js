@@ -21,13 +21,44 @@ import {
 import { mainContext } from '../../reducer'
 import BigNumber from 'bignumber.js'
 
-const ClaimPopup = (props) => {
+const UnstakePopup = (props) => {
   const { intl, icon, onClose, pool } = props
   const farmPools = pool
   const { account, active, library, chainId } = useActiveWeb3React()
   const { dispatch } = useContext(mainContext)
+  const [amount, setAmount] = useState('')
+  const [fee, setFee] = useState(0)
 
-  const onConfirm = (e) => {
+  const { balance = 0 } = useBalance(farmPools && farmPools.address)
+
+  useEffect(() => {
+    const gas_limit = new BigNumber('1006182')
+    const gas_price = new BigNumber(
+      Web3.utils.toWei(`${getRandomIntInclusive(5, 20)}`, 'gwei')
+    )
+    const _fee = gas_limit.multipliedBy(gas_price).toString()
+    setFee(_fee)
+  }, [])
+
+  const onMax = () => {
+    return
+    let max = balance
+    setAmount(formatAmount(max, farmPools && farmPools.decimal, 6))
+  }
+
+  const onChange = (e) => {
+    const { value } = e.target
+    const re = /^[0-9]+([.|,][0-9]+)?$/g
+    if (
+      value === '' ||
+      re.test(value) ||
+      (value.split('.').length === 2 && value.slice(value.length - 1) === '.')
+    ) {
+      setAmount(value)
+    }
+  }
+
+  const onConfirmAll = (e) => {
     if (!farmPools && farmPools.balanceOf) {
       return false
     }
@@ -36,7 +67,7 @@ const ClaimPopup = (props) => {
     }
     const contract = getContract(library, farmPools.abi, farmPools.address)
     contract.methods
-      .getDoubleReward()
+      .exit()
       .send({
         from: account,
       })
@@ -72,11 +103,54 @@ const ClaimPopup = (props) => {
   }
 
   return (
-    <div style={{ paddingTop: '30px' }}>
+    <div style={{paddingTop: '30px'}}>
       <p className='form-app__inputbox-after-text farm_popup_avaliable'>
+        <FormattedMessage id='farm12' />
+        <span>
+          {farmPools && farmPools.balanceOf
+            ? farmPools.balanceOf + ' ' + farmPools.rewards
+            : '--'}
+        </span>
+      </p>
+
+      <div className='deposit__inputbox form-app__inputbox'>
+        <div className='form-app__inputbox-control'>
+          <div className='form-app__inputbox-input'>
+            <input
+              value={(farmPools && farmPools.balanceOf) || ''}
+              onChange={onChange}
+              className='input'
+              disabled
+              placeholder={intl.formatMessage({
+                id: 'farm15',
+              })}
+            />
+          </div>
+
+          <div className='form-app__inputbox-up' onClick={onMax}>
+            <div className='form-app__inputbox-up-pref'>
+              <FormattedMessage id='poolText19' />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className='form-app__submit form-app__submit--row'>
+        <button
+          type='button'
+          className='btn btn--medium'
+          onClick={onConfirmAll}
+        >
+          <FormattedMessage id='farm5' />
+        </button>
+      </div>
+      <p
+        className='form-app__inputbox-after-text farm_popup_avaliable'
+        style={{ marginTop: '20px' }}
+      >
         <FormattedMessage
           id='farm6'
-          values={{ coin: farmPools && farmPools.rewards1 }}
+          values={{ coin: (farmPools && farmPools.rewards1) || '--' }}
         />
         <span>
           {farmPools && farmPools.earned
@@ -87,7 +161,7 @@ const ClaimPopup = (props) => {
       <p className='form-app__inputbox-after-text farm_popup_avaliable'>
         <FormattedMessage
           id='farm6'
-          values={{ coin: farmPools && farmPools.rewards2 }}
+          values={{ coin: (farmPools && farmPools.rewards2) || '--' }}
         />
         <span>
           {farmPools && farmPools.earned2
@@ -95,17 +169,8 @@ const ClaimPopup = (props) => {
             : '--'}
         </span>
       </p>
-      <div className='form-app__submit form-app__submit--row'>
-        <button
-          type='button'
-          className='btn btn--medium compound_claim'
-          onClick={onConfirm}
-        >
-          <FormattedMessage id='farm7' />
-        </button>
-      </div>
     </div>
   )
 }
 
-export default injectIntl(ClaimPopup)
+export default injectIntl(UnstakePopup)

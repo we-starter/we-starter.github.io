@@ -28,6 +28,7 @@ import { LedgerConnector } from '@web3-react/ledger-connector'
 import { WalletModal } from '../components/Modals/WalletModal'
 import DepositPopup from '../components/farm/depositPopup'
 import ClaimPopup from '../components/farm/claimPopup'
+import FarmPopupTab from '../components/farm/farmPopupTab'
 import PoolsJoin from '../components/staterPools/poolsJoin'
 import PoolsSlippage from '../components/staterPools/poolsSlippage'
 import PoolsSuccess from '../components/staterPools/poolsSuccess'
@@ -329,10 +330,10 @@ export const InitPage = () => {
           </div>
         </div>
       )}
-      {walletModal === 'deposit' && (
+      {(walletModal === 'deposit' || walletModal === 'claim') && (
         <div className='modal-show'>
           <div className='wrapper' style={{ zIndex: 10 }}>
-            <DepositPopup
+            <FarmPopupTab
               pool={pool}
               onClose={() =>
                 dispatch({
@@ -345,7 +346,7 @@ export const InitPage = () => {
           </div>
         </div>
       )}
-      {walletModal === 'claim' && (
+      {/* {walletModal === 'claim' && (
         <div className='modal-show'>
           <div className='wrapper' style={{ zIndex: 10 }}>
             <ClaimPopup
@@ -360,7 +361,7 @@ export const InitPage = () => {
             />
           </div>
         </div>
-      )}
+      )} */}
     </>
   )
 }

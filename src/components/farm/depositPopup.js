@@ -146,59 +146,47 @@ const DepositPopup = (props) => {
   }
 
   return (
-    <div className='modal'>
-      <div className='modal__box'>
-        <form className='form-app farm_popup' action='/'>
-          <div className='form-app__inner deposit'>
-            <h1 className='form-app__title h1' style={{ marginTop: 0 }}>
-              <FormattedMessage id='farm3' />
-              <a className='farm_popup_close_btn' onClick={onClose}></a>
-            </h1>
-            <p className='form-app__inputbox-after-text farm_popup_avaliable'>
-              <FormattedMessage id='farm4' />
-              <span>
-                {farmPools
-                  ? formatAmount(balance) + ' ' + farmPools.rewards
-                  : '--'}
-              </span>
-            </p>
+    <div style={{ paddingTop: '30px' }}>
+      <p className='form-app__inputbox-after-text farm_popup_avaliable'>
+        <FormattedMessage id='farm4' />
+        <span>
+          {farmPools ? formatAmount(balance) + ' ' + farmPools.rewards : '--'}
+        </span>
+      </p>
 
-            <div className='deposit__inputbox form-app__inputbox'>
-              <div className='form-app__inputbox-control'>
-                <div className='form-app__inputbox-input'>
-                  <input
-                    value={amount}
-                    onChange={onChange}
-                    className='input'
-                    placeholder={intl.formatMessage({
-                      id: 'farm15',
-                    })}
-                  />
-                </div>
+      <div className='deposit__inputbox form-app__inputbox'>
+        <div className='form-app__inputbox-control'>
+          <div className='form-app__inputbox-input'>
+            <input
+              value={amount}
+              onChange={onChange}
+              className='input'
+              placeholder={intl.formatMessage({
+                id: 'farm15',
+              })}
+            />
+          </div>
 
-                <div className='form-app__inputbox-up' onClick={onMax}>
-                  <div className='form-app__inputbox-up-pref'>
-                    <FormattedMessage id='poolText19' />
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className='form-app__submit form-app__submit--row'>
-              {approve && (
-                <Button type='primary' onClick={onApprove} loading={loadFlag}>
-                  <FormattedMessage id='farm20' />
-                </Button>
-              )}
-
-              {!approve && (
-                <Button type='primary' onClick={onConfirm} loading={loadFlag}>
-                  <FormattedMessage id='farm3' />
-                </Button>
-              )}
+          <div className='form-app__inputbox-up' onClick={onMax}>
+            <div className='form-app__inputbox-up-pref'>
+              <FormattedMessage id='poolText19' />
             </div>
           </div>
-        </form>
+        </div>
+      </div>
+
+      <div className='form-app__submit form-app__submit--row'>
+        {approve && (
+          <Button type='primary' onClick={onApprove} loading={loadFlag}>
+            <FormattedMessage id='farm20' />
+          </Button>
+        )}
+
+        {!approve && (
+          <Button type='primary' onClick={onConfirm} loading={loadFlag}>
+            <FormattedMessage id='farm3' />
+          </Button>
+        )}
       </div>
     </div>
   )

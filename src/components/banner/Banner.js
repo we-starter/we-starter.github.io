@@ -4,6 +4,7 @@ import { FormattedMessage } from 'react-intl'
 import { useActiveWeb3React } from '../../web3'
 import { USDT_ADDRESS, WAR_ADDRESS, WHT_ADDRESS } from '../../web3/address'
 import { useMDexPrice } from '../../pages/pools/Hooks'
+import { message } from 'antd'
 import Icon1 from '../../assets/icon/icon1@2x.png'
 import Icon2 from '../../assets/icon/icon2@2x.png'
 import Icon3 from '../../assets/icon/icon3@2x.png'
@@ -25,7 +26,6 @@ export const Banner = () => {
   const [realTimePrice, setRealTimePrice] = useState('-')
   const WarTokenAddress =
     WAR_ADDRESS[chainId] || '0x910651F81a605a6Ef35d05527d24A72fecef8bF0'
-
   const _tmp_price_war2ht = useMDexPrice(
     chainId && WAR_ADDRESS(chainId),
     chainId && WHT_ADDRESS(chainId)
@@ -44,6 +44,28 @@ export const Banner = () => {
       setRealTimePrice(price.toFixed(3))
     }
   }, [_tmp_price_war2ht, _tmp_price_usdt2ht])
+
+  const addToken = async () => {
+    try {
+      let addTokenClick = await window.ethereum.request({
+        method: 'wallet_watchAsset',
+        params: {
+          type: 'ERC20',
+          options: {
+            address: WarTokenAddress,
+            symbol: 'WAR',
+            decimals: 18,
+            image: '',
+          },
+        },
+      })
+      if (addTokenClick) {
+        message.success('add success')
+      }
+    } catch (err) {
+      console.log(err, 'addToken')
+    }
+  }
 
   return (
     <div className='banner'>
@@ -233,28 +255,33 @@ export const Banner = () => {
           </p>
         </div>
       </div>
-      <a
-        className='banner_address'
-        href={'https://hecoinfo.com/address/' + WarTokenAddress}
-        target='_blank'
-      >
-        <FormattedMessage id='farm19' /> {WarTokenAddress}
-        <svg
-          t='1619095072712'
-          className='icon'
-          viewBox='0 0 1024 1024'
-          version='1.1'
-          xmlns='http://www.w3.org/2000/svg'
-          p-id='1281'
-          width='20'
-          height='20'
+      <div className='banner_address_box'>
+        <a
+          className='banner_address'
+          href={'https://hecoinfo.com/address/' + WarTokenAddress}
+          target='_blank'
         >
-          <path
-            d='M424.96 128v87.04H215.04v599.04h599.04v-215.04h87.04v256c0 25.6-20.48 40.96-40.96 40.96H168.96c-25.6 0-40.96-20.48-40.96-40.96V168.96c0-25.6 20.48-40.96 40.96-40.96h256z m327.68 87.04h-194.56V128h343.04v343.04h-87.04V271.36L512 573.44 450.56 512l302.08-296.96z'
-            p-id='1282'
-          ></path>
-        </svg>
-      </a>
+          <FormattedMessage id='farm19' /> {WarTokenAddress}
+          <svg
+            t='1619095072712'
+            className='icon'
+            viewBox='0 0 1024 1024'
+            version='1.1'
+            xmlns='http://www.w3.org/2000/svg'
+            p-id='1281'
+            width='20'
+            height='20'
+          >
+            <path
+              d='M424.96 128v87.04H215.04v599.04h599.04v-215.04h87.04v256c0 25.6-20.48 40.96-40.96 40.96H168.96c-25.6 0-40.96-20.48-40.96-40.96V168.96c0-25.6 20.48-40.96 40.96-40.96h256z m327.68 87.04h-194.56V128h343.04v343.04h-87.04V271.36L512 573.44 450.56 512l302.08-296.96z'
+              p-id='1282'
+            ></path>
+          </svg>
+        </a>
+        <a className='banner_address_metaMask' onClick={addToken}>
+          Add WAR to MetaMask<span className='metaMask_logo'></span>
+        </a>
+      </div>
     </div>
   )
 }
