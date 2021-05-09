@@ -928,6 +928,7 @@ export const useMdxARP = (pool_address,pool_abi,lpt_address,reward1_address) => 
 
   const { account, active, library, chainId } = useActiveWeb3React()
   const [apr, setApr] = useState(0)
+  const blockHeight = useBlockHeight()
   const lptValue = useLTPValue(lpt_address, chainId && WAR_ADDRESS(chainId), pool_address, pool_abi)
   const mdex2warPrice = useMDexPrice(MDEX_ADDRESS, chainId && WAR_ADDRESS(chainId))
   useEffect(() => {
@@ -949,7 +950,7 @@ export const useMdxARP = (pool_address,pool_abi,lpt_address,reward1_address) => 
         setApr(apr)
       })
     }
-  }, [library, lptValue, mdex2warPrice])
+  }, [library, lptValue, mdex2warPrice, blockHeight])
   return apr
 }
 
