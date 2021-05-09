@@ -3,6 +3,10 @@ const NETWORK_ID_ETHEREUM_ROPSTEN = 3
 const NETWORK_ID_HUOBI_ECO_CHAIN_MAINNET = 128
 
 export const ADDRESS_0 = '0x0000000000000000000000000000000000000000'
+
+export const MDEX_POOL_ADDRESS = '0xFB03e11D93632D97a8981158A632Dd5986F5E909'
+export const MDEX_ADDRESS = '0x25D2e80cB6B86881Fd7e07dd263Fb79f4AbE033c'
+
 // GLF token
 export function getGalleryAddress(chainId) {
   switch (chainId) {
@@ -361,4 +365,6 @@ export function WHT_ADDRESS(chainId) {
       return ''
   }
 }
+
+
 

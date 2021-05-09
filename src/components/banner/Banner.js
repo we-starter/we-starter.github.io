@@ -25,8 +25,8 @@ export const Banner = () => {
   const [realTimePrice, setRealTimePrice] = useState('-')
 
   const _tmp_price_war2ht = useMDexPrice(
-    chainId && WHT_ADDRESS(chainId),
-    chainId && WAR_ADDRESS(chainId)
+    chainId && WAR_ADDRESS(chainId),
+    chainId && WHT_ADDRESS(chainId)
   )
 
   const _tmp_price_usdt2ht = useMDexPrice(
