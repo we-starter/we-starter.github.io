@@ -943,10 +943,16 @@ export const useMdxARP = (pool_address,pool_abi,lpt_address,reward1_address) => 
       Promise.all(promiseList).then(data => {
         const [poolInfo, totalSupply] = data
         const {totalAmount} = poolInfo
+        console.log('totalAmount', totalAmount)
+        console.log('totalSupply', totalSupply)
         console.log('mdex2warPrice', mdex2warPrice)
         const radio = new BigNumber(totalSupply).div(new BigNumber(totalAmount))
+        console.log('radio', radio.toString())
         const totalRewardValue = new BigNumber(Web3.utils.toWei('3510.72', 'ether')).multipliedBy(radio).multipliedBy(new BigNumber(mdex2warPrice)).multipliedBy(new BigNumber(365))
+        console.log('totalRewardValue', totalRewardValue.toString())
+        console.log('lptValue', lptValue.toString())
         const apr = totalRewardValue.div(lptValue).toString()
+        console.log('apr', apr)
         setApr(apr)
       })
     }
