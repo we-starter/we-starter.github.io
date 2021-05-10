@@ -263,6 +263,7 @@ const PoolsIndex = (props) => {
             {pool && pool.underlying.symbol === 'BLACK' && <img src={BLACK} />}
             {pool && pool.underlying.symbol === 'YFX' && <img src={FX} />}
             {pool && pool.underlying.symbol === 'LEV' && <img src={LEV} />}
+            {pool && pool.underlying.symbol === 'O3' && <img src={LEV} />}
             {pool && pool.name}
           </p>
           <p className='pools-type_card_title_right'>

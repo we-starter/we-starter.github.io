@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { getContract, getLogs, useActiveWeb3React } from '../../web3'
 import {
-  ADDRESS_0, MDEX_ADDRESS,
-  MDEX_FACTORY_ADDRESS, MDEX_POOL_ADDRESS,
+  ADDRESS_0,
+  MDEX_ADDRESS,
+  MDEX_FACTORY_ADDRESS,
+  MDEX_POOL_ADDRESS,
   MINE_MOUNTAIN_ADDRESS,
   WAR_ADDRESS,
   WETH_ADDRESS,
@@ -857,7 +859,7 @@ export const useAPR = (
   pool_address,
   pool_abi,
   lpt_address,
-  reward1_address,
+  reward1_address
 ) => {
   const { account, active, library, chainId } = useActiveWeb3React()
   const blockHeight = useBlockHeight()
@@ -880,37 +882,54 @@ export const useAPR = (
   // const reward1 = useRewardsValue(reward1_address, WAR_ADDRESS(chainId), yearReward)
 
   // 矿池总的LPT的价值
-  const lptValue = useLTPValue(lpt_address, chainId && WAR_ADDRESS(chainId), pool_address, pool_abi)
+  const lptValue = useLTPValue(
+    lpt_address,
+    chainId && WAR_ADDRESS(chainId),
+    pool_address,
+    pool_abi
+  )
 
   useEffect(() => {
-    console.log('allowance',allowance)
-    console.log('span',span)
-    if(library && allowance && span && lptValue > 0){
-      const dayRate = new BigNumber(1).div(new BigNumber(span).div(new BigNumber(86400)))
+    console.log('allowance', allowance)
+    console.log('span', span)
+    if (library && allowance && span && lptValue > 0) {
+      const dayRate = new BigNumber(1).div(
+        new BigNumber(span).div(new BigNumber(86400))
+      )
       console.log('dayRate', dayRate.toString())
       const reward1_vol = new BigNumber(allowance).minus(
         new BigNumber(unClaimReward)
       )
 
-      console.log('reward1_vol',reward1_vol)
+      console.log('reward1_vol', reward1_vol)
 
       // 奖励的war
-      const yearReward = dayRate.multipliedBy(reward1_vol).multipliedBy(new BigNumber(365)).toFixed(0, 1)
+      const yearReward = dayRate
+        .multipliedBy(reward1_vol)
+        .multipliedBy(new BigNumber(365))
+        .toFixed(0, 1)
       // setYearReward(yearReward)
       console.log('yearReward', yearReward)
       console.log('lptValue', lptValue)
-      if(yearReward > 0) {
-        const _arp = new BigNumber(yearReward).div(new BigNumber(lptValue)).toString()
+      if (yearReward > 0) {
+        const _arp = new BigNumber(yearReward)
+          .div(new BigNumber(lptValue))
+          .toString()
         setApr(_arp)
       }
     }
     return () => {}
-  }, [library , allowance, span, unClaimReward, lptValue, blockHeight])
+  }, [library, allowance, span, unClaimReward, lptValue, blockHeight])
 
   return apr
 }
 
-export const useMdxARP = (pool_address,pool_abi,lpt_address,reward1_address) => {
+export const useMdxARP = (
+  pool_address,
+  pool_abi,
+  lpt_address,
+  reward1_address
+) => {
   // mdx 年释放总量 * 价值 /
 
   // cagefreedom:
@@ -929,10 +948,18 @@ export const useMdxARP = (pool_address,pool_abi,lpt_address,reward1_address) => 
   const { account, active, library, chainId } = useActiveWeb3React()
   const [apr, setApr] = useState(0)
   const blockHeight = useBlockHeight()
-  const lptValue = useLTPValue(lpt_address, chainId && WAR_ADDRESS(chainId), pool_address, pool_abi)
-  const mdex2warPrice = useMDexPrice(MDEX_ADDRESS, chainId && WAR_ADDRESS(chainId))
+  const lptValue = useLTPValue(
+    lpt_address,
+    chainId && WAR_ADDRESS(chainId),
+    pool_address,
+    pool_abi
+  )
+  const mdex2warPrice = useMDexPrice(
+    MDEX_ADDRESS,
+    chainId && WAR_ADDRESS(chainId)
+  )
   useEffect(() => {
-    if(library && lptValue > 0 && mdex2warPrice > 0){
+    if (library && lptValue > 0 && mdex2warPrice > 0) {
       const contract = getContract(library, MDexPool, MDEX_POOL_ADDRESS)
       const pool_contract = getContract(library, pool_abi, pool_address)
       const poolId = '0x4c'
@@ -940,15 +967,20 @@ export const useMdxARP = (pool_address,pool_abi,lpt_address,reward1_address) => 
         contract.methods.poolInfo(poolId).call(),
         pool_contract.methods.totalSupply().call(),
       ]
-      Promise.all(promiseList).then(data => {
+      Promise.all(promiseList).then((data) => {
         const [poolInfo, totalSupply] = data
-        const {totalAmount} = poolInfo
+        const { totalAmount } = poolInfo
         console.log('totalAmount', totalAmount)
         console.log('totalSupply', totalSupply)
         console.log('mdex2warPrice', mdex2warPrice)
         const radio = new BigNumber(totalSupply).div(new BigNumber(totalAmount))
         console.log('radio', radio.toString())
-        const totalRewardValue = new BigNumber(Web3.utils.toWei('3510.72', 'ether')).multipliedBy(radio).multipliedBy(new BigNumber(mdex2warPrice)).multipliedBy(new BigNumber(365))
+        const totalRewardValue = new BigNumber(
+          Web3.utils.toWei('5037.12', 'ether')
+        )
+          .multipliedBy(radio)
+          .multipliedBy(new BigNumber(mdex2warPrice))
+          .multipliedBy(new BigNumber(365))
         console.log('totalRewardValue', totalRewardValue.toString())
         console.log('lptValue', lptValue.toString())
         const apr = totalRewardValue.div(lptValue).toString()
@@ -975,21 +1007,22 @@ export const useMDexPrice = (address1, address2) => {
         )
         factory.methods
           .getPair(address1, address2)
-          .call().then(pair_address => {
+          .call()
+          .then((pair_address) => {
             console.log(pair_address)
-          const pair_contract = getContract(library, LPT, pair_address)
+            const pair_contract = getContract(library, LPT, pair_address)
             const promiseList = [
               pair_contract.methods.token0().call(),
               pair_contract.methods.token1().call(),
-              pair_contract.methods.getReserves().call()
+              pair_contract.methods.getReserves().call(),
             ]
-            Promise.all(promiseList).then(data => {
+            Promise.all(promiseList).then((data) => {
               const [token0, token1, getReserves] = data
-              const {_reserve0, _reserve1} = getReserves
-              if(token0.toLowerCase() == address2.toLowerCase()){
+              const { _reserve0, _reserve1 } = getReserves
+              if (token0.toLowerCase() == address2.toLowerCase()) {
                 const _price = _reserve0 / _reserve1
                 setPrice(_price)
-              }else if(token1.toLowerCase() == address2.toLowerCase()) {
+              } else if (token1.toLowerCase() == address2.toLowerCase()) {
                 const _price = _reserve1 / _reserve0
                 setPrice(_price)
               }
@@ -1011,17 +1044,9 @@ export const useLTPValue = (address, token_address, pool_address, pool_abi) => {
   const [value, setValue] = useState(0)
   const blockHeight = useBlockHeight()
   useEffect(() => {
-    if(library){
-      const contract = getContract(
-        library,
-        LPT,
-        address
-      )
-      const pool_contract = getContract(
-        library,
-        pool_abi,
-        pool_address
-      )
+    if (library) {
+      const contract = getContract(library, LPT, address)
+      const pool_contract = getContract(library, pool_abi, pool_address)
       const promise_list = [
         contract.methods.token0().call(),
         contract.methods.token1().call(),
@@ -1029,10 +1054,16 @@ export const useLTPValue = (address, token_address, pool_address, pool_abi) => {
         contract.methods.totalSupply().call(),
         pool_contract.methods.totalSupply().call(),
       ]
-      Promise.all(promise_list).then(data => {
+      Promise.all(promise_list).then((data) => {
         console.log(data)
         console.log('#############')
-        const [token0_address, token1_address, {_reserve0, _reserve1}, totalSupply, poolTotalSupply] = data
+        const [
+          token0_address,
+          token1_address,
+          { _reserve0, _reserve1 },
+          totalSupply,
+          poolTotalSupply,
+        ] = data
         console.log('_reserve0', _reserve0)
         console.log('_reserve1', _reserve1)
         console.log('token0_address', token0_address)
@@ -1040,10 +1071,22 @@ export const useLTPValue = (address, token_address, pool_address, pool_abi) => {
         console.log('token_address', token_address)
         console.log('totalSupply', totalSupply)
         console.log('poolTotalSupply', poolTotalSupply)
-        if(token_address == token0_address){
-          setValue(new BigNumber(_reserve0).multipliedBy(new BigNumber(2)).multipliedBy(new BigNumber(poolTotalSupply).div(new BigNumber(totalSupply))))
-        }else if(token_address == token1_address) {
-          setValue(new BigNumber(_reserve1).multipliedBy(new BigNumber(2)).multipliedBy(new BigNumber(poolTotalSupply).div(new BigNumber(totalSupply))))
+        if (token_address == token0_address) {
+          setValue(
+            new BigNumber(_reserve0)
+              .multipliedBy(new BigNumber(2))
+              .multipliedBy(
+                new BigNumber(poolTotalSupply).div(new BigNumber(totalSupply))
+              )
+          )
+        } else if (token_address == token1_address) {
+          setValue(
+            new BigNumber(_reserve1)
+              .multipliedBy(new BigNumber(2))
+              .multipliedBy(
+                new BigNumber(poolTotalSupply).div(new BigNumber(totalSupply))
+              )
+          )
         }
       })
     }
