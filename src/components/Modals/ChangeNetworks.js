@@ -61,6 +61,8 @@ export const ChangeNetworks = ({ onClose }) => {
                   }],
                 }).then(() => {
                   window.location.reload()
+                }).catch(e => {
+                  window.location.reload()
                 });
               }}>
                 <FormattedMessage id='modalsText4' />
