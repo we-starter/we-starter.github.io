@@ -67,6 +67,13 @@ const wallets = {
   //Torus: torus,
   //Aut
 }
+if(window.ethereum){
+  window.ethereum.on('networkChanged', () => {
+    // 链改了，刷新网页
+    window.location.reload()
+  })
+}
+
 
 export const InitPage = () => {
   const { dispatch, state } = useContext(mainContext)
