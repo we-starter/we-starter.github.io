@@ -23,6 +23,7 @@ import WARLBP from '../../assets/image/W@2x.png'
 import BLACKLBP from '../../assets/image/B@2x.png'
 import FX from '../../assets/icon/FX.png'
 import LEV from '../../assets/icon/LEV.png'
+import O3 from '../../assets/icon/O3.png'
 
 import HyperPay from '../../assets/icon/HyperPay-Logo@2x.png'
 import { usePoolsInfo, usePoolsLBPInfo } from './Hooks'
@@ -263,7 +264,7 @@ const PoolsIndex = (props) => {
             {pool && pool.underlying.symbol === 'BLACK' && <img src={BLACK} />}
             {pool && pool.underlying.symbol === 'YFX' && <img src={FX} />}
             {pool && pool.underlying.symbol === 'LEV' && <img src={LEV} />}
-            {pool && pool.underlying.symbol === 'O3' && <img src={LEV} />}
+            {pool && pool.underlying.symbol === 'O3' && <img src={O3} />}
             {pool && pool.name}
           </p>
           <p className='pools-type_card_title_right'>
