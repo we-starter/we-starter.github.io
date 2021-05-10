@@ -13,7 +13,7 @@ export const ChangeNetworks = ({ onClose }) => {
   return (
     <div className='modal'>
       <div className='modal__box'>
-        <form className='form-app' action='/'>
+        <form className='form-app'>
           <div className='form-app__inner transction-submitted transction-submitted-box'>
             <div
               className='form-app__inner__header'
@@ -42,17 +42,29 @@ export const ChangeNetworks = ({ onClose }) => {
             <footer>
               <p
                 style={{ color: '#0f8c20', marginBottom: '0' }}
-                onClick={() => {
-                  onClose()
-                  dispatch({
-                    type: HANDLE_WALLET_MODAL,
-                    walletModal: 'connect',
-                  })
-                }}
               >
-                <FormattedMessage id='modalsText4' />
+                {/*<FormattedMessage id='modalsText4' />*/}
               </p>
-              <button className='btn'>
+              <button className='btn' onClick={() => {
+                window.ethereum && window.ethereum.request({
+                  method: 'wallet_addEthereumChain',
+                  params: [{
+                    chainId: '0x80',
+                    chainName: 'HECO',
+                    nativeCurrency: {
+                      name: 'HT',
+                      symbol: 'HT',
+                      decimals: 18
+                    },
+                    rpcUrls: ['https://http-mainnet-node.huobichain.com'],
+                    blockExplorerUrls: ['https://hecoinfo.com']
+                  }],
+                }).then(() => {
+                  window.location.reload()
+                }).catch(e => {
+                  window.location.reload()
+                });
+              }}>
                 <FormattedMessage id='modalsText4' />
               </button>
             </footer>
