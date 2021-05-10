@@ -17,7 +17,7 @@ import {
   HANDLE_WALLET_MODAL,
   HANDLE_SHOW_MENUMASK_MODAL,
   HANDLE_CHANGE_NETWORKS,
-  TOOL_DATA,
+  TOOL_DATA, IS_SUPPORTEDCHAIN,
 } from '../const'
 import {
   InjectedConnector,
@@ -115,8 +115,20 @@ export const InitPage = () => {
     console.log('wallet content', localContent)
     if (localContent) {
       console.log('activate', wallets[localContent])
-      activate(wallets[localContent]).then(() => {
+      activate(wallets[localContent], () => {}, true ).then(() => {
         console.log(wallets[localContent])
+      }).catch(e => {
+        if(e instanceof UnsupportedChainIdError){
+          dispatch({
+            type: IS_SUPPORTEDCHAIN,
+            isSupportedChain: false,
+          })
+
+          dispatch({
+            type: HANDLE_CHANGE_NETWORKS,
+            changeNetworkStatus: true,
+          })
+        }
       })
     }
   }, [])

@@ -17,6 +17,7 @@ import {
   CHANGE_LOCALE,
   HANDLE_CHANGE_NETWORKS,
   TOOL_DATA,
+  IS_SUPPORTEDCHAIN,
   CHANGE_SLIPPAGE,
 } from './const'
 
@@ -84,6 +85,11 @@ const reducer = (state, action) => {
         ...state,
         slippageVal: action.slippageVal,
       }
+    case IS_SUPPORTEDCHAIN:
+      return {
+        ...state,
+        isSupportedChain: action.isSupportedChain
+      }
     default:
       return state
   }
@@ -100,6 +106,7 @@ const ContextProvider = (props) => {
     showFailedTransactionModal: false,
     showWaitingWalletConfirmModal: { show: false, title: '', content: '' },
     showTransactionModal: false,
+    isSupportedChain: true,
     walletModal: null,
     txStatus: null,
     pool: null,
