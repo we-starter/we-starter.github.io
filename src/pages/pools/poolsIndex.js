@@ -431,7 +431,7 @@ const PoolsIndex = (props) => {
                     pool.settleable.volume == 0) ||
                     (pool.settleable &&
                       pool.type === 1 &&
-                      (pool.settleable.claimedOf !== 0 ||
+                      (pool.settleable.claimedOf * 1 !== 0 ||
                         pool.settleable.volume == 0)))) ||
                 (!active && status === 3) ||
                 (status === 3 && pool.underlying.name === 'LBP')) &&
@@ -449,7 +449,7 @@ const PoolsIndex = (props) => {
                       pool.settleable.volume == 0) ||
                       (pool.settleable &&
                         pool.type === 1 &&
-                        pool.settleable.claimedOf !== 0) ||
+                        pool.settleable.claimedOf * 1 !== 0) ||
                       pool.settleable.volume == 0)) ||
                   (!active && status === 3) ||
                   (status === 3 && pool.underlying.name === 'LBP')),
