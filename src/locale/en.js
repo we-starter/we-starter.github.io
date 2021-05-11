@@ -272,6 +272,8 @@ const en_US = {
     'Lever is developed to bridge the gap between lending protocols and DEXs, increasing capital efficiency in DeFi.Lever is an open-source margin trading platform where you can lend, borrow and perform leveraged trading to either buy long/sell short an asset in just one place.',
   yfxAboutProject1:
     'YFX.COM is a trading platform provide up to 100x leverage to trade on BTC, ETH and other crypto assets support by ETH, Tron, BSC , Heco,OKEx Chain,Polkadot .By invent QIC-AMM, YFX.COM provide high liquidity and low slippage.',
+  O3AboutProject1:
+    'O3 Swap, a proprietary cross-chain aggregation protocol, was designed to achieve more efficient trading pathways using 2 solutions. The first solution is Liquidity Aggregation - aggregating the liquidity source across leading Decentralized Exchanges(DEXs) from mainstream blockchains. Another part is Cross-Chain Exchange - implementing cross-chain protocols that allow DeFi users to freely exchange cross-chain assets with one click within their own wallet.',
   related_title1: 'Total raised funds',
   related_title2: 'Total participated addresses',
   related_title3: 'Total established pools',

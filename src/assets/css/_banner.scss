@@ -664,7 +664,7 @@
       padding: 0 36px;
     }
     &_address {
-      display: flex;
+      display: inline-block;
       justify-content: flex-start;
       font-size: 14px;
       font-weight: 700;
@@ -678,8 +678,10 @@
         }
       }
       svg {
+        display: inline-block;
         margin-left: 4px;
         fill: #7a7f82;
+        vertical-align: sub;
       }
     }
     &_address_metaMask {
@@ -900,7 +902,7 @@
       padding: 0 36px;
     }
     &_address {
-      display: flex;
+      display: inline-block;
       justify-content: flex-start;
       font-size: 14px;
       font-weight: 700;
@@ -914,8 +916,10 @@
         }
       }
       svg {
+        display: inline-block;
         margin-left: 4px;
         fill: #7a7f82;
+        vertical-align: sub;
       }
     }
     &_address_metaMask {

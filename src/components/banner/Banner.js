@@ -4,11 +4,13 @@ import { FormattedMessage } from 'react-intl'
 import { useActiveWeb3React } from '../../web3'
 import { USDT_ADDRESS, WAR_ADDRESS, WHT_ADDRESS } from '../../web3/address'
 import { useMDexPrice } from '../../pages/pools/Hooks'
+import { CopyToClipboard } from 'react-copy-to-clipboard'
 import { message } from 'antd'
 import Icon1 from '../../assets/icon/icon1@2x.png'
 import Icon2 from '../../assets/icon/icon2@2x.png'
 import Icon3 from '../../assets/icon/icon3@2x.png'
 import Icon4 from '../../assets/icon/icon4@2x.png'
+import FileCopyLine from '../../assets/image/file-copy-line@2x.png'
 import {
   usePoolsInfo,
   usePoolsLBPInfo,
@@ -256,27 +258,30 @@ export const Banner = () => {
         </div>
       </div>
       <div className='banner_address_box'>
-        <a
-          className='banner_address'
-          href={'https://hecoinfo.com/address/' + WarTokenAddress}
-          target='_blank'
-        >
+        <a className='banner_address'>
           <FormattedMessage id='farm19' /> {WarTokenAddress}
-          <svg
-            t='1619095072712'
-            className='icon'
-            viewBox='0 0 1024 1024'
-            version='1.1'
-            xmlns='http://www.w3.org/2000/svg'
-            p-id='1281'
-            width='20'
-            height='20'
+          <CopyToClipboard
+            text={WarTokenAddress}
+            onCopy={() => {
+              message.success('copy success')
+            }}
           >
-            <path
-              d='M424.96 128v87.04H215.04v599.04h599.04v-215.04h87.04v256c0 25.6-20.48 40.96-40.96 40.96H168.96c-25.6 0-40.96-20.48-40.96-40.96V168.96c0-25.6 20.48-40.96 40.96-40.96h256z m327.68 87.04h-194.56V128h343.04v343.04h-87.04V271.36L512 573.44 450.56 512l302.08-296.96z'
-              p-id='1282'
-            ></path>
-          </svg>
+            <svg
+              t='1620653809614'
+              class='icon'
+              viewBox='0 0 1024 1024'
+              version='1.1'
+              xmlns='http://www.w3.org/2000/svg'
+              p-id='1660'
+              width='20'
+              height='20'
+            >
+              <path
+                d='M394.666667 106.666667h448a74.666667 74.666667 0 0 1 74.666666 74.666666v448a74.666667 74.666667 0 0 1-74.666666 74.666667H394.666667a74.666667 74.666667 0 0 1-74.666667-74.666667V181.333333a74.666667 74.666667 0 0 1 74.666667-74.666666z m0 64a10.666667 10.666667 0 0 0-10.666667 10.666666v448a10.666667 10.666667 0 0 0 10.666667 10.666667h448a10.666667 10.666667 0 0 0 10.666666-10.666667V181.333333a10.666667 10.666667 0 0 0-10.666666-10.666666H394.666667z m245.333333 597.333333a32 32 0 0 1 64 0v74.666667a74.666667 74.666667 0 0 1-74.666667 74.666666H181.333333a74.666667 74.666667 0 0 1-74.666666-74.666666V394.666667a74.666667 74.666667 0 0 1 74.666666-74.666667h74.666667a32 32 0 0 1 0 64h-74.666667a10.666667 10.666667 0 0 0-10.666666 10.666667v448a10.666667 10.666667 0 0 0 10.666666 10.666666h448a10.666667 10.666667 0 0 0 10.666667-10.666666v-74.666667z'
+                p-id='1661'
+              ></path>
+            </svg>
+          </CopyToClipboard>
         </a>
         <a className='banner_address_metaMask' onClick={addToken}>
           Add WAR to MetaMask<span className='metaMask_logo'></span>
