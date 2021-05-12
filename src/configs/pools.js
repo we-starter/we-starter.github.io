@@ -691,14 +691,14 @@ export default [
     Telegram_Channel: 'https://t.me/LeverNetwork',
     Github: 'https://github.com/levernetwork',
     yuque: '-',
-    progress: 0,
-    status: 0,
+    progress: 6114.57,
+    status: 3,
     ratio: '1LEV=0.5USDT',
     time: '1620486000',
     purchasedCurrencyOf: 0,
     totalPurchasedAmount: '30000000000000000000000',
-    totalPurchasedUnderlying: '0',
-    totalPurchasedCurrency: '0',
+    totalPurchasedUnderlying: '366874480000000000000000000',
+    totalPurchasedCurrency: '183437240275702999999549440',
     is_flash: false,
     link_url: 'https://www.lever.network', // 跳转外链接
     project_introduction:
@@ -741,15 +741,15 @@ export default [
     Telegram_Channel: 'https://t.me/YFX_EN',
     Github: '-',
     yuque: '-',
-    progress: 0,
-    status: 0,
+    progress: 1,
+    status: 3,
     ratio: '1YFX=0.032HT',
     defaultRatio: '31250000000000000000',
     time: '1620554400',
     purchasedCurrencyOf: 0,
     totalPurchasedAmount: '2000000000000000000000',
-    totalPurchasedUnderlying: '0',
-    totalPurchasedCurrency: '0',
+    totalPurchasedUnderlying: '62498920687500000000000',
+    totalPurchasedCurrency: '1999965462000000000000',
     is_flash: false,
     link_url: 'https://www.yfx.com/', // 跳转外链接
     project_introduction: 'Decentralized Futures Trading Platform YFX.COM',
@@ -791,26 +791,26 @@ export default [
     Telegram_Channel: 'https://t.me/YFX_EN',
     Github: '-',
     yuque: '-',
-    progress: 0,
-    status: 0,
+    progress: 2764.43,
+    status: 3,
     ratio: '1YFX=0.032HT',
     time: '1620554400',
     defaultRatio: '31250000000000000000',
     purchasedCurrencyOf: 0,
     totalPurchasedAmount: '2000000000000000000000',
-    totalPurchasedUnderlying: '0',
-    totalPurchasedCurrency: '0',
+    totalPurchasedUnderlying: '172777089000000000000000000',
+    totalPurchasedCurrency: '5528866854336999999909888',
     is_flash: false,
     link_url: 'https://www.yfx.com/', // 跳转外链接
     project_introduction: 'Decentralized Futures Trading Platform YFX.COM',
   },
   {
     name: 'O3 Swap',
-    address: '0x01', // 超募合约地址
+    address: '0x9210D73229b56786221Ab9e55Bd077BE4910BeA7', // 超募合约地址
     abi: StarterV3,
     start_at: '1620822000', //1620820800
     is_top: true,
-    is_coming: true,
+    is_coming: false,
     currency: {
       address: '0xa71edc38d189767582c38a3145b5873052c3e47a', // 如果是0x0则是ht
       decimal: 18,
@@ -820,7 +820,7 @@ export default [
     type: 0,
     isPrivate: false,
     underlying: {
-      address: '0xeCBF96Dd4fBfD666A849252EC022Bf311A4cA002',
+      address: '0xEe9801669C6138E84bD50dEB500827b776777d28',
       decimal: 18,
       symbol: 'O3',
       name: 'O3',
@@ -856,11 +856,11 @@ export default [
   },
   {
     name: 'O3 Swap',
-    address: '0x02', // 超募合约地址
+    address: '0x126a7f7071eD74Dc3495c3EB9b6a472BC446f2D2', // 超募合约地址
     abi: OfferingV2,
     start_at: '1620820800',
     is_top: true,
-    is_coming: true,
+    is_coming: false,
     currency: {
       address: '0xa71edc38d189767582c38a3145b5873052c3e47a', // 如果是0x0则是ht
       decimal: 18,
@@ -870,7 +870,7 @@ export default [
     type: 1,
     isPrivate: false,
     underlying: {
-      address: '0xeCBF96Dd4fBfD666A849252EC022Bf311A4cA002',
+      address: '0xEe9801669C6138E84bD50dEB500827b776777d28',
       decimal: 18,
       symbol: 'O3',
       name: 'O3',
