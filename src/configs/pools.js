@@ -806,11 +806,11 @@ export default [
   },
   {
     name: 'O3 Swap',
-    address: '0x01', // 超募合约地址
+    address: '0x9210D73229b56786221Ab9e55Bd077BE4910BeA7', // 超募合约地址
     abi: StarterV3,
     start_at: '1620822000', //1620820800
     is_top: true,
-    is_coming: true,
+    is_coming: false,
     currency: {
       address: '0xa71edc38d189767582c38a3145b5873052c3e47a', // 如果是0x0则是ht
       decimal: 18,
@@ -820,7 +820,7 @@ export default [
     type: 0,
     isPrivate: false,
     underlying: {
-      address: '0xeCBF96Dd4fBfD666A849252EC022Bf311A4cA002',
+      address: '0xEe9801669C6138E84bD50dEB500827b776777d28',
       decimal: 18,
       symbol: 'O3',
       name: 'O3',
@@ -856,11 +856,11 @@ export default [
   },
   {
     name: 'O3 Swap',
-    address: '0x02', // 超募合约地址
+    address: '0x126a7f7071eD74Dc3495c3EB9b6a472BC446f2D2', // 超募合约地址
     abi: OfferingV2,
     start_at: '1620820800',
     is_top: true,
-    is_coming: true,
+    is_coming: false,
     currency: {
       address: '0xa71edc38d189767582c38a3145b5873052c3e47a', // 如果是0x0则是ht
       decimal: 18,
@@ -870,7 +870,7 @@ export default [
     type: 1,
     isPrivate: false,
     underlying: {
-      address: '0xeCBF96Dd4fBfD666A849252EC022Bf311A4cA002',
+      address: '0xEe9801669C6138E84bD50dEB500827b776777d28',
       decimal: 18,
       symbol: 'O3',
       name: 'O3',
