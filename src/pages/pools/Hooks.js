@@ -37,6 +37,9 @@ import BN from 'bn.js'
 import { formatAmount } from '../../utils/format'
 import PoolsLBP from '../../configs/poolsLBP'
 import { useAllowance, useTokenAllowance } from '../Hooks'
+import {getMultiCallProvider, processResult} from "../../utils/multicall";
+import {Contract} from "ethers-multicall";
+import warnAboutDeprecatedESMImport from "react-router-dom/es/warnAboutDeprecatedESMImport";
 
 export const useStakingInfo = (stakingInfo) => {
   const { account, library, chainId } = useActiveWeb3React()
@@ -403,52 +406,47 @@ export const usePoolsInfo = (address = '') => {
 
           const currency_token = pool.currency.is_ht
             ? null
-            : getContract(library, ERC20, pool.currency.address)
+            : new Contract(pool.currency.address, ERC20)
 
-          // const underlying_token = getContract(
-          //     library,
-          //     ERC20,
-          //     pool.underlying.address,
-          // )
+          const multicallProvider = getMultiCallProvider(library, chainId)
+
+          const pool_contract = new Contract(pool.address, pool.abi)
+
+          const underlying_token = new Contract(pool.underlying.address, ERC20)
 
           if (pool.type === 0) {
-            const pool_contract = getContract(library, pool.abi, pool.address)
             const promise_list = [
-              pool_contract.methods.time
-                ? pool_contract.methods.time().call()
-                : 0, // 募资结束时间点
-              pool_contract.methods.timeSettle
-                ? pool_contract.methods.timeSettle().call()
-                : 0, // 结算开始时间点 V2版本提供
-              pool_contract.methods.price().call(), // 结算时间点
-              pool_contract.methods.totalPurchasedCurrency().call(), //总申购的量
-              pool_contract.methods.purchasedCurrencyOf(account).call(),
-              pool_contract.methods.totalSettleable().call(),
-              pool_contract.methods.settleable(account).call(),
-              // getLogs(library, Starter, {fromBlock: 0, toBlock: 'latest', address: pool.address, topics: [null, Web3.utils.padLeft(account, 64)]}),
-              getLogs(library, pool.abi, {
-                address: pool.address,
-                topics: [null, Web3.utils.padLeft(account, 64)],
-              }),
-              currency_token
-                ? currency_token.methods.allowance(account, pool.address).call()
-                : 0,
-              pool_contract.methods.totalSettledUnderlying().call(),
-              // underlying_token.methods.balanceOf(pool.address).call(),
+              pool_contract.price(), // 结算时间点
+              pool_contract.totalPurchasedCurrency(), //总申购的量
+              pool_contract.purchasedCurrencyOf(account),
+              pool_contract.totalSettleable(),
+              pool_contract.settleable(account),
+              pool_contract.totalSettledUnderlying(),
             ]
-            return Promise.all(promise_list).then(
-              ([
-                time,
-                timeSettle,
-                price,
-                totalPurchasedCurrency,
-                purchasedCurrencyOf,
-                totalSettleable,
-                settleable,
-                logs,
-                currency_allowance,
-                totalSettledUnderlying,
-              ]) => {
+
+            // 追加可能存在的
+            pool_contract.time && promise_list.push(pool_contract.time())
+            pool_contract.timeSettle && promise_list.push(pool_contract.timeSettle())
+            currency_token && promise_list.push(currency_token.allowance(account, pool.address))
+
+            return multicallProvider.all(promise_list).then(
+              (data) => {
+                data = processResult(data)
+                let [
+                  price,
+                  totalPurchasedCurrency,
+                  purchasedCurrencyOf,
+                  totalSettleable,
+                  settleable,
+                  logs,
+                  totalSettledUnderlying,
+                  time = 0,
+                  timeSettle = 0,
+                  currency_allowance = 0,
+                ] = data
+                const [total_completed_, total_amount, total_volume, total_rate] = totalSettleable
+                const [completed_, amount, volume, rate] = settleable
+
                 let status = pool.status || 0 // 即将上线
                 const timeClose = time
                 if (timeSettle) {
@@ -492,7 +490,6 @@ export const usePoolsInfo = (address = '') => {
                 Object.assign(pool.currency, {
                   allowance: currency_allowance,
                 })
-                console.log('update pools', status)
 
                 return Object.assign({}, pool, {
                   ratio: `1${pool.underlying.symbol}=${formatAmount(
@@ -514,9 +511,19 @@ export const usePoolsInfo = (address = '') => {
                   totalPurchasedAmount: totalPurchasedAmount.toString(),
                   totalPurchasedUnderlying,
                   purchasedCurrencyOf,
-                  totalSettleable,
+                  totalSettleable: {
+                    completed_: total_completed_,
+                    amount: total_amount,
+                    volume: total_volume,
+                    rate: total_rate
+                  },
                   totalSettledUnderlying,
-                  settleable,
+                  settleable: {
+                    completed_,
+                    amount,
+                    volume,
+                    rate
+                  },
                   logs,
                 })
               }
@@ -524,40 +531,34 @@ export const usePoolsInfo = (address = '') => {
           } else if (pool.type === 1) {
             // TODO 默认HT，后面需要根据通货来查询进度
             let currency_decimals = pool.currency.decimal
-
-            const underlying_token = getContract(
-              library,
-              ERC20,
-              pool.underlying.address
-            )
-
             // 白名单是offering合约
-            const pool_contract = getContract(library, pool.abi, pool.address)
             const promise_list = [
-              pool_contract.methods.timeOffer().call(), // 结算时间点
-              pool_contract.methods.timeClaim().call(), // 结算时间点
-              pool_contract.methods.ratio().call(), // 比例
-              pool_contract.methods.totalQuota().call(), //总申购的量
-              pool_contract.methods.totalOffered().call(), //总申购的量
-              pool_contract.methods.totalClaimed().call(), //总领取的量
-              pool_contract.methods.quotaOf(account).call(), // 最大申购额度
-              pool_contract.methods.offeredOf(account).call(), // 已经认购的量
-              pool_contract.methods.claimedOf(account).call(), // 已经领取的量
-              underlying_token.methods.decimals().call(),
+              pool_contract.timeOffer(), // 结算时间点
+              pool_contract.timeClaim(), // 结算时间点
+              pool_contract.ratio(), // 比例
+              pool_contract.totalQuota(), //总申购的量
+              pool_contract.totalOffered(), //总申购的量
+              pool_contract.totalClaimed(), //总领取的量
+              pool_contract.quotaOf(account), // 最大申购额度
+              pool_contract.offeredOf(account), // 已经认购的量
+              pool_contract.claimedOf(account), // 已经领取的量
+              underlying_token.decimals(),
             ]
-            return Promise.all(promise_list).then(
-              ([
-                start_at,
-                time,
-                ratio,
-                totalQuota,
-                totalOffered,
-                totalClaimed,
-                quotaOf,
-                offeredOf,
-                claimedOf,
-                underlying_decimals,
-              ]) => {
+            return multicallProvider.all(promise_list).then(
+              (data) => {
+                data = processResult(data)
+                let [
+                  start_at,
+                  time,
+                  ratio,
+                  totalQuota,
+                  totalOffered,
+                  totalClaimed,
+                  quotaOf,
+                  offeredOf,
+                  claimedOf,
+                  underlying_decimals,
+                ] = data
                 let status = pool.status || 0 // 即将上线
                 if (start_at < now && status < 1) {
                   // 募集中
@@ -620,7 +621,6 @@ export const usePoolsInfo = (address = '') => {
                   allowance: 0,
                 })
 
-                console.log('update pools')
                 return Object.assign({}, pool, {
                   ratio: `1${pool.underlying.symbol}=${
                     __ratio.toFixed(4, 1).toString() * 1
@@ -707,22 +707,22 @@ export const usePoolsLBPInfo = (address = '') => {
 
   useEffect(() => {
     if (library) {
+      const multicallProvider = getMultiCallProvider(library, chainId)
       Promise.all(
         poolsLBP.map((pool) => {
           // 如果还未开始，则不调用合约
           if (pool.is_coming) return pool
 
-          const currency_token = pool.currency.is_ht
-            ? null
-            : getContract(library, ERC20, pool.currency.address)
+          const pool_contract = new Contract(pool.address, pool.abi)
 
-          const pool_contract = getContract(library, pool.abi, pool.address)
           const promise_list = [
-            pool_contract.methods.begin().call(), // 开始时间
-            pool_contract.methods.span().call(), // lbp持续时间
-            pool_contract.methods.priceLBP().call(), // 价格
+            pool_contract.begin(), // 开始时间
+            pool_contract.span(), // lbp持续时间
+            pool_contract.priceLBP(), // 价格
           ]
-          return Promise.all(promise_list).then(([begin, span, priceLBP]) => {
+          return multicallProvider.all(promise_list).then((data) => {
+            data = processResult(data)
+            let [begin, span, priceLBP] = data
             const start_at = begin // 开始时间
             const time = parseInt(begin) + parseInt(span) // 结束时间
             let status = pool.status
@@ -735,7 +735,6 @@ export const usePoolsLBPInfo = (address = '') => {
               status = 3
             }
 
-            console.log('update poolsLBP', status)
             const is_join =
               localStorage.getItem(`is_join_${pool.address}`) || false
             const price = Web3.utils.fromWei(priceLBP, 'ether')
@@ -770,28 +769,32 @@ export const useFarmInfo = (address = '') => {
 
   useEffect(() => {
     if (library) {
+
+      const multicallProvider = getMultiCallProvider(library, chainId)
       console.log(Farm, 'Farm')
       Promise.all(
         Farm.map((pool) => {
-          const pool_contract = getContract(library, pool.abi, pool.address)
-          const currency_token = getContract(library, ERC20, pool.MLP)
+          const pool_contract = new Contract(pool.address, pool.abi)
+          const currency_token = new Contract(pool.MLP, ERC20)
           const promise_list = [
-            pool_contract.methods.begin().call(), // 开始时间
-            pool_contract.methods.earned(account).call(), // 奖励1
-            pool_contract.methods.earned2(account).call(), // 奖励2
-            pool_contract.methods.totalSupply().call(), // 总抵押
-            pool_contract.methods.balanceOf(account).call(), // 我的抵押
-            currency_token.methods.allowance(account, pool.address).call(),
+            pool_contract.begin(), // 开始时间
+            pool_contract.earned(account), // 奖励1
+            pool_contract.earned2(account), // 奖励2
+            pool_contract.totalSupply(), // 总抵押
+            pool_contract.balanceOf(account), // 我的抵押
+            currency_token.allowance(account, pool.address),
           ]
-          return Promise.all(promise_list).then(
-            ([
-              begin,
-              earned,
-              earned2,
-              totalSupply,
-              balanceOf,
-              currency_allowance,
-            ]) => {
+          return multicallProvider.all(promise_list).then(
+            (data) => {
+              data = processResult(data)
+              let [
+                begin,
+                earned,
+                earned2,
+                totalSupply,
+                balanceOf,
+                currency_allowance,
+              ] = data
               console.log(balanceOf, 'balanceOfbalanceOf')
               return Object.assign({}, pool, {
                 start_at: begin,
