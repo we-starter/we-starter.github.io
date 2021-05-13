@@ -14,6 +14,8 @@ import { useFarmInfo } from '../../pages/pools/Hooks'
 import {
   HANDLE_SHOW_FAILED_TRANSACTION_MODAL,
   HANDLE_SHOW_TRANSACTION_MODAL,
+  HANDLE_SHOW_SUCCESS_TRANSACTION_MODAL,
+  HANDLE_SHOW_APPROVE_FAILED_TRANSACTION_MODAL,
   HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
   waitingForInit,
   waitingPending,
@@ -89,8 +91,8 @@ const DepositPopup = (props) => {
       .on('error', (err, receipt) => {
         console.log('approve error', err)
         dispatch({
-          type: HANDLE_SHOW_FAILED_TRANSACTION_MODAL,
-          showFailedTransactionModal: true,
+          type: HANDLE_SHOW_APPROVE_FAILED_TRANSACTION_MODAL,
+          showApproveFailedTransactionModal: true,
         })
         dispatch({
           type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
@@ -125,8 +127,8 @@ const DepositPopup = (props) => {
           showWaitingWalletConfirmModal: waitingForInit,
         })
         dispatch({
-          type: HANDLE_SHOW_TRANSACTION_MODAL,
-          showTransactionModal: true,
+          type: HANDLE_SHOW_SUCCESS_TRANSACTION_MODAL,
+          showSuccessTransactionModal: true,
         })
         setLoadFlag(false)
         onClose()

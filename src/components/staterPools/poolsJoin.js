@@ -14,7 +14,8 @@ import { FormattedMessage } from 'react-intl'
 
 import {
   HANDLE_SHOW_FAILED_TRANSACTION_MODAL,
-  HANDLE_SHOW_TRANSACTION_MODAL,
+  HANDLE_SHOW_SUCCESS_TRANSACTION_MODAL,
+  HANDLE_SHOW_APPROVE_FAILED_TRANSACTION_MODAL,
   HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
   waitingForInit,
   waitingPending,
@@ -124,8 +125,8 @@ const PoolsJoin = (props) => {
       .on('error', (err, receipt) => {
         console.log('approve error', err)
         dispatch({
-          type: HANDLE_SHOW_FAILED_TRANSACTION_MODAL,
-          showFailedTransactionModal: true,
+          type: HANDLE_SHOW_APPROVE_FAILED_TRANSACTION_MODAL,
+          showApproveFailedTransactionModal: true,
         })
         dispatch({
           type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
@@ -163,8 +164,8 @@ const PoolsJoin = (props) => {
               showWaitingWalletConfirmModal: waitingForInit,
             })
             dispatch({
-              type: HANDLE_SHOW_TRANSACTION_MODAL,
-              showTransactionModal: true,
+              type: HANDLE_SHOW_SUCCESS_TRANSACTION_MODAL,
+              showSuccessTransactionModal: true,
             })
             setLoadFlag(false)
             onClose()
@@ -194,8 +195,8 @@ const PoolsJoin = (props) => {
               showWaitingWalletConfirmModal: waitingForInit,
             })
             dispatch({
-              type: HANDLE_SHOW_TRANSACTION_MODAL,
-              showTransactionModal: true,
+              type: HANDLE_SHOW_SUCCESS_TRANSACTION_MODAL,
+              showSuccessTransactionModal: true,
             })
             setLoadFlag(false)
             onClose()
@@ -231,8 +232,8 @@ const PoolsJoin = (props) => {
               showWaitingWalletConfirmModal: waitingForInit,
             })
             dispatch({
-              type: HANDLE_SHOW_TRANSACTION_MODAL,
-              showTransactionModal: true,
+              type: HANDLE_SHOW_SUCCESS_TRANSACTION_MODAL,
+              showSuccessTransactionModal: true,
             })
             setLoadFlag(false)
             onClose()
@@ -262,8 +263,8 @@ const PoolsJoin = (props) => {
               showWaitingWalletConfirmModal: waitingForInit,
             })
             dispatch({
-              type: HANDLE_SHOW_TRANSACTION_MODAL,
-              showTransactionModal: true,
+              type: HANDLE_SHOW_SUCCESS_TRANSACTION_MODAL,
+              showSuccessTransactionModal: true,
             })
             setLoadFlag(false)
             onClose()

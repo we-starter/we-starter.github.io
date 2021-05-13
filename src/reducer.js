@@ -9,8 +9,10 @@ import {
   HANDLE_SHOW_STAKED_TOKENS_MODAL,
   HANDLE_SHOW_UNSTAKED_TOKENS_MODAL,
   HANDLE_SHOW_FAILED_TRANSACTION_MODAL,
+  HANDLE_SHOW_APPROVE_FAILED_TRANSACTION_MODAL,
   HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
   HANDLE_SHOW_TRANSACTION_MODAL,
+  HANDLE_SHOW_SUCCESS_TRANSACTION_MODAL,
   HANDLE_WALLET_MODAL,
   HANDLE_TX_STATUS,
   HANDLE_SHOW_MENUMASK_MODAL,
@@ -48,6 +50,12 @@ const reducer = (state, action) => {
         ...state,
         showFailedTransactionModal: action.showFailedTransactionModal,
       }
+    case HANDLE_SHOW_APPROVE_FAILED_TRANSACTION_MODAL:
+      return {
+        ...state,
+        showApproveFailedTransactionModal:
+          action.showApproveFailedTransactionModal,
+      }
     case HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL:
       return {
         ...state,
@@ -57,6 +65,11 @@ const reducer = (state, action) => {
       return {
         ...state,
         showTransactionModal: action.showTransactionModal,
+      }
+    case HANDLE_SHOW_SUCCESS_TRANSACTION_MODAL:
+      return {
+        ...state,
+        showSuccessTransactionModal: action.showSuccessTransactionModal,
       }
     case HANDLE_WALLET_MODAL:
       return {
@@ -104,8 +117,10 @@ const ContextProvider = (props) => {
     showStakedTokensModal: false,
     showUnstakedTokensModal: false,
     showFailedTransactionModal: false,
+    showApproveFailedTransactionModal: false,
     showWaitingWalletConfirmModal: { show: false, title: '', content: '' },
     showTransactionModal: false,
+    showSuccessTransactionModal: false,
     isSupportedChain: true,
     walletModal: null,
     txStatus: null,

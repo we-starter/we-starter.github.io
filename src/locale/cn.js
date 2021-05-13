@@ -184,6 +184,8 @@ const zh_CN = {
   modalsText64: 'Deposited',
   modalsText65: 'Your Unclaimed WAR',
   modalsText66: 'Unstake &Claim',
+  modalsText67: '授权失败, 请重新尝试授权',
+  modalsText68: '参与成功, 请返回页面查看',
   poolText1: 'by',
   poolText2: 'Token ID:',
   poolText3: 'Reward points',

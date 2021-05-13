@@ -184,6 +184,8 @@ const en_US = {
   modalsText64: 'Deposited',
   modalsText65: 'Your Unclaimed WAR',
   modalsText66: 'Unstake &Claim',
+  modalsText67: 'Approve failed, Please try again',
+  modalsText68: 'Succeeded! Please return to the page to view',
   poolText1: 'by',
   poolText2: 'Token ID:',
   poolText3: 'Reward points',
