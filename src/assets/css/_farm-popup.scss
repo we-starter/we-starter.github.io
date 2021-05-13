@@ -21,6 +21,15 @@
     border-color: #0f8c20 !important;
   }
 }
+.ant-btn > .ant-btn-loading-icon {
+  svg {
+    margin-right: 8px;
+    width: 24px;
+    height: 24px;
+    fill: #fff !important;
+    top: 4px;
+  }
+}
 @media #{$desktop} {
   .farm_popup {
     &_avaliable {

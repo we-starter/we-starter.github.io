@@ -3,7 +3,8 @@ import { usage } from 'browserslist'
 import { formatAmount, numToWei, splitFormat } from '../../utils/format'
 import { getRandomIntInclusive } from '../../utils/index'
 import { Select } from 'antd'
-import { useBalance } from '../../pages/Hooks'
+import { Button } from 'antd'
+import { useBalance, useAllowance } from '../../pages/Hooks'
 import { getPointAddress } from '../../web3/address'
 import Web3 from 'web3'
 import { getContract, useActiveWeb3React } from '../../web3'
@@ -13,7 +14,8 @@ import { FormattedMessage } from 'react-intl'
 
 import {
   HANDLE_SHOW_FAILED_TRANSACTION_MODAL,
-  HANDLE_SHOW_TRANSACTION_MODAL,
+  HANDLE_SHOW_SUCCESS_TRANSACTION_MODAL,
+  HANDLE_SHOW_APPROVE_FAILED_TRANSACTION_MODAL,
   HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
   waitingForInit,
   waitingPending,
@@ -30,6 +32,7 @@ const PoolsJoin = (props) => {
   const [approve, setApprove] = useState(true)
   const [amount, setAmount] = useState('')
   const [fee, setFee] = useState(0)
+  const [loadFlag, setLoadFlag] = useState(false)
 
   const currency_address = pool ? pool.currency.address : '0x0'
   const { balance = 0 } = useBalance(currency_address)
@@ -39,11 +42,12 @@ const PoolsJoin = (props) => {
 
   useEffect(() => {
     const gas_limit = new BigNumber('1006182')
-    const gas_price = new BigNumber(Web3.utils.toWei(`${getRandomIntInclusive(5, 20)}`, 'gwei'))
-    const _fee =  gas_limit.multipliedBy(gas_price).toString()
+    const gas_price = new BigNumber(
+      Web3.utils.toWei(`${getRandomIntInclusive(5, 20)}`, 'gwei')
+    )
+    const _fee = gas_limit.multipliedBy(gas_price).toString()
     setFee(_fee)
   }, [])
-
 
   useEffect(() => {
     if (pool && (pool.currency.allowance > 0 || pool.currency.is_ht)) {
@@ -60,7 +64,7 @@ const PoolsJoin = (props) => {
       max = pool.quotaOf
     }
 
-    if(pool.currency.is_ht && max == balance){
+    if (pool.currency.is_ht && max == balance) {
       // 如果是ht,留部分手续费
       const feeB = new BigNumber(fee)
       max = maxB.gt(feeB) ? maxB.minus(feeB).toString() : 0
@@ -87,19 +91,23 @@ const PoolsJoin = (props) => {
   }
 
   const onChange = (e) => {
-    const { value } = e.target;
-    const re = /^[0-9]+([.|,][0-9]+)?$/g;
+    const { value } = e.target
+    const re = /^[0-9]+([.|,][0-9]+)?$/g
     if (
-        value === '' ||
-        re.test(value) ||
-        (value.split('.').length === 2 &&
-            value.slice(value.length - 1) === '.')
+      value === '' ||
+      re.test(value) ||
+      (value.split('.').length === 2 && value.slice(value.length - 1) === '.')
     ) {
-      setAmount(value);
+      setAmount(value)
     }
-  };
+  }
 
   const onApprove = (e) => {
+    if (!active) {
+      return false
+    }
+    if (loadFlag) return
+    setLoadFlag(true)
     const contract = getContract(library, ERC20.abi, pool.currency.address)
     contract.methods
       .approve(
@@ -109,195 +117,172 @@ const PoolsJoin = (props) => {
       .send({
         from: account,
       })
-      .on('transactionHash', (hash) => {
-        dispatch({
-          type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
-          showWaitingWalletConfirmModal: { ...waitingPending, hash },
-        })
-      })
       .on('receipt', (_, receipt) => {
         console.log('approve success')
-        dispatch({
-          type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
-          showWaitingWalletConfirmModal: waitingForInit,
-        })
-        dispatch({
-          type: HANDLE_SHOW_TRANSACTION_MODAL,
-          showTransactionModal: true,
-        })
+        setLoadFlag(false)
         setApprove(false)
       })
       .on('error', (err, receipt) => {
         console.log('approve error', err)
         dispatch({
-          type: HANDLE_SHOW_FAILED_TRANSACTION_MODAL,
-          showFailedTransactionModal: true,
+          type: HANDLE_SHOW_APPROVE_FAILED_TRANSACTION_MODAL,
+          showApproveFailedTransactionModal: true,
         })
         dispatch({
           type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
           showWaitingWalletConfirmModal: waitingForInit,
         })
+        setLoadFlag(false)
       })
   }
 
   const onConfirm = (e) => {
+    if (!active) {
+      return false
+    }
     if (!amount) {
       return false
     }
     if (isNaN(parseInt(amount))) {
       return false
     }
+    if (loadFlag) return
+    setLoadFlag(true)
     if (pool.type === 1) {
       const pool_contract = getContract(library, pool.abi, pool.address)
-      if(pool.currency.is_ht){
+      if (pool.currency.is_ht) {
         pool_contract.methods
-            .offerHT()
-            .send({
-              from: account,
-              value: Web3.utils.toWei(`${amount}`, 'ether'),
+          .offerHT()
+          .send({
+            from: account,
+            value: Web3.utils.toWei(`${amount}`, 'ether'),
+          })
+          .on('receipt', (_, receipt) => {
+            console.log('BOT staking success')
+            dispatch({
+              type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
+              showWaitingWalletConfirmModal: waitingForInit,
             })
-            .on('transactionHash', (hash) => {
-              dispatch({
-                type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
-                showWaitingWalletConfirmModal: { ...waitingPending, hash },
-              })
+            dispatch({
+              type: HANDLE_SHOW_SUCCESS_TRANSACTION_MODAL,
+              showSuccessTransactionModal: true,
             })
-            .on('receipt', (_, receipt) => {
-              console.log('BOT staking success')
-              dispatch({
-                type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
-                showWaitingWalletConfirmModal: waitingForInit,
-              })
-              dispatch({
-                type: HANDLE_SHOW_TRANSACTION_MODAL,
-                showTransactionModal: true,
-              })
+            setLoadFlag(false)
+            onClose()
+          })
+          .on('error', (err, receipt) => {
+            console.log('BOT staking error', err)
+            dispatch({
+              type: HANDLE_SHOW_FAILED_TRANSACTION_MODAL,
+              showFailedTransactionModal: true,
             })
-            .on('error', (err, receipt) => {
-              console.log('BOT staking error', err)
-              dispatch({
-                type: HANDLE_SHOW_FAILED_TRANSACTION_MODAL,
-                showFailedTransactionModal: true,
-              })
-              dispatch({
-                type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
-                showWaitingWalletConfirmModal: waitingForInit,
-              })
+            dispatch({
+              type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
+              showWaitingWalletConfirmModal: waitingForInit,
             })
-      }else {
+            setLoadFlag(false)
+          })
+      } else {
         pool_contract.methods
-            .offer(Web3.utils.toWei(`${amount}`, 'ether'))
-            .send({
-              from: account
+          .offer(Web3.utils.toWei(`${amount}`, 'ether'))
+          .send({
+            from: account,
+          })
+          .on('receipt', (_, receipt) => {
+            console.log('BOT staking success')
+            dispatch({
+              type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
+              showWaitingWalletConfirmModal: waitingForInit,
             })
-            .on('transactionHash', (hash) => {
-              dispatch({
-                type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
-                showWaitingWalletConfirmModal: { ...waitingPending, hash },
-              })
+            dispatch({
+              type: HANDLE_SHOW_SUCCESS_TRANSACTION_MODAL,
+              showSuccessTransactionModal: true,
             })
-            .on('receipt', (_, receipt) => {
-              console.log('BOT staking success')
-              dispatch({
-                type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
-                showWaitingWalletConfirmModal: waitingForInit,
-              })
-              dispatch({
-                type: HANDLE_SHOW_TRANSACTION_MODAL,
-                showTransactionModal: true,
-              })
+            setLoadFlag(false)
+            onClose()
+          })
+          .on('error', (err, receipt) => {
+            console.log('BOT staking error', err)
+            dispatch({
+              type: HANDLE_SHOW_FAILED_TRANSACTION_MODAL,
+              showFailedTransactionModal: true,
             })
-            .on('error', (err, receipt) => {
-              console.log('BOT staking error', err)
-              dispatch({
-                type: HANDLE_SHOW_FAILED_TRANSACTION_MODAL,
-                showFailedTransactionModal: true,
-              })
-              dispatch({
-                type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
-                showWaitingWalletConfirmModal: waitingForInit,
-              })
+            dispatch({
+              type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
+              showWaitingWalletConfirmModal: waitingForInit,
             })
+            setLoadFlag(false)
+          })
       }
-
     } else {
-
       const pool_contract = getContract(library, pool.abi, pool.address)
       const _amount = numToWei(amount, pool.currency.decimal)
 
-      if(pool.currency.is_ht){
+      if (pool.currency.is_ht) {
         pool_contract.methods
-            .purchaseHT()
-            .send({
-              from: account,
-              value: _amount
+          .purchaseHT()
+          .send({
+            from: account,
+            value: _amount,
+          })
+          .on('receipt', (_, receipt) => {
+            console.log('BOT staking success')
+            dispatch({
+              type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
+              showWaitingWalletConfirmModal: waitingForInit,
             })
-            .on('transactionHash', (hash) => {
-              dispatch({
-                type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
-                showWaitingWalletConfirmModal: { ...waitingPending, hash },
-              })
+            dispatch({
+              type: HANDLE_SHOW_SUCCESS_TRANSACTION_MODAL,
+              showSuccessTransactionModal: true,
             })
-            .on('receipt', (_, receipt) => {
-              console.log('BOT staking success')
-              dispatch({
-                type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
-                showWaitingWalletConfirmModal: waitingForInit,
-              })
-              dispatch({
-                type: HANDLE_SHOW_TRANSACTION_MODAL,
-                showTransactionModal: true,
-              })
+            setLoadFlag(false)
+            onClose()
+          })
+          .on('error', (err, receipt) => {
+            console.log('BOT staking error', err)
+            dispatch({
+              type: HANDLE_SHOW_FAILED_TRANSACTION_MODAL,
+              showFailedTransactionModal: true,
             })
-            .on('error', (err, receipt) => {
-              console.log('BOT staking error', err)
-              dispatch({
-                type: HANDLE_SHOW_FAILED_TRANSACTION_MODAL,
-                showFailedTransactionModal: true,
-              })
-              dispatch({
-                type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
-                showWaitingWalletConfirmModal: waitingForInit,
-              })
+            dispatch({
+              type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
+              showWaitingWalletConfirmModal: waitingForInit,
             })
-      }else{
+            setLoadFlag(false)
+          })
+      } else {
         pool_contract.methods
-            .purchase(_amount)
-            .send({
-              from: account,
+          .purchase(_amount)
+          .send({
+            from: account,
+          })
+          .on('receipt', (_, receipt) => {
+            console.log('BOT staking success')
+            dispatch({
+              type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
+              showWaitingWalletConfirmModal: waitingForInit,
             })
-            .on('transactionHash', (hash) => {
-              dispatch({
-                type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
-                showWaitingWalletConfirmModal: { ...waitingPending, hash },
-              })
+            dispatch({
+              type: HANDLE_SHOW_SUCCESS_TRANSACTION_MODAL,
+              showSuccessTransactionModal: true,
             })
-            .on('receipt', (_, receipt) => {
-              console.log('BOT staking success')
-              dispatch({
-                type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
-                showWaitingWalletConfirmModal: waitingForInit,
-              })
-              dispatch({
-                type: HANDLE_SHOW_TRANSACTION_MODAL,
-                showTransactionModal: true,
-              })
+            setLoadFlag(false)
+            onClose()
+          })
+          .on('error', (err, receipt) => {
+            console.log('BOT staking error', err)
+            dispatch({
+              type: HANDLE_SHOW_FAILED_TRANSACTION_MODAL,
+              showFailedTransactionModal: true,
             })
-            .on('error', (err, receipt) => {
-              console.log('BOT staking error', err)
-              dispatch({
-                type: HANDLE_SHOW_FAILED_TRANSACTION_MODAL,
-                showFailedTransactionModal: true,
-              })
-              dispatch({
-                type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
-                showWaitingWalletConfirmModal: waitingForInit,
-              })
+            dispatch({
+              type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
+              showWaitingWalletConfirmModal: waitingForInit,
             })
+            setLoadFlag(false)
+          })
       }
-
     }
-    onClose()
   }
 
   return (
@@ -307,11 +292,18 @@ const PoolsJoin = (props) => {
           <div className='form-app__inner deposit'>
             <h1
               className='form-app__title h3'
-              style={{ marginTop: 0, marginBottom: '10px' }}
+              style={{
+                marginTop: 0,
+                marginBottom: '10px',
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+              }}
             >
               <FormattedMessage id='poolText16' />
               {pool && pool.underlying.symbol}
               <FormattedMessage id='poolText17' />
+              <a className='farm_popup_close_btn' onClick={onClose}></a>
             </h1>
             <p className='form-app__tip'>{pool && pool.ratio}</p>
             {/*<Select*/}
@@ -352,7 +344,7 @@ const PoolsJoin = (props) => {
                   opacity: 1,
                 }}
               >
-                最大申购额度:
+                <FormattedMessage id='poolText23' />
                 {pool &&
                   pool.type === 1 &&
                   pool.quotaOf > 0 &&
@@ -383,29 +375,14 @@ const PoolsJoin = (props) => {
             </div>
 
             <div className='form-app__submit form-app__submit--row'>
-              <button
-                className='btn btn--outline btn--medium'
-                type='button'
-                onClick={onClose}
-              >
-                <FormattedMessage id='poolText20' />
-              </button>
               {approve ? (
-                <button
-                  type='button'
-                  className='btn btn--medium'
-                  onClick={onApprove}
-                >
+                <Button type='primary' onClick={onApprove} loading={loadFlag}>
                   <FormattedMessage id='poolText21' />
-                </button>
+                </Button>
               ) : (
-                <button
-                  type='button'
-                  className='btn btn--medium'
-                  onClick={onConfirm}
-                >
+                <Button type='primary' onClick={onConfirm} loading={loadFlag}>
                   <FormattedMessage id='poolText22' />
-                </button>
+                </Button>
               )}
             </div>
           </div>

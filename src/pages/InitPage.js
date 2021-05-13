@@ -8,8 +8,10 @@ import {
   ClaimRewardModal,
   StakedTokensModal,
   FailedTransactionModal,
+  ApproveFailedTransactionModal,
   WaitingWalletConfirmModal,
   TransactionModal,
+  SuccessTransactionModal,
 } from '../components/Modals'
 import { MenuMask } from '../components/menumask/index'
 import {
@@ -17,7 +19,9 @@ import {
   HANDLE_WALLET_MODAL,
   HANDLE_SHOW_MENUMASK_MODAL,
   HANDLE_CHANGE_NETWORKS,
-  TOOL_DATA, IS_SUPPORTEDCHAIN,
+  TOOL_DATA,
+  IS_SUPPORTEDCHAIN,
+  HANDLE_SHOW_SUCCESS_TRANSACTION_MODAL,
 } from '../const'
 import {
   InjectedConnector,
@@ -67,13 +71,12 @@ const wallets = {
   //Torus: torus,
   //Aut
 }
-if(window.ethereum){
+if (window.ethereum) {
   window.ethereum.on('networkChanged', () => {
     // 链改了，刷新网页
     window.location.reload()
   })
 }
-
 
 export const InitPage = () => {
   const { dispatch, state } = useContext(mainContext)
@@ -89,8 +92,10 @@ export const InitPage = () => {
     showStakedTokensModal,
     showUnstakedTokensModal,
     showFailedTransactionModal,
+    showApproveFailedTransactionModal,
     showWaitingWalletConfirmModal,
     showTransactionModal,
+    showSuccessTransactionModal,
     walletModal,
     txStatus,
     pool,
@@ -122,21 +127,23 @@ export const InitPage = () => {
     console.log('wallet content', localContent)
     if (localContent) {
       console.log('activate', wallets[localContent])
-      activate(wallets[localContent], () => {}, true ).then(() => {
-        console.log(wallets[localContent])
-      }).catch(e => {
-        if(e instanceof UnsupportedChainIdError){
-          dispatch({
-            type: IS_SUPPORTEDCHAIN,
-            isSupportedChain: false,
-          })
+      activate(wallets[localContent], () => {}, true)
+        .then(() => {
+          console.log(wallets[localContent])
+        })
+        .catch((e) => {
+          if (e instanceof UnsupportedChainIdError) {
+            dispatch({
+              type: IS_SUPPORTEDCHAIN,
+              isSupportedChain: false,
+            })
 
-          dispatch({
-            type: HANDLE_CHANGE_NETWORKS,
-            changeNetworkStatus: true,
-          })
-        }
-      })
+            dispatch({
+              type: HANDLE_CHANGE_NETWORKS,
+              changeNetworkStatus: true,
+            })
+          }
+        })
     }
   }, [])
 
@@ -153,7 +160,6 @@ export const InitPage = () => {
           }
         />
       )}
-
       {showStakeModal && (
         <div className='modal-show'>
           <div className='wrapper'>
@@ -182,11 +188,18 @@ export const InitPage = () => {
           </div>
         </div>
       )}
-
       {showFailedTransactionModal && (
         <div className='modal-show'>
           <div className='wrapper' style={{ zIndex: 11 }}>
             <FailedTransactionModal />
+          </div>
+        </div>
+      )}
+      {/* 授权失败弹框 */}
+      {showApproveFailedTransactionModal && (
+        <div className='modal-show'>
+          <div className='wrapper' style={{ zIndex: 11 }}>
+            <ApproveFailedTransactionModal />
           </div>
         </div>
       )}
@@ -204,11 +217,17 @@ export const InitPage = () => {
       {/*        </div>*/}
       {/*    </div>*/}
       {/*)}*/}
-
       {showTransactionModal && (
         <div className='modal-show'>
           <div className='wrapper' style={{ zIndex: 11 }}>
             <TransactionModal />
+          </div>
+        </div>
+      )}
+      {showSuccessTransactionModal && (
+        <div className='modal-show'>
+          <div className='wrapper' style={{ zIndex: 11 }}>
+            <SuccessTransactionModal />
           </div>
         </div>
       )}
@@ -220,7 +239,6 @@ export const InitPage = () => {
           </div>
         </div>
       )}
-
       {walletModal === 'connect' && (
         <div className='modal-show'>
           <div className='wrapper'>
@@ -228,7 +246,6 @@ export const InitPage = () => {
           </div>
         </div>
       )}
-
       {walletModal === 'connecting' && (
         <div className='modal-show'>
           <div className='wrapper'>
@@ -243,7 +260,6 @@ export const InitPage = () => {
           </div>
         </div>
       )}
-
       {walletModal === 'status' && (
         <div className='modal-show'>
           <div className='wrapper' style={{ zIndex: 11 }}>
@@ -300,7 +316,6 @@ export const InitPage = () => {
           </div>
         </div>
       )}
-
       {walletModal === 'slippageSuccess' && (
         <div className='modal-show'>
           <div className='wrapper' style={{ zIndex: 10 }}>
@@ -317,7 +332,6 @@ export const InitPage = () => {
           </div>
         </div>
       )}
-
       {walletModal === 'slippage' && (
         <div className='modal-show'>
           <div className='wrapper' style={{ zIndex: 10 }}>
@@ -334,7 +348,6 @@ export const InitPage = () => {
           </div>
         </div>
       )}
-
       {changeNetworkStatus && (
         <div className='modal-show'>
           <div className='wrapper'>

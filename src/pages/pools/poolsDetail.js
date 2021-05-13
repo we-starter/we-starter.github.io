@@ -175,7 +175,7 @@ const PoolsDetail = (props) => {
           )}
           {pool &&
             pool.status === 1 &&
-            (pool.timeClose === 0 || pool.timeClose > now) && (
+            (pool.timeClose == 0 || pool.timeClose > now) && (
               <div className='pools_card_start'>
                 <FormattedMessage id='recruit' />
               </div>
@@ -231,6 +231,7 @@ const PoolsDetail = (props) => {
         </div>
       </div>
       <div className='pools_detail_btn_box'>
+        {/* pool.timeClose * 1 > now  timeClose 是超募的claim余额的结束时间 */}
         <a
           className={`pools_detail_btn ${
             pool &&
