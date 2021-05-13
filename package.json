@@ -30,7 +30,7 @@
     "browserslist": "^4.16.1",
     "caniuse-lite": "^1.0.30001179",
     "dayjs": "^1.10.4",
-    "ethers-multicall": "^0.2.0",
+    "ethers-multicall-x": "^0.2.2",
     "lodash": "^4.17.21",
     "node-sass": "^4.14.1",
     "react": "^16.13.1",
