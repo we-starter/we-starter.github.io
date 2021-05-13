@@ -438,7 +438,6 @@ export const usePoolsInfo = (address = '') => {
                   purchasedCurrencyOf,
                   totalSettleable,
                   settleable,
-                  logs,
                   totalSettledUnderlying,
                   time = 0,
                   timeSettle = 0,
@@ -524,7 +523,6 @@ export const usePoolsInfo = (address = '') => {
                     volume,
                     rate
                   },
-                  logs,
                 })
               }
             )
