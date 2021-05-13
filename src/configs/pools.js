@@ -1009,7 +1009,7 @@ export default [
     name: 'WAR',
     address: '0xAe24b9F01EbBA7b5163D5A5a0d30F4935241E2d8',
     abi: StarterV2,
-    start_at: '1620921600',
+    start_at: '1620953628',
     is_top: true,
     is_coming: false,
     currency: {
