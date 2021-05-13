@@ -241,6 +241,12 @@ const PoolsDetail = (props) => {
           }`}
           onClick={() => {
             if (pool.status === 1) {
+              dispatch({
+                type: HANDLE_WALLET_MODAL,
+                walletModal: 'join',
+                pool,
+              })
+              return
               if (pool.type === 1 && pool.purchasedCurrencyOf > 0) {
                 // 如果是 已经申购过的
                 // message.info('已申购过')

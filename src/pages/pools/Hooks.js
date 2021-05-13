@@ -544,6 +544,9 @@ export const usePoolsInfo = (address = '') => {
               pool_contract.methods.offeredOf(account).call(), // 已经认购的量
               pool_contract.methods.claimedOf(account).call(), // 已经领取的量
               underlying_token.methods.decimals().call(),
+              currency_token
+                ? currency_token.methods.allowance(account, pool.address).call()
+                : 0, // 是否授权过
             ]
             return Promise.all(promise_list).then(
               ([
@@ -557,6 +560,7 @@ export const usePoolsInfo = (address = '') => {
                 offeredOf,
                 claimedOf,
                 underlying_decimals,
+                currency_allowance,
               ]) => {
                 let status = pool.status || 0 // 即将上线
                 if (start_at < now && status < 1) {
@@ -616,8 +620,9 @@ export const usePoolsInfo = (address = '') => {
                 }
 
                 // TODO 后续申购物为Token时，需要设置allowance
+                // --- 用USDT兑换时需要allowance ---
                 Object.assign(pool.currency, {
-                  allowance: 0,
+                  allowance: currency_allowance,
                 })
 
                 console.log('update pools')

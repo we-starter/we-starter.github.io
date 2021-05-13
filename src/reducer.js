@@ -88,7 +88,7 @@ const reducer = (state, action) => {
     case IS_SUPPORTEDCHAIN:
       return {
         ...state,
-        isSupportedChain: action.isSupportedChain
+        isSupportedChain: action.isSupportedChain,
       }
     default:
       return state

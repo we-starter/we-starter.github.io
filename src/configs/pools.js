@@ -904,4 +904,105 @@ export default [
     project_introduction:
       'O3 Swap, a proprietary cross-chain aggregation protocol',
   },
+  // 测试合约配置
+  {
+    name: 'WAR',
+    address: '0xC0b748Ad9C984060B5b50EE040fd232e0e6F7A7d',
+    abi: OfferingV2,
+    start_at: '1620820800',
+    is_top: true,
+    is_coming: false, // is_coming 为 true 则不请求合约
+    currency: {
+      address: '0xa71edc38d189767582c38a3145b5873052c3e47a', // 如果是0x0则是ht
+      decimal: 18,
+      symbol: 'USDT',
+    },
+    icon: '',
+    type: 1,
+    isPrivate: true,
+    underlying: {
+      address: '0x910651F81a605a6Ef35d05527d24A72fecef8bF0', // 地址有问题
+      decimal: 18,
+      symbol: 'WAR',
+      name: 'WAR',
+      total_supply: '100,000,000',
+      holders: '-',
+      transfers: '-',
+    },
+    amount: '120000',
+    pool_info: {
+      token_distribution: 'May 14th 2021, 6:00PM SGT',
+      min_allocation: '0',
+      max_allocation: '0.01 USDT',
+      min_swap_level: '1 USDT',
+    },
+    website: 'https://www.westarter.org',
+    white_paper: '-',
+    twitter: 'https://twitter.com/westarter_org',
+    Telegram_Channel: 'https://t.me/westarter_official',
+    Github: 'https://github.com/we-starter',
+    yuque: '-',
+    progress: 0,
+    status: 0,
+    ratio: '1WAR=1USDT', // 兑换比例需要确认
+    time: '1620986400',
+    purchasedCurrencyOf: 0,
+    totalPurchasedAmount: '1600000000000000000000',
+    totalPurchasedUnderlying: '0',
+    totalPurchasedCurrency: '0',
+    is_flash: false,
+    link_url: 'https://www.westarter.org', // 跳转外链接
+    project_introduction:
+      'WeStarter is a cross-chain token initial swap platform which based on HECO network. Through the fluency of the product and sufficient industry resources, it carries the requirement of funds and resources for a variety of asset types. With the role of gatekeeper, through the decentralized incentive and governance mechanism of tokens, to achieve the goal of selecting high-quality assets.',
+  },
+  {
+    name: 'WAR',
+    address: '0xAe24b9F01EbBA7b5163D5A5a0d30F4935241E2d8',
+    abi: StarterV2,
+    start_at: '1620921600',
+    is_top: true,
+    is_coming: false,
+    currency: {
+      address: '0xa71edc38d189767582c38a3145b5873052c3e47a', // 如果是0x0则是ht
+      decimal: 18,
+      symbol: 'USDT',
+    },
+    icon: '',
+    type: 0,
+    isPrivate: false,
+    underlying: {
+      address: '0x910651F81a605a6Ef35d05527d24A72fecef8bF0', // 地址有问题
+      decimal: 18,
+      symbol: 'WAR',
+      name: 'WAR',
+      total_supply: '100,000,000',
+      holders: '-',
+      transfers: '-',
+    },
+    amount: '120000',
+    pool_info: {
+      token_distribution: 'May 14th 2021, 6:00PM SGT',
+      min_allocation: '',
+      max_allocation: '',
+      min_swap_level: '1 USDT',
+    },
+    website: 'https://www.westarter.org',
+    white_paper: '-',
+    twitter: 'https://twitter.com/westarter_org',
+    Telegram_Channel: 'https://t.me/westarter_official',
+    Github: 'https://github.com/we-starter',
+    yuque: '-',
+    progress: 0,
+    status: 0,
+    ratio: '1WAR=1USDT',
+    time: '1620986400',
+    purchasedCurrencyOf: 0,
+    totalPurchasedAmount: '1600000000000000000000',
+    totalPurchasedUnderlying: '0',
+    totalPurchasedCurrency: '0',
+    is_flash: false,
+    link_url: 'https://www.westarter.org', // 跳转外链接
+    project_introduction:
+      'WeStarter is a cross-chain token initial swap platform which based on HECO network. Through the fluency of the product and sufficient industry resources, it carries the requirement of funds and resources for a variety of asset types. With the role of gatekeeper, through the decentralized incentive and governance mechanism of tokens, to achieve the goal of selecting high-quality assets.',
+  },
 ]

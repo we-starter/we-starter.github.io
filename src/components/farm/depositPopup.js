@@ -70,12 +70,6 @@ const DepositPopup = (props) => {
     if (!active) {
       return false
     }
-    if (!amount) {
-      return false
-    }
-    if (isNaN(parseInt(amount))) {
-      return false
-    }
     if (loadFlag) return
     setLoadFlag(true)
     const contract = getContract(library, ERC20.abi, farmPools.MLP)
