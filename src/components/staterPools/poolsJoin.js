@@ -224,12 +224,6 @@ const PoolsJoin = (props) => {
             from: account,
             value: _amount,
           })
-          .on('transactionHash', (hash) => {
-            dispatch({
-              type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
-              showWaitingWalletConfirmModal: { ...waitingPending, hash },
-            })
-          })
           .on('receipt', (_, receipt) => {
             console.log('BOT staking success')
             dispatch({
@@ -240,6 +234,8 @@ const PoolsJoin = (props) => {
               type: HANDLE_SHOW_TRANSACTION_MODAL,
               showTransactionModal: true,
             })
+            setLoadFlag(false)
+            onClose()
           })
           .on('error', (err, receipt) => {
             console.log('BOT staking error', err)
@@ -251,6 +247,7 @@ const PoolsJoin = (props) => {
               type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
               showWaitingWalletConfirmModal: waitingForInit,
             })
+            setLoadFlag(false)
           })
       } else {
         pool_contract.methods
@@ -258,12 +255,6 @@ const PoolsJoin = (props) => {
           .send({
             from: account,
           })
-          .on('transactionHash', (hash) => {
-            dispatch({
-              type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
-              showWaitingWalletConfirmModal: { ...waitingPending, hash },
-            })
-          })
           .on('receipt', (_, receipt) => {
             console.log('BOT staking success')
             dispatch({
@@ -274,6 +265,8 @@ const PoolsJoin = (props) => {
               type: HANDLE_SHOW_TRANSACTION_MODAL,
               showTransactionModal: true,
             })
+            setLoadFlag(false)
+            onClose()
           })
           .on('error', (err, receipt) => {
             console.log('BOT staking error', err)
@@ -285,10 +278,10 @@ const PoolsJoin = (props) => {
               type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
               showWaitingWalletConfirmModal: waitingForInit,
             })
+            setLoadFlag(false)
           })
       }
     }
-    onClose()
   }
 
   return (
