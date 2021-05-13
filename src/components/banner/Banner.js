@@ -231,7 +231,7 @@ export const Banner = () => {
             <span className='banner_related_data_title'>
               <FormattedMessage id='related_title1' />
             </span>
-            <span className='banner_related_data_val'>$954,121,300</span>
+            <span className='banner_related_data_val'>$1,087,294,900</span>
           </p>
         </div>
         <div className='banner_related_data'>
