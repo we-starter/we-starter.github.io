@@ -1,4 +1,4 @@
-import { Contract, Provider, setMulticallAddress} from 'ethers-multicall';
+import { Contract, Provider, setMulticallAddress} from 'ethers-multicall-x';
 import {cloneDeep} from 'lodash'
 import BigNumber from "bignumber.js";
 const MULTICALL_ADDRESS = '0xc9a9F768ebD123A00B52e7A0E590df2e9E998707'

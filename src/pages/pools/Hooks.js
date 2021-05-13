@@ -38,7 +38,7 @@ import { formatAmount } from '../../utils/format'
 import PoolsLBP from '../../configs/poolsLBP'
 import { useAllowance, useTokenAllowance } from '../Hooks'
 import {getMultiCallProvider, processResult} from "../../utils/multicall";
-import {Contract} from "ethers-multicall";
+import {Contract} from "ethers-multicall-x";
 import warnAboutDeprecatedESMImport from "react-router-dom/es/warnAboutDeprecatedESMImport";
 
 export const useStakingInfo = (stakingInfo) => {

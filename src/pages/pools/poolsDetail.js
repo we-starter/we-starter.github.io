@@ -175,7 +175,7 @@ const PoolsDetail = (props) => {
           )}
           {pool &&
             pool.status === 1 &&
-            (pool.timeClose === 0 || pool.timeClose > now) && (
+            (pool.timeClose == 0 || pool.timeClose > now) && (
               <div className='pools_card_start'>
                 <FormattedMessage id='recruit' />
               </div>
