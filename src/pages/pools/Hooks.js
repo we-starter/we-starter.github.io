@@ -37,9 +37,9 @@ import BN from 'bn.js'
 import { formatAmount } from '../../utils/format'
 import PoolsLBP from '../../configs/poolsLBP'
 import { useAllowance, useTokenAllowance } from '../Hooks'
-import {getMultiCallProvider, processResult} from "../../utils/multicall";
-import {Contract} from "ethers-multicall-x";
-import warnAboutDeprecatedESMImport from "react-router-dom/es/warnAboutDeprecatedESMImport";
+import { getMultiCallProvider, processResult } from '../../utils/multicall'
+import { Contract } from 'ethers-multicall-x'
+import warnAboutDeprecatedESMImport from 'react-router-dom/es/warnAboutDeprecatedESMImport'
 
 export const useStakingInfo = (stakingInfo) => {
   const { account, library, chainId } = useActiveWeb3React()
@@ -426,106 +426,111 @@ export const usePoolsInfo = (address = '') => {
 
             // 追加可能存在的
             pool_contract.time && promise_list.push(pool_contract.time())
-            pool_contract.timeSettle && promise_list.push(pool_contract.timeSettle())
-            currency_token && promise_list.push(currency_token.allowance(account, pool.address))
+            pool_contract.timeSettle &&
+              promise_list.push(pool_contract.timeSettle())
+            currency_token &&
+              promise_list.push(currency_token.allowance(account, pool.address))
 
-            return multicallProvider.all(promise_list).then(
-              (data) => {
-                data = processResult(data)
-                let [
-                  price,
-                  totalPurchasedCurrency,
-                  purchasedCurrencyOf,
-                  totalSettleable,
-                  settleable,
-                  totalSettledUnderlying,
-                  time = 0,
-                  timeSettle = 0,
-                  currency_allowance = 0,
-                ] = data
-                const [total_completed_, total_amount, total_volume, total_rate] = totalSettleable
-                const [completed_, amount, volume, rate] = settleable
+            return multicallProvider.all(promise_list).then((data) => {
+              data = processResult(data)
+              let [
+                price,
+                totalPurchasedCurrency,
+                purchasedCurrencyOf,
+                totalSettleable,
+                settleable,
+                totalSettledUnderlying,
+                time = 0,
+                timeSettle = 0,
+                currency_allowance = 0,
+              ] = data
+              const [
+                total_completed_,
+                total_amount,
+                total_volume,
+                total_rate,
+              ] = totalSettleable
+              const [completed_, amount, volume, rate] = settleable
 
-                let status = pool.status || 0 // 即将上线
-                const timeClose = time
-                if (timeSettle) {
-                  // time 如果没有的话，使用timeSettle填充
-                  time = timeSettle
-                }
-                if (pool.start_at < now && status < 1) {
-                  // 募集中
-                  status = 1
-                }
-                if (time < now && status < 2) {
-                  // 结算中
-                  status = 2
-                }
-
-                if (
-                  totalSettleable.volume == totalSettledUnderlying &&
-                  totalSettleable.volume > 0
-                ) {
-                  status = 3
-                }
-
-                const totalPurchasedAmount = new BigNumber(
-                  Web3.utils.toWei(pool.amount, 'ether')
-                )
-                  .multipliedBy(new BigNumber(price))
-                  .div(new BigNumber(Web3.utils.toWei('1', 'ether')))
-
-                const totalPurchasedUnderlying = Web3.utils.toWei(
-                  new BigNumber(totalPurchasedCurrency)
-                    .dividedBy(new BigNumber(price))
-                    .toFixed(0, 1),
-                  'ether'
-                )
-
-                let is_join = false
-                if (purchasedCurrencyOf > 0) {
-                  is_join = true
-                }
-
-                Object.assign(pool.currency, {
-                  allowance: currency_allowance,
-                })
-
-                return Object.assign({}, pool, {
-                  ratio: `1${pool.underlying.symbol}=${formatAmount(
-                    price,
-                    18,
-                    4
-                  )}${pool.currency.symbol}`,
-                  progress:
-                    new BigNumber(totalPurchasedCurrency)
-                      .dividedBy(totalPurchasedAmount)
-                      .toFixed(2, 1)
-                      .toString() * 1,
-                  status: status,
-                  time: time,
-                  timeClose,
-                  price: Web3.utils.fromWei(price, 'ether'),
-                  is_join,
-                  totalPurchasedCurrency,
-                  totalPurchasedAmount: totalPurchasedAmount.toString(),
-                  totalPurchasedUnderlying,
-                  purchasedCurrencyOf,
-                  totalSettleable: {
-                    completed_: total_completed_,
-                    amount: total_amount,
-                    volume: total_volume,
-                    rate: total_rate
-                  },
-                  totalSettledUnderlying,
-                  settleable: {
-                    completed_,
-                    amount,
-                    volume,
-                    rate
-                  },
-                })
+              let status = pool.status || 0 // 即将上线
+              const timeClose = time
+              if (timeSettle) {
+                // time 如果没有的话，使用timeSettle填充
+                time = timeSettle
               }
-            )
+              if (pool.start_at < now && status < 1) {
+                // 募集中
+                status = 1
+              }
+              if (time < now && status < 2) {
+                // 结算中
+                status = 2
+              }
+
+              if (
+                totalSettleable.volume == totalSettledUnderlying &&
+                totalSettleable.volume > 0
+              ) {
+                status = 3
+              }
+
+              const totalPurchasedAmount = new BigNumber(
+                Web3.utils.toWei(pool.amount, 'ether')
+              )
+                .multipliedBy(new BigNumber(price))
+                .div(new BigNumber(Web3.utils.toWei('1', 'ether')))
+
+              const totalPurchasedUnderlying = Web3.utils.toWei(
+                new BigNumber(totalPurchasedCurrency)
+                  .dividedBy(new BigNumber(price))
+                  .toFixed(0, 1),
+                'ether'
+              )
+
+              let is_join = false
+              if (purchasedCurrencyOf > 0) {
+                is_join = true
+              }
+
+              Object.assign(pool.currency, {
+                allowance: currency_allowance,
+              })
+
+              return Object.assign({}, pool, {
+                ratio: `1${pool.underlying.symbol}=${formatAmount(
+                  price,
+                  18,
+                  4
+                )}${pool.currency.symbol}`,
+                progress:
+                  new BigNumber(totalPurchasedCurrency)
+                    .dividedBy(totalPurchasedAmount)
+                    .toFixed(2, 1)
+                    .toString() * 1,
+                status: status,
+                time: time,
+                timeClose,
+                price: Web3.utils.fromWei(price, 'ether'),
+                is_join,
+                totalPurchasedCurrency,
+                totalPurchasedAmount: totalPurchasedAmount.toString(),
+                totalPurchasedUnderlying,
+                purchasedCurrencyOf,
+                totalSettleable: {
+                  completed_: total_completed_,
+                  amount: total_amount,
+                  volume: total_volume,
+                  rate: total_rate,
+                },
+                totalSettledUnderlying,
+                settleable: {
+                  completed_,
+                  amount,
+                  volume,
+                  rate,
+                },
+              })
+            })
           } else if (pool.type === 1) {
             // TODO 默认HT，后面需要根据通货来查询进度
             let currency_decimals = pool.currency.decimal
@@ -543,130 +548,129 @@ export const usePoolsInfo = (address = '') => {
               underlying_token.decimals(),
             ]
 
-            currency_token && promise_list.push(currency_token.allowance(account, pool.address))
+            currency_token &&
+              promise_list.push(currency_token.allowance(account, pool.address))
 
-            return multicallProvider.all(promise_list).then(
-              (data) => {
-                data = processResult(data)
-                let [
-                  start_at,
-                  time,
-                  ratio,
-                  totalQuota,
-                  totalOffered,
-                  totalClaimed,
-                  quotaOf,
-                  offeredOf,
-                  claimedOf,
-                  underlying_decimals,
-                  currency_allowance = 0,
-                ] = data
-                let status = pool.status || 0 // 即将上线
-                if (start_at < now && status < 1) {
-                  // 募集中
-                  status = 1
-                }
+            return multicallProvider.all(promise_list).then((data) => {
+              data = processResult(data)
+              let [
+                start_at,
+                time,
+                ratio,
+                totalQuota,
+                totalOffered,
+                totalClaimed,
+                quotaOf,
+                offeredOf,
+                claimedOf,
+                underlying_decimals,
+                currency_allowance = 0,
+              ] = data
+              let status = pool.status || 0 // 即将上线
+              if (start_at < now && status < 1) {
+                // 募集中
+                status = 1
+              }
 
-                if (time < now && status < 2) {
-                  // 结算中
-                  status = 2
-                }
+              if (time < now && status < 2) {
+                // 结算中
+                status = 2
+              }
 
-                if (
-                  status === 2 &&
-                  totalOffered === totalClaimed &&
-                  totalClaimed > 0
-                ) {
-                  status = 3
-                }
-                if (!(ratio - 0) && pool.defaultRatio) {
-                  ratio = pool.defaultRatio
-                }
-                const _ratio = new BigNumber(ratio).dividedBy(
+              if (
+                status === 2 &&
+                totalOffered === totalClaimed &&
+                totalClaimed > 0
+              ) {
+                status = 3
+              }
+              if (!(ratio - 0) && pool.defaultRatio) {
+                ratio = pool.defaultRatio
+              }
+              const _ratio = new BigNumber(ratio).dividedBy(
+                new BigNumber(10).pow(
+                  parseInt(underlying_decimals) -
+                    parseInt(currency_decimals) +
+                    18
+                )
+              )
+              const __ratio = new BigNumber(1).dividedBy(
+                new BigNumber(ratio).dividedBy(
                   new BigNumber(10).pow(
                     parseInt(underlying_decimals) -
                       parseInt(currency_decimals) +
                       18
                   )
                 )
-                const __ratio = new BigNumber(1).dividedBy(
-                  new BigNumber(ratio).dividedBy(
-                    new BigNumber(10).pow(
-                      parseInt(underlying_decimals) -
-                        parseInt(currency_decimals) +
-                        18
-                    )
-                  )
-                )
-                const totalPurchasedAmount = Web3.utils.toWei(
-                  new BigNumber(pool.amount)
-                    .dividedBy(new BigNumber(_ratio))
-                    .toFixed(6, 1)
-                    .toString(),
-                  'ether'
-                )
-                const totalPurchasedCurrency = Web3.utils.toWei(
-                  new BigNumber(Web3.utils.fromWei(totalOffered, 'ether'))
-                    .dividedBy(new BigNumber(_ratio))
-                    .toFixed(6, 1)
-                    .toString(),
-                  'ether'
-                )
+              )
+              const totalPurchasedAmount = Web3.utils.toWei(
+                new BigNumber(pool.amount)
+                  .dividedBy(new BigNumber(_ratio))
+                  .toFixed(6, 1)
+                  .toString(),
+                'ether'
+              )
+              const totalPurchasedCurrency = Web3.utils.toWei(
+                new BigNumber(Web3.utils.fromWei(totalOffered, 'ether'))
+                  .dividedBy(new BigNumber(_ratio))
+                  .toFixed(6, 1)
+                  .toString(),
+                'ether'
+              )
 
-                let is_join = false
-                if (offeredOf > 0) {
-                  is_join = true
-                }
-
-                // TODO 后续申购物为Token时，需要设置allowance
-                // --- 用USDT兑换时需要allowance ---
-                Object.assign(pool.currency, {
-                  allowance: currency_allowance,
-                })
-
-                return Object.assign({}, pool, {
-                  ratio: `1${pool.underlying.symbol}=${
-                    __ratio.toFixed(4, 1).toString() * 1
-                  }${pool.currency.symbol}`,
-                  progress:
-                    new BigNumber(Web3.utils.fromWei(totalOffered, 'ether'))
-                      .dividedBy(new BigNumber(pool.amount))
-                      .toNumber()
-                      .toFixed(2) * 1,
-                  status: status,
-                  start_at,
-                  time: time,
-                  timeClose: 0,
-                  price:
-                    new BigNumber(Web3.utils.toWei('1', 'ether'))
-                      .dividedBy(new BigNumber(ratio))
-                      .toFixed(6, 1) * 1,
-                  is_join,
-                  totalPurchasedCurrency,
-                  totalPurchasedAmount,
-                  totalPurchasedUnderlying: totalOffered,
-                  purchasedCurrencyOf: Web3.utils.toWei(
-                    new BigNumber(Web3.utils.fromWei(offeredOf, 'ether'))
-                      .dividedBy(new BigNumber(_ratio))
-                      .toFixed(6, 1)
-                      .toString(),
-                    'ether'
-                  ),
-                  quotaOf, //最大可申购额度 大于0则在白名单里面
-                  totalSettleable: {
-                    amount: 0,
-                    volume: totalClaimed,
-                    rate: Web3.utils.toWei('1', 'ether'),
-                  },
-                  settleable: {
-                    amount: 0, // 未结算数量
-                    volume: offeredOf, // 预计中签量
-                    claimedOf, // 获取募资币种数量
-                    rate: Web3.utils.toWei('1', 'ether'), // 预计中签率
-                  },
-                })
+              let is_join = false
+              if (offeredOf > 0) {
+                is_join = true
               }
-            )
+
+              // TODO 后续申购物为Token时，需要设置allowance
+              // --- 用USDT兑换时需要allowance ---
+              Object.assign(pool.currency, {
+                allowance: currency_allowance,
+              })
+
+              return Object.assign({}, pool, {
+                ratio: `1${pool.underlying.symbol}=${
+                  __ratio.toFixed(4, 1).toString() * 1
+                }${pool.currency.symbol}`,
+                progress:
+                  new BigNumber(Web3.utils.fromWei(totalOffered, 'ether'))
+                    .dividedBy(new BigNumber(pool.amount))
+                    .toNumber()
+                    .toFixed(2) * 1,
+                status: status,
+                start_at,
+                time: time,
+                timeClose: 0,
+                price:
+                  new BigNumber(Web3.utils.toWei('1', 'ether'))
+                    .dividedBy(new BigNumber(ratio))
+                    .toFixed(6, 1) * 1,
+                is_join,
+                totalPurchasedCurrency,
+                totalPurchasedAmount,
+                totalPurchasedUnderlying: totalOffered,
+                purchasedCurrencyOf: Web3.utils.toWei(
+                  new BigNumber(Web3.utils.fromWei(offeredOf, 'ether'))
+                    .dividedBy(new BigNumber(_ratio))
+                    .toFixed(6, 1)
+                    .toString(),
+                  'ether'
+                ),
+                quotaOf, //最大可申购额度 大于0则在白名单里面
+                totalSettleable: {
+                  amount: 0,
+                  volume: totalClaimed,
+                  rate: Web3.utils.toWei('1', 'ether'),
+                },
+                settleable: {
+                  amount: 0, // 未结算数量
+                  volume: offeredOf, // 预计中签量
+                  claimedOf, // 获取募资币种数量
+                  rate: Web3.utils.toWei('1', 'ether'), // 预计中签率
+                },
+              })
+            })
           }
         })
       ).then((pools) => {
@@ -772,7 +776,6 @@ export const useFarmInfo = (address = '') => {
 
   useEffect(() => {
     if (library) {
-
       const multicallProvider = getMultiCallProvider(library, chainId)
       console.log(Farm, 'Farm')
       Promise.all(
@@ -787,28 +790,26 @@ export const useFarmInfo = (address = '') => {
             pool_contract.balanceOf(account), // 我的抵押
             currency_token.allowance(account, pool.address),
           ]
-          return multicallProvider.all(promise_list).then(
-            (data) => {
-              data = processResult(data)
-              let [
-                begin,
-                earned,
-                earned2,
-                totalSupply,
-                balanceOf,
-                currency_allowance,
-              ] = data
-              console.log(balanceOf, 'balanceOfbalanceOf')
-              return Object.assign({}, pool, {
-                start_at: begin,
-                earned,
-                earned2,
-                totalSupply,
-                balanceOf: Web3.utils.fromWei(balanceOf, 'ether'),
-                allowance: currency_allowance,
-              })
-            }
-          )
+          return multicallProvider.all(promise_list).then((data) => {
+            data = processResult(data)
+            let [
+              begin,
+              earned,
+              earned2,
+              totalSupply,
+              balanceOf,
+              currency_allowance,
+            ] = data
+            console.log(balanceOf, 'balanceOfbalanceOf')
+            return Object.assign({}, pool, {
+              start_at: begin,
+              earned,
+              earned2,
+              totalSupply,
+              balanceOf: Web3.utils.fromWei(balanceOf, 'ether'),
+              allowance: currency_allowance,
+            })
+          })
         })
       )
         .then((pools) => {

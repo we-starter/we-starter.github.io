@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import { useHistory } from 'react-router-dom'
-import { HANDLE_SHOW_TRANSACTION_MODAL } from '../../const'
+import { HANDLE_SHOW_SUCCESS_TRANSACTION_MODAL } from '../../const'
 import { mainContext } from '../../reducer'
 import { FormattedMessage } from 'react-intl'
 
@@ -32,8 +32,8 @@ export const SuccessTransactionModal = ({}) => {
                   history.push(showWaitingWalletConfirmModal.link)
                 }
                 dispatch({
-                  type: HANDLE_SHOW_TRANSACTION_MODAL,
-                  showTransactionModal: false,
+                  type: HANDLE_SHOW_SUCCESS_TRANSACTION_MODAL,
+                  showSuccessTransactionModal: false,
                 })
               }}
             >
@@ -44,8 +44,8 @@ export const SuccessTransactionModal = ({}) => {
               className='form-app__close-btn button'
               onClick={() => {
                 dispatch({
-                  type: HANDLE_SHOW_TRANSACTION_MODAL,
-                  showTransactionModal: true,
+                  type: HANDLE_SHOW_SUCCESS_TRANSACTION_MODAL,
+                  showSuccessTransactionModal: false,
                 })
               }}
               aria-label='Close'

@@ -344,7 +344,7 @@ const PoolsJoin = (props) => {
                   opacity: 1,
                 }}
               >
-                最大申购额度:
+                <FormattedMessage id='poolText23' />
                 {pool &&
                   pool.type === 1 &&
                   pool.quotaOf > 0 &&
