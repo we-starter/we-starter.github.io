@@ -904,6 +904,56 @@ export default [
     project_introduction:
       'O3 Swap, a proprietary cross-chain aggregation protocol',
   },
+  {
+    name: 'CORA',
+    address: '0x01',
+    abi: OfferingV2,
+    start_at: '1621083600',
+    is_top: true,
+    is_coming: true, // is_coming 为 true 则不请求合约
+    currency: {
+      address: '0xa71edc38d189767582c38a3145b5873052c3e47a', // 如果是0x0则是ht
+      decimal: 18,
+      symbol: 'USDT',
+    },
+    icon: '',
+    type: 1,
+    isPrivate: true,
+    underlying: {
+      address: '0x910651F81a605a6Ef35d05527d24A72fecef8bF0', // 地址有问题
+      decimal: 18,
+      symbol: 'CORA',
+      name: 'CORA',
+      total_supply: '10,000,000',
+      holders: '-',
+      transfers: '-',
+    },
+    amount: '30000',
+    pool_info: {
+      token_distribution: 'May 15th 2021, 9:00PM SGT',
+      min_allocation: '0',
+      max_allocation: '100 USDT',
+      min_swap_level: '30,000 USDT',
+    },
+    website: 'https://corra.finance/',
+    white_paper: '-',
+    twitter: 'https://twitter.com/CorraFinance',
+    Telegram_Channel: 'https://t.me/corrafinance',
+    Github: '',
+    yuque: '-',
+    progress: 0,
+    status: 0,
+    ratio: '1CORA=12.5USDT', // 兑换比例需要确认
+    time: '',
+    purchasedCurrencyOf: 0,
+    totalPurchasedAmount: '30000000000000000000000',
+    totalPurchasedUnderlying: '0',
+    totalPurchasedCurrency: '0',
+    is_flash: false,
+    link_url: 'https://corra.finance/', // 跳转外链接
+    project_introduction:
+      'Corra.finance is a plug-and-play platform that enables the monetization of digital content using NFT technology.',
+  },
   // 测试合约配置
   {
     name: 'WAR',

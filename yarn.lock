@@ -7644,10 +7644,10 @@ ethereumjs-wallet@0.6.5:
     utf8 "^3.0.0"
     uuid "^3.3.2"
 
-ethers-multicall@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/ethers-multicall/-/ethers-multicall-0.2.0.tgz#91c54e941dbff52079d2af65ff50569b83c6cd75"
-  integrity sha512-dZeuPw+ROFQZElF8gm1OMvE5pdApRtILQdcG1xDPdGIqixtDGNz8xXGQAdBG/nAdt97tXlMbgp4/mmY5PRAnhA==
+ethers-multicall-x@^0.2.2:
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/ethers-multicall-x/-/ethers-multicall-x-0.2.2.tgz#2a0dc8035503921e5f42f96b4299462808d24345"
+  integrity sha512-gSvFAghpxJldzDB43qCkpsbeEGnJ5DcFC5rie1bdPuxkMXS4+3UnW6YRu8HixYsPJ2oKnnGZ0pzz1jZ5a9BDnw==
   dependencies:
     ethers "^5.0.0"
 
