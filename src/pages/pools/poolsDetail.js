@@ -731,6 +731,11 @@ const PoolsDetail = (props) => {
                   <FormattedMessage id='O3AboutProject1' />
                 </a>
               )}
+              {pool && pool.underlying.symbol === 'CORA' && (
+                <a className='no_link'>
+                  <FormattedMessage id='corraAboutProject1' />
+                </a>
+              )}
             </div>
           )}
         </div>
