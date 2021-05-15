@@ -928,7 +928,7 @@ export default [
       holders: '-',
       transfers: '-',
     },
-    amount: '30000',
+    amount: '2400', // token 总额
     pool_info: {
       token_distribution: 'May 15th 2021, 9:00PM SGT',
       min_allocation: '0',
