@@ -11,6 +11,7 @@ import Icon2 from '../../assets/icon/icon2@2x.png'
 import Icon3 from '../../assets/icon/icon3@2x.png'
 import Icon4 from '../../assets/icon/icon4@2x.png'
 import FileCopyLine from '../../assets/image/file-copy-line@2x.png'
+import { HANDLE_WALLET_MODAL } from '../../const'
 import {
   usePoolsInfo,
   usePoolsLBPInfo,
@@ -217,10 +218,16 @@ export const Banner = () => {
             </span>
             <span className='banner_related_data_val'>${realTimePrice}</span>
           </p>
+          {/* href='https://ht.mdex.com/#/swap?outputCurrency=0x910651f81a605a6ef35d05527d24a72fecef8bf0'
+          target='_blank' */}
           <a
             className='banner_related_data_buy'
-            href='https://ht.mdex.com/#/swap?outputCurrency=0x910651f81a605a6ef35d05527d24a72fecef8bf0'
-            target='_blank'
+            onClick={() => {
+              dispatch({
+                type: HANDLE_WALLET_MODAL,
+                walletModal: 'buyCoin',
+              })
+            }}
           >
             <FormattedMessage id='farm17' />
           </a>
