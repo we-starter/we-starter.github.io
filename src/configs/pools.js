@@ -841,7 +841,7 @@ export default [
     Telegram_Channel: 'https://t.me/O3LabsOfficial',
     Github: 'https://github.com/O3Labs',
     yuque: '-',
-    progress: 0,
+    progress: 6658.68,
     status: 0,
     ratio: '1O3=1USDT',
     time: '1621001700',
@@ -891,7 +891,7 @@ export default [
     Telegram_Channel: 'https://t.me/O3LabsOfficial',
     Github: 'https://github.com/O3Labs',
     yuque: '-',
-    progress: 0,
+    progress: 1,
     status: 0,
     ratio: '1O3=1USDT',
     time: '1621001700',
@@ -906,7 +906,7 @@ export default [
   },
   {
     name: 'CORA',
-    address: '0x0962828e4b9af3336e5af5f696bc2f3c2cc6abb4',
+    address: '0xe10d741127da509dD965C31B55b524Aed76E6EDD',
     abi: OfferingV2,
     start_at: '1621083600',
     is_top: true,
@@ -920,7 +920,7 @@ export default [
     type: 1,
     isPrivate: true,
     underlying: {
-      address: '0xe10d741127da509dD965C31B55b524Aed76E6EDD', // 地址有问题
+      address: '0x0962828e4b9af3336e5af5f696bc2f3c2cc6abb4', // 地址有问题
       decimal: 18,
       symbol: 'CORA',
       name: 'CORA',
