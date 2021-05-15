@@ -944,7 +944,7 @@ export default [
     progress: 0,
     status: 0,
     ratio: '1CORA=12.5USDT', // 兑换比例需要确认
-    time: '',
+    time: '1621306800',
     purchasedCurrencyOf: 0,
     totalPurchasedAmount: '30000000000000000000000',
     totalPurchasedUnderlying: '0',
