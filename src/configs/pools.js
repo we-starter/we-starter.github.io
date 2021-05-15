@@ -841,7 +841,7 @@ export default [
     Telegram_Channel: 'https://t.me/O3LabsOfficial',
     Github: 'https://github.com/O3Labs',
     yuque: '-',
-    progress: 0,
+    progress: 6658.68,
     status: 0,
     ratio: '1O3=1USDT',
     time: '1621001700',
@@ -891,7 +891,7 @@ export default [
     Telegram_Channel: 'https://t.me/O3LabsOfficial',
     Github: 'https://github.com/O3Labs',
     yuque: '-',
-    progress: 0,
+    progress: 1,
     status: 0,
     ratio: '1O3=1USDT',
     time: '1621001700',
@@ -906,11 +906,11 @@ export default [
   },
   {
     name: 'CORA',
-    address: '0x01',
+    address: '0xe10d741127da509dD965C31B55b524Aed76E6EDD',
     abi: OfferingV2,
     start_at: '1621083600',
     is_top: true,
-    is_coming: true, // is_coming 为 true 则不请求合约
+    is_coming: false, // is_coming 为 true 则不请求合约
     currency: {
       address: '0xa71edc38d189767582c38a3145b5873052c3e47a', // 如果是0x0则是ht
       decimal: 18,
@@ -920,7 +920,7 @@ export default [
     type: 1,
     isPrivate: true,
     underlying: {
-      address: '0x910651F81a605a6Ef35d05527d24A72fecef8bF0', // 地址有问题
+      address: '0x0962828e4b9af3336e5af5f696bc2f3c2cc6abb4', // 地址有问题
       decimal: 18,
       symbol: 'CORA',
       name: 'CORA',
@@ -928,7 +928,7 @@ export default [
       holders: '-',
       transfers: '-',
     },
-    amount: '30000',
+    amount: '2400', // token 总额
     pool_info: {
       token_distribution: 'May 15th 2021, 9:00PM SGT',
       min_allocation: '0',
@@ -944,7 +944,7 @@ export default [
     progress: 0,
     status: 0,
     ratio: '1CORA=12.5USDT', // 兑换比例需要确认
-    time: '',
+    time: '1621306800',
     purchasedCurrencyOf: 0,
     totalPurchasedAmount: '30000000000000000000000',
     totalPurchasedUnderlying: '0',
