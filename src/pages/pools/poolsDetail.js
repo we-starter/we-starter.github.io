@@ -224,8 +224,10 @@ const PoolsDetail = (props) => {
           <div className='pools_card_content_title pools_card_schedule'>
             <span>{pool && (pool.progress * 100).toFixed(2) * 1}%</span>
             <span>
-              {pool && formatAmount(pool.totalPurchasedUnderlying, 18, 2)}/
-              {pool && pool.amount} {pool && pool.underlying.symbol}
+              {pool && pool.progress == 1
+                ? Math.round(formatAmount(pool.totalPurchasedUnderlying, 18, 2))
+                : formatAmount(pool.totalPurchasedUnderlying, 18, 2)}
+              /{pool && pool.amount} {pool && pool.underlying.symbol}
             </span>
           </div>
         </div>
