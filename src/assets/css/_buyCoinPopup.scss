@@ -1,0 +1,117 @@
+@media #{$desktop} {
+  .buy_popup {
+    &_box {
+      padding: 10px 30px 20px;
+      background: #f2f0eb;
+    }
+    &_tab_box {
+      display: flex;
+      align-items: center;
+    }
+    &_tab {
+      display: inline-block;
+      margin-right: 10px;
+      width: 88px;
+      height: 36px;
+      line-height: 36px;
+      font-size: 14px;
+      font-family: PingFangSC-Semibold, PingFang SC;
+      font-weight: 600;
+      color: #22292f;
+      background: #fff;
+      border-radius: 24px;
+      text-align: center;
+      &:hover {
+        color: #fff;
+        background: #0f8c20;
+      }
+    }
+    &_tab_active {
+      color: #fff;
+      background: #0f8c20;
+    }
+    &_balance_box {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 10px;
+    }
+    &_ratio {
+      margin: 0;
+      font-size: 16px;
+      font-family: HelveticaNeue-Bold, HelveticaNeue;
+      font-weight: bold;
+      color: #0f8c20;
+      opacity: 1;
+    }
+    &_input {
+      background-color: #fff !important;
+      border: 1px solid #ebe9e3 !important;
+    }
+    &_onMax {
+      right: 106px;
+    }
+    &_unit {
+      position: absolute;
+      top: 0;
+      right: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 90px;
+      height: 100%;
+      border-left: 1px solid #f2f0eb;
+      img {
+        display: inline-block;
+        margin-right: 4px;
+        width: 24px;
+        height: 24px;
+      }
+      span {
+        font-size: 14px;
+        font-family: HelveticaNeue-Medium, HelveticaNeue;
+        font-weight: 500;
+        color: #22292f;
+      }
+    }
+    &_swap-line {
+      margin: 0 auto;
+      width: 24px;
+      height: 24px;
+    }
+    &_tips {
+      display: flex;
+      align-items: center;
+      color: #7a7f82;
+      &:hover {
+        cursor: pointer;
+      }
+      svg {
+        display: inline-block;
+        width: 14px;
+        height: 14px;
+        margin: 0 0 0 2px !important;
+        fill: #797f82 !important;
+      }
+    }
+    &_tips_value {
+      font-weight: 600;
+    }
+    &_corner_tips {
+      margin: 20px 0 0;
+      font-size: 14px;
+      font-family: PingFangSC-Regular, PingFang SC;
+      font-weight: 400;
+      color: #b6b9bc;
+      line-height: 20px;
+      text-align: center;
+    }
+  }
+}
+
+@media #{$mdWidth} {
+}
+@media #{$smWidth} {
+}
+@media #{$xsWidth} {
+}

@@ -309,5 +309,12 @@ const zh_CN = {
   farm18: '当前价',
   farm19: 'WAR合约地址:',
   farm20: '授权',
+  buyPopup1: '滑点',
+  buyPopup2: '价格影响',
+  buyPopup3: '最低收到',
+  buyPopup4: '手续费',
+  buyPopup5: '该服务由 MDEX 提供支持',
+  buyPopup6: 'Confirm Swap',
+  buyPopup7: '该服务由 MDEX 提供支持',
 }
 export default zh_CN
