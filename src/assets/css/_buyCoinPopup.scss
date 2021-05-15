@@ -106,6 +106,29 @@
       line-height: 20px;
       text-align: center;
     }
+    &_token_value {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      p {
+        margin: 0;
+        &:first-child {
+          margin-top: 10px;
+          font-size: 12px;
+          font-family: PingFangSC-Medium, PingFang SC;
+          font-weight: 500;
+          color: #7a7f82;
+          line-height: 18px;
+        }
+        &:last-child {
+          font-size: 16px;
+          font-family: PingFangSC-Semibold, PingFang SC;
+          font-weight: 600;
+          color: #22292f;
+          line-height: 22px;
+        }
+      }
+    }
   }
 }
 

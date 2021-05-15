@@ -318,6 +318,6 @@ const en_US = {
   buyPopup4: '手续费',
   buyPopup5: '该服务由 MDEX 提供支持',
   buyPopup6: 'Confirm Swap',
-  buyPopup7: '该服务由 MDEX 提供支持',
+  buyPopup7: '预计收到',
 }
 export default en_US

@@ -16,6 +16,7 @@ import MDexFactory from '../../web3/abi/MDexFactory.json'
 import MDexPool from '../../web3/abi/MDexPool.json'
 import Pools from '../../configs/pools'
 import Farm from '../../configs/farm'
+import Swap from '../../configs/swap'
 import Web3 from 'web3'
 import { ReactComponent as HUSD } from '../../assets/logo/HUSD.svg'
 import { ReactComponent as HT } from '../../assets/logo/HT.svg'
@@ -822,6 +823,38 @@ export const useFarmInfo = (address = '') => {
     }
   }, [account, address, blockHeight])
   return farmPoolsInfo
+}
+
+export const useSwapInfo = (address = '') => {
+  const { account, active, library, chainId } = useActiveWeb3React()
+  const blockHeight = useBlockHeight()
+  const [swapPoolsInfo, setSwapPoolsInfo] = useState(Swap)
+
+  useEffect(() => {
+    if (library) {
+      return
+      const multicallProvider = getMultiCallProvider(library, chainId)
+      Promise.all(
+        Swap.map((pool) => {
+          const pool_contract = new Contract(pool.address, pool.abi)
+          const promise_list = []
+          return multicallProvider.all(promise_list).then((data) => {
+            data = processResult(data)
+            let [] = data
+            return Object.assign({}, pool, {})
+          })
+        })
+      )
+        .then((pools) => {
+          console.log(pools)
+          setSwapPoolsInfo(pools)
+        })
+        .catch((err) => {
+          console.log(err, 'swap')
+        })
+    }
+  }, [account, address, blockHeight])
+  return swapPoolsInfo
 }
 
 export const useTotalRewards = (address, abi) => {
