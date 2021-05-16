@@ -1006,22 +1006,24 @@ export const useMDexPrice = (address1, address2, amount = 1, path = []) => {
   const blockHeight = useBlockHeight()
   const [price, setPrice] = useState(0)
 
-
-
   const getPairPrice = (address1, address2, amount) => {
     const factory = getContract(
       library,
       MDexFactory,
       MDEX_FACTORY_ADDRESS(chainId)
     )
-    return new Promise(resolve =>  {
+    return new Promise((resolve) => {
       factory.methods
         .getPair(address1, address2)
         .call()
         .then((pair_address) => {
           console.log(pair_address)
           const pair_contract = getContract(library, LPT, pair_address)
-          const mdex_router_contract = getContract(library, MDexRouter, MDEX_ROUTER_ADDRESS)
+          const mdex_router_contract = getContract(
+            library,
+            MDexRouter,
+            MDEX_ROUTER_ADDRESS
+          )
           const promiseList = [
             pair_contract.methods.token0().call(),
             pair_contract.methods.token1().call(),
@@ -1032,22 +1034,28 @@ export const useMDexPrice = (address1, address2, amount = 1, path = []) => {
             const { _reserve0, _reserve1 } = getReserves
             if (token0.toLowerCase() == address2.toLowerCase()) {
               console.log(amount, _reserve1, _reserve0)
-              mdex_router_contract.methods.getAmountOut(numToWei(amount), _reserve1, _reserve0).call().then(amountOut => {
-                console.warn(address1)
-                console.warn(address2)
-                console.warn(formatAmount(amountOut))
-                console.warn('1111')
-                const _price = _reserve0 / _reserve1
-                resolve(Web3.utils.fromWei(amountOut, 'ether'))
-              })
+              mdex_router_contract.methods
+                .getAmountOut(numToWei(amount), _reserve1, _reserve0)
+                .call()
+                .then((amountOut) => {
+                  console.warn(address1)
+                  console.warn(address2)
+                  console.warn(formatAmount(amountOut))
+                  console.warn('1111')
+                  const _price = _reserve0 / _reserve1
+                  resolve(Web3.utils.fromWei(amountOut, 'ether'))
+                })
             } else if (token1.toLowerCase() == address2.toLowerCase()) {
-              mdex_router_contract.methods.getAmountOut(numToWei(amount), _reserve0, _reserve1).call().then(amountOut => {
-                console.warn(address1)
-                console.warn(address2)
-                console.warn(formatAmount(amountOut))
-                console.warn('2222')
-                resolve(Web3.utils.fromWei(amountOut, 'ether'))
-              })
+              mdex_router_contract.methods
+                .getAmountOut(numToWei(amount), _reserve0, _reserve1)
+                .call()
+                .then((amountOut) => {
+                  console.warn(address1)
+                  console.warn(address2)
+                  console.warn(formatAmount(amountOut))
+                  console.warn('2222')
+                  resolve(Web3.utils.fromWei(amountOut, 'ether'))
+                })
             }
           })
         })
@@ -1055,14 +1063,14 @@ export const useMDexPrice = (address1, address2, amount = 1, path = []) => {
   }
 
   const getPrice = async (address1, address2, amount, path) => {
-    const _path =  [address1, ...path, address2]
+    const _path = [address1, ...path, address2]
     console.log(_path)
     let _price = amount
-    for(let i = 1; i < _path.length; i++){
+    for (let i = 1; i < _path.length; i++) {
       const from_address = _path[i - 1]
       const to_address = _path[i]
       _price = await getPairPrice(from_address, to_address, _price)
-      console.log(from_address, to_address ,_price)
+      console.log(from_address, to_address, _price)
     }
     return _price
   }
@@ -1071,13 +1079,15 @@ export const useMDexPrice = (address1, address2, amount = 1, path = []) => {
     if (library) {
       if (Web3.utils.isAddress(address1) && amount > 0) {
         // use path
-        getPrice(address1, address2, amount, path).then(_price => {
+        getPrice(address1, address2, amount, path).then((_price) => {
           setPrice(_price)
         })
       }
     }
     return () => {}
   }, [library, account, blockHeight, address1, address2, amount])
+  if (amount == 0) return '0'
+
   return price
 }
 

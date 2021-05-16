@@ -11,6 +11,7 @@ import {
   MDEX_ROUTER_ADDRESS,
   WETH_ADDRESS,
 } from '../../web3/address'
+import BigNumber from 'bignumber.js'
 import { getContract, useActiveWeb3React } from '../../web3'
 import { injectIntl } from 'react-intl'
 import ERC20 from '../../web3/abi/ERC20.json'
@@ -34,6 +35,7 @@ const BuyCoinPopup = (props) => {
   const [fromToken, setFromToken] = useState(chainId && WHT_ADDRESS(chainId))
   const [loadFlag, setLoadFlag] = useState(false)
   const [approve, setApprove] = useState(false)
+  const [fee, setFee] = useState(0)
   const HTbalance = useHTBalance()
   const USDTBalance = useBalance(USDT_ADDRESS(chainId))
   const [middlePath, setMiddlePath] = useState([])
@@ -88,6 +90,10 @@ const BuyCoinPopup = (props) => {
       setBalance(USDTBalance && USDTBalance.balance)
     }
   }, [tabFlag])
+
+  useEffect(() => {
+    // amount && setFee(new BigNumber(amount).multipliedBy(new BigNumber(0.003)))
+  }, [amount])
 
   const onMax = () => {
     let max = balance
@@ -346,9 +352,29 @@ const BuyCoinPopup = (props) => {
               <span className='buy_popup_tips'>
                 <FormattedMessage id='buyPopup4' />
               </span>
-              <span className='buy_popup_tips_value'>
-                {minAmount * 1 > 0 ? (minAmount * 1).toFixed(6) : 0} {tabFlag}
-              </span>
+              {tabFlag === 'HT' && (
+                <span className='buy_popup_tips_value'>
+                  {amount &&
+                    new BigNumber(amount)
+                      .multipliedBy(new BigNumber(0.003))
+                      .toNumber()}{' '}
+                  {tabFlag}
+                </span>
+              )}
+              {tabFlag === 'USDT' && (
+                <span className='buy_popup_tips_value'>
+                  {amount &&
+                    (amount * 1 <= 1
+                      ? new BigNumber(amount)
+                          .multipliedBy(new BigNumber(0.0059))
+                          .toNumber()
+                      : new BigNumber(amount)
+                          .multipliedBy(new BigNumber(0.0059))
+                          .toNumber()
+                          .toFixed(3))}{' '}
+                  {tabFlag}
+                </span>
+              )}
             </p>
 
             <p
