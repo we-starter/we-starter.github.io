@@ -203,7 +203,7 @@ const zh_CN = {
   poolText15: 'Time left',
   poolText16: 'Join',
   poolText17: 'Pool',
-  poolText18: 'Balance:',
+  poolText18: '余额:',
   poolText19: 'Max',
   poolText20: 'Cancel',
   poolText21: 'Approve',

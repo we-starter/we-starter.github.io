@@ -260,20 +260,24 @@ const BuyCoinPopup = (props) => {
               </p>
               {tabFlag === 'HT' && (
                 <p className='form-app__inputbox-after-text buy_popup_ratio'>
-                  1HT =
+                  1WAR ={' '}
                   {radioOutAmount * 1 > 0
-                    ? (radioOutAmount * 1).toFixed(6)
+                    ? new BigNumber(1)
+                        .dividedBy(new BigNumber(radioOutAmount))
+                        .toFixed(6)
                     : '--'}
-                  WAR
+                  HT
                 </p>
               )}
               {tabFlag === 'USDT' && (
                 <p className='form-app__inputbox-after-text buy_popup_ratio'>
-                  1USDT =
+                  1WAR ={' '}
                   {radioOutAmount * 1 > 0
-                    ? (radioOutAmount * 1).toFixed(8)
+                    ? new BigNumber(1)
+                        .dividedBy(new BigNumber(radioOutAmount))
+                        .toFixed(5)
                     : '--'}
-                  WAR
+                  USDT
                 </p>
               )}
             </div>
@@ -285,9 +289,7 @@ const BuyCoinPopup = (props) => {
                     value={amount}
                     onChange={onChange}
                     className='input buy_popup_input'
-                    placeholder={intl.formatMessage({
-                      id: 'farm15',
-                    })}
+                    placeholder='0.0'
                   />
                 </div>
 
@@ -349,39 +351,6 @@ const BuyCoinPopup = (props) => {
                 </Button>
               )}
             </div>
-            <p
-              className='form-app__inputbox-after-text farm_popup_avaliable'
-              style={{ marginTop: '10px' }}
-            >
-              <span className='buy_popup_tips'>
-                <FormattedMessage id='buyPopup4' />
-              </span>
-              {tabFlag === 'HT' && (
-                <span className='buy_popup_tips_value'>
-                  {(amount &&
-                    new BigNumber(amount)
-                      .multipliedBy(new BigNumber(0.003))
-                      .toNumber()) ||
-                    '-'}{' '}
-                  {tabFlag}
-                </span>
-              )}
-              {tabFlag === 'USDT' && (
-                <span className='buy_popup_tips_value'>
-                  {(amount &&
-                    (amount * 1 <= 1
-                      ? new BigNumber(amount)
-                          .multipliedBy(new BigNumber(0.0059))
-                          .toNumber()
-                      : new BigNumber(amount)
-                          .multipliedBy(new BigNumber(0.0059))
-                          .toNumber()
-                          .toFixed(3))) ||
-                    '-'}{' '}
-                  {tabFlag}
-                </span>
-              )}
-            </p>
 
             <p
               className='form-app__inputbox-after-text farm_popup_avaliable'
@@ -416,6 +385,41 @@ const BuyCoinPopup = (props) => {
                 </span>
               )}
             </p>
+
+            <p
+              className='form-app__inputbox-after-text farm_popup_avaliable'
+              style={{ marginTop: '10px' }}
+            >
+              <span className='buy_popup_tips'>
+                <FormattedMessage id='buyPopup4' />
+              </span>
+              {tabFlag === 'HT' && (
+                <span className='buy_popup_tips_value'>
+                  {(amount &&
+                    new BigNumber(amount)
+                      .multipliedBy(new BigNumber(0.003))
+                      .toNumber()) ||
+                    '-'}{' '}
+                  {tabFlag}
+                </span>
+              )}
+              {tabFlag === 'USDT' && (
+                <span className='buy_popup_tips_value'>
+                  {(amount &&
+                    (amount * 1 <= 1
+                      ? new BigNumber(amount)
+                          .multipliedBy(new BigNumber(0.0059))
+                          .toNumber()
+                      : new BigNumber(amount)
+                          .multipliedBy(new BigNumber(0.0059))
+                          .toNumber()
+                          .toFixed(3))) ||
+                    '-'}{' '}
+                  {tabFlag}
+                </span>
+              )}
+            </p>
+
             <a
               className='buy_popup_corner_tips'
               href='https://ht.mdex.com/#/swap?outputCurrency=0x910651f81a605a6ef35d05527d24a72fecef8bf0'
