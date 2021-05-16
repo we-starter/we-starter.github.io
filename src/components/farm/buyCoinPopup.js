@@ -19,7 +19,7 @@ import { mainContext } from '../../reducer'
 import BigNumber from 'bignumber.js'
 
 // 设置滑点
-const sliding = 0.05
+const sliding = 0.005
 
 const BuyCoinPopup = (props) => {
   const { intl, icon, onClose } = props
@@ -33,7 +33,8 @@ const BuyCoinPopup = (props) => {
   const [loadFlag, setLoadFlag] = useState(false)
   const HTbalance = useHTBalance()
   const USDTBalance = useBalance(USDT_ADDRESS(chainId))
-  const outAmount = useMDexPrice(fromToken,chainId && WAR_ADDRESS(chainId), amount)
+  const [middlePath, setMiddlePath] =  useState([])
+  const outAmount = useMDexPrice(fromToken,chainId && WAR_ADDRESS(chainId), amount, middlePath)
   const [minAmount, setMinAmount] = useState('-')
 
   console.log('outAmount', outAmount)
@@ -115,6 +116,7 @@ const BuyCoinPopup = (props) => {
                 onClick={() => {
                   setTabFlag('HT')
                   setFromToken(WHT_ADDRESS(chainId))
+                  setMiddlePath([])
                 }}
               >
                 HT
@@ -127,6 +129,7 @@ const BuyCoinPopup = (props) => {
                 onClick={() => {
                   setTabFlag('USDT')
                   setFromToken(USDT_ADDRESS(chainId))
+                  setMiddlePath([WHT_ADDRESS(chainId)])
                 }}
               >
                 USDT
