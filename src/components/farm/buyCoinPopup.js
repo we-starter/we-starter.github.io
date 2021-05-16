@@ -39,7 +39,7 @@ const BuyCoinPopup = (props) => {
   const HTbalance = useHTBalance()
   const USDTBalance = useBalance(USDT_ADDRESS(chainId))
   const [middlePath, setMiddlePath] = useState([])
-  const outAmount = useMDexPrice(
+  const [outAmount, outFee]  = useMDexPrice(
     fromToken,
     chainId && WAR_ADDRESS(chainId),
     amount,

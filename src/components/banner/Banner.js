@@ -29,12 +29,12 @@ export const Banner = () => {
   const [realTimePrice, setRealTimePrice] = useState('-')
   const WarTokenAddress =
     WAR_ADDRESS[chainId] || '0x910651F81a605a6Ef35d05527d24A72fecef8bF0'
-  const _tmp_price_war2ht = useMDexPrice(
+  const [_tmp_price_war2ht, _tmp_price_war2ht_fee] = useMDexPrice(
     chainId && WAR_ADDRESS(chainId),
     chainId && WHT_ADDRESS(chainId)
   )
 
-  const _tmp_price_usdt2ht = useMDexPrice(
+  const [_tmp_price_usdt2ht, _tmp_price_usdt2ht_fee] = useMDexPrice(
     chainId && USDT_ADDRESS(chainId),
     chainId && WHT_ADDRESS(chainId)
   )

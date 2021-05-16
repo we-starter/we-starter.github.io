@@ -963,7 +963,7 @@ export const useMdxARP = (
     pool_address,
     pool_abi
   )
-  const mdex2warPrice = useMDexPrice(
+  const [mdex2warPrice, mdex2warPriceFee] = useMDexPrice(
     MDEX_ADDRESS,
     chainId && WAR_ADDRESS(chainId)
   )
@@ -1002,9 +1002,11 @@ export const useMdxARP = (
 }
 
 export const useMDexPrice = (address1, address2, amount = 1, path = []) => {
+  const FEE_RADIO = 0.003
   const { account, active, library, chainId } = useActiveWeb3React()
   const blockHeight = useBlockHeight()
   const [price, setPrice] = useState(0)
+  const [fee, setFee] = useState(0)
 
   const getPairPrice = (address1, address2, amount) => {
     const factory = getContract(
@@ -1066,29 +1068,33 @@ export const useMDexPrice = (address1, address2, amount = 1, path = []) => {
     const _path = [address1, ...path, address2]
     console.log(_path)
     let _price = amount
+    let _fee = 0
+    let _fee_amount = amount
     for (let i = 1; i < _path.length; i++) {
       const from_address = _path[i - 1]
       const to_address = _path[i]
       _price = await getPairPrice(from_address, to_address, _price)
-      console.log(from_address, to_address, _price)
+      _fee = _fee + _fee_amount * FEE_RADIO
+      _fee_amount = _fee_amount - _fee_amount * FEE_RADIO
     }
-    return _price
+    return [_price, _fee]
   }
 
   useEffect(() => {
     if (library) {
       if (Web3.utils.isAddress(address1) && amount > 0) {
         // use path
-        getPrice(address1, address2, amount, path).then((_price) => {
+        getPrice(address1, address2, amount, path).then(([_price, _fee]) => {
           setPrice(_price)
+          setFee(_fee)
         })
       }
     }
     return () => {}
   }, [library, account, blockHeight, address1, address2, amount])
-  if (amount == 0) return '0'
+  if (amount == 0) return ['0', '0']
 
-  return price
+  return [price, fee]
 }
 
 /**
@@ -1158,7 +1164,7 @@ export const useLTPValue = (address, token_address, pool_address, pool_abi) => {
  * @param vol
  */
 export const useRewardsValue = (address1, address2, vol) => {
-  const price = useMDexPrice(address1, address2)
+  const [price, fee] = useMDexPrice(address1, address2)
   const [value, setValue] = useState(0)
   useEffect(() => {
     console.log('price', price)
