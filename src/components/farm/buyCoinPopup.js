@@ -2,9 +2,10 @@ import React, { useContext, useEffect, useState } from 'react'
 import cs from 'classnames'
 import { formatAmount, numToWei, splitFormat } from '../../utils/format'
 import { getRandomIntInclusive } from '../../utils/index'
-import { useBalance, useHTBalance } from '../../pages/Hooks'
+import {useAllowance, useBalance, useHTBalance} from '../../pages/Hooks'
+import MDexRouter from '../../web3/abi/MDexRouter.json'
 import { Button } from 'antd'
-import { WAR_ADDRESS, USDT_ADDRESS, WHT_ADDRESS } from '../../web3/address'
+import {WAR_ADDRESS, USDT_ADDRESS, WHT_ADDRESS, MDEX_ROUTER_ADDRESS, WETH_ADDRESS} from '../../web3/address'
 import { getPointAddress } from '../../web3/address'
 import Web3 from 'web3'
 import { getContract, useActiveWeb3React } from '../../web3'
@@ -17,6 +18,11 @@ import { FormattedMessage } from 'react-intl'
 import { useMDexPrice } from '../../pages/pools/Hooks'
 import { mainContext } from '../../reducer'
 import BigNumber from 'bignumber.js'
+import {
+  HANDLE_SHOW_APPROVE_FAILED_TRANSACTION_MODAL,
+  HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
+  waitingForInit
+} from "../../const";
 
 // 设置滑点
 const sliding = 0.005
@@ -33,9 +39,10 @@ const BuyCoinPopup = (props) => {
   const USDTBalance = useBalance(USDT_ADDRESS(chainId))
   const [middlePath, setMiddlePath] =  useState([])
   const outAmount = useMDexPrice(fromToken,chainId && WAR_ADDRESS(chainId), amount, middlePath)
+  const USDTAllowance = useAllowance(chainId && USDT_ADDRESS(chainId), MDEX_ROUTER_ADDRESS, account)
+
   const [minAmount, setMinAmount] = useState('-')
 
-  console.log('outAmount', outAmount)
   const [balance, setBalance] = useState(HTbalance && HTbalance.balance)
 
   useEffect(() => {
@@ -70,6 +77,31 @@ const BuyCoinPopup = (props) => {
     }
   }
 
+  const onApprove = (e) => {
+    if (!active) {
+      return false
+    }
+    if (loadFlag) return
+    setLoadFlag(true)
+    const contract = getContract(library, ERC20.abi, USDT_ADDRESS(chainId))
+    contract.methods
+      .approve(
+        MDEX_ROUTER_ADDRESS,
+        '0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff'
+      )
+      .send({
+        from: account,
+      })
+      .on('receipt', (_, receipt) => {
+        console.log('approve success')
+        setLoadFlag(false)
+      })
+      .on('error', (err, receipt) => {
+        console.log('approve error', err)
+        setLoadFlag(false)
+      })
+  }
+
   const onConfirmSwap = (e) => {
     if (!active) {
       return false
@@ -80,9 +112,49 @@ const BuyCoinPopup = (props) => {
     if (isNaN(parseInt(balance))) {
       return false
     }
+
     if (loadFlag) return
     setLoadFlag(true)
     // ========= 请求成功/失败  setLoadFlag(false) ==========
+
+    const contract = getContract(library, MDexRouter,  MDEX_ROUTER_ADDRESS)
+    const deadline = parseInt(Date.now()/1000) + 60 * 20
+    if(tabFlag === 'HT') {
+      contract.methods.swapExactETHForTokens(numToWei(minAmount), [
+        WHT_ADDRESS(chainId),
+        WAR_ADDRESS(chainId),
+      ], account, deadline).send({
+        from: account,
+        value: numToWei(amount)
+      }).on('receipt', (_, receipt) => {
+        console.log('success')
+        setLoadFlag(false)
+      })
+        .on('error', (err, receipt) => {
+          console.log('approve error', err)
+          setLoadFlag(false)
+        })
+    }else {
+      // 需要授权
+      if(USDTAllowance === 0) {
+        onApprove(e)
+        return
+      }
+      contract.methods.swapExactTokensForTokens(numToWei(amount), numToWei(minAmount), [
+        USDT_ADDRESS(chainId),
+        WETH_ADDRESS(chainId),
+        WAR_ADDRESS(chainId)
+      ], account, deadline).send({
+        from: account,
+      }).on('receipt', (_, receipt) => {
+        console.log('approve success')
+        setLoadFlag(false)
+      })
+      .on('error', (err, receipt) => {
+        console.log('approve error', err)
+        setLoadFlag(false)
+      })
+    }
   }
 
   return (
