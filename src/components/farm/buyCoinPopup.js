@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import cs from 'classnames'
 import { formatAmount, numToWei, splitFormat } from '../../utils/format'
-import { getRandomIntInclusive } from '../../utils/index'
 import { useAllowance, useBalance, useHTBalance } from '../../pages/Hooks'
 import MDexRouter from '../../web3/abi/MDexRouter.json'
 import { Button } from 'antd'
@@ -12,23 +11,16 @@ import {
   MDEX_ROUTER_ADDRESS,
   WETH_ADDRESS,
 } from '../../web3/address'
-import { getPointAddress } from '../../web3/address'
-import Web3 from 'web3'
 import { getContract, useActiveWeb3React } from '../../web3'
 import { injectIntl } from 'react-intl'
 import ERC20 from '../../web3/abi/ERC20.json'
 import WAR from '../../assets/icon/WAR@2x.png'
 import HT from '../../assets/icon/HT@2x.png'
+import USDT from '../../assets/icon/USDT@2x.png'
 import SWAPLINE from '../../assets/icon/swap-line@2x.png'
 import { FormattedMessage } from 'react-intl'
 import { useMDexPrice } from '../../pages/pools/Hooks'
 import { mainContext } from '../../reducer'
-import BigNumber from 'bignumber.js'
-import {
-  HANDLE_SHOW_APPROVE_FAILED_TRANSACTION_MODAL,
-  HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
-  waitingForInit,
-} from '../../const'
 
 // 设置滑点
 const sliding = 0.005
@@ -88,7 +80,11 @@ const BuyCoinPopup = (props) => {
       setBalance(HTbalance && HTbalance.balance)
     }
     if (tabFlag === 'USDT') {
-      setApprove(true)
+      if (USDTAllowance > 0) {
+        setApprove(false)
+      } else {
+        setApprove(true)
+      }
       setBalance(USDTBalance && USDTBalance.balance)
     }
   }, [tabFlag])
@@ -152,10 +148,9 @@ const BuyCoinPopup = (props) => {
     if (isNaN(parseInt(amount))) {
       return false
     }
-    if (!!(minAmount * 1)) {
+    if (!(minAmount * 1)) {
       return false
     }
-
     if (loadFlag) return
     setLoadFlag(true)
     const contract = getContract(library, MDexRouter, MDEX_ROUTER_ADDRESS)
@@ -306,7 +301,7 @@ const BuyCoinPopup = (props) => {
                 )}
                 {tabFlag === 'USDT' && (
                   <div className='buy_popup_unit'>
-                    <img src={WAR} />
+                    <img src={USDT} />
                     <span>USDT</span>
                   </div>
                 )}
@@ -344,6 +339,17 @@ const BuyCoinPopup = (props) => {
                 </Button>
               )}
             </div>
+            <p
+              className='form-app__inputbox-after-text farm_popup_avaliable'
+              style={{ marginTop: '10px' }}
+            >
+              <span className='buy_popup_tips'>
+                <FormattedMessage id='buyPopup4' />
+              </span>
+              <span className='buy_popup_tips_value'>
+                {minAmount * 1 > 0 ? (minAmount * 1).toFixed(6) : 0} {tabFlag}
+              </span>
+            </p>
 
             <p
               className='form-app__inputbox-after-text farm_popup_avaliable'
@@ -378,9 +384,13 @@ const BuyCoinPopup = (props) => {
                 </span>
               )}
             </p>
-            <p className='buy_popup_corner_tips'>
+            <a
+              className='buy_popup_corner_tips'
+              href='https://ht.mdex.com/#/swap?outputCurrency=0x910651f81a605a6ef35d05527d24a72fecef8bf0'
+              target='_black'
+            >
               <FormattedMessage id='buyPopup5' />
-            </p>
+            </a>
           </div>
         </form>
       </div>

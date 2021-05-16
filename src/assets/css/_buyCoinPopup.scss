@@ -98,6 +98,7 @@
       font-weight: 600;
     }
     &_corner_tips {
+      display: block;
       margin: 20px 0 0;
       font-size: 14px;
       font-family: PingFangSC-Regular, PingFang SC;
@@ -105,6 +106,11 @@
       color: #b6b9bc;
       line-height: 20px;
       text-align: center;
+      text-decoration: underline;
+      &:hover {
+        color: #0f8c20;
+        text-decoration: underline;
+      }
     }
     &_token_value {
       display: flex;
@@ -232,6 +238,7 @@
       font-weight: 600;
     }
     &_corner_tips {
+      display: block;
       margin: 20px 0 0;
       font-size: 14px;
       font-family: PingFangSC-Regular, PingFang SC;
@@ -239,6 +246,11 @@
       color: #b6b9bc;
       line-height: 20px;
       text-align: center;
+      text-decoration: underline;
+      &:hover {
+        color: #0f8c20;
+        text-decoration: underline;
+      }
     }
     &_token_value {
       display: flex;
@@ -317,7 +329,7 @@
       border: 1px solid #ebe9e3 !important;
     }
     &_onMax {
-      right: 74px;
+      right: 88px;
     }
     &_onMax_value {
       padding: 4px 10px !important;
@@ -330,7 +342,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      width: 60px;
+      width: 78px;
       height: 100%;
       border-left: 1px solid #f2f0eb;
       img {
@@ -370,6 +382,7 @@
       font-weight: 600;
     }
     &_corner_tips {
+      display: block;
       margin: 20px 0 0;
       font-size: 14px;
       font-family: PingFangSC-Regular, PingFang SC;
@@ -377,6 +390,11 @@
       color: #b6b9bc;
       line-height: 20px;
       text-align: center;
+      text-decoration: underline;
+      &:hover {
+        color: #0f8c20;
+        text-decoration: underline;
+      }
     }
     &_token_value {
       display: flex;
@@ -455,7 +473,7 @@
       border: 1px solid #ebe9e3 !important;
     }
     &_onMax {
-      right: 74px;
+      right: 88px;
     }
     &_onMax_value {
       padding: 4px 10px !important;
@@ -468,7 +486,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      width: 60px;
+      width: 78px;
       height: 100%;
       border-left: 1px solid #f2f0eb;
       img {
@@ -508,6 +526,7 @@
       font-weight: 600;
     }
     &_corner_tips {
+      display: block;
       margin: 20px 0 0;
       font-size: 14px;
       font-family: PingFangSC-Regular, PingFang SC;
@@ -515,6 +534,11 @@
       color: #b6b9bc;
       line-height: 20px;
       text-align: center;
+      text-decoration: underline;
+      &:hover {
+        color: #0f8c20;
+        text-decoration: underline;
+      }
     }
     &_token_value {
       display: flex;

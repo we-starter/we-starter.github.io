@@ -314,10 +314,10 @@ const en_US = {
   farm20: 'Approve',
   buyPopup1: '滑点',
   buyPopup2: '价格影响',
-  buyPopup3: '最低收到',
-  buyPopup4: '手续费',
-  buyPopup5: '该服务由 MDEX 提供支持',
+  buyPopup3: 'Minimum received',
+  buyPopup4: 'Trade Fee',
+  buyPopup5: 'This service is provided by MDEX',
   buyPopup6: 'Confirm Swap',
-  buyPopup7: '预计收到',
+  buyPopup7: 'Estimated',
 }
 export default en_US
