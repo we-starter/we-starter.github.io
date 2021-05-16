@@ -14,7 +14,7 @@ import WAR from '../../assets/icon/WAR@2x.png'
 import HT from '../../assets/icon/HT@2x.png'
 import SWAPLINE from '../../assets/icon/swap-line@2x.png'
 import { FormattedMessage } from 'react-intl'
-import {useMDexPrice, useSwapInfo} from '../../pages/pools/Hooks'
+import { useMDexPrice } from '../../pages/pools/Hooks'
 import { mainContext } from '../../reducer'
 import BigNumber from 'bignumber.js'
 
@@ -23,8 +23,6 @@ const sliding = 0.05
 
 const BuyCoinPopup = (props) => {
   const { intl, icon, onClose } = props
-  const pool = useSwapInfo()
-  const swapPools = pool[0]
   const { account, active, library, chainId } = useActiveWeb3React()
   const { dispatch } = useContext(mainContext)
   const [amount, setAmount] = useState('')
@@ -33,7 +31,11 @@ const BuyCoinPopup = (props) => {
   const [loadFlag, setLoadFlag] = useState(false)
   const HTbalance = useHTBalance()
   const USDTBalance = useBalance(USDT_ADDRESS(chainId))
-  const outAmount = useMDexPrice(fromToken,chainId && WAR_ADDRESS(chainId), amount)
+  const outAmount = useMDexPrice(
+    fromToken,
+    chainId && WAR_ADDRESS(chainId),
+    amount
+  )
   const [minAmount, setMinAmount] = useState('-')
 
   console.log('outAmount', outAmount)
@@ -56,7 +58,7 @@ const BuyCoinPopup = (props) => {
 
   const onMax = () => {
     let max = balance
-    setAmount(formatAmount(max, swapPools && swapPools.decimal, 6))
+    setAmount(formatAmount(max, 18, 6))
   }
 
   const onChange = (e) => {
@@ -102,8 +104,7 @@ const BuyCoinPopup = (props) => {
               }}
             >
               <FormattedMessage id='farm17' />
-              &nbsp;
-              {swapPools && swapPools.name}
+              &nbsp; WAR
               <a className='farm_popup_close_btn' onClick={onClose}></a>
             </h1>
             <div className='buy_popup_tab_box'>
@@ -139,12 +140,12 @@ const BuyCoinPopup = (props) => {
               </p>
               {tabFlag === 'HT' && (
                 <p className='form-app__inputbox-after-text buy_popup_ratio'>
-                  1 HT = 16.732157 {swapPools && swapPools.name}
+                  1HT = 16.732157WAR
                 </p>
               )}
               {tabFlag === 'USDT' && (
                 <p className='form-app__inputbox-after-text buy_popup_ratio'>
-                  1 USDT = 0.5312644 {swapPools && swapPools.name}
+                  1 USDT=0.5312644WAR
                 </p>
               )}
             </div>
@@ -192,7 +193,7 @@ const BuyCoinPopup = (props) => {
               <p>
                 <FormattedMessage id='buyPopup7' />
               </p>
-              <p>{outAmount} {swapPools && swapPools.name}</p>
+              <p>{outAmount} WAR</p>
             </div>
 
             <div className='form-app__submit form-app__submit--row'>
@@ -223,9 +224,7 @@ const BuyCoinPopup = (props) => {
                   ></path>
                 </svg> */}
               </span>
-              <span className='buy_popup_tips_value'>
-                {minAmount} {swapPools && swapPools.name}
-              </span>
+              <span className='buy_popup_tips_value'>{minAmount} WAR</span>
             </p>
             <p className='buy_popup_corner_tips'>
               <FormattedMessage id='buyPopup5' />
