@@ -263,9 +263,9 @@ const BuyCoinPopup = (props) => {
               {tabFlag === 'HT' && (
                 <p className='form-app__inputbox-after-text buy_popup_ratio'>
                   1WAR ={' '}
-                  {radioOutAmount * 1 > 0
-                    ? new BigNumber(1)
-                        .dividedBy(new BigNumber(radioOutAmount))
+                  {outAmount * 1 > 0 && amount * 1 > 0
+                    ? new BigNumber(amount)
+                        .dividedBy(new BigNumber(outAmount))
                         .toFixed(7)
                     : '--'}
                   HT
@@ -274,9 +274,9 @@ const BuyCoinPopup = (props) => {
               {tabFlag === 'USDT' && (
                 <p className='form-app__inputbox-after-text buy_popup_ratio'>
                   1WAR ={' '}
-                  {radioOutAmount * 1 > 0
-                    ? new BigNumber(1)
-                        .dividedBy(new BigNumber(radioOutAmount))
+                  {outAmount * 1 > 0 && amount * 1 > 0
+                    ? new BigNumber(amount)
+                        .dividedBy(new BigNumber(outAmount))
                         .toFixed(5)
                     : '--'}
                   USDT
