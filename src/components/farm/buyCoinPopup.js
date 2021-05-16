@@ -2,10 +2,16 @@ import React, { useContext, useEffect, useState } from 'react'
 import cs from 'classnames'
 import { formatAmount, numToWei, splitFormat } from '../../utils/format'
 import { getRandomIntInclusive } from '../../utils/index'
-import {useAllowance, useBalance, useHTBalance} from '../../pages/Hooks'
+import { useAllowance, useBalance, useHTBalance } from '../../pages/Hooks'
 import MDexRouter from '../../web3/abi/MDexRouter.json'
 import { Button } from 'antd'
-import {WAR_ADDRESS, USDT_ADDRESS, WHT_ADDRESS, MDEX_ROUTER_ADDRESS, WETH_ADDRESS} from '../../web3/address'
+import {
+  WAR_ADDRESS,
+  USDT_ADDRESS,
+  WHT_ADDRESS,
+  MDEX_ROUTER_ADDRESS,
+  WETH_ADDRESS,
+} from '../../web3/address'
 import { getPointAddress } from '../../web3/address'
 import Web3 from 'web3'
 import { getContract, useActiveWeb3React } from '../../web3'
@@ -21,8 +27,8 @@ import BigNumber from 'bignumber.js'
 import {
   HANDLE_SHOW_APPROVE_FAILED_TRANSACTION_MODAL,
   HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
-  waitingForInit
-} from "../../const";
+  waitingForInit,
+} from '../../const'
 
 // 设置滑点
 const sliding = 0.005
@@ -37,10 +43,24 @@ const BuyCoinPopup = (props) => {
   const [loadFlag, setLoadFlag] = useState(false)
   const HTbalance = useHTBalance()
   const USDTBalance = useBalance(USDT_ADDRESS(chainId))
-  const [middlePath, setMiddlePath] =  useState([])
-  const outAmount = useMDexPrice(fromToken,chainId && WAR_ADDRESS(chainId), amount, middlePath)
-  const radioOutAmount = useMDexPrice(fromToken,chainId && WAR_ADDRESS(chainId), 1, middlePath)
-  const USDTAllowance = useAllowance(chainId && USDT_ADDRESS(chainId), MDEX_ROUTER_ADDRESS, account)
+  const [middlePath, setMiddlePath] = useState([])
+  const outAmount = useMDexPrice(
+    fromToken,
+    chainId && WAR_ADDRESS(chainId),
+    amount,
+    middlePath
+  )
+  const radioOutAmount = useMDexPrice(
+    fromToken,
+    chainId && WAR_ADDRESS(chainId),
+    1,
+    middlePath
+  )
+  const USDTAllowance = useAllowance(
+    chainId && USDT_ADDRESS(chainId),
+    MDEX_ROUTER_ADDRESS,
+    account
+  )
 
   const [minAmount, setMinAmount] = useState('-')
 
@@ -58,7 +78,6 @@ const BuyCoinPopup = (props) => {
   useEffect(() => {
     if (tabFlag === 'HT') setBalance(HTbalance && HTbalance.balance)
     if (tabFlag === 'USDT') setBalance(USDTBalance && USDTBalance.balance)
-    setAmount('')
   }, [tabFlag])
 
   const onMax = () => {
@@ -118,43 +137,55 @@ const BuyCoinPopup = (props) => {
     setLoadFlag(true)
     // ========= 请求成功/失败  setLoadFlag(false) ==========
 
-    const contract = getContract(library, MDexRouter,  MDEX_ROUTER_ADDRESS)
-    const deadline = parseInt(Date.now()/1000) + 60 * 20
-    if(tabFlag === 'HT') {
-      contract.methods.swapExactETHForTokens(numToWei(minAmount), [
-        WHT_ADDRESS(chainId),
-        WAR_ADDRESS(chainId),
-      ], account, deadline).send({
-        from: account,
-        value: numToWei(amount)
-      }).on('receipt', (_, receipt) => {
-        console.log('success')
-        setLoadFlag(false)
-      })
+    const contract = getContract(library, MDexRouter, MDEX_ROUTER_ADDRESS)
+    const deadline = parseInt(Date.now() / 1000) + 60 * 20
+    if (tabFlag === 'HT') {
+      contract.methods
+        .swapExactETHForTokens(
+          numToWei(minAmount),
+          [WHT_ADDRESS(chainId), WAR_ADDRESS(chainId)],
+          account,
+          deadline
+        )
+        .send({
+          from: account,
+          value: numToWei(amount),
+        })
+        .on('receipt', (_, receipt) => {
+          console.log('success')
+          setLoadFlag(false)
+          onClose()
+        })
         .on('error', (err, receipt) => {
           console.log('approve error', err)
           setLoadFlag(false)
         })
-    }else {
+    } else {
       // 需要授权
-      if(USDTAllowance === 0) {
+      if (USDTAllowance === 0) {
         onApprove(e)
         return
       }
-      contract.methods.swapExactTokensForTokens(numToWei(amount), numToWei(minAmount), [
-        USDT_ADDRESS(chainId),
-        WETH_ADDRESS(chainId),
-        WAR_ADDRESS(chainId)
-      ], account, deadline).send({
-        from: account,
-      }).on('receipt', (_, receipt) => {
-        console.log('approve success')
-        setLoadFlag(false)
-      })
-      .on('error', (err, receipt) => {
-        console.log('approve error', err)
-        setLoadFlag(false)
-      })
+      contract.methods
+        .swapExactTokensForTokens(
+          numToWei(amount),
+          numToWei(minAmount),
+          [USDT_ADDRESS(chainId), WETH_ADDRESS(chainId), WAR_ADDRESS(chainId)],
+          account,
+          deadline
+        )
+        .send({
+          from: account,
+        })
+        .on('receipt', (_, receipt) => {
+          console.log('approve success')
+          setLoadFlag(false)
+          onClose()
+        })
+        .on('error', (err, receipt) => {
+          console.log('approve error', err)
+          setLoadFlag(false)
+        })
     }
   }
 
@@ -212,12 +243,12 @@ const BuyCoinPopup = (props) => {
               </p>
               {tabFlag === 'HT' && (
                 <p className='form-app__inputbox-after-text buy_popup_ratio'>
-                  1HT = {radioOutAmount}WAR
+                  1HT = {(radioOutAmount * 1).toFixed(6)}WAR
                 </p>
               )}
               {tabFlag === 'USDT' && (
                 <p className='form-app__inputbox-after-text buy_popup_ratio'>
-                  1 USDT={radioOutAmount}WAR
+                  1 USDT={(radioOutAmount * 1).toFixed(6)}WAR
                 </p>
               )}
             </div>
@@ -265,7 +296,7 @@ const BuyCoinPopup = (props) => {
               <p>
                 <FormattedMessage id='buyPopup7' />
               </p>
-              <p>{outAmount} WAR</p>
+              <p>{outAmount * 1 > 0 ? (outAmount * 1).toFixed(6) : 0} WAR</p>
             </div>
 
             <div className='form-app__submit form-app__submit--row'>
@@ -296,7 +327,9 @@ const BuyCoinPopup = (props) => {
                   ></path>
                 </svg> */}
               </span>
-              <span className='buy_popup_tips_value'>{minAmount} WAR</span>
+              <span className='buy_popup_tips_value'>
+                {minAmount * 1 > 0 ? (minAmount * 1).toFixed(6) : 0} WAR
+              </span>
             </p>
             <p className='buy_popup_corner_tips'>
               <FormattedMessage id='buyPopup5' />
