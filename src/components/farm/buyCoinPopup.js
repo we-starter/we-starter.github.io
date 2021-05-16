@@ -322,10 +322,14 @@ const BuyCoinPopup = (props) => {
                 <FormattedMessage id='buyPopup7' />
               </p>
               {tabFlag === 'HT' && (
-                <p>{outAmount * 1 > 0 ? (outAmount * 1).toFixed(6) : 0} WAR</p>
+                <p>
+                  {outAmount * 1 > 0 ? (outAmount * 1).toFixed(6) : '-'} WAR
+                </p>
               )}
               {tabFlag === 'USDT' && (
-                <p>{outAmount * 1 > 0 ? (outAmount * 1).toFixed(8) : 0} WAR</p>
+                <p>
+                  {outAmount * 1 > 0 ? (outAmount * 1).toFixed(8) : '-'} WAR
+                </p>
               )}
             </div>
 
@@ -354,16 +358,17 @@ const BuyCoinPopup = (props) => {
               </span>
               {tabFlag === 'HT' && (
                 <span className='buy_popup_tips_value'>
-                  {amount &&
+                  {(amount &&
                     new BigNumber(amount)
                       .multipliedBy(new BigNumber(0.003))
-                      .toNumber()}{' '}
+                      .toNumber()) ||
+                    '-'}{' '}
                   {tabFlag}
                 </span>
               )}
               {tabFlag === 'USDT' && (
                 <span className='buy_popup_tips_value'>
-                  {amount &&
+                  {(amount &&
                     (amount * 1 <= 1
                       ? new BigNumber(amount)
                           .multipliedBy(new BigNumber(0.0059))
@@ -371,7 +376,8 @@ const BuyCoinPopup = (props) => {
                       : new BigNumber(amount)
                           .multipliedBy(new BigNumber(0.0059))
                           .toNumber()
-                          .toFixed(3))}{' '}
+                          .toFixed(3))) ||
+                    '-'}{' '}
                   {tabFlag}
                 </span>
               )}
@@ -401,12 +407,12 @@ const BuyCoinPopup = (props) => {
               </span>
               {tabFlag === 'HT' && (
                 <span className='buy_popup_tips_value'>
-                  {minAmount * 1 > 0 ? (minAmount * 1).toFixed(6) : 0} WAR
+                  {minAmount * 1 > 0 ? (minAmount * 1).toFixed(6) : '-'} WAR
                 </span>
               )}
               {tabFlag === 'USDT' && (
                 <span className='buy_popup_tips_value'>
-                  {minAmount * 1 > 0 ? (minAmount * 1).toFixed(8) : 0} WAR
+                  {minAmount * 1 > 0 ? (minAmount * 1).toFixed(8) : '-'} WAR
                 </span>
               )}
             </p>
