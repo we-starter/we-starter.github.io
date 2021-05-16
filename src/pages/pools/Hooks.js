@@ -5,6 +5,7 @@ import {
   MDEX_ADDRESS,
   MDEX_FACTORY_ADDRESS,
   MDEX_POOL_ADDRESS,
+  MDEX_ROUTER_ADDRESS,
   MINE_MOUNTAIN_ADDRESS,
   WAR_ADDRESS,
   WETH_ADDRESS,
@@ -14,6 +15,7 @@ import { abi as ERC20 } from '../../web3/abi/ERC20.json'
 import LPT from '../../web3/abi/LPT.json'
 import MDexFactory from '../../web3/abi/MDexFactory.json'
 import MDexPool from '../../web3/abi/MDexPool.json'
+import MDexRouter from '../../web3/abi/MDexRouter.json'
 import Pools from '../../configs/pools'
 import Farm from '../../configs/farm'
 import Swap from '../../configs/swap'
@@ -35,7 +37,7 @@ import { ReactComponent as X5 } from '../../assets/logo/5x.svg'
 import { ReactComponent as X10 } from '../../assets/logo/10X.svg'
 import BigNumber from 'bignumber.js'
 import BN from 'bn.js'
-import { formatAmount } from '../../utils/format'
+import {formatAmount, numToWei} from '../../utils/format'
 import PoolsLBP from '../../configs/poolsLBP'
 import { useAllowance, useTokenAllowance } from '../Hooks'
 import { getMultiCallProvider, processResult } from '../../utils/multicall'
@@ -1032,13 +1034,13 @@ export const useMdxARP = (
   return apr
 }
 
-export const useMDexPrice = (address1, address2) => {
+export const useMDexPrice = (address1, address2, amount = 1) => {
   const { account, active, library, chainId } = useActiveWeb3React()
   const blockHeight = useBlockHeight()
   const [price, setPrice] = useState(0)
   useEffect(() => {
     if (library) {
-      if (Web3.utils.isAddress(address1)) {
+      if (Web3.utils.isAddress(address1) && amount > 0) {
         // 先取pair
         const factory = getContract(
           library,
@@ -1051,6 +1053,7 @@ export const useMDexPrice = (address1, address2) => {
           .then((pair_address) => {
             console.log(pair_address)
             const pair_contract = getContract(library, LPT, pair_address)
+            const mdex_router_contract = getContract(library, MDexRouter, MDEX_ROUTER_ADDRESS)
             const promiseList = [
               pair_contract.methods.token0().call(),
               pair_contract.methods.token1().call(),
@@ -1060,18 +1063,30 @@ export const useMDexPrice = (address1, address2) => {
               const [token0, token1, getReserves] = data
               const { _reserve0, _reserve1 } = getReserves
               if (token0.toLowerCase() == address2.toLowerCase()) {
-                const _price = _reserve0 / _reserve1
-                setPrice(_price)
+                console.log(amount, _reserve1, _reserve0)
+                mdex_router_contract.methods.getAmountOut(numToWei(amount), _reserve1, _reserve0).call().then(amountOut => {
+                  console.warn(address1)
+                  console.warn(address2)
+                  console.warn(formatAmount(amountOut))
+                  console.warn('1111')
+                  const _price = _reserve0 / _reserve1
+                  setPrice(Web3.utils.fromWei(amountOut, 'ether'))
+                })
               } else if (token1.toLowerCase() == address2.toLowerCase()) {
-                const _price = _reserve1 / _reserve0
-                setPrice(_price)
+                mdex_router_contract.methods.getAmountOut(numToWei(amount), _reserve0, _reserve1).call().then(amountOut => {
+                  console.warn(address1)
+                  console.warn(address2)
+                  console.warn(formatAmount(amountOut))
+                  console.warn('2222')
+                  setPrice(Web3.utils.fromWei(amountOut, 'ether'))
+                })
               }
             })
           })
       }
     }
     return () => {}
-  }, [library, account, blockHeight])
+  }, [library, account, blockHeight,address1, address2, amount])
   return price
 }
 

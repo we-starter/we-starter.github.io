@@ -14,9 +14,12 @@ import WAR from '../../assets/icon/WAR@2x.png'
 import HT from '../../assets/icon/HT@2x.png'
 import SWAPLINE from '../../assets/icon/swap-line@2x.png'
 import { FormattedMessage } from 'react-intl'
-import { useSwapInfo } from '../../pages/pools/Hooks'
+import {useMDexPrice, useSwapInfo} from '../../pages/pools/Hooks'
 import { mainContext } from '../../reducer'
 import BigNumber from 'bignumber.js'
+
+// 设置滑点
+const sliding = 0.05
 
 const BuyCoinPopup = (props) => {
   const { intl, icon, onClose } = props
@@ -26,14 +29,24 @@ const BuyCoinPopup = (props) => {
   const { dispatch } = useContext(mainContext)
   const [amount, setAmount] = useState('')
   const [tabFlag, setTabFlag] = useState('HT')
+  const [fromToken, setFromToken] = useState(chainId && WHT_ADDRESS(chainId))
   const [loadFlag, setLoadFlag] = useState(false)
   const HTbalance = useHTBalance()
   const USDTBalance = useBalance(USDT_ADDRESS(chainId))
+  const outAmount = useMDexPrice(fromToken,chainId && WAR_ADDRESS(chainId), amount)
+  const [minAmount, setMinAmount] = useState('-')
+
+  console.log('outAmount', outAmount)
   const [balance, setBalance] = useState(HTbalance && HTbalance.balance)
 
   useEffect(() => {
     if (tabFlag === 'HT') setBalance(HTbalance && HTbalance.balance)
   }, [HTbalance])
+
+  useEffect(() => {
+    const _minAmount = outAmount * (1 - sliding)
+    setMinAmount(_minAmount)
+  }, [outAmount])
 
   useEffect(() => {
     if (tabFlag === 'HT') setBalance(HTbalance && HTbalance.balance)
@@ -101,6 +114,7 @@ const BuyCoinPopup = (props) => {
                 )}
                 onClick={() => {
                   setTabFlag('HT')
+                  setFromToken(WHT_ADDRESS(chainId))
                 }}
               >
                 HT
@@ -112,6 +126,7 @@ const BuyCoinPopup = (props) => {
                 )}
                 onClick={() => {
                   setTabFlag('USDT')
+                  setFromToken(USDT_ADDRESS(chainId))
                 }}
               >
                 USDT
@@ -177,7 +192,7 @@ const BuyCoinPopup = (props) => {
               <p>
                 <FormattedMessage id='buyPopup7' />
               </p>
-              <p>-- {swapPools && swapPools.name}</p>
+              <p>{outAmount} {swapPools && swapPools.name}</p>
             </div>
 
             <div className='form-app__submit form-app__submit--row'>
@@ -209,7 +224,7 @@ const BuyCoinPopup = (props) => {
                 </svg> */}
               </span>
               <span className='buy_popup_tips_value'>
-                16.13 {swapPools && swapPools.name}
+                {minAmount} {swapPools && swapPools.name}
               </span>
             </p>
             <p className='buy_popup_corner_tips'>
