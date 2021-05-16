@@ -18,7 +18,6 @@ import MDexPool from '../../web3/abi/MDexPool.json'
 import MDexRouter from '../../web3/abi/MDexRouter.json'
 import Pools from '../../configs/pools'
 import Farm from '../../configs/farm'
-import Swap from '../../configs/swap'
 import Web3 from 'web3'
 import { ReactComponent as HUSD } from '../../assets/logo/HUSD.svg'
 import { ReactComponent as HT } from '../../assets/logo/HT.svg'
@@ -37,7 +36,7 @@ import { ReactComponent as X5 } from '../../assets/logo/5x.svg'
 import { ReactComponent as X10 } from '../../assets/logo/10X.svg'
 import BigNumber from 'bignumber.js'
 import BN from 'bn.js'
-import {formatAmount, numToWei} from '../../utils/format'
+import { formatAmount, numToWei } from '../../utils/format'
 import PoolsLBP from '../../configs/poolsLBP'
 import { useAllowance, useTokenAllowance } from '../Hooks'
 import { getMultiCallProvider, processResult } from '../../utils/multicall'
@@ -827,38 +826,6 @@ export const useFarmInfo = (address = '') => {
   return farmPoolsInfo
 }
 
-export const useSwapInfo = (address = '') => {
-  const { account, active, library, chainId } = useActiveWeb3React()
-  const blockHeight = useBlockHeight()
-  const [swapPoolsInfo, setSwapPoolsInfo] = useState(Swap)
-
-  useEffect(() => {
-    if (library) {
-      return
-      const multicallProvider = getMultiCallProvider(library, chainId)
-      Promise.all(
-        Swap.map((pool) => {
-          const pool_contract = new Contract(pool.address, pool.abi)
-          const promise_list = []
-          return multicallProvider.all(promise_list).then((data) => {
-            data = processResult(data)
-            let [] = data
-            return Object.assign({}, pool, {})
-          })
-        })
-      )
-        .then((pools) => {
-          console.log(pools)
-          setSwapPoolsInfo(pools)
-        })
-        .catch((err) => {
-          console.log(err, 'swap')
-        })
-    }
-  }, [account, address, blockHeight])
-  return swapPoolsInfo
-}
-
 export const useTotalRewards = (address, abi) => {
   const { account, active, library, chainId } = useActiveWeb3React()
   const [total, setTotal] = useState(0)
@@ -1110,7 +1077,7 @@ export const useMDexPrice = (address1, address2, amount = 1, path = []) => {
       }
     }
     return () => {}
-  }, [library, account, blockHeight,address1, address2, amount])
+  }, [library, account, blockHeight, address1, address2, amount])
   return price
 }
 
