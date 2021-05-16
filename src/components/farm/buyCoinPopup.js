@@ -39,6 +39,7 @@ const BuyCoinPopup = (props) => {
   const USDTBalance = useBalance(USDT_ADDRESS(chainId))
   const [middlePath, setMiddlePath] =  useState([])
   const outAmount = useMDexPrice(fromToken,chainId && WAR_ADDRESS(chainId), amount, middlePath)
+  const radioOutAmount = useMDexPrice(fromToken,chainId && WAR_ADDRESS(chainId), 1, middlePath)
   const USDTAllowance = useAllowance(chainId && USDT_ADDRESS(chainId), MDEX_ROUTER_ADDRESS, account)
 
   const [minAmount, setMinAmount] = useState('-')
@@ -211,12 +212,12 @@ const BuyCoinPopup = (props) => {
               </p>
               {tabFlag === 'HT' && (
                 <p className='form-app__inputbox-after-text buy_popup_ratio'>
-                  1HT = 16.732157WAR
+                  1HT = {radioOutAmount}WAR
                 </p>
               )}
               {tabFlag === 'USDT' && (
                 <p className='form-app__inputbox-after-text buy_popup_ratio'>
-                  1 USDT=0.5312644WAR
+                  1 USDT={radioOutAmount}WAR
                 </p>
               )}
             </div>

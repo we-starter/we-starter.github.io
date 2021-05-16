@@ -1019,7 +1019,6 @@ export const useMDexPrice = (address1, address2, amount = 1, path = []) => {
         .getPair(address1, address2)
         .call()
         .then((pair_address) => {
-          console.log(pair_address)
           const pair_contract = getContract(library, LPT, pair_address)
           const mdex_router_contract = getContract(library, MDexRouter, MDEX_ROUTER_ADDRESS)
           const promiseList = [
@@ -1031,21 +1030,12 @@ export const useMDexPrice = (address1, address2, amount = 1, path = []) => {
             const [token0, token1, getReserves] = data
             const { _reserve0, _reserve1 } = getReserves
             if (token0.toLowerCase() == address2.toLowerCase()) {
-              console.log(amount, _reserve1, _reserve0)
               mdex_router_contract.methods.getAmountOut(numToWei(amount), _reserve1, _reserve0).call().then(amountOut => {
-                console.warn(address1)
-                console.warn(address2)
-                console.warn(formatAmount(amountOut))
-                console.warn('1111')
                 const _price = _reserve0 / _reserve1
                 resolve(Web3.utils.fromWei(amountOut, 'ether'))
               })
             } else if (token1.toLowerCase() == address2.toLowerCase()) {
               mdex_router_contract.methods.getAmountOut(numToWei(amount), _reserve0, _reserve1).call().then(amountOut => {
-                console.warn(address1)
-                console.warn(address2)
-                console.warn(formatAmount(amountOut))
-                console.warn('2222')
                 resolve(Web3.utils.fromWei(amountOut, 'ether'))
               })
             }
