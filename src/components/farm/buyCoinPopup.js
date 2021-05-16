@@ -151,7 +151,7 @@ const BuyCoinPopup = (props) => {
                   className='form-app__inputbox-up buy_popup_onMax'
                   onClick={onMax}
                 >
-                  <div className='form-app__inputbox-up-pref'>
+                  <div className='form-app__inputbox-up-pref buy_popup_onMax_value'>
                     <FormattedMessage id='poolText19' />
                   </div>
                 </div>
