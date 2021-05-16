@@ -267,6 +267,10 @@ const BuyCoinPopup = (props) => {
                     ? new BigNumber(amount)
                         .dividedBy(new BigNumber(outAmount))
                         .toFixed(7)
+                    : radioOutAmount * 1 > 0
+                    ? new BigNumber(1)
+                        .dividedBy(new BigNumber(radioOutAmount))
+                        .toFixed(7)
                     : '--'}
                   HT
                 </p>
@@ -277,6 +281,10 @@ const BuyCoinPopup = (props) => {
                   {outAmount * 1 > 0 && amount * 1 > 0
                     ? new BigNumber(amount)
                         .dividedBy(new BigNumber(outAmount))
+                        .toFixed(5)
+                    : radioOutAmount * 1 > 0
+                    ? new BigNumber(1)
+                        .dividedBy(new BigNumber(radioOutAmount))
                         .toFixed(5)
                     : '--'}
                   USDT
