@@ -3,7 +3,7 @@ import cs from 'classnames'
 import { formatAmount, numToWei, splitFormat } from '../../utils/format'
 import { useAllowance, useBalance, useHTBalance } from '../../pages/Hooks'
 import MDexRouter from '../../web3/abi/MDexRouter.json'
-import { Button } from 'antd'
+import { Button, message } from 'antd'
 import {
   WAR_ADDRESS,
   USDT_ADDRESS,
@@ -29,7 +29,7 @@ const sliding = 0.005
 const BuyCoinPopup = (props) => {
   const { intl, icon, onClose } = props
   const { account, active, library, chainId } = useActiveWeb3React()
-  const { dispatch } = useContext(mainContext)
+  const { dispatch, state } = useContext(mainContext)
   const [amount, setAmount] = useState('')
   const [tabFlag, setTabFlag] = useState('HT')
   const [fromToken, setFromToken] = useState(chainId && WHT_ADDRESS(chainId))
@@ -176,7 +176,8 @@ const BuyCoinPopup = (props) => {
         .on('receipt', (_, receipt) => {
           console.log('success')
           setLoadFlag(false)
-          onClose()
+          state.locale === 'zh' && message.success('交易成功')
+          state.locale === 'en' && message.success('success')
         })
         .on('error', (err, receipt) => {
           console.log('approve error', err)
@@ -197,7 +198,8 @@ const BuyCoinPopup = (props) => {
         .on('receipt', (_, receipt) => {
           console.log('approve success')
           setLoadFlag(false)
-          onClose()
+          state.locale === 'zh' && message.success('交易成功')
+          state.locale === 'en' && message.success('success')
         })
         .on('error', (err, receipt) => {
           console.log('approve error', err)
@@ -254,7 +256,7 @@ const BuyCoinPopup = (props) => {
               </a>
             </div>
             <div className='buy_popup_balance_box'>
-              <p className='form-app__inputbox-after-text farm_popup_avaliable'>
+              <p className='form-app__inputbox-after-text farm_popup_avaliable buy_popup_avaliable'>
                 <FormattedMessage id='poolText18' />
                 <span>{formatAmount(balance)}</span>
               </p>
@@ -386,10 +388,7 @@ const BuyCoinPopup = (props) => {
               )}
             </p>
 
-            <p
-              className='form-app__inputbox-after-text farm_popup_avaliable'
-              style={{ marginTop: '10px' }}
-            >
+            <p className='form-app__inputbox-after-text farm_popup_avaliable'>
               <span className='buy_popup_tips'>
                 <FormattedMessage id='buyPopup4' />
               </span>

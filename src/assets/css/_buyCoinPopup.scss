@@ -311,9 +311,11 @@
     }
     &_balance_box {
       display: flex;
-      justify-content: space-between;
-      align-items: center;
+      flex-direction: column;
       margin-top: 10px;
+    }
+    &_avaliable {
+      justify-content: start;
     }
     &_ratio {
       margin: 0;
@@ -322,6 +324,7 @@
       font-weight: bold;
       color: #0f8c20;
       opacity: 1;
+      text-align: left;
     }
     &_input {
       padding: 0 10px !important;
@@ -455,9 +458,11 @@
     }
     &_balance_box {
       display: flex;
-      justify-content: space-between;
-      align-items: center;
+      flex-direction: column;
       margin-top: 10px;
+    }
+    &_avaliable {
+      justify-content: start;
     }
     &_ratio {
       margin: 0;
@@ -466,6 +471,7 @@
       font-weight: bold;
       color: #0f8c20;
       opacity: 1;
+      text-align: center;
     }
     &_input {
       padding: 0 10px !important;

@@ -319,5 +319,6 @@ const en_US = {
   buyPopup5: 'This service is provided by MDEX',
   buyPopup6: 'Confirm Swap',
   buyPopup7: 'Estimated',
+  buyPopup8: 'Succeed',
 }
 export default en_US

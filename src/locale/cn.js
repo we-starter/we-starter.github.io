@@ -316,5 +316,6 @@ const zh_CN = {
   buyPopup5: '该服务由 MDEX 提供支持',
   buyPopup6: '确认兑换',
   buyPopup7: '预计收到',
+  buyPopup8: '交易成功',
 }
 export default zh_CN
