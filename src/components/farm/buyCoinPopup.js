@@ -177,7 +177,7 @@ const BuyCoinPopup = (props) => {
           console.log('success')
           setLoadFlag(false)
           state.locale === 'zh' && message.success('交易成功')
-          state.locale === 'en' && message.success('Success')
+          state.locale === 'en' && message.success('Succeed')
         })
         .on('error', (err, receipt) => {
           console.log('approve error', err)
@@ -199,7 +199,7 @@ const BuyCoinPopup = (props) => {
           console.log('approve success')
           setLoadFlag(false)
           state.locale === 'zh' && message.success('交易成功')
-          state.locale === 'en' && message.success('Success')
+          state.locale === 'en' && message.success('Succeed')
         })
         .on('error', (err, receipt) => {
           console.log('approve error', err)
