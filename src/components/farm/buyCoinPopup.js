@@ -264,13 +264,19 @@ const BuyCoinPopup = (props) => {
                 <p className='form-app__inputbox-after-text buy_popup_ratio'>
                   1WAR ={' '}
                   {outAmount * 1 > 0 && amount * 1 > 0
-                    ? new BigNumber(amount)
-                        .dividedBy(new BigNumber(outAmount))
-                        .toFixed(7)
+                    ? splitFormat(
+                        new BigNumber(amount)
+                          .dividedBy(new BigNumber(outAmount))
+                          .toNumber(),
+                        7
+                      )
                     : radioOutAmount * 1 > 0
-                    ? new BigNumber(1)
-                        .dividedBy(new BigNumber(radioOutAmount))
-                        .toFixed(7)
+                    ? splitFormat(
+                        new BigNumber(1)
+                          .dividedBy(new BigNumber(radioOutAmount))
+                          .toNumber(),
+                        7
+                      )
                     : '--'}
                   HT
                 </p>
@@ -279,13 +285,19 @@ const BuyCoinPopup = (props) => {
                 <p className='form-app__inputbox-after-text buy_popup_ratio'>
                   1WAR ={' '}
                   {outAmount * 1 > 0 && amount * 1 > 0
-                    ? new BigNumber(amount)
-                        .dividedBy(new BigNumber(outAmount))
-                        .toFixed(5)
+                    ? splitFormat(
+                        new BigNumber(amount)
+                          .dividedBy(new BigNumber(outAmount))
+                          .toNumber(),
+                        5
+                      )
                     : radioOutAmount * 1 > 0
-                    ? new BigNumber(1)
-                        .dividedBy(new BigNumber(radioOutAmount))
-                        .toFixed(5)
+                    ? splitFormat(
+                        new BigNumber(1)
+                          .dividedBy(new BigNumber(radioOutAmount))
+                          .toNumber(),
+                        5
+                      )
                     : '--'}
                   USDT
                 </p>
@@ -334,14 +346,10 @@ const BuyCoinPopup = (props) => {
                 <FormattedMessage id='buyPopup7' />
               </p>
               {tabFlag === 'HT' && (
-                <p>
-                  {outAmount * 1 > 0 ? (outAmount * 1).toFixed(6) : '-'} WAR
-                </p>
+                <p>{outAmount * 1 > 0 ? splitFormat(outAmount, 6) : '-'} WAR</p>
               )}
               {tabFlag === 'USDT' && (
-                <p>
-                  {outAmount * 1 > 0 ? (outAmount * 1).toFixed(8) : '-'} WAR
-                </p>
+                <p>{outAmount * 1 > 0 ? splitFormat(outAmount, 8) : '-'} WAR</p>
               )}
             </div>
 
@@ -386,12 +394,12 @@ const BuyCoinPopup = (props) => {
               </span>
               {tabFlag === 'HT' && (
                 <span className='buy_popup_tips_value'>
-                  {minAmount * 1 > 0 ? (minAmount * 1).toFixed(6) : '-'} WAR
+                  {minAmount * 1 > 0 ? splitFormat(minAmount, 3) : '-'} WAR
                 </span>
               )}
               {tabFlag === 'USDT' && (
                 <span className='buy_popup_tips_value'>
-                  {minAmount * 1 > 0 ? (minAmount * 1).toFixed(8) : '-'} WAR
+                  {minAmount * 1 > 0 ? splitFormat(minAmount, 4) : '-'} WAR
                 </span>
               )}
             </p>
@@ -417,10 +425,12 @@ const BuyCoinPopup = (props) => {
                       ? new BigNumber(amount)
                           .multipliedBy(new BigNumber(0.0059))
                           .toNumber()
-                      : new BigNumber(amount)
-                          .multipliedBy(new BigNumber(0.0059))
-                          .toNumber()
-                          .toFixed(3))) ||
+                      : splitFormat(
+                          new BigNumber(amount)
+                            .multipliedBy(new BigNumber(0.0059))
+                            .toNumber(),
+                          3
+                        ))) ||
                     '-'}{' '}
                   {tabFlag}
                 </span>
