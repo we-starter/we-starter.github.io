@@ -41,6 +41,7 @@ const BuyCoinPopup = (props) => {
   const [tabFlag, setTabFlag] = useState('HT')
   const [fromToken, setFromToken] = useState(chainId && WHT_ADDRESS(chainId))
   const [loadFlag, setLoadFlag] = useState(false)
+  const [approve, setApprove] = useState(false)
   const HTbalance = useHTBalance()
   const USDTBalance = useBalance(USDT_ADDRESS(chainId))
   const [middlePath, setMiddlePath] = useState([])
@@ -67,6 +68,12 @@ const BuyCoinPopup = (props) => {
   const [balance, setBalance] = useState(HTbalance && HTbalance.balance)
 
   useEffect(() => {
+    if (USDTAllowance > 0) {
+      setApprove(false)
+    }
+  }, [USDTAllowance])
+
+  useEffect(() => {
     if (tabFlag === 'HT') setBalance(HTbalance && HTbalance.balance)
   }, [HTbalance])
 
@@ -76,8 +83,14 @@ const BuyCoinPopup = (props) => {
   }, [outAmount])
 
   useEffect(() => {
-    if (tabFlag === 'HT') setBalance(HTbalance && HTbalance.balance)
-    if (tabFlag === 'USDT') setBalance(USDTBalance && USDTBalance.balance)
+    if (tabFlag === 'HT') {
+      setApprove(false)
+      setBalance(HTbalance && HTbalance.balance)
+    }
+    if (tabFlag === 'USDT') {
+      setApprove(true)
+      setBalance(USDTBalance && USDTBalance.balance)
+    }
   }, [tabFlag])
 
   const onMax = () => {
@@ -115,6 +128,7 @@ const BuyCoinPopup = (props) => {
       .on('receipt', (_, receipt) => {
         console.log('approve success')
         setLoadFlag(false)
+        setApprove(false)
       })
       .on('error', (err, receipt) => {
         console.log('approve error', err)
@@ -132,17 +146,21 @@ const BuyCoinPopup = (props) => {
     if (isNaN(parseInt(balance))) {
       return false
     }
+    if (!amount) {
+      return false
+    }
+    if (isNaN(parseInt(amount))) {
+      return false
+    }
+    if (!!(minAmount * 1)) {
+      return false
+    }
 
     if (loadFlag) return
-
+    setLoadFlag(true)
     const contract = getContract(library, MDexRouter, MDEX_ROUTER_ADDRESS)
     const deadline = parseInt(Date.now() / 1000) + 60 * 20
     if (tabFlag === 'HT') {
-      if (!amount) return
-      if (isNaN(parseInt(amount))) {
-        return false
-      }
-      setLoadFlag(true)
       contract.methods
         .swapExactETHForTokens(
           numToWei(minAmount),
@@ -164,12 +182,6 @@ const BuyCoinPopup = (props) => {
           setLoadFlag(false)
         })
     } else {
-      // 需要授权
-      if (USDTAllowance === 0) {
-        onApprove(e)
-        return
-      }
-      setLoadFlag(true)
       contract.methods
         .swapExactTokensForTokens(
           numToWei(amount),
@@ -247,7 +259,7 @@ const BuyCoinPopup = (props) => {
               </p>
               {tabFlag === 'HT' && (
                 <p className='form-app__inputbox-after-text buy_popup_ratio'>
-                  1HT ={' '}
+                  1HT =
                   {radioOutAmount * 1 > 0
                     ? (radioOutAmount * 1).toFixed(6)
                     : '--'}
@@ -256,7 +268,7 @@ const BuyCoinPopup = (props) => {
               )}
               {tabFlag === 'USDT' && (
                 <p className='form-app__inputbox-after-text buy_popup_ratio'>
-                  1USDT=
+                  1USDT =
                   {radioOutAmount * 1 > 0
                     ? (radioOutAmount * 1).toFixed(8)
                     : '--'}
@@ -317,9 +329,20 @@ const BuyCoinPopup = (props) => {
             </div>
 
             <div className='form-app__submit form-app__submit--row'>
-              <Button type='primary' onClick={onConfirmSwap} loading={loadFlag}>
-                <FormattedMessage id='buyPopup6' />
-              </Button>
+              {approve && (
+                <Button type='primary' onClick={onApprove} loading={loadFlag}>
+                  <FormattedMessage id='farm20' />
+                </Button>
+              )}
+              {!approve && (
+                <Button
+                  type='primary'
+                  onClick={onConfirmSwap}
+                  loading={loadFlag}
+                >
+                  <FormattedMessage id='buyPopup6' />
+                </Button>
+              )}
             </div>
 
             <p
