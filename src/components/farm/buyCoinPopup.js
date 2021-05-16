@@ -134,12 +134,15 @@ const BuyCoinPopup = (props) => {
     }
 
     if (loadFlag) return
-    setLoadFlag(true)
-    // ========= 请求成功/失败  setLoadFlag(false) ==========
 
     const contract = getContract(library, MDexRouter, MDEX_ROUTER_ADDRESS)
     const deadline = parseInt(Date.now() / 1000) + 60 * 20
     if (tabFlag === 'HT') {
+      if (!amount) return
+      if (isNaN(parseInt(amount))) {
+        return false
+      }
+      setLoadFlag(true)
       contract.methods
         .swapExactETHForTokens(
           numToWei(minAmount),
@@ -166,6 +169,7 @@ const BuyCoinPopup = (props) => {
         onApprove(e)
         return
       }
+      setLoadFlag(true)
       contract.methods
         .swapExactTokensForTokens(
           numToWei(amount),
@@ -243,12 +247,20 @@ const BuyCoinPopup = (props) => {
               </p>
               {tabFlag === 'HT' && (
                 <p className='form-app__inputbox-after-text buy_popup_ratio'>
-                  1HT = {(radioOutAmount * 1).toFixed(6)}WAR
+                  1HT ={' '}
+                  {radioOutAmount * 1 > 0
+                    ? (radioOutAmount * 1).toFixed(6)
+                    : '--'}
+                  WAR
                 </p>
               )}
               {tabFlag === 'USDT' && (
                 <p className='form-app__inputbox-after-text buy_popup_ratio'>
-                  1 USDT={(radioOutAmount * 1).toFixed(6)}WAR
+                  1USDT=
+                  {radioOutAmount * 1 > 0
+                    ? (radioOutAmount * 1).toFixed(8)
+                    : '--'}
+                  WAR
                 </p>
               )}
             </div>
@@ -296,7 +308,12 @@ const BuyCoinPopup = (props) => {
               <p>
                 <FormattedMessage id='buyPopup7' />
               </p>
-              <p>{outAmount * 1 > 0 ? (outAmount * 1).toFixed(6) : 0} WAR</p>
+              {tabFlag === 'HT' && (
+                <p>{outAmount * 1 > 0 ? (outAmount * 1).toFixed(6) : 0} WAR</p>
+              )}
+              {tabFlag === 'USDT' && (
+                <p>{outAmount * 1 > 0 ? (outAmount * 1).toFixed(8) : 0} WAR</p>
+              )}
             </div>
 
             <div className='form-app__submit form-app__submit--row'>
@@ -327,9 +344,16 @@ const BuyCoinPopup = (props) => {
                   ></path>
                 </svg> */}
               </span>
-              <span className='buy_popup_tips_value'>
-                {minAmount * 1 > 0 ? (minAmount * 1).toFixed(6) : 0} WAR
-              </span>
+              {tabFlag === 'HT' && (
+                <span className='buy_popup_tips_value'>
+                  {minAmount * 1 > 0 ? (minAmount * 1).toFixed(6) : 0} WAR
+                </span>
+              )}
+              {tabFlag === 'USDT' && (
+                <span className='buy_popup_tips_value'>
+                  {minAmount * 1 > 0 ? (minAmount * 1).toFixed(8) : 0} WAR
+                </span>
+              )}
             </p>
             <p className='buy_popup_corner_tips'>
               <FormattedMessage id='buyPopup5' />
