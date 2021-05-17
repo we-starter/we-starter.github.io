@@ -1002,7 +1002,7 @@ export const useMdxARP = (
 }
 
 export const useMDexPrice = (address1, address2, amount = 1, path = []) => {
-  const FEE_RADIO = 0.003
+  const FEE_RADIO = '0.003'
   const { account, active, library, chainId } = useActiveWeb3React()
   const blockHeight = useBlockHeight()
   const [price, setPrice] = useState(0)
@@ -1068,17 +1068,17 @@ export const useMDexPrice = (address1, address2, amount = 1, path = []) => {
     const _path = [address1, ...path, address2]
     console.log(_path)
     let _price = amount
-    let _fee = 0
-    let _fee_amount = amount
+    let _fee = '0'
+    let _fee_amount = amount.toString()
     for (let i = 1; i < _path.length; i++) {
       const from_address = _path[i - 1]
       const to_address = _path[i]
       _price = await getPairPrice(from_address, to_address, _price)
       // _fee = _fee + _fee_amount * FEE_RADIO
+      // _fee_amount = _fee_amount - _fee_amount * FEE_RADIO
       _fee = new BigNumber(_fee)
         .plus(new BigNumber(_fee_amount).multipliedBy(new BigNumber(FEE_RADIO)))
         .toString()
-      // _fee_amount = _fee_amount - _fee_amount * FEE_RADIO
       _fee_amount = new BigNumber(_fee_amount)
         .minus(
           new BigNumber(_fee_amount).multipliedBy(new BigNumber(FEE_RADIO))

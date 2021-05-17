@@ -72,8 +72,10 @@ const BuyCoinPopup = (props) => {
   }, [HTbalance])
 
   useEffect(() => {
-    const _minAmount = outAmount * (1 - sliding)
-    setMinAmount(_minAmount)
+    const _minAmount = new BigNumber(outAmount)
+      .multipliedBy(new BigNumber('1').minus(sliding))
+      .toString()
+    setMinAmount(splitFormat(_minAmount, 8))
   }, [outAmount])
 
   useEffect(() => {
@@ -154,6 +156,7 @@ const BuyCoinPopup = (props) => {
     if (isNaN(parseInt(amount))) {
       return false
     }
+
     if (!(minAmount * 1)) {
       return false
     }
@@ -394,12 +397,22 @@ const BuyCoinPopup = (props) => {
               </span>
               {tabFlag === 'HT' && (
                 <span className='buy_popup_tips_value'>
-                  {minAmount * 1 > 0 ? splitFormat(minAmount, 3) : '-'} WAR
+                  {minAmount * 1 > 0
+                    ? minAmount * 1 < 0.1
+                      ? minAmount
+                      : splitFormat(minAmount, 3)
+                    : '-'}{' '}
+                  WAR
                 </span>
               )}
               {tabFlag === 'USDT' && (
                 <span className='buy_popup_tips_value'>
-                  {minAmount * 1 > 0 ? splitFormat(minAmount, 4) : '-'} WAR
+                  {minAmount * 1 > 0
+                    ? minAmount * 1 < 0.1
+                      ? minAmount
+                      : splitFormat(minAmount, 4)
+                    : '-'}{' '}
+                  WAR
                 </span>
               )}
             </p>
@@ -410,16 +423,13 @@ const BuyCoinPopup = (props) => {
               </span>
               {tabFlag === 'HT' && (
                 <span className='buy_popup_tips_value'>
-                  {(amount && new BigNumber(outFee).toNumber()) || '-'}{' '}
-                  {tabFlag}
+                  {(amount && outFee) || '-'} {tabFlag}
                 </span>
               )}
               {tabFlag === 'USDT' && (
                 <span className='buy_popup_tips_value'>
                   {(amount &&
-                    (amount * 1 <= 1
-                      ? new BigNumber(outFee).toNumber()
-                      : splitFormat(new BigNumber(outFee).toNumber(), 3))) ||
+                    (amount * 1 <= 1 ? outFee : splitFormat(outFee, 3))) ||
                     '-'}{' '}
                   {tabFlag}
                 </span>
