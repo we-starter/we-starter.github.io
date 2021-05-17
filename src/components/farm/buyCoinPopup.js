@@ -39,7 +39,7 @@ const BuyCoinPopup = (props) => {
   const HTbalance = useHTBalance()
   const USDTBalance = useBalance(USDT_ADDRESS(chainId))
   const [middlePath, setMiddlePath] = useState([])
-  const [outAmount, outFee]  = useMDexPrice(
+  const [outAmount, outFee] = useMDexPrice(
     fromToken,
     chainId && WAR_ADDRESS(chainId),
     amount,
@@ -91,10 +91,6 @@ const BuyCoinPopup = (props) => {
     }
   }, [tabFlag])
 
-  useEffect(() => {
-    // amount && setFee(new BigNumber(amount).multipliedBy(new BigNumber(0.003)))
-  }, [amount])
-
   const onMax = () => {
     let max = balance
     setAmount(formatAmount(max, 18, 6))
@@ -108,7 +104,11 @@ const BuyCoinPopup = (props) => {
       re.test(value) ||
       (value.split('.').length === 2 && value.slice(value.length - 1) === '.')
     ) {
-      setAmount(value)
+      if (value.indexOf('.') > -1 && value.split('.')[1].length > 8) {
+        setAmount(splitFormat(value, 8))
+      } else {
+        setAmount(value)
+      }
     }
   }
 
@@ -410,11 +410,7 @@ const BuyCoinPopup = (props) => {
               </span>
               {tabFlag === 'HT' && (
                 <span className='buy_popup_tips_value'>
-                  {(amount &&
-                    new BigNumber(amount)
-                      .multipliedBy(new BigNumber(0.003))
-                      .toNumber()) ||
-                    '-'}{' '}
+                  {(amount && new BigNumber(outFee).toNumber()) || '-'}{' '}
                   {tabFlag}
                 </span>
               )}
@@ -422,15 +418,8 @@ const BuyCoinPopup = (props) => {
                 <span className='buy_popup_tips_value'>
                   {(amount &&
                     (amount * 1 <= 1
-                      ? new BigNumber(amount)
-                          .multipliedBy(new BigNumber(0.0059))
-                          .toNumber()
-                      : splitFormat(
-                          new BigNumber(amount)
-                            .multipliedBy(new BigNumber(0.0059))
-                            .toNumber(),
-                          3
-                        ))) ||
+                      ? new BigNumber(outFee).toNumber()
+                      : splitFormat(new BigNumber(outFee).toNumber(), 3))) ||
                     '-'}{' '}
                   {tabFlag}
                 </span>

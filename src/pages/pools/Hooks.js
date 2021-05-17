@@ -1074,8 +1074,16 @@ export const useMDexPrice = (address1, address2, amount = 1, path = []) => {
       const from_address = _path[i - 1]
       const to_address = _path[i]
       _price = await getPairPrice(from_address, to_address, _price)
-      _fee = _fee + _fee_amount * FEE_RADIO
-      _fee_amount = _fee_amount - _fee_amount * FEE_RADIO
+      // _fee = _fee + _fee_amount * FEE_RADIO
+      _fee = new BigNumber(_fee)
+        .plus(new BigNumber(_fee_amount).multipliedBy(new BigNumber(FEE_RADIO)))
+        .toString()
+      // _fee_amount = _fee_amount - _fee_amount * FEE_RADIO
+      _fee_amount = new BigNumber(_fee_amount)
+        .minus(
+          new BigNumber(_fee_amount).multipliedBy(new BigNumber(FEE_RADIO))
+        )
+        .toString()
     }
     return [_price, _fee]
   }
