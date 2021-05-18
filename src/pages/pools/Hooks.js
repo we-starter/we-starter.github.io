@@ -1009,58 +1009,53 @@ export const useMDexPrice = (address1, address2, amount = 1, path = []) => {
   const [fee, setFee] = useState(0)
 
   const getPairPrice = (address1, address2, amount) => {
-    const factory = getContract(
-      library,
-      MDexFactory,
-      MDEX_FACTORY_ADDRESS(chainId)
-    )
-    return new Promise((resolve) => {
-      factory.methods
-        .getPair(address1, address2)
-        .call()
-        .then((pair_address) => {
-          console.log(pair_address)
-          const pair_contract = getContract(library, LPT, pair_address)
-          const mdex_router_contract = getContract(
-            library,
-            MDexRouter,
-            MDEX_ROUTER_ADDRESS
-          )
-          const promiseList = [
-            pair_contract.methods.token0().call(),
-            pair_contract.methods.token1().call(),
-            pair_contract.methods.getReserves().call(),
-          ]
-          Promise.all(promiseList).then((data) => {
-            const [token0, token1, getReserves] = data
-            const { _reserve0, _reserve1 } = getReserves
-            if (token0.toLowerCase() == address2.toLowerCase()) {
-              console.log(amount, _reserve1, _reserve0)
-              mdex_router_contract.methods
-                .getAmountOut(numToWei(amount), _reserve1, _reserve0)
-                .call()
-                .then((amountOut) => {
-                  console.warn(address1)
-                  console.warn(address2)
-                  console.warn(formatAmount(amountOut))
-                  console.warn('1111')
-                  const _price = _reserve0 / _reserve1
-                  resolve(Web3.utils.fromWei(amountOut, 'ether'))
-                })
-            } else if (token1.toLowerCase() == address2.toLowerCase()) {
-              mdex_router_contract.methods
-                .getAmountOut(numToWei(amount), _reserve0, _reserve1)
-                .call()
-                .then((amountOut) => {
-                  console.warn(address1)
-                  console.warn(address2)
-                  console.warn(formatAmount(amountOut))
-                  console.warn('2222')
-                  resolve(Web3.utils.fromWei(amountOut, 'ether'))
-                })
-            }
-          })
-        })
+    const multicallProvider = getMultiCallProvider(library, chainId)
+    const factory = new Contract(MDEX_FACTORY_ADDRESS(chainId), MDexFactory)
+    const promise_list = [factory.getPair(address1, address2)]
+    return multicallProvider.all(promise_list).then((data) => {
+      let [pair_address] = processResult(data)
+      const pair_contract = new Contract(pair_address, LPT)
+      const mdex_router_contract = new Contract(MDEX_ROUTER_ADDRESS, MDexRouter)
+      const promiseList = [
+        pair_contract.token0(),
+        pair_contract.token1(),
+        pair_contract.getReserves(),
+      ]
+
+      return multicallProvider.all(promiseList).then((promiseListData) => {
+        const [token0, token1, getReserves] = promiseListData
+        const { _reserve0, _reserve1 } = getReserves
+        const mdexRouterList1 = [
+          mdex_router_contract.getAmountOut(
+            numToWei(amount),
+            _reserve1,
+            _reserve0
+          ),
+        ]
+        const mdexRouterList2 = [
+          mdex_router_contract.getAmountOut(
+            numToWei(amount),
+            _reserve0,
+            _reserve1
+          ),
+        ]
+
+        if (token0.toLowerCase() == address2.toLowerCase()) {
+          return multicallProvider
+            .all(mdexRouterList1)
+            .then((amountOutData) => {
+              let [amountOut] = processResult(amountOutData)
+              return Web3.utils.fromWei(amountOut, 'ether')
+            })
+        } else if (token1.toLowerCase() == address2.toLowerCase()) {
+          return multicallProvider
+            .all(mdexRouterList2)
+            .then((amountOutData) => {
+              let [amountOut] = processResult(amountOutData)
+              return Web3.utils.fromWei(amountOut, 'ether')
+            })
+        }
+      })
     })
   }
 

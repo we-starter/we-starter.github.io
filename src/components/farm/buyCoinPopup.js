@@ -45,8 +45,8 @@ const BuyCoinPopup = (props) => {
     middlePath
   )
   const [radioOutAmount, fee] = useMDexPrice(
-    fromToken,
     chainId && WAR_ADDRESS(chainId),
+    fromToken,
     1,
     middlePath
   )
@@ -273,12 +273,7 @@ const BuyCoinPopup = (props) => {
                         7
                       )
                     : radioOutAmount * 1 > 0
-                    ? splitFormat(
-                        new BigNumber(1)
-                          .dividedBy(new BigNumber(radioOutAmount))
-                          .toNumber(),
-                        7
-                      )
+                    ? splitFormat(radioOutAmount, 7)
                     : '--'}
                   HT
                 </p>
@@ -294,12 +289,7 @@ const BuyCoinPopup = (props) => {
                         5
                       )
                     : radioOutAmount * 1 > 0
-                    ? splitFormat(
-                        new BigNumber(1)
-                          .dividedBy(new BigNumber(radioOutAmount))
-                          .toNumber(),
-                        5
-                      )
+                    ? splitFormat(radioOutAmount, 5)
                     : '--'}
                   USDT
                 </p>
