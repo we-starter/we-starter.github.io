@@ -35,7 +35,6 @@ const BuyCoinPopup = (props) => {
   const [fromToken, setFromToken] = useState(chainId && WHT_ADDRESS(chainId))
   const [loadFlag, setLoadFlag] = useState(false)
   const [approve, setApprove] = useState(false)
-  const [fee, setFee] = useState(0)
   const HTbalance = useHTBalance()
   const USDTBalance = useBalance(USDT_ADDRESS(chainId))
   const [middlePath, setMiddlePath] = useState([])
@@ -45,7 +44,7 @@ const BuyCoinPopup = (props) => {
     amount,
     middlePath
   )
-  const radioOutAmount = useMDexPrice(
+  const [radioOutAmount, fee] = useMDexPrice(
     fromToken,
     chainId && WAR_ADDRESS(chainId),
     1,
