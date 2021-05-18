@@ -316,7 +316,7 @@ const en_US = {
   buyPopup2: '价格影响',
   buyPopup3: 'Minimum received',
   buyPopup4: 'Trade Fee',
-  buyPopup5: 'This service is provided by MDEX',
+  buyPopup5: 'Powered by MDEX',
   buyPopup6: 'Confirm Swap',
   buyPopup7: 'Estimated',
   buyPopup8: 'Succeed',
