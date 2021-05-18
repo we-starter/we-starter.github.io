@@ -312,5 +312,13 @@ const en_US = {
   farm18: 'Real-time Price',
   farm19: 'WAR Contract Address:',
   farm20: 'Approve',
+  buyPopup1: '滑点',
+  buyPopup2: '价格影响',
+  buyPopup3: 'Minimum received',
+  buyPopup4: 'Trade Fee',
+  buyPopup5: 'This service is provided by MDEX',
+  buyPopup6: 'Confirm Swap',
+  buyPopup7: 'Estimated',
+  buyPopup8: 'Succeed',
 }
 export default en_US

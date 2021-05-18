@@ -5,6 +5,7 @@ import {
   MDEX_ADDRESS,
   MDEX_FACTORY_ADDRESS,
   MDEX_POOL_ADDRESS,
+  MDEX_ROUTER_ADDRESS,
   MINE_MOUNTAIN_ADDRESS,
   WAR_ADDRESS,
   WETH_ADDRESS,
@@ -14,6 +15,7 @@ import { abi as ERC20 } from '../../web3/abi/ERC20.json'
 import LPT from '../../web3/abi/LPT.json'
 import MDexFactory from '../../web3/abi/MDexFactory.json'
 import MDexPool from '../../web3/abi/MDexPool.json'
+import MDexRouter from '../../web3/abi/MDexRouter.json'
 import Pools from '../../configs/pools'
 import Farm from '../../configs/farm'
 import Web3 from 'web3'
@@ -34,7 +36,7 @@ import { ReactComponent as X5 } from '../../assets/logo/5x.svg'
 import { ReactComponent as X10 } from '../../assets/logo/10X.svg'
 import BigNumber from 'bignumber.js'
 import BN from 'bn.js'
-import { formatAmount } from '../../utils/format'
+import { formatAmount, numToWei } from '../../utils/format'
 import PoolsLBP from '../../configs/poolsLBP'
 import { useAllowance, useTokenAllowance } from '../Hooks'
 import { getMultiCallProvider, processResult } from '../../utils/multicall'
@@ -961,7 +963,7 @@ export const useMdxARP = (
     pool_address,
     pool_abi
   )
-  const mdex2warPrice = useMDexPrice(
+  const [mdex2warPrice, mdex2warPriceFee] = useMDexPrice(
     MDEX_ADDRESS,
     chainId && WAR_ADDRESS(chainId)
   )
@@ -999,47 +1001,103 @@ export const useMdxARP = (
   return apr
 }
 
-export const useMDexPrice = (address1, address2) => {
+export const useMDexPrice = (address1, address2, amount = 1, path = []) => {
+  const FEE_RADIO = '0.003'
   const { account, active, library, chainId } = useActiveWeb3React()
   const blockHeight = useBlockHeight()
   const [price, setPrice] = useState(0)
+  const [fee, setFee] = useState(0)
+
+  const getPairPrice = (address1, address2, amount) => {
+    const multicallProvider = getMultiCallProvider(library, chainId)
+    const factory = new Contract(MDEX_FACTORY_ADDRESS(chainId), MDexFactory)
+    const promise_list = [factory.getPair(address1, address2)]
+    return multicallProvider.all(promise_list).then((data) => {
+      let [pair_address] = processResult(data)
+      const pair_contract = new Contract(pair_address, LPT)
+      const mdex_router_contract = new Contract(MDEX_ROUTER_ADDRESS, MDexRouter)
+      const promiseList = [
+        pair_contract.token0(),
+        pair_contract.token1(),
+        pair_contract.getReserves(),
+      ]
+
+      return multicallProvider.all(promiseList).then((promiseListData) => {
+        const [token0, token1, getReserves] = promiseListData
+        const { _reserve0, _reserve1 } = getReserves
+        const mdexRouterList1 = [
+          mdex_router_contract.getAmountOut(
+            numToWei(amount),
+            _reserve1,
+            _reserve0
+          ),
+        ]
+        const mdexRouterList2 = [
+          mdex_router_contract.getAmountOut(
+            numToWei(amount),
+            _reserve0,
+            _reserve1
+          ),
+        ]
+
+        if (token0.toLowerCase() == address2.toLowerCase()) {
+          return multicallProvider
+            .all(mdexRouterList1)
+            .then((amountOutData) => {
+              let [amountOut] = processResult(amountOutData)
+              return Web3.utils.fromWei(amountOut, 'ether')
+            })
+        } else if (token1.toLowerCase() == address2.toLowerCase()) {
+          return multicallProvider
+            .all(mdexRouterList2)
+            .then((amountOutData) => {
+              let [amountOut] = processResult(amountOutData)
+              return Web3.utils.fromWei(amountOut, 'ether')
+            })
+        }
+      })
+    })
+  }
+
+  const getPrice = async (address1, address2, amount, path) => {
+    const _path = [address1, ...path, address2]
+    console.log(_path)
+    let _price = amount
+    let _fee = '0'
+    let _fee_amount = amount.toString()
+    for (let i = 1; i < _path.length; i++) {
+      const from_address = _path[i - 1]
+      const to_address = _path[i]
+      _price = await getPairPrice(from_address, to_address, _price)
+      // _fee = _fee + _fee_amount * FEE_RADIO
+      // _fee_amount = _fee_amount - _fee_amount * FEE_RADIO
+      _fee = new BigNumber(_fee)
+        .plus(new BigNumber(_fee_amount).multipliedBy(new BigNumber(FEE_RADIO)))
+        .toString()
+      _fee_amount = new BigNumber(_fee_amount)
+        .minus(
+          new BigNumber(_fee_amount).multipliedBy(new BigNumber(FEE_RADIO))
+        )
+        .toString()
+    }
+    return [_price, _fee]
+  }
+
   useEffect(() => {
     if (library) {
-      if (Web3.utils.isAddress(address1)) {
-        // 先取pair
-        const factory = getContract(
-          library,
-          MDexFactory,
-          MDEX_FACTORY_ADDRESS(chainId)
-        )
-        factory.methods
-          .getPair(address1, address2)
-          .call()
-          .then((pair_address) => {
-            console.log(pair_address)
-            const pair_contract = getContract(library, LPT, pair_address)
-            const promiseList = [
-              pair_contract.methods.token0().call(),
-              pair_contract.methods.token1().call(),
-              pair_contract.methods.getReserves().call(),
-            ]
-            Promise.all(promiseList).then((data) => {
-              const [token0, token1, getReserves] = data
-              const { _reserve0, _reserve1 } = getReserves
-              if (token0.toLowerCase() == address2.toLowerCase()) {
-                const _price = _reserve0 / _reserve1
-                setPrice(_price)
-              } else if (token1.toLowerCase() == address2.toLowerCase()) {
-                const _price = _reserve1 / _reserve0
-                setPrice(_price)
-              }
-            })
-          })
+      if (Web3.utils.isAddress(address1) && amount > 0) {
+        // use path
+        getPrice(address1, address2, amount, path).then(([_price, _fee]) => {
+          setPrice(_price)
+          setFee(_fee)
+        })
       }
     }
     return () => {}
-  }, [library, account, blockHeight])
-  return price
+  }, [library, account, blockHeight, address1, address2, amount])
+  if (amount == 0) return ['0', '0']
+
+  return [price, fee]
 }
 
 /**
@@ -1109,7 +1167,7 @@ export const useLTPValue = (address, token_address, pool_address, pool_abi) => {
  * @param vol
  */
 export const useRewardsValue = (address1, address2, vol) => {
-  const price = useMDexPrice(address1, address2)
+  const [price, fee] = useMDexPrice(address1, address2)
   const [value, setValue] = useState(0)
   useEffect(() => {
     console.log('price', price)

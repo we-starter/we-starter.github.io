@@ -4,6 +4,7 @@ import { FormattedMessage } from 'react-intl'
 import { useActiveWeb3React } from '../../web3'
 import { USDT_ADDRESS, WAR_ADDRESS, WHT_ADDRESS } from '../../web3/address'
 import { useMDexPrice } from '../../pages/pools/Hooks'
+import { splitFormat } from '../../utils/format'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 import { message } from 'antd'
 import Icon1 from '../../assets/icon/icon1@2x.png'
@@ -11,6 +12,8 @@ import Icon2 from '../../assets/icon/icon2@2x.png'
 import Icon3 from '../../assets/icon/icon3@2x.png'
 import Icon4 from '../../assets/icon/icon4@2x.png'
 import FileCopyLine from '../../assets/image/file-copy-line@2x.png'
+import BigNumber from 'bignumber.js'
+import { HANDLE_WALLET_MODAL } from '../../const'
 import {
   usePoolsInfo,
   usePoolsLBPInfo,
@@ -28,24 +31,37 @@ export const Banner = () => {
   const [realTimePrice, setRealTimePrice] = useState('-')
   const WarTokenAddress =
     WAR_ADDRESS[chainId] || '0x910651F81a605a6Ef35d05527d24A72fecef8bF0'
-  const _tmp_price_war2ht = useMDexPrice(
-    chainId && WAR_ADDRESS(chainId),
-    chainId && WHT_ADDRESS(chainId)
-  )
+  // const [_tmp_price_war2ht, _tmp_price_war2ht_fee] = useMDexPrice(
+  //   chainId && WAR_ADDRESS(chainId),
+  //   chainId && WHT_ADDRESS(chainId)
+  // )
 
-  const _tmp_price_usdt2ht = useMDexPrice(
+  // const [_tmp_price_usdt2ht, _tmp_price_usdt2ht_fee] = useMDexPrice(
+  //   chainId && USDT_ADDRESS(chainId),
+  //   chainId && WHT_ADDRESS(chainId)
+  // )
+
+  // useEffect(() => {
+  //   console.log('_tmp_price_war2ht', _tmp_price_war2ht)
+  //   console.log('_tmp_price_usdt2ht', _tmp_price_usdt2ht)
+  //   const price = _tmp_price_war2ht / _tmp_price_usdt2ht
+  //   if (!isNaN(price) && price > 0) {
+  //     setRealTimePrice(price.toFixed(3))
+  //   }
+  // }, [_tmp_price_war2ht, _tmp_price_usdt2ht])
+
+  const [price, fee] = useMDexPrice(
+    chainId && WAR_ADDRESS(chainId),
     chainId && USDT_ADDRESS(chainId),
-    chainId && WHT_ADDRESS(chainId)
+    1,
+    [chainId && WHT_ADDRESS(chainId)]
   )
 
   useEffect(() => {
-    console.log('_tmp_price_war2ht', _tmp_price_war2ht)
-    console.log('_tmp_price_usdt2ht', _tmp_price_usdt2ht)
-    const price = _tmp_price_war2ht / _tmp_price_usdt2ht
-    if (!isNaN(price) && price > 0) {
-      setRealTimePrice(price.toFixed(3))
+    if (price * 1 > 0) {
+      setRealTimePrice(splitFormat(price, 3))
     }
-  }, [_tmp_price_war2ht, _tmp_price_usdt2ht])
+  }, [price])
 
   const addToken = async () => {
     try {
@@ -217,10 +233,16 @@ export const Banner = () => {
             </span>
             <span className='banner_related_data_val'>${realTimePrice}</span>
           </p>
+          {/* href='https://ht.mdex.com/#/swap?outputCurrency=0x910651f81a605a6ef35d05527d24a72fecef8bf0'
+          target='_blank' */}
           <a
             className='banner_related_data_buy'
-            href='https://ht.mdex.com/#/swap?outputCurrency=0x910651f81a605a6ef35d05527d24a72fecef8bf0'
-            target='_blank'
+            onClick={() => {
+              dispatch({
+                type: HANDLE_WALLET_MODAL,
+                walletModal: 'buyCoin',
+              })
+            }}
           >
             <FormattedMessage id='farm17' />
           </a>
