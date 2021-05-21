@@ -954,6 +954,153 @@ export default [
     project_introduction:
       'Corra.finance is a plug-and-play platform that enables the monetization of digital content using NFT technology.',
   },
+  {
+    name: 'COW',
+    address: '0x01',
+    abi: OfferingV2,
+    start_at: '1621940400',
+    is_top: true,
+    is_coming: true, // is_coming 为 true 则不请求合约
+    currency: {
+      address: '0x0', // 如果是0x0则是ht
+      decimal: 18,
+      symbol: 'USDT',
+    },
+    icon: '',
+    type: 1,
+    isPrivate: true,
+    underlying: {
+      address: '0x910651F81a605a6Ef35d05527d24A72fecef8bF0', // 地址有问题
+      decimal: 18,
+      symbol: 'COW',
+      name: 'COW',
+      total_supply: '100,000,000',
+      holders: '-',
+      transfers: '-',
+    },
+    amount: '68000', // token 总额
+    pool_info: {
+      token_distribution: 'May 25th 2021, 7:00PM SGT',
+      min_allocation: '0',
+      max_allocation: '100 USDT',
+      min_swap_level: '34,000 USDT',
+    },
+    website: 'https://www.coinwind.com/',
+    white_paper: '-',
+    twitter: 'https://twitter.com/coinwind_com',
+    Telegram_Channel: 'https://t.me/CoinWind',
+    Github: '-',
+    yuque: '-',
+    progress: 0,
+    status: 0,
+    ratio: '1COW=?HT',
+    time: '1621951200',
+    purchasedCurrencyOf: 0,
+    totalPurchasedAmount: '34000000000000000000000',
+    totalPurchasedUnderlying: '0',
+    totalPurchasedCurrency: '0',
+    is_flash: false,
+    link_url: 'https://www.coinwind.com/', // 跳转外链接
+    project_introduction: 'CoinWind——A DeFi smart mining financial platform',
+  },
+  {
+    name: 'COW(Influencer)',
+    address: '0x02',
+    abi: OfferingV2,
+    start_at: '1621940400',
+    is_top: true,
+    is_coming: true, // is_coming 为 true 则不请求合约
+    currency: {
+      address: '0x0', // 如果是0x0则是ht
+      decimal: 18,
+      symbol: 'USDT',
+    },
+    icon: '',
+    type: 1,
+    isPrivate: true,
+    underlying: {
+      address: '0x910651F81a605a6Ef35d05527d24A72fecef8bF0', // 地址有问题
+      decimal: 18,
+      symbol: 'COW',
+      name: 'COW',
+      total_supply: '100,000,000',
+      holders: '-',
+      transfers: '-',
+    },
+    amount: '40000', // token 总额
+    pool_info: {
+      token_distribution: 'May 25th 2021, 7:00PM SGT',
+      min_allocation: '0',
+      max_allocation: '200 USDT',
+      min_swap_level: '20,000 USDT',
+    },
+    website: 'https://www.coinwind.com/',
+    white_paper: '-',
+    twitter: 'https://twitter.com/coinwind_com',
+    Telegram_Channel: 'https://t.me/CoinWind',
+    Github: '-',
+    yuque: '-',
+    progress: 0,
+    status: 0,
+    ratio: '1COW=?HT',
+    time: '1621951200',
+    purchasedCurrencyOf: 0,
+    totalPurchasedAmount: '20000000000000000000000',
+    totalPurchasedUnderlying: '0',
+    totalPurchasedCurrency: '0',
+    is_flash: false,
+    link_url: 'https://www.coinwind.com/', // 跳转外链接
+    project_introduction: 'CoinWind——A DeFi smart mining financial platform',
+  },
+  {
+    name: 'COW(Star)',
+    address: '0x03',
+    abi: OfferingV2,
+    start_at: '1621940400',
+    is_top: true,
+    is_coming: true, // is_coming 为 true 则不请求合约
+    currency: {
+      address: '0x0', // 如果是0x0则是ht
+      decimal: 18,
+      symbol: 'USDT',
+    },
+    icon: '',
+    type: 1,
+    isPrivate: true,
+    underlying: {
+      address: '0x910651F81a605a6Ef35d05527d24A72fecef8bF0', // 地址有问题
+      decimal: 18,
+      symbol: 'COW',
+      name: 'COW',
+      total_supply: '100,000,000',
+      holders: '-',
+      transfers: '-',
+    },
+    amount: '32000', // token 总额
+    pool_info: {
+      token_distribution: 'May 25th 2021, 7:00PM SGT',
+      min_allocation: '0',
+      max_allocation: '800 USDT',
+      min_swap_level: '16,000 USDT',
+    },
+    website: 'https://www.coinwind.com/',
+    white_paper: '-',
+    twitter: 'https://twitter.com/coinwind_com',
+    Telegram_Channel: 'https://t.me/CoinWind',
+    Github: '-',
+    yuque: '-',
+    progress: 0,
+    status: 0,
+    ratio: '1COW=?HT',
+    time: '1621951200',
+    purchasedCurrencyOf: 0,
+    totalPurchasedAmount: '16000000000000000000000',
+    totalPurchasedUnderlying: '0',
+    totalPurchasedCurrency: '0',
+    is_flash: false,
+    link_url: 'https://www.coinwind.com/', // 跳转外链接
+    project_introduction: 'CoinWind——A DeFi smart mining financial platform',
+  },
   // 测试合约配置
   // {
   //   name: 'WAR',

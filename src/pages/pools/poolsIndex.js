@@ -25,6 +25,8 @@ import FX from '../../assets/icon/FX.png'
 import LEV from '../../assets/icon/LEV.png'
 import O3 from '../../assets/icon/O3.png'
 import CORRA from '../../assets/icon/CORRA.png'
+import COW from '../../assets/icon/COW.png'
+import MOMA from '../../assets/icon/moma.png'
 
 import HyperPay from '../../assets/icon/HyperPay-Logo@2x.png'
 import { usePoolsInfo, usePoolsLBPInfo } from './Hooks'
@@ -267,6 +269,8 @@ const PoolsIndex = (props) => {
             {pool && pool.underlying.symbol === 'LEV' && <img src={LEV} />}
             {pool && pool.underlying.symbol === 'O3' && <img src={O3} />}
             {pool && pool.underlying.symbol === 'CORA' && <img src={CORRA} />}
+            {pool && pool.underlying.symbol === 'COW' && <img src={COW} />}
+
             {pool && pool.name}
           </p>
           <p className='pools-type_card_title_right'>

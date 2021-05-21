@@ -8,7 +8,7 @@ let axioss = axios.create({
 })
 let toolApi = {
   getTotalNumAddresses(data) {
-    return axioss.get('dash/?project_id' + data)
+    return axioss.get('hms/v1/project/stat?project_id=' + data)
   },
 }
 
