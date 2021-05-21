@@ -329,7 +329,6 @@ export function WAR_ADDRESS(chainId) {
   }
 }
 
-
 export function MDEX_FACTORY_ADDRESS(chainId) {
   switch (chainId) {
     case 128:
@@ -347,7 +346,6 @@ export function MINE_MOUNTAIN_ADDRESS(chainId) {
       return '0xEEC6169616d6E50560E52460A2C74f74Cdf57b6F'
   }
 }
-
 
 export function USDT_ADDRESS(chainId) {
   switch (chainId) {
@@ -367,5 +365,11 @@ export function WHT_ADDRESS(chainId) {
   }
 }
 
-
-
+export function WMDEX_ADDRESS(chainId) {
+  switch (chainId) {
+    case 128:
+      return '0x25D2e80cB6B86881Fd7e07dd263Fb79f4AbE033c'
+    case 3:
+      return ''
+  }
+}

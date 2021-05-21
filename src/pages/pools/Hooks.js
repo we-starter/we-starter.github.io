@@ -1088,7 +1088,8 @@ export const useMDexPrice = (address1, address2, amount = 1, path = []) => {
   const getPrice = async (address1, address2, amount, path) => {
     const _path = [address1, ...path, address2]
     console.log(_path)
-    let _price = amount
+    let _price = 0
+    _price = amount
     let _fee = '0'
     let _fee_amount = amount.toString()
     for (let i = 1; i < _path.length; i++) {

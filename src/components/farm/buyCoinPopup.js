@@ -8,6 +8,7 @@ import {
   WAR_ADDRESS,
   USDT_ADDRESS,
   WHT_ADDRESS,
+  WMDEX_ADDRESS,
   MDEX_ROUTER_ADDRESS,
   WETH_ADDRESS,
 } from '../../web3/address'
@@ -15,7 +16,7 @@ import BigNumber from 'bignumber.js'
 import { getContract, useActiveWeb3React } from '../../web3'
 import { injectIntl } from 'react-intl'
 import ERC20 from '../../web3/abi/ERC20.json'
-import WAR from '../../assets/icon/WAR@2x.png'
+import MDEX from '../../assets/icon/MDEX@2x.png'
 import HT from '../../assets/icon/HT@2x.png'
 import USDT from '../../assets/icon/USDT@2x.png'
 import SWAPLINE from '../../assets/icon/swap-line@2x.png'
@@ -37,6 +38,7 @@ const BuyCoinPopup = (props) => {
   const [approve, setApprove] = useState(false)
   const HTbalance = useHTBalance()
   const USDTBalance = useBalance(USDT_ADDRESS(chainId))
+  const MDEXBalance = useBalance(WMDEX_ADDRESS(chainId))
   const [middlePath, setMiddlePath] = useState([])
   const [outAmount, outFee] = useMDexPrice(
     fromToken,
@@ -50,8 +52,22 @@ const BuyCoinPopup = (props) => {
     1,
     middlePath
   )
+
+  const [HTRadioOutAmount, HTFee] = useMDexPrice(
+    fromToken,
+    chainId && WAR_ADDRESS(chainId),
+    0.1,
+    middlePath
+  )
+
   const USDTAllowance = useAllowance(
     chainId && USDT_ADDRESS(chainId),
+    MDEX_ROUTER_ADDRESS,
+    account
+  )
+
+  const MDEXAllowance = useAllowance(
+    chainId && WMDEX_ADDRESS(chainId),
     MDEX_ROUTER_ADDRESS,
     account
   )
@@ -65,6 +81,12 @@ const BuyCoinPopup = (props) => {
       setApprove(false)
     }
   }, [USDTAllowance])
+
+  useEffect(() => {
+    if (MDEXAllowance > 0) {
+      setApprove(false)
+    }
+  }, [MDEXAllowance])
 
   useEffect(() => {
     if (tabFlag === 'HT') setBalance(HTbalance && HTbalance.balance)
@@ -89,6 +111,14 @@ const BuyCoinPopup = (props) => {
         setApprove(true)
       }
       setBalance(USDTBalance && USDTBalance.balance)
+    }
+    if (tabFlag === 'MDX') {
+      if (MDEXAllowance > 0) {
+        setApprove(false)
+      } else {
+        setApprove(true)
+      }
+      setBalance(MDEXBalance && MDEXBalance.balance)
     }
   }, [tabFlag])
 
@@ -118,8 +148,17 @@ const BuyCoinPopup = (props) => {
       return false
     }
     if (loadFlag) return
+
     setLoadFlag(true)
-    const contract = getContract(library, ERC20.abi, USDT_ADDRESS(chainId))
+
+    let contractAddress = ''
+    if (tabFlag === 'USDT') {
+      contractAddress = USDT_ADDRESS(chainId)
+    } else if (tabFlag === 'MDX') {
+      contractAddress = WMDEX_ADDRESS(chainId)
+    }
+
+    const contract = getContract(library, ERC20.abi, contractAddress)
     contract.methods
       .approve(
         MDEX_ROUTER_ADDRESS,
@@ -186,11 +225,17 @@ const BuyCoinPopup = (props) => {
           setLoadFlag(false)
         })
     } else {
+      let methodsAddress = ''
+      if (tabFlag === 'USDT') {
+        methodsAddress = USDT_ADDRESS(chainId)
+      } else if (tabFlag === 'MDX') {
+        methodsAddress = WMDEX_ADDRESS(chainId)
+      }
       contract.methods
         .swapExactTokensForTokens(
           numToWei(amount),
           numToWei(minAmount),
-          [USDT_ADDRESS(chainId), WETH_ADDRESS(chainId), WAR_ADDRESS(chainId)],
+          [methodsAddress, WETH_ADDRESS(chainId), WAR_ADDRESS(chainId)],
           account,
           deadline
         )
@@ -256,6 +301,19 @@ const BuyCoinPopup = (props) => {
               >
                 USDT
               </a>
+              <a
+                className={cs(
+                  'buy_popup_tab',
+                  tabFlag === 'MDX' && 'buy_popup_tab_active'
+                )}
+                onClick={() => {
+                  setTabFlag('MDX')
+                  setFromToken(WMDEX_ADDRESS(chainId))
+                  setMiddlePath([WHT_ADDRESS(chainId)])
+                }}
+              >
+                MDX
+              </a>
             </div>
             <div className='buy_popup_balance_box'>
               <p className='form-app__inputbox-after-text farm_popup_avaliable buy_popup_avaliable'>
@@ -272,8 +330,11 @@ const BuyCoinPopup = (props) => {
                           .toNumber(),
                         7
                       )
-                    : radioOutAmount * 1 > 0
-                    ? splitFormat(radioOutAmount, 7)
+                    : HTRadioOutAmount * 1 > 0
+                    ? splitFormat(
+                        new BigNumber(0.1).dividedBy(HTRadioOutAmount),
+                        7
+                      )
                     : '--'}
                   HT
                 </p>
@@ -292,6 +353,22 @@ const BuyCoinPopup = (props) => {
                     ? splitFormat(radioOutAmount, 5)
                     : '--'}
                   USDT
+                </p>
+              )}
+              {tabFlag === 'MDX' && (
+                <p className='form-app__inputbox-after-text buy_popup_ratio'>
+                  1WAR ={' '}
+                  {outAmount * 1 > 0 && amount * 1 > 0
+                    ? splitFormat(
+                        new BigNumber(amount)
+                          .dividedBy(new BigNumber(outAmount))
+                          .toNumber(),
+                        5
+                      )
+                    : radioOutAmount * 1 > 0
+                    ? splitFormat(radioOutAmount, 7)
+                    : '--'}
+                  MDX
                 </p>
               )}
             </div>
@@ -327,6 +404,12 @@ const BuyCoinPopup = (props) => {
                     <span>USDT</span>
                   </div>
                 )}
+                {tabFlag === 'MDX' && (
+                  <div className='buy_popup_unit'>
+                    <img src={MDEX} />
+                    <span>MDX</span>
+                  </div>
+                )}
               </div>
             </div>
 
@@ -342,6 +425,9 @@ const BuyCoinPopup = (props) => {
               )}
               {tabFlag === 'USDT' && (
                 <p>{outAmount * 1 > 0 ? splitFormat(outAmount, 8) : '-'} WAR</p>
+              )}
+              {tabFlag === 'MDX' && (
+                <p>{outAmount * 1 > 0 ? splitFormat(outAmount, 7) : '-'} WAR</p>
               )}
             </div>
 
@@ -404,6 +490,16 @@ const BuyCoinPopup = (props) => {
                   WAR
                 </span>
               )}
+              {tabFlag === 'MDX' && (
+                <span className='buy_popup_tips_value'>
+                  {minAmount * 1 > 0
+                    ? minAmount * 1 < 0.1
+                      ? minAmount
+                      : splitFormat(minAmount, 3)
+                    : '-'}{' '}
+                  WAR
+                </span>
+              )}
             </p>
 
             <p className='form-app__inputbox-after-text farm_popup_avaliable'>
@@ -419,6 +515,14 @@ const BuyCoinPopup = (props) => {
                 <span className='buy_popup_tips_value'>
                   {(amount &&
                     (amount * 1 <= 1 ? outFee : splitFormat(outFee, 3))) ||
+                    '-'}{' '}
+                  {tabFlag}
+                </span>
+              )}
+              {tabFlag === 'MDX' && (
+                <span className='buy_popup_tips_value'>
+                  {(amount &&
+                    (amount * 1 < 1 ? outFee : splitFormat(outFee, 4))) ||
                     '-'}{' '}
                   {tabFlag}
                 </span>
