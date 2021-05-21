@@ -124,7 +124,7 @@ const BuyCoinPopup = (props) => {
 
   const onMax = () => {
     let max = balance
-    setAmount(formatAmount(max, 18, 6))
+    setAmount(formatAmount(max, 18, 8))
   }
 
   const onChange = (e) => {
