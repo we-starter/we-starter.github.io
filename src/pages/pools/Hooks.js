@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import { getContract, getLogs, useActiveWeb3React } from '../../web3'
 import {
   ADDRESS_0,
@@ -42,6 +42,7 @@ import { useAllowance, useTokenAllowance } from '../Hooks'
 import { getMultiCallProvider, processResult } from '../../utils/multicall'
 import { Contract } from 'ethers-multicall-x'
 import warnAboutDeprecatedESMImport from 'react-router-dom/es/warnAboutDeprecatedESMImport'
+import { mainContext } from '../../reducer'
 
 export const useStakingInfo = (stakingInfo) => {
   const { account, library, chainId } = useActiveWeb3React()
@@ -353,17 +354,17 @@ export const useStakingPoolInfo = () => {
 export function useBlockHeight() {
   const { account, active, library } = useActiveWeb3React()
   const [blockNumber, setBlockNumber] = useState(0)
+  const { dispatch, state } = useContext(mainContext)
 
   const updateBlockNumber = (blockNumber) => {
     setBlockNumber(blockNumber)
   }
-
   useEffect(() => {
     library && library.once('block', updateBlockNumber)
     return () => {
       library && library.off('block', updateBlockNumber)
     }
-  }, [blockNumber, library])
+  }, [blockNumber, library, state.randomNumber])
 
   return blockNumber
 }

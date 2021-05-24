@@ -21,6 +21,7 @@ import {
   TOOL_DATA,
   IS_SUPPORTEDCHAIN,
   CHANGE_SLIPPAGE,
+  RANDOM_NUMBER,
 } from './const'
 
 const mainContext = React.createContext()
@@ -103,6 +104,11 @@ const reducer = (state, action) => {
         ...state,
         isSupportedChain: action.isSupportedChain,
       }
+    case RANDOM_NUMBER:
+      return {
+        ...state,
+        randomNumber: action.randomNumber,
+      }
     default:
       return state
   }
@@ -130,6 +136,7 @@ const ContextProvider = (props) => {
     changeNetworkStatus: false,
     toolData: null,
     slippageVal: 10, // 滑点值
+    randomNumber: null,
   })
   return (
     <mainContext.Provider value={{ state, dispatch }}>
