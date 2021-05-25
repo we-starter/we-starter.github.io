@@ -956,21 +956,21 @@ export default [
   },
   {
     name: 'COW',
-    address: '0x01',
+    address: '0xC0310106dA3f24676a90EFd289644c2DFb3aad65',
     abi: OfferingV2,
     start_at: '1621940400',
     is_top: true,
-    is_coming: true, // is_coming 为 true 则不请求合约
+    is_coming: false, // is_coming 为 true 则不请求合约
     currency: {
       address: '0x0', // 如果是0x0则是ht
       decimal: 18,
-      symbol: 'USDT',
+      symbol: 'HT',
     },
     icon: '',
     type: 1,
     isPrivate: true,
     underlying: {
-      address: '0x910651F81a605a6Ef35d05527d24A72fecef8bF0', // 地址有问题
+      address: '0x80861A817106665bcA173DB6AC2ab628a738c737', // 地址有问题
       decimal: 18,
       symbol: 'COW',
       name: 'COW',
@@ -982,8 +982,8 @@ export default [
     pool_info: {
       token_distribution: 'May 25th 2021, 7:00PM SGT',
       min_allocation: '0',
-      max_allocation: '100 USDT',
-      min_swap_level: '34,000 USDT',
+      max_allocation: '6 HT',
+      min_swap_level: '2,040 HT',
     },
     website: 'https://www.coinwind.com/',
     white_paper: '-',
@@ -993,10 +993,10 @@ export default [
     yuque: '-',
     progress: 0,
     status: 0,
-    ratio: '1COW=?HT',
+    ratio: '1COW=0.03HT',
     time: '1621951200',
     purchasedCurrencyOf: 0,
-    totalPurchasedAmount: '34000000000000000000000',
+    totalPurchasedAmount: '2040000000000000000000',
     totalPurchasedUnderlying: '0',
     totalPurchasedCurrency: '0',
     is_flash: false,
@@ -1005,21 +1005,21 @@ export default [
   },
   {
     name: 'COW(Influencer)',
-    address: '0x02',
+    address: '0x566D9d153b1eA0e9B16D35cDf04a03E645F321A8',
     abi: OfferingV2,
     start_at: '1621940400',
     is_top: true,
-    is_coming: true, // is_coming 为 true 则不请求合约
+    is_coming: false, // is_coming 为 true 则不请求合约
     currency: {
       address: '0x0', // 如果是0x0则是ht
       decimal: 18,
-      symbol: 'USDT',
+      symbol: 'HT',
     },
     icon: '',
     type: 1,
     isPrivate: true,
     underlying: {
-      address: '0x910651F81a605a6Ef35d05527d24A72fecef8bF0', // 地址有问题
+      address: '0x80861A817106665bcA173DB6AC2ab628a738c737', // 地址有问题
       decimal: 18,
       symbol: 'COW',
       name: 'COW',
@@ -1031,8 +1031,8 @@ export default [
     pool_info: {
       token_distribution: 'May 25th 2021, 7:00PM SGT',
       min_allocation: '0',
-      max_allocation: '200 USDT',
-      min_swap_level: '20,000 USDT',
+      max_allocation: '12 HT',
+      min_swap_level: '1,200 HT',
     },
     website: 'https://www.coinwind.com/',
     white_paper: '-',
@@ -1042,10 +1042,10 @@ export default [
     yuque: '-',
     progress: 0,
     status: 0,
-    ratio: '1COW=?HT',
+    ratio: '1COW=0.03HT',
     time: '1621951200',
     purchasedCurrencyOf: 0,
-    totalPurchasedAmount: '20000000000000000000000',
+    totalPurchasedAmount: '1200000000000000000000',
     totalPurchasedUnderlying: '0',
     totalPurchasedCurrency: '0',
     is_flash: false,
@@ -1054,21 +1054,21 @@ export default [
   },
   {
     name: 'COW(Star)',
-    address: '0x03',
+    address: '0x9224Ddc3FB9993AFAf8914B50843128ffa4C3336',
     abi: OfferingV2,
     start_at: '1621940400',
     is_top: true,
-    is_coming: true, // is_coming 为 true 则不请求合约
+    is_coming: false, // is_coming 为 true 则不请求合约
     currency: {
       address: '0x0', // 如果是0x0则是ht
       decimal: 18,
-      symbol: 'USDT',
+      symbol: 'HT',
     },
     icon: '',
     type: 1,
     isPrivate: true,
     underlying: {
-      address: '0x910651F81a605a6Ef35d05527d24A72fecef8bF0', // 地址有问题
+      address: '0x80861A817106665bcA173DB6AC2ab628a738c737', // 地址有问题
       decimal: 18,
       symbol: 'COW',
       name: 'COW',
@@ -1080,8 +1080,8 @@ export default [
     pool_info: {
       token_distribution: 'May 25th 2021, 7:00PM SGT',
       min_allocation: '0',
-      max_allocation: '800 USDT',
-      min_swap_level: '16,000 USDT',
+      max_allocation: '48 HT',
+      min_swap_level: '960 HT',
     },
     website: 'https://www.coinwind.com/',
     white_paper: '-',
@@ -1091,10 +1091,10 @@ export default [
     yuque: '-',
     progress: 0,
     status: 0,
-    ratio: '1COW=?HT',
+    ratio: '1COW=0.03HT',
     time: '1621951200',
     purchasedCurrencyOf: 0,
-    totalPurchasedAmount: '16000000000000000000000',
+    totalPurchasedAmount: '960000000000000000000',
     totalPurchasedUnderlying: '0',
     totalPurchasedCurrency: '0',
     is_flash: false,
