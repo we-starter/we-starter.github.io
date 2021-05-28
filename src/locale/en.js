@@ -240,6 +240,8 @@ const en_US = {
   privateTips: 'Private pool, only for users in whitelist',
   publicTips: 'Public offering pool, prorated by the amount of funds',
   publicTips1: 'Public offering pool',
+  publicTips2:
+    'The price of LBP is determined by the real time trading situation in the market, causing crazy volatility. Please notice the risk and do not trade heavily.',
   cannotProject:
     'Sorry, you are not eligable for this project since you are not involved in the whitelist.',
   whiteList: 'Whitelist',
@@ -283,6 +285,8 @@ const en_US = {
     "CoinWind is a DeFi smart mining financial platform, which automatically matches pledged tokens to pairs through contracts, uses a minimum hedging free losing strategy to maximize users' income. Therefore, CoinWind effectively solves users' low single-token mining income, large LP mining lose, and other problems.",
   cowAboutProject2:
     'CoinWind aims to build a DeFi digital asset bank, launching a product that combines high-yield, safety, and reliability. CoinWind will manage and transfer different tokens deposited by users into different pools, then manage the funds of a certain token pool to participate in different liquidity mining according to different strategies. At last, make higher benefits for all users. CoinWind can effectively reduce the impermanence loss in liquidity mining through a combination strategy.',
+  paulAboutProject1:
+    'We designed our foundational architecture based on current cross-chain networks, which has introduced and modified based on the quoting system used by global top organizations in high-frequency automatic trading for single benchmark in multiple trading scenarios. Pledged asset quoting and arbitrage validation are used to build real-time quoting validation mechanism. In extreme situations, a price curve can be generated more smoothly by statistical hypothesis-testing.',
   related_title1: 'Total raised funds',
   related_title2: 'Total participated addresses',
   related_title3: 'Total established pools',

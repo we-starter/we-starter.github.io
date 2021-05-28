@@ -14,6 +14,7 @@
 }
 @media #{$desktop} {
   .pools-type {
+    position: relative;
     &_big_title {
       display: block;
       margin: 20px 0 40px;
@@ -147,7 +148,7 @@
     &_card {
       // display: flex;
       .pools-type_card_box {
-        // position: relative;
+        position: relative;
         margin-top: 30px;
         box-sizing: border-box;
         display: inline-block;
@@ -160,6 +161,19 @@
         vertical-align: top;
         &:nth-child(3n-1) {
           margin: 30px 30px 0;
+        }
+        .lpt_link {
+          position: absolute;
+          left: 50%;
+          transform: translateX(-50%);
+          bottom: 26px;
+          width: 300px;
+          text-align: center;
+          font-size: 12px;
+          color: #0f8c20;
+          &:hover {
+            text-decoration: underline;
+          }
         }
       }
       @keyframes light {
@@ -392,6 +406,45 @@
       float: right;
       width: 182px;
       height: 100px;
+    }
+    &_warning {
+      display: inline-block;
+    }
+    .warning_tips {
+      display: inline-block;
+      width: 24px;
+      height: 24px;
+      background: url('../icon/error-warning@2x.png') no-repeat;
+      background-size: 100% 100%;
+      vertical-align: sub;
+    }
+    .warning_tips_content {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 8px 10px;
+      margin-top: 0 !important;
+      width: 288px;
+      font-style: normal;
+      font-size: 12px;
+      color: #22292f;
+      line-height: 24px !important;
+      background: #e1dfd9;
+      border-radius: 3px;
+      &::after {
+        content: '';
+        display: inline-block;
+        position: absolute;
+        bottom: -5px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 0;
+        height: 0;
+        border-top: 7px solid #e1dfd9;
+        border-left: 7px solid transparent;
+        border-right: 7px solid transparent;
+      }
     }
   }
 }
@@ -531,7 +584,7 @@
     &_card {
       // display: flex;
       .pools-type_card_box {
-        // position: relative;
+        position: relative;
         margin-top: 30px;
         box-sizing: border-box;
         display: inline-block;
@@ -544,6 +597,19 @@
         vertical-align: top;
         &:nth-child(3n-1) {
           margin: 30px 30px 0;
+        }
+        .lpt_link {
+          position: absolute;
+          left: 50%;
+          transform: translateX(-50%);
+          bottom: 26px;
+          font-size: 12px;
+          width: 300px;
+          text-align: center;
+          color: #0f8c20;
+          &:hover {
+            text-decoration: underline;
+          }
         }
       }
       @keyframes light {
@@ -776,6 +842,45 @@
       width: 182px;
       height: 100px;
     }
+    &_warning {
+      display: inline-block;
+    }
+    .warning_tips {
+      display: inline-block;
+      width: 24px;
+      height: 24px;
+      background: url('../icon/error-warning@2x.png') no-repeat;
+      background-size: 100% 100%;
+      vertical-align: sub;
+    }
+    .warning_tips_content {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 8px 10px;
+      margin-top: 0 !important;
+      width: 288px;
+      font-style: normal;
+      font-size: 12px;
+      color: #22292f;
+      line-height: 24px !important;
+      background: #e1dfd9;
+      border-radius: 3px;
+      &::after {
+        content: '';
+        display: inline-block;
+        position: absolute;
+        bottom: -5px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 0;
+        height: 0;
+        border-top: 7px solid #e1dfd9;
+        border-left: 7px solid transparent;
+        border-right: 7px solid transparent;
+      }
+    }
   }
 }
 @media #{$smWidth} {
@@ -908,7 +1013,7 @@
     &_card {
       margin-top: 10px;
       .pools-type_card_box {
-        // position: relative;
+        position: relative;
         box-sizing: border-box;
         display: block;
         margin: 20px auto 0;
@@ -918,6 +1023,19 @@
         background: #fff;
         border-radius: 20px;
         vertical-align: top;
+      }
+      .lpt_link {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: 26px;
+        font-size: 12px;
+        width: 300px;
+        text-align: center;
+        color: #0f8c20;
+        &:hover {
+          text-decoration: underline;
+        }
       }
       @keyframes light {
         from {
@@ -1146,6 +1264,45 @@
       float: right;
       width: 182px;
       height: 100px;
+    }
+    &_warning {
+      display: inline-block;
+    }
+    .warning_tips {
+      display: inline-block;
+      width: 24px;
+      height: 24px;
+      background: url('../icon/error-warning@2x.png') no-repeat;
+      background-size: 100% 100%;
+      vertical-align: sub;
+    }
+    .warning_tips_content {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 8px 10px;
+      margin-top: 0 !important;
+      width: 288px;
+      font-style: normal;
+      font-size: 12px;
+      color: #22292f;
+      line-height: 24px !important;
+      background: #e1dfd9;
+      border-radius: 3px;
+      &::after {
+        content: '';
+        display: inline-block;
+        position: absolute;
+        bottom: -5px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 0;
+        height: 0;
+        border-top: 7px solid #e1dfd9;
+        border-left: 7px solid transparent;
+        border-right: 7px solid transparent;
+      }
     }
   }
 }
@@ -1279,7 +1436,7 @@
     &_card {
       margin-top: 10px;
       .pools-type_card_box {
-        // position: relative;
+        position: relative;
         box-sizing: border-box;
         display: block;
         margin: 20px auto 0;
@@ -1289,6 +1446,19 @@
         background: #fff;
         border-radius: 20px;
         vertical-align: top;
+      }
+      .lpt_link {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: 26px;
+        font-size: 12px;
+        width: 300px;
+        text-align: center;
+        color: #0f8c20;
+        &:hover {
+          text-decoration: underline;
+        }
       }
       @keyframes light {
         from {
@@ -1516,6 +1686,45 @@
       float: right;
       width: 182px;
       height: 100px;
+    }
+    &_warning {
+      display: inline-block;
+    }
+    .warning_tips {
+      display: inline-block;
+      width: 24px;
+      height: 24px;
+      background: url('../icon/error-warning@2x.png') no-repeat;
+      background-size: 100% 100%;
+      vertical-align: sub;
+    }
+    .warning_tips_content {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 8px 10px;
+      margin-top: 0 !important;
+      width: 288px;
+      font-style: normal;
+      font-size: 12px;
+      color: #22292f;
+      line-height: 24px !important;
+      background: #e1dfd9;
+      border-radius: 3px;
+      &::after {
+        content: '';
+        display: inline-block;
+        position: absolute;
+        bottom: -5px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 0;
+        height: 0;
+        border-top: 7px solid #e1dfd9;
+        border-left: 7px solid transparent;
+        border-right: 7px solid transparent;
+      }
     }
   }
 }

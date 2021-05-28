@@ -128,7 +128,7 @@ const ContextProvider = (props) => {
     showTransactionModal: false,
     showSuccessTransactionModal: false,
     isSupportedChain: true,
-    walletModal: null,
+    walletModal: 'join',
     txStatus: null,
     pool: null,
     showMenuMaskModal: false,

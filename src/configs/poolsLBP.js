@@ -46,4 +46,49 @@ export default [
     project_introduction:
       'An approval-free decentralized & cross-chain burning protocol, innovator of perpetual deflationary blockchain ecosystem.',
   },
+  {
+    name: 'PAUL LBP',
+    address: '0x02', // 超募合约地址
+    abi: LBP,
+    start_at: '1622548800',
+    is_top: true,
+    is_coming: true,
+    currency: {
+      address: '0xa71edc38d189767582c38a3145b5873052c3e47a', // 如果是0x0则是ht
+      decimal: 18,
+      symbol: 'USDT',
+    },
+    icon: '',
+    type: 2,
+    isPrivate: false,
+    ratio: '1PAUL=0.002USDT', // 兑换比例需要确认
+    underlying: {
+      address: '0xd714d91A169127e11D8FAb3665d72E8b7ef9Dbe2',
+      decimal: 18,
+      symbol: 'PAUL',
+      name: 'LBP',
+      total_supply: '100,000,000',
+      holders: '-',
+      transfers: '-',
+    },
+    amount: '100000',
+    pool_info: {
+      token_distribution: 'Jun 1th 2021, 8:00PM SGT',
+      min_allocation: '-',
+      max_allocation: '-',
+      min_swap_level: '190,000,000 PAUL',
+    },
+    totalPurchasedAmount: '190000000000000000000000000',
+    website: 'https://www.paulprotocol.io',
+    white_paper: '-',
+    twitter: 'https://twitter.com/PaulProtocolV1',
+    Telegram_Channel: 'https://t.me/PaulProtocolV1Community',
+    Github: '-',
+    yuque: '-',
+    status: 0,
+    time: '1622635200',
+    link_url: 'https://www.paulprotocol.io', // 跳转外链接
+    project_introduction:
+      'Paul Protocol is a double-mechanism risk resistant oracle with superior performance and timeliness.',
+  },
 ]

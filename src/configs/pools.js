@@ -1101,6 +1101,107 @@ export default [
     link_url: 'https://www.coinwind.com/', // 跳转外链接
     project_introduction: 'CoinWind——A DeFi smart mining financial platform',
   },
+  {
+    name: 'PAUL',
+    address: '0x01',
+    abi: OfferingV2,
+    start_at: '1622548800',
+    is_top: true,
+    is_coming: true, // is_coming 为 true 则不请求合约
+    currency: {
+      address: '0xa71edc38d189767582c38a3145b5873052c3e47a', // 如果是0x0则是ht
+      decimal: 18,
+      symbol: 'USDT',
+    },
+    icon: '',
+    type: 1,
+    isPrivate: true,
+    underlying: {
+      address: '0x80861A817106665bcA173DB6AC2ab628a738c737', // 地址有问题
+      decimal: 18,
+      symbol: 'PAUL',
+      name: 'PAUL',
+      total_supply: '100,000,000',
+      holders: '-',
+      transfers: '-',
+    },
+    amount: '35000000', // token 总额
+    pool_info: {
+      token_distribution: 'Jun 1th 2021, 8:00PM SGT',
+      min_allocation: '0',
+      max_allocation: '48 HT',
+      min_swap_level: '960 HT',
+    },
+    website: 'https://www.paulprotocol.io',
+    white_paper: '-',
+    twitter: 'https://twitter.com/PaulProtocolV1',
+    Telegram_Channel: 'https://t.me/PaulProtocolV1Community',
+    Github: '-',
+    yuque: '-',
+    progress: 0,
+    status: 0,
+    ratio: '1PAUL=0.002USDT',
+    time: '1622550000',
+    purchasedCurrencyOf: 0,
+    totalPurchasedAmount: '70000000000000000000000',
+    totalPurchasedUnderlying: '0',
+    totalPurchasedCurrency: '0',
+    is_flash: false,
+    link_url: 'https://www.paulprotocol.io', // 跳转外链接
+    project_introduction:
+      'Paul Protocol is a double-mechanism risk resistant oracle with superior performance and timeliness.',
+  },
+  {
+    name: 'PAUL',
+    address: '0x03',
+    abi: StarterV3,
+    start_at: '1622548800',
+    is_top: true,
+    is_coming: true, // is_coming 为 true 则不请求合约
+    currency: {
+      address: '0xa71edc38d189767582c38a3145b5873052c3e47a', // 如果是0x0则是ht
+      decimal: 18,
+      symbol: 'USDT',
+    },
+    icon: '',
+    type: 0,
+    isPrivate: true,
+    underlying: {
+      address: '0x80861A817106665bcA173DB6AC2ab628a738c737', // 地址有问题
+      decimal: 18,
+      symbol: 'LPT',
+      name: 'LPT',
+      total_supply: '100,000,000',
+      holders: '-',
+      transfers: '-',
+    },
+    amount: '35000000', // token 总额
+    pool_info: {
+      token_distribution: 'Jun 1th 2021, 8:00PM SGT',
+      min_allocation: '0',
+      max_allocation: '48 HT',
+      min_swap_level: '960 HT',
+    },
+    website: 'https://www.paulprotocol.io',
+    white_paper: '-',
+    twitter: 'https://twitter.com/PaulProtocolV1',
+    Telegram_Channel: 'https://t.me/PaulProtocolV1Community',
+    Github: '-',
+    yuque: '-',
+    progress: 0,
+    status: 0,
+    ratio: '1PAUL=?LPT',
+    time: '1622552400',
+    purchasedCurrencyOf: 0,
+    totalPurchasedAmount: '50000000000000000000000',
+    totalPurchasedUnderlying: '0',
+    totalPurchasedCurrency: '0',
+    is_flash: false,
+    link_url: 'https://www.paulprotocol.io', // 跳转外链接
+    LPTLink: '0xe4e55c9203ac398a0f0b98bd096b70d9778eca6a',
+    project_introduction:
+      'Paul Protocol is a double-mechanism risk resistant oracle with superior performance and timeliness.',
+  },
   // 测试合约配置
   // {
   //   name: 'WAR',
