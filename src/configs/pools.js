@@ -1198,7 +1198,7 @@ export default [
     totalPurchasedCurrency: '0',
     is_flash: false,
     link_url: 'https://www.paulprotocol.io', // 跳转外链接
-    LPTLink: '0xe4e55c9203ac398a0f0b98bd096b70d9778eca6a',
+    LPTLink: 'https://ht.mdex.com/#/add/HT/0x910651F81a605a6Ef35d05527d24A72fecef8bF0',
     project_introduction:
       'Paul Protocol is a double-mechanism risk resistant oracle with superior performance and timeliness.',
   },

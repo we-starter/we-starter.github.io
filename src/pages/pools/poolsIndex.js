@@ -496,7 +496,8 @@ const PoolsIndex = (props) => {
         {pool && pool.LPTLink && (
           <a
             className='lpt_link'
-            href='https://ht.mdex.com/#/add/HT/0x910651F81a605a6Ef35d05527d24A72fecef8bF0'
+            href={pool.LPTLink}
+            onClick={event => event.stopPropagation()}
             target='_black'
           >
             <FormattedMessage id='farm13' /> WAR-HT LPT(MDEX LP Token)
