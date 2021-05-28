@@ -63,7 +63,7 @@ export default [
     isPrivate: false,
     ratio: '1PAUL=0.002USDT', // 兑换比例需要确认
     underlying: {
-      address: '0xd714d91A169127e11D8FAb3665d72E8b7ef9Dbe2',
+      address: '0xfc01b8f883a89278235ba674bbe2bb48db96d9cf',
       decimal: 18,
       symbol: 'PAUL',
       name: 'LBP',

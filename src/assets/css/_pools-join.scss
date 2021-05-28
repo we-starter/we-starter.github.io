@@ -44,10 +44,8 @@
 }
 
 .lpt_link {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: 12px;
+  display: inline-block;
+  margin: 0 auto;
   width: 100%;
   text-align: center;
   font-size: 12px;

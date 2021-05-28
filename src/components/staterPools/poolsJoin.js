@@ -397,13 +397,6 @@ const PoolsJoin = (props) => {
                 <FormattedMessage id='farm13' /> WAR-HT LPT(MDEX LP Token)
               </a>
             )}
-            <a
-              className='lpt_link'
-              href='https://ht.mdex.com/#/add/HT/0x910651F81a605a6Ef35d05527d24A72fecef8bF0'
-              target='_black'
-            >
-              <FormattedMessage id='farm13' /> WAR-HT LPT(MDEX LP Token)
-            </a>
           </div>
         </form>
       </div>

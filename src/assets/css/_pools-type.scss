@@ -148,7 +148,7 @@
     &_card {
       // display: flex;
       .pools-type_card_box {
-        position: relative;
+        // position: relative;
         margin-top: 30px;
         box-sizing: border-box;
         display: inline-block;
@@ -163,10 +163,6 @@
           margin: 30px 30px 0;
         }
         .lpt_link {
-          position: absolute;
-          left: 50%;
-          transform: translateX(-50%);
-          bottom: 26px;
           width: 300px;
           text-align: center;
           font-size: 12px;
@@ -584,7 +580,7 @@
     &_card {
       // display: flex;
       .pools-type_card_box {
-        position: relative;
+        // position: relative;
         margin-top: 30px;
         box-sizing: border-box;
         display: inline-block;
@@ -599,10 +595,6 @@
           margin: 30px 30px 0;
         }
         .lpt_link {
-          position: absolute;
-          left: 50%;
-          transform: translateX(-50%);
-          bottom: 26px;
           font-size: 12px;
           width: 300px;
           text-align: center;
@@ -1013,7 +1005,7 @@
     &_card {
       margin-top: 10px;
       .pools-type_card_box {
-        position: relative;
+        // position: relative;
         box-sizing: border-box;
         display: block;
         margin: 20px auto 0;
@@ -1025,10 +1017,6 @@
         vertical-align: top;
       }
       .lpt_link {
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
-        bottom: 26px;
         font-size: 12px;
         width: 300px;
         text-align: center;
@@ -1436,7 +1424,7 @@
     &_card {
       margin-top: 10px;
       .pools-type_card_box {
-        position: relative;
+        // position: relative;
         box-sizing: border-box;
         display: block;
         margin: 20px auto 0;
@@ -1448,10 +1436,6 @@
         vertical-align: top;
       }
       .lpt_link {
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
-        bottom: 26px;
         font-size: 12px;
         width: 300px;
         text-align: center;
