@@ -289,7 +289,10 @@ const PoolsJoin = (props) => {
     <div className='modal'>
       <div className='modal__box'>
         <form className='form-app' action='/'>
-          <div className='form-app__inner deposit'>
+          <div
+            className='form-app__inner deposit'
+            style={{ position: 'relative' }}
+          >
             <h1
               className='form-app__title h3'
               style={{
@@ -385,6 +388,15 @@ const PoolsJoin = (props) => {
                 </Button>
               )}
             </div>
+            {pool && pool.LPTLink && (
+              <a
+                className='lpt_link'
+                href='https://ht.mdex.com/#/add/HT/0x910651F81a605a6Ef35d05527d24A72fecef8bF0'
+                target='_black'
+              >
+                <FormattedMessage id='farm13' /> WAR-HT LPT(MDEX LP Token)
+              </a>
+            )}
           </div>
         </form>
       </div>
