@@ -1169,8 +1169,8 @@ export default [
     underlying: {
       address: '0x80861A817106665bcA173DB6AC2ab628a738c737', // 地址有问题
       decimal: 18,
-      symbol: 'LPT',
-      name: 'LPT',
+      symbol: 'PAUL',
+      name: 'PAUL',
       total_supply: '100,000,000',
       holders: '-',
       transfers: '-',
