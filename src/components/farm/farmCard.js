@@ -75,10 +75,10 @@ const FarmCard = (props) => {
                   }}
                 >
                   {farmPools.openDate.hour}
-                </span>
-                <b>
-                  <FormattedMessage id='HourM' />
-                </b>{' '}
+                  <b>
+                    <FormattedMessage id='HourM' />
+                  </b>
+                </span>{' '}
                 <i>/</i>{' '}
                 <span
                   style={{
@@ -90,10 +90,10 @@ const FarmCard = (props) => {
                 >
                   {' '}
                   {farmPools.openDate.minute}
+                  <b>
+                    <FormattedMessage id='MinM' />
+                  </b>
                 </span>
-                <b>
-                  <FormattedMessage id='MinM' />
-                </b>
               </span>
             ) : typeof farmPools.dueDate == 'object' ? (
               <span>
