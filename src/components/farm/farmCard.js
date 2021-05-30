@@ -23,7 +23,7 @@ const FarmCard = (props) => {
     farmPools.rewards1Address
   )
   const mdexApr = useMdxARP(
-    farmPools.address,
+    farmPools.mdexReward ? farmPools.address : null,
     farmPools.abi,
     farmPools.MLP,
     farmPools.rewards1Address
@@ -32,7 +32,7 @@ const FarmCard = (props) => {
   useEffect(() => {
     console.log('apr', apr)
     console.log('mdexApr', mdexApr)
-    if (!isNaN(apr) && apr > 0 && mdexApr > 0) {
+    if (!isNaN(apr) && apr > 0 &&(!farmPools.mdexReward  || mdexApr > 0)) {
       setPercentage((apr * 100 + mdexApr * 100).toFixed(2))
     }
   }, [apr, mdexApr])
@@ -52,7 +52,7 @@ const FarmCard = (props) => {
   }, [farmPools, farmPools.balanceOf, farmPools.totalSupply])
 
   return (
-    <div className='farm_index_card'>
+    <div className={`farm_index_card ${farmPools.name}`}>
       <h3 className='farm_index_card_title'>{farmPools && farmPools.name}</h3>
       <div className='farm_index_card_content'>
         <p className='apr'>
@@ -173,17 +173,22 @@ const FarmCard = (props) => {
               : '--'}
           </span>
         </p>
-        <p className='form-app__inputbox-after-text farm_popup_avaliable'>
-          <FormattedMessage
-            id='farm6'
-            values={{ coin: farmPools && farmPools.rewards2 }}
-          />
-          <span>
+        {
+          farmPools.rewards2 && (
+            <p className='form-app__inputbox-after-text farm_popup_avaliable'>
+              <FormattedMessage
+                id='farm6'
+                values={{ coin: farmPools && farmPools.rewards2 }}
+              />
+              <span>
             {farmPools && farmPools.earned2
               ? formatAmount(farmPools.earned2)
               : '--'}
           </span>
-        </p>
+            </p>
+          )
+        }
+
       </div>
     </div>
   )

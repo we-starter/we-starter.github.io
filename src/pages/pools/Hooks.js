@@ -995,7 +995,7 @@ export const useMdxARP = (
     chainId && WAR_ADDRESS(chainId)
   )
   useEffect(() => {
-    if (library && lptValue > 0 && mdex2warPrice > 0) {
+    if (library && pool_address && lptValue > 0 && mdex2warPrice > 0) {
       const contract = getContract(library, MDexPool, MDEX_POOL_ADDRESS)
       const pool_contract = getContract(library, pool_abi, pool_address)
       const poolId = '0x4c'
@@ -1137,7 +1137,7 @@ export const useLTPValue = (address, token_address, pool_address, pool_abi) => {
   const [value, setValue] = useState(0)
   const blockHeight = useBlockHeight()
   useEffect(() => {
-    if (library) {
+    if (library && pool_address) {
       const contract = getContract(library, LPT, address)
       const pool_contract = getContract(library, pool_abi, pool_address)
       const promise_list = [
