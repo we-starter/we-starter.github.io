@@ -161,6 +161,7 @@ const UnstakePopup = (props) => {
             : '--'}
         </span>
       </p>
+      {farmPools.rewards2 && (
       <p className='form-app__inputbox-after-text farm_popup_avaliable'>
         <FormattedMessage
           id='farm6'
@@ -172,6 +173,7 @@ const UnstakePopup = (props) => {
             : '--'}
         </span>
       </p>
+      )}
     </div>
   )
 }
