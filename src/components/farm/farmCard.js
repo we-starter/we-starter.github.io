@@ -167,21 +167,6 @@ const FarmCard = (props) => {
                     <b>
                       <FormattedMessage id='HourM' />
                     </b>
-                  </span>{' '}
-                  <i>/</i>{' '}
-                  <span
-                    style={{
-                      display: 'inline-block',
-                      padding: '0 6px',
-                      background: '#C5E5C9',
-                      borderRadius: '3px',
-                    }}
-                  >
-                    {' '}
-                    <Timer.Minutes />
-                    <b>
-                      <FormattedMessage id='MinM' />
-                    </b>
                   </span>
                 </span>
               </Timer>
