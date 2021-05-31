@@ -15,6 +15,7 @@ const FarmCard = (props) => {
   const farmPools = pools
   const { balance } = useBalance(farmPools && farmPools.MLP)
   const [balanceProportion, setBalanceProportion] = useState(0)
+  const [now, setNow] = useState(parseInt(Date.now() / 1000))
 
   const apr = useAPR(
     farmPools.address,
@@ -36,6 +37,23 @@ const FarmCard = (props) => {
       setPercentage((apr * 100 + mdexApr * 100).toFixed(2))
     }
   }, [apr, mdexApr])
+
+  useEffect(() => {
+    const timerId = setTimeout(() => {
+      const now = parseInt(Date.now() / 1000)
+      setNow(now)
+    }, 1000)
+    return () => {
+      clearTimeout(timerId)
+    }
+  }, [now])
+
+  let left_time = 0
+  if (farmPools && farmPools.openDate > now) {
+    left_time = (farmPools && farmPools.openDate - now) * 1000
+  } else if (farmPools && farmPools.dueDate > now) {
+    left_time = (farmPools.dueDate - now) * 1000
+  }
 
   useEffect(() => {
     if (farmPools && farmPools.balanceOf && farmPools.totalSupply) {
@@ -64,7 +82,117 @@ const FarmCard = (props) => {
 
         {farmPools && farmPools.openDate && (
           <p className='countdown'>
-            {farmPools && typeof farmPools.openDate == 'object' ? (
+            {farmPools && farmPools.openDate > now && (
+              <Timer
+                initialTime={left_time}
+                key={left_time}
+                direction='backward'
+                formatValue={(number) => {
+                  if (number === 0) return '00'
+                  if (number < 10) {
+                    return `0${number}`
+                  }
+                  return number
+                }}
+              >
+                <span>
+                  <span
+                    style={{
+                      display: 'inline-block',
+                      padding: '0 6px',
+                      background: '#C5E5C9',
+                      borderRadius: '3px',
+                    }}
+                  >
+                    <Timer.Hours />
+                    <b>
+                      <FormattedMessage id='HourM' />
+                    </b>
+                  </span>{' '}
+                  <i>/</i>{' '}
+                  <span
+                    style={{
+                      display: 'inline-block',
+                      padding: '0 6px',
+                      background: '#C5E5C9',
+                      borderRadius: '3px',
+                    }}
+                  >
+                    {' '}
+                    <Timer.Minutes />
+                    <b>
+                      <FormattedMessage id='MinM' />
+                    </b>
+                  </span>
+                </span>
+              </Timer>
+            )}
+            {farmPools && farmPools.dueDate > now && farmPools.openDate < now && (
+              <Timer
+                initialTime={left_time}
+                key={left_time}
+                direction='backward'
+                formatValue={(number) => {
+                  if (number === 0) return '00'
+                  if (number < 10) {
+                    return `0${number}`
+                  }
+                  return number
+                }}
+              >
+                <span>
+                  <span
+                    style={{
+                      display: 'inline-block',
+                      padding: '0 6px',
+                      background: '#C5E5C9',
+                      borderRadius: '3px',
+                    }}
+                  >
+                    <Timer.Days />
+                    <b>
+                      <FormattedMessage id='DayM' />
+                    </b>
+                  </span>{' '}
+                  <i>/</i>{' '}
+                  <span
+                    style={{
+                      display: 'inline-block',
+                      padding: '0 6px',
+                      background: '#C5E5C9',
+                      borderRadius: '3px',
+                    }}
+                  >
+                    <Timer.Hours />
+                    <b>
+                      <FormattedMessage id='HourM' />
+                    </b>
+                  </span>{' '}
+                  <i>/</i>{' '}
+                  <span
+                    style={{
+                      display: 'inline-block',
+                      padding: '0 6px',
+                      background: '#C5E5C9',
+                      borderRadius: '3px',
+                    }}
+                  >
+                    {' '}
+                    <Timer.Minutes />
+                    <b>
+                      <FormattedMessage id='MinM' />
+                    </b>
+                  </span>
+                </span>
+              </Timer>
+            )}
+            {farmPools && farmPools.dueDate <= now && farmPools.openDate < now && (
+              <span>
+                <FormattedMessage id='completed' />
+              </span>
+            )}
+
+            {/* {farmPools && typeof farmPools.openDate == 'object' ? (
               <span>
                 <span
                   style={{
@@ -127,7 +255,7 @@ const FarmCard = (props) => {
               </span>
             ) : (
               <span>{farmPools.dueDate}</span>
-            )}
+            )} */}
             <span className='content_name'>
               <FormattedMessage id='farm8' />
             </span>
