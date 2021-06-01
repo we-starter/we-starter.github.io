@@ -779,6 +779,7 @@ export const usePoolsLBPInfo = (address = '') => {
             })
             .catch((e) => {
               console.log(e, '==== usePoolsLBPInfo ====')
+              return pool
             })
         })
       )

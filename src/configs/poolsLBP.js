@@ -48,11 +48,11 @@ export default [
   },
   {
     name: 'PAUL LBP',
-    address: '0x02', // 超募合约地址
+    address: '0x30DceF869fe03554E281933dA495F6Dab0A3Ce22', // 超募合约地址
     abi: LBP,
     start_at: '1622548800',
     is_top: true,
-    is_coming: true,
+    is_coming: false,
     currency: {
       address: '0xa71edc38d189767582c38a3145b5873052c3e47a', // 如果是0x0则是ht
       decimal: 18,
