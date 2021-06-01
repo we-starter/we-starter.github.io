@@ -36,7 +36,7 @@ import { ReactComponent as X5 } from '../../assets/logo/5x.svg'
 import { ReactComponent as X10 } from '../../assets/logo/10X.svg'
 import BigNumber from 'bignumber.js'
 import BN from 'bn.js'
-import { formatAmount, numToWei } from '../../utils/format'
+import {formatAmount, fromWei, numToWei} from '../../utils/format'
 import PoolsLBP from '../../configs/poolsLBP'
 import { useAllowance, useTokenAllowance } from '../Hooks'
 import { getMultiCallProvider, processResult } from '../../utils/multicall'
@@ -907,12 +907,19 @@ export const useAPR = (
   pool_abi,
   lpt_address,
   reward1_address,
-  apr_address
+  valueAprToken,
+  valueAprPath,
+  rewardsAprPath,
+  settleToken,
 ) => {
   const { account, active, library, chainId } = useActiveWeb3React()
   const blockHeight = useBlockHeight()
   // const [yearReward, setYearReward] = useState(0)
   const [apr, setApr] = useState(0)
+
+  const [reward1Vol, setReward1Vol] = useState('0')
+  const [rewardsTotalValue, setRewardsTotalValue] = useState('0')
+  const [lptTotalValue, setLptTotalValue] = useState('0')
 
   // 获取奖励1在矿山的总量
   const allowance = useAllowance(
@@ -932,42 +939,86 @@ export const useAPR = (
   // 矿池总的LPT的价值
   const lptValue = useLTPValue(
     lpt_address,
-    apr_address,
+    valueAprToken,
     pool_address,
     pool_abi
   )
 
+  // 通过转换后的lpt价格
+  const [lptTotalPrice] = useMDexPrice(
+    valueAprToken,
+    settleToken,
+    1,
+    valueAprPath
+  )
+
+  // 奖励转换后的价格
+  const [rewardsTotalPrice] = useMDexPrice(
+    reward1_address,
+    settleToken,
+    1,
+    rewardsAprPath
+  )
+
   useEffect(() => {
-    console.log('allowance', allowance)
-    console.log('span', span)
-    if (library && allowance && span && lptValue > 0) {
-      const dayRate = new BigNumber(1).div(
-        new BigNumber(span).div(new BigNumber(86400))
-      )
-      console.log('dayRate', dayRate.toString())
+    setLptTotalValue(new BigNumber(lptTotalPrice).multipliedBy(new BigNumber(lptValue)).toString())
+  }, [library, lptTotalPrice])
+
+  useEffect(() => {
+    setRewardsTotalValue(new BigNumber(rewardsTotalPrice).multipliedBy(new BigNumber(reward1Vol)).toString())
+  }, [library, rewardsTotalPrice])
+
+  // 计算奖励的量
+  useEffect(() => {
+    if (library && allowance) {
       const reward1_vol = new BigNumber(allowance).minus(
         new BigNumber(unClaimReward)
       )
+      console.log('ara', 'reward1_vol', fromWei(reward1_vol.toString()).toString())
+      console.log('ara', 'reward1_vol',reward1_vol.toString())
+      setReward1Vol(reward1_vol.toString())
+    }
+  }, [library, allowance, unClaimReward])
 
-      console.log('reward1_vol', reward1_vol)
+  useEffect(() => {
+    console.log('ara','rewardsTotalValue', rewardsTotalValue)
+  }, [library, rewardsTotalValue])
+
+  useEffect(() => {
+    console.log('ara','reward1Vol', fromWei(reward1Vol).toString())
+  }, [library, reward1Vol])
+
+
+  useEffect(() => {
+    console.log('ara','lptTotalValue', lptTotalValue)
+  }, [library, lptTotalValue])
+
+  useEffect(() => {
+    console.log('ara','lptValue', fromWei(lptValue.toString()).toString())
+    console.log('ara','lptValue', lptValue.toString())
+  }, [library, lptValue])
+
+  useEffect(() => {
+    if (library && lptTotalValue &&  rewardsTotalValue && span > 0) {
+      const dayRate = new BigNumber(1).div(
+        new BigNumber(span).div(new BigNumber(86400))
+      )
 
       // 奖励的war
       const yearReward = dayRate
-        .multipliedBy(reward1_vol)
+        .multipliedBy(new BigNumber(rewardsTotalValue))
         .multipliedBy(new BigNumber(365))
         .toFixed(0, 1)
       // setYearReward(yearReward)
-      console.log('yearReward', yearReward)
-      console.log('lptValue', lptValue)
       if (yearReward > 0) {
         const _arp = new BigNumber(yearReward)
-          .div(new BigNumber(lptValue))
+          .div(new BigNumber(lptTotalValue))
           .toString()
         setApr(_arp)
       }
     }
     return () => {}
-  }, [library, allowance, span, unClaimReward, lptValue, blockHeight])
+  }, [library, span, lptTotalValue, rewardsTotalValue, blockHeight])
 
   return apr
 }
@@ -979,19 +1030,6 @@ export const useMdxARP = (
   reward1_address
 ) => {
   // mdx 年释放总量 * 价值 /
-
-  // cagefreedom:
-  //   收益/质押金额=（每日产出的MDX价值+每日产出的war价值）/总抵押价值 *365*100%
-  //
-  // cagefreedom:
-  //   MDEX每日产量可以写死
-  //
-  // cagefreedom:
-  //   价值=产量*价格
-  //
-  // cagefreedom:
-  //   3,510.72  MDX每日产出
-  // 13500 WAR每日产出
 
   const { account, active, library, chainId } = useActiveWeb3React()
   const [apr, setApr] = useState(0)
@@ -1101,7 +1139,6 @@ export const useMDexPrice = (address1, address2, amount = 1, path = []) => {
 
   const getPrice = async (address1, address2, amount, path) => {
     const _path = [address1, ...path, address2]
-    console.log(_path)
     let _price = 0
     _price = amount
     let _fee = '0'

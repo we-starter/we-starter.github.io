@@ -22,7 +22,10 @@ const FarmCard = (props) => {
     farmPools.abi,
     farmPools.MLP,
     farmPools.rewards1Address,
-    farmPools.aprAddress
+    farmPools.valueAprToken,
+    farmPools.valueAprPath,
+    farmPools.rewardsAprPath,
+    farmPools.settleToken,
   )
   const mdexApr = useMdxARP(
     farmPools.mdexReward ? farmPools.address : null,
