@@ -38,7 +38,7 @@ const ClaimPopup = (props) => {
       return false
     }
     const contract = getContract(library, farmPools.abi, farmPools.address)
-    const method = pool.reward2 ? 'getDoubleReward' : 'getReward'
+    const method = pool.rewards2 ? 'getDoubleReward' : 'getReward'
     contract.methods[method]()
       .send({
         from: account,
