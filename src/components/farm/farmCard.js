@@ -6,8 +6,8 @@ import { HANDLE_WALLET_MODAL } from '../../const'
 import { mainContext } from '../../reducer'
 import { formatAmount } from '../../utils/format'
 import { useAPR, useMdxARP } from '../../pages/pools/Hooks'
-import WARHT_Small from '../../assets/icon/farm/WAR HT_small@2x.png'
 import { useBalance } from '../../pages/Hooks'
+import Timer from 'react-compound-timer'
 
 const FarmCard = (props) => {
   const { dispatch, state } = useContext(mainContext)
@@ -32,7 +32,7 @@ const FarmCard = (props) => {
   useEffect(() => {
     console.log('apr', apr)
     console.log('mdexApr', mdexApr)
-    if (!isNaN(apr) && apr > 0 &&(!farmPools.mdexReward  || mdexApr > 0)) {
+    if (!isNaN(apr) && apr > 0 && (!farmPools.mdexReward || mdexApr > 0)) {
       setPercentage((apr * 100 + mdexApr * 100).toFixed(2))
     }
   }, [apr, mdexApr])
@@ -61,45 +61,95 @@ const FarmCard = (props) => {
             {farmPools && farmPools.earnName}
           </span>
         </p>
-        <p className='countdown'>
-          {/* {farmPools && typeof farmPools.openDate == 'object' ? (
-                <span>
+
+        {farmPools && farmPools.openDate && (
+          <p className='countdown'>
+            {farmPools && typeof farmPools.openDate == 'object' ? (
+              <span>
+                <span
+                  style={{
+                    display: 'inline-block',
+                    padding: '0 6px',
+                    background: '#C5E5C9',
+                    borderRadius: '3px',
+                  }}
+                >
                   {farmPools.openDate.hour}
-                  <b>
-                    <FormattedMessage id='HourM' />
-                  </b>{' '}
-                  <i>/</i> {farmPools.openDate.minute}
-                  <b>
-                    <FormattedMessage id='MinM' />
-                  </b>
                 </span>
-              ) : typeof farmPools.dueDate == 'object' ? (
-                <span>
+                <b>
+                  <FormattedMessage id='HourM' />
+                </b>{' '}
+                <i>/</i>{' '}
+                <span
+                  style={{
+                    display: 'inline-block',
+                    padding: '0 6px',
+                    background: '#C5E5C9',
+                    borderRadius: '3px',
+                  }}
+                >
+                  {' '}
+                  {farmPools.openDate.minute}
+                </span>
+                <b>
+                  <FormattedMessage id='MinM' />
+                </b>
+              </span>
+            ) : typeof farmPools.dueDate == 'object' ? (
+              <span>
+                <span
+                  style={{
+                    display: 'inline-block',
+                    padding: '0 6px',
+                    background: '#C5E5C9',
+                    borderRadius: '3px',
+                  }}
+                >
                   {farmPools.dueDate.day}
                   <b>
                     <FormattedMessage id='DayM' />
                   </b>
-                  <i>/</i>
+                </span>{' '}
+                <i style={{ color: '#7a7f82' }}>/</i>{' '}
+                <span
+                  style={{
+                    display: 'inline-block',
+                    padding: '0 6px',
+                    background: '#C5E5C9',
+                    borderRadius: '3px',
+                  }}
+                >
                   {farmPools.dueDate.hour}
                   <b>
                     <FormattedMessage id='HourM' />
                   </b>
                 </span>
-              ) : (
-                <span>{farmPools.dueDate}</span>
-              )} */}
-          <span>
-            {' '}
-            <FormattedMessage id='farm14' />
-          </span>
-          <span className='content_name'>
-            <FormattedMessage id='farm8' />
-          </span>
-        </p>
+              </span>
+            ) : (
+              <span>{farmPools.dueDate}</span>
+            )}
+            <span className='content_name'>
+              <FormattedMessage id='farm8' />
+            </span>
+          </p>
+        )}
+        {farmPools && !farmPools.openDate && (
+          <p className='countdown'>
+            <span>
+              {' '}
+              <FormattedMessage id='farm14' />
+            </span>
+            <span className='content_name'>
+              <FormattedMessage id='farm8' />
+            </span>
+          </p>
+        )}
       </div>
       <p className='farm_index_card_value'>
         <FormattedMessage id='farm10' />
-        <img src={WARHT_Small} />
+        {farmPools && farmPools.icon && (
+          <img src={require('../../assets/icon/farm/' + farmPools.icon)} />
+        )}
       </p>
       <p className='farm_index_card_value'>
         <FormattedMessage id='farm11' />
@@ -173,22 +223,19 @@ const FarmCard = (props) => {
               : '--'}
           </span>
         </p>
-        {
-          farmPools.rewards2 && (
-            <p className='form-app__inputbox-after-text farm_popup_avaliable'>
-              <FormattedMessage
-                id='farm6'
-                values={{ coin: farmPools && farmPools.rewards2 }}
-              />
-              <span>
-            {farmPools && farmPools.earned2
-              ? formatAmount(farmPools.earned2)
-              : '--'}
-          </span>
-            </p>
-          )
-        }
-
+        {farmPools.rewards2 && (
+          <p className='form-app__inputbox-after-text farm_popup_avaliable'>
+            <FormattedMessage
+              id='farm6'
+              values={{ coin: farmPools && farmPools.rewards2 }}
+            />
+            <span>
+              {farmPools && farmPools.earned2
+                ? formatAmount(farmPools.earned2)
+                : '--'}
+            </span>
+          </p>
+        )}
       </div>
     </div>
   )
