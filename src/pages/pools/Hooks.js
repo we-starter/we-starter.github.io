@@ -844,6 +844,7 @@ export const useFarmInfo = (address = '') => {
             })
             .catch((e) => {
               console.log(e, '==== farm ====')
+              return pool
             })
         })
       )

@@ -10,9 +10,9 @@ import Coming_Small from '../../assets/icon/farm/coming_small@2x.png'
 const Farm = (props) => {
   const pools = useFarmInfo()
 
-  const isComing = () => {
+  const isComing = (index) => {
     return (
-      <div className='farm_index_card farm_index_coming'>
+      <div className='farm_index_card farm_index_coming' key={index}>
         <h3 className='farm_index_card_title'>
           <FormattedMessage id='comingSoon' />
         </h3>
@@ -69,7 +69,7 @@ const Farm = (props) => {
           pools.map((item, index) => {
             return <FarmCard pools={item} key={index} />
           })}
-        {pools.length < 3 && [1].map(isComing)}
+        {pools.length < 3 && [1].map(() => isComing(1))}
       </div>
       <Footer />
     </div>
