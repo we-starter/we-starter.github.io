@@ -68,7 +68,7 @@ export default [
       decimal: 18,
       symbol: 'PAUL',
       name: 'LBP',
-      total_supply: '100,000,000',
+      total_supply: '10,000,000,000',
       holders: '-',
       transfers: '-',
     },
