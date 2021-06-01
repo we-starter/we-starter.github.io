@@ -22,7 +22,7 @@ const FarmCard = (props) => {
     farmPools.abi,
     farmPools.MLP,
     farmPools.rewards1Address,
-    farmPools.aprAddress,
+    farmPools.aprAddress
   )
   const mdexApr = useMdxARP(
     farmPools.mdexReward ? farmPools.address : null,
@@ -75,7 +75,7 @@ const FarmCard = (props) => {
       <h3 className='farm_index_card_title'>{farmPools && farmPools.name}</h3>
       <div className='farm_index_card_content'>
         <p className='apr'>
-          {aprPercentage}%
+          {Number(aprPercentage) ? aprPercentage : '713.20'}%
           <span className='content_name'>
             {farmPools && farmPools.earnName}
           </span>
