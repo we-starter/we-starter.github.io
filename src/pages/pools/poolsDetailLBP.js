@@ -127,6 +127,12 @@ const PoolsDetailLBP = (props) => {
     if (!active) {
       return false
     }
+
+    if(pool.status === 0) {
+      message.info(intl.formatMessage({ id: 'cannotSubscribe' }))
+      return
+    }
+
     if (loadFlag) return
     setLoadFlag(true)
     const contract = getContract(library, ERC20.abi, pool.currency.address)
@@ -219,6 +225,10 @@ const PoolsDetailLBP = (props) => {
   }, [slippageVal])
 
   const purchaseBtn = async () => {
+    if(pool.status === 0) {
+      message.info(intl.formatMessage({ id: 'cannotSubscribe' }))
+      return
+    }
     if (pool.status === 3) return
     // TODO 校验amount 合法性
     if (!(amount * 1 > 0)) {
@@ -403,7 +413,7 @@ const PoolsDetailLBP = (props) => {
         </div>
         {approve && (
           <Button
-            className={cs('btn', pool.status === 3 && 'btn_disable')}
+            className={'btn'}
             type='button'
             loading={loadFlag}
             onClick={onApprove}
@@ -413,7 +423,7 @@ const PoolsDetailLBP = (props) => {
         )}
         {!approve && (
           <Button
-            className={cs('btn', pool.status === 3 && 'btn_disable')}
+            className={'btn'}
             type='button'
             loading={loadFlag}
             onClick={purchaseBtn}
