@@ -242,8 +242,13 @@ const PoolsDetailLBP = (props) => {
       .toString()
 
     if(pool.is_ht) {
-      return contract.methods
-        .strap(minOut)
+      let method = 'strapETH'
+      if(typeof contract.methods[method] == 'undefined'){
+        // V1版本合约
+        method = 'strap'
+      }
+
+      return contract.methods[method](minOut)
         .send({
           from: account,
           value: numToWei(amount),
@@ -261,7 +266,7 @@ const PoolsDetailLBP = (props) => {
         })
     }else{
       return contract.methods
-        .strap(minOut)
+        .strap(numToWei(amount), minOut)
         .send({
           from: account,
         })
@@ -561,6 +566,13 @@ const PoolsDetailLBP = (props) => {
                 <a className='no_link'>
                   <FormattedMessage id='blackAboutProject1' />
                 </a>
+              )}
+              {pool && pool.underlying.symbol === 'PAUL' && (
+                <>
+                  <a className='no_link'>
+                    <FormattedMessage id='paulAboutProject1' />
+                  </a>
+                </>
               )}
             </div>
           )}

@@ -1,4 +1,5 @@
 import LBP from '../web3/abi/LBP.json'
+import LBPV2 from '../web3/abi/LBPV2.json'
 
 export default [
   {
@@ -49,7 +50,7 @@ export default [
   {
     name: 'PAUL LBP',
     address: '0x30DceF869fe03554E281933dA495F6Dab0A3Ce22', // 超募合约地址
-    abi: LBP,
+    abi: LBPV2,
     start_at: '1622548800',
     is_top: true,
     is_coming: false,
