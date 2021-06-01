@@ -4,19 +4,25 @@ import PoolsHeader from '../../components/staterPools/poolsHeader'
 import chromeLine from '../../assets/icon/chrome-line@2x.png'
 import bookMarkLine from '../../assets/icon/book-mark-line@2x.png'
 import Web3 from 'web3'
-import { useBalance } from '../../pages/Hooks'
+import {useAllowance, useBalance} from '../../pages/Hooks'
 import { getRandomIntInclusive } from '../../utils/index'
 import Timer from 'react-compound-timer'
-import { HANDLE_WALLET_MODAL } from '../../const'
+import {
+  HANDLE_SHOW_APPROVE_FAILED_TRANSACTION_MODAL,
+  HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
+  HANDLE_WALLET_MODAL, waitingForInit
+} from '../../const'
 import transitions from '@material-ui/core/styles/transitions'
 // import pools from '../../configs/pools'
 import { usePoolsLBPInfo } from './Hooks'
-import { message } from 'antd'
+import {Button, message} from 'antd'
 import { getContract, useActiveWeb3React } from '../../web3'
 import { mainContext } from '../../reducer'
 import { FormattedMessage, injectIntl } from 'react-intl'
 import BigNumber from 'bignumber.js'
 import { formatAmount, fromWei, numToWei } from '../../utils/format'
+import ERC20 from "../../web3/abi/ERC20.json";
+import {MINE_MOUNTAIN_ADDRESS} from "../../web3/address";
 
 const PoolsDetailLBP = (props) => {
   const { address } = props.match.params
@@ -31,6 +37,8 @@ const PoolsDetailLBP = (props) => {
   const [now, setNow] = useState(parseInt(Date.now() / 1000))
   const [left_time, setLeftTime] = useState(0)
   const [amount, setAmount] = useState('')
+  const [approve, setApprove] = useState(true)
+  const [loadFlag, setLoadFlag] = useState(false)
   const [fee, setFee] = useState(0)
 
   const { dispatch, state } = useContext(mainContext)
@@ -39,6 +47,17 @@ const PoolsDetailLBP = (props) => {
 
   const currency_address = pool ? pool.currency.address : '0x0'
   const { balance = 0 } = useBalance(currency_address)
+  const allowance = useAllowance(
+    pool.currency.address,
+    pool.address,
+    account
+  )
+
+  useEffect(() => {
+    if (allowance > 0) {
+      setApprove(false)
+    }
+  }, [allowance])
 
   useEffect(() => {
     const timerId = setTimeout(() => {
@@ -103,6 +122,47 @@ const PoolsDetailLBP = (props) => {
     setFee(_fee)
   }, [])
 
+
+  const onApprove = (e) => {
+    if (!active) {
+      return false
+    }
+
+    if(pool.status === 0) {
+      message.info(intl.formatMessage({ id: 'cannotSubscribe' }))
+      return
+    }
+
+    if (loadFlag) return
+    setLoadFlag(true)
+    const contract = getContract(library, ERC20.abi, pool.currency.address)
+    contract.methods
+      .approve(
+        pool.address,
+        '0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff'
+      )
+      .send({
+        from: account,
+      })
+      .on('receipt', (_, receipt) => {
+        console.log('approve success')
+        setLoadFlag(false)
+        setApprove(false)
+      })
+      .on('error', (err, receipt) => {
+        console.log('approve error', err)
+        dispatch({
+          type: HANDLE_SHOW_APPROVE_FAILED_TRANSACTION_MODAL,
+          showApproveFailedTransactionModal: true,
+        })
+        dispatch({
+          type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
+          showWaitingWalletConfirmModal: waitingForInit,
+        })
+        setLoadFlag(false)
+      })
+  }
+
   const onMax = async () => {
     if (balance <= 0) {
       setAmount(0)
@@ -165,11 +225,19 @@ const PoolsDetailLBP = (props) => {
   }, [slippageVal])
 
   const purchaseBtn = async () => {
+    if(pool.status === 0) {
+      message.info(intl.formatMessage({ id: 'cannotSubscribe' }))
+      return
+    }
     if (pool.status === 3) return
     // TODO 校验amount 合法性
     if (!(amount * 1 > 0)) {
       return false
     }
+
+    if (loadFlag) return
+    setLoadFlag(true)
+
     const contract = getContract(library, pool.abi, address)
 
     // 买入数量 * （(100 - 滑点) / 100）
@@ -186,23 +254,57 @@ const PoolsDetailLBP = (props) => {
       )
       .toFixed(0, 1)
       .toString()
-    return contract.methods
-      .strap(minOut)
-      .send({
-        from: account,
-        value: numToWei(amount),
-      })
-      .on('confirmation', (confirmationNumber, receipt) => {
-        // 买入成功后弹框提示
-        if (confirmationNumber - 0 === 0) {
-          //根据池子的address
-          localStorage.setItem(`is_join_${pool.address}`, true)
-          dispatch({
-            type: HANDLE_WALLET_MODAL,
-            walletModal: 'slippageSuccess',
-          })
-        }
-      })
+
+    if(pool.is_ht) {
+      let method = 'strapETH'
+      if(typeof contract.methods[method] == 'undefined'){
+        // V1版本合约
+        method = 'strap'
+      }
+
+      return contract.methods[method](minOut)
+        .send({
+          from: account,
+          value: numToWei(amount),
+        })
+        .on('confirmation', (confirmationNumber, receipt) => {
+          // 买入成功后弹框提示
+          if (confirmationNumber - 0 === 0) {
+            //根据池子的address
+            localStorage.setItem(`is_join_${pool.address}`, true)
+            dispatch({
+              type: HANDLE_WALLET_MODAL,
+              walletModal: 'slippageSuccess',
+            })
+          }
+        }).on('receipt', () => {
+          setLoadFlag(false)
+        }).on('error', () => {
+          setLoadFlag(false)
+        })
+    }else{
+      return contract.methods
+        .strap(numToWei(amount), minOut)
+        .send({
+          from: account,
+        })
+        .on('confirmation', (confirmationNumber, receipt) => {
+          // 买入成功后弹框提示
+          if (confirmationNumber - 0 === 0) {
+            //根据池子的address
+            localStorage.setItem(`is_join_${pool.address}`, true)
+            dispatch({
+              type: HANDLE_WALLET_MODAL,
+              walletModal: 'slippageSuccess',
+            })
+          }
+        }).on('receipt', () => {
+          setLoadFlag(false)
+        }).on('error', () => {
+          setLoadFlag(false)
+        })
+    }
+
   }
 
   return (
@@ -309,13 +411,29 @@ const PoolsDetailLBP = (props) => {
             </a>
           </div>
         </div>
-        <button
-          className={cs('btn', pool.status === 3 && 'btn_disable')}
-          type='button'
-          onClick={purchaseBtn}
-        >
-          <FormattedMessage id='warLBP2' />
-        </button>
+        {approve && (
+          <Button
+            className={'btn'}
+            type='button'
+            loading={loadFlag}
+            onClick={onApprove}
+          >
+            <FormattedMessage id='farm20' />
+          </Button>
+        )}
+        {!approve && (
+          <Button
+            className={'btn'}
+            type='button'
+            loading={loadFlag}
+            onClick={purchaseBtn}
+          >
+            <FormattedMessage id='warLBP2' />
+          </Button>
+        )}
+        <div className="lbp_tip">
+          <p><FormattedMessage id='warLBP8' values={{token: pool.farm_lpt}} /> <a href={pool.farm_link} target="_blank"><FormattedMessage id='warLBP9' values={{token: pool.farm_lpt}} /></a> <FormattedMessage id='warLBP10' /></p>
+        </div>
       </div>
       <div className='pools_detail'>
         <div className='pools_detail_content'>
@@ -474,6 +592,13 @@ const PoolsDetailLBP = (props) => {
                 <a className='no_link'>
                   <FormattedMessage id='blackAboutProject1' />
                 </a>
+              )}
+              {pool && pool.underlying.symbol === 'PAUL' && (
+                <>
+                  <a className='no_link'>
+                    <FormattedMessage id='paulAboutProject1' />
+                  </a>
+                </>
               )}
             </div>
           )}
