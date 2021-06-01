@@ -815,11 +815,15 @@ export const useFarmInfo = (address = '') => {
           const promise_list = [
             pool_contract.begin(), // 开始时间
             pool_contract.earned(account), // 奖励1
-            pool_contract.earned2(account), // 奖励2
             pool_contract.totalSupply(), // 总抵押
             pool_contract.balanceOf(account), // 我的抵押
             currency_token.allowance(account, pool.address),
           ]
+
+          if(pool.rewards2) {
+            promise_list.push(pool_contract.earned2(account))
+          }
+
           return multicallProvider
             .all(promise_list)
             .then((data) => {
@@ -827,10 +831,10 @@ export const useFarmInfo = (address = '') => {
               let [
                 begin,
                 earned,
-                earned2,
                 totalSupply,
                 balanceOf,
                 currency_allowance,
+                earned2 = 0,
               ] = data
               console.log(balanceOf, 'balanceOfbalanceOf')
               return Object.assign({}, pool, {
@@ -902,7 +906,8 @@ export const useAPR = (
   pool_address,
   pool_abi,
   lpt_address,
-  reward1_address
+  reward1_address,
+  apr_address
 ) => {
   const { account, active, library, chainId } = useActiveWeb3React()
   const blockHeight = useBlockHeight()
@@ -927,7 +932,7 @@ export const useAPR = (
   // 矿池总的LPT的价值
   const lptValue = useLTPValue(
     lpt_address,
-    chainId && WAR_ADDRESS(chainId),
+    apr_address,
     pool_address,
     pool_abi
   )
