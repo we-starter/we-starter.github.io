@@ -23,6 +23,7 @@ import SWAPLINE from '../../assets/icon/swap-line@2x.png'
 import { FormattedMessage } from 'react-intl'
 import { useMDexPrice } from '../../pages/pools/Hooks'
 import { mainContext } from '../../reducer'
+import { RANDOM_NUMBER } from '../../const'
 
 // 设置滑点
 const sliding = 0.005
@@ -91,6 +92,14 @@ const BuyCoinPopup = (props) => {
   useEffect(() => {
     if (tabFlag === 'HT') setBalance(HTbalance && HTbalance.balance)
   }, [HTbalance])
+
+  useEffect(() => {
+    if (tabFlag === 'USDT') setBalance(USDTBalance && USDTBalance.balance)
+  }, [USDTBalance])
+
+  useEffect(() => {
+    if (tabFlag === 'MDX') setBalance(MDEXBalance && MDEXBalance.balance)
+  }, [MDEXBalance])
 
   useEffect(() => {
     const _minAmount = new BigNumber(outAmount)
@@ -217,6 +226,10 @@ const BuyCoinPopup = (props) => {
         .on('receipt', (_, receipt) => {
           console.log('success')
           setLoadFlag(false)
+          dispatch({
+            type: RANDOM_NUMBER,
+            randomNumber: Math.random(),
+          })
           state.locale === 'zh' && message.success('交易成功')
           state.locale === 'en' && message.success('Succeed')
         })
@@ -245,6 +258,10 @@ const BuyCoinPopup = (props) => {
         .on('receipt', (_, receipt) => {
           console.log('approve success')
           setLoadFlag(false)
+          dispatch({
+            type: RANDOM_NUMBER,
+            randomNumber: Math.random(),
+          })
           state.locale === 'zh' && message.success('交易成功')
           state.locale === 'en' && message.success('Succeed')
         })

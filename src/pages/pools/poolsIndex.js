@@ -21,12 +21,14 @@ import BitKeep from '../../assets/icon/bitkeep.png'
 import Bingoo from '../../assets/icon/bingoo.png'
 import WARLBP from '../../assets/image/W@2x.png'
 import BLACKLBP from '../../assets/image/B@2x.png'
+import PAULLBP from '../../assets/image/PaulLbp.png'
 import FX from '../../assets/icon/FX.png'
 import LEV from '../../assets/icon/LEV.png'
 import O3 from '../../assets/icon/O3.png'
 import CORRA from '../../assets/icon/CORRA.png'
 import COW from '../../assets/icon/COW.png'
 import MOMA from '../../assets/icon/moma.png'
+import PAUL from '../../assets/icon/paul.png'
 
 import HyperPay from '../../assets/icon/HyperPay-Logo@2x.png'
 import { usePoolsInfo, usePoolsLBPInfo } from './Hooks'
@@ -152,6 +154,10 @@ const PoolsIndex = (props) => {
     window.open(url)
   }
 
+  useEffect(() => {
+    console.log(hoverFlag, 'hoverFlag')
+  }, [hoverFlag])
+
   // 列表查看详情
   const goDetail = (e, flag, address, symbol) => {
     e.stopPropagation()
@@ -271,7 +277,23 @@ const PoolsIndex = (props) => {
             {pool && pool.underlying.symbol === 'CORA' && <img src={CORRA} />}
             {pool && pool.underlying.symbol === 'COW' && <img src={COW} />}
 
+            {pool && pool.underlying.symbol === 'PAUL' && <img src={PAUL} />}
             {pool && pool.name}
+            {pool && pool.underlying.name === 'LBP' && (
+              <a className='pools-type_card_warning'>
+                <span
+                  className='warning_tips'
+                  onMouseOver={() => setHoverFlag(index + 'LBP')}
+                  onMouseOut={() => setHoverFlag(null)}
+                >
+                  {hoverFlag == index + 'LBP' && (
+                    <i className='warning_tips_content'>
+                      <FormattedMessage id='publicTips2' />
+                    </i>
+                  )}
+                </span>
+              </a>
+            )}
           </p>
           <p className='pools-type_card_title_right'>
             {renderStatus(pool)}
@@ -420,6 +442,9 @@ const PoolsIndex = (props) => {
         {pool && pool.name === 'BLACK LBP' && (
           <img className='w_bg' src={BLACKLBP} />
         )}
+        {pool && pool.name === 'PAUL LBP' && (
+          <img className='w_bg' src={PAULLBP} />
+        )}
 
         {/* 
             pool.settleable.volume > 0 获取数量大于0
@@ -468,6 +493,16 @@ const PoolsIndex = (props) => {
         >
           <FormattedMessage id='poolsIndexText3' />
         </a>
+        {pool && pool.LPTLink && (
+          <a
+            className='lpt_link'
+            href={pool.LPTLink}
+            onClick={event => event.stopPropagation()}
+            target='_black'
+          >
+            <FormattedMessage id='farm13' /> WAR-HT LPT(MDEX LP Token)
+          </a>
+        )}
       </div>
     )
   }

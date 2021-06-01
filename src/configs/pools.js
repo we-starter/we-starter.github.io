@@ -941,7 +941,7 @@ export default [
     Telegram_Channel: 'https://t.me/corrafinance',
     Github: '',
     yuque: '-',
-    progress: 0,
+    progress: 1,
     status: 0,
     ratio: '1CORA=12.5USDT', // 兑换比例需要确认
     time: '1621306800',
@@ -956,21 +956,21 @@ export default [
   },
   {
     name: 'COW',
-    address: '0x01',
+    address: '0xC0310106dA3f24676a90EFd289644c2DFb3aad65',
     abi: OfferingV2,
     start_at: '1621940400',
     is_top: true,
-    is_coming: true, // is_coming 为 true 则不请求合约
+    is_coming: false, // is_coming 为 true 则不请求合约
     currency: {
       address: '0x0', // 如果是0x0则是ht
       decimal: 18,
-      symbol: 'USDT',
+      symbol: 'HT',
     },
     icon: '',
     type: 1,
     isPrivate: true,
     underlying: {
-      address: '0x910651F81a605a6Ef35d05527d24A72fecef8bF0', // 地址有问题
+      address: '0x80861A817106665bcA173DB6AC2ab628a738c737', // 地址有问题
       decimal: 18,
       symbol: 'COW',
       name: 'COW',
@@ -982,8 +982,8 @@ export default [
     pool_info: {
       token_distribution: 'May 25th 2021, 7:00PM SGT',
       min_allocation: '0',
-      max_allocation: '100 USDT',
-      min_swap_level: '34,000 USDT',
+      max_allocation: '6 HT',
+      min_swap_level: '2,040 HT',
     },
     website: 'https://www.coinwind.com/',
     white_paper: '-',
@@ -991,12 +991,12 @@ export default [
     Telegram_Channel: 'https://t.me/CoinWind',
     Github: '-',
     yuque: '-',
-    progress: 0,
+    progress: 1,
     status: 0,
-    ratio: '1COW=?HT',
+    ratio: '1COW=0.03HT',
     time: '1621951200',
     purchasedCurrencyOf: 0,
-    totalPurchasedAmount: '34000000000000000000000',
+    totalPurchasedAmount: '2040000000000000000000',
     totalPurchasedUnderlying: '0',
     totalPurchasedCurrency: '0',
     is_flash: false,
@@ -1005,21 +1005,21 @@ export default [
   },
   {
     name: 'COW(Influencer)',
-    address: '0x02',
+    address: '0x566D9d153b1eA0e9B16D35cDf04a03E645F321A8',
     abi: OfferingV2,
     start_at: '1621940400',
     is_top: true,
-    is_coming: true, // is_coming 为 true 则不请求合约
+    is_coming: false, // is_coming 为 true 则不请求合约
     currency: {
       address: '0x0', // 如果是0x0则是ht
       decimal: 18,
-      symbol: 'USDT',
+      symbol: 'HT',
     },
     icon: '',
     type: 1,
     isPrivate: true,
     underlying: {
-      address: '0x910651F81a605a6Ef35d05527d24A72fecef8bF0', // 地址有问题
+      address: '0x80861A817106665bcA173DB6AC2ab628a738c737', // 地址有问题
       decimal: 18,
       symbol: 'COW',
       name: 'COW',
@@ -1031,8 +1031,8 @@ export default [
     pool_info: {
       token_distribution: 'May 25th 2021, 7:00PM SGT',
       min_allocation: '0',
-      max_allocation: '200 USDT',
-      min_swap_level: '20,000 USDT',
+      max_allocation: '12 HT',
+      min_swap_level: '1,200 HT',
     },
     website: 'https://www.coinwind.com/',
     white_paper: '-',
@@ -1040,12 +1040,12 @@ export default [
     Telegram_Channel: 'https://t.me/CoinWind',
     Github: '-',
     yuque: '-',
-    progress: 0,
+    progress: 1,
     status: 0,
-    ratio: '1COW=?HT',
+    ratio: '1COW=0.03HT',
     time: '1621951200',
     purchasedCurrencyOf: 0,
-    totalPurchasedAmount: '20000000000000000000000',
+    totalPurchasedAmount: '1200000000000000000000',
     totalPurchasedUnderlying: '0',
     totalPurchasedCurrency: '0',
     is_flash: false,
@@ -1054,21 +1054,21 @@ export default [
   },
   {
     name: 'COW(Star)',
-    address: '0x03',
+    address: '0x9224Ddc3FB9993AFAf8914B50843128ffa4C3336',
     abi: OfferingV2,
     start_at: '1621940400',
     is_top: true,
-    is_coming: true, // is_coming 为 true 则不请求合约
+    is_coming: false, // is_coming 为 true 则不请求合约
     currency: {
       address: '0x0', // 如果是0x0则是ht
       decimal: 18,
-      symbol: 'USDT',
+      symbol: 'HT',
     },
     icon: '',
     type: 1,
     isPrivate: true,
     underlying: {
-      address: '0x910651F81a605a6Ef35d05527d24A72fecef8bF0', // 地址有问题
+      address: '0x80861A817106665bcA173DB6AC2ab628a738c737', // 地址有问题
       decimal: 18,
       symbol: 'COW',
       name: 'COW',
@@ -1080,8 +1080,8 @@ export default [
     pool_info: {
       token_distribution: 'May 25th 2021, 7:00PM SGT',
       min_allocation: '0',
-      max_allocation: '800 USDT',
-      min_swap_level: '16,000 USDT',
+      max_allocation: '48 HT',
+      min_swap_level: '960 HT',
     },
     website: 'https://www.coinwind.com/',
     white_paper: '-',
@@ -1089,17 +1089,118 @@ export default [
     Telegram_Channel: 'https://t.me/CoinWind',
     Github: '-',
     yuque: '-',
-    progress: 0,
-    status: 0,
-    ratio: '1COW=?HT',
+    progress: 1,
+    status: 3,
+    ratio: '1COW=0.03HT',
     time: '1621951200',
     purchasedCurrencyOf: 0,
-    totalPurchasedAmount: '16000000000000000000000',
+    totalPurchasedAmount: '960000000000000000000',
     totalPurchasedUnderlying: '0',
     totalPurchasedCurrency: '0',
     is_flash: false,
     link_url: 'https://www.coinwind.com/', // 跳转外链接
     project_introduction: 'CoinWind——A DeFi smart mining financial platform',
+  },
+  {
+    name: 'PAUL',
+    address: '0x01',
+    abi: OfferingV2,
+    start_at: '1622548800',
+    is_top: true,
+    is_coming: true, // is_coming 为 true 则不请求合约
+    currency: {
+      address: '0xa71edc38d189767582c38a3145b5873052c3e47a', // 如果是0x0则是ht
+      decimal: 18,
+      symbol: 'USDT',
+    },
+    icon: '',
+    type: 1,
+    isPrivate: true,
+    underlying: {
+      address: '0xfc01b8f883a89278235ba674bbe2bb48db96d9cf', // 地址有问题
+      decimal: 18,
+      symbol: 'PAUL',
+      name: 'PAUL',
+      total_supply: '100,000,000',
+      holders: '-',
+      transfers: '-',
+    },
+    amount: '35000000', // token 总额
+    pool_info: {
+      token_distribution: 'Jun 1th 2021, 8:00PM SGT',
+      min_allocation: '0',
+      max_allocation: '48 HT',
+      min_swap_level: '960 HT',
+    },
+    website: 'https://www.paulprotocol.io',
+    white_paper: '-',
+    twitter: 'https://twitter.com/PaulProtocolV1',
+    Telegram_Channel: 'https://t.me/PaulProtocolV1Community',
+    Github: '-',
+    yuque: '-',
+    progress: 0,
+    status: 0,
+    ratio: '1PAUL=0.002USDT',
+    time: '1622550000',
+    purchasedCurrencyOf: 0,
+    totalPurchasedAmount: '70000000000000000000000',
+    totalPurchasedUnderlying: '0',
+    totalPurchasedCurrency: '0',
+    is_flash: false,
+    link_url: 'https://www.paulprotocol.io', // 跳转外链接
+    project_introduction:
+      'Paul Protocol is a double-mechanism risk resistant oracle with superior performance and timeliness.',
+  },
+  {
+    name: 'PAUL',
+    address: '0x03',
+    abi: StarterV3,
+    start_at: '1622548800',
+    is_top: true,
+    is_coming: true, // is_coming 为 true 则不请求合约
+    currency: {
+      address: '0xa71edc38d189767582c38a3145b5873052c3e47a', // 如果是0x0则是ht
+      decimal: 18,
+      symbol: 'USDT',
+    },
+    icon: '',
+    type: 0,
+    isPrivate: true,
+    underlying: {
+      address: '0xfc01b8f883a89278235ba674bbe2bb48db96d9cf', // 地址有问题
+      decimal: 18,
+      symbol: 'PAUL',
+      name: 'PAUL',
+      total_supply: '100,000,000',
+      holders: '-',
+      transfers: '-',
+    },
+    amount: '35000000', // token 总额
+    pool_info: {
+      token_distribution: 'Jun 1th 2021, 8:00PM SGT',
+      min_allocation: '0',
+      max_allocation: '48 HT',
+      min_swap_level: '960 HT',
+    },
+    website: 'https://www.paulprotocol.io',
+    white_paper: '-',
+    twitter: 'https://twitter.com/PaulProtocolV1',
+    Telegram_Channel: 'https://t.me/PaulProtocolV1Community',
+    Github: '-',
+    yuque: '-',
+    progress: 0,
+    status: 0,
+    ratio: '1PAUL=?LPT',
+    time: '1622552400',
+    purchasedCurrencyOf: 0,
+    totalPurchasedAmount: '50000000000000000000000',
+    totalPurchasedUnderlying: '0',
+    totalPurchasedCurrency: '0',
+    is_flash: false,
+    link_url: 'https://www.paulprotocol.io', // 跳转外链接
+    LPTLink: 'https://ht.mdex.com/#/add/HT/0x910651F81a605a6Ef35d05527d24A72fecef8bF0',
+    project_introduction:
+      'Paul Protocol is a double-mechanism risk resistant oracle with superior performance and timeliness.',
   },
   // 测试合约配置
   // {
