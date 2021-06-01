@@ -292,7 +292,7 @@ const FarmCard = (props) => {
       </p>
       <a
         className='farm_index_card_getMLP'
-        href='https://ht.mdex.com/#/add/HT/0x910651F81a605a6Ef35d05527d24A72fecef8bF0'
+        href={farmPools.byLink}
         target='_black'
       >
         <FormattedMessage id='farm13' /> {farmPools && farmPools.name}(MDEX LP
