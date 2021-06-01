@@ -224,6 +224,10 @@ const PoolsDetailLBP = (props) => {
     if (!(amount * 1 > 0)) {
       return false
     }
+
+    if (loadFlag) return
+    setLoadFlag(true)
+
     const contract = getContract(library, pool.abi, address)
 
     // 买入数量 * （(100 - 滑点) / 100）
@@ -263,6 +267,10 @@ const PoolsDetailLBP = (props) => {
               walletModal: 'slippageSuccess',
             })
           }
+        }).on('receipt', () => {
+          setLoadFlag(false)
+        }).on('error', () => {
+          setLoadFlag(false)
         })
     }else{
       return contract.methods
@@ -280,6 +288,10 @@ const PoolsDetailLBP = (props) => {
               walletModal: 'slippageSuccess',
             })
           }
+        }).on('receipt', () => {
+          setLoadFlag(false)
+        }).on('error', () => {
+          setLoadFlag(false)
         })
     }
 
@@ -403,6 +415,7 @@ const PoolsDetailLBP = (props) => {
           <Button
             className={cs('btn', pool.status === 3 && 'btn_disable')}
             type='button'
+            loading={loadFlag}
             onClick={purchaseBtn}
           >
             <FormattedMessage id='warLBP2' />
