@@ -1103,11 +1103,11 @@ export default [
   },
   {
     name: 'PAUL',
-    address: '0x01',
+    address: '0xF32f2F0e71F89B145c3c3408f5beC2714e9291ea',
     abi: OfferingV2,
     start_at: '1622548800',
     is_top: true,
-    is_coming: true, // is_coming 为 true 则不请求合约
+    is_coming: false, // is_coming 为 true 则不请求合约
     currency: {
       address: '0xa71edc38d189767582c38a3145b5873052c3e47a', // 如果是0x0则是ht
       decimal: 18,
@@ -1117,11 +1117,11 @@ export default [
     type: 1,
     isPrivate: true,
     underlying: {
-      address: '0xfc01b8f883a89278235ba674bbe2bb48db96d9cf', // 地址有问题
+      address: '0xfc01b8f883a89278235ba674bbe2bb48db96d9cf',
       decimal: 18,
       symbol: 'PAUL',
       name: 'PAUL',
-      total_supply: '100,000,000',
+      total_supply: '10,000,000,000',
       holders: '-',
       transfers: '-',
     },
@@ -1129,8 +1129,8 @@ export default [
     pool_info: {
       token_distribution: 'Jun 1th 2021, 8:00PM SGT',
       min_allocation: '0',
-      max_allocation: '48 HT',
-      min_swap_level: '960 HT',
+      max_allocation: '200 USDT',
+      min_swap_level: '70,000 USDT',
     },
     website: 'https://www.paulprotocol.io',
     white_paper: '-',
@@ -1141,7 +1141,7 @@ export default [
     progress: 0,
     status: 0,
     ratio: '1PAUL=0.002USDT',
-    time: '1622550000',
+    time: '1622635200',
     purchasedCurrencyOf: 0,
     totalPurchasedAmount: '70000000000000000000000',
     totalPurchasedUnderlying: '0',
@@ -1153,34 +1153,34 @@ export default [
   },
   {
     name: 'PAUL',
-    address: '0x03',
+    address: '0x7AC61a6eC0Efd0Acff9A9a5d7510d38CfaF2AfEa',
     abi: StarterV3,
     start_at: '1622548800',
     is_top: true,
-    is_coming: true, // is_coming 为 true 则不请求合约
+    is_coming: false, // is_coming 为 true 则不请求合约
     currency: {
-      address: '0xa71edc38d189767582c38a3145b5873052c3e47a', // 如果是0x0则是ht
+      address: '0xE4E55C9203Ac398A0F0B98BD096B70D9778eCa6A', // 如果是0x0则是ht
       decimal: 18,
-      symbol: 'USDT',
+      symbol: 'LPT',
     },
     icon: '',
     type: 0,
     isPrivate: true,
     underlying: {
-      address: '0xfc01b8f883a89278235ba674bbe2bb48db96d9cf', // 地址有问题
+      address: '0xfc01b8f883a89278235ba674bbe2bb48db96d9cf',
       decimal: 18,
       symbol: 'PAUL',
       name: 'PAUL',
-      total_supply: '100,000,000',
+      total_supply: '10,000,000,000',
       holders: '-',
       transfers: '-',
     },
-    amount: '35000000', // token 总额
+    amount: '25000000', // token 总额
     pool_info: {
       token_distribution: 'Jun 1th 2021, 8:00PM SGT',
-      min_allocation: '0',
-      max_allocation: '48 HT',
-      min_swap_level: '960 HT',
+      min_allocation: '',
+      max_allocation: '',
+      min_swap_level: '8,000 LPT',
     },
     website: 'https://www.paulprotocol.io',
     white_paper: '-',
@@ -1191,7 +1191,7 @@ export default [
     progress: 0,
     status: 0,
     ratio: '1PAUL=?LPT',
-    time: '1622552400',
+    time: '1622635200',
     purchasedCurrencyOf: 0,
     totalPurchasedAmount: '50000000000000000000000',
     totalPurchasedUnderlying: '0',

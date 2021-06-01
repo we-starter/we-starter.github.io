@@ -536,7 +536,10 @@ export const usePoolsInfo = (address = '') => {
                   },
                 })
               })
-              .catch((e) => [console.log(e, '===== usePoolsInfo =====')])
+              .catch((e) => {
+                console.log(e, '===== usePoolsInfo =====')
+                return pool
+              })
           } else if (pool.type === 1) {
             // TODO 默认HT，后面需要根据通货来查询进度
             let currency_decimals = pool.currency.decimal
@@ -681,6 +684,7 @@ export const usePoolsInfo = (address = '') => {
               })
               .catch((e) => {
                 console.log(e, '===== usePoolsInfo =====')
+                return pool
               })
           }
         })
@@ -774,6 +778,7 @@ export const usePoolsLBPInfo = (address = '') => {
             })
             .catch((e) => {
               console.log(e, '==== usePoolsLBPInfo ====')
+              return pool
             })
         })
       )
