@@ -299,7 +299,7 @@ const en_US = {
   warLBP7: 'Please visit MDEX for trading',
   warLBP8: '{token} LPT Mining LIVE. Add your ',
   warLBP9: '{token} LPT from MDEX ',
-  warLBP10: 'and get WAR rewards from Farm tab.',
+  warLBP10: 'and get WAR rewards from Farms tab.',
   farm1: 'Farms',
   farm2: 'Stake Liquidity Pool Tokens(LPT) to look for more "sweeties"',
   farm3: 'Stake',
