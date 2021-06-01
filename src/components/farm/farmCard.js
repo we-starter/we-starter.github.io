@@ -6,8 +6,8 @@ import { HANDLE_WALLET_MODAL } from '../../const'
 import { mainContext } from '../../reducer'
 import { formatAmount } from '../../utils/format'
 import { useAPR, useMdxARP } from '../../pages/pools/Hooks'
-import WARHT_Small from '../../assets/icon/farm/WAR HT_small@2x.png'
 import { useBalance } from '../../pages/Hooks'
+import Timer from 'react-compound-timer'
 
 const FarmCard = (props) => {
   const { dispatch, state } = useContext(mainContext)
@@ -15,15 +15,17 @@ const FarmCard = (props) => {
   const farmPools = pools
   const { balance } = useBalance(farmPools && farmPools.MLP)
   const [balanceProportion, setBalanceProportion] = useState(0)
+  const [now, setNow] = useState(parseInt(Date.now() / 1000))
 
   const apr = useAPR(
     farmPools.address,
     farmPools.abi,
     farmPools.MLP,
-    farmPools.rewards1Address
+    farmPools.rewards1Address,
+    farmPools.aprAddress,
   )
   const mdexApr = useMdxARP(
-    farmPools.address,
+    farmPools.mdexReward ? farmPools.address : null,
     farmPools.abi,
     farmPools.MLP,
     farmPools.rewards1Address
@@ -32,10 +34,27 @@ const FarmCard = (props) => {
   useEffect(() => {
     console.log('apr', apr)
     console.log('mdexApr', mdexApr)
-    if (!isNaN(apr) && apr > 0 && mdexApr > 0) {
+    if (!isNaN(apr) && apr > 0 && (!farmPools.mdexReward || mdexApr > 0)) {
       setPercentage((apr * 100 + mdexApr * 100).toFixed(2))
     }
   }, [apr, mdexApr])
+
+  useEffect(() => {
+    const timerId = setTimeout(() => {
+      const now = parseInt(Date.now() / 1000)
+      setNow(now)
+    }, 1000)
+    return () => {
+      clearTimeout(timerId)
+    }
+  }, [now])
+
+  let left_time = 0
+  if (farmPools && farmPools.openDate > now) {
+    left_time = (farmPools && farmPools.openDate - now) * 1000
+  } else if (farmPools && farmPools.dueDate > now) {
+    left_time = (farmPools.dueDate - now) * 1000
+  }
 
   useEffect(() => {
     if (farmPools && farmPools.balanceOf && farmPools.totalSupply) {
@@ -52,7 +71,7 @@ const FarmCard = (props) => {
   }, [farmPools, farmPools.balanceOf, farmPools.totalSupply])
 
   return (
-    <div className='farm_index_card'>
+    <div className={`farm_index_card ${farmPools.name}`}>
       <h3 className='farm_index_card_title'>{farmPools && farmPools.name}</h3>
       <div className='farm_index_card_content'>
         <p className='apr'>
@@ -61,45 +80,190 @@ const FarmCard = (props) => {
             {farmPools && farmPools.earnName}
           </span>
         </p>
-        <p className='countdown'>
-          {/* {farmPools && typeof farmPools.openDate == 'object' ? (
+
+        {farmPools && farmPools.openDate && (
+          <p className='countdown'>
+            {farmPools && farmPools.openDate > now && (
+              <Timer
+                initialTime={left_time}
+                key={left_time}
+                direction='backward'
+                formatValue={(number) => {
+                  if (number === 0) return '00'
+                  if (number < 10) {
+                    return `0${number}`
+                  }
+                  return number
+                }}
+              >
                 <span>
+                  <span
+                    style={{
+                      display: 'inline-block',
+                      padding: '0 6px',
+                      background: '#C5E5C9',
+                      borderRadius: '3px',
+                    }}
+                  >
+                    <Timer.Hours />
+                    <b>
+                      <FormattedMessage id='HourM' />
+                    </b>
+                  </span>{' '}
+                  <i>/</i>{' '}
+                  <span
+                    style={{
+                      display: 'inline-block',
+                      padding: '0 6px',
+                      background: '#C5E5C9',
+                      borderRadius: '3px',
+                    }}
+                  >
+                    {' '}
+                    <Timer.Minutes />
+                    <b>
+                      <FormattedMessage id='MinM' />
+                    </b>
+                  </span>
+                </span>
+              </Timer>
+            )}
+            {farmPools && farmPools.dueDate > now && farmPools.openDate < now && (
+              <Timer
+                initialTime={left_time}
+                key={left_time}
+                direction='backward'
+                formatValue={(number) => {
+                  if (number === 0) return '00'
+                  if (number < 10) {
+                    return `0${number}`
+                  }
+                  return number
+                }}
+              >
+                <span>
+                  <span
+                    style={{
+                      display: 'inline-block',
+                      padding: '0 6px',
+                      background: '#C5E5C9',
+                      borderRadius: '3px',
+                    }}
+                  >
+                    <Timer.Days />
+                    <b>
+                      <FormattedMessage id='DayM' />
+                    </b>
+                  </span>{' '}
+                  <i>/</i>{' '}
+                  <span
+                    style={{
+                      display: 'inline-block',
+                      padding: '0 6px',
+                      background: '#C5E5C9',
+                      borderRadius: '3px',
+                    }}
+                  >
+                    <Timer.Hours />
+                    <b>
+                      <FormattedMessage id='HourM' />
+                    </b>
+                  </span>
+                </span>
+              </Timer>
+            )}
+            {farmPools && farmPools.dueDate <= now && farmPools.openDate < now && (
+              <span>
+                <FormattedMessage id='completed' />
+              </span>
+            )}
+
+            {/* {farmPools && typeof farmPools.openDate == 'object' ? (
+              <span>
+                <span
+                  style={{
+                    display: 'inline-block',
+                    padding: '0 6px',
+                    background: '#C5E5C9',
+                    borderRadius: '3px',
+                  }}
+                >
                   {farmPools.openDate.hour}
                   <b>
                     <FormattedMessage id='HourM' />
-                  </b>{' '}
-                  <i>/</i> {farmPools.openDate.minute}
+                  </b>
+                </span>{' '}
+                <i>/</i>{' '}
+                <span
+                  style={{
+                    display: 'inline-block',
+                    padding: '0 6px',
+                    background: '#C5E5C9',
+                    borderRadius: '3px',
+                  }}
+                >
+                  {' '}
+                  {farmPools.openDate.minute}
                   <b>
                     <FormattedMessage id='MinM' />
                   </b>
                 </span>
-              ) : typeof farmPools.dueDate == 'object' ? (
-                <span>
+              </span>
+            ) : typeof farmPools.dueDate == 'object' ? (
+              <span>
+                <span
+                  style={{
+                    display: 'inline-block',
+                    padding: '0 6px',
+                    background: '#C5E5C9',
+                    borderRadius: '3px',
+                  }}
+                >
                   {farmPools.dueDate.day}
                   <b>
                     <FormattedMessage id='DayM' />
                   </b>
-                  <i>/</i>
+                </span>{' '}
+                <i style={{ color: '#7a7f82' }}>/</i>{' '}
+                <span
+                  style={{
+                    display: 'inline-block',
+                    padding: '0 6px',
+                    background: '#C5E5C9',
+                    borderRadius: '3px',
+                  }}
+                >
                   {farmPools.dueDate.hour}
                   <b>
                     <FormattedMessage id='HourM' />
                   </b>
                 </span>
-              ) : (
-                <span>{farmPools.dueDate}</span>
-              )} */}
-          <span>
-            {' '}
-            <FormattedMessage id='farm14' />
-          </span>
-          <span className='content_name'>
-            <FormattedMessage id='farm8' />
-          </span>
-        </p>
+              </span>
+            ) : (
+              <span>{farmPools.dueDate}</span>
+            )} */}
+            <span className='content_name'>
+              <FormattedMessage id='farm8' />
+            </span>
+          </p>
+        )}
+        {farmPools && !farmPools.openDate && (
+          <p className='countdown'>
+            <span>
+              {' '}
+              <FormattedMessage id='farm14' />
+            </span>
+            <span className='content_name'>
+              <FormattedMessage id='farm8' />
+            </span>
+          </p>
+        )}
       </div>
       <p className='farm_index_card_value'>
         <FormattedMessage id='farm10' />
-        <img src={WARHT_Small} />
+        {farmPools && farmPools.icon && (
+          <img src={require('../../assets/icon/farm/' + farmPools.icon)} />
+        )}
       </p>
       <p className='farm_index_card_value'>
         <FormattedMessage id='farm11' />
@@ -129,7 +293,7 @@ const FarmCard = (props) => {
       </p>
       <a
         className='farm_index_card_getMLP'
-        href='https://ht.mdex.com/#/add/HT/0x910651F81a605a6Ef35d05527d24A72fecef8bF0'
+        href={farmPools.byLink}
         target='_black'
       >
         <FormattedMessage id='farm13' /> {farmPools && farmPools.name}(MDEX LP
@@ -173,17 +337,19 @@ const FarmCard = (props) => {
               : '--'}
           </span>
         </p>
-        <p className='form-app__inputbox-after-text farm_popup_avaliable'>
-          <FormattedMessage
-            id='farm6'
-            values={{ coin: farmPools && farmPools.rewards2 }}
-          />
-          <span>
-            {farmPools && farmPools.earned2
-              ? formatAmount(farmPools.earned2)
-              : '--'}
-          </span>
-        </p>
+        {farmPools.rewards2 && (
+          <p className='form-app__inputbox-after-text farm_popup_avaliable'>
+            <FormattedMessage
+              id='farm6'
+              values={{ coin: farmPools && farmPools.rewards2 }}
+            />
+            <span>
+              {farmPools && farmPools.earned2
+                ? formatAmount(farmPools.earned2)
+                : '--'}
+            </span>
+          </p>
+        )}
       </div>
     </div>
   )

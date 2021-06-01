@@ -27,7 +27,6 @@ export const Banner = () => {
   const { dispatch, state } = useContext(mainContext)
   const pools = usePoolsInfo()
   const poolsLBP = usePoolsLBPInfo()
-  const farmPools = useFarmInfo()
   const [realTimePrice, setRealTimePrice] = useState('-')
   const WarTokenAddress =
     WAR_ADDRESS[chainId] || '0x910651F81a605a6Ef35d05527d24A72fecef8bF0'

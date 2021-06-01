@@ -37,7 +37,7 @@ export const useBalance = (address) => {
   const { account, active, library } = useActiveWeb3React()
   const [balance, setBalance] = useState(0)
   const blockHeight = useBlockHeight()
-  const pools = useFarmInfo()
+  // const pools = useFarmInfo()
 
   useEffect(() => {
     console.log(active)
@@ -65,7 +65,7 @@ export const useBalance = (address) => {
         console.log('load token balance error:', e)
       }
     }
-  }, [active, blockHeight, pools])
+  }, [active, blockHeight])
 
   return { balance }
 }
