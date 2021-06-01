@@ -6,9 +6,9 @@ import {
   MDEX_FACTORY_ADDRESS,
   MDEX_POOL_ADDRESS,
   MDEX_ROUTER_ADDRESS,
-  MINE_MOUNTAIN_ADDRESS,
+  MINE_MOUNTAIN_ADDRESS, USDT_ADDRESS,
   WAR_ADDRESS,
-  WETH_ADDRESS,
+  WETH_ADDRESS, WHT_ADDRESS,
 } from '../../web3/address'
 import StakingReward from '../../web3/abi/StakingReward.json'
 import { abi as ERC20 } from '../../web3/abi/ERC20.json'
@@ -694,6 +694,7 @@ export const usePoolsInfo = (address = '') => {
           setPoolsInfo(pools)
         })
         .catch((e) => {
+          setPoolsInfo(pools)
           console.log(e, 'pools')
         })
     }
@@ -989,6 +990,7 @@ export const useMdxARP = (
   const { account, active, library, chainId } = useActiveWeb3React()
   const [apr, setApr] = useState(0)
   const blockHeight = useBlockHeight()
+
   const lptValue = useLTPValue(
     lpt_address,
     chainId && WAR_ADDRESS(chainId),
@@ -997,7 +999,9 @@ export const useMdxARP = (
   )
   const [mdex2warPrice, mdex2warPriceFee] = useMDexPrice(
     MDEX_ADDRESS,
-    chainId && WAR_ADDRESS(chainId)
+    chainId && WAR_ADDRESS(chainId),
+    5037.12,
+    [chainId &&  WHT_ADDRESS(chainId)]
   )
   useEffect(() => {
     if (library && lptValue > 0 && mdex2warPrice > 0) {
@@ -1016,14 +1020,12 @@ export const useMdxARP = (
         console.log('mdex2warPrice', mdex2warPrice)
         const radio = new BigNumber(totalSupply).div(new BigNumber(totalAmount))
         console.log('radio', radio.toString())
-        const totalRewardValue = new BigNumber(
-          Web3.utils.toWei('5037.12', 'ether')
-        )
-          .multipliedBy(radio)
-          .multipliedBy(new BigNumber(mdex2warPrice))
+        const totalRewardValue =
+          radio
+          .multipliedBy(new BigNumber(numToWei(mdex2warPrice)))
           .multipliedBy(new BigNumber(365))
-        console.log('totalRewardValue', totalRewardValue.toString())
-        console.log('lptValue', lptValue.toString())
+        console.log('mdextotalRewardValue', totalRewardValue.toString())
+        console.log('mdexlptValue', lptValue.toString())
         const apr = totalRewardValue.div(lptValue).toString()
         console.log('apr', apr)
         setApr(apr)
