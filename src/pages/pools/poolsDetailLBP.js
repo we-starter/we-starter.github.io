@@ -421,6 +421,10 @@ const PoolsDetailLBP = (props) => {
             <FormattedMessage id='warLBP2' />
           </Button>
         )}
+        <div className="lbp_tip">
+          <p>{pool.farm_lpt} <FormattedMessage id='warLBP8' /> <a href={pool.farm_link} target="_blank">{pool.farm_lpt} LPT(MDEX LP Token)</a></p>
+          <p><FormattedMessage id='warLBP9' /></p>
+        </div>
       </div>
       <div className='pools_detail'>
         <div className='pools_detail_content'>

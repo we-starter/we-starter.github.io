@@ -294,6 +294,8 @@ const zh_CN = {
   warLBP5: '最大滑点',
   warLBP6: '成功',
   warLBP7: '请到 MDEX 上进行交易',
+  warLBP8: '流动性挖矿奖励现已开，组',
+  warLBP9: '前去Farm抵押享高额WAR奖励',
   farm1: '农场',
   farm2: '抵押你的 LPT, 来获得更多的收益',
   farm3: '抵押',

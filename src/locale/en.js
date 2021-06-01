@@ -297,6 +297,8 @@ const en_US = {
   warLBP5: 'Slippage tolerance',
   warLBP6: 'Succeed',
   warLBP7: 'Please visit MDEX for trading',
+  warLBP8: 'liquidity mining rewards are now open, the group',
+  warLBP9: 'Go to Farm to mortgage and enjoy high WAR rewards',
   farm1: 'Farms',
   farm2: 'Stake Liquidity Pool Tokens(LPT) to look for more "sweeties"',
   farm3: 'Stake',
