@@ -55,7 +55,7 @@ export default [
     is_top: true,
     is_coming: false,
     currency: {
-      address: '0xa71edc38d189767582c38a3145b5873052c3e47a', // 如果是0x0则是ht
+      address: '0xa71EdC38d189767582C38A3145b5873052c3e47a', // 如果是0x0则是ht
       decimal: 18,
       symbol: 'USDT',
     },
