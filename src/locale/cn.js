@@ -88,6 +88,7 @@ const zh_CN = {
   poolsDetailText18: '申请中签率',
   poolsDetailText19: '超募比例',
   poolsDetailText20: '参与资金规模',
+  poolsDetailText21: '定向',
   poolsIndexText1: '兑换比例',
   poolsIndexText2: '当前进度',
   poolsIndexText3: '兑换',

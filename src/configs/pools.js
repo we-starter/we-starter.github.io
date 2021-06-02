@@ -58,6 +58,7 @@ export default [
     winningRate: '0.68', // 申请中签率
     committed: '', // 超募比例
     total: '', // 参与资金规模
+    poolType: 0, // 值为 1 代表 定向
   },
   {
     name: 'dFuture',
@@ -110,9 +111,10 @@ export default [
       'dFuture is an experimental derivative trading protocol initiated and incubated by Mix Lab of the Mix group. As a decentralized derivatives exchange, dFuture is based on external quotation, enabling traders to execute long / short trading with leverage safely and efficiently at better price. Compared to the centralized exchanges, traders will also enjoy far better trading depth. Meanwhile LP (liquidity provider) only needs to stake single settlement currency (currently USDT), which can obtain stable, risk-free, high return without any impermanent loss.',
     duration: '26', // 完成时间
     totalApplicants: '', // 申请总人数
-    winningRate: '', // 申请中签率
+    winningRate: '-', // 申请中签率
     committed: '', // 超募比例
     total: '$51,940,000', // 参与资金规模
+    poolType: 0, // 值为 1 代表 定向
   },
   {
     name: 'FIX',
@@ -165,9 +167,10 @@ export default [
       'Fixed-Rate Protocol (official Site：fixed.finance) is the first and the best stable yield investment protocol on HECO. The all-time monitoring of on-chain data and the intelligent aggregating strategy of savings provide the various investment options for distinctive users along with balancing risks and earnings mechanically. By combining liquidity mining, NFT, and community governance(DAO), FIX Token endowed with intrinsic value which will support Fixed-Rate Protocol to become one of the most stable and the most fruitful application among HECO.',
     duration: '33', // 完成时间
     totalApplicants: '8000', // 申请总人数
-    winningRate: '', // 申请中签率
+    winningRate: '-', // 申请中签率
     committed: '', // 超募比例
     total: '', // 参与资金规模
+    poolType: 0, // 值为 1 代表 定向
   },
   {
     name: 'FIX',
@@ -220,9 +223,10 @@ export default [
       'Fixed-Rate Protocol (official Site：fixed.finance) is the first and the best stable yield investment protocol on HECO. The all-time monitoring of on-chain data and the intelligent aggregating strategy of savings provide the various investment options for distinctive users along with balancing risks and earnings mechanically. By combining liquidity mining, NFT, and community governance(DAO), FIX Token endowed with intrinsic value which will support Fixed-Rate Protocol to become one of the most stable and the most fruitful application among HECO.',
     duration: '9', // 完成时间
     totalApplicants: '', // 申请总人数
-    winningRate: '', // 申请中签率
+    winningRate: '-', // 申请中签率
     committed: '', // 超募比例
     total: '$76,680,000', // 参与资金规模
+    poolType: 0, // 值为 1 代表 定向
   },
   {
     name: 'DORA',
@@ -278,6 +282,7 @@ export default [
     winningRate: '0.9', // 申请中签率
     committed: '', // 超募比例
     total: '', // 参与资金规模
+    poolType: 0, // 值为 1 代表 定向
   },
   {
     name: 'Cook',
@@ -333,6 +338,7 @@ export default [
     winningRate: '1.67', // 申请中签率
     committed: '', // 超募比例
     total: '', // 参与资金规模
+    poolType: 0, // 值为 1 代表 定向
   },
   {
     name: 'Cook',
@@ -385,9 +391,10 @@ export default [
       'Cook Protocol is a completely decentralized asset management platform in the DeFi space built on top of the Ethereum blockchain.',
     duration: '22', // 完成时间
     totalApplicants: '', // 申请总人数
-    winningRate: '', // 申请中签率
+    winningRate: '-', // 申请中签率
     committed: '', // 超募比例
     total: '$21,480,000', // 参与资金规模
+    poolType: 0, // 值为 1 代表 定向
   },
   {
     name: 'ChainSwap',
@@ -440,9 +447,10 @@ export default [
     project_introduction: 'Chainswap is the hub for all smart chains.',
     duration: '24', // 完成时间
     totalApplicants: '', // 申请总人数
-    winningRate: '', // 申请中签率
+    winningRate: '-', // 申请中签率
     committed: '', // 超募比例
     total: '$115,515,300', // 参与资金规模
+    poolType: 0, // 值为 1 代表 定向
   },
   {
     name: 'WAR(Influencer)',
@@ -494,10 +502,11 @@ export default [
     project_introduction:
       'WeStarter is a cross-chain token initial swap platform which based on HECO network. Through the fluency of the product and sufficient industry resources, it carries the requirement of funds and resources for a variety of asset types. With the role of gatekeeper, through the decentralized incentive and governance mechanism of tokens, to achieve the goal of selecting high-quality assets.',
     duration: '1350', // 完成时间
-    totalApplicants: '10000', // 申请总人数
-    winningRate: '5', // 申请中签率
+    totalApplicants: 'Special', // 申请总人数
+    winningRate: '-', // 申请中签率
     committed: '', // 超募比例
     total: '', // 参与资金规模
+    poolType: 1, // 值为 1 代表 定向
   },
   {
     name: 'WAR',
@@ -553,6 +562,7 @@ export default [
     winningRate: '5', // 申请中签率
     committed: '', // 超募比例
     total: '', // 参与资金规模
+    poolType: 0, // 值为 1 代表 定向
   },
   {
     name: 'WAR',
@@ -605,9 +615,10 @@ export default [
       'WeStarter is a cross-chain token initial swap platform which based on HECO network. Through the fluency of the product and sufficient industry resources, it carries the requirement of funds and resources for a variety of asset types. With the role of gatekeeper, through the decentralized incentive and governance mechanism of tokens, to achieve the goal of selecting high-quality assets.',
     duration: '0.1', // 完成时间
     totalApplicants: '', // 申请总人数
-    winningRate: '', // 申请中签率
+    winningRate: '-', // 申请中签率
     committed: '', // 超募比例
     total: '$233,144,700', // 参与资金规模
+    poolType: 0, // 值为 1 代表 定向
   },
   {
     name: 'BLACK',
@@ -663,6 +674,7 @@ export default [
     winningRate: '6.25', // 申请中签率
     committed: '', // 超募比例
     total: '', // 参与资金规模
+    poolType: 0, // 值为 1 代表 定向
   },
   {
     name: 'BLACK',
@@ -715,9 +727,10 @@ export default [
       'BlackHole is an approval-free decentralized & cross-chain burning protocol, innovator of perpetual deflationary blockchain ecosystem.',
     duration: '15', // 完成时间
     totalApplicants: '', // 申请总人数
-    winningRate: '', // 申请中签率
+    winningRate: '-', // 申请中签率
     committed: '', // 超募比例
     total: '$130,820,200', // 参与资金规模
+    poolType: 0, // 值为 1 代表 定向
   },
   {
     name: 'Lever',
@@ -770,9 +783,10 @@ export default [
       'The #1 AMM-Based Decentralized Margin Trading Platform.',
     duration: '39', // 完成时间
     totalApplicants: '', // 申请总人数
-    winningRate: '', // 申请中签率
+    winningRate: '-', // 申请中签率
     committed: '', // 超募比例
     total: '$183,437,100', // 参与资金规模
+    poolType: 0, // 值为 1 代表 定向
   },
   {
     name: 'YFX.COM',
@@ -828,6 +842,7 @@ export default [
     winningRate: '5', // 申请中签率
     committed: '', // 超募比例
     total: '', // 参与资金规模
+    poolType: 0, // 值为 1 代表 定向
   },
   {
     name: 'YFX.COM',
@@ -880,9 +895,10 @@ export default [
     project_introduction: 'Decentralized Futures Trading Platform YFX.COM',
     duration: '15', // 完成时间
     totalApplicants: '', // 申请总人数
-    winningRate: '', // 申请中签率
+    winningRate: '-', // 申请中签率
     committed: '', // 超募比例
     total: '$138,221,500', // 参与资金规模
+    poolType: 0, // 值为 1 代表 定向
   },
   {
     name: 'O3 Swap',
@@ -935,9 +951,10 @@ export default [
       'O3 Swap, a proprietary cross-chain aggregation protocol',
     duration: '31', // 完成时间
     totalApplicants: '', // 申请总人数
-    winningRate: '', // 申请中签率
+    winningRate: '-', // 申请中签率
     committed: '', // 超募比例
     total: '$133,173,600', // 参与资金规模
+    poolType: 0, // 值为 1 代表 定向
   },
   {
     name: 'O3 Swap',
@@ -993,6 +1010,7 @@ export default [
     winningRate: '6.25', // 申请中签率
     committed: '', // 超募比例
     total: '', // 参与资金规模
+    poolType: 0, // 值为 1 代表 定向
   },
   {
     name: 'CORA',
@@ -1048,6 +1066,7 @@ export default [
     winningRate: '6.25', // 申请中签率
     committed: '', // 超募比例
     total: '', // 参与资金规模
+    poolType: 0, // 值为 1 代表 定向
   },
   {
     name: 'COW',
@@ -1099,9 +1118,10 @@ export default [
     project_introduction: 'CoinWind——A DeFi smart mining financial platform',
     duration: '37', // 完成时间
     totalApplicants: '', // 申请总人数
-    winningRate: '', // 申请中签率
+    winningRate: '-', // 申请中签率
     committed: '', // 超募比例
     total: '', // 参与资金规模
+    poolType: 0, // 值为 1 代表 定向
   },
   {
     name: 'COW(Influencer)',
@@ -1152,10 +1172,11 @@ export default [
     link_url: 'https://www.coinwind.com/', // 跳转外链接
     project_introduction: 'CoinWind——A DeFi smart mining financial platform',
     duration: '2566', // 完成时间
-    totalApplicants: '120', // 申请总人数
-    winningRate: '', // 申请中签率
+    totalApplicants: 'Special', // 申请总人数
+    winningRate: '-', // 申请中签率
     committed: '', // 超募比例
     total: '', // 参与资金规模
+    poolType: 1, // 值为 1 代表 定向
   },
   {
     name: 'COW(Star)',
@@ -1206,10 +1227,11 @@ export default [
     link_url: 'https://www.coinwind.com/', // 跳转外链接
     project_introduction: 'CoinWind——A DeFi smart mining financial platform',
     duration: '5764', // 完成时间
-    totalApplicants: '10000', // 申请总人数
-    winningRate: '5', // 申请中签率
+    totalApplicants: 'Special', // 申请总人数
+    winningRate: '-', // 申请中签率
     committed: '', // 超募比例
     total: '', // 参与资金规模
+    poolType: 1, // 值为 1 代表定向
   },
   {
     name: 'PAUL',
@@ -1265,6 +1287,7 @@ export default [
     winningRate: '7.69', // 申请中签率
     committed: '', // 超募比例
     total: '', // 参与资金规模
+    poolType: 0, // 值为 1 代表定向
   },
   {
     name: 'PAUL',
@@ -1319,9 +1342,10 @@ export default [
       'Paul Protocol is a double-mechanism risk resistant oracle with superior performance and timeliness.',
     duration: '', // 完成时间
     totalApplicants: '', // 申请总人数
-    winningRate: '', // 申请中签率
+    winningRate: '-', // 申请中签率
     committed: '', // 超募比例
     total: '$1,759,500', // 参与资金规模
+    poolType: 0, // 值为 1 代表定向
   },
   // 测试合约配置
   // {

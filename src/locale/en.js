@@ -88,6 +88,7 @@ const en_US = {
   poolsDetailText18: 'Winning rate',
   poolsDetailText19: 'Committed',
   poolsDetailText20: 'Total',
+  poolsDetailText21: 'Special',
   poolsIndexText1: 'Ratio',
   poolsIndexText2: 'Progress',
   poolsIndexText3: 'Enter Pool',

@@ -484,7 +484,11 @@ const PoolsIndex = (props) => {
                   className='pools-type_card_ratio pools-type_card_access'
                   style={{ marginTop: '4px', textAlign: 'right' }}
                 >
-                  {pool && pool.totalApplicants}
+                  {pool && pool.poolType === 1 ? (
+                    <FormattedMessage id='poolsDetailText21' />
+                  ) : (
+                    pool && pool.totalApplicants
+                  )}
                 </p>
               </div>
               <div className='pools-type_title'>
@@ -501,9 +505,7 @@ const PoolsIndex = (props) => {
                   className='pools-type_card_ratio pools-type_card_access'
                   style={{ marginTop: '4px', textAlign: 'right' }}
                 >
-                  {pool && pool.winningRate
-                    ? pool && pool.winningRate + '%'
-                    : '-'}
+                  {pool && pool.winningRate + '%'}
                 </p>
               </div>
             </div>
