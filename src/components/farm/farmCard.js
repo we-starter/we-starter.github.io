@@ -13,20 +13,22 @@ const FarmCard = (props) => {
   const { dispatch, state } = useContext(mainContext)
   const { pools } = props
   const farmPools = pools
+  const [hoverFlag, setHoverFlag] = useState(false)
   const { balance } = useBalance(farmPools && farmPools.MLP)
   const [balanceProportion, setBalanceProportion] = useState(0)
   const [now, setNow] = useState(parseInt(Date.now() / 1000))
 
-  const apr = useAPR(
-    farmPools.address,
-    farmPools.abi,
-    farmPools.MLP,
-    farmPools.rewards1Address,
-    farmPools.valueAprToken,
-    farmPools.valueAprPath,
-    farmPools.rewardsAprPath,
-    farmPools.settleToken,
-  )
+  // const apr = useAPR(
+  //   farmPools.address,
+  //   farmPools.abi,
+  //   farmPools.MLP,
+  //   farmPools.rewards1Address,
+  //   farmPools.valueAprToken,
+  //   farmPools.valueAprPath,
+  //   farmPools.rewardsAprPath,
+  //   farmPools.settleToken
+  // )
+  const apr = 0
   const mdexApr = useMdxARP(
     farmPools.mdexReward ? farmPools.address : null,
     farmPools.abi,
@@ -60,7 +62,7 @@ const FarmCard = (props) => {
   }
 
   useEffect(() => {
-    if (farmPools && farmPools.balanceOf && farmPools.totalSupply) {
+    if (farmPools && farmPools.balanceOf * 1 && farmPools.totalSupply) {
       setBalanceProportion(
         new BigNumber(farmPools.balanceOf)
           .dividedBy(new BigNumber(formatAmount(farmPools.totalSupply)))
@@ -81,6 +83,34 @@ const FarmCard = (props) => {
           {aprPercentage}%
           <span className='content_name'>
             {farmPools && farmPools.earnName}
+            {farmPools && farmPools.name === 'WAR' && (
+              <span
+                className='tips'
+                onMouseOver={() => setHoverFlag(true)}
+                onMouseOut={() => setHoverFlag(false)}
+              >
+                <svg
+                  t='1622718431544'
+                  class='icon'
+                  viewBox='0 0 1024 1024'
+                  version='1.1'
+                  xmlns='http://www.w3.org/2000/svg'
+                  p-id='1141'
+                  width='16'
+                  height='16'
+                >
+                  <path
+                    d='M512 43.885714c258.121143 0 468.114286 209.993143 468.114286 468.114286 0 258.121143-209.993143 468.114286-468.114286 468.114286A468.626286 468.626286 0 0 1 43.885714 512C43.885714 253.878857 253.878857 43.885714 512 43.885714z m0 643.657143a58.514286 58.514286 0 1 0-0.073143 116.955429A58.514286 58.514286 0 0 0 512 687.542857zM512 219.428571c-96.768 0-175.542857 71.460571-175.542857 159.305143 0 25.161143 22.454857 45.494857 50.176 45.494857 27.721143 0 50.102857-20.333714 50.102857-45.494857 0-37.668571 33.792-68.315429 75.264-68.315428s75.264 30.72 75.264 68.315428c0 34.962286-29.110857 63.853714-66.56 67.803429L512 446.902857c-27.794286 0-50.176 20.333714-50.176 45.494857v91.062857c0 25.161143 22.454857 45.494857 50.176 45.494858 27.794286 0 50.176-20.333714 50.176-45.494858v-52.955428C634.368 510.829714 687.542857 450.633143 687.542857 378.733714 687.542857 290.889143 608.768 219.428571 512 219.428571z'
+                    p-id='1142'
+                  ></path>
+                </svg>
+                {hoverFlag && (
+                  <i className='tips_content'>
+                    <FormattedMessage id='farm23' />
+                  </i>
+                )}
+              </span>
+            )}
           </span>
         </p>
 
@@ -294,14 +324,29 @@ const FarmCard = (props) => {
           {farmPools && farmPools.balanceOf ? formatAmount(balance) : '--'}
         </span>
       </p>
-      <a
-        className='farm_index_card_getMLP'
-        href={farmPools.byLink}
-        target='_black'
-      >
-        <FormattedMessage id='farm13' /> {farmPools && farmPools.name}(MDEX LP
-        Token)
-      </a>
+      {farmPools && farmPools.name !== 'WAR' && (
+        <a
+          className='farm_index_card_getMLP'
+          href={farmPools.byLink}
+          target='_black'
+        >
+          <FormattedMessage id='farm13' /> {farmPools && farmPools.name}(MDEX LP
+          Token)
+        </a>
+      )}
+      {farmPools && farmPools.name === 'WAR' && (
+        <a
+          className='farm_index_card_getMLP'
+          onClick={() => {
+            dispatch({
+              type: HANDLE_WALLET_MODAL,
+              walletModal: 'buyCoin',
+            })
+          }}
+        >
+          <FormattedMessage id='farm17' /> {farmPools.name}
+        </a>
+      )}
       <div className='farm_index_card_btn'>
         <a
           className='deposit_btn'
@@ -315,18 +360,34 @@ const FarmCard = (props) => {
         >
           <FormattedMessage id='farm3' />
         </a>
-        <a
-          className='claim_btn'
-          onClick={() => {
-            dispatch({
-              type: HANDLE_WALLET_MODAL,
-              walletModal: 'claim',
-              pool: farmPools && farmPools,
-            })
-          }}
-        >
-          <FormattedMessage id='farm16' />
-        </a>
+        {farmPools && farmPools.name !== 'WAR' && (
+          <a
+            className='claim_btn'
+            onClick={() => {
+              dispatch({
+                type: HANDLE_WALLET_MODAL,
+                walletModal: 'claim',
+                pool: farmPools && farmPools,
+              })
+            }}
+          >
+            <FormattedMessage id='farm16' />
+          </a>
+        )}
+        {farmPools && farmPools.name === 'WAR' && (
+          <a
+            className='claim_btn'
+            onClick={() => {
+              dispatch({
+                type: HANDLE_WALLET_MODAL,
+                walletModal: 'claim',
+                pool: farmPools && farmPools,
+              })
+            }}
+          >
+            <FormattedMessage id='farm16' />
+          </a>
+        )}
       </div>
       <div className='farm_index_card_rewards'>
         <p className='form-app__inputbox-after-text farm_popup_avaliable'>
@@ -354,6 +415,21 @@ const FarmCard = (props) => {
           </p>
         )}
       </div>
+      {farmPools && farmPools.name === 'WAR' && (
+        <a
+          className='deposit_btn'
+          style={{ marginTop: '8px', width: '100%' }}
+          onClick={() => {
+            dispatch({
+              type: HANDLE_WALLET_MODAL,
+              walletModal: 'compound',
+              pool: farmPools && farmPools,
+            })
+          }}
+        >
+          <FormattedMessage id='farm21' />
+        </a>
+      )}
     </div>
   )
 }

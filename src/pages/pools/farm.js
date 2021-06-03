@@ -19,9 +19,7 @@ const Farm = (props) => {
         <div className='farm_index_card_content'>
           <p className='apr'>
             --
-            <span className='content_name'>
-              APR
-            </span>
+            <span className='content_name'>APR</span>
           </p>
           <p className='countdown'>
             <span>--</span>

@@ -6,9 +6,11 @@ import {
   MDEX_FACTORY_ADDRESS,
   MDEX_POOL_ADDRESS,
   MDEX_ROUTER_ADDRESS,
-  MINE_MOUNTAIN_ADDRESS, USDT_ADDRESS,
+  MINE_MOUNTAIN_ADDRESS,
+  USDT_ADDRESS,
   WAR_ADDRESS,
-  WETH_ADDRESS, WHT_ADDRESS,
+  WETH_ADDRESS,
+  WHT_ADDRESS,
 } from '../../web3/address'
 import StakingReward from '../../web3/abi/StakingReward.json'
 import { abi as ERC20 } from '../../web3/abi/ERC20.json'
@@ -36,7 +38,7 @@ import { ReactComponent as X5 } from '../../assets/logo/5x.svg'
 import { ReactComponent as X10 } from '../../assets/logo/10X.svg'
 import BigNumber from 'bignumber.js'
 import BN from 'bn.js'
-import {formatAmount, fromWei, numToWei} from '../../utils/format'
+import { formatAmount, fromWei, numToWei } from '../../utils/format'
 import PoolsLBP from '../../configs/poolsLBP'
 import { useAllowance, useTokenAllowance } from '../Hooks'
 import { getMultiCallProvider, processResult } from '../../utils/multicall'
@@ -820,7 +822,7 @@ export const useFarmInfo = (address = '') => {
             currency_token.allowance(account, pool.address),
           ]
 
-          if(pool.rewards2) {
+          if (pool.rewards2) {
             promise_list.push(pool_contract.earned2(account))
           }
 
@@ -910,7 +912,7 @@ export const useAPR = (
   valueAprToken,
   valueAprPath,
   rewardsAprPath,
-  settleToken,
+  settleToken
 ) => {
   const { account, active, library, chainId } = useActiveWeb3React()
   const blockHeight = useBlockHeight()
@@ -961,11 +963,19 @@ export const useAPR = (
   )
 
   useEffect(() => {
-    setLptTotalValue(new BigNumber(lptTotalPrice).multipliedBy(new BigNumber(lptValue)).toString())
+    setLptTotalValue(
+      new BigNumber(lptTotalPrice)
+        .multipliedBy(new BigNumber(lptValue))
+        .toString()
+    )
   }, [library, lptTotalPrice])
 
   useEffect(() => {
-    setRewardsTotalValue(new BigNumber(rewardsTotalPrice).multipliedBy(new BigNumber(reward1Vol)).toString())
+    setRewardsTotalValue(
+      new BigNumber(rewardsTotalPrice)
+        .multipliedBy(new BigNumber(reward1Vol))
+        .toString()
+    )
   }, [library, rewardsTotalPrice])
 
   // 计算奖励的量
@@ -974,32 +984,35 @@ export const useAPR = (
       const reward1_vol = new BigNumber(allowance).minus(
         new BigNumber(unClaimReward)
       )
-      console.log('ara', 'reward1_vol', fromWei(reward1_vol.toString()).toString())
-      console.log('ara', 'reward1_vol',reward1_vol.toString())
+      console.log(
+        'ara',
+        'reward1_vol',
+        fromWei(reward1_vol.toString()).toString()
+      )
+      console.log('ara', 'reward1_vol', reward1_vol.toString())
       setReward1Vol(reward1_vol.toString())
     }
   }, [library, allowance, unClaimReward])
 
   useEffect(() => {
-    console.log('ara','rewardsTotalValue', rewardsTotalValue)
+    console.log('ara', 'rewardsTotalValue', rewardsTotalValue)
   }, [library, rewardsTotalValue])
 
   useEffect(() => {
-    console.log('ara','reward1Vol', fromWei(reward1Vol).toString())
+    console.log('ara', 'reward1Vol', fromWei(reward1Vol).toString())
   }, [library, reward1Vol])
 
-
   useEffect(() => {
-    console.log('ara','lptTotalValue', lptTotalValue)
+    console.log('ara', 'lptTotalValue', lptTotalValue)
   }, [library, lptTotalValue])
 
   useEffect(() => {
-    console.log('ara','lptValue', fromWei(lptValue.toString()).toString())
-    console.log('ara','lptValue', lptValue.toString())
+    console.log('ara', 'lptValue', fromWei(lptValue.toString()).toString())
+    console.log('ara', 'lptValue', lptValue.toString())
   }, [library, lptValue])
 
   useEffect(() => {
-    if (library && lptTotalValue &&  rewardsTotalValue && span > 0) {
+    if (library && lptTotalValue && rewardsTotalValue && span > 0) {
       const dayRate = new BigNumber(1).div(
         new BigNumber(span).div(new BigNumber(86400))
       )
@@ -1030,7 +1043,6 @@ export const useMdxARP = (
   reward1_address
 ) => {
   // mdx 年释放总量 * 价值 /
-
   const { account, active, library, chainId } = useActiveWeb3React()
   const [apr, setApr] = useState(0)
   const blockHeight = useBlockHeight()
@@ -1045,7 +1057,7 @@ export const useMdxARP = (
     MDEX_ADDRESS,
     chainId && WAR_ADDRESS(chainId),
     5037.12,
-    [chainId &&  WHT_ADDRESS(chainId)]
+    [chainId && WHT_ADDRESS(chainId)]
   )
   useEffect(() => {
     if (library && pool_address && lptValue > 0 && mdex2warPrice > 0) {
@@ -1064,8 +1076,7 @@ export const useMdxARP = (
         console.log('mdex2warPrice', mdex2warPrice)
         const radio = new BigNumber(totalSupply).div(new BigNumber(totalAmount))
         console.log('radio', radio.toString())
-        const totalRewardValue =
-          radio
+        const totalRewardValue = radio
           .multipliedBy(new BigNumber(numToWei(mdex2warPrice)))
           .multipliedBy(new BigNumber(365))
         console.log('mdextotalRewardValue', totalRewardValue.toString())
