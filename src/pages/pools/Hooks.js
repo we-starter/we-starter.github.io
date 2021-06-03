@@ -6,9 +6,9 @@ import {
   MDEX_FACTORY_ADDRESS,
   MDEX_POOL_ADDRESS,
   MDEX_ROUTER_ADDRESS,
-  MINE_MOUNTAIN_ADDRESS,
+  MINE_MOUNTAIN_ADDRESS, USDT_ADDRESS,
   WAR_ADDRESS,
-  WETH_ADDRESS,
+  WETH_ADDRESS, WHT_ADDRESS,
 } from '../../web3/address'
 import StakingReward from '../../web3/abi/StakingReward.json'
 import { abi as ERC20 } from '../../web3/abi/ERC20.json'
@@ -36,7 +36,7 @@ import { ReactComponent as X5 } from '../../assets/logo/5x.svg'
 import { ReactComponent as X10 } from '../../assets/logo/10X.svg'
 import BigNumber from 'bignumber.js'
 import BN from 'bn.js'
-import { formatAmount, numToWei } from '../../utils/format'
+import {formatAmount, fromWei, numToWei} from '../../utils/format'
 import PoolsLBP from '../../configs/poolsLBP'
 import { useAllowance, useTokenAllowance } from '../Hooks'
 import { getMultiCallProvider, processResult } from '../../utils/multicall'
@@ -505,7 +505,7 @@ export const usePoolsInfo = (address = '') => {
                   ratio: `1${pool.underlying.symbol}=${formatAmount(
                     price,
                     18,
-                    4
+                    5
                   )}${pool.currency.symbol}`,
                   progress:
                     new BigNumber(totalPurchasedCurrency)
@@ -536,7 +536,10 @@ export const usePoolsInfo = (address = '') => {
                   },
                 })
               })
-              .catch((e) => [console.log(e, '===== usePoolsInfo =====')])
+              .catch((e) => {
+                console.log(e, '===== usePoolsInfo =====')
+                return pool
+              })
           } else if (pool.type === 1) {
             // TODO 默认HT，后面需要根据通货来查询进度
             let currency_decimals = pool.currency.decimal
@@ -639,7 +642,7 @@ export const usePoolsInfo = (address = '') => {
 
                 return Object.assign({}, pool, {
                   ratio: `1${pool.underlying.symbol}=${
-                    __ratio.toFixed(4, 1).toString() * 1
+                    __ratio.toFixed(5, 1).toString() * 1
                   }${pool.currency.symbol}`,
                   progress:
                     new BigNumber(Web3.utils.fromWei(totalOffered, 'ether'))
@@ -681,6 +684,7 @@ export const usePoolsInfo = (address = '') => {
               })
               .catch((e) => {
                 console.log(e, '===== usePoolsInfo =====')
+                return pool
               })
           }
         })
@@ -690,6 +694,7 @@ export const usePoolsInfo = (address = '') => {
           setPoolsInfo(pools)
         })
         .catch((e) => {
+          setPoolsInfo(pools)
           console.log(e, 'pools')
         })
     }
@@ -774,6 +779,7 @@ export const usePoolsLBPInfo = (address = '') => {
             })
             .catch((e) => {
               console.log(e, '==== usePoolsLBPInfo ====')
+              return pool
             })
         })
       )
@@ -809,11 +815,15 @@ export const useFarmInfo = (address = '') => {
           const promise_list = [
             pool_contract.begin(), // 开始时间
             pool_contract.earned(account), // 奖励1
-            pool_contract.earned2(account), // 奖励2
             pool_contract.totalSupply(), // 总抵押
             pool_contract.balanceOf(account), // 我的抵押
             currency_token.allowance(account, pool.address),
           ]
+
+          if(pool.rewards2) {
+            promise_list.push(pool_contract.earned2(account))
+          }
+
           return multicallProvider
             .all(promise_list)
             .then((data) => {
@@ -821,10 +831,10 @@ export const useFarmInfo = (address = '') => {
               let [
                 begin,
                 earned,
-                earned2,
                 totalSupply,
                 balanceOf,
                 currency_allowance,
+                earned2 = 0,
               ] = data
               console.log(balanceOf, 'balanceOfbalanceOf')
               return Object.assign({}, pool, {
@@ -838,6 +848,7 @@ export const useFarmInfo = (address = '') => {
             })
             .catch((e) => {
               console.log(e, '==== farm ====')
+              return pool
             })
         })
       )
@@ -895,12 +906,20 @@ export const useAPR = (
   pool_address,
   pool_abi,
   lpt_address,
-  reward1_address
+  reward1_address,
+  valueAprToken,
+  valueAprPath,
+  rewardsAprPath,
+  settleToken,
 ) => {
   const { account, active, library, chainId } = useActiveWeb3React()
   const blockHeight = useBlockHeight()
   // const [yearReward, setYearReward] = useState(0)
   const [apr, setApr] = useState(0)
+
+  const [reward1Vol, setReward1Vol] = useState('0')
+  const [rewardsTotalValue, setRewardsTotalValue] = useState('0')
+  const [lptTotalValue, setLptTotalValue] = useState('0')
 
   // 获取奖励1在矿山的总量
   const allowance = useAllowance(
@@ -920,42 +939,86 @@ export const useAPR = (
   // 矿池总的LPT的价值
   const lptValue = useLTPValue(
     lpt_address,
-    chainId && WAR_ADDRESS(chainId),
+    valueAprToken,
     pool_address,
     pool_abi
   )
 
+  // 通过转换后的lpt价格
+  const [lptTotalPrice] = useMDexPrice(
+    valueAprToken,
+    settleToken,
+    1,
+    valueAprPath
+  )
+
+  // 奖励转换后的价格
+  const [rewardsTotalPrice] = useMDexPrice(
+    reward1_address,
+    settleToken,
+    1,
+    rewardsAprPath
+  )
+
   useEffect(() => {
-    console.log('allowance', allowance)
-    console.log('span', span)
-    if (library && allowance && span && lptValue > 0) {
-      const dayRate = new BigNumber(1).div(
-        new BigNumber(span).div(new BigNumber(86400))
-      )
-      console.log('dayRate', dayRate.toString())
+    setLptTotalValue(new BigNumber(lptTotalPrice).multipliedBy(new BigNumber(lptValue)).toString())
+  }, [library, lptTotalPrice])
+
+  useEffect(() => {
+    setRewardsTotalValue(new BigNumber(rewardsTotalPrice).multipliedBy(new BigNumber(reward1Vol)).toString())
+  }, [library, rewardsTotalPrice])
+
+  // 计算奖励的量
+  useEffect(() => {
+    if (library && allowance) {
       const reward1_vol = new BigNumber(allowance).minus(
         new BigNumber(unClaimReward)
       )
+      console.log('ara', 'reward1_vol', fromWei(reward1_vol.toString()).toString())
+      console.log('ara', 'reward1_vol',reward1_vol.toString())
+      setReward1Vol(reward1_vol.toString())
+    }
+  }, [library, allowance, unClaimReward])
 
-      console.log('reward1_vol', reward1_vol)
+  useEffect(() => {
+    console.log('ara','rewardsTotalValue', rewardsTotalValue)
+  }, [library, rewardsTotalValue])
+
+  useEffect(() => {
+    console.log('ara','reward1Vol', fromWei(reward1Vol).toString())
+  }, [library, reward1Vol])
+
+
+  useEffect(() => {
+    console.log('ara','lptTotalValue', lptTotalValue)
+  }, [library, lptTotalValue])
+
+  useEffect(() => {
+    console.log('ara','lptValue', fromWei(lptValue.toString()).toString())
+    console.log('ara','lptValue', lptValue.toString())
+  }, [library, lptValue])
+
+  useEffect(() => {
+    if (library && lptTotalValue &&  rewardsTotalValue && span > 0) {
+      const dayRate = new BigNumber(1).div(
+        new BigNumber(span).div(new BigNumber(86400))
+      )
 
       // 奖励的war
       const yearReward = dayRate
-        .multipliedBy(reward1_vol)
+        .multipliedBy(new BigNumber(rewardsTotalValue))
         .multipliedBy(new BigNumber(365))
         .toFixed(0, 1)
       // setYearReward(yearReward)
-      console.log('yearReward', yearReward)
-      console.log('lptValue', lptValue)
       if (yearReward > 0) {
         const _arp = new BigNumber(yearReward)
-          .div(new BigNumber(lptValue))
+          .div(new BigNumber(lptTotalValue))
           .toString()
         setApr(_arp)
       }
     }
     return () => {}
-  }, [library, allowance, span, unClaimReward, lptValue, blockHeight])
+  }, [library, span, lptTotalValue, rewardsTotalValue, blockHeight])
 
   return apr
 }
@@ -968,22 +1031,10 @@ export const useMdxARP = (
 ) => {
   // mdx 年释放总量 * 价值 /
 
-  // cagefreedom:
-  //   收益/质押金额=（每日产出的MDX价值+每日产出的war价值）/总抵押价值 *365*100%
-  //
-  // cagefreedom:
-  //   MDEX每日产量可以写死
-  //
-  // cagefreedom:
-  //   价值=产量*价格
-  //
-  // cagefreedom:
-  //   3,510.72  MDX每日产出
-  // 13500 WAR每日产出
-
   const { account, active, library, chainId } = useActiveWeb3React()
   const [apr, setApr] = useState(0)
   const blockHeight = useBlockHeight()
+
   const lptValue = useLTPValue(
     lpt_address,
     chainId && WAR_ADDRESS(chainId),
@@ -992,10 +1043,12 @@ export const useMdxARP = (
   )
   const [mdex2warPrice, mdex2warPriceFee] = useMDexPrice(
     MDEX_ADDRESS,
-    chainId && WAR_ADDRESS(chainId)
+    chainId && WAR_ADDRESS(chainId),
+    5037.12,
+    [chainId &&  WHT_ADDRESS(chainId)]
   )
   useEffect(() => {
-    if (library && lptValue > 0 && mdex2warPrice > 0) {
+    if (library && pool_address && lptValue > 0 && mdex2warPrice > 0) {
       const contract = getContract(library, MDexPool, MDEX_POOL_ADDRESS)
       const pool_contract = getContract(library, pool_abi, pool_address)
       const poolId = '0x4c'
@@ -1011,14 +1064,12 @@ export const useMdxARP = (
         console.log('mdex2warPrice', mdex2warPrice)
         const radio = new BigNumber(totalSupply).div(new BigNumber(totalAmount))
         console.log('radio', radio.toString())
-        const totalRewardValue = new BigNumber(
-          Web3.utils.toWei('5037.12', 'ether')
-        )
-          .multipliedBy(radio)
-          .multipliedBy(new BigNumber(mdex2warPrice))
+        const totalRewardValue =
+          radio
+          .multipliedBy(new BigNumber(numToWei(mdex2warPrice)))
           .multipliedBy(new BigNumber(365))
-        console.log('totalRewardValue', totalRewardValue.toString())
-        console.log('lptValue', lptValue.toString())
+        console.log('mdextotalRewardValue', totalRewardValue.toString())
+        console.log('mdexlptValue', lptValue.toString())
         const apr = totalRewardValue.div(lptValue).toString()
         console.log('apr', apr)
         setApr(apr)
@@ -1088,7 +1139,6 @@ export const useMDexPrice = (address1, address2, amount = 1, path = []) => {
 
   const getPrice = async (address1, address2, amount, path) => {
     const _path = [address1, ...path, address2]
-    console.log(_path)
     let _price = 0
     _price = amount
     let _fee = '0'
@@ -1137,7 +1187,7 @@ export const useLTPValue = (address, token_address, pool_address, pool_abi) => {
   const [value, setValue] = useState(0)
   const blockHeight = useBlockHeight()
   useEffect(() => {
-    if (library) {
+    if (library && pool_address) {
       const contract = getContract(library, LPT, address)
       const pool_contract = getContract(library, pool_abi, pool_address)
       const promise_list = [

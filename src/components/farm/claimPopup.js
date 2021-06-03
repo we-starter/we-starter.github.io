@@ -38,8 +38,8 @@ const ClaimPopup = (props) => {
       return false
     }
     const contract = getContract(library, farmPools.abi, farmPools.address)
-    contract.methods
-      .getDoubleReward()
+    const method = pool.rewards2 ? 'getDoubleReward' : 'getReward'
+    contract.methods[method]()
       .send({
         from: account,
       })
@@ -87,17 +87,20 @@ const ClaimPopup = (props) => {
             : '--'}
         </span>
       </p>
-      <p className='form-app__inputbox-after-text farm_popup_avaliable'>
-        <FormattedMessage
-          id='farm6'
-          values={{ coin: farmPools && farmPools.rewards2 }}
-        />
-        <span>
+      {farmPools.rewards2 && (
+        <p className='form-app__inputbox-after-text farm_popup_avaliable'>
+          <FormattedMessage
+            id='farm6'
+            values={{ coin: farmPools && farmPools.rewards2 }}
+          />
+          <span>
           {farmPools && farmPools.earned2
             ? formatAmount(farmPools.earned2) + ' ' + farmPools.rewards2
             : '--'}
         </span>
-      </p>
+        </p>
+      )}
+
       <div className='form-app__submit form-app__submit--row'>
         <button
           type='button'

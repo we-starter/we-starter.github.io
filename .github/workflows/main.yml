@@ -29,10 +29,11 @@ jobs:
         CI: false
       
     - name: Deploy to GitHub Pages
-      uses: Cecilapp/GitHub-Pages-deploy@v3
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      uses: JamesIves/github-pages-deploy-action@4.1.3
       with:
-        email: westarter@protonmail.com
-        build_dir: build
+        token: ${{ secrets.GITHUB_TOKEN }}
+        git-config-email: westarter@protonmail.com
+        git-config-name: westarter
+        folder: build
         branch: gh-pages
+        clean: false

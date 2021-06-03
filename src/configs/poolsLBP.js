@@ -1,4 +1,5 @@
 import LBP from '../web3/abi/LBP.json'
+import LBPV2 from '../web3/abi/LBPV2.json'
 
 export default [
   {
@@ -43,18 +44,20 @@ export default [
     status: 3,
     time: '1619701200',
     link_url: 'https://www.blackhole.black', // 跳转外链接
+    farm_lpt: "WAR-USDT",
+    farm_link: "https://ht.mdex.com/#/add/HT/0x910651F81a605a6Ef35d05527d24A72fecef8bF0",
     project_introduction:
       'An approval-free decentralized & cross-chain burning protocol, innovator of perpetual deflationary blockchain ecosystem.',
   },
   {
     name: 'PAUL LBP',
-    address: '0x02', // 超募合约地址
-    abi: LBP,
+    address: '0x30DceF869fe03554E281933dA495F6Dab0A3Ce22', // 超募合约地址
+    abi: LBPV2,
     start_at: '1622548800',
     is_top: true,
-    is_coming: true,
+    is_coming: false,
     currency: {
-      address: '0xa71edc38d189767582c38a3145b5873052c3e47a', // 如果是0x0则是ht
+      address: '0xa71EdC38d189767582C38A3145b5873052c3e47a', // 如果是0x0则是ht
       decimal: 18,
       symbol: 'USDT',
     },
@@ -67,7 +70,7 @@ export default [
       decimal: 18,
       symbol: 'PAUL',
       name: 'LBP',
-      total_supply: '100,000,000',
+      total_supply: '10,000,000,000',
       holders: '-',
       transfers: '-',
     },
@@ -88,6 +91,8 @@ export default [
     status: 0,
     time: '1622635200',
     link_url: 'https://www.paulprotocol.io', // 跳转外链接
+    farm_lpt: "PAUL-USDT",
+    farm_link: "https://ht.mdex.com/#/add/0xa71EdC38d189767582C38A3145b5873052c3e47a/0xFC01b8f883a89278235ba674bbE2bb48db96d9Cf",
     project_introduction:
       'Paul Protocol is a double-mechanism risk resistant oracle with superior performance and timeliness.',
   },
