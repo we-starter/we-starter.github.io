@@ -31,10 +31,12 @@ const FarmPopupTabPopup = (props) => {
       })
       .on('receipt', (_, receipt) => {
         console.log('compound success')
+        setLoadFlag(false)
         onClose()
       })
       .on('error', (err, receipt) => {
         console.log('compound error', err)
+        setLoadFlag(false)
       })
   }
 
