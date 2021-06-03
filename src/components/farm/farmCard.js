@@ -18,17 +18,17 @@ const FarmCard = (props) => {
   const [balanceProportion, setBalanceProportion] = useState(0)
   const [now, setNow] = useState(parseInt(Date.now() / 1000))
 
-  // const apr = useAPR(
-  //   farmPools.address,
-  //   farmPools.abi,
-  //   farmPools.MLP,
-  //   farmPools.rewards1Address,
-  //   farmPools.valueAprToken,
-  //   farmPools.valueAprPath,
-  //   farmPools.rewardsAprPath,
-  //   farmPools.settleToken
-  // )
-  const apr = 0
+  const apr = useAPR(
+    farmPools.address,
+    farmPools.abi,
+    farmPools.MLP,
+    farmPools.rewards1Address,
+    farmPools.valueAprToken,
+    farmPools.valueAprPath,
+    farmPools.rewardsAprPath,
+    farmPools.settleToken
+  )
+  // const apr = 0
   const mdexApr = useMdxARP(
     farmPools.mdexReward ? farmPools.address : null,
     farmPools.abi,
@@ -91,7 +91,7 @@ const FarmCard = (props) => {
               >
                 <svg
                   t='1622718431544'
-                  class='icon'
+                  className='icon'
                   viewBox='0 0 1024 1024'
                   version='1.1'
                   xmlns='http://www.w3.org/2000/svg'

@@ -989,6 +989,7 @@ export const useAPR = (
         'reward1_vol',
         fromWei(reward1_vol.toString()).toString()
       )
+      console.log('ara', 'allowance', allowance.toString())
       console.log('ara', 'reward1_vol', reward1_vol.toString())
       setReward1Vol(reward1_vol.toString())
     }
@@ -1242,6 +1243,14 @@ export const useLTPValue = (address, token_address, pool_address, pool_abi) => {
               )
           )
         }
+      }).catch(e => {
+        // 报错默认是token
+        pool_contract.methods.totalSupply().call().then(poolTotalSupply => {
+          setValue(
+            new BigNumber(poolTotalSupply)
+          )
+        })
+
       })
     }
     return () => {}
