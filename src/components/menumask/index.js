@@ -130,7 +130,6 @@ export const MenuMask = () => {
                 }
               >
                 <FormattedMessage id='fundraisingPool' />
-                <span className='menumask__hot'></span>
               </NavLink>
             </li>
             <li className='menumask_item'>
@@ -145,6 +144,7 @@ export const MenuMask = () => {
                 }
               >
                 <FormattedMessage id='farm' />
+                <span className='menumask__hot'></span>
               </NavLink>
             </li>
             <li className='menumask_item'>
