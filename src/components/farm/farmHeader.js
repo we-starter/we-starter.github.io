@@ -85,7 +85,6 @@ const FarmHeader = (props) => {
                     onClick={handleMenuItemClick}
                   >
                     <FormattedMessage id='fundraisingPool' />
-                    <span className='menu__hot'></span>
                   </NavLink>
                 </li>
 
@@ -97,6 +96,7 @@ const FarmHeader = (props) => {
                     onClick={handleMenuItemClick}
                   >
                     <FormattedMessage id='farm' />
+                    <span className='menu__hot'></span>
                   </NavLink>
                 </li>
                 <li className='menu__item'>

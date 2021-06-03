@@ -115,7 +115,6 @@ export const Header = () => {
                     onClick={handleMenuItemClick}
                   >
                     <FormattedMessage id='fundraisingPool' />
-                    <span className='menu__hot'></span>
                   </NavLink>
                 </li>
                 <li className='menu__item'>
@@ -125,6 +124,7 @@ export const Header = () => {
                     onClick={handleMenuItemClick}
                   >
                     <FormattedMessage id='farm' />
+                    <span className='menu__hot'></span>
                   </NavLink>
                 </li>
                 <li className='menu__item'>
