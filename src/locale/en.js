@@ -331,7 +331,7 @@ const en_US = {
   farm20: 'Approve',
   farm21: 'Compound',
   farm22: 'Compound {icon} Earned',
-  farm23: '每日进行复投',
+  farm23: 'Compound daily',
   buyPopup1: '滑点',
   buyPopup2: '价格影响',
   buyPopup3: 'Minimum received',
