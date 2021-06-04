@@ -927,7 +927,7 @@ export const useAPR = (
   const allowance = useAllowance(
     reward1_address,
     pool_address,
-    MINE_MOUNTAIN_ADDRESS(chainId)
+    pool_address === '0x26D0928EDBb5486Dd29f3DE4Ba981f78149Bff90' ? '0xcC3C822871A1D110398fACB71c4Fd1F26C94D218' : MINE_MOUNTAIN_ADDRESS(chainId)
   )
 
   // 获取奖励1未发放的量
