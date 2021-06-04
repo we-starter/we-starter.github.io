@@ -301,16 +301,23 @@ const FarmCard = (props) => {
       <p className='farm_index_card_value'>
         <FormattedMessage id='farm11' />
         <span>
-          {farmPools && farmPools.totalSupply
+          {farmPools && farmPools.totalSupply && farmPools.name !== 'WAR'
             ? formatAmount(farmPools.totalSupply)
+            : farmPools && farmPools.totalSupply && farmPools.name === 'WAR'
+            ? formatAmount(farmPools.totalSupply, farmPools.decimal, 6)
             : '--'}
         </span>
       </p>
       <p className='farm_index_card_value'>
         <FormattedMessage id='farm12' />
         <span>
-          {farmPools && farmPools.balanceOf
+          {farmPools && farmPools.balanceOf && farmPools.name !== 'WAR'
             ? farmPools.balanceOf +
+              '(' +
+              (balanceProportion - 0 === 0 ? '0.00' : balanceProportion) +
+              '%)'
+            : farmPools && farmPools.balanceOf && farmPools.name === 'WAR'
+            ? formatAmount(farmPools.balanceOf, farmPools.decimal, 6) +
               '(' +
               (balanceProportion - 0 === 0 ? '0.00' : balanceProportion) +
               '%)'
