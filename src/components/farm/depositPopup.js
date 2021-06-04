@@ -6,6 +6,7 @@ import { Button } from 'antd'
 import { useBalance } from '../../pages/Hooks'
 import { getPointAddress } from '../../web3/address'
 import Web3 from 'web3'
+import { HANDLE_WALLET_MODAL } from '../../const'
 import { getContract, useActiveWeb3React } from '../../web3'
 import { injectIntl } from 'react-intl'
 import ERC20 from '../../web3/abi/ERC20.json'
@@ -176,14 +177,29 @@ const DepositPopup = (props) => {
           </div>
         </div>
       </div>
-      <a
-        className='farm_index_card_getMLP'
-        href='https://ht.mdex.com/#/add/HT/0x910651F81a605a6Ef35d05527d24A72fecef8bF0'
-        target='_black'
-      >
-        <FormattedMessage id='farm13' /> {farmPools && farmPools.name}(MDEX LP
-        Token)
-      </a>
+      {farmPools && farmPools.name !== 'WAR' && (
+        <a
+          className='farm_index_card_getMLP'
+          href='https://ht.mdex.com/#/add/HT/0x910651F81a605a6Ef35d05527d24A72fecef8bF0'
+          target='_black'
+        >
+          <FormattedMessage id='farm13' /> {farmPools && farmPools.name}(MDEX LP
+          Token)
+        </a>
+      )}
+      {farmPools && farmPools.name === 'WAR' && (
+        <a
+          className='farm_index_card_getMLP'
+          onClick={() => {
+            dispatch({
+              type: HANDLE_WALLET_MODAL,
+              walletModal: 'buyCoin',
+            })
+          }}
+        >
+          <FormattedMessage id='farm17' /> {farmPools.name}
+        </a>
+      )}
       <div className='form-app__submit form-app__submit--row'>
         {approve && (
           <Button type='primary' onClick={onApprove} loading={loadFlag}>

@@ -95,7 +95,7 @@ export default [
     dueDate: null,
     earnName: 'APY',
     status: 0,
-    rewards: 'LPT',
+    rewards: 'WAR',
     decimal: 18,
     is_coming: false,
     mdexReward: false,
