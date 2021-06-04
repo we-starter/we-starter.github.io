@@ -83,11 +83,11 @@
         line-height: 18px;
       }
       .content_name {
-        margin: 8px 0 16px;
+        margin: 8px 0;
         font-size: 12px;
         font-family: HelveticaNeue;
         color: #7a7f82;
-        line-height: 12px;
+        line-height: 16px;
         .tips {
           position: relative;
           margin-left: 2px;
@@ -304,11 +304,52 @@
         line-height: 18px;
       }
       .content_name {
-        margin: 8px 0 16px;
+        margin: 8px 0;
         font-size: 12px;
         font-family: HelveticaNeue;
         color: #7a7f82;
-        line-height: 12px;
+        line-height: 16px;
+        .tips {
+          position: relative;
+          margin-left: 2px;
+          display: inline-block;
+          width: 16px;
+          height: 16px;
+          vertical-align: sub;
+          cursor: pointer;
+          svg {
+            fill: #c5e5c9;
+          }
+        }
+        .tips_content {
+          position: absolute;
+          bottom: 50%;
+          transform: translateY(50%);
+          left: 22px;
+          padding: 0 10px;
+          margin-top: 0 !important;
+          height: 24px;
+          font-style: normal;
+          font-size: 12px;
+          color: #22292f;
+          line-height: 24px !important;
+          background: #c5e5c9;
+          border-radius: 3px;
+          white-space: nowrap;
+          &::after {
+            content: '';
+            display: inline-block;
+            position: absolute;
+            left: -5px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 0;
+            height: 0;
+            border-top: 7px solid transparent;
+            border-bottom: 7px solid transparent;
+            border-right: 7px solid #c5e5c9;
+          }
+        }
       }
     }
     &_card_value {
@@ -481,11 +522,52 @@
         line-height: 18px;
       }
       .content_name {
-        margin: 8px 0 16px;
+        margin: 8px 0;
         font-size: 12px;
         font-family: HelveticaNeue;
         color: #7a7f82;
-        line-height: 12px;
+        line-height: 16px;
+        .tips {
+          position: relative;
+          margin-left: 2px;
+          display: inline-block;
+          width: 16px;
+          height: 16px;
+          vertical-align: sub;
+          cursor: pointer;
+          svg {
+            fill: #c5e5c9;
+          }
+        }
+        .tips_content {
+          position: absolute;
+          bottom: 50%;
+          transform: translateY(50%);
+          left: 22px;
+          padding: 0 10px;
+          margin-top: 0 !important;
+          height: 24px;
+          font-style: normal;
+          font-size: 12px;
+          color: #22292f;
+          line-height: 24px !important;
+          background: #c5e5c9;
+          border-radius: 3px;
+          white-space: nowrap;
+          &::after {
+            content: '';
+            display: inline-block;
+            position: absolute;
+            left: -5px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 0;
+            height: 0;
+            border-top: 7px solid transparent;
+            border-bottom: 7px solid transparent;
+            border-right: 7px solid #c5e5c9;
+          }
+        }
       }
     }
     &_card_value {
@@ -658,11 +740,52 @@
         line-height: 18px;
       }
       .content_name {
-        margin: 8px 0 16px;
+        margin: 8px 0;
         font-size: 12px;
         font-family: HelveticaNeue;
         color: #7a7f82;
-        line-height: 12px;
+        line-height: 16px;
+        .tips {
+          position: relative;
+          margin-left: 2px;
+          display: inline-block;
+          width: 16px;
+          height: 16px;
+          vertical-align: sub;
+          cursor: pointer;
+          svg {
+            fill: #c5e5c9;
+          }
+        }
+        .tips_content {
+          position: absolute;
+          bottom: 50%;
+          transform: translateY(50%);
+          left: 22px;
+          padding: 0 10px;
+          margin-top: 0 !important;
+          height: 24px;
+          font-style: normal;
+          font-size: 12px;
+          color: #22292f;
+          line-height: 24px !important;
+          background: #c5e5c9;
+          border-radius: 3px;
+          white-space: nowrap;
+          &::after {
+            content: '';
+            display: inline-block;
+            position: absolute;
+            left: -5px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 0;
+            height: 0;
+            border-top: 7px solid transparent;
+            border-bottom: 7px solid transparent;
+            border-right: 7px solid #c5e5c9;
+          }
+        }
       }
     }
     &_card_value {
