@@ -912,7 +912,8 @@ export const useAPR = (
   valueAprToken,
   valueAprPath,
   rewardsAprPath,
-  settleToken
+  settleToken,
+  mode = 1
 ) => {
   const { account, active, library, chainId } = useActiveWeb3React()
   const blockHeight = useBlockHeight()
@@ -1018,18 +1019,29 @@ export const useAPR = (
         new BigNumber(span).div(new BigNumber(86400))
       )
 
-      // 奖励的war
-      const yearReward = dayRate
-        .multipliedBy(new BigNumber(rewardsTotalValue))
-        .multipliedBy(new BigNumber(365))
-        .toFixed(0, 1)
-      // setYearReward(yearReward)
-      if (yearReward > 0) {
-        const _arp = new BigNumber(yearReward)
-          .div(new BigNumber(lptTotalValue))
-          .toString()
-        setApr(_arp)
+      if(mode === 1){
+        // 奖励的war
+        const yearReward = dayRate
+          .multipliedBy(new BigNumber(rewardsTotalValue))
+          .multipliedBy(new BigNumber(365))
+          .toFixed(0, 1)
+        // setYearReward(yearReward)
+        if (yearReward > 0) {
+          const _arp = new BigNumber(yearReward)
+            .div(new BigNumber(lptTotalValue))
+            .toString()
+          setApr(_arp)
+        }
+      }else if (mode === 2){
+        const yearReward = dayRate.plus(new BigNumber(1)).exponentiatedBy(new BigNumber(365)).multipliedBy(new BigNumber(rewardsTotalValue))
+        if (yearReward > 0) {
+          const _arp = new BigNumber(yearReward)
+            .div(new BigNumber(lptTotalValue))
+            .toString()
+          setApr(_arp)
+        }
       }
+
     }
     return () => {}
   }, [library, span, lptTotalValue, rewardsTotalValue, blockHeight])

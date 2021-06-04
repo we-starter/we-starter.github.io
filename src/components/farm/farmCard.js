@@ -26,7 +26,8 @@ const FarmCard = (props) => {
     farmPools.valueAprToken,
     farmPools.valueAprPath,
     farmPools.rewardsAprPath,
-    farmPools.settleToken
+    farmPools.settleToken,
+    farmPools.earnName === 'APY' ? 2 : 1
   )
   // const apr = 0
   const mdexApr = useMdxARP(
