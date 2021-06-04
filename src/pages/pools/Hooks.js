@@ -1033,11 +1033,12 @@ export const useAPR = (
           setApr(_arp)
         }
       }else if (mode === 2){
-        const yearReward = dayRate.plus(new BigNumber(1)).exponentiatedBy(new BigNumber(365)).multipliedBy(new BigNumber(rewardsTotalValue))
-        if (yearReward > 0) {
-          const _arp = new BigNumber(yearReward)
-            .div(new BigNumber(lptTotalValue))
-            .toString()
+        console.log('dayRate ', fromWei(reward1Vol).toString())
+        console.log('dayRate', dayRate)
+        console.log('dayRate + 1', dayRate.plus(new BigNumber(1)).toString())
+        console.log('(dayRate + 1) ^ 365', dayRate.plus(new BigNumber(1)).exponentiatedBy(new BigNumber(365)).toString())
+        const _arp = dayRate.multipliedBy(new BigNumber(rewardsTotalValue)).dividedBy(new BigNumber(lptTotalValue)).plus(new BigNumber(1)).exponentiatedBy(new BigNumber(365))
+        if (_arp > 0) {
           setApr(_arp)
         }
       }
