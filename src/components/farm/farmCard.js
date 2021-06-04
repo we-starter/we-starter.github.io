@@ -4,7 +4,7 @@ import { FormattedMessage, injectIntl } from 'react-intl'
 import BigNumber from 'bignumber.js'
 import { HANDLE_WALLET_MODAL } from '../../const'
 import { mainContext } from '../../reducer'
-import { formatAmount } from '../../utils/format'
+import { formatAmount, splitFormat } from '../../utils/format'
 import { useAPR, useMdxARP } from '../../pages/pools/Hooks'
 import { useBalance } from '../../pages/Hooks'
 import Timer from 'react-compound-timer'
@@ -318,7 +318,7 @@ const FarmCard = (props) => {
               (balanceProportion - 0 === 0 ? '0.00' : balanceProportion) +
               '%)'
             : farmPools && farmPools.balanceOf && farmPools.name === 'WAR'
-            ? formatAmount(farmPools.balanceOf, farmPools.decimal, 6) +
+            ? splitFormat(farmPools.balanceOf, 6) +
               '(' +
               (balanceProportion - 0 === 0 ? '0.00' : balanceProportion) +
               '%)'

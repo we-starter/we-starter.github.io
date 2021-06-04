@@ -67,6 +67,8 @@ export const splitFormat = (num, fractionDigits) => {
       if (digit[1].length > fractionDigits) {
         let digitResult = digit[1].substring(0, fractionDigits)
         return digit[0] + '.' + digitResult
+      } else {
+        return num
       }
     }
   } else {
