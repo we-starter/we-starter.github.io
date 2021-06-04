@@ -928,7 +928,7 @@ export const useAPR = (
   const allowance = useAllowance(
     reward1_address,
     pool_address,
-    pool_address === '0x26D0928EDBb5486Dd29f3DE4Ba981f78149Bff90' ? '0xcC3C822871A1D110398fACB71c4Fd1F26C94D218' : MINE_MOUNTAIN_ADDRESS(chainId)
+    MINE_MOUNTAIN_ADDRESS(chainId)
   )
 
   // 获取奖励1未发放的量
@@ -1033,10 +1033,6 @@ export const useAPR = (
           setApr(_arp)
         }
       }else if (mode === 2){
-        console.log('dayRate ', fromWei(reward1Vol).toString())
-        console.log('dayRate', dayRate)
-        console.log('dayRate + 1', dayRate.plus(new BigNumber(1)).toString())
-        console.log('(dayRate + 1) ^ 365', dayRate.plus(new BigNumber(1)).exponentiatedBy(new BigNumber(365)).toString())
         const _arp = dayRate.multipliedBy(new BigNumber(rewardsTotalValue)).dividedBy(new BigNumber(lptTotalValue)).plus(new BigNumber(1)).exponentiatedBy(new BigNumber(365))
         if (_arp > 0) {
           setApr(_arp)
