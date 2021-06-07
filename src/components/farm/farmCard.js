@@ -84,7 +84,7 @@ const FarmCard = (props) => {
           {aprPercentage}%
           <span className='content_name'>
             {farmPools && farmPools.earnName}
-            {farmPools && farmPools.name === 'WAR' && (
+            {farmPools && farmPools.name === 'WAR POOL (DAO)' && (
               <span
                 className='tips'
                 onMouseOver={() => setHoverFlag(true)}
@@ -302,9 +302,13 @@ const FarmCard = (props) => {
       <p className='farm_index_card_value'>
         <FormattedMessage id='farm11' />
         <span>
-          {farmPools && farmPools.totalSupply && farmPools.name !== 'WAR'
+          {farmPools &&
+          farmPools.totalSupply &&
+          farmPools.name !== 'WAR POOL (DAO)'
             ? formatAmount(farmPools.totalSupply)
-            : farmPools && farmPools.totalSupply && farmPools.name === 'WAR'
+            : farmPools &&
+              farmPools.totalSupply &&
+              farmPools.name === 'WAR POOL (DAO)'
             ? formatAmount(farmPools.totalSupply, farmPools.decimal, 6)
             : '--'}
         </span>
@@ -312,12 +316,16 @@ const FarmCard = (props) => {
       <p className='farm_index_card_value'>
         <FormattedMessage id='farm12' />
         <span>
-          {farmPools && farmPools.balanceOf && farmPools.name !== 'WAR'
+          {farmPools &&
+          farmPools.balanceOf &&
+          farmPools.name !== 'WAR POOL (DAO)'
             ? farmPools.balanceOf +
               '(' +
               (balanceProportion - 0 === 0 ? '0.00' : balanceProportion) +
               '%)'
-            : farmPools && farmPools.balanceOf && farmPools.name === 'WAR'
+            : farmPools &&
+              farmPools.balanceOf &&
+              farmPools.name === 'WAR POOL (DAO)'
             ? splitFormat(farmPools.balanceOf, 6) +
               '(' +
               (balanceProportion - 0 === 0 ? '0.00' : balanceProportion) +
@@ -332,7 +340,7 @@ const FarmCard = (props) => {
           {farmPools && farmPools.balanceOf ? formatAmount(balance) : '--'}
         </span>
       </p>
-      {farmPools && farmPools.name !== 'WAR' && (
+      {farmPools && farmPools.name !== 'WAR POOL (DAO)' && (
         <a
           className='farm_index_card_getMLP'
           href={farmPools.byLink}
@@ -342,7 +350,7 @@ const FarmCard = (props) => {
           Token)
         </a>
       )}
-      {farmPools && farmPools.name === 'WAR' && (
+      {farmPools && farmPools.name === 'WAR POOL (DAO)' && (
         <a
           className='farm_index_card_getMLP'
           onClick={() => {
@@ -352,7 +360,7 @@ const FarmCard = (props) => {
             })
           }}
         >
-          <FormattedMessage id='farm17' /> {farmPools.name}
+          <FormattedMessage id='farm17' /> {farmPools.rewards}
         </a>
       )}
       <div className='farm_index_card_btn'>
@@ -368,7 +376,7 @@ const FarmCard = (props) => {
         >
           <FormattedMessage id='farm3' />
         </a>
-        {farmPools && farmPools.name !== 'WAR' && (
+        {farmPools && farmPools.name !== 'WAR POOL (DAO)' && (
           <a
             className='claim_btn'
             onClick={() => {
@@ -382,7 +390,7 @@ const FarmCard = (props) => {
             <FormattedMessage id='farm16' />
           </a>
         )}
-        {farmPools && farmPools.name === 'WAR' && (
+        {farmPools && farmPools.name === 'WAR POOL (DAO)' && (
           <a
             className='claim_btn'
             onClick={() => {
@@ -423,7 +431,7 @@ const FarmCard = (props) => {
           </p>
         )}
       </div>
-      {farmPools && farmPools.name === 'WAR' && (
+      {farmPools && farmPools.name === 'WAR POOL (DAO)' && (
         <a
           className='deposit_btn'
           style={{ marginTop: '8px', width: '100%' }}

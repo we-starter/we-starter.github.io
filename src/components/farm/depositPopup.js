@@ -177,7 +177,7 @@ const DepositPopup = (props) => {
           </div>
         </div>
       </div>
-      {farmPools && farmPools.name !== 'WAR' && (
+      {farmPools && farmPools.name !== 'WAR POOL (DAO)' && (
         <a
           className='farm_index_card_getMLP'
           href='https://ht.mdex.com/#/add/HT/0x910651F81a605a6Ef35d05527d24A72fecef8bF0'
@@ -187,7 +187,7 @@ const DepositPopup = (props) => {
           Token)
         </a>
       )}
-      {farmPools && farmPools.name === 'WAR' && (
+      {farmPools && farmPools.name === 'WAR POOL (DAO)' && (
         <a
           className='farm_index_card_getMLP'
           onClick={() => {
@@ -197,7 +197,7 @@ const DepositPopup = (props) => {
             })
           }}
         >
-          <FormattedMessage id='farm17' /> {farmPools.name}
+          <FormattedMessage id='farm17' /> {farmPools.rewards}
         </a>
       )}
       <div className='form-app__submit form-app__submit--row'>

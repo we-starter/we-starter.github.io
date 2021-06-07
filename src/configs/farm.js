@@ -37,7 +37,7 @@ export default [
     mdexReward: true,
   },
   {
-    name: 'WAR',
+    name: 'WAR POOL (DAO)',
     icon: 'PAUL-HT_small@2x.png',
     rewards1: 'WAR',
     rewards2: null,
