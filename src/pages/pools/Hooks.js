@@ -1066,8 +1066,8 @@ export const useMdxARP = (
   const [mdex2warPrice, mdex2warPriceFee] = useMDexPrice(
     MDEX_ADDRESS,
     chainId && WAR_ADDRESS(chainId),
-    5037.12,
-    [chainId && WHT_ADDRESS(chainId)]
+    2534.40,
+    [chainId &&  WHT_ADDRESS(chainId)]
   )
   useEffect(() => {
     if (library && pool_address && lptValue > 0 && mdex2warPrice > 0) {
