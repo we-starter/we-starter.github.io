@@ -14,7 +14,7 @@ const FarmPopupTabPopup = (props) => {
   const [tabFlag, setTabFlag] = useState(
     state.walletModal === 'deposit'
       ? 'Stake'
-      : farmPools && farmPools.name !== 'WAR'
+      : farmPools && farmPools.name !== 'WAR POOL (DAO)'
       ? 'Claim'
       : 'Unstake'
   )
@@ -37,7 +37,7 @@ const FarmPopupTabPopup = (props) => {
                 >
                   <FormattedMessage id='farm3' />
                 </a>
-                {farmPools && farmPools.name !== 'WAR' && (
+                {farmPools && farmPools.name !== 'WAR POOL (DAO)' && (
                   <a
                     className={cs(
                       'farm_popup_tab',
@@ -68,9 +68,11 @@ const FarmPopupTabPopup = (props) => {
             {tabFlag === 'Stake' && (
               <DepositPopup pool={farmPools} onClose={onClose} />
             )}
-            {tabFlag === 'Claim' && farmPools && farmPools.name !== 'WAR' && (
-              <ClaimPopup pool={farmPools} onClose={onClose} />
-            )}
+            {tabFlag === 'Claim' &&
+              farmPools &&
+              farmPools.name !== 'WAR POOL (DAO)' && (
+                <ClaimPopup pool={farmPools} onClose={onClose} />
+              )}
             {tabFlag === 'Unstake' && (
               <UnstakePopup pool={farmPools} onClose={onClose} />
             )}
