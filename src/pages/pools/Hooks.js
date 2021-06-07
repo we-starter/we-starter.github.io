@@ -1044,7 +1044,7 @@ export const useMdxARP = (
   const [mdex2warPrice, mdex2warPriceFee] = useMDexPrice(
     MDEX_ADDRESS,
     chainId && WAR_ADDRESS(chainId),
-    5037.12,
+    2534.40,
     [chainId &&  WHT_ADDRESS(chainId)]
   )
   useEffect(() => {
