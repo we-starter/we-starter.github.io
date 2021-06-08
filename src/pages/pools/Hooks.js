@@ -1209,22 +1209,28 @@ export const useLTPValue = (address, token_address, pool_address, pool_abi) => {
   const blockHeight = useBlockHeight()
   useEffect(() => {
     if (library && pool_address) {
-      const contract = getContract(library, LPT, address)
-      const pool_contract = getContract(library, pool_abi, pool_address)
+
+      const multicallProvider = getMultiCallProvider(library, chainId)
+
+      const pool_contract = new Contract(pool_address, pool_abi)
+
+      const contract = new Contract(address, LPT)
+
       const promise_list = [
-        contract.methods.token0().call(),
-        contract.methods.token1().call(),
-        contract.methods.getReserves().call(),
-        contract.methods.totalSupply().call(),
-        pool_contract.methods.totalSupply().call(),
+        contract.token0(),
+        contract.token1(),
+        contract.getReserves(),
+        contract.totalSupply(),
+        pool_contract.totalSupply(),
       ]
-      Promise.all(promise_list).then((data) => {
+      multicallProvider.all(promise_list).then((data) => {
         console.log(data)
         console.log('#############')
+        data = processResult(data)
         const [
           token0_address,
           token1_address,
-          { _reserve0, _reserve1 },
+          [ _reserve0, _reserve1 ],
           totalSupply,
           poolTotalSupply,
         ] = data
@@ -1254,12 +1260,13 @@ export const useLTPValue = (address, token_address, pool_address, pool_abi) => {
         }
       }).catch(e => {
         // 报错默认是token
-        pool_contract.methods.totalSupply().call().then(poolTotalSupply => {
+        multicallProvider.all([pool_contract.totalSupply()]).then(data => {
+          data = processResult(data)
+          const [poolTotalSupply] = data
           setValue(
             new BigNumber(poolTotalSupply)
           )
         })
-
       })
     }
     return () => {}
