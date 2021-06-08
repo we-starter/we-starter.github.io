@@ -61,7 +61,6 @@ const FarmCard = (props) => {
   } else if (farmPools && farmPools.dueDate > now) {
     left_time = (farmPools.dueDate - now) * 1000
   }
-
   useEffect(() => {
     if (farmPools && farmPools.balanceOf * 1 && farmPools.totalSupply) {
       setBalanceProportion(
@@ -116,7 +115,7 @@ const FarmCard = (props) => {
         </p>
         {farmPools && farmPools.openDate && (
           <p className='countdown'>
-            {farmPools && farmPools.openDate > now && (
+            {farmPools && farmPools.openDate > now && !farmPools.dueDate && (
               <Timer
                 initialTime={left_time}
                 key={left_time}
@@ -158,9 +157,71 @@ const FarmCard = (props) => {
                       <FormattedMessage id='MinM' />
                     </b>
                   </span>
+                  <i>/</i>{' '}
+                  <span
+                    style={{
+                      display: 'inline-block',
+                      padding: '0 6px',
+                      background: '#C5E5C9',
+                      borderRadius: '3px',
+                    }}
+                  >
+                    {' '}
+                    <Timer.Seconds />
+                    <b>
+                      <FormattedMessage id='SecondM' />
+                    </b>
+                  </span>
                 </span>
               </Timer>
             )}
+            {farmPools &&
+              farmPools.openDate > now &&
+              farmPools.dueDate && (
+                <Timer
+                  initialTime={left_time}
+                  key={left_time}
+                  direction='backward'
+                  formatValue={(number) => {
+                    if (number === 0) return '00'
+                    if (number < 10) {
+                      return `0${number}`
+                    }
+                    return number
+                  }}
+                >
+                  <span>
+                    <span
+                      style={{
+                        display: 'inline-block',
+                        padding: '0 6px',
+                        background: '#C5E5C9',
+                        borderRadius: '3px',
+                      }}
+                    >
+                      <Timer.Hours />
+                      <b>
+                        <FormattedMessage id='HourM' />
+                      </b>
+                    </span>{' '}
+                    <i>/</i>{' '}
+                    <span
+                      style={{
+                        display: 'inline-block',
+                        padding: '0 6px',
+                        background: '#C5E5C9',
+                        borderRadius: '3px',
+                      }}
+                    >
+                      {' '}
+                      <Timer.Minutes />
+                      <b>
+                        <FormattedMessage id='MinM' />
+                      </b>
+                    </span>
+                  </span>
+                </Timer>
+              )}
             {farmPools && farmPools.dueDate > now && farmPools.openDate < now && (
               <Timer
                 initialTime={left_time}
@@ -213,7 +274,7 @@ const FarmCard = (props) => {
                   <FormattedMessage id='completed' />
                 </span>
               )}
-            {farmPools && !farmPools.dueDate && farmPools.openDate < now && (
+            {farmPools && !farmPools.dueDate && farmPools.openDate <= now && (
               <span>
                 <FormattedMessage id='farm14' />
               </span>

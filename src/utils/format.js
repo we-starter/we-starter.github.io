@@ -70,6 +70,8 @@ export const splitFormat = (num, fractionDigits) => {
       } else {
         return num
       }
+    } else {
+      return num
     }
   } else {
     return num
