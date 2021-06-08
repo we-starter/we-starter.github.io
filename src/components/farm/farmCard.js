@@ -4,7 +4,7 @@ import { FormattedMessage, injectIntl } from 'react-intl'
 import BigNumber from 'bignumber.js'
 import { HANDLE_WALLET_MODAL } from '../../const'
 import { mainContext } from '../../reducer'
-import { formatAmount } from '../../utils/format'
+import { formatAmount, splitFormat } from '../../utils/format'
 import { useAPR, useMdxARP } from '../../pages/pools/Hooks'
 import { useBalance } from '../../pages/Hooks'
 import Timer from 'react-compound-timer'
@@ -13,6 +13,7 @@ const FarmCard = (props) => {
   const { dispatch, state } = useContext(mainContext)
   const { pools } = props
   const farmPools = pools
+  const [hoverFlag, setHoverFlag] = useState(false)
   const { balance } = useBalance(farmPools && farmPools.MLP)
   const [balanceProportion, setBalanceProportion] = useState(0)
   const [now, setNow] = useState(parseInt(Date.now() / 1000))
@@ -26,7 +27,9 @@ const FarmCard = (props) => {
     farmPools.valueAprPath,
     farmPools.rewardsAprPath,
     farmPools.settleToken,
+    farmPools.earnName === 'APY' ? 2 : 1
   )
+  // const apr = 0
   const mdexApr = useMdxARP(
     farmPools.mdexReward ? farmPools.address : null,
     farmPools.abi,
@@ -58,9 +61,8 @@ const FarmCard = (props) => {
   } else if (farmPools && farmPools.dueDate > now) {
     left_time = (farmPools.dueDate - now) * 1000
   }
-
   useEffect(() => {
-    if (farmPools && farmPools.balanceOf && farmPools.totalSupply) {
+    if (farmPools && farmPools.balanceOf * 1 && farmPools.totalSupply) {
       setBalanceProportion(
         new BigNumber(farmPools.balanceOf)
           .dividedBy(new BigNumber(formatAmount(farmPools.totalSupply)))
@@ -78,15 +80,112 @@ const FarmCard = (props) => {
       <h3 className='farm_index_card_title'>{farmPools && farmPools.name}</h3>
       <div className='farm_index_card_content'>
         <p className='apr'>
-          {aprPercentage}%
+          {farmPools &&
+            farmPools.name === 'WAR POOL (DAO)' &&
+            farmPools.openDate > now &&
+            '--'}
+          {farmPools &&
+            farmPools.name === 'WAR POOL (DAO)' &&
+            farmPools.openDate < now &&
+            (aprPercentage * 1 > 999999.99 ? '999999.99%' : aprPercentage)}
+          {farmPools &&
+            farmPools.name !== 'WAR POOL (DAO)' &&
+            aprPercentage + '%'}
           <span className='content_name'>
             {farmPools && farmPools.earnName}
+            {farmPools && farmPools.name === 'WAR POOL (DAO)' && (
+              <span
+                className='tips'
+                onMouseOver={() => setHoverFlag(true)}
+                onMouseOut={() => setHoverFlag(false)}
+              >
+                <svg
+                  t='1622718431544'
+                  className='icon'
+                  viewBox='0 0 1024 1024'
+                  version='1.1'
+                  xmlns='http://www.w3.org/2000/svg'
+                  p-id='1141'
+                  width='16'
+                  height='16'
+                >
+                  <path
+                    d='M512 43.885714c258.121143 0 468.114286 209.993143 468.114286 468.114286 0 258.121143-209.993143 468.114286-468.114286 468.114286A468.626286 468.626286 0 0 1 43.885714 512C43.885714 253.878857 253.878857 43.885714 512 43.885714z m0 643.657143a58.514286 58.514286 0 1 0-0.073143 116.955429A58.514286 58.514286 0 0 0 512 687.542857zM512 219.428571c-96.768 0-175.542857 71.460571-175.542857 159.305143 0 25.161143 22.454857 45.494857 50.176 45.494857 27.721143 0 50.102857-20.333714 50.102857-45.494857 0-37.668571 33.792-68.315429 75.264-68.315428s75.264 30.72 75.264 68.315428c0 34.962286-29.110857 63.853714-66.56 67.803429L512 446.902857c-27.794286 0-50.176 20.333714-50.176 45.494857v91.062857c0 25.161143 22.454857 45.494857 50.176 45.494858 27.794286 0 50.176-20.333714 50.176-45.494858v-52.955428C634.368 510.829714 687.542857 450.633143 687.542857 378.733714 687.542857 290.889143 608.768 219.428571 512 219.428571z'
+                    p-id='1142'
+                  ></path>
+                </svg>
+                {hoverFlag && (
+                  <i className='tips_content'>
+                    <FormattedMessage id='farm23' />
+                  </i>
+                )}
+              </span>
+            )}
           </span>
         </p>
-
         {farmPools && farmPools.openDate && (
           <p className='countdown'>
-            {farmPools && farmPools.openDate > now && (
+            {farmPools && farmPools.openDate > now && !farmPools.dueDate && (
+              <Timer
+                initialTime={left_time}
+                key={left_time}
+                direction='backward'
+                formatValue={(number) => {
+                  if (number === 0) return '00'
+                  if (number < 10) {
+                    return `0${number}`
+                  }
+                  return number
+                }}
+              >
+                <span>
+                  <span
+                    style={{
+                      display: 'inline-block',
+                      padding: '0 6px',
+                      background: '#C5E5C9',
+                      borderRadius: '3px',
+                    }}
+                  >
+                    <Timer.Hours />
+                    <b>
+                      <FormattedMessage id='HourM' />
+                    </b>
+                  </span>{' '}
+                  <i>/</i>{' '}
+                  <span
+                    style={{
+                      display: 'inline-block',
+                      padding: '0 6px',
+                      background: '#C5E5C9',
+                      borderRadius: '3px',
+                    }}
+                  >
+                    {' '}
+                    <Timer.Minutes />
+                    <b>
+                      <FormattedMessage id='MinM' />
+                    </b>
+                  </span>
+                  <i>/</i>{' '}
+                  <span
+                    style={{
+                      display: 'inline-block',
+                      padding: '0 6px',
+                      background: '#C5E5C9',
+                      borderRadius: '3px',
+                    }}
+                  >
+                    {' '}
+                    <Timer.Seconds />
+                    <b>
+                      <FormattedMessage id='SecondM' />
+                    </b>
+                  </span>
+                </span>
+              </Timer>
+            )}
+            {farmPools && farmPools.openDate > now && farmPools.dueDate && (
               <Timer
                 initialTime={left_time}
                 key={left_time}
@@ -175,9 +274,17 @@ const FarmCard = (props) => {
                 </span>
               </Timer>
             )}
-            {farmPools && farmPools.dueDate <= now && farmPools.openDate < now && (
+            {farmPools &&
+              farmPools.dueDate &&
+              farmPools.dueDate <= now &&
+              farmPools.openDate < now && (
+                <span>
+                  <FormattedMessage id='completed' />
+                </span>
+              )}
+            {farmPools && !farmPools.dueDate && farmPools.openDate <= now && (
               <span>
-                <FormattedMessage id='completed' />
+                <FormattedMessage id='farm14' />
               </span>
             )}
 
@@ -250,7 +357,7 @@ const FarmCard = (props) => {
             </span>
           </p>
         )}
-        {farmPools && !farmPools.openDate && (
+        {farmPools && !farmPools.openDate && left_time <= 0 && (
           <p className='countdown'>
             <span>
               {' '}
@@ -271,16 +378,31 @@ const FarmCard = (props) => {
       <p className='farm_index_card_value'>
         <FormattedMessage id='farm11' />
         <span>
-          {farmPools && farmPools.totalSupply
+          {farmPools &&
+          farmPools.totalSupply &&
+          farmPools.name !== 'WAR POOL (DAO)'
             ? formatAmount(farmPools.totalSupply)
+            : farmPools &&
+              farmPools.totalSupply &&
+              farmPools.name === 'WAR POOL (DAO)'
+            ? formatAmount(farmPools.totalSupply, farmPools.decimal, 6)
             : '--'}
         </span>
       </p>
       <p className='farm_index_card_value'>
         <FormattedMessage id='farm12' />
         <span>
-          {farmPools && farmPools.balanceOf
+          {farmPools &&
+          farmPools.balanceOf &&
+          farmPools.name !== 'WAR POOL (DAO)'
             ? farmPools.balanceOf +
+              '(' +
+              (balanceProportion - 0 === 0 ? '0.00' : balanceProportion) +
+              '%)'
+            : farmPools &&
+              farmPools.balanceOf &&
+              farmPools.name === 'WAR POOL (DAO)'
+            ? splitFormat(farmPools.balanceOf, 6) +
               '(' +
               (balanceProportion - 0 === 0 ? '0.00' : balanceProportion) +
               '%)'
@@ -294,14 +416,29 @@ const FarmCard = (props) => {
           {farmPools && farmPools.balanceOf ? formatAmount(balance) : '--'}
         </span>
       </p>
-      <a
-        className='farm_index_card_getMLP'
-        href={farmPools.byLink}
-        target='_black'
-      >
-        <FormattedMessage id='farm13' /> {farmPools && farmPools.name}(MDEX LP
-        Token)
-      </a>
+      {farmPools && farmPools.name !== 'WAR POOL (DAO)' && (
+        <a
+          className='farm_index_card_getMLP'
+          href={farmPools.byLink}
+          target='_black'
+        >
+          <FormattedMessage id='farm13' /> {farmPools && farmPools.name}(MDEX LP
+          Token)
+        </a>
+      )}
+      {farmPools && farmPools.name === 'WAR POOL (DAO)' && (
+        <a
+          className='farm_index_card_getMLP'
+          onClick={() => {
+            dispatch({
+              type: HANDLE_WALLET_MODAL,
+              walletModal: 'buyCoin',
+            })
+          }}
+        >
+          <FormattedMessage id='farm17' /> {farmPools.rewards}
+        </a>
+      )}
       <div className='farm_index_card_btn'>
         <a
           className='deposit_btn'
@@ -315,18 +452,34 @@ const FarmCard = (props) => {
         >
           <FormattedMessage id='farm3' />
         </a>
-        <a
-          className='claim_btn'
-          onClick={() => {
-            dispatch({
-              type: HANDLE_WALLET_MODAL,
-              walletModal: 'claim',
-              pool: farmPools && farmPools,
-            })
-          }}
-        >
-          <FormattedMessage id='farm16' />
-        </a>
+        {farmPools && farmPools.name !== 'WAR POOL (DAO)' && (
+          <a
+            className='claim_btn'
+            onClick={() => {
+              dispatch({
+                type: HANDLE_WALLET_MODAL,
+                walletModal: 'claim',
+                pool: farmPools && farmPools,
+              })
+            }}
+          >
+            <FormattedMessage id='farm16' />
+          </a>
+        )}
+        {farmPools && farmPools.name === 'WAR POOL (DAO)' && (
+          <a
+            className='claim_btn'
+            onClick={() => {
+              dispatch({
+                type: HANDLE_WALLET_MODAL,
+                walletModal: 'claim',
+                pool: farmPools && farmPools,
+              })
+            }}
+          >
+            <FormattedMessage id='farm16' />
+          </a>
+        )}
       </div>
       <div className='farm_index_card_rewards'>
         <p className='form-app__inputbox-after-text farm_popup_avaliable'>
@@ -354,6 +507,21 @@ const FarmCard = (props) => {
           </p>
         )}
       </div>
+      {farmPools && farmPools.name === 'WAR POOL (DAO)' && (
+        <a
+          className='deposit_btn'
+          style={{ marginTop: '8px', width: '100%' }}
+          onClick={() => {
+            dispatch({
+              type: HANDLE_WALLET_MODAL,
+              walletModal: 'compound',
+              pool: farmPools && farmPools,
+            })
+          }}
+        >
+          <FormattedMessage id='farm21' />
+        </a>
+      )}
     </div>
   )
 }

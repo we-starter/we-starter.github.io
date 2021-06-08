@@ -34,6 +34,7 @@ import DepositPopup from '../components/farm/depositPopup'
 import ClaimPopup from '../components/farm/claimPopup'
 import FarmPopupTab from '../components/farm/farmPopupTab'
 import BuyCoinPopup from '../components/farm/buyCoinPopup'
+import CompoundPopup from '../components/farm/compoundPopup'
 import PoolsJoin from '../components/staterPools/poolsJoin'
 import PoolsSlippage from '../components/staterPools/poolsSlippage'
 import PoolsSuccess from '../components/staterPools/poolsSuccess'
@@ -232,7 +233,6 @@ export const InitPage = () => {
           </div>
         </div>
       )}
-
       {txStatus && (
         <div className='modal-show'>
           <div className='wrapper' style={{ zIndex: 11 }}>
@@ -395,6 +395,24 @@ export const InitPage = () => {
           </div>
         </div>
       )}
+
+      {walletModal === 'compound' && (
+        <div className='modal-show'>
+          <div className='wrapper' style={{ zIndex: 10 }}>
+            <CompoundPopup
+              pool={pool}
+              onClose={() =>
+                dispatch({
+                  type: HANDLE_WALLET_MODAL,
+                  walletModal: null,
+                })
+              }
+              onChange={() => {}}
+            />
+          </div>
+        </div>
+      )}
+
       {/* {walletModal === 'claim' && (
         <div className='modal-show'>
           <div className='wrapper' style={{ zIndex: 10 }}>

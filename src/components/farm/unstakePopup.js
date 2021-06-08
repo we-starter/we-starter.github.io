@@ -110,8 +110,10 @@ const UnstakePopup = (props) => {
       <p className='form-app__inputbox-after-text farm_popup_avaliable'>
         <FormattedMessage id='farm12' />
         <span>
-          {farmPools && farmPools.balanceOf
+          {farmPools && farmPools.balanceOf && farmPools.name !== 'WAR'
             ? farmPools.balanceOf + ' ' + farmPools.rewards
+            : farmPools && farmPools.balanceOf && farmPools.name === 'WAR'
+            ? splitFormat(farmPools.balanceOf, 6) + ' ' + farmPools.rewards
             : '--'}
         </span>
       </p>
@@ -162,17 +164,17 @@ const UnstakePopup = (props) => {
         </span>
       </p>
       {farmPools.rewards2 && (
-      <p className='form-app__inputbox-after-text farm_popup_avaliable'>
-        <FormattedMessage
-          id='farm6'
-          values={{ coin: (farmPools && farmPools.rewards2) || '--' }}
-        />
-        <span>
-          {farmPools && farmPools.earned2
-            ? formatAmount(farmPools.earned2) + ' ' + farmPools.rewards2
-            : '--'}
-        </span>
-      </p>
+        <p className='form-app__inputbox-after-text farm_popup_avaliable'>
+          <FormattedMessage
+            id='farm6'
+            values={{ coin: (farmPools && farmPools.rewards2) || '--' }}
+          />
+          <span>
+            {farmPools && farmPools.earned2
+              ? formatAmount(farmPools.earned2) + ' ' + farmPools.rewards2
+              : '--'}
+          </span>
+        </p>
       )}
     </div>
   )

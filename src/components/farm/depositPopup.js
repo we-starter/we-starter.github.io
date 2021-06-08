@@ -1,11 +1,13 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { usage } from 'browserslist'
+import cs from 'classnames'
 import { formatAmount, numToWei, splitFormat } from '../../utils/format'
 import { getRandomIntInclusive } from '../../utils/index'
 import { Button } from 'antd'
 import { useBalance } from '../../pages/Hooks'
 import { getPointAddress } from '../../web3/address'
 import Web3 from 'web3'
+import { HANDLE_WALLET_MODAL } from '../../const'
 import { getContract, useActiveWeb3React } from '../../web3'
 import { injectIntl } from 'react-intl'
 import ERC20 from '../../web3/abi/ERC20.json'
@@ -32,6 +34,7 @@ const DepositPopup = (props) => {
   const [amount, setAmount] = useState('')
   const [fee, setFee] = useState(0)
   const [loadFlag, setLoadFlag] = useState(false)
+  const [nowTime, setNowTime] = useState(parseInt(Date.now() / 1000))
 
   const { balance } = useBalance(farmPools && farmPools.MLP)
 
@@ -44,11 +47,29 @@ const DepositPopup = (props) => {
     setFee(_fee)
   }, [])
 
-  useEffect(() => {
-    if (farmPools && farmPools.allowance > 0) {
-      setApprove(false)
-    }
-  }, [farmPools])
+useEffect(() => {
+  const timerId = setTimeout(() => {
+    const nowTime = parseInt(Date.now() / 1000)
+    setNowTime(nowTime)
+  }, 1000)
+  return () => {
+    clearTimeout(timerId)
+  }
+}, [nowTime])
+
+  let disableBtn = false
+  if (
+    farmPools &&
+    !farmPools.dueDate &&
+    farmPools.openDate > nowTime
+  ) {
+    disableBtn = true
+  }
+    useEffect(() => {
+      if (farmPools && farmPools.allowance > 0) {
+        setApprove(false)
+      }
+    }, [farmPools, farmPools && farmPools.allowance])
 
   const onMax = () => {
     let max = balance
@@ -112,7 +133,10 @@ const DepositPopup = (props) => {
     if (isNaN(parseInt(amount))) {
       return false
     }
-    if (loadFlag) return
+    if (disableBtn) {
+      return false
+    }
+     if (loadFlag) return
     setLoadFlag(true)
     const pool_contract = getContract(library, farmPools.abi, farmPools.address)
     pool_contract.methods
@@ -176,14 +200,29 @@ const DepositPopup = (props) => {
           </div>
         </div>
       </div>
-      <a
-        className='farm_index_card_getMLP'
-        href='https://ht.mdex.com/#/add/HT/0x910651F81a605a6Ef35d05527d24A72fecef8bF0'
-        target='_black'
-      >
-        <FormattedMessage id='farm13' /> {farmPools && farmPools.name}(MDEX LP
-        Token)
-      </a>
+      {farmPools && farmPools.name !== 'WAR POOL (DAO)' && (
+        <a
+          className='farm_index_card_getMLP'
+          href='https://ht.mdex.com/#/add/HT/0x910651F81a605a6Ef35d05527d24A72fecef8bF0'
+          target='_black'
+        >
+          <FormattedMessage id='farm13' /> {farmPools && farmPools.name}(MDEX LP
+          Token)
+        </a>
+      )}
+      {farmPools && farmPools.name === 'WAR POOL (DAO)' && (
+        <a
+          className='farm_index_card_getMLP'
+          onClick={() => {
+            dispatch({
+              type: HANDLE_WALLET_MODAL,
+              walletModal: 'buyCoin',
+            })
+          }}
+        >
+          <FormattedMessage id='farm17' /> {farmPools.rewards}
+        </a>
+      )}
       <div className='form-app__submit form-app__submit--row'>
         {approve && (
           <Button type='primary' onClick={onApprove} loading={loadFlag}>
@@ -192,7 +231,12 @@ const DepositPopup = (props) => {
         )}
 
         {!approve && (
-          <Button type='primary' onClick={onConfirm} loading={loadFlag}>
+          <Button
+            type='primary'
+            className={cs(disableBtn && 'disable_btn')}
+            onClick={onConfirm}
+            loading={loadFlag}
+          >
             <FormattedMessage id='farm3' />
           </Button>
         )}
