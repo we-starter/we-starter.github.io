@@ -809,7 +809,6 @@ export const useFarmInfo = (address = '') => {
   useEffect(() => {
     if (library) {
       const multicallProvider = getMultiCallProvider(library, chainId)
-      console.log(Farm, 'Farm')
       Promise.all(
         Farm.map((pool) => {
           const pool_contract = new Contract(pool.address, pool.abi)
@@ -825,7 +824,6 @@ export const useFarmInfo = (address = '') => {
           if (pool.rewards2) {
             promise_list.push(pool_contract.earned2(account))
           }
-
           return multicallProvider
             .all(promise_list)
             .then((data) => {
