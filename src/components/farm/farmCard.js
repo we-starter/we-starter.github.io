@@ -87,7 +87,7 @@ const FarmCard = (props) => {
           {farmPools &&
             farmPools.name === 'WAR POOL (DAO)' &&
             farmPools.openDate < now &&
-            (aprPercentage * 1 > 999999.99 ? '999999.99%' : aprPercentage)}
+            (aprPercentage * 1 > 999999.99 ? '999999.99%' : aprPercentage + '%')}
           {farmPools &&
             farmPools.name !== 'WAR POOL (DAO)' &&
             aprPercentage + '%'}
