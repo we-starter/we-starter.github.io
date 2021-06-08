@@ -114,7 +114,6 @@ const FarmCard = (props) => {
             )}
           </span>
         </p>
-
         {farmPools && farmPools.openDate && (
           <p className='countdown'>
             {farmPools && farmPools.openDate > now && (
@@ -206,9 +205,17 @@ const FarmCard = (props) => {
                 </span>
               </Timer>
             )}
-            {farmPools && farmPools.dueDate <= now && farmPools.openDate < now && (
+            {farmPools &&
+              farmPools.dueDate &&
+              farmPools.dueDate <= now &&
+              farmPools.openDate < now && (
+                <span>
+                  <FormattedMessage id='completed' />
+                </span>
+              )}
+            {farmPools && !farmPools.dueDate && farmPools.openDate < now && (
               <span>
-                <FormattedMessage id='completed' />
+                <FormattedMessage id='farm14' />
               </span>
             )}
 
@@ -281,7 +288,7 @@ const FarmCard = (props) => {
             </span>
           </p>
         )}
-        {farmPools && !farmPools.openDate && (
+        {farmPools && !farmPools.openDate && left_time <= 0 && (
           <p className='countdown'>
             <span>
               {' '}

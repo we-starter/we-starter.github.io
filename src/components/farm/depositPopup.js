@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { usage } from 'browserslist'
+import cs from 'classnames'
 import { formatAmount, numToWei, splitFormat } from '../../utils/format'
 import { getRandomIntInclusive } from '../../utils/index'
 import { Button } from 'antd'
@@ -33,6 +34,7 @@ const DepositPopup = (props) => {
   const [amount, setAmount] = useState('')
   const [fee, setFee] = useState(0)
   const [loadFlag, setLoadFlag] = useState(false)
+  const [nowTime, setNowTime] = useState(parseInt(Date.now() / 1000))
 
   const { balance } = useBalance(farmPools && farmPools.MLP)
 
@@ -45,11 +47,30 @@ const DepositPopup = (props) => {
     setFee(_fee)
   }, [])
 
-  useEffect(() => {
-    if (farmPools && farmPools.allowance > 0) {
-      setApprove(false)
-    }
-  }, [farmPools])
+useEffect(() => {
+  const timerId = setTimeout(() => {
+    const nowTime = parseInt(Date.now() / 1000)
+    setNowTime(nowTime)
+  }, 1000)
+  return () => {
+    clearTimeout(timerId)
+  }
+}, [nowTime])
+
+  let disableBtn = false
+  if (
+    farmPools &&
+    !farmPools.dueDate &&
+    farmPools.openDate > nowTime
+  ) {
+    disableBtn = true
+    console.log(disableBtn, 'disable_btn')
+  }
+    useEffect(() => {
+      if (farmPools && farmPools.allowance > 0) {
+        setApprove(false)
+      }
+    }, [farmPools])
 
   const onMax = () => {
     let max = balance
@@ -113,7 +134,10 @@ const DepositPopup = (props) => {
     if (isNaN(parseInt(amount))) {
       return false
     }
-    if (loadFlag) return
+    if (disableBtn) {
+      return false
+    }
+     if (loadFlag) return
     setLoadFlag(true)
     const pool_contract = getContract(library, farmPools.abi, farmPools.address)
     pool_contract.methods
@@ -208,7 +232,12 @@ const DepositPopup = (props) => {
         )}
 
         {!approve && (
-          <Button type='primary' onClick={onConfirm} loading={loadFlag}>
+          <Button
+            type='primary'
+            className={cs(disableBtn && 'disable_btn')}
+            onClick={onConfirm}
+            loading={loadFlag}
+          >
             <FormattedMessage id='farm3' />
           </Button>
         )}

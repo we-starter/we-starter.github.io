@@ -41,7 +41,7 @@ export default [
     icon: 'PAUL-HT_small@2x.png',
     rewards1: 'WAR',
     rewards2: null,
-    address: '0x26D0928EDBb5486Dd29f3DE4Ba981f78149Bff90',
+    address: '0xF01f44B1b5770d3c5dc54FE1455786d1227736CC',
     rewards1Address: '0x910651F81a605a6Ef35d05527d24A72fecef8bF0',
     rewards2Address: null,
     // apr
@@ -59,7 +59,7 @@ export default [
     abi: StakingPool3,
     start_at: '',
     time: '',
-    openDate: null,
+    openDate: '1623153600',
     dueDate: null,
     earnName: 'APY',
     status: 0,
