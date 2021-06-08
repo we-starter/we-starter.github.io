@@ -21,15 +21,16 @@ import {
   HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
   waitingForInit,
   waitingPending,
+  RANDOM_NUMBER,
 } from '../../const'
 import { mainContext } from '../../reducer'
 import BigNumber from 'bignumber.js'
 
 const DepositPopup = (props) => {
   const { intl, icon, onClose, pool } = props
-  const farmPools = pool
+  const [farmPools, setFarmPools] = useState(pool)
   const { account, active, library, chainId } = useActiveWeb3React()
-  const { dispatch } = useContext(mainContext)
+  const { dispatch, state } = useContext(mainContext)
   const [approve, setApprove] = useState(true)
   const [amount, setAmount] = useState('')
   const [fee, setFee] = useState(0)
@@ -46,6 +47,10 @@ const DepositPopup = (props) => {
     const _fee = gas_limit.multipliedBy(gas_price).toString()
     setFee(_fee)
   }, [])
+
+   useEffect(() => {
+     setFarmPools(props.pool)
+   }, [props])
 
 useEffect(() => {
   const timerId = setTimeout(() => {
@@ -69,7 +74,7 @@ useEffect(() => {
       if (farmPools && farmPools.allowance > 0) {
         setApprove(false)
       }
-    }, [farmPools, farmPools && farmPools.allowance])
+    }, [farmPools, farmPools && farmPools.allowance, state.randomNumber])
 
   const onMax = () => {
     let max = balance
@@ -106,6 +111,10 @@ useEffect(() => {
       })
       .on('receipt', (_, receipt) => {
         console.log('approve success')
+         dispatch({
+           type: RANDOM_NUMBER,
+           randomNumber: Math.random(),
+         })
         setLoadFlag(false)
         setApprove(false)
       })
