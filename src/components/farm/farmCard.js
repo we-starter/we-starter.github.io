@@ -80,7 +80,17 @@ const FarmCard = (props) => {
       <h3 className='farm_index_card_title'>{farmPools && farmPools.name}</h3>
       <div className='farm_index_card_content'>
         <p className='apr'>
-          {aprPercentage}%
+          {farmPools &&
+            farmPools.name === 'WAR POOL (DAO)' &&
+            farmPools.openDate > now &&
+            '--'}
+          {farmPools &&
+            farmPools.name === 'WAR POOL (DAO)' &&
+            farmPools.openDate < now &&
+            (aprPercentage * 1 > 999999.99 ? '999999.99%' : aprPercentage)}
+          {farmPools &&
+            farmPools.name !== 'WAR POOL (DAO)' &&
+            aprPercentage + '%'}
           <span className='content_name'>
             {farmPools && farmPools.earnName}
             {farmPools && farmPools.name === 'WAR POOL (DAO)' && (
@@ -175,53 +185,51 @@ const FarmCard = (props) => {
                 </span>
               </Timer>
             )}
-            {farmPools &&
-              farmPools.openDate > now &&
-              farmPools.dueDate && (
-                <Timer
-                  initialTime={left_time}
-                  key={left_time}
-                  direction='backward'
-                  formatValue={(number) => {
-                    if (number === 0) return '00'
-                    if (number < 10) {
-                      return `0${number}`
-                    }
-                    return number
-                  }}
-                >
-                  <span>
-                    <span
-                      style={{
-                        display: 'inline-block',
-                        padding: '0 6px',
-                        background: '#C5E5C9',
-                        borderRadius: '3px',
-                      }}
-                    >
-                      <Timer.Hours />
-                      <b>
-                        <FormattedMessage id='HourM' />
-                      </b>
-                    </span>{' '}
-                    <i>/</i>{' '}
-                    <span
-                      style={{
-                        display: 'inline-block',
-                        padding: '0 6px',
-                        background: '#C5E5C9',
-                        borderRadius: '3px',
-                      }}
-                    >
-                      {' '}
-                      <Timer.Minutes />
-                      <b>
-                        <FormattedMessage id='MinM' />
-                      </b>
-                    </span>
+            {farmPools && farmPools.openDate > now && farmPools.dueDate && (
+              <Timer
+                initialTime={left_time}
+                key={left_time}
+                direction='backward'
+                formatValue={(number) => {
+                  if (number === 0) return '00'
+                  if (number < 10) {
+                    return `0${number}`
+                  }
+                  return number
+                }}
+              >
+                <span>
+                  <span
+                    style={{
+                      display: 'inline-block',
+                      padding: '0 6px',
+                      background: '#C5E5C9',
+                      borderRadius: '3px',
+                    }}
+                  >
+                    <Timer.Hours />
+                    <b>
+                      <FormattedMessage id='HourM' />
+                    </b>
+                  </span>{' '}
+                  <i>/</i>{' '}
+                  <span
+                    style={{
+                      display: 'inline-block',
+                      padding: '0 6px',
+                      background: '#C5E5C9',
+                      borderRadius: '3px',
+                    }}
+                  >
+                    {' '}
+                    <Timer.Minutes />
+                    <b>
+                      <FormattedMessage id='MinM' />
+                    </b>
                   </span>
-                </Timer>
-              )}
+                </span>
+              </Timer>
+            )}
             {farmPools && farmPools.dueDate > now && farmPools.openDate < now && (
               <Timer
                 initialTime={left_time}

@@ -64,13 +64,12 @@ useEffect(() => {
     farmPools.openDate > nowTime
   ) {
     disableBtn = true
-    console.log(disableBtn, 'disable_btn')
   }
     useEffect(() => {
       if (farmPools && farmPools.allowance > 0) {
         setApprove(false)
       }
-    }, [farmPools])
+    }, [farmPools, farmPools && farmPools.allowance])
 
   const onMax = () => {
     let max = balance
