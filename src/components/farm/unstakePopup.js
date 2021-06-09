@@ -6,6 +6,8 @@ import { Select } from 'antd'
 import { useBalance } from '../../pages/Hooks'
 import { getPointAddress } from '../../web3/address'
 import Web3 from 'web3'
+// 处理格式 千位符
+import { formatNumber } from 'accounting'
 import { getContract, useActiveWeb3React } from '../../web3'
 import { injectIntl } from 'react-intl'
 import ERC20 from '../../web3/abi/ERC20.json'
@@ -110,10 +112,26 @@ const UnstakePopup = (props) => {
       <p className='form-app__inputbox-after-text farm_popup_avaliable'>
         <FormattedMessage id='farm12' />
         <span>
-          {farmPools && farmPools.balanceOf && farmPools.name !== 'WAR'
-            ? farmPools.balanceOf + ' ' + farmPools.rewards
-            : farmPools && farmPools.balanceOf && farmPools.name === 'WAR'
-            ? splitFormat(farmPools.balanceOf, 6) + ' ' + farmPools.rewards
+          {farmPools &&
+          farmPools.balanceOf &&
+          farmPools.name !== 'WAR POOL (DAO)'
+            ? formatNumber(farmPools.balanceOf, {
+                thousand: ',',
+                decimal: '.',
+                precision: farmPools.balanceOf - 0 > 0 ? 6 : 0,
+              }) +
+              ' ' +
+              farmPools.rewards
+            : farmPools &&
+              farmPools.balanceOf &&
+              farmPools.name === 'WAR POOL (DAO)'
+            ? formatNumber(farmPools.balanceOf, {
+                thousand: ',',
+                decimal: '.',
+                precision: farmPools.balanceOf - 0 > 0 ? 4 : 0,
+              }) +
+              ' ' +
+              farmPools.rewards
             : '--'}
         </span>
       </p>
@@ -122,7 +140,11 @@ const UnstakePopup = (props) => {
         <div className='form-app__inputbox-control'>
           <div className='form-app__inputbox-input'>
             <input
-              value={(farmPools && farmPools.balanceOf) || ''}
+              value={
+                (farmPools && farmPools.name === 'WAR POOL (DAO)'
+                  ? splitFormat(farmPools.balanceOf, 4)
+                  : farmPools.balanceOf) || ''
+              }
               onChange={onChange}
               className='input'
               disabled
@@ -158,8 +180,28 @@ const UnstakePopup = (props) => {
           values={{ coin: (farmPools && farmPools.rewards1) || '--' }}
         />
         <span>
-          {farmPools && farmPools.earned
-            ? formatAmount(farmPools.earned) + ' ' + farmPools.rewards1
+          {farmPools && farmPools.earned && farmPools.name !== 'WAR POOL (DAO)'
+            ? formatNumber(
+                formatAmount(farmPools.earned, farmPools.decimal, 6),
+                {
+                  thousand: ',',
+                  decimal: '.',
+                  precision: formatAmount(farmPools.earned) - 0 > 0 ? 6 : 0,
+                }
+              ) +
+              ' ' +
+              farmPools.rewards1
+            : farmPools &&
+              farmPools.earned &&
+              farmPools.name === 'WAR POOL (DAO)'
+            ? formatNumber(
+                formatAmount(farmPools.earned, farmPools.decimal, 4),
+                {
+                  thousand: ',',
+                  decimal: '.',
+                  precision: formatAmount(farmPools.earned) - 0 > 0 ? 4 : 0,
+                }
+              )
             : '--'}
         </span>
       </p>
@@ -171,7 +213,12 @@ const UnstakePopup = (props) => {
           />
           <span>
             {farmPools && farmPools.earned2
-              ? formatAmount(farmPools.earned2) + ' ' + farmPools.rewards2
+              ? formatNumber(
+                  formatAmount(farmPools.earned2, farmPools.decimal, 6),
+                  formatAmount(farmPools.earned2) - 0 > 0 ? 6 : 0
+                ) +
+                ' ' +
+                farmPools.rewards2
               : '--'}
           </span>
         </p>

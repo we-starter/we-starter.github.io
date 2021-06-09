@@ -385,11 +385,15 @@ const FarmCard = (props) => {
           {farmPools &&
           farmPools.totalSupply &&
           farmPools.name !== 'WAR POOL (DAO)'
-            ? formatNumber(formatAmount(farmPools.totalSupply), {
-                thousand: ',',
-                decimal: '.',
-                precision: formatAmount(farmPools.totalSupply) - 0 > 0 ? 6 : 0,
-              })
+            ? formatNumber(
+                formatAmount(farmPools.totalSupply, farmPools.decimal, 6),
+                {
+                  thousand: ',',
+                  decimal: '.',
+                  precision:
+                    formatAmount(farmPools.totalSupply) - 0 > 0 ? 6 : 0,
+                }
+              )
             : farmPools &&
               farmPools.totalSupply &&
               farmPools.name === 'WAR POOL (DAO)'
@@ -408,8 +412,25 @@ const FarmCard = (props) => {
       <p className='farm_index_card_value'>
         <FormattedMessage id='farm12' />
         <span>
-          {farmPools && farmPools.balanceOf
-            ? farmPools.balanceOf +
+          {farmPools &&
+          farmPools.balanceOf &&
+          farmPools.name !== 'WAR POOL (DAO)'
+            ? formatNumber(splitFormat(farmPools.balanceOf, 6), {
+                thousand: ',',
+                decimal: '.',
+                precision: farmPools.balanceOf - 0 > 0 ? 6 : 0,
+              }) +
+              '(' +
+              (balanceProportion - 0 === 0 ? '0.00' : balanceProportion) +
+              '%)'
+            : farmPools &&
+              farmPools.balanceOf &&
+              farmPools.name === 'WAR POOL (DAO)'
+            ? formatNumber(splitFormat(farmPools.balanceOf, 4), {
+                thousand: ',',
+                decimal: '.',
+                precision: farmPools.balanceOf - 0 > 0 ? 4 : 0,
+              }) +
               '(' +
               (balanceProportion - 0 === 0 ? '0.00' : balanceProportion) +
               '%)'
@@ -423,7 +444,7 @@ const FarmCard = (props) => {
           {farmPools &&
           farmPools.balanceOf &&
           farmPools.name !== 'WAR POOL (DAO)'
-            ? formatNumber(formatAmount(balance), {
+            ? formatNumber(formatAmount(balance, farmPools.decimal, 6), {
                 thousand: ',',
                 decimal: '.',
                 precision: formatAmount(balance) - 0 > 0 ? 6 : 0,
@@ -511,8 +532,28 @@ const FarmCard = (props) => {
             values={{ coin: farmPools && farmPools.rewards1 }}
           />
           <span>
-            {farmPools && farmPools.earned
-              ? formatAmount(farmPools.earned)
+            {farmPools &&
+            farmPools.earned &&
+            farmPools.name !== 'WAR POOL (DAO)'
+              ? formatNumber(
+                  formatAmount(farmPools.earned, farmPools.decimal, 6),
+                  {
+                    thousand: ',',
+                    decimal: '.',
+                    precision: formatAmount(farmPools.earned) - 0 > 0 ? 6 : 0,
+                  }
+                )
+              : farmPools &&
+                farmPools.earned &&
+                farmPools.name === 'WAR POOL (DAO)'
+              ? formatNumber(
+                  formatAmount(farmPools.earned, farmPools.decimal, 4),
+                  {
+                    thousand: ',',
+                    decimal: '.',
+                    precision: formatAmount(farmPools.earned) - 0 > 0 ? 4 : 0,
+                  }
+                )
               : '--'}
           </span>
         </p>
@@ -524,7 +565,10 @@ const FarmCard = (props) => {
             />
             <span>
               {farmPools && farmPools.earned2
-                ? formatAmount(farmPools.earned2)
+                ? formatNumber(
+                    formatAmount(farmPools.earned2, farmPools.decimal, 6),
+                    formatAmount(farmPools.earned2) - 0 > 0 ? 6 : 0
+                  )
                 : '--'}
             </span>
           </p>
