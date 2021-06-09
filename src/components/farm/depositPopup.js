@@ -11,6 +11,8 @@ import { HANDLE_WALLET_MODAL } from '../../const'
 import { getContract, useActiveWeb3React } from '../../web3'
 import { injectIntl } from 'react-intl'
 import ERC20 from '../../web3/abi/ERC20.json'
+// 处理格式 千位符
+import { formatNumber } from 'accounting'
 import { FormattedMessage } from 'react-intl'
 import { useFarmInfo } from '../../pages/pools/Hooks'
 import {
@@ -185,7 +187,23 @@ useEffect(() => {
       <p className='form-app__inputbox-after-text farm_popup_avaliable'>
         <FormattedMessage id='farm4' />
         <span>
-          {farmPools ? formatAmount(balance) + ' ' + farmPools.rewards : '--'}
+          {farmPools && farmPools.name !== 'WAR POOL (DAO)'
+            ? formatNumber(formatAmount(balance, farmPools.decimal, 6), {
+                thousand: ',',
+                decimal: '.',
+                precision: formatAmount(balance) - 0 > 0 ? 6 : 0,
+              }) +
+              ' ' +
+              farmPools.rewards
+            : farmPools && farmPools.name === 'WAR POOL (DAO)'
+            ? formatNumber(formatAmount(balance, farmPools.decimal, 4), {
+                thousand: ',',
+                decimal: '.',
+                precision: formatAmount(balance) - 0 > 0 ? 4 : 0,
+              }) +
+              ' ' +
+              farmPools.rewards
+            : '--'}
         </span>
       </p>
 

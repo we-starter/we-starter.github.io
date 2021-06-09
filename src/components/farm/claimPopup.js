@@ -6,6 +6,8 @@ import { Select } from 'antd'
 import { useBalance } from '../../pages/Hooks'
 import { getPointAddress } from '../../web3/address'
 import Web3 from 'web3'
+// 处理格式 千位符
+import { formatNumber } from 'accounting'
 import { getContract, useActiveWeb3React } from '../../web3'
 import { injectIntl } from 'react-intl'
 import ERC20 from '../../web3/abi/ERC20.json'
@@ -83,7 +85,16 @@ const ClaimPopup = (props) => {
         />
         <span>
           {farmPools && farmPools.earned
-            ? formatAmount(farmPools.earned) + ' ' + farmPools.rewards1
+            ? formatNumber(
+                formatAmount(farmPools.earned, farmPools.decimal, 6),
+                {
+                  thousand: ',',
+                  decimal: '.',
+                  precision: formatAmount(farmPools.earned) - 0 > 0 ? 6 : 0,
+                }
+              ) +
+              ' ' +
+              farmPools.rewards1
             : '--'}
         </span>
       </p>
@@ -94,10 +105,15 @@ const ClaimPopup = (props) => {
             values={{ coin: farmPools && farmPools.rewards2 }}
           />
           <span>
-          {farmPools && farmPools.earned2
-            ? formatAmount(farmPools.earned2) + ' ' + farmPools.rewards2
-            : '--'}
-        </span>
+            {farmPools && farmPools.earned2
+              ? formatNumber(
+                  formatAmount(farmPools.earned2, farmPools.decimal, 6),
+                  formatAmount(farmPools.earned2) - 0 > 0 ? 6 : 0
+                ) +
+                ' ' +
+                farmPools.rewards2
+              : '--'}
+          </span>
         </p>
       )}
 

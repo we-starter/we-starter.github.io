@@ -8,6 +8,8 @@ import { formatAmount, splitFormat } from '../../utils/format'
 import { useAPR, useMdxARP } from '../../pages/pools/Hooks'
 import { useBalance } from '../../pages/Hooks'
 import Timer from 'react-compound-timer'
+// 处理格式 千位符
+import { formatNumber } from 'accounting'
 
 const FarmCard = (props) => {
   const { dispatch, state } = useContext(mainContext)
@@ -87,7 +89,9 @@ const FarmCard = (props) => {
           {farmPools &&
             farmPools.name === 'WAR POOL (DAO)' &&
             farmPools.openDate < now &&
-            (aprPercentage * 1 > 999999.99 ? '999999.99%' : aprPercentage + '%')}
+            (aprPercentage * 1 > 999999.99
+              ? '999999.99%'
+              : aprPercentage + '%')}
           {farmPools &&
             farmPools.name !== 'WAR POOL (DAO)' &&
             aprPercentage + '%'}
@@ -381,11 +385,27 @@ const FarmCard = (props) => {
           {farmPools &&
           farmPools.totalSupply &&
           farmPools.name !== 'WAR POOL (DAO)'
-            ? formatAmount(farmPools.totalSupply)
+            ? formatNumber(
+                formatAmount(farmPools.totalSupply, farmPools.decimal, 6),
+                {
+                  thousand: ',',
+                  decimal: '.',
+                  precision:
+                    formatAmount(farmPools.totalSupply) - 0 > 0 ? 6 : 0,
+                }
+              )
             : farmPools &&
               farmPools.totalSupply &&
               farmPools.name === 'WAR POOL (DAO)'
-            ? formatAmount(farmPools.totalSupply, farmPools.decimal, 6)
+            ? formatNumber(
+                formatAmount(farmPools.totalSupply, farmPools.decimal, 4),
+                {
+                  thousand: ',',
+                  decimal: '.',
+                  precision:
+                    formatAmount(farmPools.totalSupply) - 0 > 0 ? 4 : 0,
+                }
+              )
             : '--'}
         </span>
       </p>
@@ -395,14 +415,22 @@ const FarmCard = (props) => {
           {farmPools &&
           farmPools.balanceOf &&
           farmPools.name !== 'WAR POOL (DAO)'
-            ? farmPools.balanceOf +
+            ? formatNumber(splitFormat(farmPools.balanceOf, 6), {
+                thousand: ',',
+                decimal: '.',
+                precision: farmPools.balanceOf - 0 > 0 ? 6 : 0,
+              }) +
               '(' +
               (balanceProportion - 0 === 0 ? '0.00' : balanceProportion) +
               '%)'
             : farmPools &&
               farmPools.balanceOf &&
               farmPools.name === 'WAR POOL (DAO)'
-            ? splitFormat(farmPools.balanceOf, 6) +
+            ? formatNumber(splitFormat(farmPools.balanceOf, 4), {
+                thousand: ',',
+                decimal: '.',
+                precision: farmPools.balanceOf - 0 > 0 ? 4 : 0,
+              }) +
               '(' +
               (balanceProportion - 0 === 0 ? '0.00' : balanceProportion) +
               '%)'
@@ -411,9 +439,25 @@ const FarmCard = (props) => {
       </p>
       <p className='farm_index_card_value'>
         <FormattedMessage id='farm4' />
-        {/* 为了和 farmPools.balanceOf 展示同步 */}
+        {/* 为了和 farmPools.balanceOf 展示同步 formatNumber */}
         <span>
-          {farmPools && farmPools.balanceOf ? formatAmount(balance) : '--'}
+          {farmPools &&
+          farmPools.balanceOf &&
+          farmPools.name !== 'WAR POOL (DAO)'
+            ? formatNumber(formatAmount(balance, farmPools.decimal, 6), {
+                thousand: ',',
+                decimal: '.',
+                precision: formatAmount(balance) - 0 > 0 ? 6 : 0,
+              })
+            : farmPools &&
+              farmPools.balanceOf &&
+              farmPools.name === 'WAR POOL (DAO)'
+            ? formatNumber(formatAmount(balance, farmPools.decimal, 4), {
+                thousand: ',',
+                decimal: '.',
+                precision: formatAmount(balance) - 0 > 0 ? 4 : 0,
+              })
+            : '--'}
         </span>
       </p>
       {farmPools && farmPools.name !== 'WAR POOL (DAO)' && (
@@ -488,8 +532,28 @@ const FarmCard = (props) => {
             values={{ coin: farmPools && farmPools.rewards1 }}
           />
           <span>
-            {farmPools && farmPools.earned
-              ? formatAmount(farmPools.earned)
+            {farmPools &&
+            farmPools.earned &&
+            farmPools.name !== 'WAR POOL (DAO)'
+              ? formatNumber(
+                  formatAmount(farmPools.earned, farmPools.decimal, 6),
+                  {
+                    thousand: ',',
+                    decimal: '.',
+                    precision: formatAmount(farmPools.earned) - 0 > 0 ? 6 : 0,
+                  }
+                )
+              : farmPools &&
+                farmPools.earned &&
+                farmPools.name === 'WAR POOL (DAO)'
+              ? formatNumber(
+                  formatAmount(farmPools.earned, farmPools.decimal, 4),
+                  {
+                    thousand: ',',
+                    decimal: '.',
+                    precision: formatAmount(farmPools.earned) - 0 > 0 ? 4 : 0,
+                  }
+                )
               : '--'}
           </span>
         </p>
@@ -501,7 +565,10 @@ const FarmCard = (props) => {
             />
             <span>
               {farmPools && farmPools.earned2
-                ? formatAmount(farmPools.earned2)
+                ? formatNumber(
+                    formatAmount(farmPools.earned2, farmPools.decimal, 6),
+                    formatAmount(farmPools.earned2) - 0 > 0 ? 6 : 0
+                  )
                 : '--'}
             </span>
           </p>
