@@ -5,18 +5,25 @@
   }
   .farm_index {
     position: relative;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 74px auto 112px;
+    // display: flex;
+    // justify-content: space-between;
+    // align-items: center;
+    margin: 0 auto;
+     padding: 44px 0 112px;
     width: 1080px;
     &_card {
       position: relative;
+      display: inline-block;
       padding: 42px 30px 0;
+      margin-top: 30px;
       width: 332px;
       height: 440px;
       background: #e0f8e3;
       border-radius: 20px;
+      vertical-align: top;
+      &:nth-child(3n-1) {
+          margin: 30px 30px 0;
+        }
       &:after {
         content: '';
         position: absolute;
@@ -225,19 +232,26 @@
   }
   .farm_index {
     position: relative;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 74px auto 0;
+    // display: flex;
+    // justify-content: space-between;
+    // align-items: center;
+    margin: 0 auto;
+    padding: 44px 0 112px;
     padding-bottom: 112px;
     width: 1080px;
     &_card {
       position: relative;
+      display: inline-block;
       padding: 42px 30px 0;
+      margin-top: 30px;
       width: 332px;
       height: 440px;
       background: #e0f8e3;
       border-radius: 20px;
+      vertical-align: top;
+      &:nth-child(3n-1) {
+          margin: 30px 30px 0;
+        }
       &:after {
         content: '';
         position: absolute;
