@@ -46,7 +46,7 @@ import satellite from '../assets/image/satellite.png'
 import toolApi from '../apis/toolApi'
 
 const injected = new InjectedConnector({
-  supportedChainIds: [3, 128],
+  supportedChainIds: [3, 56, 128],
 })
 
 const POLLING_INTERVAL = 12000
@@ -58,20 +58,9 @@ const walletconnect = new WalletConnectConnector({
   pollingInterval: POLLING_INTERVAL,
 })
 
-const ledger = new LedgerConnector({
-  chainId: 128,
-  url: 'https://http-mainnet-node.huobichain.com',
-  pollingInterval: POLLING_INTERVAL,
-})
-
 const wallets = {
   MetaMask: injected,
   WalletConnect: walletconnect,
-  Ledger: ledger,
-  //TrustWallet: injected,
-  //Squarelink: squarelink,
-  //Torus: torus,
-  //Aut
 }
 if (window.ethereum) {
   window.ethereum.on('networkChanged', () => {
