@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import cs from 'classnames'
 import { FormattedMessage, injectIntl } from 'react-intl'
 import BigNumber from 'bignumber.js'
+import { useActiveWeb3React } from '../../web3'
 import { HANDLE_WALLET_MODAL } from '../../const'
 import { mainContext } from '../../reducer'
 import { formatAmount, splitFormat } from '../../utils/format'
@@ -12,6 +13,7 @@ import Timer from 'react-compound-timer'
 import { formatNumber } from 'accounting'
 
 const FarmCard = (props) => {
+  const { chainId } = useActiveWeb3React()
   const { dispatch, state } = useContext(mainContext)
   const { pools } = props
   const farmPools = pools

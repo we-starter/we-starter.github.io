@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { Header } from '../../components/header/Header'
-import { PoolTab } from '../../components/pooltab/PoolTab'
 import { withRouter } from 'react-router'
 
 const ExtractComponents = (props) => {

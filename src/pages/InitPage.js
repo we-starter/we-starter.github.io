@@ -46,7 +46,7 @@ import satellite from '../assets/image/satellite.png'
 import toolApi from '../apis/toolApi'
 
 const injected = new InjectedConnector({
-  supportedChainIds: [3, 128, 56],
+  supportedChainIds: [3, 56, 128],
 })
 
 const POLLING_INTERVAL = 12000

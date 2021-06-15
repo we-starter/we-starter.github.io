@@ -52,9 +52,9 @@ export const WalletConnect = ({ onClose, onCancel }) => {
 
   const { connector, activate, active } = context
 
-    const {
-      changeNetworkStatus,
-    } = state
+  const {
+    changeNetworkStatus,
+  } = state
 
   useEffect(() => {
     if (activatingConnector && activatingConnector === connector) {

@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import cs from 'classnames'
+import { useActiveWeb3React } from '../../web3'
 import { FormattedMessage, injectIntl } from 'react-intl'
 import FarmHeader from '../../components/farm/farmHeader'
 import Footer from '../../components/Footer'
@@ -8,6 +9,7 @@ import { useFarmInfo } from './Hooks'
 import Coming_Small from '../../assets/icon/farm/coming_small@2x.png'
 
 const Farm = (props) => {
+   const { chainId } = useActiveWeb3React()
   const pools = useFarmInfo()
 
   const isComing = (index) => {
@@ -67,7 +69,7 @@ const Farm = (props) => {
           pools.map((item, index) => {
             return <FarmCard pools={item} key={index} />
           })}
-        {pools.length < 3 && [1].map(() => isComing(1))}
+        {pools.length < 3 && [1, 2, 3].map(() => isComing(1))}
       </div>
       <Footer />
     </div>

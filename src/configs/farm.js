@@ -35,6 +35,7 @@ export default [
     decimal: 18,
     is_coming: false,
     mdexReward: true,
+    networkId: 128,
   },
   {
     name: 'WAR POOL (DAO)',
@@ -67,6 +68,7 @@ export default [
     decimal: 18,
     is_coming: false,
     mdexReward: false,
+    networkId: 128,
   },
   {
     name: 'PAUL-USDT LPT',
@@ -99,5 +101,6 @@ export default [
     decimal: 18,
     is_coming: false,
     mdexReward: false,
+    networkId: 128,
   },
 ]

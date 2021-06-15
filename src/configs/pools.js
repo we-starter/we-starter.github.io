@@ -59,6 +59,7 @@ export default [
     committed: '', // 超募比例
     total: '', // 参与资金规模
     poolType: 0, // 值为 1 代表 定向
+    networkId: 128,
   },
   {
     name: 'dFuture',
@@ -115,6 +116,7 @@ export default [
     committed: '', // 超募比例
     total: '$51,940,000', // 参与资金规模
     poolType: 0, // 值为 1 代表 定向
+    networkId: 128,
   },
   {
     name: 'FIX',
@@ -171,6 +173,7 @@ export default [
     committed: '', // 超募比例
     total: '', // 参与资金规模
     poolType: 0, // 值为 1 代表 定向
+    networkId: 128,
   },
   {
     name: 'FIX',
@@ -227,6 +230,7 @@ export default [
     committed: '', // 超募比例
     total: '$76,680,000', // 参与资金规模
     poolType: 0, // 值为 1 代表 定向
+    networkId: 128,
   },
   {
     name: 'DORA',
@@ -283,6 +287,7 @@ export default [
     committed: '', // 超募比例
     total: '', // 参与资金规模
     poolType: 0, // 值为 1 代表 定向
+    networkId: 128,
   },
   {
     name: 'Cook',
@@ -339,6 +344,7 @@ export default [
     committed: '', // 超募比例
     total: '', // 参与资金规模
     poolType: 0, // 值为 1 代表 定向
+    networkId: 128,
   },
   {
     name: 'Cook',
@@ -395,6 +401,7 @@ export default [
     committed: '', // 超募比例
     total: '$21,480,000', // 参与资金规模
     poolType: 0, // 值为 1 代表 定向
+    networkId: 128,
   },
   {
     name: 'ChainSwap',
@@ -451,6 +458,7 @@ export default [
     committed: '', // 超募比例
     total: '$115,515,300', // 参与资金规模
     poolType: 0, // 值为 1 代表 定向
+    networkId: 128,
   },
   {
     name: 'WAR(Influencer)',
@@ -507,6 +515,7 @@ export default [
     committed: '', // 超募比例
     total: '', // 参与资金规模
     poolType: 1, // 值为 1 代表 定向
+    networkId: 128,
   },
   {
     name: 'WAR',
@@ -563,6 +572,7 @@ export default [
     committed: '', // 超募比例
     total: '', // 参与资金规模
     poolType: 0, // 值为 1 代表 定向
+    networkId: 128,
   },
   {
     name: 'WAR',
@@ -619,6 +629,7 @@ export default [
     committed: '', // 超募比例
     total: '$233,144,700', // 参与资金规模
     poolType: 0, // 值为 1 代表 定向
+    networkId: 128,
   },
   {
     name: 'BLACK',
@@ -675,6 +686,7 @@ export default [
     committed: '', // 超募比例
     total: '', // 参与资金规模
     poolType: 0, // 值为 1 代表 定向
+    networkId: 128,
   },
   {
     name: 'BLACK',
@@ -731,6 +743,7 @@ export default [
     committed: '', // 超募比例
     total: '$130,820,200', // 参与资金规模
     poolType: 0, // 值为 1 代表 定向
+    networkId: 128,
   },
   {
     name: 'Lever',
@@ -787,6 +800,7 @@ export default [
     committed: '', // 超募比例
     total: '$183,437,100', // 参与资金规模
     poolType: 0, // 值为 1 代表 定向
+    networkId: 128,
   },
   {
     name: 'YFX.COM',
@@ -843,6 +857,7 @@ export default [
     committed: '', // 超募比例
     total: '', // 参与资金规模
     poolType: 0, // 值为 1 代表 定向
+    networkId: 128,
   },
   {
     name: 'YFX.COM',
@@ -899,6 +914,7 @@ export default [
     committed: '', // 超募比例
     total: '$138,221,500', // 参与资金规模
     poolType: 0, // 值为 1 代表 定向
+    networkId: 128,
   },
   {
     name: 'O3 Swap',
@@ -955,6 +971,7 @@ export default [
     committed: '', // 超募比例
     total: '$133,173,600', // 参与资金规模
     poolType: 0, // 值为 1 代表 定向
+    networkId: 128,
   },
   {
     name: 'O3 Swap',
@@ -1011,6 +1028,7 @@ export default [
     committed: '', // 超募比例
     total: '', // 参与资金规模
     poolType: 0, // 值为 1 代表 定向
+    networkId: 128,
   },
   {
     name: 'CORA',
@@ -1067,6 +1085,7 @@ export default [
     committed: '', // 超募比例
     total: '', // 参与资金规模
     poolType: 0, // 值为 1 代表 定向
+    networkId: 128,
   },
   {
     name: 'COW',
@@ -1122,6 +1141,7 @@ export default [
     committed: '', // 超募比例
     total: '', // 参与资金规模
     poolType: 0, // 值为 1 代表 定向
+    networkId: 128,
   },
   {
     name: 'COW(Influencer)',
@@ -1177,6 +1197,7 @@ export default [
     committed: '', // 超募比例
     total: '', // 参与资金规模
     poolType: 1, // 值为 1 代表 定向
+    networkId: 128,
   },
   {
     name: 'COW(Star)',
@@ -1232,6 +1253,7 @@ export default [
     committed: '', // 超募比例
     total: '', // 参与资金规模
     poolType: 1, // 值为 1 代表定向
+    networkId: 128,
   },
   {
     name: 'PAUL',
@@ -1288,6 +1310,7 @@ export default [
     committed: '', // 超募比例
     total: '', // 参与资金规模
     poolType: 0, // 值为 1 代表定向
+    networkId: 128,
   },
   {
     name: 'PAUL',
@@ -1346,6 +1369,7 @@ export default [
     committed: '', // 超募比例
     total: '$1,759,500', // 参与资金规模
     poolType: 0, // 值为 1 代表定向
+    networkId: 128,
   },
   // 测试合约配置
   // {

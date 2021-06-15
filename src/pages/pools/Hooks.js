@@ -377,12 +377,16 @@ export const usePoolsInfo = (address = '') => {
 
   const now = parseInt(Date.now() / 1000)
 
-  const pools = Pools.filter((o) => address === '' || o.address === address)
+  const pools = Pools.filter(
+    (o) =>
+      chainId == o.networkId && (address === '' || o.address === address)
+  )
 
   const [poolsInfo, setPoolsInfo] = useState(pools)
 
   // 数据预处理
   pools.map((item) => {
+    if (chainId * 1 !== item.networkId) return
     let status = item.status
     if (status === 0) {
       status = now < item.start_at ? 0 : now < item.time ? 1 : 2
@@ -406,6 +410,8 @@ export const usePoolsInfo = (address = '') => {
     if (library) {
       Promise.all(
         pools.map((pool) => {
+          // 链不匹配 不调用合约
+          if (chainId * 1 !== pool.networkId) return
           // 如果还未开始，则不调用合约
           if (pool.is_coming) return pool
 
@@ -713,13 +719,16 @@ export const usePoolsLBPInfo = (address = '') => {
   const now = parseInt(Date.now() / 1000)
 
   const poolsLBP = PoolsLBP.filter(
-    (o) => address === '' || o.address === address
+    (o) => 
+      chainId == o.networkId && (address === '' || o.address === address)
   )
 
   const [poolsLBPInfo, setPoolsLBPInfo] = useState(poolsLBP)
 
   // 数据预处理
   poolsLBP.map((item) => {
+    // 链不匹配 不调用合约
+    if (chainId * 1 !== item.networkId) return
     let status = item.status
     if (status === 0) {
       status = now < item.start_at ? 0 : now < item.time ? 1 : 3
@@ -739,6 +748,8 @@ export const usePoolsLBPInfo = (address = '') => {
       const multicallProvider = getMultiCallProvider(library, chainId)
       Promise.all(
         poolsLBP.map((pool) => {
+          // 链不匹配 不调用合约
+          if (chainId * 1 !== pool.networkId) return
           // 如果还未开始，则不调用合约
           if (pool.is_coming) return pool
 
@@ -804,13 +815,19 @@ export const useFarmInfo = (address = '') => {
 
   const now = parseInt(Date.now() / 1000)
 
-  const [farmPoolsInfo, setFarmPoolsInfo] = useState(Farm)
+    const farmData = Farm.filter(
+      (o) => chainId == o.networkId
+    )
+
+  const [farmPoolsInfo, setFarmPoolsInfo] = useState(farmData)
 
   useEffect(() => {
     if (library) {
       const multicallProvider = getMultiCallProvider(library, chainId)
       Promise.all(
-        Farm.map((pool) => {
+        farmData.map((pool) => {
+          // 链不匹配 不调用合约
+          if (chainId * 1 !== pool.networkId) return
           const pool_contract = new Contract(pool.address, pool.abi)
           const currency_token = new Contract(pool.MLP, ERC20)
           const promise_list = [
@@ -1101,7 +1118,7 @@ export const useMdxARP = (
 export const useMDexPrice = (address1, address2, amount = 1, path = []) => {
   const FEE_RADIO = '0.003'
   const { account, active, library, chainId } = useActiveWeb3React()
-  const blockHeight = useBlockHeight()
+   const blockHeight = useBlockHeight()
   const [price, setPrice] = useState(0)
   const [fee, setFee] = useState(0)
 

@@ -465,6 +465,21 @@
       }
     }
   }
+   .header-network {
+    margin-right: 14px;
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    @media #{$mdWidth} {
+      display: none;
+    }
+    @media #{$smWidth} {
+      display: none;
+    }
+    @media #{$xsWidth} {
+      display: none;
+    }
+  }
 }
 
 @media #{$mdWidth} {

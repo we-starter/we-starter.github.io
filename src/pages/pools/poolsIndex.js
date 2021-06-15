@@ -96,7 +96,6 @@ const PoolsIndex = (props) => {
   //     }
   //   }
   // }, [props.location])
-
   _pools.sort(function (x, y) {
     if (x.status < 3 && y.status < 3) {
       // return x.start_at - y.start_at
@@ -818,8 +817,8 @@ const PoolsIndex = (props) => {
               listData.map((pool, index) => {
                 return renderCard(pool, index)
               })}
-            {/* {tabFlag === 1 && [1, 2].map(noLogin)} */}
-            {[1, 2].includes(tabFlag) && !listData.length && noData()}
+            {tabFlag === 1 && listData.length < 3 && [1, 2, 3].map(noLogin)}
+            {[2].includes(tabFlag) && !listData.length && noData()}
           </div>
         </div>
       </div>

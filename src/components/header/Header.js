@@ -6,13 +6,15 @@ import WeStarterGuidebookZH from '../../pdfFile/WeStarter -优质资产起跑线
 import WeStarterGuidebookEN from '../../pdfFile/WeStarter-Introduction in English.pdf'
 import { formatAddress, formatAmount } from '../../utils/format'
 import { mainContext } from '../../reducer'
-import { HANDLE_WALLET_MODAL, HANDLE_SHOW_MENUMASK_MODAL } from '../../const'
+import { HANDLE_WALLET_MODAL, HANDLE_CHANGE_NETWORKS, HANDLE_SHOW_MENUMASK_MODAL } from '../../const'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import doubleLine from '../../assets/icon/check-double-line.png'
 import { Logoicon, LogoSmallIcon } from '../../icons'
 import { ReactComponent as LogoText } from '../../assets/image/logo-text.svg'
 import { ReactComponent as More } from '../../assets/icon/more.svg'
 import dot from '../../assets/icon/dot.png'
+import BSC from '../../assets/icon/BSC@2x.png'
+import HECO from '../../assets/icon/HECO@2x.png'
 import { Banner } from '../banner/Banner'
 import Exchange from '../../assets/icon/exchange@2x.png'
 import { useHTBalance, useBalance } from '../../pages/Hooks'
@@ -236,7 +238,33 @@ export const Header = () => {
               </div> */}
             </div>
             {/* {active && <img className='exchange' src={Exchange} />} */}
-            {active && (
+
+            {chainId == 56 && (
+              <img
+                onClick={() => {
+                  dispatch({
+                    type: HANDLE_CHANGE_NETWORKS,
+                    changeNetworkStatus: true,
+                  })
+                }}
+                className='header-network'
+                src={BSC}
+              />
+            )}
+            {chainId == 128 && (
+              <img
+                onClick={() => {
+                  dispatch({
+                    type: HANDLE_CHANGE_NETWORKS,
+                    changeNetworkStatus: true,
+                  })
+                }}
+                className='header-network'
+                src={HECO}
+              />
+            )}
+
+            {active && chainId == 128 && (
               <div className='ht-balance'>
                 <span></span>
                 <p>{formatAmount(balance)} WAR</p>

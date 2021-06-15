@@ -49,18 +49,21 @@ export const Banner = () => {
   //   }
   // }, [_tmp_price_war2ht, _tmp_price_usdt2ht])
 
-  const [price, fee] = useMDexPrice(
-    chainId && WAR_ADDRESS(chainId),
-    chainId && USDT_ADDRESS(chainId),
-    1,
-    [chainId && WHT_ADDRESS(chainId)]
-  )
+  // const [price, fee] = useMDexPrice(
+  //   chainId && WAR_ADDRESS(chainId),
+  //   chainId && USDT_ADDRESS(chainId),
+  //   1,
+  //   [chainId && WHT_ADDRESS(chainId)]
+  // )
+
+   const [price, fee] = [1.6, 0]
 
   useEffect(() => {
     if (price * 1 > 0) {
       setRealTimePrice(splitFormat(price, 3))
     }
   }, [price])
+
 
   const addToken = async () => {
     try {
@@ -234,17 +237,20 @@ export const Banner = () => {
           </p>
           {/* href='https://ht.mdex.com/#/swap?outputCurrency=0x910651f81a605a6ef35d05527d24a72fecef8bf0'
           target='_blank' */}
-          <a
-            className='banner_related_data_buy'
-            onClick={() => {
-              dispatch({
-                type: HANDLE_WALLET_MODAL,
-                walletModal: 'buyCoin',
-              })
-            }}
-          >
-            <FormattedMessage id='farm17' />
-          </a>
+
+          {chainId == 128 && (
+            <a
+              className='banner_related_data_buy'
+              onClick={() => {
+                dispatch({
+                  type: HANDLE_WALLET_MODAL,
+                  walletModal: 'buyCoin',
+                })
+              }}
+            >
+              <FormattedMessage id='farm17' />
+            </a>
+          )}
         </div>
         <div className='banner_related_data'>
           <img src={Icon1} />
