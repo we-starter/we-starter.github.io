@@ -326,6 +326,8 @@ export function WAR_ADDRESS(chainId) {
       return '0x910651F81a605a6Ef35d05527d24A72fecef8bF0'
     case 3:
       return '0x910651F81a605a6Ef35d05527d24A72fecef8bF0'
+    case 56:
+      return '0x910651F81a605a6Ef35d05527d24A72fecef8bF0'
   }
 }
 
@@ -334,6 +336,8 @@ export function MDEX_FACTORY_ADDRESS(chainId) {
     case 128:
       return '0xb0b670fc1F7724119963018DB0BfA86aDb22d941'
     case 3:
+      return '0xb0b670fc1F7724119963018DB0BfA86aDb22d941'
+    case 56:
       return '0xb0b670fc1F7724119963018DB0BfA86aDb22d941'
   }
 }
@@ -344,6 +348,8 @@ export function MINE_MOUNTAIN_ADDRESS(chainId) {
       return '0xEEC6169616d6E50560E52460A2C74f74Cdf57b6F'
     case 3:
       return '0xEEC6169616d6E50560E52460A2C74f74Cdf57b6F'
+    case 56:
+      return '0xEEC6169616d6E50560E52460A2C74f74Cdf57b6F'
   }
 }
 
@@ -352,6 +358,8 @@ export function USDT_ADDRESS(chainId) {
     case 128:
       return '0xa71edc38d189767582c38a3145b5873052c3e47a'
     case 3:
+      return '0xa71edc38d189767582c38a3145b5873052c3e47a'
+    case 56:
       return '0xa71edc38d189767582c38a3145b5873052c3e47a'
   }
 }
@@ -362,6 +370,8 @@ export function WHT_ADDRESS(chainId) {
       return '0x5545153ccfca01fbd7dd11c0b23ba694d9509a6f'
     case 3:
       return ''
+    case 56:
+      return ''
   }
 }
 
@@ -370,6 +380,8 @@ export function WMDEX_ADDRESS(chainId) {
     case 128:
       return '0x25D2e80cB6B86881Fd7e07dd263Fb79f4AbE033c'
     case 3:
+      return ''
+    case 56:
       return ''
   }
 }

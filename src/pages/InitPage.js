@@ -46,13 +46,20 @@ import satellite from '../assets/image/satellite.png'
 import toolApi from '../apis/toolApi'
 
 const injected = new InjectedConnector({
-  supportedChainIds: [3, 128],
+  supportedChainIds: [3, 128, 56],
 })
 
 const POLLING_INTERVAL = 12000
 
 const walletconnect = new WalletConnectConnector({
   rpc: { 128: 'https://http-mainnet-node.huobichain.com' },
+  bridge: 'https://bridge.walletconnect.org',
+  qrcode: true,
+  pollingInterval: POLLING_INTERVAL,
+})
+
+const walletChangeBSC = new WalletConnectConnector({
+  rpc: { 56: 'https://bsc-dataseed.binance.org/' },
   bridge: 'https://bridge.walletconnect.org',
   qrcode: true,
   pollingInterval: POLLING_INTERVAL,
@@ -67,6 +74,7 @@ const ledger = new LedgerConnector({
 const wallets = {
   MetaMask: injected,
   WalletConnect: walletconnect,
+  walletChangeBSC: walletChangeBSC,
   Ledger: ledger,
   //TrustWallet: injected,
   //Squarelink: squarelink,
@@ -243,7 +251,14 @@ export const InitPage = () => {
       {walletModal === 'connect' && (
         <div className='modal-show'>
           <div className='wrapper'>
-            <WalletConnect />
+            <WalletConnect
+              onClose={() =>
+                dispatch({
+                  type: HANDLE_WALLET_MODAL,
+                  walletModal: null,
+                })
+              }
+            />
           </div>
         </div>
       )}
@@ -284,7 +299,15 @@ export const InitPage = () => {
       {walletModal === 'change' && (
         <div className='modal-show'>
           <div className='wrapper'>
-            <WalletChange
+            <WalletConnect
+              onClose={() =>
+                dispatch({
+                  type: HANDLE_WALLET_MODAL,
+                  walletModal: null,
+                })
+              }
+            />
+            {/* <WalletChange
               onClose={() =>
                 dispatch({
                   type: HANDLE_WALLET_MODAL,
@@ -297,7 +320,7 @@ export const InitPage = () => {
                   walletModal: 'status',
                 })
               }
-            />
+            /> */}
           </div>
         </div>
       )}
@@ -352,14 +375,22 @@ export const InitPage = () => {
       {changeNetworkStatus && (
         <div className='modal-show'>
           <div className='wrapper'>
-            <ChangeNetworks
+            <WalletConnect
+              onClose={() =>
+                dispatch({
+                  type: HANDLE_CHANGE_NETWORKS,
+                  walletModal: null,
+                })
+              }
+            />
+            {/* <ChangeNetworks
               onClose={() =>
                 dispatch({
                   type: HANDLE_CHANGE_NETWORKS,
                   walletModal: false,
                 })
               }
-            />
+            /> */}
           </div>
         </div>
       )}

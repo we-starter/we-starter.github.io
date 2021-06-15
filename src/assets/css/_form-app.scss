@@ -16,7 +16,6 @@
       width: 100%;
       display: flex;
       align-items: center;
-      justify-content: center;
       @media #{$smWidth} {
         flex-direction: column;
       }
@@ -24,13 +23,22 @@
         flex-direction: column;
       }
       &__item {
-        width: 320px;
-        height: 280px;
+        width: 160px;
+        height: 160px;
+        &:first-child {
+          border-right: 1px rgba(235, 233, 227, 1) solid;
+        }
         @media #{$smWidth} {
-          height: 240px;
+          height: 160px;
+           &:first-child {
+          border-right: none;
+        }
         }
         @media #{$xsWidth} {
-          height: 240px;
+          height: 160px;
+          &:first-child {
+          border-right: none;
+        }
         }
         display: flex;
         flex-direction: column;
@@ -40,7 +48,7 @@
         background: #f2f0eb;
         cursor: pointer;
         img {
-          width: 80px;
+          width: 40px;
         }
         p {
           color: rgba(34, 41, 47, 1);
@@ -570,28 +578,103 @@
 }
 
 .wallet-connect {
-  padding: 0;
+  padding: 16px 0 0;
   border-radius: 5px;
   overflow: hidden;
+      background-color: transparent;
 }
 @media #{$desktop} {
   .wallet-connect {
-    width: 640px;
+    // width: 640px;
   }
 }
 @media #{$mdWidth} {
   .wallet-connect {
-    width: 640px;
+    // width: 640px;
   }
 }
 @media #{$smWidth} {
   .wallet-connect {
-    width: 320px;
+    // width: 320px;
   }
 }
 
 @media #{$xsWidth} {
   .wallet-connect {
-    width: 320px;
+    // width: 320px;
+  }
+}
+
+.link-wallet {
+  background: #F2F0EB;
+  .form-app__inner__header {
+    max-width: 100%;
+    font-size: 18px;
+  }
+  .choose-network-title {
+    margin-top: 16px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-family: PingFangSC-Medium, PingFang SC;
+    font-weight: 500;
+    color: #121212;
+    line-height: 40px;
+    text-align: left;
+  }
+  .choose-network {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    p {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      margin-bottom: 0;
+      margin-right: 22px;
+      width: 120px;
+      height: 42px;
+      border-radius: 5px;
+      border: 2px solid #EBE9E3;
+      cursor: pointer;
+      &:hover {
+        border: 2px solid #0F8C20;
+      }
+      &:last-child {
+        margin-right: 0;
+      }
+      img {
+        display: inline-block;
+        margin-right: 4px;
+        width: 24px;
+        height: 24px;
+        border: 1px solid 1px;
+        border-radius: 50%;
+      }
+      span {
+          font-size: 14px;
+          font-family: HelveticaNeue-Medium, HelveticaNeue;
+          font-weight: 500;
+          color: #22292F;
+          line-height: 18px;
+      }
+      svg {
+        display: none;
+      }
+    }
+    .active {
+      border: 2px solid #0F8C20;
+      svg {
+        display: inline-block;
+        position: absolute;
+        right: -1px;
+        bottom: -1px;
+        fill: #0F8C20;
+      }
+     }
+  }
+  .change-network {
+    margin-top: 38px;
+    justify-content: center;
   }
 }
