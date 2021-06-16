@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
 import cs from 'classnames'
-import PoolsHeader from '../../components/staterPools/poolsHeader'
 import chromeLine from '../../assets/icon/chrome-line@2x.png'
 import bookMarkLine from '../../assets/icon/book-mark-line@2x.png'
 import PoolsBanner from '../../components/banner/PoolsBanner'

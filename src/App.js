@@ -13,7 +13,6 @@ import { InitPage } from './pages/InitPage'
 
 import Footer from './components/Footer'
 import PoolsIndex from './pages/pools/poolsIndex'
-import WriteInformation from './pages/pools/writeInformation'
 import PoolsDetail from './pages/pools/poolsDetail'
 import PoolsDetailLBP from './pages/pools/poolsDetailLBP'
 import Farm from './pages/pools/farm'
@@ -58,11 +57,6 @@ function App() {
                 path='/pools/detailLBP/:address'
                 component={PoolsDetailLBP}
               ></Route>
-              {/* <Route
-                exact
-                path='/information'
-                component={WriteInformation}
-              ></Route> */}
             </Switch>
             <InitPage />
             {/* <Footer /> */}

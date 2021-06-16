@@ -63,7 +63,7 @@ export const WalletModal = ({ onChange, onClose }) => {
               </div>
             </CopyToClipboard>
 
-            <div className='form-app__inner__frame' onClick={onChange}>
+            <div className='form-app__inner__frame' style={{marginBottom: '24px'}} onClick={onChange}>
               <img src={switchIcon} alt='' />
               <p>
                 <FormattedMessage id='modalsText61' />
@@ -73,7 +73,7 @@ export const WalletModal = ({ onChange, onClose }) => {
             <button
               style={{ marginTop: 30, width: '100%' }}
               type='button'
-              className='transction-submitted__btn btn'
+              className='btn transction-submitted__btn'
               onClick={() => {
                 deactivate()
                 dispatch({

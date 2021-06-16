@@ -404,8 +404,20 @@
     cursor: pointer;
     position: absolute;
     top: 30px;
-    right: 40px;
     width: 20px;
+    @media #{$desktop} {
+      right: 40px;
+    }
+    @media #{$mdWidth} {
+      right: 40px;
+    }
+    @media #{$smWidth} {
+      right: 40px;
+    }
+
+    @media #{$xsWidth} {
+      right: 0px;
+    }
   }
 
   &__back-btn {
