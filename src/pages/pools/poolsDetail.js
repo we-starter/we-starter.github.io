@@ -22,6 +22,7 @@ import { mainContext } from '../../reducer'
 import { FormattedMessage, injectIntl } from 'react-intl'
 import BigNumber from 'bignumber.js'
 import { formatAmount, fromWei } from '../../utils/format'
+import {getScanLink} from "../../connectors";
 
 const PoolsDetail = (props) => {
   const { address } = props.match.params
@@ -271,7 +272,7 @@ const PoolsDetail = (props) => {
         </a>
         <a
           className='pools_detail_btn'
-          href={`https://hecoinfo.com/address/${address}`}
+          href={getScanLink(chainId, address, 'address')}
           target='_blank'
         >
           <FormattedMessage id='poolsDetailText4' />

@@ -1,7 +1,7 @@
 import React, {useCallback, useEffect} from 'react'
 import {InjectedConnector, NoEthereumProviderError, UserRejectedRequestError} from '@web3-react/injected-connector'
 import { WalletConnectConnector } from '@web3-react/walletconnect-connector'
-import { ChainId } from '../web3/address'
+import {ChainId, SCAN_ADDRESS} from '../web3/address'
 import {UnsupportedChainIdError, useWeb3React} from "@web3-react/core";
 
 export const POLLING_INTERVAL = 12000
@@ -39,7 +39,7 @@ const bscNetwork =  {
     decimals: 18,
   },
   rpcUrls: ['https://bsc-dataseed.binance.org/'],
-  blockExplorerUrls: ['https://bscscan.com/'],
+  blockExplorerUrls: [SCAN_ADDRESS[ChainId.BSC]],
 }
 
 const hecoNetwork = {
@@ -53,7 +53,7 @@ const hecoNetwork = {
   rpcUrls: [
     'https://http-mainnet-node.huobichain.com',
   ],
-  blockExplorerUrls: ['https://hecoinfo.com'],
+  blockExplorerUrls: [SCAN_ADDRESS[ChainId.HECO]],
 }
 
 const networkConf = {
@@ -81,6 +81,25 @@ export const changeNetwork = (chainId) => {
       reslove()
     }
   })
+}
+
+export function getScanLink(chainId, data, type) {
+  const prefix = SCAN_ADDRESS[chainId]
+  switch (type) {
+    case 'transaction': {
+      return `${prefix}/tx/${data}`
+    }
+    case 'token': {
+      return `${prefix}/token/${data}`
+    }
+    case 'block': {
+      return `${prefix}/block/${data}`
+    }
+    case 'address':
+    default: {
+      return `${prefix}/address/${data}`
+    }
+  }
 }
 
 export const useConnectWallet = () => {

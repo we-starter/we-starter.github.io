@@ -6,9 +6,10 @@ import { GALLERY_SELECT_WEB3_CONTEXT, HANDLE_WALLET_MODAL } from '../../const'
 import { injectIntl } from 'react-intl'
 import { message } from 'antd'
 import { useActiveWeb3React } from '../../web3'
+import {getScanLink} from "../../connectors";
 
 const PoolsBanner = (props) => {
-  const { active, account } = useActiveWeb3React()
+  const { active, account,chainId } = useActiveWeb3React()
   const { intl } = props
   const { address, pool, LBPFlag } = props
   const { dispatch, state } = useContext(mainContext)
@@ -39,7 +40,7 @@ const PoolsBanner = (props) => {
         <>
           <a
             className='pools_banner_dec'
-            href={'https://hecoinfo.com/address/' + address}
+            href={getScanLink(chainId, address, 'address')}
             target='_blank'
           >
             {address}
