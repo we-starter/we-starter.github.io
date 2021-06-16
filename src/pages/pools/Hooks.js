@@ -378,15 +378,14 @@ export const usePoolsInfo = (address = '') => {
   const now = parseInt(Date.now() / 1000)
 
   const pools = Pools.filter(
-    (o) =>
-      chainId == o.networkId && (address === '' || o.address === address)
+    (o) =>(address === '' || o.address === address)
   )
 
   const [poolsInfo, setPoolsInfo] = useState(pools)
 
   // 数据预处理
   pools.map((item) => {
-    if (chainId * 1 !== item.networkId) return
+    // if (chainId * 1 !== item.networkId) return
     let status = item.status
     if (status === 0) {
       status = now < item.start_at ? 0 : now < item.time ? 1 : 2
@@ -411,7 +410,7 @@ export const usePoolsInfo = (address = '') => {
       Promise.all(
         pools.map((pool) => {
           // 链不匹配 不调用合约
-          if (chainId * 1 !== pool.networkId) return
+          // if (chainId * 1 !== pool.networkId) return
           // 如果还未开始，则不调用合约
           if (pool.is_coming) return pool
 

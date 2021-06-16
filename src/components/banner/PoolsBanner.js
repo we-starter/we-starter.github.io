@@ -14,36 +14,38 @@ const PoolsBanner = (props) => {
   const { dispatch, state } = useContext(mainContext)
 
   return (
-    <div className='pools_banner'>
-      <div className='pools_banner_img'></div>
-      <h3 className='pools_banner_text'>
-        {pool && pool.type == 0 && (
-          <p>
-            {pool.underlying.symbol} <FormattedMessage id='detailTitlePublic' />
-          </p>
-        )}
-        {pool && pool.type == 1 && (
-          <p>
-            {pool.underlying.symbol}{' '}
-            <FormattedMessage id='detailTitlePrivate' />
-          </p>
-        )}
-        {pool && pool.type == 2 && (
-          <p>
-            {pool.name} <FormattedMessage id='detailTitlePublic' />
-          </p>
-        )}
-        {/*{!active && <FormattedMessage id='htPublic' />}*/}
-      </h3>
-      {LBPFlag !== 'LBP' && (
-        <>
-          <a
-            className='pools_banner_dec'
-            href={'https://hecoinfo.com/address/' + address}
-            target='_blank'
-          >
-            {address}
-            {/* <CopyToClipboard
+    <div className='pools_banner_box'>
+      <div className='pools_banner'>
+        <div className='pools_banner_img'></div>
+        <h3 className='pools_banner_text'>
+          {pool && pool.type == 0 && (
+            <p>
+              {pool.underlying.symbol}{' '}
+              <FormattedMessage id='detailTitlePublic' />
+            </p>
+          )}
+          {pool && pool.type == 1 && (
+            <p>
+              {pool.underlying.symbol}{' '}
+              <FormattedMessage id='detailTitlePrivate' />
+            </p>
+          )}
+          {pool && pool.type == 2 && (
+            <p>
+              {pool.name} <FormattedMessage id='detailTitlePublic' />
+            </p>
+          )}
+          {/*{!active && <FormattedMessage id='htPublic' />}*/}
+        </h3>
+        {LBPFlag !== 'LBP' && (
+          <>
+            <a
+              className='pools_banner_dec'
+              href={'https://hecoinfo.com/address/' + address}
+              target='_blank'
+            >
+              {address}
+              {/* <CopyToClipboard
           text={address}
           onCopy={() => {
             message.success('copy success')
@@ -66,14 +68,14 @@ const PoolsBanner = (props) => {
                   p-id='1282'
                 ></path>
               </svg>
-          </a>
-          <p className='pools_banner_withdraw_tip'>
-            <FormattedMessage id='withdrawTip' />
-          </p>
-        </>
-      )}
+            </a>
+            <p className='pools_banner_withdraw_tip'>
+              <FormattedMessage id='withdrawTip' />
+            </p>
+          </>
+        )}
 
-      {/* <div>
+        {/* <div>
         <a
           className={`pools_banner_btn ${
             pool && pool.status === 1
@@ -102,6 +104,7 @@ const PoolsBanner = (props) => {
           View HECO
         </a>
       </div> */}
+      </div>
     </div>
   )
 }

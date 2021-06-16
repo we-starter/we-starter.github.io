@@ -1,7 +1,6 @@
 .header {
-  position: relative;
-  background: #fff;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+    background-color: transparent;
   .exchange {
     display: inline-block;
     margin-right: 10px;
@@ -63,55 +62,70 @@
     cursor: pointer;
   }
   @media #{$desktop} {
-    padding-bottom: 58px;
-    background-image: url('../image/weBanner.png');
-    background-repeat: no-repeat;
-    background-size: 100% 500px;
-    background-position: top;
-    height: auto;
-    min-width: 1080px;
+    // padding-bottom: 58px;
+    // background-image: url('../image/weBanner.png');
+    // background-repeat: no-repeat;
+    // background-size: 100% 500px;
+    // background-position: top;
+    // height: auto;
+    // min-width: 1080px;
   }
   @media #{$mdWidth} {
-    padding-bottom: 58px;
-    background: #fff;
-    background-image: url('../image/weBanner.png');
-    background-repeat: no-repeat;
-    background-size: 100% 500px;
-    background-position: top;
-    height: auto;
     min-width: 1080px;
-      .header-network {
-    display: none;
-  }
+    // padding-bottom: 58px;
+    // background: #fff;
+    // background-image: url('../image/weBanner.png');
+    // background-repeat: no-repeat;
+    // background-size: 100% 500px;
+    // background-position: top;
+    // height: auto;
+    // min-width: 1080px;
+    .header-network {
+      display: none;
+    }
   }
   @media #{$smWidth} {
-    background: #fff;
+    // position: relative;
+    width: 100%;
+    background: transparent;
     height: auto;
-     .header-network {
-    display: none;
-  }
+    .header-network {
+      display: none;
+    }
   }
   @media #{$xsWidth} {
-    background: #fff;
+    // position: relative;
+    width: 100%;
+    min-width: 350px;
+    background: transparent;
     height: auto;
-      .header-network {
-    display: none;
-  }
+    .header-network {
+      display: none;
+    }
   }
   .center {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
     padding: 0;
-    max-width: 1080px;
+    background: transparent;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     @media #{$desktop} {
       width: 1080px;
+      height: 100px;
     }
     @media #{$mdWidth} {
       width: 1080px;
+      height: auto;
     }
     @media #{$smWidth} {
       width: 100%;
     }
     @media #{$xsWidth} {
       width: 100%;
+      min-width: 350px;
     }
   }
 
@@ -270,6 +284,7 @@
 
     @media #{$mdWidth} {
       display: flex;
+      min-width: 1080px;
       height: auto;
     }
     @media #{$smWidth} {
@@ -321,9 +336,29 @@
 
     &--small {
       display: none;
-      svg {
-        width: 155px;
-        height: 24px;
+        @media #{$desktop} {
+        svg {
+          width: 155px;
+          height: 24px;
+        }
+      }
+      @media #{$mdWidth} {
+        svg {
+          width: 155px;
+          height: 24px;
+        }
+      }
+      @media #{$smWidth} {
+        svg {
+          width: 100px;
+          height: 16px;
+        }
+      }
+      @media #{$xsWidth} {
+        svg {
+          width: 100px;
+          height: 16px;
+        }
       }
 
       &.active {

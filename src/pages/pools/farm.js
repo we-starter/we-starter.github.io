@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import cs from 'classnames'
 import { useActiveWeb3React } from '../../web3'
 import { FormattedMessage, injectIntl } from 'react-intl'
-import FarmHeader from '../../components/farm/farmHeader'
+import { FarmBanner } from '../../components/farm/farmBanner'
 import Footer from '../../components/Footer'
 import FarmCard from '../../components/farm/farmCard'
 import { useFarmInfo } from './Hooks'
@@ -63,7 +63,7 @@ const Farm = (props) => {
 
   return (
     <div className='farm_box' style={{ minHeight: '100%', background: '#fff' }}>
-      <FarmHeader />
+      <FarmBanner />
       <div className='farm_index'>
         {pools &&
           pools.map((item, index) => {

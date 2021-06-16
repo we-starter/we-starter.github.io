@@ -41,6 +41,7 @@ import { formatAmount } from '../../utils/format'
 import Timer from 'react-compound-timer'
 import { useActiveWeb3React } from '../../web3'
 import { mainContext } from '../../reducer'
+import { Banner } from '../../components/banner/Banner'
 
 const PoolsIndex = (props) => {
   const [listData, setListData] = useState([])
@@ -772,34 +773,37 @@ const PoolsIndex = (props) => {
   }
 
   return (
-    <div className='pools-type' id='position'>
-      <div className='pools-type-top'>
-        <div className='pools-type_content'>
-          <div className='pools-type_tab'>
-            <h2
-              onClick={() => changeTab(1)}
-              className={cs('new_flag', tabFlag === 1 ? 'tab_active' : '')}
-            >
-              <FormattedMessage id='poolsIndexText4' />
-              {poolSum > 0 && <span className='pools_sum'>{poolSum}</span>}
-            </h2>
+    <div>
+      {/* banner图 */}
+      <Banner />
+      <div className='pools-type' id='position'>
+        <div className='pools-type-top'>
+          <div className='pools-type_content'>
+            <div className='pools-type_tab'>
+              <h2
+                onClick={() => changeTab(1)}
+                className={cs('new_flag', tabFlag === 1 ? 'tab_active' : '')}
+              >
+                <FormattedMessage id='poolsIndexText4' />
+                {poolSum > 0 && <span className='pools_sum'>{poolSum}</span>}
+              </h2>
 
-            {/*<h2*/}
-            {/*  onClick={() => changeTab(3)}*/}
-            {/*  className={cs(tabFlag === 3 ? 'tab_active' : '')}*/}
-            {/*>*/}
-            {/*  <img className='flashPool_png' src={timePng} />*/}
-            {/*  <FormattedMessage id='flashPool' />*/}
-            {/*</h2>*/}
-            <h2
-              onClick={() => changeTab(2)}
-              className={tabFlag === 2 ? 'tab_active' : ''}
-            >
-              <FormattedMessage id='myJoinPool' />
-            </h2>
-          </div>
-          <div className='pools-type_card'>
-            {/* {isLogin ? (
+              {/*<h2*/}
+              {/*  onClick={() => changeTab(3)}*/}
+              {/*  className={cs(tabFlag === 3 ? 'tab_active' : '')}*/}
+              {/*>*/}
+              {/*  <img className='flashPool_png' src={timePng} />*/}
+              {/*  <FormattedMessage id='flashPool' />*/}
+              {/*</h2>*/}
+              <h2
+                onClick={() => changeTab(2)}
+                className={tabFlag === 2 ? 'tab_active' : ''}
+              >
+                <FormattedMessage id='myJoinPool' />
+              </h2>
+            </div>
+            <div className='pools-type_card'>
+              {/* {isLogin ? (
               <>
                 {listData &&
                   listData.map((pool, index) => {
@@ -813,16 +817,16 @@ const PoolsIndex = (props) => {
                 {!isLogin && tabFlag === 1 ? [1, 2, 3].map(noLogin) : noData()}
               </>
             )} */}
-            {listData &&
-              listData.map((pool, index) => {
-                return renderCard(pool, index)
-              })}
-            {tabFlag === 1 && listData.length < 3 && [1, 2, 3].map(noLogin)}
-            {[2].includes(tabFlag) && !listData.length && noData()}
+              {listData &&
+                listData.map((pool, index) => {
+                  return renderCard(pool, index)
+                })}
+              {tabFlag === 1 && listData.length < 3 && [1, 2, 3].map(noLogin)}
+              {[2].includes(tabFlag) && !listData.length && noData()}
+            </div>
           </div>
         </div>
-      </div>
-      {/* <div className='pools-type-bottom'>
+        {/* <div className='pools-type-bottom'>
         <h2>
           <FormattedMessage id='supportWallet' />
         </h2>
@@ -845,6 +849,7 @@ const PoolsIndex = (props) => {
           </div>
         </div>
       </div> */}
+      </div>
     </div>
   )
 }

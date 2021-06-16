@@ -3,6 +3,7 @@ import cs from 'classnames'
 import PoolsHeader from '../../components/staterPools/poolsHeader'
 import chromeLine from '../../assets/icon/chrome-line@2x.png'
 import bookMarkLine from '../../assets/icon/book-mark-line@2x.png'
+import PoolsBanner from '../../components/banner/PoolsBanner'
 import Web3 from 'web3'
 import Timer from 'react-compound-timer'
 import { GALLERY_SELECT_WEB3_CONTEXT, HANDLE_WALLET_MODAL } from '../../const'
@@ -145,8 +146,8 @@ const PoolsDetail = (props) => {
   }
 
   return (
-    <div style={{ background: '#fff' }}>
-      <PoolsHeader address={address} pool={pool} />
+    <div className='pools_detail_box' style={{ background: '#fff' }}>
+      <PoolsBanner address={address} pool={pool} />
       <div className='pools_card'>
         <div className='pools_card_content'>
           <div className='pools_card_content_title'>

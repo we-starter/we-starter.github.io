@@ -3,6 +3,9 @@
   background: #fff;
 }
 @media #{$desktop} {
+  .pools_detail_box {
+    min-width: 1080px;
+  }
   .pools_detail {
     margin-top: 60px;
     padding-bottom: 176px;
@@ -339,6 +342,9 @@
   }
 }
 @media #{$mdWidth} {
+  .pools_detail_box {
+    min-width: 1080px;
+  }
   .pools_detail {
     margin-top: 60px;
     padding-bottom: 176px;
@@ -670,6 +676,9 @@
 }
 
 @media #{$smWidth} {
+  .pools_detail_box {
+    min-width: 350px;
+  }
   .pools_detail {
     padding-bottom: 40px;
     &_btn_box {
@@ -990,6 +999,9 @@
   }
 }
 @media #{$xsWidth} {
+  .pools_detail_box {
+    min-width: 350px;
+  }
   .pools_detail {
     padding-bottom: 40px;
     &_btn_box {

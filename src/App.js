@@ -40,11 +40,11 @@ function App() {
         <Intl>
           <Router>
             {/* 头部 */}
-            {/*<Header />*/}
+            <Header />
             {/* 矿池类型 */}
             {/*<PoolTab />*/}
             {/* pools页面banner和其他的不同，所以单独拎出去判断了 */}
-            <ExtractComponents />
+            {/* <ExtractComponents /> */}
             <Switch>
               <Route exact path={['/']} component={PoolsIndex}></Route>
               <Route exact path='/farm' component={Farm}></Route>

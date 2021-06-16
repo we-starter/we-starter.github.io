@@ -440,6 +440,10 @@
   }
 }
 @media #{$smWidth} {
+   .farm_box {
+    min-width: 350px;
+    background: #fff;
+  }
   .farm_index {
     display: flex;
     justify-content: space-between;
@@ -658,6 +662,10 @@
   }
 }
 @media #{$xsWidth} {
+   .farm_box {
+    min-width: 350px;
+    background: #fff;
+  }
   .farm_index {
     display: flex;
     justify-content: space-between;

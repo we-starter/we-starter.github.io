@@ -96,7 +96,7 @@ export const InitPage = () => {
   //       .catch((e) => {
   //         if (e instanceof UnsupportedChainIdError) {
   //           dispatch({
-  //             type: IS_SUPPORTEDCHAIN,
+  //             type: IS_SUPPORTEDCHAIN
   //             isSupportedChain: false,
   //           })
   //
