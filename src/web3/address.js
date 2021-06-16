@@ -4,8 +4,8 @@ export const ChainId = {
 }
 
 export const SCAN_ADDRESS = {
-  [ChainId.BSC]: 'https://bscscan.com/',
-  [ChainId.HECO]: 'https://hecoinfo.com/',
+  [ChainId.BSC]: 'https://bscscan.com',
+  [ChainId.HECO]: 'https://hecoinfo.com',
 }
 
 export const ADDRESS_0 = '0x0000000000000000000000000000000000000000'

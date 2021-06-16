@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import cs from 'classnames'
 import PoolsHeader from '../../components/staterPools/poolsHeader'
+import PoolsBanner from '../../components/banner/PoolsBanner'
 import chromeLine from '../../assets/icon/chrome-line@2x.png'
 import bookMarkLine from '../../assets/icon/book-mark-line@2x.png'
 import Web3 from 'web3'
@@ -47,6 +48,11 @@ const PoolsDetailLBP = (props) => {
 
   const currency_address = pool ? pool.currency.address : '0x0'
   const { balance = 0 } = useBalance(currency_address)
+
+ if (!pool || chainId !== pool.networkId) {
+   window.location.href = '/'
+ }
+  
   const allowance = useAllowance(
     pool.currency.address,
     pool.address,
@@ -135,7 +141,11 @@ const PoolsDetailLBP = (props) => {
 
     if (loadFlag) return
     setLoadFlag(true)
-    const contract = getContract(library, ERC20.abi, pool.currency.address)
+    const contract = getContract(
+      library,
+      ERC20.abi,
+      pool.currency.address
+    )
     contract.methods
       .approve(
         pool.address,
@@ -308,8 +318,8 @@ const PoolsDetailLBP = (props) => {
   }
 
   return (
-    <div style={{ background: '#fff' }}>
-      <PoolsHeader address={address} pool={pool} LBPFlag='LBP' />
+    <div className='pools_detail_box'>
+      <PoolsBanner address={address} pool={pool} LBPFlag='LBP' />
       <div className='pools_LBP_card'>
         <div className='pools_LBP_card_title'>
           <h2 className='LBP_title'>
@@ -431,8 +441,17 @@ const PoolsDetailLBP = (props) => {
             <FormattedMessage id='warLBP2' />
           </Button>
         )}
-        <div className="lbp_tip">
-          <p><FormattedMessage id='warLBP8' values={{token: pool.farm_lpt}} /> <a href={pool.farm_link} target="_blank"><FormattedMessage id='warLBP9' values={{token: pool.farm_lpt}} /></a> <FormattedMessage id='warLBP10' /></p>
+        <div className='lbp_tip'>
+          <p>
+            <FormattedMessage id='warLBP8' values={{ token: pool.farm_lpt }} />{' '}
+            <a href={pool.farm_link} target='_blank'>
+              <FormattedMessage
+                id='warLBP9'
+                values={{ token: pool.farm_lpt }}
+              />
+            </a>{' '}
+            <FormattedMessage id='warLBP10' />
+          </p>
         </div>
       </div>
       <div className='pools_detail'>

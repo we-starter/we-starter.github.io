@@ -378,14 +378,15 @@ export const usePoolsInfo = (address = '') => {
   const now = parseInt(Date.now() / 1000)
 
   const pools = Pools.filter(
-    (o) =>(address === '' || o.address === address)
+    (o) =>
+      chainId == o.networkId && (address === '' || o.address === address)
   )
 
   const [poolsInfo, setPoolsInfo] = useState(pools)
 
   // 数据预处理
   pools.map((item) => {
-    // if (chainId * 1 !== item.networkId) return
+    if (chainId !== item.networkId) return
     let status = item.status
     if (status === 0) {
       status = now < item.start_at ? 0 : now < item.time ? 1 : 2
@@ -410,7 +411,7 @@ export const usePoolsInfo = (address = '') => {
       Promise.all(
         pools.map((pool) => {
           // 链不匹配 不调用合约
-          // if (chainId * 1 !== pool.networkId) return
+          if (chainId !== pool.networkId) return
           // 如果还未开始，则不调用合约
           if (pool.is_coming) return pool
 
@@ -719,7 +720,7 @@ export const usePoolsLBPInfo = (address = '') => {
 
   const poolsLBP = PoolsLBP.filter(
     (o) => 
-      chainId == o.networkId && (address === '' || o.address === address)
+    chainId == o.networkId && (address === '' || o.address === address)
   )
 
   const [poolsLBPInfo, setPoolsLBPInfo] = useState(poolsLBP)
@@ -727,7 +728,7 @@ export const usePoolsLBPInfo = (address = '') => {
   // 数据预处理
   poolsLBP.map((item) => {
     // 链不匹配 不调用合约
-    if (chainId * 1 !== item.networkId) return
+    if (chainId !== item.networkId) return
     let status = item.status
     if (status === 0) {
       status = now < item.start_at ? 0 : now < item.time ? 1 : 3
@@ -748,7 +749,7 @@ export const usePoolsLBPInfo = (address = '') => {
       Promise.all(
         poolsLBP.map((pool) => {
           // 链不匹配 不调用合约
-          if (chainId * 1 !== pool.networkId) return
+          if (chainId !== pool.networkId) return
           // 如果还未开始，则不调用合约
           if (pool.is_coming) return pool
 
@@ -826,7 +827,7 @@ export const useFarmInfo = (address = '') => {
       Promise.all(
         farmData.map((pool) => {
           // 链不匹配 不调用合约
-          if (chainId * 1 !== pool.networkId) return
+          if (chainId !== pool.networkId) return
           const pool_contract = new Contract(pool.address, pool.abi)
           const currency_token = new Contract(pool.MLP, ERC20)
           const promise_list = [

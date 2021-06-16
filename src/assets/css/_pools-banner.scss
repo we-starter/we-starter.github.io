@@ -235,6 +235,9 @@
       font-weight: 600;
       color: #22292f;
       line-height: 42px;
+       p {
+        margin-bottom: 0;
+      }
     }
     &_dec {
       display: block;

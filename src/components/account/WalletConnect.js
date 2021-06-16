@@ -6,7 +6,6 @@ import Web3 from 'web3'
 import Web3Modal from 'web3modal'
 import WalletConnectProvider from '@walletconnect/web3-provider'
 import {
-  InjectedConnector,
   NoEthereumProviderError,
 } from '@web3-react/injected-connector'
 import { FormattedMessage } from 'react-intl'
@@ -20,52 +19,19 @@ import close from '../../assets/icon/close.png'
 import BSC from '../../assets/icon/BSC@2x.png'
 import HECO from '../../assets/icon/HECO@2x.png'
 import walletConnect from '../../assets/icon/walletConnect.png'
-
-import { WalletConnectConnector } from '@web3-react/walletconnect-connector'
-import { LedgerConnector } from '@web3-react/ledger-connector'
-
-const injected = new InjectedConnector({
-  supportedChainIds: [3, 128, 56],
-})
-
-const POLLING_INTERVAL = 12000
-
-const walletChange = new WalletConnectConnector({
-  rpc: { 128: 'https://http-mainnet-node.huobichain.com'},
-  bridge: 'https://bridge.walletconnect.org',
-  qrcode: true,
-  pollingInterval: POLLING_INTERVAL,
-})
-
-const walletChangeBSC = new WalletConnectProvider({
-  rpc: { 56: 'https://bsc-dataseed.binance.org/' },
-  bridge: 'https://bridge.walletconnect.org',
-  qrcode: true,
-  pollingInterval: POLLING_INTERVAL,
-})
+import {changeNetwork, injected, useConnectWallet, walletConnector} from "../../connectors";
+import {ChainId} from "../../web3/address";
 
 export const WalletConnect = ({ onClose, onCancel }) => {
   const { dispatch, state } = useContext(mainContext)
   const { chainId } = useActiveWeb3React()
   const [connectedName, setConnectedName] = useState()
+  const connectWallet = useConnectWallet()
 
-  const context = useWeb3React()
 
-  const [activatingConnector, setActivatingConnector] = useState()
+  const initChainId = chainId || ChainId.HECO
+  const [netWorkFlag, setNetWorkFlag] = useState(initChainId)
 
-  const { connector, activate, active } = context
-
-  const [netWorkFlag, setNetWorkFlag] = useState('BSC')
-
-  const {
-    changeNetworkStatus,
-  } = state
-
-  useEffect(() => {
-    if (activatingConnector && activatingConnector === connector) {
-      setActivatingConnector(undefined)
-    }
-  }, [activatingConnector])
 
   useEffect(() => {
     const localContent =
@@ -76,8 +42,8 @@ export const WalletConnect = ({ onClose, onCancel }) => {
     }
   }, [])
 
-  const selectNetWork = (flag) => {
-    setNetWorkFlag(flag)
+  const selectNetWork = (_chainId) => {
+    setNetWorkFlag(_chainId)
   }
 
   return (
@@ -94,9 +60,9 @@ export const WalletConnect = ({ onClose, onCancel }) => {
 
               <div className={`choose-network`}>
                 <p
-                  className={`${netWorkFlag == 'BSC' ? 'active' : ''}`}
+                  className={`${netWorkFlag == ChainId.BSC ? 'active' : ''}`}
                   onClick={() => {
-                    selectNetWork('BSC')
+                    selectNetWork(ChainId.BSC)
                   }}
                 >
                   <img src={BSC} />
@@ -118,9 +84,9 @@ export const WalletConnect = ({ onClose, onCancel }) => {
                   </svg>
                 </p>
                 <p
-                  className={`${netWorkFlag == 'HECO' ? 'active' : ''}`}
+                  className={`${netWorkFlag == ChainId.HECO ? 'active' : ''}`}
                   onClick={() => {
-                    selectNetWork('HECO')
+                    selectNetWork(ChainId.HECO)
                   }}
                 >
                   <img src={HECO} />
@@ -148,33 +114,11 @@ export const WalletConnect = ({ onClose, onCancel }) => {
               <div className='form-app__inner__wallets'>
                 <div
                   onClick={() => {
-                  activate(injected, (e) => {}, true)
-                    .then((e) => {
-                      dispatch({
-                        type: HANDLE_WALLET_MODAL,
-                        walletModal: null,
-                      })
-                      window &&
-                        window.localStorage.setItem(
-                          GALLERY_SELECT_WEB3_CONTEXT,
-                          'MetaMask'
-                        )
-                    })
-                    .catch((e) => {
-                      // 钱包无法连接
-                      if (e instanceof UnsupportedChainIdError) {
-                        // TODO网络不支持
-                        dispatch({
-                          type: HANDLE_CHANGE_NETWORKS,
-                          changeNetworkStatus: true,
-                        })
-                        console.log('network not support')
-                      } else if (e instanceof NoEthereumProviderError) {
+                    connectWallet(injected, netWorkFlag).then(() => {
                         dispatch({
                           type: HANDLE_WALLET_MODAL,
-                          walletModal: 'connecting',
+                          walletModal: null,
                         })
-                      }
                     })
                   }}
                   className='form-app__inner__wallets__item'
@@ -187,28 +131,34 @@ export const WalletConnect = ({ onClose, onCancel }) => {
 
                 <div
                   onClick={() => {
-                    activate(
-                      netWorkFlag == 'BSC' ? walletChangeBSC : walletChange,
-                      (e) => {},
-                      true
-                    )
-                      .then(() => {
-                        // 验证链接之后
-                        dispatch({
-                          type: HANDLE_WALLET_MODAL,
-                          walletModal: null,
-                        })
-                        window &&
-                          window.localStorage.setItem(
-                            GALLERY_SELECT_WEB3_CONTEXT,
-                            netWorkFlag == 'BSC'
-                              ? 'walletChangeBSC'
-                              : 'WalletConnect'
-                          )
+                    connectWallet(walletConnector[netWorkFlag]).then(() => {
+                      dispatch({
+                        type: HANDLE_WALLET_MODAL,
+                        walletModal: null,
                       })
-                      .catch((e) => {
-                        console.log(e)
-                      })
+                    })
+                    // activate(
+                    //   netWorkFlag == 'BSC' ? walletChangeBSC : walletChange,
+                    //   (e) => {},
+                    //   true
+                    // )
+                    //   .then(() => {
+                    //     // 验证链接之后
+                    //     dispatch({
+                    //       type: HANDLE_WALLET_MODAL,
+                    //       walletModal: null,
+                    //     })
+                    //     window &&
+                    //       window.localStorage.setItem(
+                    //         GALLERY_SELECT_WEB3_CONTEXT,
+                    //         netWorkFlag == 'BSC'
+                    //           ? 'walletChangeBSC'
+                    //           : 'WalletConnect'
+                    //       )
+                    //   })
+                    //   .catch((e) => {
+                    //     console.log(e)
+                    //   })
                   }}
                   className='form-app__inner__wallets__item'
                 >

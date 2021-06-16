@@ -23,6 +23,7 @@ import { mainContext } from '../../reducer'
 import { FormattedMessage, injectIntl } from 'react-intl'
 import BigNumber from 'bignumber.js'
 import { formatAmount, fromWei } from '../../utils/format'
+import {getScanLink} from "../../connectors";
 
 const PoolsDetail = (props) => {
   const { address } = props.match.params
@@ -39,6 +40,10 @@ const PoolsDetail = (props) => {
   const [left_time, setLeftTime] = useState(0)
 
   const { dispatch } = useContext(mainContext)
+
+   if (!pool || chainId !== pool.networkId) {
+     window.location.href = '/'
+   }
 
   useEffect(() => {
     const timerId = setTimeout(() => {
@@ -146,7 +151,7 @@ const PoolsDetail = (props) => {
   }
 
   return (
-    <div className='pools_detail_box' style={{ background: '#fff' }}>
+    <div className='pools_detail_box'>
       <PoolsBanner address={address} pool={pool} />
       <div className='pools_card'>
         <div className='pools_card_content'>
@@ -272,7 +277,7 @@ const PoolsDetail = (props) => {
         </a>
         <a
           className='pools_detail_btn'
-          href={`https://hecoinfo.com/address/${address}`}
+          href={getScanLink(chainId, address, 'address')}
           target='_blank'
         >
           <FormattedMessage id='poolsDetailText4' />

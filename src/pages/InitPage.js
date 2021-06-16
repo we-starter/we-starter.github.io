@@ -32,18 +32,18 @@ import CompoundPopup from '../components/farm/compoundPopup'
 import PoolsJoin from '../components/staterPools/poolsJoin'
 import PoolsSlippage from '../components/staterPools/poolsSlippage'
 import PoolsSuccess from '../components/staterPools/poolsSuccess'
-import { WalletChange } from '../components/account/WalletChange'
 import { LoginModal } from '../components/Modals/LoginModl'
 import { ChangeNetworks } from '../components/Modals/ChangeNetworks'
 import { TXStatusModal } from '../components/Modals/TXStatusModal'
-import satellite from '../assets/image/satellite.png'
 import toolApi from '../apis/toolApi'
+import {useConnectWallet} from "../connectors";
 
 
 export const InitPage = () => {
   const { dispatch, state } = useContext(mainContext)
 
   const context = useWeb3React()
+  const connectWallet = useConnectWallet()
   const { activate } = context
 
   const {
@@ -81,33 +81,6 @@ export const InitPage = () => {
         console.log(e)
       })
   }, [])
-
-  // useEffect(() => {
-  //   const localContent =
-  //     (window && window.localStorage.getItem(GALLERY_SELECT_WEB3_CONTEXT)) ||
-  //     'MetaMask'
-  //   console.log('wallet content', localContent)
-  //   if (localContent) {
-  //     console.log('activate', wallets[localContent])
-  //     activate(wallets[localContent], () => {}, true)
-  //       .then(() => {
-  //         console.log(wallets[localContent])
-  //       })
-  //       .catch((e) => {
-  //         if (e instanceof UnsupportedChainIdError) {
-  //           dispatch({
-  //             type: IS_SUPPORTEDCHAIN
-  //             isSupportedChain: false,
-  //           })
-  //
-  //           dispatch({
-  //             type: HANDLE_CHANGE_NETWORKS,
-  //             changeNetworkStatus: true,
-  //           })
-  //         }
-  //       })
-  //   }
-  // }, [])
 
   return (
     <>

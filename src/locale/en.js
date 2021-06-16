@@ -60,7 +60,6 @@ const en_US = {
   submit: 'submit',
   errorTip: 'Please fill in this blank.',
   myJoinPool: 'My Pool',
-  guide: 'Guide',
   bannerTitle1: 'Get the Drop on Spotting the Value',
   certik: 'Audit Report',
   partner: 'Business Partner',
@@ -106,7 +105,6 @@ const en_US = {
   accountText8: 'Connect to your Metamask Wallet',
   accountText9: 'Connect to your WalletConnect',
   auctionText1: 'Purchased',
-  accountText2: 'GLF',
   bannerText1: 'Live on',
   exhibitionHallText1: 'Become a sponsor',
   exhibitionHallText2:

@@ -2,10 +2,13 @@ import React, { useContext } from 'react'
 import { useHistory } from 'react-router-dom'
 import { mainContext } from '../../reducer'
 import loading from '../../assets/icon/loading.png'
+import {useActiveWeb3React} from "../../web3";
+import {getScanLink} from "../../connectors";
 
 export const WaitingWalletConfirmModal = () => {
   const { history } = useHistory
   const { dispatch, state } = useContext(mainContext)
+  const {chainId} = useActiveWeb3React()
   const { showWaitingWalletConfirmModal } = state
 
   // useEffect(() => {
@@ -26,7 +29,7 @@ export const WaitingWalletConfirmModal = () => {
             {showWaitingWalletConfirmModal.hash ? (
               <a
                 target='_blank'
-                href={`https://hecoinfo.com/tx/${showWaitingWalletConfirmModal.hash}`}
+                href={getScanLink(chainId, showWaitingWalletConfirmModal.hash, 'transaction')}
                 className='transction-submitted__text'
               >
                 {showWaitingWalletConfirmModal.content}
