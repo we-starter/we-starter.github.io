@@ -1,25 +1,9 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { UnsupportedChainIdError, useWeb3React } from '@web3-react/core'
-import { mainContext } from '../../reducer'
-import {
-  InjectedConnector,
-  NoEthereumProviderError,
-} from '@web3-react/injected-connector'
-import { FormattedMessage } from 'react-intl'
-import {
-  GALLERY_SELECT_WEB3_CONTEXT,
-  HANDLE_CHANGE_NETWORKS,
-  HANDLE_WALLET_MODAL,
-} from '../../const'
-import { useActiveWeb3React } from '../../web3'
-import metamask from '../../assets/icon/metamask.png'
+import React, {useContext} from 'react'
+import {mainContext} from '../../reducer'
+import {useActiveWeb3React} from '../../web3'
 import close from '../../assets/icon/close.png'
 import BSC from '../../assets/icon/BSC@2x.png'
 import HECO from '../../assets/icon/HECO@2x.png'
-import walletConnect from '../../assets/icon/walletConnect.png'
-
-import { WalletConnectConnector } from '@web3-react/walletconnect-connector'
-import { LedgerConnector } from '@web3-react/ledger-connector'
 import {changeNetwork} from "../../connectors";
 import {ChainId} from "../../web3/address";
 

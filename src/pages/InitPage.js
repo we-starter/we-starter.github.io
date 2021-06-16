@@ -32,11 +32,9 @@ import CompoundPopup from '../components/farm/compoundPopup'
 import PoolsJoin from '../components/staterPools/poolsJoin'
 import PoolsSlippage from '../components/staterPools/poolsSlippage'
 import PoolsSuccess from '../components/staterPools/poolsSuccess'
-import { WalletChange } from '../components/account/WalletChange'
 import { LoginModal } from '../components/Modals/LoginModl'
 import { ChangeNetworks } from '../components/Modals/ChangeNetworks'
 import { TXStatusModal } from '../components/Modals/TXStatusModal'
-import satellite from '../assets/image/satellite.png'
 import toolApi from '../apis/toolApi'
 import {useConnectWallet} from "../connectors";
 
