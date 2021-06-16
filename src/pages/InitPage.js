@@ -54,14 +54,14 @@ const POLLING_INTERVAL = 12000
 const walletconnect = new WalletConnectConnector({
   rpc: { 128: 'https://http-mainnet-node.huobichain.com' },
   bridge: 'https://bridge.walletconnect.org',
-  qrcode: true,
+  qrcode: false,
   pollingInterval: POLLING_INTERVAL,
 })
 
 const walletChangeBSC = new WalletConnectConnector({
   rpc: { 56: 'https://bsc-dataseed.binance.org/' },
   bridge: 'https://bridge.walletconnect.org',
-  qrcode: true,
+  qrcode: false,
   pollingInterval: POLLING_INTERVAL,
 })
 
@@ -375,7 +375,15 @@ export const InitPage = () => {
       {changeNetworkStatus && (
         <div className='modal-show'>
           <div className='wrapper'>
-            <WalletConnect
+            {/* <WalletConnect
+              onClose={() =>
+                dispatch({
+                  type: HANDLE_CHANGE_NETWORKS,
+                  walletModal: null,
+                })
+              }
+            /> */}
+            <ChangeNetworks
               onClose={() =>
                 dispatch({
                   type: HANDLE_CHANGE_NETWORKS,
@@ -383,14 +391,6 @@ export const InitPage = () => {
                 })
               }
             />
-            {/* <ChangeNetworks
-              onClose={() =>
-                dispatch({
-                  type: HANDLE_CHANGE_NETWORKS,
-                  walletModal: false,
-                })
-              }
-            /> */}
           </div>
         </div>
       )}

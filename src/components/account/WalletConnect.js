@@ -1,6 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { UnsupportedChainIdError, useWeb3React } from '@web3-react/core'
 import { mainContext } from '../../reducer'
+import { useActiveWeb3React } from '../../web3'
+import Web3 from 'web3'
+import Web3Modal from 'web3modal'
+import WalletConnectProvider from '@walletconnect/web3-provider'
 import {
   InjectedConnector,
   NoEthereumProviderError,
@@ -11,7 +15,6 @@ import {
   HANDLE_CHANGE_NETWORKS,
   HANDLE_WALLET_MODAL,
 } from '../../const'
-import { useActiveWeb3React } from '../../web3'
 import metamask from '../../assets/icon/metamask.png'
 import close from '../../assets/icon/close.png'
 import BSC from '../../assets/icon/BSC@2x.png'
@@ -34,7 +37,7 @@ const walletChange = new WalletConnectConnector({
   pollingInterval: POLLING_INTERVAL,
 })
 
-const walletChangeBSC = new WalletConnectConnector({
+const walletChangeBSC = new WalletConnectProvider({
   rpc: { 56: 'https://bsc-dataseed.binance.org/' },
   bridge: 'https://bridge.walletconnect.org',
   qrcode: true,
@@ -51,6 +54,8 @@ export const WalletConnect = ({ onClose, onCancel }) => {
   const [activatingConnector, setActivatingConnector] = useState()
 
   const { connector, activate, active } = context
+
+  const [netWorkFlag, setNetWorkFlag] = useState('BSC')
 
   const {
     changeNetworkStatus,
@@ -71,60 +76,34 @@ export const WalletConnect = ({ onClose, onCancel }) => {
     }
   }, [])
 
+  const selectNetWork = (flag) => {
+    setNetWorkFlag(flag)
+  }
+
   return (
     <div className='modal'>
       <div className='modal__box'>
         <form className='form-app' action='/'>
           <div className='form-app__inner transction-submitted link-wallet'>
             <div className='form-app__inner__header'>
-              {changeNetworkStatus ? '切换网络' : '链接钱包'}
+              链接钱包
               {/* <FormattedMessage id='modalsText1' /> */}
             </div>{' '}
             <div className='choose-network-box'>
-              {!changeNetworkStatus && (
-                <p className='choose-network-title'>选择网络</p>
-              )}
+              <p className='choose-network-title'>选择网络</p>
 
-              <div
-                className={`choose-network ${
-                  changeNetworkStatus ? 'change-network' : ''
-                }`}
-                style={{ justifyContent: changeNetworkStatus && 'center' }}
-              >
+              <div className={`choose-network`}>
                 <p
-                  className={`${chainId == 56 ? 'active' : ''}`}
+                  className={`${netWorkFlag == 'BSC' ? 'active' : ''}`}
                   onClick={() => {
-                    window.ethereum &&
-                      window.ethereum
-                        .request({
-                          method: 'wallet_addEthereumChain',
-                          params: [
-                            {
-                              chainId: '0x38',
-                              chainName: 'BSC',
-                              nativeCurrency: {
-                                name: 'BNB',
-                                symbol: 'BNB',
-                                decimals: 18,
-                              },
-                              rpcUrls: ['https://bsc-dataseed.binance.org/'],
-                              blockExplorerUrls: ['https://bscscan.com/'],
-                            },
-                          ],
-                        })
-                        .then(() => {
-                          window.location.reload()
-                        })
-                        .catch((e) => {
-                          window.location.reload()
-                        })
+                    selectNetWork('BSC')
                   }}
                 >
                   <img src={BSC} />
                   <span>Binance</span>
                   <svg
                     t='1623750759643'
-                    class='icon'
+                    className='icon'
                     viewBox='0 0 1077 1024'
                     version='1.1'
                     xmlns='http://www.w3.org/2000/svg'
@@ -139,41 +118,16 @@ export const WalletConnect = ({ onClose, onCancel }) => {
                   </svg>
                 </p>
                 <p
-                  className={`${chainId == 128 ? 'active' : ''}`}
+                  className={`${netWorkFlag == 'HECO' ? 'active' : ''}`}
                   onClick={() => {
-                    window.ethereum &&
-                      window.ethereum
-                        .request({
-                          method: 'wallet_addEthereumChain',
-                          params: [
-                            {
-                              chainId: '0x80',
-                              chainName: 'HECO',
-                              nativeCurrency: {
-                                name: 'HT',
-                                symbol: 'HT',
-                                decimals: 18,
-                              },
-                              rpcUrls: [
-                                'https://http-mainnet-node.huobichain.com',
-                              ],
-                              blockExplorerUrls: ['https://hecoinfo.com'],
-                            },
-                          ],
-                        })
-                        .then(() => {
-                          window.location.reload()
-                        })
-                        .catch((e) => {
-                          window.location.reload()
-                        })
+                    selectNetWork('HECO')
                   }}
                 >
                   <img src={HECO} />
                   <span>Heco</span>
                   <svg
                     t='1623750759643'
-                    class='icon'
+                    className='icon'
                     viewBox='0 0 1077 1024'
                     version='1.1'
                     xmlns='http://www.w3.org/2000/svg'
@@ -189,84 +143,82 @@ export const WalletConnect = ({ onClose, onCancel }) => {
                 </p>
               </div>
             </div>
-            {!changeNetworkStatus && (
-              <div className='form-app__inner wallet-connect'>
-                <p className='choose-network-title'>选择钱包</p>
-                <div className='form-app__inner__wallets'>
-                  <div
-                    onClick={() => {
-                      activate(injected, (e) => {}, true)
-                        .then((e) => {
-                          dispatch({
-                            type: HANDLE_WALLET_MODAL,
-                            walletModal: null,
-                          })
-                          window &&
-                            window.localStorage.setItem(
-                              GALLERY_SELECT_WEB3_CONTEXT,
-                              'MetaMask'
-                            )
+            <div className='form-app__inner wallet-connect'>
+              <p className='choose-network-title'>选择钱包</p>
+              <div className='form-app__inner__wallets'>
+                <div
+                  onClick={() => {
+                  activate(injected, (e) => {}, true)
+                    .then((e) => {
+                      dispatch({
+                        type: HANDLE_WALLET_MODAL,
+                        walletModal: null,
+                      })
+                      window &&
+                        window.localStorage.setItem(
+                          GALLERY_SELECT_WEB3_CONTEXT,
+                          'MetaMask'
+                        )
+                    })
+                    .catch((e) => {
+                      // 钱包无法连接
+                      if (e instanceof UnsupportedChainIdError) {
+                        // TODO网络不支持
+                        dispatch({
+                          type: HANDLE_CHANGE_NETWORKS,
+                          changeNetworkStatus: true,
                         })
-                        .catch((e) => {
-                          // 钱包无法连接
-                          if (e instanceof UnsupportedChainIdError) {
-                            // TODO网络不支持
-                            dispatch({
-                              type: HANDLE_CHANGE_NETWORKS,
-                              changeNetworkStatus: true,
-                            })
-                            console.log('network not support')
-                          } else if (e instanceof NoEthereumProviderError) {
-                            dispatch({
-                              type: HANDLE_WALLET_MODAL,
-                              walletModal: 'connecting',
-                            })
-                          }
+                        console.log('network not support')
+                      } else if (e instanceof NoEthereumProviderError) {
+                        dispatch({
+                          type: HANDLE_WALLET_MODAL,
+                          walletModal: 'connecting',
                         })
-                    }}
-                    className='form-app__inner__wallets__item'
-                  >
-                    <img src={metamask} />
-                    {/* <p>
+                      }
+                    })
+                  }}
+                  className='form-app__inner__wallets__item'
+                >
+                  <img src={metamask} />
+                  {/* <p>
                     <FormattedMessage id='accountText8' />
                   </p> */}
-                  </div>
+                </div>
 
-                  <div
-                    onClick={() => {
-                      activate(
-                        changeNetworkStatus ? walletChangeBSC : walletChange,
-                        (e) => {},
-                        true
-                      )
-                        .then(() => {
-                          // 验证链接之后
-                          dispatch({
-                            type: HANDLE_WALLET_MODAL,
-                            walletModal: null,
-                          })
-                          window &&
-                            window.localStorage.setItem(
-                              GALLERY_SELECT_WEB3_CONTEXT,
-                              changeNetworkStatus
-                                ? 'walletChangeBSC'
-                                : 'WalletConnect'
-                            )
+                <div
+                  onClick={() => {
+                    activate(
+                      netWorkFlag == 'BSC' ? walletChangeBSC : walletChange,
+                      (e) => {},
+                      true
+                    )
+                      .then(() => {
+                        // 验证链接之后
+                        dispatch({
+                          type: HANDLE_WALLET_MODAL,
+                          walletModal: null,
                         })
-                        .catch((e) => {
-                          console.log(e)
-                        })
-                    }}
-                    className='form-app__inner__wallets__item'
-                  >
-                    <img src={walletConnect} />
-                    {/* <p>
+                        window &&
+                          window.localStorage.setItem(
+                            GALLERY_SELECT_WEB3_CONTEXT,
+                            netWorkFlag == 'BSC'
+                              ? 'walletChangeBSC'
+                              : 'WalletConnect'
+                          )
+                      })
+                      .catch((e) => {
+                        console.log(e)
+                      })
+                  }}
+                  className='form-app__inner__wallets__item'
+                >
+                  <img src={walletConnect} />
+                  {/* <p>
                     <FormattedMessage id='accountText9' />
                   </p> */}
-                  </div>
                 </div>
               </div>
-            )}
+            </div>
             <img
               src={close}
               alt=''
