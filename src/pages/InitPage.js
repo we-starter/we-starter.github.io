@@ -23,12 +23,6 @@ import {
   IS_SUPPORTEDCHAIN,
   HANDLE_SHOW_SUCCESS_TRANSACTION_MODAL,
 } from '../const'
-import {
-  InjectedConnector,
-  NoEthereumProviderError,
-} from '@web3-react/injected-connector'
-import { WalletConnectConnector } from '@web3-react/walletconnect-connector'
-import { LedgerConnector } from '@web3-react/ledger-connector'
 import { WalletModal } from '../components/Modals/WalletModal'
 import DepositPopup from '../components/farm/depositPopup'
 import ClaimPopup from '../components/farm/claimPopup'
@@ -45,48 +39,6 @@ import { TXStatusModal } from '../components/Modals/TXStatusModal'
 import satellite from '../assets/image/satellite.png'
 import toolApi from '../apis/toolApi'
 
-const injected = new InjectedConnector({
-  supportedChainIds: [3, 56, 128],
-})
-
-const POLLING_INTERVAL = 12000
-
-const walletconnect = new WalletConnectConnector({
-  rpc: { 128: 'https://http-mainnet-node.huobichain.com' },
-  bridge: 'https://bridge.walletconnect.org',
-  qrcode: false,
-  pollingInterval: POLLING_INTERVAL,
-})
-
-const walletChangeBSC = new WalletConnectConnector({
-  rpc: { 56: 'https://bsc-dataseed.binance.org/' },
-  bridge: 'https://bridge.walletconnect.org',
-  qrcode: false,
-  pollingInterval: POLLING_INTERVAL,
-})
-
-const ledger = new LedgerConnector({
-  chainId: 128,
-  url: 'https://http-mainnet-node.huobichain.com',
-  pollingInterval: POLLING_INTERVAL,
-})
-
-const wallets = {
-  MetaMask: injected,
-  WalletConnect: walletconnect,
-  walletChangeBSC: walletChangeBSC,
-  Ledger: ledger,
-  //TrustWallet: injected,
-  //Squarelink: squarelink,
-  //Torus: torus,
-  //Aut
-}
-if (window.ethereum) {
-  window.ethereum.on('networkChanged', () => {
-    // 链改了，刷新网页
-    window.location.reload()
-  })
-}
 
 export const InitPage = () => {
   const { dispatch, state } = useContext(mainContext)
@@ -130,32 +82,32 @@ export const InitPage = () => {
       })
   }, [])
 
-  useEffect(() => {
-    const localContent =
-      (window && window.localStorage.getItem(GALLERY_SELECT_WEB3_CONTEXT)) ||
-      'MetaMask'
-    console.log('wallet content', localContent)
-    if (localContent) {
-      console.log('activate', wallets[localContent])
-      activate(wallets[localContent], () => {}, true)
-        .then(() => {
-          console.log(wallets[localContent])
-        })
-        .catch((e) => {
-          if (e instanceof UnsupportedChainIdError) {
-            dispatch({
-              type: IS_SUPPORTEDCHAIN,
-              isSupportedChain: false,
-            })
-
-            dispatch({
-              type: HANDLE_CHANGE_NETWORKS,
-              changeNetworkStatus: true,
-            })
-          }
-        })
-    }
-  }, [])
+  // useEffect(() => {
+  //   const localContent =
+  //     (window && window.localStorage.getItem(GALLERY_SELECT_WEB3_CONTEXT)) ||
+  //     'MetaMask'
+  //   console.log('wallet content', localContent)
+  //   if (localContent) {
+  //     console.log('activate', wallets[localContent])
+  //     activate(wallets[localContent], () => {}, true)
+  //       .then(() => {
+  //         console.log(wallets[localContent])
+  //       })
+  //       .catch((e) => {
+  //         if (e instanceof UnsupportedChainIdError) {
+  //           dispatch({
+  //             type: IS_SUPPORTEDCHAIN,
+  //             isSupportedChain: false,
+  //           })
+  //
+  //           dispatch({
+  //             type: HANDLE_CHANGE_NETWORKS,
+  //             changeNetworkStatus: true,
+  //           })
+  //         }
+  //       })
+  //   }
+  // }, [])
 
   return (
     <>

@@ -8,7 +8,6 @@ import { Header } from './components/header/Header'
 
 import ExtractComponents from './pages/pools/extractComponents'
 
-import { HomePage } from './pages/HomePage'
 import { ContextProvider } from './reducer'
 import { InitPage } from './pages/InitPage'
 

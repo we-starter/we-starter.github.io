@@ -5,34 +5,6 @@ import { useBlockHeight, useFarmInfo } from './pools/Hooks'
 import { getContract, getWeb3, useActiveWeb3React } from '../web3'
 import { getGLFStakingAddress } from '../web3/address'
 
-export const useGLFBalance = () => {
-  const { account, active, library, chainId } = useActiveWeb3React()
-  const [glfBalance, setGLFBalance] = useState()
-
-  useEffect(() => {
-    if (active) {
-      try {
-        const contract = getContract(
-          library,
-          StakingRewardsV2.abi,
-          getGLFStakingAddress(chainId)
-        )
-        contract.methods
-          .balanceOf(account)
-          .call()
-          .then((res) => {
-            console.log('bot totalSupply:', res)
-            setGLFBalance(res)
-          })
-      } catch (e) {
-        console.log('load totalSupply error:', e)
-      }
-    }
-  }, [active])
-
-  return { glfBalance }
-}
-
 export const useBalance = (address) => {
   const { account, active, library } = useActiveWeb3React()
   const [balance, setBalance] = useState(0)

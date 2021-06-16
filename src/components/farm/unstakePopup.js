@@ -4,7 +4,6 @@ import { formatAmount, numToWei, splitFormat } from '../../utils/format'
 import { getRandomIntInclusive } from '../../utils/index'
 import { Select } from 'antd'
 import { useBalance } from '../../pages/Hooks'
-import { getPointAddress } from '../../web3/address'
 import Web3 from 'web3'
 // 处理格式 千位符
 import { formatNumber } from 'accounting'
