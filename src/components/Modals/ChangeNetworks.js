@@ -6,6 +6,7 @@ import BSC from '../../assets/icon/BSC@2x.png'
 import HECO from '../../assets/icon/HECO@2x.png'
 import {changeNetwork} from "../../connectors";
 import {ChainId} from "../../web3/address";
+import { FormattedMessage } from 'react-intl'
 
 export const ChangeNetworks = ({ onClose }) => {
     const { dispatch, state } = useContext(mainContext)
@@ -17,13 +18,10 @@ export const ChangeNetworks = ({ onClose }) => {
         <form className='form-app' action='/'>
           <div className='form-app__inner transction-submitted link-wallet'>
             <div className='form-app__inner__header'>
-              切换网络
-              {/* <FormattedMessage id='modalsText1' /> */}
+              <FormattedMessage id='netWork3' />
             </div>{' '}
             <div className='choose-network-box'>
-              <div
-                className={`choose-network change-network`}
-              >
+              <div className={`choose-network change-network`}>
                 <p
                   className={`${chainId == ChainId.BSC ? 'active' : ''}`}
                   onClick={() => {

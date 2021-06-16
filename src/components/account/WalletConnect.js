@@ -1,13 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { UnsupportedChainIdError, useWeb3React } from '@web3-react/core'
 import { mainContext } from '../../reducer'
 import { useActiveWeb3React } from '../../web3'
-import Web3 from 'web3'
-import Web3Modal from 'web3modal'
-import WalletConnectProvider from '@walletconnect/web3-provider'
-import {
-  NoEthereumProviderError,
-} from '@web3-react/injected-connector'
 import { FormattedMessage } from 'react-intl'
 import {
   GALLERY_SELECT_WEB3_CONTEXT,
@@ -52,11 +45,12 @@ export const WalletConnect = ({ onClose, onCancel }) => {
         <form className='form-app' action='/'>
           <div className='form-app__inner transction-submitted link-wallet'>
             <div className='form-app__inner__header'>
-              链接钱包
-              {/* <FormattedMessage id='modalsText1' /> */}
+              <FormattedMessage id='linkWallet' />
             </div>{' '}
             <div className='choose-network-box'>
-              <p className='choose-network-title'>选择网络</p>
+              <p className='choose-network-title'>
+                <FormattedMessage id='netWork1' />
+              </p>
 
               <div className={`choose-network`}>
                 <p
@@ -110,15 +104,18 @@ export const WalletConnect = ({ onClose, onCancel }) => {
               </div>
             </div>
             <div className='form-app__inner wallet-connect'>
-              <p className='choose-network-title'>选择钱包</p>
+              <p className='choose-network-title'>
+                {' '}
+                <FormattedMessage id='netWork2' />
+              </p>
               <div className='form-app__inner__wallets'>
                 <div
                   onClick={() => {
                     connectWallet(injected, netWorkFlag).then(() => {
-                        dispatch({
-                          type: HANDLE_WALLET_MODAL,
-                          walletModal: null,
-                        })
+                      dispatch({
+                        type: HANDLE_WALLET_MODAL,
+                        walletModal: null,
+                      })
                     })
                   }}
                   className='form-app__inner__wallets__item'

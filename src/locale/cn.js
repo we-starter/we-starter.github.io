@@ -337,5 +337,8 @@ const zh_CN = {
   buyPopup6: '确认兑换',
   buyPopup7: '预计收到',
   buyPopup8: '交易成功',
+  netWork1: '选择网络',
+  netWork2: '选择钱包',
+  netWork3: '切换网络',
 }
 export default zh_CN

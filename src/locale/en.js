@@ -338,5 +338,8 @@ const en_US = {
   buyPopup6: 'Confirm Swap',
   buyPopup7: 'Estimated',
   buyPopup8: 'Succeed',
+  netWork1: 'Choose Network',
+  netWork2: 'Choose Wallet',
+  netWork3: 'Change Network',
 }
 export default en_US
