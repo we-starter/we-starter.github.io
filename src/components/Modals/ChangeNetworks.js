@@ -20,34 +20,12 @@ import walletConnect from '../../assets/icon/walletConnect.png'
 
 import { WalletConnectConnector } from '@web3-react/walletconnect-connector'
 import { LedgerConnector } from '@web3-react/ledger-connector'
+import {changeNetwork} from "../../connectors";
+import {ChainId} from "../../web3/address";
 
 export const ChangeNetworks = ({ onClose }) => {
     const { dispatch, state } = useContext(mainContext)
     const { chainId } = useActiveWeb3React()
-    const [connectedName, setConnectedName] = useState()
-
-    const context = useWeb3React()
-
-    const [activatingConnector, setActivatingConnector] = useState()
-
-    const { connector, activate, active } = context
-
-    const { changeNetworkStatus } = state
-
-    useEffect(() => {
-      if (activatingConnector && activatingConnector === connector) {
-        setActivatingConnector(undefined)
-      }
-    }, [activatingConnector])
-
-    useEffect(() => {
-      const localContent =
-        window && window.localStorage.getItem(GALLERY_SELECT_WEB3_CONTEXT)
-      console.log('wallet content', localContent)
-      if (localContent) {
-        setConnectedName(localContent)
-      }
-    }, [])
 
   return (
     <div className='modal'>
@@ -63,32 +41,11 @@ export const ChangeNetworks = ({ onClose }) => {
                 className={`choose-network change-network`}
               >
                 <p
-                  className={`${chainId == 56 ? 'active' : ''}`}
+                  className={`${chainId == ChainId.BSC ? 'active' : ''}`}
                   onClick={() => {
-                    window.ethereum &&
-                      window.ethereum
-                        .request({
-                          method: 'wallet_addEthereumChain',
-                          params: [
-                            {
-                              chainId: '0x38',
-                              chainName: 'BSC',
-                              nativeCurrency: {
-                                name: 'BNB',
-                                symbol: 'BNB',
-                                decimals: 18,
-                              },
-                              rpcUrls: ['https://bsc-dataseed.binance.org/'],
-                              blockExplorerUrls: ['https://bscscan.com/'],
-                            },
-                          ],
-                        })
-                        .then(() => {
-                          window.location.reload()
-                        })
-                        .catch((e) => {
-                          window.location.reload()
-                        })
+                    changeNetwork(ChainId.BSC).then(() => {
+                      // TODO 关闭窗口
+                    })
                   }}
                 >
                   <img src={BSC} />
@@ -110,34 +67,11 @@ export const ChangeNetworks = ({ onClose }) => {
                   </svg>
                 </p>
                 <p
-                  className={`${chainId == 128 ? 'active' : ''}`}
+                  className={`${chainId == ChainId.HECO ? 'active' : ''}`}
                   onClick={() => {
-                    window.ethereum &&
-                      window.ethereum
-                        .request({
-                          method: 'wallet_addEthereumChain',
-                          params: [
-                            {
-                              chainId: '0x80',
-                              chainName: 'HECO',
-                              nativeCurrency: {
-                                name: 'HT',
-                                symbol: 'HT',
-                                decimals: 18,
-                              },
-                              rpcUrls: [
-                                'https://http-mainnet-node.huobichain.com',
-                              ],
-                              blockExplorerUrls: ['https://hecoinfo.com'],
-                            },
-                          ],
-                        })
-                        .then(() => {
-                          window.location.reload()
-                        })
-                        .catch((e) => {
-                          window.location.reload()
-                        })
+                    changeNetwork(ChainId.HECO).then(() => {
+                      // TODO 关闭窗口
+                    })
                   }}
                 >
                   <img src={HECO} />
