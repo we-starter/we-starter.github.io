@@ -1,12 +1,14 @@
-import React, { useContext, useState, useEffect } from 'react'
+import React, { useContext, useState, useRef, useEffect } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import { FormattedMessage } from 'react-intl'
+import { withRouter } from 'react-router'
 import { useActiveWeb3React } from '../../web3'
 import { USDT_ADDRESS, WAR_ADDRESS, WHT_ADDRESS } from '../../web3/address'
 import { useMDexPrice } from '../../pages/pools/Hooks'
 import { splitFormat } from '../../utils/format'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 import { message } from 'antd'
+import toolApi from '../../apis/toolApi'
 import Icon1 from '../../assets/icon/icon1@2x.png'
 import Icon2 from '../../assets/icon/icon2@2x.png'
 import Icon3 from '../../assets/icon/icon3@2x.png'
@@ -22,12 +24,14 @@ import {
 import { mainContext } from '../../reducer'
 import WeStarterPDF from '../../pdfFile/Security Assessment for WeStarter - Starter.pdf'
 
-export const Banner = () => {
+const Banner = (props) => {
   const { chainId } = useActiveWeb3React()
   const { dispatch, state } = useContext(mainContext)
   const pools = usePoolsInfo()
   const poolsLBP = usePoolsLBPInfo()
   const [realTimePrice, setRealTimePrice] = useState('-')
+  const [bscPrice, setBscPrice] = useState(0)
+  let timer = useRef() 
   const WarTokenAddress =
     WAR_ADDRESS[chainId] || '0x910651F81a605a6Ef35d05527d24A72fecef8bF0'
   // const [_tmp_price_war2ht, _tmp_price_war2ht_fee] = useMDexPrice(
@@ -49,14 +53,39 @@ export const Banner = () => {
   //   }
   // }, [_tmp_price_war2ht, _tmp_price_usdt2ht])
 
-  // const [price, fee] = useMDexPrice(
-  //   chainId && WAR_ADDRESS(chainId),
-  //   chainId && USDT_ADDRESS(chainId),
-  //   1,
-  //   [chainId && WHT_ADDRESS(chainId)]
-  // )
+  const [price, fee] = useMDexPrice(
+    chainId && WAR_ADDRESS(chainId),
+    chainId && USDT_ADDRESS(chainId),
+    1,
+    [chainId && WHT_ADDRESS(chainId)],
+    128
+  )
 
-   const [price, fee] = [1.6, 0]
+  const getTokenPrice = () => {
+    toolApi
+      .getWarTokenPrice()
+      .then((res) => {
+        if (res.data.data) {
+          setBscPrice(res.data.data.price)
+        }
+      })
+      .catch((e) => {
+        console.log(e)
+      })
+  }
+   useEffect(() => {
+     clearInterval(timer.current)
+     if (chainId == 56) {
+       getTokenPrice()
+       timer.current = setInterval(() => {
+         getTokenPrice()
+       }, 60000)
+       return () => {
+         clearInterval(timer.current)
+       }
+     }
+     
+   }, [chainId])
 
   useEffect(() => {
     if (price * 1 > 0) {
@@ -233,7 +262,12 @@ export const Banner = () => {
               <span className='banner_related_data_title'>
                 <FormattedMessage id='farm18' />
               </span>
-              <span className='banner_related_data_val'>${realTimePrice}</span>
+              <span className='banner_related_data_val'>
+                $
+                {chainId == 128
+                  ? realTimePrice
+                  : bscPrice * 1 > 0 ? splitFormat(bscPrice, 3) : '-'}
+              </span>
             </p>
             {/* href='https://ht.mdex.com/#/swap?outputCurrency=0x910651f81a605a6ef35d05527d24a72fecef8bf0'
           target='_blank' */}
@@ -318,3 +352,5 @@ export const Banner = () => {
     </div>
   )
 }
+
+export default withRouter(Banner)

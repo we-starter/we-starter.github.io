@@ -69,7 +69,7 @@ const Farm = (props) => {
           pools.map((item, index) => {
             return <FarmCard pools={item} key={index} />
           })}
-        {pools.length < 3 && [1, 2, 3].map(() => isComing(1))}
+        {pools.length < 3 && [1, 2, 3].map(() => isComing(Math.random()))}
       </div>
       <Footer />
     </div>
