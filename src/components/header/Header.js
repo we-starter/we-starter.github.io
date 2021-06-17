@@ -193,7 +193,7 @@ export const Header = () => {
               />
             )}
 
-            {active && chainId == 128 && (
+            {active && (
               <div className='ht-balance'>
                 <span></span>
                 <p>{formatAmount(balance)} WAR</p>

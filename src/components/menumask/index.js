@@ -65,7 +65,7 @@ export const MenuMask = () => {
           <ul className='menumask_list'>
             <div className='menumask__menu-wrapper'>
               {/* {active && <img className='exchange' src={Exchange} />} */}
-              {active && chainId == 128 && (
+              {active && (
                 <div className='menumask_ht-balance'>
                   <span></span>
                   <p>{formatAmount(balance)} WAR</p>
