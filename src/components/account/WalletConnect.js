@@ -60,7 +60,7 @@ export const WalletConnect = ({ onClose, onCancel }) => {
                   }}
                 >
                   <img src={BSC} />
-                  <span>Binance</span>
+                  <span>BSC</span>
                   <svg
                     t='1623750759643'
                     className='icon'
