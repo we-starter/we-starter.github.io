@@ -1115,13 +1115,13 @@ export const useMdxARP = (
   return apr
 }
 
-export const useMDexPrice = (address1, address2, amount = 1, path = []) => {
+export const useMDexPrice = (address1, address2, amount = 1, path = [], _chainId) => {
   const FEE_RADIO = '0.003'
   const { account, active, library, chainId } = useActiveWeb3React()
    const blockHeight = useBlockHeight()
   const [price, setPrice] = useState(0)
   const [fee, setFee] = useState(0)
-
+  
   const getPairPrice = (address1, address2, amount) => {
     const multicallProvider = getMultiCallProvider(library, chainId)
     const factory = new Contract(MDEX_FACTORY_ADDRESS(chainId), MDexFactory)
@@ -1179,6 +1179,7 @@ export const useMDexPrice = (address1, address2, amount = 1, path = []) => {
     _price = amount
     let _fee = '0'
     let _fee_amount = amount.toString()
+    if (chainId !== _chainId) return ['0', '0']
     for (let i = 1; i < _path.length; i++) {
       const from_address = _path[i - 1]
       const to_address = _path[i]
@@ -1208,7 +1209,7 @@ export const useMDexPrice = (address1, address2, amount = 1, path = []) => {
       }
     }
     return () => {}
-  }, [library, account, blockHeight, address1, address2, amount])
+  }, [library, account, blockHeight, address1, address2, amount, chainId])
   if (amount == 0) return ['0', '0']
 
   return [price, fee]

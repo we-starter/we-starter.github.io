@@ -41,7 +41,7 @@ import { formatAmount } from '../../utils/format'
 import Timer from 'react-compound-timer'
 import { useActiveWeb3React } from '../../web3'
 import { mainContext } from '../../reducer'
-import { Banner } from '../../components/banner/Banner'
+import Banner from '../../components/banner/Banner'
 
 const PoolsIndex = (props) => {
   const [listData, setListData] = useState([])
