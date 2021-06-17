@@ -68,7 +68,7 @@ export const MenuMask = () => {
               {active && (
                 <div className='menumask_ht-balance'>
                   <span></span>
-                  <p>{formatAmount(balance)} WAR</p>
+                  <p>{formatAmount(balance)}</p>
                 </div>
               )}
             </div>

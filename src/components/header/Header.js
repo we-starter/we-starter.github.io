@@ -196,7 +196,7 @@ export const Header = () => {
             {active && (
               <div className='ht-balance'>
                 <span></span>
-                <p>{formatAmount(balance)} WAR</p>
+                <p>{formatAmount(balance)}</p>
               </div>
             )}
             {active && (
