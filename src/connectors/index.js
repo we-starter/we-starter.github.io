@@ -162,13 +162,11 @@ export const useConnectWallet = () => {
   },[])
 
   useEffect(() => {
-    connectWallet(injected)
+    !active && connectWallet(injected)
     window.ethereum.on('networkChanged', () => {
       // 切换网络后，尝试连接
-      if(!active) {
-        connectWallet(injected)
-      }
+      !active && connectWallet(injected)
     })
-  }, [active])
+  }, [])
   return connectWallet
 }
