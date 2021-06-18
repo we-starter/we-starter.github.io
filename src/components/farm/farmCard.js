@@ -31,15 +31,18 @@ const FarmCard = (props) => {
     farmPools.valueAprPath,
     farmPools.rewardsAprPath,
     farmPools.settleToken,
-    farmPools.earnName === 'APY' ? 2 : 1
+    farmPools.earnName === 'APY' ? 2 : 1,
+    farmPools.networkId
   )
-  // const apr = 0
+
   const mdexApr = useMdxARP(
     farmPools.mdexReward ? farmPools.address : null,
     farmPools.abi,
     farmPools.MLP,
-    farmPools.rewards1Address
+    farmPools.rewards1Address,
+    farmPools.networkId
   )
+
   const [aprPercentage, setPercentage] = useState('-')
   useEffect(() => {
     console.log('apr', apr)
@@ -468,8 +471,8 @@ const FarmCard = (props) => {
           href={farmPools.byLink}
           target='_black'
         >
-          <FormattedMessage id='farm13' /> {farmPools && farmPools.name}(MDEX LP
-          Token)
+          <FormattedMessage id='farm13' /> {farmPools && farmPools.name}(
+          {farmPools && farmPools.lpToken})
         </a>
       )}
       {farmPools && farmPools.name === 'WAR POOL (DAO)' && (

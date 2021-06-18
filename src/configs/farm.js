@@ -36,6 +36,7 @@ export default [
     is_coming: false,
     mdexReward: true,
     networkId: 128,
+    lpToken: 'MDEX LP Token',
   },
   {
     name: 'WAR POOL (DAO)',
@@ -102,5 +103,41 @@ export default [
     is_coming: false,
     mdexReward: false,
     networkId: 128,
+    lpToken: 'MDEX LP Token',
   },
+  // {
+  //   name: 'WAR-BUSD LPT',
+  //   icon: 'PAUL-HT_small@2x.png',
+  //   rewards1: 'WAR',
+  //   rewards2: null,
+  //   address: '', // 超募合约地址
+  //   rewards1Address: '0x910651F81a605a6Ef35d05527d24A72fecef8bF0',
+  //   rewards2Address: null,
+  //   // apr
+  //   valueAprToken: '0x910651F81a605a6Ef35d05527d24A72fecef8bF0', // WAR
+  //   valueAprPath: [
+  //     '0x5545153ccfca01fbd7dd11c0b23ba694d9509a6f', // WHT
+  //   ],
+  //   rewardsAprPath: [
+  //     '0x5545153ccfca01fbd7dd11c0b23ba694d9509a6f', // WHT
+  //   ],
+  //   settleToken: '0xe9e7cea3dedca5984780bafc599bd69add087d56',
+
+  //   MLP: '0xe4e55c9203ac398a0f0b98bd096b70d9778eca6a',
+  //   byLink:
+  //     'https://ht.mdex.com/#/add/HT/0x910651F81a605a6Ef35d05527d24A72fecef8bF0',
+  //   abi: StakingPool,
+  //   start_at: '',
+  //   time: '',
+  //   dueDate: null,
+  //   openDate: null,
+  //   earnName: 'APR',
+  //   status: 0,
+  //   rewards: 'LPT',
+  //   decimal: 18,
+  //   is_coming: true,
+  //   mdexReward: false,
+  //   networkId: 56,
+  //   lpToken: 'BSC LP Token',
+  // },
 ]

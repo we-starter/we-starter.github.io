@@ -232,8 +232,8 @@ useEffect(() => {
           href='https://ht.mdex.com/#/add/HT/0x910651F81a605a6Ef35d05527d24A72fecef8bF0'
           target='_black'
         >
-          <FormattedMessage id='farm13' /> {farmPools && farmPools.name}(MDEX LP
-          Token)
+          <FormattedMessage id='farm13' /> {farmPools && farmPools.name}(
+          {farmPools && farmPools.lpToken})
         </a>
       )}
       {farmPools && farmPools.name === 'WAR POOL (DAO)' && (

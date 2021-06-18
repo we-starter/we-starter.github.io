@@ -93,3 +93,14 @@ export function WMDEX_ADDRESS(chainId) {
       return '0x25D2e80cB6B86881Fd7e07dd263Fb79f4AbE033c'
   }
 }
+
+export function BUSD_ADDRESS(chainId) {
+  switch (chainId) {
+    case ChainId.BSC:
+      return '0xe9e7cea3dedca5984780bafc599bd69add087d56'
+    case ChainId.HECO:
+      return '0xe9e7cea3dedca5984780bafc599bd69add087d56'
+    default:
+      return '0xe9e7cea3dedca5984780bafc599bd69add087d56'
+  }
+}

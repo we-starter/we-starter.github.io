@@ -886,7 +886,7 @@ export const useTotalRewards = (address, abi) => {
   const [total, setTotal] = useState(0)
   const blockHeight = useBlockHeight()
   useEffect(() => {
-    if (library) {
+    if (library && address) {
       const contract = getContract(library, abi, address)
       contract.methods
         .rewards(ADDRESS_0)
@@ -905,7 +905,7 @@ export const useSpan = (address, abi) => {
   const [span, setSpan] = useState(0)
   const blockHeight = useBlockHeight()
   useEffect(() => {
-    if (library) {
+    if (library && address) {
       const contract = getContract(library, abi, address)
       contract.methods
         .rewardsDuration()
@@ -928,7 +928,8 @@ export const useAPR = (
   valueAprPath,
   rewardsAprPath,
   settleToken,
-  mode = 1
+  mode = 1,
+  _chainId
 ) => {
   const { account, active, library, chainId } = useActiveWeb3React()
   const blockHeight = useBlockHeight()
@@ -975,7 +976,8 @@ export const useAPR = (
     reward1_address,
     settleToken,
     1,
-    rewardsAprPath
+    rewardsAprPath,
+    _chainId
   )
 
   useEffect(() => {
@@ -996,7 +998,7 @@ export const useAPR = (
 
   // 计算奖励的量
   useEffect(() => {
-    if (library && allowance) {
+    if (library && allowance && pool_address) {
       const reward1_vol = new BigNumber(allowance).minus(
         new BigNumber(unClaimReward)
       )
@@ -1034,7 +1036,7 @@ export const useAPR = (
         new BigNumber(span).div(new BigNumber(86400))
       )
 
-      if(mode === 1){
+      if (mode === 1) {
         // 奖励的war
         const yearReward = dayRate
           .multipliedBy(new BigNumber(rewardsTotalValue))
@@ -1047,13 +1049,16 @@ export const useAPR = (
             .toString()
           setApr(_arp)
         }
-      }else if (mode === 2){
-        const _arp = dayRate.multipliedBy(new BigNumber(rewardsTotalValue)).dividedBy(new BigNumber(lptTotalValue)).plus(new BigNumber(1)).exponentiatedBy(new BigNumber(365))
+      } else if (mode === 2) {
+        const _arp = dayRate
+          .multipliedBy(new BigNumber(rewardsTotalValue))
+          .dividedBy(new BigNumber(lptTotalValue))
+          .plus(new BigNumber(1))
+          .exponentiatedBy(new BigNumber(365))
         if (_arp > 0) {
           setApr(_arp)
         }
       }
-
     }
     return () => {}
   }, [library, span, lptTotalValue, rewardsTotalValue, blockHeight])
@@ -1065,7 +1070,8 @@ export const useMdxARP = (
   pool_address,
   pool_abi,
   lpt_address,
-  reward1_address
+  reward1_address,
+  _chainId
 ) => {
   // mdx 年释放总量 * 价值 /
   const { account, active, library, chainId } = useActiveWeb3React()
@@ -1081,12 +1087,14 @@ export const useMdxARP = (
   const [mdex2warPrice, mdex2warPriceFee] = useMDexPrice(
     MDEX_ADDRESS,
     chainId && WAR_ADDRESS(chainId),
-    2534.40,
-    [chainId &&  WHT_ADDRESS(chainId)]
+    2534.4,
+    [chainId && WHT_ADDRESS(chainId)],
+    _chainId
   )
   useEffect(() => {
     if (library && pool_address && lptValue > 0 && mdex2warPrice > 0) {
-      const contract = getContract(library, MDexPool, MDEX_POOL_ADDRESS)
+      if (_chainId && _chainId !== chainId) return
+        const contract = getContract(library, MDexPool, MDEX_POOL_ADDRESS)
       const pool_contract = getContract(library, pool_abi, pool_address)
       const poolId = '0x4c'
       const promiseList = [
@@ -1173,13 +1181,13 @@ export const useMDexPrice = (address1, address2, amount = 1, path = [], _chainId
     })
   }
 
-  const getPrice = async (address1, address2, amount, path) => {
+  const getPrice = async (address1, address2, amount, path, _chainId) => {
     const _path = [address1, ...path, address2]
     let _price = 0
     _price = amount
     let _fee = '0'
     let _fee_amount = amount.toString()
-    if (chainId !== _chainId) return ['0', '0']
+    if (_chainId && chainId !== _chainId) return ['0', '0']
     for (let i = 1; i < _path.length; i++) {
       const from_address = _path[i - 1]
       const to_address = _path[i]
@@ -1202,10 +1210,12 @@ export const useMDexPrice = (address1, address2, amount = 1, path = [], _chainId
     if (library) {
       if (Web3.utils.isAddress(address1) && amount > 0) {
         // use path
-        getPrice(address1, address2, amount, path).then(([_price, _fee]) => {
-          setPrice(_price)
-          setFee(_fee)
-        })
+        getPrice(address1, address2, amount, path, _chainId).then(
+          ([_price, _fee]) => {
+            setPrice(_price)
+            setFee(_fee)
+          }
+        )
       }
     }
     return () => {}
