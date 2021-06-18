@@ -5,18 +5,24 @@
   }
   .farm_index {
     position: relative;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    // display: flex;
+    // justify-content: space-between;
+    // align-items: center;
     margin: 74px auto 112px;
     width: 1080px;
     &_card {
       position: relative;
+      display: inline-block;
+      margin-top: 30px;
       padding: 42px 30px 0;
       width: 332px;
       height: 440px;
       background: #e0f8e3;
       border-radius: 20px;
+      vertical-align: top;
+        &:nth-child(3n-1) {
+          margin: 30px 30px 0;
+        }
       &:after {
         content: '';
         position: absolute;
@@ -35,6 +41,10 @@
     .WAR:after {
       width: 50px;
       background: url('../icon/WAR@2x.png') no-repeat;
+      background-size: 100% 100%;
+    }
+     .WAR-BUSD:after {
+      background: url('../icon/farm/WAR_BUSD.png') no-repeat;
       background-size: 100% 100%;
     }
     &_coming {
@@ -225,19 +235,25 @@
   }
   .farm_index {
     position: relative;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    // display: flex;
+    // justify-content: space-between;
+    // align-items: center;
     margin: 74px auto 0;
     padding-bottom: 112px;
     width: 1080px;
     &_card {
       position: relative;
+      display: inline-block;
+      margin-top: 30px;
       padding: 42px 30px 0;
       width: 332px;
       height: 440px;
       background: #e0f8e3;
       border-radius: 20px;
+        vertical-align: top;
+        &:nth-child(3n-1) {
+          margin: 30px 30px 0;
+        }
       &:after {
         content: '';
         position: absolute;
@@ -249,13 +265,17 @@
         background-size: 100% 100%;
       }
     }
-    .PAUL-USDT:after {
+     .PAUL-USDT:after {
       background: url('../icon/farm/PAUL-HT@2x.png') no-repeat;
       background-size: 100% 100%;
     }
     .WAR:after {
       width: 50px;
       background: url('../icon/WAR@2x.png') no-repeat;
+      background-size: 100% 100%;
+    }
+    .WAR-BUSD:after {
+      background: url('../icon/farm/WAR_BUSD.png') no-repeat;
       background-size: 100% 100%;
     }
     &_coming {
@@ -480,6 +500,10 @@
       background: url('../icon/WAR@2x.png') no-repeat;
       background-size: 100% 100%;
     }
+     .WAR-BUSD:after {
+      background: url('../icon/farm/WAR_BUSD.png') no-repeat;
+      background-size: 100% 100%;
+    }
     &_coming {
       background: #f2f0eb;
       &:after {
@@ -700,6 +724,10 @@
     .WAR:after {
       width: 50px;
       background: url('../icon/WAR@2x.png') no-repeat;
+      background-size: 100% 100%;
+    }
+     .WAR-BUSD:after {
+      background: url('../icon/farm/WAR_BUSD.png') no-repeat;
       background-size: 100% 100%;
     }
     &_coming {

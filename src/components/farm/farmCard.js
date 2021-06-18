@@ -22,27 +22,28 @@ const FarmCard = (props) => {
   const [balanceProportion, setBalanceProportion] = useState(0)
   const [now, setNow] = useState(parseInt(Date.now() / 1000))
 
-  const apr = useAPR(
-    farmPools.address,
-    farmPools.abi,
-    farmPools.MLP,
-    farmPools.rewards1Address,
-    farmPools.valueAprToken,
-    farmPools.valueAprPath,
-    farmPools.rewardsAprPath,
-    farmPools.settleToken,
-    farmPools.earnName === 'APY' ? 2 : 1,
-    farmPools.networkId
-  )
+  // const apr = useAPR(
+  //   farmPools.address,
+  //   farmPools.abi,
+  //   farmPools.MLP,
+  //   farmPools.rewards1Address,
+  //   farmPools.valueAprToken,
+  //   farmPools.valueAprPath,
+  //   farmPools.rewardsAprPath,
+  //   farmPools.settleToken,
+  //   farmPools.earnName === 'APY' ? 2 : 1,
+  //   farmPools.networkId
+  // )
 
-  const mdexApr = useMdxARP(
-    farmPools.mdexReward ? farmPools.address : null,
-    farmPools.abi,
-    farmPools.MLP,
-    farmPools.rewards1Address,
-    farmPools.networkId
-  )
-
+  // const mdexApr = useMdxARP(
+  //   farmPools.mdexReward ? farmPools.address : null,
+  //   farmPools.abi,
+  //   farmPools.MLP,
+  //   farmPools.rewards1Address,
+  //   farmPools.networkId
+  // )
+const apr=0
+const mdexApr=0
   const [aprPercentage, setPercentage] = useState('-')
   useEffect(() => {
     console.log('apr', apr)
