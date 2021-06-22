@@ -13,7 +13,7 @@ const en_US = {
   cannotSubscribe: 'Unavailable to purchase currently',
   bannerTitle: 'Liquidity Valuation Discovery Platform',
   bannerContent1:
-    'WeStarter is a cross-chain token initial swap platform which based on HECO network. Through the fluency of the product and sufficient industry resources, it carries the requirement of funds and resources for a variety of asset types. With the role of gatekeeper, through the decentralized incentive and governance mechanism of tokens, to achieve the goal of selecting high-quality assets.',
+    'WeStarter is a cross-chain token initial swap platform which based on HECO network. Through the fluency of the product and sufficient industry resources, it carries the requirement of resources for a variety of asset types. With the role of gatekeeper, through the decentralized incentive and governance mechanism of tokens, to achieve the goal of selecting high-quality assets.',
   bannerContent2: '',
   money: 'input investment amount',
   FundraisingRecord: 'Fundraising Record',
@@ -291,7 +291,7 @@ const en_US = {
     'CoinWind aims to build a DeFi digital asset bank, launching a product that combines high-yield, safety, and reliability. CoinWind will manage and transfer different tokens deposited by users into different pools, then manage the funds of a certain token pool to participate in different liquidity mining according to different strategies. At last, make higher benefits for all users. CoinWind can effectively reduce the impermanence loss in liquidity mining through a combination strategy.',
   paulAboutProject1:
     'We designed our foundational architecture based on current cross-chain networks, which has introduced and modified based on the quoting system used by global top organizations in high-frequency automatic trading for single benchmark in multiple trading scenarios. Pledged asset quoting and arbitrage validation are used to build real-time quoting validation mechanism. In extreme situations, a price curve can be generated more smoothly by statistical hypothesis-testing.',
-  related_title1: 'Total raised funds',
+  related_title1: 'Total IWO funds',
   related_title2: 'Total participated addresses',
   related_title3: 'Total established pools',
   warLBP1: 'Participate {LBPType} Token',
