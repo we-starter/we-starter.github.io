@@ -113,19 +113,27 @@
     background: transparent;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     @media #{$desktop} {
-      width: 1080px;
+      width: 100%;
       height: 100px;
+      padding: 0 120px;
+    }
+    @media screen and (min-width: 1200px) and (max-width: 1336px) {
+       width: 1080px;
+       padding: 0;
     }
     @media #{$mdWidth} {
       width: 1080px;
       height: auto;
+      padding: 0;
     }
     @media #{$smWidth} {
       width: 100%;
+      padding: 0;
     }
     @media #{$xsWidth} {
       width: 100%;
       min-width: 350px;
+      padding: 0;
     }
   }
 
