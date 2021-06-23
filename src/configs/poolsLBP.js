@@ -17,7 +17,7 @@ export default [
     icon: '',
     type: 2,
     isPrivate: false,
-    ratio: '-', // 兑换比例需要确认
+    ratio: '1BLACK=0.0027HT', // 兑换比例需要确认
     underlying: {
       address: '0xd714d91A169127e11D8FAb3665d72E8b7ef9Dbe2',
       decimal: 18,

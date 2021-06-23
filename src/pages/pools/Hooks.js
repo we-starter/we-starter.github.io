@@ -753,6 +753,9 @@ export const usePoolsLBPInfo = (address = '') => {
           // 如果还未开始，则不调用合约
           if (pool.is_coming) return pool
 
+          // 如果是已完成状态，则不调用合约
+          if (pool.status == 3) return pool
+
           const pool_contract = new Contract(pool.address, pool.abi)
 
           const promise_list = [
