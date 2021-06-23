@@ -17,7 +17,7 @@ export default [
     icon: '',
     type: 2,
     isPrivate: false,
-    ratio: '-', // 兑换比例需要确认
+    ratio: '1BLACK=0.0027HT', // 兑换比例需要确认
     underlying: {
       address: '0xd714d91A169127e11D8FAb3665d72E8b7ef9Dbe2',
       decimal: 18,
@@ -44,8 +44,9 @@ export default [
     status: 3,
     time: '1619701200',
     link_url: 'https://www.blackhole.black', // 跳转外链接
-    farm_lpt: "WAR-USDT",
-    farm_link: "https://ht.mdex.com/#/add/HT/0x910651F81a605a6Ef35d05527d24A72fecef8bF0",
+    farm_lpt: 'WAR-USDT',
+    farm_link:
+      'https://ht.mdex.com/#/add/HT/0x910651F81a605a6Ef35d05527d24A72fecef8bF0',
     project_introduction:
       'An approval-free decentralized & cross-chain burning protocol, innovator of perpetual deflationary blockchain ecosystem.',
   },
@@ -91,8 +92,9 @@ export default [
     status: 0,
     time: '1622635200',
     link_url: 'https://www.paulprotocol.io', // 跳转外链接
-    farm_lpt: "PAUL-USDT",
-    farm_link: "https://ht.mdex.com/#/add/0xa71EdC38d189767582C38A3145b5873052c3e47a/0xFC01b8f883a89278235ba674bbE2bb48db96d9Cf",
+    farm_lpt: 'PAUL-USDT',
+    farm_link:
+      'https://ht.mdex.com/#/add/0xa71EdC38d189767582C38A3145b5873052c3e47a/0xFC01b8f883a89278235ba674bbE2bb48db96d9Cf',
     project_introduction:
       'Paul Protocol is a double-mechanism risk resistant oracle with superior performance and timeliness.',
   },
