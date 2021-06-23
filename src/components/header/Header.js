@@ -95,6 +95,15 @@ export const Header = () => {
                   </NavLink>
                 </li>
                 <li className='menu__item'>
+                  <NavLink
+                    to='/bridge'
+                    className='menu__link'
+                    onClick={handleMenuItemClick}
+                  >
+                    <FormattedMessage id='bridge' />
+                  </NavLink>
+                </li>
+                <li className='menu__item'>
                   <a
                     href='https://forms.gle/n6M5tJ46KtEfEDQz9'
                     target='_blank'

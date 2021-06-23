@@ -1,6 +1,7 @@
 const zh_CN = {
   fundraisingPool: '兑换池',
   farm: '农场',
+  bridge: 'Bridge',
   mortgage: '抵押挖矿',
   liquidityPool: '流动性挖矿',
   crowdfund: '众筹池',

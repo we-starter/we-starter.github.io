@@ -16,6 +16,7 @@ import PoolsIndex from './pages/pools/poolsIndex'
 import PoolsDetail from './pages/pools/poolsDetail'
 import PoolsDetailLBP from './pages/pools/poolsDetailLBP'
 import Farm from './pages/pools/farm'
+import Bridge from './pages/pools/bridge'
 import Intl from './locale/intl'
 
 function getLibrary(provider) {
@@ -47,6 +48,7 @@ function App() {
             <Switch>
               <Route exact path={['/']} component={PoolsIndex}></Route>
               <Route exact path='/farm' component={Farm}></Route>
+              <Route exact path='/bridge' component={Bridge}></Route>
               <Route
                 exact
                 path='/pools/detail/:address'
