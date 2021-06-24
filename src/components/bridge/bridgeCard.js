@@ -200,10 +200,6 @@ const BridgeCard = (props) => {
         getMaxNonce(toChainId, fromChainId, getPledgeData)
     }
 
-    useEffect(()=>{
-        chainId && getCrossChainData()
-    }, [])
-
     const purchaseBtn = () => {}
 
     return (
