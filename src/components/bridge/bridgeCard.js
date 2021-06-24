@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, {useContext, useEffect, useMemo, useState} from 'react'
 import cs from 'classnames'
 import { Button, message } from 'antd'
 import { getContract, useActiveWeb3React } from '../../web3'
@@ -22,7 +22,6 @@ var web3BSC = new Web3(new Web3.providers.HttpProvider(RPC_URLS(ChainId.BSC)));
 var web3HECO = new Web3(new Web3.providers.HttpProvider(RPC_URLS(ChainId.HECO)));
 
 const BridgeCard = (props) => {
-
     const { intl } = props
     const { account, active, library, chainId } = useActiveWeb3React()
 
@@ -35,6 +34,7 @@ const BridgeCard = (props) => {
 
     const { dispatch, state } = useContext(mainContext)
 
+    const [pledgeHistory, setPledgeHistory] = useState([])
     const [transferData, setTransferData] = useState({})
 
     const onChange = (e) => {
@@ -48,20 +48,20 @@ const BridgeCard = (props) => {
         setAmount(formatAmount(balance))
     }
     /**
-     * 无需授权，直接转移
+     * 无需授权，直接质押
      */
     const onApprove = () => {
         if (chainId !== ChainId.HECO) {
             changeNetwork(ChainId.HECO).then((e) => {})
         } else {
-            onTransfer()
+            onPledge()
         }
     }
 
     /**
-     * 转移
+     * 质押
      */
-    const onTransfer = () => {
+    const onPledge = () => {
         setLoading(true)
         let web3 = new Web3(window.ethereum);
         let myContract = new web3.eth.Contract(ChainSwapAbi, CHAIN_SWAP_ADDRESS(chainId));
@@ -148,6 +148,61 @@ const BridgeCard = (props) => {
             })
         })
     }
+
+    /**
+     * 获取跨链数据
+     */
+    const getCrossChainData = () => {
+        var web3HECO = new Web3(new Web3.providers.HttpProvider(RPC_URLS(ChainId.HECO)));
+        let fromContract = new web3HECO.eth.Contract(ChainSwapAbi, RPC_URLS(ChainId.HECO));
+        var web3BSC = new Web3(new Web3.providers.HttpProvider(RPC_URLS(ChainId.BSC)));
+        let toContract = new web3BSC.eth.Contract(ChainSwapAbi, RPC_URLS(ChainId.BSC));
+
+        // 查询 源链 ChainSwap合约中 sentCount(toChainId, to) ，得到 maxNonce
+        const getMaxNonce = (toChainId, fromChainId, callback) => {
+            fromContract.methods.sentCount(toChainId, account).call().then(maxNonce => {
+                callback(toChainId, fromChainId, maxNonce)
+            })
+        }
+
+        // 查询所有质押的数据，遍历 源链
+        const getPledgeData = (toChainId, fromChainId, maxNonce) => {
+            let nonce = 0
+            let historyData = []
+            do {
+                (function (nonce){
+                    fromContract.methods.sent(toChainId, account, nonce).call({
+                        from: account,
+                    }).then(pledgeAmount => {
+                        toContract.methods.received(fromChainId, account, nonce).call({
+                            from: account,
+                        }).then( extractAmount => {
+                            historyData.push({
+                                nonce,
+                                pledgeAmount: web3BSC.utils.fromWei(pledgeAmount, 'ether'),
+                                extractAmount: web3BSC.utils.fromWei(extractAmount, 'ether'),
+                                fromChainId,
+                                toChainId,
+                                account,
+
+                            })
+                            if (historyData.length === ~~maxNonce + 1) {
+                                console.log(historyData)
+                                setPledgeHistory(historyData)
+                            }
+                        })
+                    })
+                })(nonce)
+            } while (++nonce <= maxNonce)
+        }
+        const toChainId = ChainId.BSC
+        const fromChainId = ChainId.HECO
+        getMaxNonce(toChainId, fromChainId, getPledgeData)
+    }
+
+    useEffect(()=>{
+        chainId && getCrossChainData()
+    }, [])
 
     const purchaseBtn = () => {}
 
