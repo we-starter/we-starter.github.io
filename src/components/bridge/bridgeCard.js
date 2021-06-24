@@ -10,25 +10,144 @@ import WAR from '../../assets/icon/WAR@2x.png'
 import BSC from '../../assets/icon/BSC@2x.png'
 import HECO from '../../assets/icon/HECO@2x.png'
 import SwapLine from '../../assets/icon/swap-line@2x.png'
+import {useBalance} from "../../pages/Hooks";
+import {ChainId, WAR_ADDRESS, CHAIN_SWAP_ADDRESS, RPC_URLS, CHAIN_SWAP_NODE_REQ_URL} from "../../web3/address";
+import ChainSwapAbi from '../../web3/abi/ChainSwap.json'
+import Web3 from "web3";
+import {changeNetwork} from "../../connectors";
+import qs from 'qs'
+import axios from "axios";
+
+var web3BSC = new Web3(new Web3.providers.HttpProvider(RPC_URLS(ChainId.BSC)));
+var web3HECO = new Web3(new Web3.providers.HttpProvider(RPC_URLS(ChainId.HECO)));
 
 const BridgeCard = (props) => {
 
     const { intl } = props
-
     const { account, active, library, chainId } = useActiveWeb3React()
 
+    const { balance } = useBalance(WAR_ADDRESS(chainId))
     const [pool, setPool] = useState([])
     const [amount, setAmount] = useState('')
     const [approve, setApprove] = useState(true)
     const [loadFlag, setLoadFlag] = useState(false)
+    const [loading, setLoading] = useState(false)
 
     const { dispatch, state } = useContext(mainContext)
 
-    const onChange = () => {}
+    const [transferData, setTransferData] = useState({})
 
-    const onMax = () => {}
+    const onChange = (e) => {
+        const value = e.target.value
+        const maxAmount = formatAmount(balance)
+        console.log(value, maxAmount, value > maxAmount)
+        setAmount(Number(value) > Number(maxAmount) ? maxAmount : value)
+    }
 
-    const onApprove = () => {}
+    const onMax = () => {
+        setAmount(formatAmount(balance))
+    }
+    /**
+     * 无需授权，直接转移
+     */
+    const onApprove = () => {
+        if (chainId !== ChainId.HECO) {
+            changeNetwork(ChainId.HECO).then((e) => {})
+        } else {
+            onTransfer()
+        }
+    }
+
+    /**
+     * 转移
+     */
+    const onTransfer = () => {
+        setLoading(true)
+        let web3 = new Web3(window.ethereum);
+        let myContract = new web3.eth.Contract(ChainSwapAbi, CHAIN_SWAP_ADDRESS(chainId));
+        myContract.methods.send(ChainId.BSC, account, web3.utils.toWei(amount, 'ether')).send({
+            from: account,
+            value: web3.utils.toWei('0.005', 'ether')
+        }).then(() => {
+            // save transfer data
+            setTransferData({
+                fromChainId: chainId
+            })
+            setLoading(false)
+            console.log('success')
+        }).catch(error => {
+            setLoading(false)
+            console.log('fail', error)
+        })
+    }
+
+    /**
+     * 获取签名数据
+     */
+    const getSignData = (callback) => {
+        let signData = {
+            contractAddress: CHAIN_SWAP_ADDRESS(chainId),
+            toContract: CHAIN_SWAP_ADDRESS(chainId),
+            mainContract: CHAIN_SWAP_ADDRESS(chainId),
+            fromChainId: transferData.fromChainId,
+            fromContract: CHAIN_SWAP_ADDRESS(transferData.fromChainId),
+            to: account,
+            toChainId: chainId,
+        }
+        let web3 = new Web3(window.ethereum);
+        let myContract = new web3.eth.Contract(ChainSwapAbi, CHAIN_SWAP_ADDRESS(chainId));
+        myContract.methods.sentCount(chainId, account).call().then(res =>{
+            signData.nonce = res - 1
+            transferData.nonce = signData.nonce
+            setTransferData(transferData)
+            callback(signData)
+        }).catch((error) => {
+            message.error('sign error')
+            console.log('error', error)
+        })
+    }
+
+    /**
+     * 获取签名结果
+     */
+    const getSignResultData = (callback) => {
+        getSignData((signData) => {
+            let params = qs.stringify(signData, { encodeValuesOnly: true })
+            let signResultData = []
+            setLoading(true)
+            CHAIN_SWAP_NODE_REQ_URL.map(item => {
+                axios.get(item + '?' + params).then(res => {
+                    if (signResultData.length === 3 && loading) {
+                        setLoading(false)
+                        callback(signResultData)
+                    } else {
+                        let {signatory,signV, signR, signS} = res.data.data
+                        signResultData.push([signatory, signV, signR, signS])
+                    }
+                })
+            })
+        })
+    }
+
+    /**
+     * 提取
+     */
+    const onExtract = () => {
+        let web3 = new Web3(window.ethereum);
+        let myContract = new web3.eth.Contract(ChainSwapAbi, CHAIN_SWAP_ADDRESS(chainId));
+        getSignResultData((signResultData) => {
+            myContract.methods.receive([chainId, account, transferData.nonce, web3.utils.toWei(amount, 'ether'), signResultData]).send({
+                from: account,
+                value: web3.utils.toWei('0.005', 'ether')
+            }).then(() => {
+                console.log('success')
+                message.success('extract success')
+            }).catch(error => {
+                message.error('extract fail')
+                console.log('fail', error)
+            })
+        })
+    }
 
     const purchaseBtn = () => {}
 
@@ -43,6 +162,7 @@ const BridgeCard = (props) => {
               <input
                 style={{ background: '#fff' }}
                 value={amount}
+                type='number'
                 onChange={onChange}
                 className='input'
                 placeholder={intl.formatMessage({
@@ -86,8 +206,8 @@ const BridgeCard = (props) => {
             <div className='form-app__inputbox-input'>
               <input
                 style={{ background: '#fff' }}
-                value={amount}
-                onChange={onChange}
+                disabled
+                value={account||''}
                 className='input'
                 placeholder={intl.formatMessage({
                   id: 'money',
