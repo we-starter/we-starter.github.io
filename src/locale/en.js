@@ -342,5 +342,15 @@ const en_US = {
   netWork1: 'Choose Network',
   netWork2: 'Choose Wallet',
   netWork3: 'Change Network',
+  bridge1: 'Migrate to BSC(Binance Smart Chain)',
+  bridge2: 'Destination',
+  bridge3: '注意：该过程是不可逆过程，Heco 资产将会彻底转化成 BSC 资产',
+  bridge4: 'Powered by BlackHole & ChainSwap',
+  bridge5: 'History',
+  bridge6: 'Assets',
+  bridge7: 'From',
+  bridge8: 'To',
+  bridge9: 'Amounts',
+  bridge10: 'withdraw',
 }
 export default en_US

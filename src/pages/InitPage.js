@@ -20,6 +20,7 @@ import {
   HANDLE_SHOW_MENUMASK_MODAL,
   HANDLE_CHANGE_NETWORKS,
   TOOL_DATA,
+  HANDLE_WITHDRAW_MODAL,
   IS_SUPPORTEDCHAIN,
   HANDLE_SHOW_SUCCESS_TRANSACTION_MODAL,
 } from '../const'
@@ -35,6 +36,8 @@ import PoolsSuccess from '../components/staterPools/poolsSuccess'
 import { LoginModal } from '../components/Modals/LoginModl'
 import { ChangeNetworks } from '../components/Modals/ChangeNetworks'
 import { TXStatusModal } from '../components/Modals/TXStatusModal'
+import SwitchWithdrawPopup from '../components/bridge/switchWithdrawPopup'
+import WithdrawSuccessPopup from '../components/bridge/withdrawSuccessPopup'
 import toolApi from '../apis/toolApi'
 import {useConnectWallet} from "../connectors";
 
@@ -63,6 +66,7 @@ export const InitPage = () => {
     pool,
     showMenuMaskModal,
     changeNetworkStatus,
+    withdrawModal
   } = state
 
   console.log(state, 'state')
@@ -364,6 +368,38 @@ export const InitPage = () => {
                 })
               }
               onChange={() => {}}
+            />
+          </div>
+        </div>
+      )}
+
+      {walletModal === 'switchWithdraw' && (
+        <div className='modal-show'>
+          <div className='wrapper' style={{ zIndex: 10 }}>
+            <SwitchWithdrawPopup
+              onClose={() =>
+                dispatch({
+                  type: HANDLE_WALLET_MODAL,
+                  walletModal: null,
+                })
+              }
+              onChange={() => { }}
+            />
+          </div>
+        </div>
+      )}
+
+      {withdrawModal && (
+        <div className='modal-show'>
+          <div className='wrapper' style={{ zIndex: 10 }}>
+            <WithdrawSuccessPopup
+              onClose={() =>
+                dispatch({
+                  type: HANDLE_WITHDRAW_MODAL,
+                  withdrawModal: null,
+                })
+              }
+              onChange={() => { }}
             />
           </div>
         </div>

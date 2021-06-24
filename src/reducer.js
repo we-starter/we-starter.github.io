@@ -22,6 +22,7 @@ import {
   IS_SUPPORTEDCHAIN,
   CHANGE_SLIPPAGE,
   RANDOM_NUMBER,
+  HANDLE_WITHDRAW_MODAL
 } from './const'
 
 const mainContext = React.createContext()
@@ -109,6 +110,11 @@ const reducer = (state, action) => {
         ...state,
         randomNumber: action.randomNumber,
       }
+    case HANDLE_WITHDRAW_MODAL: 
+    return {
+      ...state,
+      withdrawModal: action.withdrawModal
+    }
     default:
       return state
   }
@@ -129,6 +135,7 @@ const ContextProvider = (props) => {
     showSuccessTransactionModal: false,
     isSupportedChain: true,
     walletModal: null,
+    withdrawModal: false,
     txStatus: null,
     pool: null,
     showMenuMaskModal: false,

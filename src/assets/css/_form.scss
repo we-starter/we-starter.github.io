@@ -168,6 +168,20 @@
       border-color: rgba(212, 233, 226, 1);
     }
   }
+  @media #{$smWidth} {
+    padding: 10px;
+    font-size: 14px;
+    &::placeholder {
+      font-size: 12px;
+    }
+  }
+  @media #{$xsWidth} {
+    padding: 10px;
+    font-size: 12px;
+    &::placeholder {
+      font-size: 12px;
+    }
+  }
 
   &:focus {
     outline: none;

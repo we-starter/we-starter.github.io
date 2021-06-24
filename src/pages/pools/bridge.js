@@ -4,6 +4,7 @@ import { useActiveWeb3React } from '../../web3'
 import { FormattedMessage, injectIntl } from 'react-intl'
 import PoolsBanner from '../../components/banner/PoolsBanner'
 import BridgeCard from '../../components/bridge/bridgeCard'
+import BridgeList from '../../components/bridge/bridgeList'
 import Footer from '../../components/Footer'
 
 const Bridge = (props) => {
@@ -14,6 +15,7 @@ const Bridge = (props) => {
             <PoolsBanner LBPFlag='LBP' />
             <div className='bridge_index'>
                 <BridgeCard />
+                <BridgeList />
             </div>
             <Footer />
         </div>

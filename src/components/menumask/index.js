@@ -147,11 +147,16 @@ export const MenuMask = () => {
                 <span className='menumask__hot'></span>
               </NavLink>
             </li>
-            <li className='menu__item'>
+            <li className='menumask_item'>
               <NavLink
                 to='/bridge'
-                className='menu__link'
-                onClick={handleMenuItemClick}
+                className='menumask_link'
+                onClick={() => 
+                  dispatch({
+                    type: HANDLE_SHOW_MENUMASK_MODAL,
+                    showMenuMaskModal: false,
+                  })
+                }
               >
                 <FormattedMessage id='bridge' />
               </NavLink>

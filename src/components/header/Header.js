@@ -94,15 +94,19 @@ export const Header = () => {
                     <span className='menu__hot'></span>
                   </NavLink>
                 </li>
-                <li className='menu__item'>
-                  <NavLink
-                    to='/bridge'
-                    className='menu__link'
-                    onClick={handleMenuItemClick}
-                  >
-                    <FormattedMessage id='bridge' />
-                  </NavLink>
-                </li>
+                {
+                  chainId == 56 && (
+                    <li className='menu__item'>
+                      <NavLink
+                        to='/bridge'
+                        className='menu__link'
+                        onClick={handleMenuItemClick}
+                      >
+                        <FormattedMessage id='bridge' />
+                      </NavLink>
+                    </li>
+                  )
+                }
                 <li className='menu__item'>
                   <a
                     href='https://forms.gle/n6M5tJ46KtEfEDQz9'
