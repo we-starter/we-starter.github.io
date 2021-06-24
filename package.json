@@ -34,6 +34,7 @@
     "ethers-multicall-x": "^0.2.2",
     "lodash": "^4.17.21",
     "node-sass": "^4.14.1",
+    "qs": "^6.10.1",
     "react": "^16.13.1",
     "react-compound-timer": "^1.2.0",
     "react-copy-to-clipboard": "^5.0.3",

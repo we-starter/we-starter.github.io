@@ -104,3 +104,25 @@ export function BUSD_ADDRESS(chainId) {
       return '0xe9e7cea3dedca5984780bafc599bd69add087d56'
   }
 }
+
+export function CHAIN_SWAP_ADDRESS (chainId) {
+  return {
+    [ChainId.HECO]: '0x910651F81a605a6Ef35d05527d24A72fecef8bF0',
+    [ChainId.BSC]: '0x910651F81a605a6Ef35d05527d24A72fecef8bF0',
+  }[chainId]
+}
+
+export function RPC_URLS (chainId) {
+    return {
+      [ChainId.HECO]: 'https://http-mainnet-node.huobichain.com',
+      [ChainId.BSC]: 'https://bsc-dataseed.binance.org/',
+    }[chainId]
+}
+
+export const CHAIN_SWAP_NODE_REQ_URL = [
+  'https://node1.chainswap.exchange/web/getSignDataSyn',
+  'https://node2.chainswap.exchange/web/getSignDataSyn',
+  'https://node3.chainswap.exchange/web/getSignDataSyn',
+  'https://node4.chainswap.exchange/web/getSignDataSyn',
+  'https://node5.chainswap.exchange/web/getSignDataSyn',
+]
