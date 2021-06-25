@@ -1,11 +1,13 @@
 export const ChainId = {
   BSC: 56,
   HECO: 128,
+  MATIC: 137
 }
 
 export const SCAN_ADDRESS = {
   [ChainId.BSC]: 'https://bscscan.com',
   [ChainId.HECO]: 'https://hecoinfo.com',
+  [ChainId.MATIC]: 'https://polygonscan.com/',
 }
 
 export const ADDRESS_0 = '0x0000000000000000000000000000000000000000'

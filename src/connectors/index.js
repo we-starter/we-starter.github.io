@@ -7,7 +7,7 @@ import {UnsupportedChainIdError, useWeb3React} from "@web3-react/core";
 export const POLLING_INTERVAL = 12000
 
 export const injected = new InjectedConnector({
-  supportedChainIds: [ChainId.HECO, ChainId.BSC],
+  supportedChainIds: [ChainId.HECO, ChainId.BSC, ChainId.MATIC],
 })
 
 
@@ -25,9 +25,17 @@ const hecoWalletConnector = new WalletConnectConnector({
   pollingInterval: POLLING_INTERVAL,
 })
 
+const maticWalletConnector = new WalletConnectConnector({
+  rpc: { 137: 'https://rpc-mainnet.maticvigil.com\n' },
+  bridge: 'https://bridge.walletconnect.org',
+  qrcode: true,
+  pollingInterval: POLLING_INTERVAL,
+})
+
 export const walletConnector = {
   [ChainId.HECO]: hecoWalletConnector,
-  [ChainId.BSC]: bscWalletConnector
+  [ChainId.BSC]: bscWalletConnector,
+  [ChainId.MATIC]: maticWalletConnector,
 }
 
 const bscNetwork =  {
@@ -56,9 +64,22 @@ const hecoNetwork = {
   blockExplorerUrls: [SCAN_ADDRESS[ChainId.HECO]],
 }
 
+const maticNetwork = {
+  chainId: '0x89',
+  chainName: 'MATIC',
+  nativeCurrency: {
+    name: 'MATIC',
+    symbol: 'MATIC',
+    decimals: 18,
+  },
+  rpcUrls: ['https://rpc-mainnet.maticvigil.com'],
+  blockExplorerUrls: [SCAN_ADDRESS[ChainId.MATIC]],
+}
+
 const networkConf = {
   [ChainId.HECO]: hecoNetwork,
-  [ChainId.BSC]: bscNetwork
+  [ChainId.BSC]: bscNetwork,
+  [ChainId.MATIC]: maticNetwork
 }
 
 export const changeNetwork = (chainId) => {

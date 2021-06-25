@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { useActiveWeb3React } from '../../web3'
-import { WAR_ADDRESS } from '../../web3/address'
+import { WAR_ADDRESS, ChainId } from '../../web3/address'
 import globe from '../../assets/icon/globe.png'
 import WeStarterGuidebookZH from '../../pdfFile/WeStarter -优质资产起跑线.pdf'
 import WeStarterGuidebookEN from '../../pdfFile/WeStarter-Introduction in English.pdf'
@@ -15,6 +15,7 @@ import { ReactComponent as More } from '../../assets/icon/more.svg'
 import dot from '../../assets/icon/dot.png'
 import BSC from '../../assets/icon/BSC@2x.png'
 import HECO from '../../assets/icon/HECO@2x.png'
+import MATIC from '../../assets/icon/MATIC@2x.png'
 import { Banner } from '../banner/Banner'
 import Exchange from '../../assets/icon/exchange@2x.png'
 import { useHTBalance, useBalance } from '../../pages/Hooks'
@@ -168,7 +169,7 @@ export const Header = () => {
             </div>
             {/* {active && <img className='exchange' src={Exchange} />} */}
 
-            {chainId == 56 && (
+            {chainId == ChainId.BSC && (
               <img
                 onClick={() => {
                   dispatch({
@@ -180,7 +181,7 @@ export const Header = () => {
                 src={BSC}
               />
             )}
-            {chainId == 128 && (
+            {chainId == ChainId.HECO && (
               <img
                 onClick={() => {
                   dispatch({
@@ -190,6 +191,18 @@ export const Header = () => {
                 }}
                 className='header-network'
                 src={HECO}
+              />
+            )}
+            {chainId == ChainId.MATIC && (
+              <img
+                onClick={() => {
+                  dispatch({
+                    type: HANDLE_CHANGE_NETWORKS,
+                    changeNetworkStatus: true,
+                  })
+                }}
+                className='header-network'
+                src={MATIC}
               />
             )}
 
