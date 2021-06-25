@@ -9,16 +9,13 @@ import { mainContext } from '../../reducer'
 import { HANDLE_WALLET_MODAL, HANDLE_CHANGE_NETWORKS, HANDLE_SHOW_MENUMASK_MODAL } from '../../const'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import doubleLine from '../../assets/icon/check-double-line.png'
-import { Logoicon, LogoSmallIcon } from '../../icons'
 import { ReactComponent as LogoText } from '../../assets/image/logo-text.svg'
 import { ReactComponent as More } from '../../assets/icon/more.svg'
 import dot from '../../assets/icon/dot.png'
 import BSC from '../../assets/icon/BSC@2x.png'
 import HECO from '../../assets/icon/HECO@2x.png'
 import MATIC from '../../assets/icon/MATIC@2x.png'
-import { Banner } from '../banner/Banner'
-import Exchange from '../../assets/icon/exchange@2x.png'
-import { useHTBalance, useBalance } from '../../pages/Hooks'
+import { useBalance } from '../../pages/Hooks'
 import { CHANGE_LOCALE } from '../../const'
 import { FormattedMessage } from 'react-intl'
 
@@ -32,8 +29,6 @@ export const Header = () => {
   )
 
   const [showMenu, setShowMenu] = useState(false)
-  const [showPoolsStarter, setShowPoolsStarter] = useState(false)
-  const location = useLocation()
 
   useEffect(() => {
     if (state.locale === 'en') setLanguage('中文简体')
@@ -259,8 +254,6 @@ export const Header = () => {
           </div>
         </div>
       </div>
-      {/* banner图 */}
-      {/* <Banner /> */}
     </header>
   )
 }
