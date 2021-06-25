@@ -2,6 +2,8 @@ import React, { useContext, useEffect, useState } from 'react'
 import cs from 'classnames'
 import BigNumber from 'bignumber.js'
 import { withRouter } from 'react-router'
+import { changeNetwork } from '../../connectors'
+import { message } from 'antd'
 import HUSD from '../../assets/icon/HUSD@2x.png'
 import DFT from '../../assets/icon/DFT@2x.png'
 import WAR from '../../assets/icon/WAR@2x.png'
@@ -50,8 +52,7 @@ const PoolsIndex = (props) => {
   const [isLogin, setIsLogin] = useState(false)
   const [hoverFlag, setHoverFlag] = useState(false)
   const [poolSum, setPoolSum] = useState(0)
-  const { account, active, library } = useActiveWeb3React()
-
+  const { account, active, library, chainId } = useActiveWeb3React()
   const pools = usePoolsInfo()
   const poolsLBP = usePoolsLBPInfo()
 
@@ -587,28 +588,11 @@ const PoolsIndex = (props) => {
             pool.settleable.amount > 0 未结算数量大于0
             pool.settleable.claimedOf == 0 如果是白名单的话 需要判断获取募资币种数量(已经领取的量) == 0 
         */}
-        <a
-          className={cs(
-            'pools-type_enter',
-            pool && pool.underlying.name === 'LBP' && 'pools-type_lbp_enter',
-            pool &&
-              (pool.is_coming ||
-                (status === 3 &&
-                  ((pool.type === 0 &&
-                    pool.settleable &&
-                    pool.settleable.amount == 0 &&
-                    pool.settleable.volume == 0) ||
-                    (pool.settleable &&
-                      pool.type === 1 &&
-                      (pool.settleable.claimedOf * 1 !== 0 ||
-                        pool.settleable.volume == 0)))) ||
-                (!active && status === 3) ||
-                (status === 3 && pool.underlying.name === 'LBP')) &&
-              'pools-type_disable_enter'
-          )}
-          onClick={(e) => {
-            goDetail(
-              e,
+        {pool && pool.networkId == chainId && (
+          <a
+            className={cs(
+              'pools-type_enter',
+              pool && pool.underlying.name === 'LBP' && 'pools-type_lbp_enter',
               pool &&
                 (pool.is_coming ||
                   (status === 3 &&
@@ -618,17 +602,50 @@ const PoolsIndex = (props) => {
                       pool.settleable.volume == 0) ||
                       (pool.settleable &&
                         pool.type === 1 &&
-                        pool.settleable.claimedOf * 1 !== 0) ||
-                      pool.settleable.volume == 0)) ||
+                        (pool.settleable.claimedOf * 1 !== 0 ||
+                          pool.settleable.volume == 0)))) ||
                   (!active && status === 3) ||
-                  (status === 3 && pool.underlying.name === 'LBP')),
-              address,
-              pool && pool.underlying.name
-            )
-          }}
-        >
-          <FormattedMessage id='poolsIndexText3' />
-        </a>
+                  (status === 3 && pool.underlying.name === 'LBP')) &&
+                'pools-type_disable_enter'
+            )}
+            onClick={(e) => {
+              goDetail(
+                e,
+                pool &&
+                  (pool.is_coming ||
+                    (status === 3 &&
+                      ((pool.type === 0 &&
+                        pool.settleable &&
+                        pool.settleable.amount == 0 &&
+                        pool.settleable.volume == 0) ||
+                        (pool.settleable &&
+                          pool.type === 1 &&
+                          pool.settleable.claimedOf * 1 !== 0) ||
+                        pool.settleable.volume == 0)) ||
+                    (!active && status === 3) ||
+                    (status === 3 && pool.underlying.name === 'LBP')),
+                address,
+                pool && pool.underlying.name
+              )
+            }}
+          >
+            <FormattedMessage id='poolsIndexText3' />
+          </a>
+        )}
+        {pool && pool.networkId !== chainId && (
+          <a
+            className={cs('pools-type_enter')}
+            onClick={(e) => {
+              changeNetwork(pool.networkId).then(() => {
+                message.success('Switch success')
+              })
+            }}
+          >
+            {pool.networkId == 128 && <FormattedMessage id='poolText24' />}
+            {pool.networkId == 137 && <FormattedMessage id='poolText25' />}
+            {pool.networkId == 56 && <FormattedMessage id='poolText26' />}
+          </a>
+        )}
         {pool && pool.status == 3 && pool && pool.underlying.name !== 'LBP' && (
           <div className='pools-type_title'>
             <p
