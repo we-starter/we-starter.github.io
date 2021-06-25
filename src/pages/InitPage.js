@@ -373,21 +373,21 @@ export const InitPage = () => {
         </div>
       )}
 
-      {walletModal === 'switchWithdraw' && (
-        <div className='modal-show'>
-          <div className='wrapper' style={{ zIndex: 10 }}>
-            <SwitchWithdrawPopup
-              onClose={() =>
-                dispatch({
-                  type: HANDLE_WALLET_MODAL,
-                  walletModal: null,
-                })
-              }
-              onChange={() => { }}
-            />
-          </div>
-        </div>
-      )}
+      {/*{walletModal === 'switchWithdraw' && (*/}
+      {/*  <div className='modal-show'>*/}
+      {/*    <div className='wrapper' style={{ zIndex: 10 }}>*/}
+      {/*      <SwitchWithdrawPopup*/}
+      {/*        onClose={() =>*/}
+      {/*          dispatch({*/}
+      {/*            type: HANDLE_WALLET_MODAL,*/}
+      {/*            walletModal: null,*/}
+      {/*          })*/}
+      {/*        }*/}
+      {/*        onChange={() => { }}*/}
+      {/*      />*/}
+      {/*    </div>*/}
+      {/*  </div>*/}
+      {/*)}*/}
 
       {withdrawModal && (
         <div className='modal-show'>

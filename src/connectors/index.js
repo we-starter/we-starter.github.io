@@ -119,7 +119,7 @@ export const useConnectWallet = () => {
                   deactivate()
                 }
                 // 账号改了，刷新网页
-                window.location.reload()
+                // window.location.reload()
               })
 
               window.ethereum.on('disconnect', () => {
