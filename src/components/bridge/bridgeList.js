@@ -16,6 +16,9 @@ import Web3 from "web3";
 import {ChainId, RPC_URLS, WAR_ADDRESS} from "../../web3/address";
 import ChainSwapAbi from "../../web3/abi/ChainSwap.json";
 import {changeNetwork} from "../../connectors";
+import { getMultiCallProvider, processResult } from '../../utils/multicall'
+import {Contract} from "ethers-multicall-x";
+import {abi as ERC20} from "../../web3/abi/ERC20.json";
 
 const CurrencyIcon = {
     [ChainId.HECO]: {
@@ -30,8 +33,10 @@ const CurrencyIcon = {
 
 var web3HECO = new Web3(new Web3.providers.HttpProvider(RPC_URLS(ChainId.HECO)));
 let fromContract = new web3HECO.eth.Contract(ChainSwapAbi, WAR_ADDRESS(ChainId.HECO));
+// const fromContract = new Contract(WAR_ADDRESS(ChainId.HECO), ChainSwapAbi)
 var web3BSC = new Web3(new Web3.providers.HttpProvider(RPC_URLS(ChainId.BSC)));
 let toContract = new web3BSC.eth.Contract(ChainSwapAbi, WAR_ADDRESS(ChainId.BSC));
+// const toContract = new Contract(WAR_ADDRESS(ChainId.BSC), ChainSwapAbi)
 
 const BridgeList = ({onExtractItem}) => {
   const { account, active, library, chainId } = useActiveWeb3React()
@@ -45,50 +50,57 @@ const BridgeList = ({onExtractItem}) => {
     //   pledgeAmount: "0.00001",
     //   toChainId: 56
     // }
+  const createContract = cId => new Contract(WAR_ADDRESS(cId), ChainSwapAbi)
   /**
    * 获取跨链数据
    */
   const getCrossChainData = () => {
     // 查询 源链 ChainSwap合约中 sentCount(toChainId, to) ，得到 maxNonce
-    const getMaxNonce = (toChainId, fromChainId, callback) => {
-      fromContract.methods.sentCount(toChainId, account).call().then(maxNonce => {
-        callback(toChainId, fromChainId, maxNonce)
-      })
-    }
+    const multicallProvider = getMultiCallProvider(library, chainId)
     // 查询所有质押的数据，遍历 源链
     const getPledgeData = (toChainId, fromChainId, maxNonce) => {
-      let nonce = 0
-      let data = []
-      do {
-        (function (nonce){
-          fromContract.methods.sent(toChainId, account, nonce).call({
-            from: account,
-          }).then(pledgeAmount => {
-            toContract.methods.received(fromChainId, account, nonce).call({
-              from: account,
-            }).then( extractAmount => {
-              data.push({
-                nonce,
-                pledgeAmount: web3BSC.utils.fromWei(pledgeAmount, 'ether'),
-                extractAmount: web3BSC.utils.fromWei(extractAmount, 'ether'),
-                fromChainId,
-                toChainId,
-                account
-              })
-              if (data.length === ~~maxNonce + 1) {
-                historyData.push(...data)
-                console.log(historyData)
-                setHistoryData(historyData)
-              }
-            })
+      const fromPledgeAmountConcat = createContract(fromChainId)
+      const toPledgeAmountConcat = createContract(toChainId)
+      const extractAmountAll = []
+      let pledgeAmountAll = []
+      for (let nonce = 0; nonce <= maxNonce; nonce++) {
+        pledgeAmountAll.push(fromPledgeAmountConcat.sent(toChainId, account, nonce))
+        extractAmountAll.push(toPledgeAmountConcat.received(fromChainId, account, nonce))
+      }
+      return Promise.all([multicallProvider.all(pledgeAmountAll),multicallProvider.all(extractAmountAll)]).then(res => {
+        let pledgeAmountData = processResult(res[0])
+        let extractAmountData = processResult(res[1])
+        return pledgeAmountData.reduce((l, item, index)=>{
+          l.push({
+            nonce: index,
+            pledgeAmount: web3BSC.utils.fromWei(pledgeAmountData[index], 'ether'),
+            extractAmount: web3BSC.utils.fromWei(extractAmountData[index], 'ether'),
+            fromChainId,
+            toChainId,
+            account
           })
-        })(nonce)
-      } while (++nonce <= maxNonce)
+          return l
+        }, [])
+      })
     }
     setHistoryData([])
-    setTimeout(()=>{
-      getMaxNonce(ChainId.BSC, ChainId.HECO, getPledgeData)
-      // getMaxNonce(ChainId.HECO, ChainId.BSC, getPledgeData)
+    // 每一个跨链方向[from,to]
+    const directions = [[ChainId.BSC, ChainId.HECO], [ChainId.HECO, ChainId.BSC]]
+    // 获取maxNonce
+    const sentCountArr = directions.reduce((l, i)=>{
+      l.push(fromContract.methods.sentCount(i[0], account).call())
+      return l
+    }, [])
+
+    Promise.all(sentCountArr).then(maxNonceArr => {
+      // 获取签名后数据
+      const getPledgeDataArr = directions.reduce((l, item, idx)=>{
+        l.push(getPledgeData(...item, maxNonceArr[idx]))
+        return l
+      }, [])
+      Promise.all(getPledgeDataArr).then(result => {
+        setHistoryData(result.flat(1))
+      })
     })
   }
   useEffect(() => {
