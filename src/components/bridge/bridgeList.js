@@ -19,6 +19,8 @@ import {changeNetwork} from "../../connectors";
 import { getMultiCallProvider, processResult } from '../../utils/multicall'
 import {Contract} from "ethers-multicall-x";
 import {abi as ERC20} from "../../web3/abi/ERC20.json";
+import { JsonRpcProvider } from '@ethersproject/providers'
+import web3 from "web3";
 
 const CurrencyIcon = {
     [ChainId.HECO]: {
@@ -32,10 +34,10 @@ const CurrencyIcon = {
   }
 
 var web3HECO = new Web3(new Web3.providers.HttpProvider(RPC_URLS(ChainId.HECO)));
-let fromContract = new web3HECO.eth.Contract(ChainSwapAbi, WAR_ADDRESS(ChainId.HECO));
+// let fromContract = new web3HECO.eth.Contract(ChainSwapAbi, WAR_ADDRESS(ChainId.HECO));
 // const fromContract = new Contract(WAR_ADDRESS(ChainId.HECO), ChainSwapAbi)
 var web3BSC = new Web3(new Web3.providers.HttpProvider(RPC_URLS(ChainId.BSC)));
-let toContract = new web3BSC.eth.Contract(ChainSwapAbi, WAR_ADDRESS(ChainId.BSC));
+// let toContract = new web3BSC.eth.Contract(ChainSwapAbi, WAR_ADDRESS(ChainId.BSC));
 // const toContract = new Contract(WAR_ADDRESS(ChainId.BSC), ChainSwapAbi)
 
 const BridgeList = ({onExtractItem}) => {
@@ -56,9 +58,9 @@ const BridgeList = ({onExtractItem}) => {
    */
   const getCrossChainData = () => {
     // 查询 源链 ChainSwap合约中 sentCount(toChainId, to) ，得到 maxNonce
-    const multicallProvider = getMultiCallProvider(library, chainId)
     // 查询所有质押的数据，遍历 源链
     const getPledgeData = (toChainId, fromChainId, maxNonce) => {
+      const multicallProvider = getMultiCallProvider(new JsonRpcProvider(RPC_URLS(fromChainId)), fromChainId)
       const fromPledgeAmountConcat = createContract(fromChainId)
       const toPledgeAmountConcat = createContract(toChainId)
       const extractAmountAll = []
@@ -85,10 +87,12 @@ const BridgeList = ({onExtractItem}) => {
     }
     setHistoryData([])
     // 每一个跨链方向[from,to]
-    const directions = [[ChainId.BSC, ChainId.HECO], [ChainId.HECO, ChainId.BSC]]
+    const directions = [[ChainId.HECO, ChainId.BSC], [ChainId.BSC, ChainId.HECO]]
     // 获取maxNonce
     const sentCountArr = directions.reduce((l, i)=>{
-      l.push(fromContract.methods.sentCount(i[0], account).call())
+      // 当前链去查
+      const tContract = new web3HECO.eth.Contract(ChainSwapAbi, WAR_ADDRESS(i[0]));
+      l.push(tContract.methods.sentCount(i[0], account).call())
       return l
     }, [])
 
@@ -99,6 +103,7 @@ const BridgeList = ({onExtractItem}) => {
         return l
       }, [])
       Promise.all(getPledgeDataArr).then(result => {
+        console.log(result.flat(1))
         setHistoryData(result.flat(1))
       })
     })

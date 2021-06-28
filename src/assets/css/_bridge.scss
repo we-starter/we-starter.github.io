@@ -1,4 +1,9 @@
 @media #{$desktop} {
+  .bridge_box{
+    .footer{
+      position: fixed;
+    }
+  }
   .bridge_index {
     position: relative;
     margin: -200px auto 126px;
@@ -731,7 +736,7 @@
         font-size: 14px;
         font-family: HelveticaNeue-Medium, HelveticaNeue;
         font-weight: 500;
-        color: #22292F;      
+        color: #22292F;
       }
       img {
         display: inline-block;
@@ -760,7 +765,7 @@
         color: #7A7F82;
         line-height: 14px;
         &:last-child {
-          margin-top: 10px;   
+          margin-top: 10px;
           color: #22292F;
         }
       }
@@ -1012,7 +1017,7 @@
         font-size: 14px;
         font-family: HelveticaNeue-Medium, HelveticaNeue;
         font-weight: 500;
-        color: #22292F;      
+        color: #22292F;
       }
       img {
         display: inline-block;
@@ -1041,7 +1046,7 @@
         color: #7A7F82;
         line-height: 14px;
         &:last-child {
-          margin-top: 10px;   
+          margin-top: 10px;
           color: #22292F;
         }
       }

@@ -35,9 +35,8 @@ const BridgeCard = (props) => {
     const [loadFlag, setLoadFlag] = useState(false)
     const [loading, setLoading] = useState(false)
 
-  const { dispatch, state } = useContext(mainContext)
+    const { dispatch, state } = useContext(mainContext)
 
-    const [pledgeHistory, setPledgeHistory] = useState([])
     const [transferData, setTransferData] = useState({
         account,
         extractAmount: "0",
@@ -52,13 +51,13 @@ const BridgeCard = (props) => {
 
     const [visibleSwitchWithdrawPopup, setVisibleSwitchWithdrawPopup] = useState(false)
 
-    useEffect(() => {
-        if (!active) {
-            if (chainId !== ChainId.HECO && chainId !== ChainId.BSC) {
-                changeNetwork(ChainId.HECO).then()
-            }
-        }
-    }, [chainId])
+    // useEffect(() => {
+    //     if (!active) {
+    //         if (chainId !== ChainId.HECO && chainId !== ChainId.BSC) {
+    //             changeNetwork(ChainId.HECO).then()
+    //         }
+    //     }
+    // }, [chainId])
 
     const onChange = (e) => {
         const value = e.target.value
@@ -74,7 +73,7 @@ const BridgeCard = (props) => {
      * 质押
      */
     const onPledge = () => {
-        if (!amount) {
+        if (!amount || amount == 0) {
             return
         }
         setLoading(true)
@@ -144,7 +143,6 @@ const BridgeCard = (props) => {
             let signResultData = []
             CHAIN_SWAP_NODE_REQ_URL.map(item => {
                 axios.get(item + '?' + params).then(res => {
-                    console.log(loading)
                     if (signResultData.length === 3 && t) {
                         t = false
                         setLoading(false)
