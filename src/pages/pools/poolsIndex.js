@@ -583,10 +583,10 @@ const PoolsIndex = (props) => {
           <img className='w_bg' src={PAULLBP} />
         )}
 
-        {/* 
+        {/*
             pool.settleable.volume > 0 获取数量大于0
             pool.settleable.amount > 0 未结算数量大于0
-            pool.settleable.claimedOf == 0 如果是白名单的话 需要判断获取募资币种数量(已经领取的量) == 0 
+            pool.settleable.claimedOf == 0 如果是白名单的话 需要判断获取募资币种数量(已经领取的量) == 0
         */}
         {pool && pool.networkId == chainId && (
           <a
@@ -609,6 +609,7 @@ const PoolsIndex = (props) => {
                 'pools-type_disable_enter'
             )}
             onClick={(e) => {
+              console.log(pool)
               goDetail(
                 e,
                 pool &&
@@ -621,7 +622,7 @@ const PoolsIndex = (props) => {
                         (pool.settleable &&
                           pool.type === 1 &&
                           pool.settleable.claimedOf * 1 !== 0) ||
-                        pool.settleable.volume == 0)) ||
+                          (pool.settleable && pool.settleable.volume == 0))) ||
                     (!active && status === 3) ||
                     (status === 3 && pool.underlying.name === 'LBP')),
                 address,

@@ -41,24 +41,28 @@ const BuyCoinPopup = (props) => {
   const USDTBalance = useBalance(USDT_ADDRESS(chainId))
   const MDEXBalance = useBalance(WMDEX_ADDRESS(chainId))
   const [middlePath, setMiddlePath] = useState([])
+
   const [outAmount, outFee] = useMDexPrice(
     fromToken,
     chainId && WAR_ADDRESS(chainId),
     amount,
-    middlePath
+    middlePath,
+      chainId
   )
   const [radioOutAmount, fee] = useMDexPrice(
     chainId && WAR_ADDRESS(chainId),
     fromToken,
     1,
-    middlePath
+    middlePath,
+      chainId
   )
 
   const [HTRadioOutAmount, HTFee] = useMDexPrice(
     fromToken,
     chainId && WAR_ADDRESS(chainId),
     0.1,
-    middlePath
+    middlePath,
+      chainId
   )
 
   const USDTAllowance = useAllowance(
