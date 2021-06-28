@@ -250,7 +250,7 @@ const BridgeCard = (props) => {
                                 style={{ background: '#fff' }}
                                 disabled
                                 value={account||''}
-                                className='input'
+                                className='input disable_input'
                                 placeholder={account}
                             />
                         </div>

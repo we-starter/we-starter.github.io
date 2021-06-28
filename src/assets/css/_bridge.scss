@@ -1,3 +1,6 @@
+.disable_input {
+  color: #B6B9BC;
+}
 @media #{$desktop} {
   .bridge_box{
     .footer{
@@ -855,6 +858,13 @@
       background: #00b900;
     }
   }
+  .disable_input {
+    padding-right: 60px;
+    color: #B6B9BC;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+  }
 }
 @media #{$xsWidth} {
   .bridge_index {
@@ -1135,5 +1145,12 @@
        color: #fff;
       background: #00b900;
     }
+  }
+   .disable_input {
+    padding-right: 60px;
+    color: #B6B9BC;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
   }
 }
