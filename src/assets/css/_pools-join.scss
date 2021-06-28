@@ -1,12 +1,15 @@
 .ant-select {
   margin-top: 12px;
 }
+.ant-select:not(.ant-select-customize-input) .ant-select-selector {
+  border: none
+}
 .ant-select:not(.ant-select-disabled):hover .ant-select-selector {
-  border-color: #00b900;
+  border: none
 }
 .ant-select-focused:not(.ant-select-disabled).ant-select:not(.ant-select-customize-input)
   .ant-select-selector {
-  border-color: #00b900;
+  border: none;
   box-shadow: none;
 }
 .ant-select-single.ant-select-show-arrow .ant-select-selection-item,
@@ -14,11 +17,23 @@
   font-size: 14px;
   font-weight: 500;
   color: #22292f;
+  height: 28px;
+  line-height: 28px;
+}
+.ant-select-single:not(.ant-select-customize-input) .ant-select-selector {
+  height: 28px;
+}
+.ant-select-single:not(.ant-select-customize-input) .ant-select-selector .ant-select-selection-search-input {
+  height: 28px;
 }
 .ant-select-single.ant-select-open .ant-select-selection-item {
   font-size: 14px;
   font-weight: 500;
   color: #22292f;
+}
+.ant-select-single:not(.ant-select-customize-input) .ant-select-selector {
+  min-width: 102px;
+  border-radius: 5px;
 }
 .option_hover_style {
   margin: 0 10px 4px;
@@ -27,11 +42,11 @@
   line-height: 28px;
   border-radius: 5px;
   &.active {
-    background-color: #d4e9e2;
+    background-color: #D4E9E2 !important;
   }
   &:hover,
   &:focus {
-    background-color: #d4e9e2;
+    background-color: #D4E9E2 !important;
   }
 }
 

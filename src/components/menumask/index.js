@@ -147,7 +147,7 @@ export const MenuMask = () => {
                 <span className='menumask__hot'></span>
               </NavLink>
             </li>
-            {(chainId == 56 || chainId == 128) && (
+            {active && (
               <li className='menumask_item'>
                 <NavLink
                   to='/bridge'

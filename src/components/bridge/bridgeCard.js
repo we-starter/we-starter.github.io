@@ -1,6 +1,6 @@
 import React, {useContext, useEffect, useMemo, useState, forwardRef} from 'react'
 import cs from 'classnames'
-import { Button, message, Modal } from 'antd'
+import { Button, message, Modal, Select } from 'antd'
 import { getContract, useActiveWeb3React } from '../../web3'
 import { mainContext } from '../../reducer'
 import { FormattedMessage, injectIntl } from 'react-intl'
@@ -14,6 +14,7 @@ import { getRandomIntInclusive } from '../../utils/index'
 import WAR from '../../assets/icon/WAR@2x.png'
 import BSC from '../../assets/icon/BSC@2x.png'
 import HECO from '../../assets/icon/HECO@2x.png'
+import MATIC from '../../assets/icon/MATIC@2x.png'
 import SwapLine from '../../assets/icon/swap-line@2x.png'
 import {useBalance} from "../../pages/Hooks"
 import {ChainId, WAR_ADDRESS, CHAIN_SWAP_ADDRESS, RPC_URLS, CHAIN_SWAP_NODE_REQ_URL} from "../../web3/address"
@@ -23,6 +24,8 @@ import qs from 'qs'
 import axios from "axios"
 import SwitchWithdrawPopup from '../../components/bridge/switchWithdrawPopup'
 import BridgeList from "./bridgeList";
+
+const { Option } = Select
 
 const BridgeCard = (props) => {
     const { intl } = props
@@ -195,133 +198,267 @@ const BridgeCard = (props) => {
     }
 
     return (
-        <React.Fragment>
-            <div className='bridge_card'>
-                <div className='bridge_card_title'>
-                    <FormattedMessage id='bridge1' />
-                </div>
-                <div className='deposit__inputbox form-app__inputbox'>
-                    <div className='form-app__inputbox-control'>
-                        <div className='form-app__inputbox-input'>
-                            <input
-                                style={{ background: '#fff' }}
-                                value={amount}
-                                type='number'
-                                onChange={onChange}
-                                className='input'
-                                placeholder={intl.formatMessage({
-                                    id: 'money',
-                                })}
-                            />
-                        </div>
+      <React.Fragment>
+        <div className='bridge_card'>
+          <div className='bridge_card_title'>
+            <FormattedMessage id='bridge1' />
+          </div>
+          <div className='deposit__inputbox form-app__inputbox'>
+            <div className='form-app__inputbox-control'>
+              <div className='form-app__inputbox-input'>
+                <input
+                  style={{ background: '#fff' }}
+                  value={amount}
+                  type='number'
+                  onChange={onChange}
+                  className='input'
+                  placeholder={intl.formatMessage({
+                    id: 'money',
+                  })}
+                />
+              </div>
 
-                        <div className='form-app__inputbox-up' onClick={onMax}>
-                            <div className='form-app__inputbox-up-pref'>
-                                <FormattedMessage id='poolText19' />
-                            </div>
-                        </div>
-                        {/* 选择币种 */}
-                        <a className='set_slippage'>
-                            <img src={WAR} />
-                            WAR
-                        </a>
-                    </div>
+              <div className='form-app__inputbox-up' onClick={onMax}>
+                <div className='form-app__inputbox-up-pref'>
+                  <FormattedMessage id='poolText19' />
                 </div>
-                <div className='bridge_card_from_to'>
-                    <div className='bridge_card_from'>
-                        <p className='bridge_card_from_text'><FormattedMessage id='bridge7' /></p>
-                        <p className='bridge_card_from_chain'>
-                            <ChainBtn chainId={chainId}/>
-                        </p>
-                    </div>
-                    <img className='bridge_card_transform' src={SwapLine} onClick={()=>{changeNetwork(toChainId).then()}}/>
-                    <div className='bridge_card_from'>
-                        <p className='bridge_card_from_text'><FormattedMessage id='bridge8' /></p>
-                        <p className='bridge_card_from_chain'>
-                            <ChainBtn chainId={toChainId}/>
-                        </p>
-                    </div>
-                </div>
-                <p className='bridge_card_input_title'><FormattedMessage id='bridge2' /></p>
-                <div className='deposit__inputbox form-app__inputbox'>
-                    <div className='form-app__inputbox-control'>
-                        <div className='form-app__inputbox-input'>
-                            <input
-                                style={{ background: '#fff' }}
-                                disabled
-                                value={account||''}
-                                className='input disable_input'
-                                placeholder={account}
-                            />
-                        </div>
-
-                        {/* 地址跳转 */}
-                        <a className='set_slippage copy_address'>
-                            <svg
-                                t='1619095072712'
-                                className='icon'
-                                viewBox='0 0 1024 1024'
-                                version='1.1'
-                                xmlns='http://www.w3.org/2000/svg'
-                                p-id='1281'
-                                width='20'
-                                height='20'
-                            >
-                                <path
-                                    d='M424.96 128v87.04H215.04v599.04h599.04v-215.04h87.04v256c0 25.6-20.48 40.96-40.96 40.96H168.96c-25.6 0-40.96-20.48-40.96-40.96V168.96c0-25.6 20.48-40.96 40.96-40.96h256z m327.68 87.04h-194.56V128h343.04v343.04h-87.04V271.36L512 573.44 450.56 512l302.08-296.96z'
-                                    p-id='1282'
-                                ></path>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-
-                {/*{approve && (*/}
-                {/*  <Button*/}
-                {/*    className={'btn'}*/}
-                {/*    type='button'*/}
-                {/*    onClick={onApprove}*/}
-                {/*  >*/}
-                {/*    <FormattedMessage id='farm20' />*/}
-                {/*  </Button>*/}
-                {/*)}*/}
-                <Button
-                    className={'btn'}
-                    type='button'
-                    onClick={onPledge}
-                    loading={loading}
-                >
-                    <FormattedMessage id='modalsText15' />
-                </Button>
-                <div className='lbp_tip'>
-                    <p>
-                        <FormattedMessage id='bridge3' />
-                    </p>
-                    <p>
-                        <FormattedMessage id='bridge4' />
-                    </p>
-                </div>
+              </div>
+              {/* 选择币种 */}
+              <a className='set_slippage'>
+                <img src={WAR} />
+                WAR
+              </a>
             </div>
-            <BridgeList onExtractItem={onExtractItem}/>
-            <SwitchWithdrawPopup
-                visible={visibleSwitchWithdrawPopup}
-                onClose={()=>setVisibleSwitchWithdrawPopup(false)}
-                onExtract={onExtract}
-                transferData={transferData}
+          </div>
+          <div className='bridge_card_from_to'>
+            <div className='bridge_card_from'>
+              <p className='bridge_card_from_text'>
+                <FormattedMessage id='bridge7' />
+              </p>
+              <ChainBtn chainId={chainId} />
+            </div>
+            <img
+              className='bridge_card_transform'
+              src={SwapLine}
+              onClick={() => {
+                changeNetwork(toChainId).then()
+              }}
             />
-        </React.Fragment>
+            <div className='bridge_card_from'>
+              <p className='bridge_card_from_text'>
+                <FormattedMessage id='bridge8' />
+              </p>
+              {/* <p className='bridge_card_from_chain'>
+                <ChainBtn chainId={toChainId} />
+              </p> */}
+              <ChainSelect chainId={chainId} />
+            </div>
+          </div>
+          <p className='bridge_card_input_title'>
+            <FormattedMessage id='bridge2' />
+          </p>
+          <div className='deposit__inputbox form-app__inputbox'>
+            <div className='form-app__inputbox-control'>
+              <div className='form-app__inputbox-input'>
+                <input
+                  style={{ background: '#fff' }}
+                  disabled
+                  value={account || ''}
+                  className='input disable_input'
+                  placeholder={account}
+                />
+              </div>
+
+              {/* 地址跳转 */}
+              <a className='set_slippage copy_address'>
+                <svg
+                  t='1619095072712'
+                  className='icon'
+                  viewBox='0 0 1024 1024'
+                  version='1.1'
+                  xmlns='http://www.w3.org/2000/svg'
+                  p-id='1281'
+                  width='20'
+                  height='20'
+                >
+                  <path
+                    d='M424.96 128v87.04H215.04v599.04h599.04v-215.04h87.04v256c0 25.6-20.48 40.96-40.96 40.96H168.96c-25.6 0-40.96-20.48-40.96-40.96V168.96c0-25.6 20.48-40.96 40.96-40.96h256z m327.68 87.04h-194.56V128h343.04v343.04h-87.04V271.36L512 573.44 450.56 512l302.08-296.96z'
+                    p-id='1282'
+                  ></path>
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          {/*{approve && (*/}
+          {/*  <Button*/}
+          {/*    className={'btn'}*/}
+          {/*    type='button'*/}
+          {/*    onClick={onApprove}*/}
+          {/*  >*/}
+          {/*    <FormattedMessage id='farm20' />*/}
+          {/*  </Button>*/}
+          {/*)}*/}
+          <Button
+            className={'btn'}
+            type='button'
+            onClick={onPledge}
+            loading={loading}
+          >
+            <FormattedMessage id='modalsText15' />
+          </Button>
+          <div className='lbp_tip'>
+            <p>
+              <FormattedMessage id='bridge3' />
+            </p>
+            <p>
+              <FormattedMessage id='bridge4' />
+            </p>
+          </div>
+        </div>
+        <BridgeList onExtractItem={onExtractItem} />
+        <SwitchWithdrawPopup
+          visible={visibleSwitchWithdrawPopup}
+          onClose={() => setVisibleSwitchWithdrawPopup(false)}
+          onExtract={onExtract}
+          transferData={transferData}
+        />
+      </React.Fragment>
     )
 }
 const ChainBtn = ({chainId}) => {
-    return {
-        [ChainId.HECO]: (<>
-            <img src={HECO} />
-            Heco
-            </>),
-        [ChainId.BSC]: (<>
-            <img src={BSC} />
-            Binance Smart Chain
-        </>)
+    return (
+      {
+        [ChainId.HECO]: (
+          <Select
+            defaultValue='Heco'
+            onChange={handleChange}
+            dropdownClassName='dropdownClassName'
+          >
+            <Option value='Heco'>
+              <p className='bridge_card_from_chain bridge_card_from_chain_select'>
+                <img src={HECO} />
+                Heco
+              </p>
+            </Option>
+            <Option value='BSC'>
+              <p className='bridge_card_from_chain bridge_card_from_chain_select'>
+                <img src={BSC} />
+                BSC
+              </p>
+            </Option>
+          </Select>
+        ),
+        [ChainId.BSC]: (
+          <Select defaultValue='BSC' onChange={handleChange}>
+            <Option value='Heco'>
+              <p className='bridge_card_from_chain bridge_card_from_chain_select'>
+                <img src={HECO} />
+                Heco
+              </p>
+            </Option>
+            <Option value='BSC'>
+              <p className='bridge_card_from_chain bridge_card_from_chain_select'>
+                <img src={BSC} />
+                BSC
+              </p>
+            </Option>
+          </Select>
+        ),
+        [ChainId.MATIC]: (
+          <Select defaultValue='Heco' onChange={handleChange}>
+            <Option value='Heco'>
+              <p
+                className='bridge_card_from_chain bridge_card_from_chain_select'
+                onClick={() => {
+                  changeNetwork(ChainId.HECO).then()
+                }}
+              >
+                <img src={HECO} />
+                Heco
+              </p>
+            </Option>
+            <Option value='Binance Smart Chain'>
+              <p
+                className='bridge_card_from_chain bridge_card_from_chain_select'
+                onClick={() => {
+                  changeNetwork(ChainId.BSC).then()
+                }}
+              >
+                <img src={BSC} />
+                BSC
+              </p>
+            </Option>
+          </Select>
+        ),
+      }[chainId] || null
+    )
+}
+
+ const handleChange = (value) => {
+   console.log(`selected ${value}`)
+ }
+
+const ChainSelect = ({ chainId }) => {
+  return (
+    {
+      [ChainId.HECO]: (
+        <Select defaultValue='BSC' onChange={handleChange}>
+          <Option value='BSC'>
+            <p className='bridge_card_from_chain bridge_card_from_chain_select'>
+              <img src={BSC} />
+              BSC
+            </p>
+          </Option>
+          <Option value='MATIC'>
+            <p className='bridge_card_from_chain bridge_card_from_chain_select'>
+              <img src={MATIC} />
+              Polygon
+            </p>
+          </Option>
+        </Select>
+      ),
+      [ChainId.BSC]: (
+        <>
+          <Select defaultValue='Heco' onChange={handleChange}>
+            <Option value='Heco'>
+              <p className='bridge_card_from_chain bridge_card_from_chain_select'>
+                <img src={HECO} />
+                Heco
+              </p>
+            </Option>
+            <Option value='MATIC'>
+              <p className='bridge_card_from_chain bridge_card_from_chain_select'>
+                <img src={MATIC} />
+                Polygon
+              </p>
+            </Option>
+          </Select>
+        </>
+      ),
+      [ChainId.MATIC]: (
+        <>
+          <Select defaultValue='Heco' onChange={handleChange}>
+            <Option
+              value='Heco'
+            >
+              <p className='bridge_card_from_chain bridge_card_from_chain_select'>
+                <img src={HECO} />
+                Heco
+              </p>
+            </Option>
+            <Option
+              value='BSC'
+            >
+              <p className='bridge_card_from_chain bridge_card_from_chain_select'>
+                <img src={BSC} />
+                BSC
+              </p>
+            </Option>
+          </Select>
+        </>
+      ),
     }[chainId] || null
+  )
 }
 export default injectIntl(BridgeCard)

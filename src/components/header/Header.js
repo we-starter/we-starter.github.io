@@ -90,7 +90,7 @@ export const Header = () => {
                     <span className='menu__hot'></span>
                   </NavLink>
                 </li>
-                {(chainId == 56 || chainId == 128) && (
+                {active && (
                   <li className='menu__item'>
                     <NavLink
                       to='/bridge'
