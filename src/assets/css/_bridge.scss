@@ -428,6 +428,10 @@
         height: 20px;
       }
     }
+    &_from_chain_select {
+      padding: 0 !important;
+      margin-bottom: 0;
+    }
   }
   .bridge_list {
     margin: 40px auto 0;
@@ -712,6 +716,10 @@
         width: 20px;
         height: 20px;
       }
+    }
+    &_from_chain_select {
+      padding: 0 !important;
+      margin-bottom: 0;
     }
   }
   .bridge_list {
@@ -999,6 +1007,10 @@
         width: 20px;
         height: 20px;
       }
+    }
+    &_from_chain_select {
+      padding: 0 !important;
+      margin-bottom: 0;
     }
   }
   .bridge_list {
