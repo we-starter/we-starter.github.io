@@ -47,14 +47,14 @@ const BuyCoinPopup = (props) => {
     chainId && WAR_ADDRESS(chainId),
     amount,
     middlePath,
-      chainId
+      128
   )
   const [radioOutAmount, fee] = useMDexPrice(
     chainId && WAR_ADDRESS(chainId),
     fromToken,
     1,
     middlePath,
-      chainId
+      128
   )
 
   const [HTRadioOutAmount, HTFee] = useMDexPrice(
@@ -62,7 +62,7 @@ const BuyCoinPopup = (props) => {
     chainId && WAR_ADDRESS(chainId),
     0.1,
     middlePath,
-      chainId
+      128
   )
 
   const USDTAllowance = useAllowance(
