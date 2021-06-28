@@ -346,7 +346,12 @@ const ChainBtn = ({chainId}) => {
               </p>
             </Option>
             <Option value='BSC'>
-              <p className='bridge_card_from_chain bridge_card_from_chain_select'>
+              <p
+                className='bridge_card_from_chain bridge_card_from_chain_select'
+                onClick={() => {
+                  changeNetwork(ChainId.BSC).then()
+                }}
+              >
                 <img src={BSC} />
                 BSC
               </p>
@@ -356,7 +361,12 @@ const ChainBtn = ({chainId}) => {
         [ChainId.BSC]: (
           <Select defaultValue='BSC' onChange={handleChange}>
             <Option value='Heco'>
-              <p className='bridge_card_from_chain bridge_card_from_chain_select'>
+              <p
+                className='bridge_card_from_chain bridge_card_from_chain_select'
+                onClick={() => {
+                  changeNetwork(ChainId.HECO).then()
+                }}
+              >
                 <img src={HECO} />
                 Heco
               </p>
