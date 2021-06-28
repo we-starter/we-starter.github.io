@@ -72,6 +72,10 @@ const BridgeCard = (props) => {
         setAmount(formatAmount(balance))
     }
 
+    const handleChange = (value) => {
+    console.log(`selected ${value}`)
+    }
+
     /**
      * 质押
      */
