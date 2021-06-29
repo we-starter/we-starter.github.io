@@ -3,6 +3,7 @@ import cs from 'classnames'
 import BigNumber from 'bignumber.js'
 import { withRouter } from 'react-router'
 import { changeNetwork } from '../../connectors'
+import { ChainId } from '../../web3/address'
 import { message } from 'antd'
 import HUSD from '../../assets/icon/HUSD@2x.png'
 import DFT from '../../assets/icon/DFT@2x.png'
@@ -31,6 +32,9 @@ import CORRA from '../../assets/icon/CORRA.png'
 import COW from '../../assets/icon/COW.png'
 import MOMA from '../../assets/icon/moma.png'
 import PAUL from '../../assets/icon/paul.png'
+import BSC from '../../assets/icon/BSC@2x.png'
+import HECO from '../../assets/icon/HECO@2x.png'
+import MATIC from '../../assets/icon/MATIC@2x.png'
 
 import HyperPay from '../../assets/icon/HyperPay-Logo@2x.png'
 import { usePoolsInfo, usePoolsLBPInfo } from './Hooks'
@@ -259,6 +263,9 @@ const PoolsIndex = (props) => {
         key={pool.address}
       >
         <div className='pools-type_title'>
+          <a className={cs(pool ? 'pools-type_chaind_box_' + pool.networkId : 'pools-type_chaind_box_128')}>
+            <span className={cs('pools-type_chaind')}></span>
+          </a>
           <p className='pools-type_card_title'>
             {pool && pool.underlying.symbol === 'MATTER' && (
               <img src={MATTER} />
@@ -634,16 +641,16 @@ const PoolsIndex = (props) => {
         )}
         {pool && pool.networkId !== chainId && (
           <a
-            className={cs('pools-type_enter')}
+            className={cs('pools-type_enter', pool.networkId == ChainId.MATIC && 'pools-type_matic_enter', pool.networkId == ChainId.BSC && 'pools-type_bsc_enter')}
             onClick={(e) => {
               changeNetwork(pool.networkId).then(() => {
                 message.success('Switch success')
               })
             }}
           >
-            {pool.networkId == 128 && <FormattedMessage id='poolText24' />}
-            {pool.networkId == 137 && <FormattedMessage id='poolText25' />}
-            {pool.networkId == 56 && <FormattedMessage id='poolText26' />}
+            {pool.networkId == ChainId.HECO && <FormattedMessage id='poolText24' />}
+            {pool.networkId == ChainId.MATIC && <FormattedMessage id='poolText25' />}
+            {pool.networkId == ChainId.BSC && <FormattedMessage id='poolText26' />}
           </a>
         )}
         {pool && pool.status == 3 && pool && pool.underlying.name !== 'LBP' && (
