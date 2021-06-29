@@ -10,6 +10,7 @@ const MULTICALL_ADDRESS = '0xc9a9F768ebD123A00B52e7A0E590df2e9E998707'
 export function getMultiCallProvider(provider, chainId) {
   // HECO multical
   setMulticallAddress(128, MULTICALL_ADDRESS)
+  setMulticallAddress(137, "0x11ce4B23bD875D7F5C6a31084f55fDe1e9A87507")
   const multiCallProvider = new Provider(provider, chainId);
   return multiCallProvider
 }

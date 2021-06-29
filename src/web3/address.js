@@ -110,14 +110,17 @@ export function BUSD_ADDRESS(chainId) {
 export function CHAIN_SWAP_ADDRESS (chainId) {
   return {
     [ChainId.HECO]: '0x910651F81a605a6Ef35d05527d24A72fecef8bF0',
-    [ChainId.BSC]: '0x910651F81a605a6Ef35d05527d24A72fecef8bF0',
+    [ChainId.BSC]: '0x910651F81a605a6Ef35d05527d24A72fecef8bF0'
   }[chainId]
 }
+export const BURN_SWAP_ADDRESS = '0x6Bab2711Ca22fE7395811022F92bB037cd4af7bc'
+export const BURN_SWAP_S_ADDRESS = '0x81d82a35253B982E755c4D7d6AADB6463305B188'
 
 export function RPC_URLS (chainId) {
     return {
       [ChainId.HECO]: 'https://http-mainnet-node.huobichain.com',
       [ChainId.BSC]: 'https://bsc-dataseed.binance.org/',
+      [ChainId.MATIC]: 'https://rpc-mainnet.maticvigil.com'
     }[chainId]
 }
 

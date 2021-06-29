@@ -13,14 +13,15 @@ import { formatNumber } from 'accounting'
 import { formatAmount, formatAddress } from '../../utils/format'
 import Right from '../../assets/icon/right@2x.png'
 import Web3 from "web3";
-import {ChainId, RPC_URLS, WAR_ADDRESS} from "../../web3/address";
+import {BURN_SWAP_ADDRESS, BURN_SWAP_S_ADDRESS, ChainId, RPC_URLS} from "../../web3/address";
 import ChainSwapAbi from "../../web3/abi/ChainSwap.json";
 import {changeNetwork} from "../../connectors";
-import { getMultiCallProvider, processResult } from '../../utils/multicall'
+import { getOnlyMultiCallProvider, processResult } from '../../utils/multicall'
 import {Contract} from "ethers-multicall-x";
-import {abi as ERC20} from "../../web3/abi/ERC20.json";
 import { JsonRpcProvider } from '@ethersproject/providers'
 import web3 from "web3";
+import ERC20 from '../../web3/abi/ERC20.json'
+import BurnSwapAbi from '../../web3/abi/BurnSwap.json'
 
 const CurrencyIcon = {
     [ChainId.HECO]: {
@@ -30,17 +31,28 @@ const CurrencyIcon = {
     [ChainId.BSC]: {
       icon: 'BSC',
       title: 'Binance Smart Chain'
-    }
+    },
+  [ChainId.MATIC]: {
+    icon: 'BSC',
+    title: 'MATIC'
+  }
   }
 
-var web3HECO = new Web3(new Web3.providers.HttpProvider(RPC_URLS(ChainId.HECO)));
-// let fromContract = new web3HECO.eth.Contract(ChainSwapAbi, WAR_ADDRESS(ChainId.HECO));
-// const fromContract = new Contract(WAR_ADDRESS(ChainId.HECO), ChainSwapAbi)
-var web3BSC = new Web3(new Web3.providers.HttpProvider(RPC_URLS(ChainId.BSC)));
-// let toContract = new web3BSC.eth.Contract(ChainSwapAbi, WAR_ADDRESS(ChainId.BSC));
-// const toContract = new Contract(WAR_ADDRESS(ChainId.BSC), ChainSwapAbi)
+var web3HECO = new Web3(new Web3.providers.HttpProvider(RPC_URLS(ChainId.HECO)))
+var web3BSC = new Web3(new Web3.providers.HttpProvider(RPC_URLS(ChainId.BSC)))
 
-const BridgeList = ({onExtractItem}) => {
+/*const pair = [
+  128: {
+    is_burn: true,
+    stake_address: WAR_ADDRESS(128),
+      stake: "swapAndBurn",
+    abi: BurnSwapAbi,
+    chainswap_address: WAR_ADDRESS(128),
+    token_address: WAR_ADDRESS(128)
+  }
+]*/
+
+const BridgeList = ({onExtractItem, getList, bridgeCardConfig}) => {
   const { account, active, library, chainId } = useActiveWeb3React()
   const { dispatch, state } = useContext(mainContext)
   const [historyData, setHistoryData] = useState([])
@@ -52,33 +64,43 @@ const BridgeList = ({onExtractItem}) => {
     //   pledgeAmount: "0.00001",
     //   toChainId: 56
     // }
-  const createContract = cId => new Contract(WAR_ADDRESS(cId), ChainSwapAbi)
+  const createContract = (fromChainId, toChainId) => {
+    const fromConfig = bridgeCardConfig(fromChainId)
+    const toConfig = bridgeCardConfig(toChainId)
+    const fromPledgeAmountConcat = new Contract(fromConfig.war_burn_address, fromConfig.war_burn_abi)
+    const toPledgeAmountConcat = new Contract(toConfig.war_burn_address, toConfig.war_burn_abi)
+    // 燃烧的话，from与to都应是燃烧的配置
+    return {
+      fromPledgeAmountConcat: toConfig.is_burn ? toPledgeAmountConcat : fromPledgeAmountConcat,
+      toPledgeAmountConcat
+    }
+  }
   /**
    * 获取跨链数据
    */
   const getCrossChainData = () => {
     // 查询 源链 ChainSwap合约中 sentCount(toChainId, to) ，得到 maxNonce
     // 查询所有质押的数据，遍历 源链
-    const getPledgeData = (toChainId, fromChainId, maxNonce) => {
-      const multicallProvider = getMultiCallProvider(new JsonRpcProvider(RPC_URLS(fromChainId)), fromChainId)
-      const fromPledgeAmountConcat = createContract(fromChainId)
-      const toPledgeAmountConcat = createContract(toChainId)
+    const getPledgeData = (fromChainId, toChainId, maxNonce) => {
+      const multicallProvider = getOnlyMultiCallProvider(fromChainId)
+      const {fromPledgeAmountConcat, toPledgeAmountConcat} = createContract(fromChainId, toChainId)
       const extractAmountAll = []
       let pledgeAmountAll = []
-      for (let nonce = 0; nonce <= maxNonce; nonce++) {
-        pledgeAmountAll.push(fromPledgeAmountConcat.sent(toChainId, account, nonce))
-        extractAmountAll.push(toPledgeAmountConcat.received(fromChainId, account, nonce))
+      for (let nonce = 0; nonce < maxNonce; nonce++) {
+        pledgeAmountAll.push(toPledgeAmountConcat.sent(toChainId, account, nonce))
+        extractAmountAll.push(fromPledgeAmountConcat.received(fromChainId, account, nonce))
       }
       return Promise.all([multicallProvider.all(pledgeAmountAll),multicallProvider.all(extractAmountAll)]).then(res => {
         let pledgeAmountData = processResult(res[0])
+        console.log(pledgeAmountData)
         let extractAmountData = processResult(res[1])
         return pledgeAmountData.reduce((l, item, index)=>{
           l.push({
             nonce: index,
             pledgeAmount: web3BSC.utils.fromWei(pledgeAmountData[index], 'ether'),
             extractAmount: web3BSC.utils.fromWei(extractAmountData[index], 'ether'),
-            fromChainId,
             toChainId,
+            fromChainId,
             account
           })
           return l
@@ -86,20 +108,30 @@ const BridgeList = ({onExtractItem}) => {
       })
     }
     setHistoryData([])
-    // 每一个跨链方向[from,to]
-    const directions = [[ChainId.HECO, ChainId.BSC], [ChainId.BSC, ChainId.HECO]]
+    // 每一个跨链方向[to, from]
+    const directions = [{
+      from: ChainId.HECO,
+      to: ChainId.BSC
+    }, {
+      from: ChainId.BSC,
+      to: ChainId.HECO
+    },{
+      from: ChainId.HECO,
+      to: ChainId.MATIC
+    }]
     // 获取maxNonce
     const sentCountArr = directions.reduce((l, i)=>{
-      // 当前链去查
-      const tContract = new web3HECO.eth.Contract(ChainSwapAbi, WAR_ADDRESS(i[0]));
-      l.push(tContract.methods.sentCount(i[0], account).call())
+      const tConfig = bridgeCardConfig(i.to)
+      let tContract  = new web3HECO.eth.Contract(tConfig.war_burn_abi,tConfig.war_burn_address);
+      l.push(tContract.methods.sentCount(i.to, account).call())
       return l
     }, [])
 
     Promise.all(sentCountArr).then(maxNonceArr => {
+      console.log('maxNonceArr', maxNonceArr)
       // 获取签名后数据
       const getPledgeDataArr = directions.reduce((l, item, idx)=>{
-        l.push(getPledgeData(...item, maxNonceArr[idx]))
+        l.push(getPledgeData(item.from, item.to, maxNonceArr[idx]))
         return l
       }, [])
       Promise.all(getPledgeDataArr).then(result => {
@@ -109,10 +141,10 @@ const BridgeList = ({onExtractItem}) => {
     })
   }
   useEffect(() => {
-    if (active){
+    if (account){
       getCrossChainData()
     }
-  }, [active])
+  }, [getList, account])
   return (
     <div className='bridge_list'>
       <div className='bridge_list_tab'>
