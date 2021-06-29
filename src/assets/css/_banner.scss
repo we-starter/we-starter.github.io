@@ -68,7 +68,7 @@
       display: flex;
       align-items: center;
       margin-top: 20px;
-      padding-bottom: 52px;
+      padding-bottom: 30px;
       span {
         font-size: 16px;
         font-family: PTMono-Regular, PTMono !important;
@@ -83,7 +83,21 @@
         background-size: 100% 100%;
         width: 168px;
         height: 20px;
-        margin: 0 20px 0 8px;
+        margin-right: 20px;
+      }
+      .binance_logo {
+        width: 144px;
+        height: 20px;
+        background-image: url('../icon/binance.svg');
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+      }
+      .polygon_logo {
+        width: 88px;
+        height: 20px;
+        background-image: url('../icon/polygon.svg');
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
       }
     }
     &_svg__links {
@@ -117,7 +131,7 @@
     &_pdf {
       display: flex;
       align-items: center;
-      padding-bottom: 40px;
+      padding: 28px 0;
       a {
         display: flex;
         justify-content: center;
@@ -157,7 +171,7 @@
       justify-content: space-between;
       align-items: center;
       padding: 0 50px;
-      margin: 42px auto 0;
+      margin: 0 auto 0;
       width: 1080px;
       height: 140px;
       background: url('../../assets/icon/related_bg@2x.png') no-repeat;
@@ -309,7 +323,7 @@
       display: flex;
       align-items: center;
       margin-top: 20px;
-      padding-bottom: 42px;
+      padding-bottom: 30px;
       span {
         font-size: 16px;
         font-family: PTMono-Regular, PTMono !important;
@@ -317,14 +331,28 @@
         color: #22292f;
         line-height: 20px;
       }
-      .huobi_logo {
+       .huobi_logo {
         display: inline-block;
         background-image: url('../icon/huobi-logo.svg');
         background-repeat: no-repeat;
         background-size: 100% 100%;
         width: 168px;
         height: 20px;
-        margin: 0 20px 0 8px;
+        margin-right: 20px;
+      }
+      .binance_logo {
+        width: 144px;
+        height: 20px;
+        background-image: url('../icon/binance.svg');
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+      }
+      .polygon_logo {
+        width: 88px;
+        height: 20px;
+        background-image: url('../icon/polygon.svg');
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
       }
     }
     &_svg__links {
@@ -358,7 +386,7 @@
     &_pdf {
       display: flex;
       align-items: center;
-      padding-bottom: 40px;
+      padding: 28px 0;
       a {
         display: flex;
         justify-content: center;
@@ -398,7 +426,7 @@
       justify-content: space-between;
       align-items: center;
       padding: 0 50px;
-      margin: 42px auto 0;
+      margin: 0 auto 0;
       width: 1080px;
       height: 140px;
       background: url('../../assets/icon/related_bg@2x.png') no-repeat;
@@ -526,11 +554,10 @@
     }
     &_text-title {
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      padding: 0 22px;
+      flex-direction: column;
+      padding: 12px 22px 16px;
       width: 100%;
-      height: 40px;
       background: #d4e9e2;
       span {
         font-size: 12px;
@@ -546,8 +573,22 @@
         background-repeat: no-repeat;
         background-size: 100% 100%;
         width: 100px;
-        height: 12px;
-        margin-left: 4px;
+        height: 14px;
+        margin-right: 8px;
+      }
+      .binance_logo {
+        width: 102px;
+        height: 14px;
+        background-image: url('../icon/binance.svg');
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+      }
+      .polygon_logo {
+        width: 62px;
+        height: 14px;
+        background-image: url('../icon/polygon.svg');
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
       }
     }
     &_text_img {
@@ -566,7 +607,7 @@
       display: flex;
       align-items: center;
       margin-top: 20px;
-      padding-bottom: 42px;
+      padding-bottom: 30px;
       display: none;
       span {
         font-size: 20px;
@@ -596,6 +637,7 @@
       border: 1px solid #979797;
     }
     &_small_pdf {
+      margin-top: 10px;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -766,11 +808,11 @@
       line-height: 62px;
     }
     &_text-title {
-      display: flex;
-      justify-content: center;
+        display: flex;
       align-items: center;
+      flex-direction: column;
+      padding: 12px 22px 16px;
       width: 100%;
-      height: 40px;
       background: #d4e9e2;
       span {
         font-size: 12px;
@@ -786,8 +828,22 @@
         background-repeat: no-repeat;
         background-size: 100% 100%;
         width: 100px;
-        height: 12px;
-        margin-left: 4px;
+        height: 14px;
+        margin-right: 8px;
+      }
+      .binance_logo {
+        width: 102px;
+        height: 14px;
+        background-image: url('../icon/binance.svg');
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+      }
+      .polygon_logo {
+        width: 62px;
+        height: 14px;
+        background-image: url('../icon/polygon.svg');
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
       }
     }
     &_text_img {
@@ -806,7 +862,7 @@
       display: flex;
       align-items: center;
       margin-top: 20px;
-      padding-bottom: 42px;
+      padding-bottom: 30px;
       display: none;
       span {
         font-size: 20px;
@@ -836,6 +892,7 @@
       border: 1px solid #979797;
     }
     &_small_pdf {
+      margin-top: 10px;
       display: flex;
       justify-content: center;
       align-items: center;
