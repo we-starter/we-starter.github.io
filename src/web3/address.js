@@ -36,6 +36,8 @@ export function WAR_ADDRESS(chainId) {
       return '0x910651F81a605a6Ef35d05527d24A72fecef8bF0'
     case ChainId.HECO:
       return '0x910651F81a605a6Ef35d05527d24A72fecef8bF0'
+    case ChainId.MATIC:
+      return '0x81d82a35253B982E755c4D7d6AADB6463305B188'
     default:
       return '0x910651F81a605a6Ef35d05527d24A72fecef8bF0'
   }

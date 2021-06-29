@@ -1,3 +1,8 @@
+.farm_box{
+  .footer{
+    position: fixed;
+  }
+}
 @media #{$desktop} {
   .farm_box {
     min-width: 1080px;

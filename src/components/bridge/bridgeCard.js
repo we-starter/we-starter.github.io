@@ -39,6 +39,7 @@ import {debounce} from "lodash/function";
 const { Option } = Select
 let web3 = new Web3(window.ethereum);
 
+
 // 配置
 const bridgeCardConfig = (cId) => {
     return {
@@ -46,6 +47,7 @@ const bridgeCardConfig = (cId) => {
             war_burn_address: WAR_ADDRESS(cId),
             war_burn_abi: ChainSwapAbi,
             abi: ChainSwapAbi,
+            switch_network_text_id: 'poolText24',
             chainswap_address: CHAIN_SWAP_ADDRESS(cId),
             token_address: WAR_ADDRESS(cId)
         },
@@ -53,6 +55,7 @@ const bridgeCardConfig = (cId) => {
             war_burn_address: WAR_ADDRESS(cId),
             war_burn_abi: ChainSwapAbi,
             abi: ChainSwapAbi,
+            switch_network_text_id: 'poolText26',
             chainswap_address: CHAIN_SWAP_ADDRESS(cId),
             token_address: WAR_ADDRESS(cId)
         },
@@ -60,6 +63,7 @@ const bridgeCardConfig = (cId) => {
             war_burn_address: BURN_SWAP_S_ADDRESS,
             war_burn_abi: ChainSwapAbi,
             is_burn: true,
+            switch_network_text_id: 'poolText25',
             chainswap_address: BURN_SWAP_S_ADDRESS,
             token_address: BURN_SWAP_ADDRESS,
             abi: BurnSwapAbi,
@@ -92,18 +96,32 @@ const BridgeCard = (props) => {
         account,
         extractAmount: "0",
         fromChainId: 128,
-        nonce: 2,
+        nonce: 0,
         pledgeAmount: "0.00001",
         toChainId: 56,
         assets: 'WAR'
     })//质押的数据，用于提取
 
     const [getList, setGetList] = useState(0)
+
+    const [fromChainId, setFromChainId] = useState(ChainId.HECO)
     const [toChainId, setToChainId] = useState(null)
 
     const [visibleSwitchWithdrawPopup, setVisibleSwitchWithdrawPopup] = useState(false)
 
-    const chainSelectData = [
+    const fromChainSelectData = [
+        {
+            icon: HECO,
+            value: 'Heco',
+            chainId: ChainId.HECO
+        },
+        {
+            icon: BSC,
+            value: 'BSC',
+            chainId: ChainId.BSC
+        }
+    ]
+    const toChainSelectData = [
         {
             icon: HECO,
             value: 'Heco',
@@ -120,23 +138,23 @@ const BridgeCard = (props) => {
             chainId: ChainId.MATIC
         }
     ]
-    const [fromChainSelectData, setFromChainSelectData] = useState([])
-    const [toChainSelectData, setToChainSelectData] = useState([])
+
 
     // 是否已经授权
     const BURNAllowance = useAllowance(WAR_ADDRESS(chainId), BURN_SWAP_ADDRESS, account)
 
-    // 通过ChainId过滤select
     useEffect(() => {
-        // from filter thisChainId and MATIC
-        setFromChainSelectData(chainSelectData.filter(i => i.chainId !== chainId && i.chainId !== ChainId.MATIC))
-        // from filter fromChainId
-        const newToChainSelectData = chainSelectData.filter(i => i.chainId !== chainId)
-        setToChainSelectData(newToChainSelectData)
-        if (toChainId === chainId || !toChainId) {
-            setToChainId(newToChainSelectData[0].chainId)
+        if (chainId === ChainId.HECO || chainId === ChainId.BSC) {
+           setFromChainId(chainId)
         }
     }, [chainId])
+
+    useEffect(() => {
+        if (toChainId === fromChainId || !toChainId) {
+            const toChainItem = toChainSelectData.find(i=>i.chainId !== fromChainId)
+            setToChainId(toChainItem.chainId)
+        }
+    }, [fromChainId])
 
     // useEffect(()=>{
     //     debounceChangeNetwork(active, chainId)
@@ -329,6 +347,8 @@ const BridgeCard = (props) => {
         setVisibleSwitchWithdrawPopup(true)
     }
 
+    const fromChainIdConfig = bridgeCardConfig(fromChainId)
+    const toChainIdConfig = bridgeCardConfig(toChainId)
     return (
       <React.Fragment>
         <div className='bridge_card'>
@@ -367,7 +387,7 @@ const BridgeCard = (props) => {
               <p className='bridge_card_from_text'>
                 <FormattedMessage id='bridge7' />
               </p>
-                <ChainSelect chainSelectData={fromChainSelectData} chainId={chainId} type='from'/>
+                <ChainSelect chainSelectData={fromChainSelectData} chainId={fromChainId} setChainId={setFromChainId}/>
             </div>
             <img
               className='bridge_card_transform'
@@ -379,7 +399,7 @@ const BridgeCard = (props) => {
               {/* <p className='bridge_card_from_chain'>
                 <ChainBtn chainId={toChainId} />
               </p> */}
-              <ChainSelect chainSelectData={toChainSelectData} chainId={toChainId} type='to' setToChainId={setToChainId}/>
+              <ChainSelect chainSelectData={toChainSelectData} chainId={toChainId} hiddenId={fromChainId} setChainId={setToChainId}/>
             </div>
           </div>
           <p className='bridge_card_input_title'>
@@ -418,25 +438,36 @@ const BridgeCard = (props) => {
             </div>
           </div>
 
-            {toChainId === ChainId.MATIC && BURNAllowance < Number(amount) ? (
-                <Button
-                    className={'btn'}
-                    type='button'
-                    onClick={onApprove}
-                    loading={approveLoading}
-                >
-                    <FormattedMessage id='farm20'/>
-                </Button>
-            ) : (
-                <Button
-                    className={'btn'}
-                    type='button'
-                    onClick={toChainId === ChainId.MATIC ? onBurn : onPledge}
-                    loading={loading}
-                >
-                    <FormattedMessage id='modalsText15' />
-                </Button>
-            )
+            {
+                fromChainId !== chainId ? (
+                    <Button
+                        className={'btn'}
+                        type='button'
+                        onClick={()=>{
+                            changeNetwork(fromChainId).then()
+                        }}
+                    >
+                        <FormattedMessage id={fromChainIdConfig.switch_network_text_id} />
+                    </Button>
+                ) : toChainIdConfig.is_burn && BURNAllowance < Number(amount) ? (
+                    <Button
+                        className={'btn'}
+                        type='button'
+                        onClick={onApprove}
+                        loading={approveLoading}
+                    >
+                        <FormattedMessage id='farm20'/>
+                    </Button>
+                ) : (
+                    <Button
+                        className={'btn'}
+                        type='button'
+                        onClick={toChainId === ChainId.MATIC ? onBurn : onPledge}
+                        loading={loading}
+                    >
+                        <FormattedMessage id='modalsText15' />
+                    </Button>
+                )
             }
           <div className='lbp_tip'>
             <p>
@@ -457,20 +488,18 @@ const BridgeCard = (props) => {
       </React.Fragment>
     )
 }
- const handleChange = (value, type, setToChainId) => {
-    if (type === 'from') {
-        changeNetwork(value).then()
-    } else {
-        setToChainId(value)
-    }
- }
 
-const ChainSelect = ({ chainSelectData, chainId, type, setToChainId }) => {
+const ChainSelect = ({ chainSelectData, chainId, hiddenId, setChainId }) => {
   return (
-        <Select value={chainId} onChange={(val)=>handleChange(val, type, setToChainId)}>
+        <Select value={chainId} onChange={(cId)=>{
+        console.log(cId)
+            setChainId(cId)
+        }
+        }>
             {
                 chainSelectData.map((item) => (
-                    <Option value={item.chainId} key={item.chainId}>
+                    hiddenId !== item.chainId &&
+                    <Option value={item.chainId} key={item.chainId} disabled={item.chainId === chainId} className='bridge_card_from_chain_option'>
                         <p className='bridge_card_from_chain bridge_card_from_chain_select'>
                             <img src={item.icon} />
                             {item.value}

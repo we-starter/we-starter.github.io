@@ -24,6 +24,7 @@ export const useBalance = (address) => {
           })
         } else {
           const contract = getContract(library, ERC20.abi, address)
+
           console.log('token address:', address)
           contract.methods
             .balanceOf(account)

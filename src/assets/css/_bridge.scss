@@ -1,5 +1,18 @@
-.disable_input {
-  color: #B6B9BC;
+.bridge_box {
+  .disable_input {
+    color: #B6B9BC;
+    font-size: 14px;
+  }
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+  }
+  input[type="number"]{
+    -moz-appearance: textfield;
+  }
+}
+.bridge_card_from_chain_option.ant-select-item-option-disabled{
+  background: #dedede;
 }
 @media #{$desktop} {
   .bridge_box{
@@ -142,6 +155,7 @@
     &_from_chain_select {
       padding: 0 !important;
       margin-bottom: 0;
+      background: transparent;
     }
   }
   .bridge_list {
@@ -431,6 +445,7 @@
     &_from_chain_select {
       padding: 0 !important;
       margin-bottom: 0;
+      background: transparent;
     }
   }
   .bridge_list {
@@ -720,6 +735,7 @@
     &_from_chain_select {
       padding: 0 !important;
       margin-bottom: 0;
+      background: transparent;
     }
   }
   .bridge_list {
@@ -1011,6 +1027,7 @@
     &_from_chain_select {
       padding: 0 !important;
       margin-bottom: 0;
+      background: transparent;
     }
   }
   .bridge_list {
