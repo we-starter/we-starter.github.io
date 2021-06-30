@@ -18,22 +18,22 @@ import ChainSwapAbi from "../../web3/abi/ChainSwap.json";
 import {changeNetwork} from "../../connectors";
 import { getOnlyMultiCallProvider, processResult } from '../../utils/multicall'
 import {Contract} from "ethers-multicall-x";
-import { JsonRpcProvider } from '@ethersproject/providers'
-import web3 from "web3";
-import ERC20 from '../../web3/abi/ERC20.json'
-import BurnSwapAbi from '../../web3/abi/BurnSwap.json'
+import WAR from '../../assets/icon/WAR@2x.png'
+import BSC from '../../assets/icon/BSC@2x.png'
+import HECO from '../../assets/icon/HECO@2x.png'
+import MATIC from '../../assets/icon/MATIC@2x.png'
 
 const CurrencyIcon = {
     [ChainId.HECO]: {
-      icon: 'HECO',
+      icon: HECO,
       title: 'Heco'
     },
     [ChainId.BSC]: {
-      icon: 'BSC',
+      icon: BSC,
       title: 'Binance Smart Chain'
     },
   [ChainId.MATIC]: {
-    icon: 'BSC',
+    icon: MATIC,
     title: 'MATIC'
   }
   }
@@ -144,7 +144,12 @@ const BridgeList = ({onExtractItem, getList, bridgeCardConfig}) => {
     if (account){
       getCrossChainData()
     }
-  }, [getList, account])
+  }, [getList])
+  useEffect(() => {
+    if (account && historyData.length === 0){
+      getCrossChainData()
+    }
+  }, [account])
   return (
     <div className='bridge_list'>
       <div className='bridge_list_tab'>
@@ -167,13 +172,13 @@ const BridgeList = ({onExtractItem, getList, bridgeCardConfig}) => {
               return (
                 <tr key={index}>
                   <td className='tbody_title'>
-                    <img className='icon' src={require('../../assets/icon/WAR@2x.png')} /> WAR
+                    <img className='icon' src={WAR} /> WAR
                   </td>
                   <td>
-                    <img src={require('../../assets/icon/' + CurrencyIcon[item.fromChainId].icon + '@2x.png')} /> {CurrencyIcon[item.fromChainId].title}
+                    <img src={CurrencyIcon[item.fromChainId].icon} /> {CurrencyIcon[item.fromChainId].title}
                   </td>
                   <td>
-                    <img src={require('../../assets/icon/' + CurrencyIcon[item.toChainId].icon + '@2x.png')} /> {CurrencyIcon[item.toChainId].title}
+                    <img src={CurrencyIcon[item.toChainId].icon} /> {CurrencyIcon[item.toChainId].title}
                   </td>
                   <td>{formatAddress(item.account)}</td>
                   <td>{item.pledgeAmount}</td>
@@ -197,7 +202,7 @@ const BridgeList = ({onExtractItem, getList, bridgeCardConfig}) => {
            return (
              <div className='bridge_list_data' key={index}>
                <div className='bridge_list_data_title'>
-                 <h2><img className='icon' src={require('../../assets/icon/WAR@2x.png')} /> WAR</h2>
+                 <h2><img className='icon' src={WAR} /> WAR</h2>
                  {
                    item.status == 2 && <img src={Right} />
                  }
@@ -205,11 +210,11 @@ const BridgeList = ({onExtractItem, getList, bridgeCardConfig}) => {
                <div className='bridge_list_data_title'>
                  <div className='bridge_list_data_value'>
                    <p><FormattedMessage id='bridge7' /></p>
-                   <p><img className='success_status' src={require('../../assets/icon/' + CurrencyIcon[item.fromChainId].icon + '@2x.png')} /> {CurrencyIcon[item.fromChainId].title}</p>
+                   <p><img className='success_status' src={CurrencyIcon[item.fromChainId].icon} /> {CurrencyIcon[item.fromChainId].title}</p>
                  </div>
                  <div className='bridge_list_data_value'>
                    <p><FormattedMessage id='bridge8' /></p>
-                   <p style={{ textAlign: 'right' }}><img className='success_status' src={require('../../assets/icon/' + CurrencyIcon[item.toChainId].icon + '@2x.png')} /> {CurrencyIcon[item.toChainId].title}</p>
+                   <p style={{ textAlign: 'right' }}><img className='success_status' src={CurrencyIcon[item.toChainId].icon} /> {CurrencyIcon[item.toChainId].title}</p>
                  </div>
                </div>
                <div className='bridge_list_data_title'>

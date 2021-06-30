@@ -47,36 +47,67 @@ const bridgeCardConfig = (cId) => {
             war_burn_address: WAR_ADDRESS(cId),
             war_burn_abi: ChainSwapAbi,
             abi: ChainSwapAbi,
+            address: CHAIN_SWAP_ADDRESS(cId),
+            sign_address: WAR_ADDRESS(cId),
             switch_network_text_id: 'poolText24',
-            chainswap_address: CHAIN_SWAP_ADDRESS(cId),
-            token_address: WAR_ADDRESS(cId)
+            confirm_method: 'send'
         },
         [ChainId.BSC]: {
             war_burn_address: WAR_ADDRESS(cId),
             war_burn_abi: ChainSwapAbi,
             abi: ChainSwapAbi,
+            address: CHAIN_SWAP_ADDRESS(cId),
+            sign_address: WAR_ADDRESS(cId),
             switch_network_text_id: 'poolText26',
-            chainswap_address: CHAIN_SWAP_ADDRESS(cId),
-            token_address: WAR_ADDRESS(cId)
+            confirm_method: 'send'
+
         },
         [ChainId.MATIC]: {
-            war_burn_address: BURN_SWAP_S_ADDRESS,
+            war_burn_address: WAR_ADDRESS(cId),
             war_burn_abi: ChainSwapAbi,
-            is_burn: true,
             switch_network_text_id: 'poolText25',
-            chainswap_address: BURN_SWAP_S_ADDRESS,
-            token_address: BURN_SWAP_ADDRESS,
             abi: BurnSwapAbi,
+            address: BURN_SWAP_ADDRESS,
+            sign_address: BURN_SWAP_S_ADDRESS,
+            is_burn: true,
+            confirm_method: 'swapAndSend'
         }
     }[cId]
-
 }
-
-const debounceChangeNetwork = debounce((active, chainId)=>{
-    if (!active || (chainId !== ChainId.HECO && chainId !== ChainId.BSC)){
-        changeNetwork(ChainId.HECO).then()
+const fromChainSelectData = [
+    {
+        icon: HECO,
+        value: 'Heco',
+        chainId: ChainId.HECO
+    },
+    {
+        icon: BSC,
+        value: 'BSC',
+        chainId: ChainId.BSC
     }
-}, 500)
+]
+const toChainSelectData = [
+    {
+        icon: HECO,
+        value: 'Heco',
+        chainId: ChainId.HECO
+    },
+    {
+        icon: BSC,
+        value: 'BSC',
+        chainId: ChainId.BSC
+    },
+    {
+        icon: MATIC,
+        value: 'MATIC',
+        chainId: ChainId.MATIC
+    }
+]
+// const debounceChangeNetwork = debounce((active, chainId)=>{
+//     if (!active || (chainId !== ChainId.HECO && chainId !== ChainId.BSC)){
+//         changeNetwork(ChainId.HECO).then()
+//     }
+// }, 500)
 
 const BridgeCard = (props) => {
     const { intl } = props
@@ -108,36 +139,6 @@ const BridgeCard = (props) => {
     const [toChainId, setToChainId] = useState(null)
 
     const [visibleSwitchWithdrawPopup, setVisibleSwitchWithdrawPopup] = useState(false)
-
-    const fromChainSelectData = [
-        {
-            icon: HECO,
-            value: 'Heco',
-            chainId: ChainId.HECO
-        },
-        {
-            icon: BSC,
-            value: 'BSC',
-            chainId: ChainId.BSC
-        }
-    ]
-    const toChainSelectData = [
-        {
-            icon: HECO,
-            value: 'Heco',
-            chainId: ChainId.HECO
-        },
-        {
-            icon: BSC,
-            value: 'BSC',
-            chainId: ChainId.BSC
-        },
-        {
-            icon: MATIC,
-            value: 'Polygon',
-            chainId: ChainId.MATIC
-        }
-    ]
 
 
     // 是否已经授权
@@ -192,19 +193,23 @@ const BridgeCard = (props) => {
                 console.log('approve error', err)
             })
     }
+
+
     /**
-     * 质押
+     * config
      */
-    const onPledge = () => {
+    const onConfig = () => {
         if (!amount || amount == 0) {
             return
         }
         setLoading(true)
-        let myContract = new web3.eth.Contract(ChainSwapAbi, CHAIN_SWAP_ADDRESS(chainId));
-        myContract.methods.send(toChainId, account, web3.utils.toWei(amount, 'ether')).send({
+        let myContract = new web3.eth.Contract(toChainIdConfig.abi, toChainIdConfig.address);
+        const params = toChainIdConfig.is_burn ? [web3.utils.toWei(amount, 'ether'), toChainId, account] : [toChainId, account, web3.utils.toWei(amount, 'ether')]
+        myContract.methods[toChainIdConfig.confirm_method](...params).send({
             from: account,
             value: web3.utils.toWei('0.005', 'ether')
         }).then(() => {
+
             // save transfer data
             setTransferData({
                 fromChainId: chainId,
@@ -222,29 +227,6 @@ const BridgeCard = (props) => {
         })
     }
 
-    /**
-     * 燃烧
-     */
-    const onBurn = () => {
-        if (!amount || amount == 0) {
-            return
-        }
-        setLoading(true)
-        let myContract = new web3.eth.Contract(BurnSwapAbi, BURN_SWAP_ADDRESS);
-        myContract.methods.swapAndSend(web3.utils.toWei(amount, 'ether'), toChainId, account).send({
-            from: account,
-            value: web3.utils.toWei('0.005', 'ether')
-        }).then(() => {
-
-            setLoading(false)
-            // setVisibleSwitchWithdrawPopup(true)
-            console.log('success')
-            setGetList(getList+1)
-        }).catch(error => {
-            setLoading(false)
-            console.log('fail', error)
-        })
-    }
 
     /**
      * 获取签名数据
@@ -253,11 +235,11 @@ const BridgeCard = (props) => {
         const fromConfig = bridgeCardConfig(transferData.fromChainId)
         const toConfig = bridgeCardConfig(transferData.toChainId)
         let signData = {
-            contractAddress: toConfig.war_burn_address, //CHAIN_SWAP_ADDRESS(transferData.toChainId),
-            toContract: toConfig.war_burn_address, //CHAIN_SWAP_ADDRESS(transferData.toChainId),
-            mainContract: toConfig.war_burn_address, //CHAIN_SWAP_ADDRESS(transferData.toChainId),
+            contractAddress: toConfig.sign_address,
+            toContract: toConfig.sign_address,
+            mainContract: toConfig.sign_address,
             fromChainId: transferData.fromChainId,
-            fromContract: fromConfig.war_burn_address, //CHAIN_SWAP_ADDRESS(transferData.fromChainId),
+            fromContract: toConfig.sign_address,
             to: transferData.account,
             toChainId: transferData.toChainId,
         }
@@ -418,7 +400,7 @@ const BridgeCard = (props) => {
               </div>
 
               {/* 地址跳转 */}
-              <a className='set_slippage copy_address'>
+              <a className='set_slippage copy_address' href='https://hecoinfo.com/address/0x23fcb0e1ddbc821bd26d5429ba13b7d5c96c0de0' target='_blank'>
                 <svg
                   t='1619095072712'
                   className='icon'
@@ -462,7 +444,7 @@ const BridgeCard = (props) => {
                     <Button
                         className={'btn'}
                         type='button'
-                        onClick={toChainId === ChainId.MATIC ? onBurn : onPledge}
+                        onClick={onConfig}
                         loading={loading}
                     >
                         <FormattedMessage id='modalsText15' />
