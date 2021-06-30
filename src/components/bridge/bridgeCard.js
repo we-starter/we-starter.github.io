@@ -1,7 +1,7 @@
 import React, {useContext, useEffect, useMemo, useState, forwardRef} from 'react'
 import cs from 'classnames'
 import { Button, message, Modal, Select } from 'antd'
-import { getContract, useActiveWeb3React } from '../../web3'
+import {getContract, getWeb3, useActiveWeb3React} from '../../web3'
 import { mainContext } from '../../reducer'
 import { FormattedMessage, injectIntl } from 'react-intl'
 import BigNumber from 'bignumber.js'
@@ -10,7 +10,6 @@ import Web3 from 'web3'
 import {
     HANDLE_WALLET_MODAL, HANDLE_WITHDRAW_MODAL
 } from '../../const'
-import { getRandomIntInclusive } from '../../utils/index'
 import WAR from '../../assets/icon/WAR@2x.png'
 import BSC from '../../assets/icon/BSC@2x.png'
 import HECO from '../../assets/icon/HECO@2x.png'
@@ -25,8 +24,6 @@ import {
     CHAIN_SWAP_NODE_REQ_URL,
     BURN_SWAP_ADDRESS, MDEX_ROUTER_ADDRESS, BURN_SWAP_S_ADDRESS
 } from "../../web3/address"
-import ChainSwapAbi from '../../web3/abi/ChainSwap.json'
-import BurnSwapAbi from '../../web3/abi/BurnSwap.json'
 import ERC20 from '../../web3/abi/ERC20.json'
 import {changeNetwork} from "../../connectors"
 import qs from 'qs'
@@ -34,51 +31,14 @@ import axios from "axios"
 import SwitchWithdrawPopup from '../../components/bridge/switchWithdrawPopup'
 import BridgeList from "./bridgeList";
 import { useAllowance } from '../../pages/Hooks'
-import {JsonRpcProvider} from "@ethersproject/providers";
-import {debounce} from "lodash/function";
+
+import {bridgeCardConfig} from "./config";
 const { Option } = Select
 let web3 = new Web3(window.ethereum);
 
+export const BRIDGE_TYPE_NORMAL = 1
+export const BRIDGE_TYPE_BURN = 2
 
-// 配置
-const bridgeCardConfig = (cId) => {
-    return {
-        [ChainId.HECO]: {
-            war_burn_address: WAR_ADDRESS(cId),
-            war_burn_abi: ChainSwapAbi,
-            abi: ChainSwapAbi,
-            address: CHAIN_SWAP_ADDRESS(cId),
-            sign_address: WAR_ADDRESS(cId),
-            switch_network_text_id: 'poolText24',
-            confirm_method: 'send',
-            cId: ChainId.HECO,
-            name: 'Heco'
-        },
-        [ChainId.BSC]: {
-            war_burn_address: WAR_ADDRESS(cId),
-            war_burn_abi: ChainSwapAbi,
-            abi: ChainSwapAbi,
-            address: CHAIN_SWAP_ADDRESS(cId),
-            sign_address: WAR_ADDRESS(cId),
-            switch_network_text_id: 'poolText26',
-            confirm_method: 'send',
-            cId: ChainId.BSC,
-            name: 'BSC'
-        },
-        [ChainId.MATIC]: {
-            war_burn_address: WAR_ADDRESS(cId),
-            war_burn_abi: ChainSwapAbi,
-            switch_network_text_id: 'poolText25',
-            abi: BurnSwapAbi,
-            address: BURN_SWAP_ADDRESS,
-            sign_address: BURN_SWAP_S_ADDRESS,
-            is_burn: true,
-            confirm_method: 'swapAndSend',
-            cId: ChainId.MATIC,
-            name: 'MATIC'
-        }
-    }[cId]
-}
 const fromChainSelectData = [
     {
         icon: HECO,
@@ -141,26 +101,27 @@ const BridgeCard = (props) => {
     const [getList, setGetList] = useState(0)
 
     const [fromChainId, setFromChainId] = useState(ChainId.HECO)
-    const [toChainId, setToChainId] = useState(ChainId.BSC)
+    const [toChainId, setToChainId] = useState(ChainId.MATIC)
 
     const [visibleSwitchWithdrawPopup, setVisibleSwitchWithdrawPopup] = useState(false)
-
 
     // 是否已经授权
     const BURNAllowance = useAllowance(WAR_ADDRESS(chainId), BURN_SWAP_ADDRESS, account)
 
     useEffect(() => {
-        if (chainId === ChainId.HECO || chainId === ChainId.BSC) {
+        if ((chainId === ChainId.HECO || chainId === ChainId.BSC) && !visibleSwitchWithdrawPopup) {
            setFromChainId(chainId)
         }
     }, [chainId])
 
     useEffect(() => {
-        if (toChainId === fromChainId || !toChainId) {
+        if ((toChainId === fromChainId || !toChainId) && !visibleSwitchWithdrawPopup) {
             const toChainItem = toChainSelectData.find(i=>i.chainId !== fromChainId)
             setToChainId(toChainItem.chainId)
         }
     }, [fromChainId])
+
+    const config = bridgeCardConfig(transferData.fromChainId, transferData.toChainId)
 
     // useEffect(()=>{
     //     debounceChangeNetwork(active, chainId)
@@ -169,7 +130,12 @@ const BridgeCard = (props) => {
     const onChange = (e) => {
         const value = e.target.value
         const maxAmount = formatAmount(balance)
-        setAmount(Number(value) > Number(maxAmount) ? maxAmount : value)
+        let resultAmount = Number(value) > Number(maxAmount) ? maxAmount : value
+        const point = resultAmount.toString().split(".")
+        if (point[1] && point[1].length > 6) {
+            resultAmount = Number(resultAmount).toFixed(6)
+        }
+        setAmount(resultAmount)
     }
 
     const onMax = () => {
@@ -199,7 +165,6 @@ const BridgeCard = (props) => {
             })
     }
 
-
     /**
      * config
      */
@@ -208,9 +173,9 @@ const BridgeCard = (props) => {
             return
         }
         setLoading(true)
-        let myContract = new web3.eth.Contract(toChainIdConfig.abi, toChainIdConfig.address);
-        const params = toChainIdConfig.is_burn ? [web3.utils.toWei(amount, 'ether'), toChainId, account] : [toChainId, account, web3.utils.toWei(amount, 'ether')]
-        myContract.methods[toChainIdConfig.confirm_method](...params).send({
+        let myContract = new web3.eth.Contract(config.stackContract.abi, config.stackContract.address);
+        const params = config.type === BRIDGE_TYPE_BURN ? [web3.utils.toWei(amount, 'ether'), toChainId, account] : [toChainId, account, web3.utils.toWei(amount, 'ether')]
+        myContract.methods[config.stackContract.method](...params).send({
             from: account,
             value: web3.utils.toWei('0.005', 'ether')
         }).then(() => {
@@ -236,14 +201,13 @@ const BridgeCard = (props) => {
      * 获取签名数据
      */
     const getSignData = (callback) => {
-        const fromConfig = bridgeCardConfig(transferData.fromChainId)
-        const toConfig = bridgeCardConfig(transferData.toChainId)
+        const config = bridgeCardConfig(transferData.fromChainId, transferData.toChainId)
         let signData = {
-            contractAddress: toConfig.sign_address,
-            toContract: toConfig.sign_address,
-            mainContract: toConfig.sign_address,
+            contractAddress: config.chainswapContract.address,
+            toContract: config.chainswapContract.address,
+            mainContract: config.chainswapContract.address,
             fromChainId: transferData.fromChainId,
-            fromContract: toConfig.sign_address,
+            fromContract: config.chainswapContract.address,
             to: transferData.account,
             toChainId: transferData.toChainId,
         }
@@ -253,9 +217,15 @@ const BridgeCard = (props) => {
             callback(signData)
             return
         }
-        let web3 = new Web3(window.ethereum);
-        let myContract = new web3.eth.Contract(toConfig.war_burn_abi, toConfig.war_burn_address);
-        myContract.methods.sentCount(transferData.toChainId, account).call().then(res =>{
+
+        let web3 = new Web3(new Web3.providers.HttpProvider(RPC_URLS(fromChainId)))
+        let myContract = new web3.eth.Contract(config.chainswapContract.abi, config.chainswapContract.address);
+        myContract.methods.sentCount(transferData.toChainId, account).call(
+            {
+                from: account
+            }
+        ).then(res =>{
+            console.log(res)
             signData.nonce = Math.max(0, res - 1)
             transferData.nonce = signData.nonce
             setTransferData(transferData)
@@ -298,9 +268,8 @@ const BridgeCard = (props) => {
      */
     const onExtract = (callback) => {
         let web3 = new Web3(window.ethereum);
-        const fromConfig = bridgeCardConfig(transferData.fromChainId)
-        const toConfig = bridgeCardConfig(transferData.toChainId)
-        let myContract = new web3.eth.Contract(toConfig.war_burn_abi, toConfig.war_burn_address);
+        const config = bridgeCardConfig(transferData.fromChainId, transferData.toChainId)
+        let myContract = new web3.eth.Contract(config.chainswapContract.abi, config.chainswapContract.address);
         getSignResultData((signResultData) => {
             console.log(signResultData)
             myContract.methods.receive(transferData.fromChainId, transferData.account, transferData.nonce, web3.utils.toWei(transferData.pledgeAmount, 'ether'), signResultData).send({
@@ -334,14 +303,11 @@ const BridgeCard = (props) => {
         setTransferData(item)
         setVisibleSwitchWithdrawPopup(true)
     }
-
-    const fromChainIdConfig = bridgeCardConfig(fromChainId)
-    const toChainIdConfig = bridgeCardConfig(toChainId)
     return (
       <React.Fragment>
         <div className='bridge_card'>
           <div className='bridge_card_title'>
-            <FormattedMessage id='bridge1' />
+            <FormattedMessage id='bridge1' />{config.name} {config.toFullName && `(${config.toFullName})`}
           </div>
           <div className='deposit__inputbox form-app__inputbox'>
             <div className='form-app__inputbox-control'>
@@ -353,7 +319,7 @@ const BridgeCard = (props) => {
                   onChange={onChange}
                   className='input'
                   placeholder={intl.formatMessage({
-                    id: 'money',
+                    id: 'amount',
                   })}
                 />
               </div>
@@ -435,9 +401,9 @@ const BridgeCard = (props) => {
                             changeNetwork(fromChainId).then()
                         }}
                     >
-                        <FormattedMessage id={fromChainIdConfig.switch_network_text_id} />
+                        <FormattedMessage id={`poolTextS${config.toChainId}`} />
                     </Button>
-                ) : toChainIdConfig.is_burn && BURNAllowance < Number(amount) ? (
+                ) : config.isNeedApprove && BURNAllowance < Number(amount) ? (
                     <Button
                         className={'btn'}
                         type='button'
@@ -459,20 +425,19 @@ const BridgeCard = (props) => {
             }
           <div className='lbp_tip'>
             <p>
-              <FormattedMessage id='bridge3' />
+                {config.type === BRIDGE_TYPE_BURN && <FormattedMessage id='bridge3' />}
             </p>
             <p>
               <FormattedMessage id='bridge4' />
             </p>
           </div>
         </div>
-        <BridgeList onExtractItem={onExtractItem} getList={getList} bridgeCardConfig={bridgeCardConfig}/>
+        <BridgeList onExtractItem={onExtractItem} getList={getList}/>
         <SwitchWithdrawPopup
           visible={visibleSwitchWithdrawPopup}
           onClose={() => setVisibleSwitchWithdrawPopup(false)}
           onExtract={onExtract}
           transferData={transferData}
-          bridgeCardConfig={bridgeCardConfig}
         />
       </React.Fragment>
     )

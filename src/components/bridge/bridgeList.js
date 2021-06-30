@@ -4,9 +4,6 @@ import { useActiveWeb3React } from '../../web3'
 import { FormattedMessage, injectIntl } from 'react-intl'
 import BigNumber from 'bignumber.js'
 import { Button, Skeleton } from 'antd'
-import {
-  HANDLE_WALLET_MODAL
-} from '../../const'
 import { mainContext } from '../../reducer'
 // 处理格式 千位符
 import { formatNumber } from 'accounting'
@@ -14,14 +11,13 @@ import { formatAmount, formatAddress } from '../../utils/format'
 import Right from '../../assets/icon/right@2x.png'
 import Web3 from "web3";
 import {BURN_SWAP_ADDRESS, BURN_SWAP_S_ADDRESS, ChainId, RPC_URLS} from "../../web3/address";
-import ChainSwapAbi from "../../web3/abi/ChainSwap.json";
-import {changeNetwork} from "../../connectors";
 import { getOnlyMultiCallProvider, processResult } from '../../utils/multicall'
 import {Contract} from "ethers-multicall-x";
 import WAR from '../../assets/icon/WAR@2x.png'
 import BSC from '../../assets/icon/BSC@2x.png'
 import HECO from '../../assets/icon/HECO@2x.png'
 import MATIC from '../../assets/icon/MATIC@2x.png'
+import {bridgeCardConfig} from "./config";
 
 const CurrencyIcon = {
     [ChainId.HECO]: {
@@ -52,7 +48,7 @@ var web3BSC = new Web3(new Web3.providers.HttpProvider(RPC_URLS(ChainId.BSC)))
   }
 ]*/
 
-const BridgeList = ({onExtractItem, getList, bridgeCardConfig}) => {
+const BridgeList = ({onExtractItem, getList}) => {
   const { account, active, library, chainId } = useActiveWeb3React()
   const { dispatch, state } = useContext(mainContext)
   const [historyData, setHistoryData] = useState([])
@@ -66,15 +62,8 @@ const BridgeList = ({onExtractItem, getList, bridgeCardConfig}) => {
     //   toChainId: 56
     // }
   const createContract = (fromChainId, toChainId) => {
-    const fromConfig = bridgeCardConfig(fromChainId)
-    const toConfig = bridgeCardConfig(toChainId)
-    const fromPledgeAmountConcat = new Contract(fromConfig.war_burn_address, fromConfig.war_burn_abi)
-    const toPledgeAmountConcat = new Contract(toConfig.war_burn_address, toConfig.war_burn_abi)
-    // 燃烧的话，from与to都应是燃烧的配置
-    return {
-      fromPledgeAmountConcat: toConfig.is_burn ? toPledgeAmountConcat : fromPledgeAmountConcat,
-      toPledgeAmountConcat
-    }
+    const config = bridgeCardConfig(fromChainId, toChainId)
+    return new Contract(config.chainswapContract.address, config.chainswapContract.abi)
   }
   /**
    * 获取跨链数据
@@ -85,12 +74,12 @@ const BridgeList = ({onExtractItem, getList, bridgeCardConfig}) => {
     const getPledgeData = (fromChainId, toChainId, maxNonce) => {
       const fromMulticallProvider = getOnlyMultiCallProvider(fromChainId)
       const toMulticallProvider = getOnlyMultiCallProvider(toChainId)
-      const {fromPledgeAmountConcat, toPledgeAmountConcat} = createContract(fromChainId, toChainId)
+      const pledgeAmountConcat = createContract(fromChainId, toChainId)
       const extractAmountAll = []
       let pledgeAmountAll = []
       for (let nonce = 0; nonce < maxNonce; nonce++) {
-        pledgeAmountAll.push(toPledgeAmountConcat.sent(toChainId, account, nonce))
-        extractAmountAll.push(toPledgeAmountConcat.received(fromChainId, account, nonce))
+        pledgeAmountAll.push(pledgeAmountConcat.sent(toChainId, account, nonce))
+        extractAmountAll.push(pledgeAmountConcat.received(fromChainId, account, nonce))
       }
       return Promise.all([fromMulticallProvider.all(pledgeAmountAll),toMulticallProvider.all(extractAmountAll)]).then(res => {
         let pledgeAmountData = processResult(res[0])
@@ -128,9 +117,9 @@ const BridgeList = ({onExtractItem, getList, bridgeCardConfig}) => {
     //   }]
     // 获取maxNonce
     const sentCountArr = directions.reduce((l, i)=>{
-      const tConfig = bridgeCardConfig(i.to)
+      const config = bridgeCardConfig(i.from, i.to)
       const web3_ = new Web3(new Web3.providers.HttpProvider(RPC_URLS(i.from)))
-      let tContract  = new web3_.eth.Contract(tConfig.war_burn_abi,tConfig.war_burn_address);
+      let tContract  = new web3_.eth.Contract(config.chainswapContract.abi,config.chainswapContract.address);
       l.push(tContract.methods.sentCount(i.to, account).call())
       return l
     }, [])

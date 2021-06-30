@@ -196,6 +196,13 @@
       tbody td {
         color: #22292F;
       }
+      .to_address{
+        display: inline-block;
+        padding-bottom: 2px;
+        transform: translateY(2px);
+        border-bottom:1px dashed #5CB6FF;
+        text-decoration:none;
+      }
       .tbody_title {
         font-family: HelveticaNeue-Medium, HelveticaNeue;
         font-weight: 500;
@@ -226,6 +233,7 @@
           background: #D4E9E2;
           border-radius: 5px;
           cursor: pointer;
+          text-align: center;
         }
       }
     }
@@ -516,6 +524,7 @@
           background: #D4E9E2;
           border-radius: 5px;
           cursor: pointer;
+          text-align: center;
         }
       }
     }

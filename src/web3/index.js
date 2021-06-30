@@ -1,6 +1,7 @@
 import { useWeb3React as useWeb3ReactCore } from '@web3-react/core'
 import Web3 from 'web3'
 import ethAbi from 'web3-eth-abi'
+import {message} from "antd";
 
 export function getWeb3(library) {
   return new Web3(library.provider)
@@ -50,4 +51,26 @@ export const useActiveWeb3React = () => {
   const context = useWeb3ReactCore()
   const contextNetwork = useWeb3ReactCore()
   return context.active ? context : contextNetwork
+}
+
+export const addToken = async (address, symbol) =>{
+  try {
+    let addTokenClick = await window.ethereum.request({
+      method: 'wallet_watchAsset',
+      params: {
+        type: 'ERC20',
+        options: {
+          address,
+          symbol,
+          decimals: 18,
+          image: '',
+        },
+      },
+    })
+    if (addTokenClick) {
+      message.success('add success')
+    }
+  } catch (err) {
+    console.log(err, 'addToken')
+  }
 }

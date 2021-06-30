@@ -2,7 +2,7 @@ import React, {useContext, useEffect, useState} from 'react'
 import {injectIntl} from 'react-intl'
 import {FormattedMessage} from 'react-intl'
 import {mainContext} from '../../reducer'
-import {getContract, useActiveWeb3React} from '../../web3'
+import {addToken, getContract, useActiveWeb3React} from '../../web3'
 import {ChainId, WAR_ADDRESS} from '../../web3/address'
 import {Button, message, Modal} from 'antd'
 import {formatAmount} from '../../utils/format'
@@ -12,8 +12,9 @@ import {
 } from '../../const'
 import cs from 'classnames'
 import {changeNetwork} from "../../connectors";
+import {bridgeCardConfig} from "./config";
 
-const SwitchWithdrawPopup = ({visible, onClose, onExtract, transferData, bridgeCardConfig}) => {
+const SwitchWithdrawPopup = ({visible, onClose, onExtract, transferData}) => {
     const {account, active, library, chainId} = useActiveWeb3React()
     const {dispatch, state} = useContext(mainContext)
     const [loading, setLoading] = useState(false)
@@ -21,26 +22,10 @@ const SwitchWithdrawPopup = ({visible, onClose, onExtract, transferData, bridgeC
     const WarTokenAddress =
         WAR_ADDRESS[chainId] || '0x910651F81a605a6Ef35d05527d24A72fecef8bF0'
 
-    const addToken = async () => {
-        try {
-            let addTokenClick = await window.ethereum.request({
-                method: 'wallet_watchAsset',
-                params: {
-                    type: 'ERC20',
-                    options: {
-                        address: WarTokenAddress,
-                        symbol: 'WAR',
-                        decimals: 18,
-                        image: '',
-                    },
-                },
-            })
-            if (addTokenClick) {
-                message.success('add success')
-            }
-        } catch (err) {
-            console.log(err, 'addToken')
-        }
+
+    const config = bridgeCardConfig(transferData.fromChainId, transferData.toChainId)
+    const onAddToken = async () => {
+        await addToken(config.chainswapContract.address, config.addAsset.name)
     }
 
     const onConfirm = () => {
@@ -53,7 +38,6 @@ const SwitchWithdrawPopup = ({visible, onClose, onExtract, transferData, bridgeC
             setLoading(false)
         })
     }
-
     return (
         <Modal
             centered
@@ -70,7 +54,9 @@ const SwitchWithdrawPopup = ({visible, onClose, onExtract, transferData, bridgeC
                         <form className='form-app farm_popup' action='/'>
                             <div className='form-app__inner deposit'>
                                 <a className='farm_popup_close_btn withdraw_close' onClick={onClose}></a>
-                                <p className='withdraw_title'>This process may take some time</p>
+                                <p className='withdraw_title'>
+                                    <FormattedMessage id='waitingText1'/>
+                                </p>
                                 <div className='form-app__submit form-app__submit--row'>
                                     <Button
                                         type='button'
@@ -78,11 +64,17 @@ const SwitchWithdrawPopup = ({visible, onClose, onExtract, transferData, bridgeC
                                         onClick={onConfirm}
                                         loading={loading}
                                     >
-                                        {!pledgeStatus ? 'Switch to '+ bridgeCardConfig(transferData.toChainId).name : loading ? 'This process may take some time ...' : 'Withdraw'}
+                                        {!pledgeStatus ? (
+                                            <>
+                                                <FormattedMessage id={'poolTextS' + transferData.toChainId} />
+                                                &nbsp;&&nbsp;
+                                                <FormattedMessage id='bridge10' />
+                                            </>
+                                        ) : loading ? <FormattedMessage id='waitingText1'/> : <FormattedMessage id='withdraw'/>}
                                     </Button>
                                 </div>
-                                <a className='add_address_metaMask' onClick={addToken}>
-                                    Add WAR to MetaMask<span className='metaMask_logo'></span>
+                                <a className='add_address_metaMask' onClick={onAddToken}>
+                                    <FormattedMessage id='add' /> {config.addAsset.assetsText} <FormattedMessage id='to' /> MetaMask<span className='metaMask_logo'></span>
                                 </a>
                                 <div className='withdraw_tip'>
                                     Powered by BlackHole & ChainSwap

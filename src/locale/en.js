@@ -214,9 +214,9 @@ const en_US = {
   poolText21: 'Approve',
   poolText22: 'Confirm',
   poolText23: 'Max quota:',
-  poolText24: 'Switch to HECO',
-  poolText25: 'Switch to Matic',
-  poolText26: 'Switch to BSC',
+  poolTextS128: 'Switch to HECO',
+  poolTextS137: 'Switch to Matic',
+  poolTextS56: 'Switch to BSC',
   poolText27: 'Switch success',
   workShopText1: 'Time in',
   workShopText2: 'Status',
@@ -346,9 +346,9 @@ const en_US = {
   netWork1: 'Choose Network',
   netWork2: 'Choose Wallet',
   netWork3: 'Change Network',
-  bridge1: 'Migrate to BSC(Binance Smart Chain)',
+  bridge1: 'Migrate to ',
   bridge2: 'Destination',
-  bridge3: '注意：该过程是不可逆过程，Heco 资产将会彻底转化成 BSC 资产',
+  bridge3: 'Notice: Irreversible migration, WAR(Heco) will be transferred to RAW(Matic) forever.',
   bridge4: 'Powered by BlackHole & ChainSwap',
   bridge5: 'History',
   bridge6: 'Assets',
@@ -356,6 +356,12 @@ const en_US = {
   bridge8: 'To',
   bridge9: 'Amounts',
   bridge10: 'withdraw',
-  waitingText: 'This process may take some time ... '
+  waitingText: 'This process may take some time ... ',
+  waitingText1: 'This process may take some time',
+  amount: 'amount',
+  switchTo: 'Switch to',
+  withdraw: 'Withdraw',
+  add: 'add',
+  to: 'to'
 }
 export default en_US
