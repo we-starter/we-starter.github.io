@@ -50,7 +50,9 @@ const bridgeCardConfig = (cId) => {
             address: CHAIN_SWAP_ADDRESS(cId),
             sign_address: WAR_ADDRESS(cId),
             switch_network_text_id: 'poolText24',
-            confirm_method: 'send'
+            confirm_method: 'send',
+            cId: ChainId.HECO,
+            name: 'Heco'
         },
         [ChainId.BSC]: {
             war_burn_address: WAR_ADDRESS(cId),
@@ -59,8 +61,9 @@ const bridgeCardConfig = (cId) => {
             address: CHAIN_SWAP_ADDRESS(cId),
             sign_address: WAR_ADDRESS(cId),
             switch_network_text_id: 'poolText26',
-            confirm_method: 'send'
-
+            confirm_method: 'send',
+            cId: ChainId.BSC,
+            name: 'BSC'
         },
         [ChainId.MATIC]: {
             war_burn_address: WAR_ADDRESS(cId),
@@ -70,7 +73,9 @@ const bridgeCardConfig = (cId) => {
             address: BURN_SWAP_ADDRESS,
             sign_address: BURN_SWAP_S_ADDRESS,
             is_burn: true,
-            confirm_method: 'swapAndSend'
+            confirm_method: 'swapAndSend',
+            cId: ChainId.MATIC,
+            name: 'MATIC'
         }
     }[cId]
 }
@@ -209,7 +214,6 @@ const BridgeCard = (props) => {
             from: account,
             value: web3.utils.toWei('0.005', 'ether')
         }).then(() => {
-
             // save transfer data
             setTransferData({
                 fromChainId: chainId,
@@ -270,6 +274,7 @@ const BridgeCard = (props) => {
         setLoading(true)
         let t = true
         getSignData((signData) => {
+            console.log(signData)
             let params = qs.stringify(signData, { encodeValuesOnly: true })
             let signResultData = []
             CHAIN_SWAP_NODE_REQ_URL.map(item => {
@@ -297,7 +302,8 @@ const BridgeCard = (props) => {
         const toConfig = bridgeCardConfig(transferData.toChainId)
         let myContract = new web3.eth.Contract(toConfig.war_burn_abi, toConfig.war_burn_address);
         getSignResultData((signResultData) => {
-            myContract.methods.receive(transferData.toChainId, transferData.account, transferData.nonce, web3.utils.toWei(transferData.pledgeAmount, 'ether'), signResultData).send({
+            console.log(signResultData)
+            myContract.methods.receive(transferData.fromChainId, transferData.account, transferData.nonce, web3.utils.toWei(transferData.pledgeAmount, 'ether'), signResultData).send({
                 from: account,
                 value: web3.utils.toWei('0.005', 'ether')
             }).then(() => {
@@ -447,7 +453,7 @@ const BridgeCard = (props) => {
                         onClick={onConfig}
                         loading={loading}
                     >
-                        <FormattedMessage id='modalsText15' />
+                        <FormattedMessage id={loading ? 'waitingText' : 'modalsText15'} />
                     </Button>
                 )
             }
@@ -466,6 +472,7 @@ const BridgeCard = (props) => {
           onClose={() => setVisibleSwitchWithdrawPopup(false)}
           onExtract={onExtract}
           transferData={transferData}
+          bridgeCardConfig={bridgeCardConfig}
         />
       </React.Fragment>
     )
@@ -473,11 +480,7 @@ const BridgeCard = (props) => {
 
 const ChainSelect = ({ chainSelectData, chainId, hiddenId, setChainId }) => {
   return (
-        <Select value={chainId} onChange={(cId)=>{
-        console.log(cId)
-            setChainId(cId)
-        }
-        }>
+        <Select value={chainId} onChange={setChainId}>
             {
                 chainSelectData.map((item) => (
                     hiddenId !== item.chainId &&

@@ -13,7 +13,7 @@ import {
 import cs from 'classnames'
 import {changeNetwork} from "../../connectors";
 
-const SwitchWithdrawPopup = ({visible, onClose, onExtract, transferData}) => {
+const SwitchWithdrawPopup = ({visible, onClose, onExtract, transferData, bridgeCardConfig}) => {
     const {account, active, library, chainId} = useActiveWeb3React()
     const {dispatch, state} = useContext(mainContext)
     const [loading, setLoading] = useState(false)
@@ -74,11 +74,11 @@ const SwitchWithdrawPopup = ({visible, onClose, onExtract, transferData}) => {
                                 <div className='form-app__submit form-app__submit--row'>
                                     <Button
                                         type='button'
-                                        className={cs('btn btn--medium', pledgeStatus && 'compound_claim', !pledgeStatus && 'btn_disable')}
+                                        className={cs('btn btn--medium', pledgeStatus && 'compound_claim')}
                                         onClick={onConfirm}
                                         loading={loading}
                                     >
-                                        Switch to Matic & Withdraw
+                                        {!pledgeStatus ? 'Switch to '+ bridgeCardConfig(transferData.toChainId).name : loading ? 'This process may take some time ...' : 'Withdraw'}
                                     </Button>
                                 </div>
                                 <a className='add_address_metaMask' onClick={addToken}>

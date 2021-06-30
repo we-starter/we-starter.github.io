@@ -30,7 +30,7 @@ const CurrencyIcon = {
     },
     [ChainId.BSC]: {
       icon: BSC,
-      title: 'Binance Smart Chain'
+      title: 'BSC'
     },
   [ChainId.MATIC]: {
     icon: MATIC,
@@ -83,17 +83,17 @@ const BridgeList = ({onExtractItem, getList, bridgeCardConfig}) => {
     // 查询 源链 ChainSwap合约中 sentCount(toChainId, to) ，得到 maxNonce
     // 查询所有质押的数据，遍历 源链
     const getPledgeData = (fromChainId, toChainId, maxNonce) => {
-      const multicallProvider = getOnlyMultiCallProvider(fromChainId)
+      const fromMulticallProvider = getOnlyMultiCallProvider(fromChainId)
+      const toMulticallProvider = getOnlyMultiCallProvider(toChainId)
       const {fromPledgeAmountConcat, toPledgeAmountConcat} = createContract(fromChainId, toChainId)
       const extractAmountAll = []
       let pledgeAmountAll = []
       for (let nonce = 0; nonce < maxNonce; nonce++) {
         pledgeAmountAll.push(toPledgeAmountConcat.sent(toChainId, account, nonce))
-        extractAmountAll.push(fromPledgeAmountConcat.received(fromChainId, account, nonce))
+        extractAmountAll.push(toPledgeAmountConcat.received(fromChainId, account, nonce))
       }
-      return Promise.all([multicallProvider.all(pledgeAmountAll),multicallProvider.all(extractAmountAll)]).then(res => {
+      return Promise.all([fromMulticallProvider.all(pledgeAmountAll),toMulticallProvider.all(extractAmountAll)]).then(res => {
         let pledgeAmountData = processResult(res[0])
-        console.log(pledgeAmountData)
         let extractAmountData = processResult(res[1])
         return pledgeAmountData.reduce((l, item, index)=>{
           l.push({
@@ -123,8 +123,8 @@ const BridgeList = ({onExtractItem, getList, bridgeCardConfig}) => {
     }]
     // const directions = [
     //     {
-    //     from: ChainId.BSC,
-    //     to: ChainId.HECO
+    //     from: ChainId.HECO,
+    //     to: ChainId.BSC
     //   }]
     // 获取maxNonce
     const sentCountArr = directions.reduce((l, i)=>{
@@ -143,8 +143,9 @@ const BridgeList = ({onExtractItem, getList, bridgeCardConfig}) => {
         return l
       }, [])
       Promise.all(getPledgeDataArr).then(result => {
-        console.log(result.flat(1))
-        setHistoryData(result.flat(1))
+        const arr = result.flat(1).sort(i=>i.extractAmount - i.pledgeAmount)
+        console.log(arr)
+        setHistoryData(arr)
         setLoading(false)
       })
     })

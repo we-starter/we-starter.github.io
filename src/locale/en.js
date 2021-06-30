@@ -356,5 +356,6 @@ const en_US = {
   bridge8: 'To',
   bridge9: 'Amounts',
   bridge10: 'withdraw',
+  waitingText: 'This process may take some time ... '
 }
 export default en_US

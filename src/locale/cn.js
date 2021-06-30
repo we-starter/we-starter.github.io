@@ -1,7 +1,7 @@
 const zh_CN = {
   fundraisingPool: '兑换池',
   farm: '农场',
-  bridge: 'Migrate',
+  bridge: '迁移',
   mortgage: '抵押挖矿',
   liquidityPool: '流动性挖矿',
   crowdfund: '众筹池',
@@ -355,5 +355,6 @@ const zh_CN = {
   bridge8: 'To',
   bridge9: 'Amounts',
   bridge10: 'withdraw',
+  waitingText: '这个过程可能需要一些时间 ... '
 }
 export default zh_CN
