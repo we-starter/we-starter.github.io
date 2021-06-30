@@ -121,10 +121,16 @@ const BridgeList = ({onExtractItem, getList, bridgeCardConfig}) => {
       from: ChainId.HECO,
       to: ChainId.MATIC
     }]
+    // const directions = [
+    //     {
+    //     from: ChainId.BSC,
+    //     to: ChainId.HECO
+    //   }]
     // 获取maxNonce
     const sentCountArr = directions.reduce((l, i)=>{
       const tConfig = bridgeCardConfig(i.to)
-      let tContract  = new web3HECO.eth.Contract(tConfig.war_burn_abi,tConfig.war_burn_address);
+      const web3_ = new Web3(new Web3.providers.HttpProvider(RPC_URLS(i.from)))
+      let tContract  = new web3_.eth.Contract(tConfig.war_burn_abi,tConfig.war_burn_address);
       l.push(tContract.methods.sentCount(i.to, account).call())
       return l
     }, [])
