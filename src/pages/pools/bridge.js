@@ -10,10 +10,12 @@ const Bridge = (props) => {
     const bridgeCardRef = useRef()
     const { chainId } = useActiveWeb3React()
     return (
-        <div className='bridge_box' style={{ minHeight: '100%', background: '#fff' }}>
-            <PoolsBanner LBPFlag='LBP' />
-            <div className='bridge_index'>
-                <BridgeCard ref={bridgeCardRef}/>
+        <div className='bridge_box'>
+            <div className='bridge_box_main'>
+                <PoolsBanner LBPFlag='LBP' />
+                <div className='bridge_index'>
+                    <BridgeCard ref={bridgeCardRef}/>
+                </div>
             </div>
             <Footer/>
         </div>

@@ -16,8 +16,14 @@
 }
 @media #{$desktop} {
   .bridge_box{
+    background: #ffffff;
+    height: 100%;
+    .bridge_box_main{
+      position: relative;
+      min-height: calc(100% - 80px);
+    }
     .footer{
-      position: fixed;
+      position: relative;
     }
   }
   .bridge_index {

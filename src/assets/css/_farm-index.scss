@@ -1,12 +1,15 @@
-.farm_box{
-  .footer{
-    position: fixed;
-  }
-}
+
 @media #{$desktop} {
   .farm_box {
     min-width: 1080px;
     background: #fff;
+    height: 100%;
+    .farm_box_main{
+      min-height: calc(100% - 80px);
+    }
+    .footer{
+      position: relative;
+    }
   }
   .farm_index {
     position: relative;
