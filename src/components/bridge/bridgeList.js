@@ -3,7 +3,7 @@ import cs from 'classnames'
 import { useActiveWeb3React } from '../../web3'
 import { FormattedMessage, injectIntl } from 'react-intl'
 import BigNumber from 'bignumber.js'
-import { Button } from 'antd'
+import { Button, Skeleton } from 'antd'
 import {
   HANDLE_WALLET_MODAL
 } from '../../const'
@@ -56,6 +56,7 @@ const BridgeList = ({onExtractItem, getList, bridgeCardConfig}) => {
   const { account, active, library, chainId } = useActiveWeb3React()
   const { dispatch, state } = useContext(mainContext)
   const [historyData, setHistoryData] = useState([])
+  const [loading, setLoading] = useState(false)
     // {
     //   account: '0x12xxx',
     //   extractAmount: "0",
@@ -108,6 +109,7 @@ const BridgeList = ({onExtractItem, getList, bridgeCardConfig}) => {
       })
     }
     setHistoryData([])
+    setLoading(true)
     // 每一个跨链方向[to, from]
     const directions = [{
       from: ChainId.HECO,
@@ -137,6 +139,7 @@ const BridgeList = ({onExtractItem, getList, bridgeCardConfig}) => {
       Promise.all(getPledgeDataArr).then(result => {
         console.log(result.flat(1))
         setHistoryData(result.flat(1))
+        setLoading(false)
       })
     })
   }
@@ -247,6 +250,9 @@ const BridgeList = ({onExtractItem, getList, bridgeCardConfig}) => {
          })
        }
       </div>
+      {
+        historyData.length === 0 && loading && <Skeleton active />
+      }
     </div>
   )
 }
