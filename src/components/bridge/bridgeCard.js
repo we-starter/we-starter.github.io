@@ -136,7 +136,7 @@ const BridgeCard = (props) => {
     const [getList, setGetList] = useState(0)
 
     const [fromChainId, setFromChainId] = useState(ChainId.HECO)
-    const [toChainId, setToChainId] = useState(null)
+    const [toChainId, setToChainId] = useState(ChainId.BSC)
 
     const [visibleSwitchWithdrawPopup, setVisibleSwitchWithdrawPopup] = useState(false)
 
