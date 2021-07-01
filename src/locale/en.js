@@ -335,8 +335,8 @@ const en_US = {
   farm21: 'Compound',
   farm22: 'Compound {icon} Earned',
   farm23: 'Compound daily',
-  buyPopup1: '滑点',
-  buyPopup2: '价格影响',
+  buyPopup1: 'Slippage Tolerance',
+  buyPopup2: 'Price Impact',
   buyPopup3: 'Minimum received',
   buyPopup4: 'Trade Fee',
   buyPopup5: 'Powered by MDEX',
@@ -363,6 +363,6 @@ const en_US = {
   switchTo: 'Switch to',
   withdraw: 'Withdraw',
   add: 'add',
-  to: 'to'
+  to: 'to',
 }
 export default en_US
