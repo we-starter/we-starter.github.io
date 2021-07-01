@@ -150,7 +150,7 @@ export const MenuMask = () => {
             {active && (
               <li className='menumask_item'>
                 <NavLink
-                  to='/bridge'
+                  to='/migrate'
                   className='menumask_link'
                   onClick={() =>
                     dispatch({
@@ -250,7 +250,7 @@ export const MenuMask = () => {
               </div> */}
             </div>
             <ul className='footer__links'>
-              
+
               <li>
                 <a
                   title='title'

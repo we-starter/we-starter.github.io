@@ -48,7 +48,7 @@ var web3BSC = new Web3(new Web3.providers.HttpProvider(RPC_URLS(ChainId.BSC)))
   }
 ]*/
 
-const BridgeList = ({onExtractItem, getList}) => {
+const MigrateList = ({onExtractItem, getList}) => {
   const { account, active, library, chainId } = useActiveWeb3React()
   const { dispatch, state } = useContext(mainContext)
   const [historyData, setHistoryData] = useState([])
@@ -256,4 +256,4 @@ const BridgeList = ({onExtractItem, getList}) => {
   )
 }
 
-export default injectIntl(BridgeList)
+export default injectIntl(MigrateList)

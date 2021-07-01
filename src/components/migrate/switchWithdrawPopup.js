@@ -73,9 +73,11 @@ const SwitchWithdrawPopup = ({visible, onClose, onExtract, transferData}) => {
                                         ) : loading ? <FormattedMessage id='waitingText'/> : <FormattedMessage id='withdraw'/>}
                                     </Button>
                                 </div>
-                                <a className='add_address_metaMask' onClick={onAddToken}>
-                                    <FormattedMessage id='add' /> {config.addAsset.assetsText} <FormattedMessage id='to' /> MetaMask<span className='metaMask_logo'></span>
-                                </a>
+                                {
+                                    pledgeStatus && <a className='add_address_metaMask' onClick={onAddToken}>
+                                        <FormattedMessage id='add' /> {config.addAsset.assetsText} <FormattedMessage id='to' /> MetaMask<span className='metaMask_logo'></span>
+                                    </a>
+                                }
                                 <div className='withdraw_tip'>
                                     Powered by BlackHole & ChainSwap
                                 </div>

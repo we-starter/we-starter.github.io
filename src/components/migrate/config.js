@@ -1,7 +1,7 @@
 import {ChainId, WAR_ADDRESS} from "../../web3/address";
 import ChainSwapAbi from "../../web3/abi/ChainSwap.json";
 import BurnSwapAbi from "../../web3/abi/BurnSwap.json";
-import {BRIDGE_TYPE_BURN, BRIDGE_TYPE_NORMAL} from "./bridgeCard";
+import {BRIDGE_TYPE_BURN, BRIDGE_TYPE_NORMAL} from "./migrateCard";
 
 export const bridgeCardConfig = (fromChainId, toChainId, from_asset_address) => {
     const config = [

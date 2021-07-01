@@ -93,7 +93,7 @@ export const Header = () => {
                 {active && (
                   <li className='menu__item'>
                     <NavLink
-                      to='/bridge'
+                      to='/migrate'
                       className='menu__link'
                       onClick={handleMenuItemClick}
                     >

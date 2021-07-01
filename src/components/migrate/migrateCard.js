@@ -28,8 +28,8 @@ import ERC20 from '../../web3/abi/ERC20.json'
 import {changeNetwork} from "../../connectors"
 import qs from 'qs'
 import axios from "axios"
-import SwitchWithdrawPopup from '../../components/bridge/switchWithdrawPopup'
-import BridgeList from "./bridgeList";
+import SwitchWithdrawPopup from '../../components/migrate/switchWithdrawPopup'
+import MigrateList from "./migrateList";
 import { useAllowance } from '../../pages/Hooks'
 
 import {bridgeCardConfig} from "./config";
@@ -441,7 +441,7 @@ const BridgeCard = (props) => {
             </p>
           </div>
         </div>
-        <BridgeList onExtractItem={onExtractItem} getList={getList}/>
+        <MigrateList onExtractItem={onExtractItem} getList={getList}/>
         <SwitchWithdrawPopup
           visible={visibleSwitchWithdrawPopup}
           onClose={() => setVisibleSwitchWithdrawPopup(false)}

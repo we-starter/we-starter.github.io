@@ -36,8 +36,8 @@ import PoolsSuccess from '../components/staterPools/poolsSuccess'
 import { LoginModal } from '../components/Modals/LoginModl'
 import { ChangeNetworks } from '../components/Modals/ChangeNetworks'
 import { TXStatusModal } from '../components/Modals/TXStatusModal'
-import SwitchWithdrawPopup from '../components/bridge/switchWithdrawPopup'
-import WithdrawSuccessPopup from '../components/bridge/withdrawSuccessPopup'
+import SwitchWithdrawPopup from '../components/migrate/switchWithdrawPopup'
+import WithdrawSuccessPopup from '../components/migrate/withdrawSuccessPopup'
 import toolApi from '../apis/toolApi'
 import {useConnectWallet} from "../connectors";
 

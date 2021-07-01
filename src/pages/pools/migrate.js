@@ -3,10 +3,9 @@ import cs from 'classnames'
 import { useActiveWeb3React } from '../../web3'
 import { FormattedMessage, injectIntl } from 'react-intl'
 import PoolsBanner from '../../components/banner/PoolsBanner'
-import BridgeCard from '../../components/bridge/bridgeCard'
-import BridgeList from '../../components/bridge/bridgeList'
+import BridgeCard from '../../components/migrate/migrateCard'
 import Footer from '../../components/Footer'
-const Bridge = (props) => {
+const Migrate = (props) => {
     const bridgeCardRef = useRef()
     const { chainId } = useActiveWeb3React()
     return (
@@ -22,4 +21,4 @@ const Bridge = (props) => {
     )
 }
 
-export default injectIntl(Bridge)
+export default injectIntl(Migrate)
