@@ -321,10 +321,12 @@
     }
     .deposit_btn,
     .claim_btn {
-      display: inline-block;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       width: 130px;
       height: 40px;
-      line-height: 40px;
+      // line-height: 40px;
       font-size: 14px;
       font-family: HelveticaNeue-Medium, HelveticaNeue;
       font-weight: 500;
@@ -701,10 +703,12 @@
     }
     .deposit_btn,
     .claim_btn {
-      display: inline-block;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       width: 130px;
       height: 40px;
-      line-height: 40px;
+      // line-height: 40px;
       font-size: 14px;
       font-family: HelveticaNeue-Medium, HelveticaNeue;
       font-weight: 500;
@@ -1075,10 +1079,12 @@
     }
     .deposit_btn,
     .claim_btn {
-      display: inline-block;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       width: 130px;
       height: 40px;
-      line-height: 40px;
+      // line-height: 40px;
       font-size: 14px;
       font-family: HelveticaNeue-Medium, HelveticaNeue;
       font-weight: 500;
@@ -1449,10 +1455,12 @@
     }
     .deposit_btn,
     .claim_btn {
-      display: inline-block;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       width: 130px;
       height: 40px;
-      line-height: 40px;
+      // line-height: 40px;
       font-size: 14px;
       font-family: HelveticaNeue-Medium, HelveticaNeue;
       font-weight: 500;

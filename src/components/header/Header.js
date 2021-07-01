@@ -24,15 +24,17 @@ export const Header = () => {
   const { dispatch, state } = useContext(mainContext)
   const { balance } = useBalance(WAR_ADDRESS(chainId))
   const [language, setLanguage] = useState(
-    (state.locale === 'en' && '中文简体') ||
-      (state.locale === 'zh' && 'English')
+    (state.locale === 'en' && 'English') ||
+      (state.locale === 'zh' && '中文简体') ||
+      (state.locale === 'ru' && 'Русский язык')
   )
 
   const [showMenu, setShowMenu] = useState(false)
 
   useEffect(() => {
-    if (state.locale === 'en') setLanguage('中文简体')
-    if (state.locale === 'zh') setLanguage('English')
+    if (state.locale === 'en') setLanguage('English')
+    if (state.locale === 'zh') setLanguage('中文简体')
+    if (state.locale === 'ru') setLanguage('Русский язык')
   }, [state.locale])
 
   const handleMenuItemClick = () => {
@@ -40,9 +42,10 @@ export const Header = () => {
   }
 
   const tabLanguage = (val) => {
-    val = val === 'English' ? 'en' : 'zh'
+    // val = val === 'English' ? 'en' : val === 'ru' ? 'Русский язык' : 'zh'
     if (val === 'en') setLanguage('English')
     if (val === 'zh') setLanguage('中文简体')
+    if (val === 'ru') setLanguage('Русский язык')
     dispatch({
       type: CHANGE_LOCALE,
       locale: val,
@@ -147,31 +150,34 @@ export const Header = () => {
             <div
               className='language'
               style={{ marginRight: '16px' }}
-              onClick={() => tabLanguage(language)}
+              // onClick={() => tabLanguage(language)}
             >
               <img src={globe} alt='' />
-              {language === '中文简体' ? '中文简体' : 'English'}
-              {/* <div
+              {language}
+              {/* {language === '中文简体' ? '中文简体' : 'English'} */}
+              <div
                 className='language-items'
-                style={{ top: '80%', bottom: 'auto' }}
+                style={{ top: '40px', bottom: 'auto' }}
               >
-                {language === 'ZH-CH' && (
-                  <p
-                    style={{ padding: '0', marginBottom: '0' }}
-                    onClick={() => tabLanguage('en')}
-                  >
-                    English
-                  </p>
-                )}
-                {language === 'English' && (
-                  <p
-                    style={{ padding: '0', marginBottom: '0' }}
-                    onClick={() => tabLanguage('zh')}
-                  >
-                    中文简体
-                  </p>
-                )}
-              </div> */}
+                <p
+                  style={{ padding: '0', marginBottom: '0' }}
+                  onClick={() => tabLanguage('zh')}
+                >
+                  中文简体
+                </p>
+                <p
+                  style={{ padding: '0', marginBottom: '0' }}
+                  onClick={() => tabLanguage('en')}
+                >
+                  English
+                </p>
+                <p
+                  style={{ padding: '0', marginBottom: '0' }}
+                  onClick={() => tabLanguage('ru')}
+                >
+                  Русский язык
+                </p>
+              </div>
             </div>
             {/* {active && <img className='exchange' src={Exchange} />} */}
 

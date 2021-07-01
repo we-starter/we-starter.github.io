@@ -249,6 +249,7 @@ a[href^='tel'],
     margin-right: 8px;
   }
 
+@media #{$desktop} {
   .language-items {
     display: none;
     flex-direction: column;
@@ -256,13 +257,32 @@ a[href^='tel'],
     box-shadow: 0px 0px 6px 0px rgba(122, 127, 130, 0.2);
     border-radius: 5px 5px 0px 0px;
     padding: 12px 10px;
+    min-height: 80px;
     right: 50%;
     position: absolute;
     bottom: 80%;
     transform: translate(50%);
+    &::after {
+      content: '';
+      display: inline-block;
+      position: absolute;
+      top: -7px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 0;
+      border-bottom: 7px solid #f2f0eb;
+      border-left: 7px solid transparent;
+      border-right: 7px solid transparent;
+    }
     p {
       color: #22292f;
-      width: 90px;
+      width: 100px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 14px;
       padding: 5px 0;
       text-align: center;
       &:hover {
@@ -271,6 +291,8 @@ a[href^='tel'],
       }
     }
   }
+}
+  
 
   &:hover {
     display: flex;
@@ -287,6 +309,50 @@ a[href^='tel'],
   bottom: 0;
   right: 0;
 }
+@media #{$mdWidth} {
+  .language-items {
+    display: none;
+    flex-direction: column;
+    background: #f2f0eb;
+    box-shadow: 0px 0px 6px 0px rgba(122, 127, 130, 0.2);
+    border-radius: 5px 5px 0px 0px;
+    padding: 12px 10px;
+    min-height: 80px;
+    right: 50%;
+    position: absolute;
+    bottom: 40px;
+    transform: translate(50%);
+    &::after {
+      content: '';
+      display: inline-block;
+      position: absolute;
+      bottom: -7px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 0;
+      border-top: 7px solid #f2f0eb;
+      border-left: 7px solid transparent;
+      border-right: 7px solid transparent;
+    }
+    p {
+      color: #22292f;
+      width: 100px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 14px;
+      padding: 5px 0;
+      text-align: center;
+      &:hover {
+        background-color: rgba(212, 233, 226, 1);
+        border-radius: 5px;
+      }
+    }
+  }
+}
+
 @media #{$smWidth} {
   .satellite {
     position: absolute;
@@ -319,29 +385,91 @@ a[href^='tel'],
       background: #f2f0eb;
       box-shadow: 0px 0px 6px 0px rgba(122, 127, 130, 0.2);
       border-radius: 5px 5px 0px 0px;
-      bottom: 40px;
-      position: absolute;
-      left: 0;
       padding: 12px 10px;
-      // right: 50%;
-      // transform: translateX(50%);
-      p {
-        color: #22292f;
-        width: 90px;
-        padding: 5px 0;
-        text-align: center;
-        &:hover {
-          background-color: rgba(212, 233, 226, 1);
-          border-radius: 5px;
-        }
+      min-height: 80px;
+      right: 50%;
+      position: absolute;
+      bottom: 40px;
+      transform: translate(50%);
+    &::after {
+      content: '';
+      display: inline-block;
+      position: absolute;
+      bottom: -7px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 0;
+      border-top: 7px solid #f2f0eb;
+      border-left: 7px solid transparent;
+      border-right: 7px solid transparent;
+    }
+    p {
+      color: #22292f;
+      width: 100px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 14px;
+      padding: 5px 0;
+      text-align: center;
+      &:hover {
+        background-color: rgba(212, 233, 226, 1);
+        border-radius: 5px;
       }
     }
+  }
 
     &:hover {
       display: flex;
       background: #f2f0eb;
       .language-items {
         display: flex;
+      }
+    }
+  }
+}
+
+@media #{$xsWidth} {
+     .language-items {
+      display: none;
+      flex-direction: column;
+      background: #f2f0eb;
+      box-shadow: 0px 0px 6px 0px rgba(122, 127, 130, 0.2);
+      border-radius: 5px 5px 0px 0px;
+      padding: 12px 10px;
+      min-height: 80px;
+      right: 50%;
+      position: absolute;
+      bottom: 40px;
+      transform: translate(50%);
+    &::after {
+      content: '';
+      display: inline-block;
+      position: absolute;
+      bottom: -7px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 0;
+      border-top: 7px solid #f2f0eb;
+      border-left: 7px solid transparent;
+      border-right: 7px solid transparent;
+    }
+    p {
+      color: #22292f;
+      width: 100px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 14px;
+      padding: 5px 0;
+      text-align: center;
+      &:hover {
+        background-color: rgba(212, 233, 226, 1);
+        border-radius: 5px;
       }
     }
   }

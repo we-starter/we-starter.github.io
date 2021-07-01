@@ -48,9 +48,9 @@ const PoolsDetailLBP = (props) => {
   const currency_address = pool ? pool.currency.address : '0x0'
   const { balance = 0 } = useBalance(currency_address)
 
- if (!pool || chainId !== pool.networkId) {
-   window.location.href = '/'
- }
+//  if (!pool || chainId !== pool.networkId) {
+//    window.location.href = '/'
+//  }
   
   const allowance = useAllowance(
     pool.currency.address,

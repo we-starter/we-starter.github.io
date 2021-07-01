@@ -26,13 +26,15 @@ const FarmPopupTabPopup = (props) => {
         <form className='form-app farm_popup' action='/'>
           <div className='form-app__inner deposit farm_popup_box'>
             <div className='farm_popup_tab_box'>
-              <div>
+              <div className='farm_popup_tab_content'>
                 <a
                   className={cs(
                     'farm_popup_tab',
                     farmPools && 'farm_popup_tab_' + farmPools.networkId,
                     tabFlag === 'Stake' && 'farm_popup_tab_active',
-                    tabFlag === 'Stake' && farmPools && 'farm_popup_tab_active_' + farmPools.networkId
+                    tabFlag === 'Stake' &&
+                      farmPools &&
+                      'farm_popup_tab_active_' + farmPools.networkId
                   )}
                   onClick={() => {
                     setTabFlag('Stake')
@@ -44,9 +46,11 @@ const FarmPopupTabPopup = (props) => {
                   <a
                     className={cs(
                       'farm_popup_tab',
-                       farmPools && 'farm_popup_tab_' + farmPools.networkId,
-                       tabFlag === 'Claim' && 'farm_popup_tab_active',
-                       tabFlag === 'Claim' && farmPools && 'farm_popup_tab_active_' + farmPools.networkId
+                      farmPools && 'farm_popup_tab_' + farmPools.networkId,
+                      tabFlag === 'Claim' && 'farm_popup_tab_active',
+                      tabFlag === 'Claim' &&
+                        farmPools &&
+                        'farm_popup_tab_active_' + farmPools.networkId
                     )}
                     onClick={() => {
                       setTabFlag('Claim')
@@ -61,7 +65,9 @@ const FarmPopupTabPopup = (props) => {
                     'farm_popup_tab',
                     farmPools && 'farm_popup_tab_' + farmPools.networkId,
                     tabFlag === 'Unstake' && 'farm_popup_tab_active',
-                    tabFlag === 'Unstake' && farmPools && 'farm_popup_tab_active_' + farmPools.networkId
+                    tabFlag === 'Unstake' &&
+                      farmPools &&
+                      'farm_popup_tab_active_' + farmPools.networkId
                   )}
                   onClick={() => {
                     setTabFlag('Unstake')
