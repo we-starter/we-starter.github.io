@@ -16,6 +16,7 @@ import PoolsIndex from './pages/pools/poolsIndex'
 import PoolsDetail from './pages/pools/poolsDetail'
 import PoolsDetailLBP from './pages/pools/poolsDetailLBP'
 import Farm from './pages/pools/farm'
+import ScrollToTop from './components/ScrollTop'
 import Intl from './locale/intl'
 
 function getLibrary(provider) {
@@ -38,6 +39,7 @@ function App() {
       <Web3ReactProvider getLibrary={getLibrary}>
         <Intl>
           <Router>
+            <ScrollToTop />
             {/* 头部 */}
             <Header />
             {/* 矿池类型 */}

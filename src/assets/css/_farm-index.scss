@@ -34,6 +34,60 @@
         background: url('../icon/farm/WAR-HT@2x.png') no-repeat;
         background-size: 100% 100%;
       }
+      .farm_index_card_chainId_content {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 60px;
+        height: 60px;
+        border-top-right-radius: 20px;
+        overflow: hidden;
+      }
+      .farm_index_card_chainId_box {
+        position: absolute;
+        right: 0px;
+        top: 0px;
+        z-index: 0;
+        width: 0;
+        height: 0;
+        border-top: 62px solid #C5EECB;
+        border-bottom: 62px solid transparent;
+        border-left: 62px solid transparent;
+        .farm_index_card_chainId {
+          position: absolute;
+          right: 6px;
+          bottom: 30px;
+          z-index: 1;
+          width: 20px !important;
+          height: 20px !important;
+          background: url('../../assets/icon/HECO@2x.png') no-repeat;
+          background-size: 100% 100%;
+        }
+      }
+    }
+    &_card_56 {
+      background: #FFF8E0;
+      .farm_index_card_chainId_box {
+        border-top: 62px solid #FFEEB9;
+        border-bottom: 62px solid transparent;
+        border-left: 62px solid transparent;
+        .farm_index_card_chainId {
+          background: url('../../assets/icon/BSC@2x.png') no-repeat;
+          background-size: 100% 100%;
+        }
+      }
+    }
+    &_card_137 {
+      background: #F7F2FF;
+      .farm_index_card_chainId_box {
+        border-top: 62px solid #E1CFFF;
+        border-bottom: 62px solid transparent;
+        border-left: 62px solid transparent;
+        .farm_index_card_chainId {
+          background: url('../../assets/icon/MATIC@2x.png') no-repeat;
+          background-size: 100% 100%;
+        }
+      }
     }
     .PAUL-USDT:after {
       background: url('../icon/farm/PAUL-HT@2x.png') no-repeat;
@@ -75,6 +129,12 @@
       color: #0f8c20;
       line-height: 26px;
     }
+    &_card_title_56 {
+      color: #F0B90B;
+    }
+    &_card_title_137 {
+      color: #8247E5;
+    }
     &_card_content {
       display: flex;
       justify-content: space-between;
@@ -93,6 +153,18 @@
         color: #22292f;
         line-height: 18px;
       }
+      .countdown_time {
+        display: inline-block;
+        padding: 0 6px;
+        background: #C5E5C9;
+        border-radius: 3px;
+      }
+       .countdown_time_56 {
+        background: #FFEEB9;
+      }
+      .countdown_time_137 {
+        background: #E1CFFF;
+      }
       .content_name {
         margin: 8px 0;
         font-size: 12px;
@@ -109,6 +181,16 @@
           cursor: pointer;
           svg {
             fill: #c5e5c9;
+          }
+        }
+        .tips_56 {
+          svg {
+            fill: #FFEEB9;
+          }
+        }
+         .tips_137 {
+          svg {
+            fill: #E1CFFF;
           }
         }
         .tips_content {
@@ -138,6 +220,38 @@
             border-top: 7px solid transparent;
             border-bottom: 7px solid transparent;
             border-right: 7px solid #c5e5c9;
+          }
+        }
+          .tips_content_56 {
+          background: #FFEEB9;
+           &::after {
+            content: '';
+            display: inline-block;
+            position: absolute;
+            left: -5px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 0;
+            height: 0;
+            border-top: 7px solid transparent;
+            border-bottom: 7px solid transparent;
+            border-right: 7px solid #FFEEB9;
+          }
+        }
+        .tips_content_137 {
+          background: #E1CFFF;
+             &::after {
+            content: '';
+            display: inline-block;
+            position: absolute;
+            left: -5px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 0;
+            height: 0;
+            border-top: 7px solid transparent;
+            border-bottom: 7px solid transparent;
+            border-right: 7px solid #E1CFFF;
           }
         }
       }
@@ -176,6 +290,20 @@
         text-decoration: underline;
       }
     }
+    &_card_getMLP_56 {
+      color: #F0B90B;
+      &:hover {
+        color: #F3C73B;
+        text-decoration: underline;
+      }
+    }
+    &_card_getMLP_137 {
+      color: #8247E5;
+      &:hover {
+        color: #9B6BEA;
+        text-decoration: underline;
+      }
+    }
     &_card_btn {
       display: flex;
       justify-content: space-between;
@@ -201,6 +329,20 @@
         background-color: #00b900;
       }
     }
+    .deposit_btn_56 {
+      background: #F0B90B;
+      box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.1);
+      &:hover {
+        background-color: #F3C73B;
+      }
+    }
+     .deposit_btn_137 {
+      background: #8247E5;
+      box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.1);
+      &:hover {
+        background-color: #9B6BEA;
+      }
+    }
     .claim_btn {
       background: #121212;
       box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.1);
@@ -222,6 +364,12 @@
       padding: 8px 10px;
       background: #c5e5c9;
       border-radius: 5px;
+    }
+     &_card_rewards_56 {
+      background: #FFEEB9;
+    }
+    &_card_rewards_137 {
+      background: #E1CFFF;
     }
   }
   .farm_popup_avaliable {
@@ -266,6 +414,60 @@
         background: url('../icon/farm/WAR-HT@2x.png') no-repeat;
         background-size: 100% 100%;
       }
+            .farm_index_card_chainId_content {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 60px;
+        height: 60px;
+        border-top-right-radius: 20px;
+        overflow: hidden;
+      }
+      .farm_index_card_chainId_box {
+        position: absolute;
+        right: 0px;
+        top: 0px;
+        z-index: 0;
+        width: 0;
+        height: 0;
+        border-top: 62px solid #C5EECB;
+        border-bottom: 62px solid transparent;
+        border-left: 62px solid transparent;
+        .farm_index_card_chainId {
+          position: absolute;
+          right: 6px;
+          bottom: 30px;
+          z-index: 1;
+          width: 20px !important;
+          height: 20px !important;
+          background: url('../../assets/icon/HECO@2x.png') no-repeat;
+          background-size: 100% 100%;
+        }
+      }
+    }
+        &_card_56 {
+      background: #FFF8E0;
+      .farm_index_card_chainId_box {
+        border-top: 62px solid #FFEEB9;
+        border-bottom: 62px solid transparent;
+        border-left: 62px solid transparent;
+        .farm_index_card_chainId {
+          background: url('../../assets/icon/BSC@2x.png') no-repeat;
+          background-size: 100% 100%;
+        }
+      }
+    }
+    &_card_137 {
+      background: #F7F2FF;
+      .farm_index_card_chainId_box {
+        border-top: 62px solid #E1CFFF;
+        border-bottom: 62px solid transparent;
+        border-left: 62px solid transparent;
+        .farm_index_card_chainId {
+          background: url('../../assets/icon/MATIC@2x.png') no-repeat;
+          background-size: 100% 100%;
+        }
+      }
     }
      .PAUL-USDT:after {
       background: url('../icon/farm/PAUL-HT@2x.png') no-repeat;
@@ -307,6 +509,12 @@
       color: #0f8c20;
       line-height: 26px;
     }
+       &_card_title_56 {
+      color: #F0B90B;
+    }
+    &_card_title_137 {
+      color: #8247E5;
+    }
     &_card_content {
       display: flex;
       justify-content: space-between;
@@ -325,6 +533,18 @@
         color: #22292f;
         line-height: 18px;
       }
+      .countdown_time {
+        display: inline-block;
+        padding: 0 6px;
+        background: #C5E5C9;
+        border-radius: 3px;
+      }
+      .countdown_time_56 {
+        background: #FFEEB9;
+      }
+      .countdown_time_137 {
+        background: #E1CFFF;
+      }
       .content_name {
         margin: 8px 0;
         font-size: 12px;
@@ -341,6 +561,16 @@
           cursor: pointer;
           svg {
             fill: #c5e5c9;
+          }
+        }
+         .tips_56 {
+          svg {
+            fill: #FFEEB9;
+          }
+        }
+         .tips_137 {
+          svg {
+            fill: #E1CFFF;
           }
         }
         .tips_content {
@@ -370,6 +600,38 @@
             border-top: 7px solid transparent;
             border-bottom: 7px solid transparent;
             border-right: 7px solid #c5e5c9;
+          }
+        }
+        .tips_content_56 {
+          background: #FFEEB9;
+           &::after {
+            content: '';
+            display: inline-block;
+            position: absolute;
+            left: -5px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 0;
+            height: 0;
+            border-top: 7px solid transparent;
+            border-bottom: 7px solid transparent;
+            border-right: 7px solid #FFEEB9;
+          }
+        }
+        .tips_content_137 {
+          background: #E1CFFF;
+             &::after {
+            content: '';
+            display: inline-block;
+            position: absolute;
+            left: -5px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 0;
+            height: 0;
+            border-top: 7px solid transparent;
+            border-bottom: 7px solid transparent;
+            border-right: 7px solid #E1CFFF;
           }
         }
       }
@@ -408,6 +670,20 @@
         text-decoration: underline;
       }
     }
+     &_card_getMLP_56 {
+      color: #F0B90B;
+      &:hover {
+        color: #F3C73B;
+        text-decoration: underline;
+      }
+    }
+    &_card_getMLP_137 {
+      color: #8247E5;
+      &:hover {
+        color: #9B6BEA;
+        text-decoration: underline;
+      }
+    }
     &_card_btn {
       display: flex;
       justify-content: space-between;
@@ -433,6 +709,20 @@
         background-color: #00b900;
       }
     }
+     .deposit_btn_56 {
+      background: #F0B90B;
+      box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.1);
+      &:hover {
+        background-color: #F3C73B;
+      }
+    }
+     .deposit_btn_137 {
+      background: #8247E5;
+      box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.1);
+      &:hover {
+        background-color: #9B6BEA;
+      }
+    }
     .claim_btn {
       background: #121212;
       box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.1);
@@ -454,6 +744,12 @@
       padding: 8px 10px;
       background: #c5e5c9;
       border-radius: 5px;
+    }
+     &_card_rewards_56 {
+      background: #FFEEB9;
+    }
+    &_card_rewards_137 {
+      background: #E1CFFF;
     }
   }
   .farm_popup_avaliable {
@@ -492,6 +788,60 @@
         background: url('../icon/farm/WAR-HT@2x.png') no-repeat;
         background-size: 100% 100%;
       }
+            .farm_index_card_chainId_content {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 60px;
+        height: 60px;
+        border-top-right-radius: 20px;
+        overflow: hidden;
+      }
+      .farm_index_card_chainId_box {
+        position: absolute;
+        right: 0px;
+        top: 0px;
+        z-index: 0;
+        width: 0;
+        height: 0;
+        border-top: 62px solid #C5EECB;
+        border-bottom: 62px solid transparent;
+        border-left: 62px solid transparent;
+        .farm_index_card_chainId {
+          position: absolute;
+          right: 6px;
+          bottom: 30px;
+          z-index: 1;
+          width: 20px !important;
+          height: 20px !important;
+          background: url('../../assets/icon/HECO@2x.png') no-repeat;
+          background-size: 100% 100%;
+        }
+      }
+    }
+        &_card_56 {
+      background: #FFF8E0;
+      .farm_index_card_chainId_box {
+        border-top: 62px solid #FFEEB9;
+        border-bottom: 62px solid transparent;
+        border-left: 62px solid transparent;
+        .farm_index_card_chainId {
+          background: url('../../assets/icon/BSC@2x.png') no-repeat;
+          background-size: 100% 100%;
+        }
+      }
+    }
+    &_card_137 {
+      background: #F7F2FF;
+      .farm_index_card_chainId_box {
+        border-top: 62px solid #E1CFFF;
+        border-bottom: 62px solid transparent;
+        border-left: 62px solid transparent;
+        .farm_index_card_chainId {
+          background: url('../../assets/icon/MATIC@2x.png') no-repeat;
+          background-size: 100% 100%;
+        }
+      }
     }
     .PAUL-USDT:after {
       background: url('../icon/farm/PAUL-HT@2x.png') no-repeat;
@@ -533,6 +883,12 @@
       color: #0f8c20;
       line-height: 26px;
     }
+       &_card_title_56 {
+      color: #F0B90B;
+    }
+    &_card_title_137 {
+      color: #8247E5;
+    }
     &_card_content {
       display: flex;
       justify-content: space-between;
@@ -551,6 +907,18 @@
         color: #22292f;
         line-height: 18px;
       }
+      .countdown_time {
+        display: inline-block;
+        padding: 0 6px;
+        background: #C5E5C9;
+        border-radius: 3px;
+      }
+      .countdown_time_56 {
+        background: #FFEEB9;
+      }
+      .countdown_time_137 {
+        background: #E1CFFF;
+      }
       .content_name {
         margin: 8px 0;
         font-size: 12px;
@@ -567,6 +935,16 @@
           cursor: pointer;
           svg {
             fill: #c5e5c9;
+          }
+        }
+         .tips_56 {
+          svg {
+            fill: #FFEEB9;
+          }
+        }
+         .tips_137 {
+          svg {
+            fill: #E1CFFF;
           }
         }
         .tips_content {
@@ -596,6 +974,38 @@
             border-top: 7px solid transparent;
             border-bottom: 7px solid transparent;
             border-right: 7px solid #c5e5c9;
+          }
+        }
+          .tips_content_56 {
+          background: #FFEEB9;
+           &::after {
+            content: '';
+            display: inline-block;
+            position: absolute;
+            left: -5px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 0;
+            height: 0;
+            border-top: 7px solid transparent;
+            border-bottom: 7px solid transparent;
+            border-right: 7px solid #FFEEB9;
+          }
+        }
+        .tips_content_137 {
+          background: #E1CFFF;
+             &::after {
+            content: '';
+            display: inline-block;
+            position: absolute;
+            left: -5px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 0;
+            height: 0;
+            border-top: 7px solid transparent;
+            border-bottom: 7px solid transparent;
+            border-right: 7px solid #E1CFFF;
           }
         }
       }
@@ -634,6 +1044,20 @@
         text-decoration: underline;
       }
     }
+     &_card_getMLP_56 {
+      color: #F0B90B;
+      &:hover {
+        color: #F3C73B;
+        text-decoration: underline;
+      }
+    }
+    &_card_getMLP_137 {
+      color: #8247E5;
+      &:hover {
+        color: #9B6BEA;
+        text-decoration: underline;
+      }
+    }
     &_card_btn {
       display: flex;
       justify-content: space-between;
@@ -659,6 +1083,20 @@
         background-color: #00b900;
       }
     }
+     .deposit_btn_56 {
+      background: #F0B90B;
+      box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.1);
+      &:hover {
+        background-color: #F3C73B;
+      }
+    }
+     .deposit_btn_137 {
+      background: #8247E5;
+      box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.1);
+      &:hover {
+        background-color: #9B6BEA;
+      }
+    }
     .claim_btn {
       background: #121212;
       box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.1);
@@ -680,6 +1118,12 @@
       padding: 8px 10px;
       background: #c5e5c9;
       border-radius: 5px;
+    }
+     &_card_rewards_56 {
+      background: #FFEEB9;
+    }
+    &_card_rewards_137 {
+      background: #E1CFFF;
     }
   }
   .farm_popup_avaliable {
@@ -718,6 +1162,60 @@
         background: url('../icon/farm/WAR-HT@2x.png') no-repeat;
         background-size: 100% 100%;
       }
+            .farm_index_card_chainId_content {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 60px;
+        height: 60px;
+        border-top-right-radius: 20px;
+        overflow: hidden;
+      }
+      .farm_index_card_chainId_box {
+        position: absolute;
+        right: 0px;
+        top: 0px;
+        z-index: 0;
+        width: 0;
+        height: 0;
+        border-top: 62px solid #C5EECB;
+        border-bottom: 62px solid transparent;
+        border-left: 62px solid transparent;
+        .farm_index_card_chainId {
+          position: absolute;
+          right: 6px;
+          bottom: 30px;
+          z-index: 1;
+          width: 20px !important;
+          height: 20px !important;
+          background: url('../../assets/icon/HECO@2x.png') no-repeat;
+          background-size: 100% 100%;
+        }
+      }
+    }
+        &_card_56 {
+      background: #FFF8E0;
+      .farm_index_card_chainId_box {
+        border-top: 62px solid #FFEEB9;
+        border-bottom: 62px solid transparent;
+        border-left: 62px solid transparent;
+        .farm_index_card_chainId {
+          background: url('../../assets/icon/BSC@2x.png') no-repeat;
+          background-size: 100% 100%;
+        }
+      }
+    }
+    &_card_137 {
+      background: #F7F2FF;
+      .farm_index_card_chainId_box {
+        border-top: 62px solid #E1CFFF;
+        border-bottom: 62px solid transparent;
+        border-left: 62px solid transparent;
+        .farm_index_card_chainId {
+          background: url('../../assets/icon/MATIC@2x.png') no-repeat;
+          background-size: 100% 100%;
+        }
+      }
     }
     .PAUL-USDT:after {
       background: url('../icon/farm/PAUL-HT@2x.png') no-repeat;
@@ -759,6 +1257,12 @@
       color: #0f8c20;
       line-height: 26px;
     }
+    &_card_title_56 {
+      color: #F0B90B;
+    }
+    &_card_title_137 {
+      color: #8247E5;
+    }
     &_card_content {
       display: flex;
       justify-content: space-between;
@@ -777,6 +1281,18 @@
         color: #22292f;
         line-height: 18px;
       }
+      .countdown_time {
+        display: inline-block;
+        padding: 0 6px;
+        background: #C5E5C9;
+        border-radius: 3px;
+      }
+      .countdown_time_56 {
+        background: #FFEEB9;
+      }
+      .countdown_time_137 {
+        background: #E1CFFF;
+      }
       .content_name {
         margin: 8px 0;
         font-size: 12px;
@@ -793,6 +1309,16 @@
           cursor: pointer;
           svg {
             fill: #c5e5c9;
+          }
+        }
+         .tips_56 {
+          svg {
+            fill: #FFEEB9;
+          }
+        }
+         .tips_137 {
+          svg {
+            fill: #E1CFFF;
           }
         }
         .tips_content {
@@ -822,6 +1348,38 @@
             border-top: 7px solid transparent;
             border-bottom: 7px solid transparent;
             border-right: 7px solid #c5e5c9;
+          }
+        }
+          .tips_content_56 {
+          background: #FFEEB9;
+           &::after {
+            content: '';
+            display: inline-block;
+            position: absolute;
+            left: -5px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 0;
+            height: 0;
+            border-top: 7px solid transparent;
+            border-bottom: 7px solid transparent;
+            border-right: 7px solid #FFEEB9;
+          }
+        }
+        .tips_content_137 {
+          background: #E1CFFF;
+             &::after {
+            content: '';
+            display: inline-block;
+            position: absolute;
+            left: -5px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 0;
+            height: 0;
+            border-top: 7px solid transparent;
+            border-bottom: 7px solid transparent;
+            border-right: 7px solid #E1CFFF;
           }
         }
       }
@@ -860,6 +1418,20 @@
         text-decoration: underline;
       }
     }
+     &_card_getMLP_56 {
+      color: #F0B90B;
+      &:hover {
+        color: #F3C73B;
+        text-decoration: underline;
+      }
+    }
+    &_card_getMLP_137 {
+      color: #8247E5;
+      &:hover {
+        color: #9B6BEA;
+        text-decoration: underline;
+      }
+    }
     &_card_btn {
       display: flex;
       justify-content: space-between;
@@ -885,6 +1457,20 @@
         background-color: #00b900;
       }
     }
+     .deposit_btn_56 {
+      background: #F0B90B;
+      box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.1);
+      &:hover {
+        background-color: #F3C73B;
+      }
+    }
+     .deposit_btn_137 {
+      background: #8247E5;
+      box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.1);
+      &:hover {
+        background-color: #9B6BEA;
+      }
+    }
     .claim_btn {
       background: #121212;
       box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.1);
@@ -906,6 +1492,12 @@
       padding: 8px 10px;
       background: #c5e5c9;
       border-radius: 5px;
+    }
+    &_card_rewards_56 {
+      background: #FFEEB9;
+    }
+    &_card_rewards_137 {
+      background: #E1CFFF;
     }
   }
   .farm_popup_avaliable {

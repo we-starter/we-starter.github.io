@@ -69,7 +69,7 @@ export default [
     decimal: 18,
     is_coming: false,
     mdexReward: false,
-    networkId: 128,
+    networkId: 56,
   },
   {
     name: 'PAUL-USDT LPT',
@@ -102,7 +102,7 @@ export default [
     decimal: 18,
     is_coming: false,
     mdexReward: false,
-    networkId: 128,
+    networkId: 137,
     lpToken: 'MDEX LP Token',
   },
   // {

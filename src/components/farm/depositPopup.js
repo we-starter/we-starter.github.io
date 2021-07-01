@@ -219,8 +219,21 @@ useEffect(() => {
             />
           </div>
 
-          <div className='form-app__inputbox-up' onClick={onMax}>
-            <div className='form-app__inputbox-up-pref'>
+          <div
+            className={cs(
+              `form-app__inputbox-up ${
+                farmPools && 'form-app__inputbox-up_' + farmPools.networkId
+              }`
+            )}
+            onClick={onMax}
+          >
+            <div
+              className={cs(
+                `form-app__inputbox-up-pref ${
+                  farmPools && 'form-app__inputbox-up-pref_' + farmPools.networkId
+                }`
+              )}
+            >
               <FormattedMessage id='poolText19' />
             </div>
           </div>
@@ -228,7 +241,11 @@ useEffect(() => {
       </div>
       {farmPools && farmPools.name !== 'WAR POOL (DAO)' && (
         <a
-          className='farm_index_card_getMLP'
+          className={cs(
+            `farm_index_card_getMLP ${
+              'farm_index_card_getMLP_' + farmPools.networkId
+            }`
+          )}
           href='https://ht.mdex.com/#/add/HT/0x910651F81a605a6Ef35d05527d24A72fecef8bF0'
           target='_black'
         >
@@ -238,7 +255,11 @@ useEffect(() => {
       )}
       {farmPools && farmPools.name === 'WAR POOL (DAO)' && (
         <a
-          className='farm_index_card_getMLP'
+          className={cs(
+            `farm_index_card_getMLP ${
+              'farm_index_card_getMLP_' + farmPools.networkId
+            }`
+          )}
           onClick={() => {
             dispatch({
               type: HANDLE_WALLET_MODAL,
@@ -251,7 +272,14 @@ useEffect(() => {
       )}
       <div className='form-app__submit form-app__submit--row'>
         {approve && (
-          <Button type='primary' onClick={onApprove} loading={loadFlag}>
+          <Button
+            type='primary'
+            className={cs(
+              farmPools && 'ant-btn-primary_' + farmPools.networkId
+            )}
+            onClick={onApprove}
+            loading={loadFlag}
+          >
             <FormattedMessage id='farm20' />
           </Button>
         )}
@@ -259,7 +287,10 @@ useEffect(() => {
         {!approve && (
           <Button
             type='primary'
-            className={cs(disableBtn && 'disable_btn')}
+            className={cs(
+              disableBtn && 'disable_btn',
+              farmPools && 'ant-btn-primary_' + farmPools.networkId
+            )}
             onClick={onConfirm}
             loading={loadFlag}
           >
