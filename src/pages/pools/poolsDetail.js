@@ -240,11 +240,12 @@ const PoolsDetail = (props) => {
       <div className='pools_detail_btn_box'>
         {/* pool.timeClose * 1 > now  timeClose 是超募的claim余额的结束时间 */}
         <a
-          className={`pools_detail_btn ${
+          className={`pools_detail_btn ${pool ? 'pools_detail_btn_' + pool.networkId : ''} ${
             pool &&
             pool.status === 1 &&
             (pool.timeClose === 0 || pool.timeClose * 1 > now)
-              ? 'pools_detail_btn_active'
+              ? 'pools_detail_btn_active ' +
+                ('pools_detail_btn_active_' + pool.networkId)
               : 'pools_detail_btn_disable'
           }`}
           onClick={() => {
@@ -275,7 +276,7 @@ const PoolsDetail = (props) => {
           <FormattedMessage id='poolsDetailText3' />
         </a>
         <a
-          className='pools_detail_btn'
+          className={cs(`pools_detail_btn ${pool ? 'pools_detail_btn_' + pool.networkId : ''}`)}
           href={getScanLink(chainId, address, 'address')}
           target='_blank'
         >
@@ -446,7 +447,13 @@ const PoolsDetail = (props) => {
                         now < pool.time && (
                           <a
                             style={{ marginLeft: '4px' }}
-                            className='pools_detail_record_btn'
+                            className={cs(
+                              `pools_detail_record_btn ${
+                                pool
+                                  ? 'pools_detail_record_btn_' + pool.networkId
+                                  : ''
+                              }`
+                            )}
                             onClick={() => onClaim()}
                           >
                             <FormattedMessage id='poolsDetailText5' />
@@ -466,7 +473,13 @@ const PoolsDetail = (props) => {
                         now > pool.timeClose &&
                         now >= pool.time && (
                           <a
-                            className='pools_detail_record_btn'
+                            className={cs(
+                              `pools_detail_record_btn ${
+                                pool
+                                  ? 'pools_detail_record_btn_' + pool.networkId
+                                  : ''
+                              }`
+                            )}
                             onClick={() => onClaim()}
                           >
                             <FormattedMessage id='poolsDetailText5' />
@@ -480,7 +493,13 @@ const PoolsDetail = (props) => {
                         now > pool.timeClose &&
                         now >= pool.time && (
                           <a
-                            className='pools_detail_record_btn'
+                            className={cs(
+                              `pools_detail_record_btn ${
+                                pool
+                                  ? 'pools_detail_record_btn_' + pool.networkId
+                                  : ''
+                              }`
+                            )}
                             onClick={() => onClaim()}
                           >
                             <FormattedMessage id='poolsDetailText5' />
@@ -581,7 +600,13 @@ const PoolsDetail = (props) => {
                   now < pool.time && (
                     <a
                       style={{ marginLeft: '4px' }}
-                      className='pools_detail_record_btn'
+                      className={cs(
+                        `pools_detail_record_btn ${
+                          pool
+                            ? 'pools_detail_record_btn_' + pool.networkId
+                            : ''
+                        }`
+                      )}
                       onClick={() => onClaim()}
                     >
                       <FormattedMessage id='poolsDetailText5' />
@@ -613,7 +638,13 @@ const PoolsDetail = (props) => {
                   now > pool.timeClose &&
                   now >= pool.time && (
                     <a
-                      className='pools_detail_record_btn'
+                      className={cs(
+                        `pools_detail_record_btn ${
+                          pool
+                            ? 'pools_detail_record_btn_' + pool.networkId
+                            : ''
+                        }`
+                      )}
                       onClick={() => onClaim()}
                     >
                       <FormattedMessage id='poolsDetailText5' />
@@ -627,7 +658,13 @@ const PoolsDetail = (props) => {
                   now > pool.timeClose &&
                   now >= pool.time && (
                     <a
-                      className='pools_detail_record_btn'
+                      className={cs(
+                        `pools_detail_record_btn ${
+                          pool
+                            ? 'pools_detail_record_btn_' + pool.networkId
+                            : ''
+                        }`
+                      )}
                       onClick={() => onClaim()}
                     >
                       <FormattedMessage id='poolsDetailText5' />
