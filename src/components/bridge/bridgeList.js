@@ -109,6 +109,9 @@ const BridgeList = ({onExtractItem, getList}) => {
     },{
       from: ChainId.HECO,
       to: ChainId.MATIC
+    },{
+      from: ChainId.BSC,
+      to: ChainId.MATIC
     }]
     // const directions = [
     //     {

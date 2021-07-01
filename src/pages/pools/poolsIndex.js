@@ -649,9 +649,9 @@ const PoolsIndex = (props) => {
               })
             }}
           >
-            {pool.networkId == ChainId.HECO && <FormattedMessage id='poolText24' />}
-            {pool.networkId == ChainId.MATIC && <FormattedMessage id='poolText25' />}
-            {pool.networkId == ChainId.BSC && <FormattedMessage id='poolText26' />}
+            {pool.networkId == ChainId.HECO && <FormattedMessage id='poolTextS128' />}
+            {pool.networkId == ChainId.MATIC && <FormattedMessage id='poolTextS137' />}
+            {pool.networkId == ChainId.BSC && <FormattedMessage id='poolTextS56' />}
           </a>
         )}
         {pool && pool.status == 3 && pool && pool.underlying.name !== 'LBP' && (

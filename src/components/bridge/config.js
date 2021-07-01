@@ -97,12 +97,12 @@ export const bridgeCardConfig = (fromChainId, toChainId, from_asset_address) => 
                 abi: ChainSwapAbi,
             },
             fromAsset: {
-                address: WAR_ADDRESS[ChainId.HECO] // WAR Token合约地址
+                address: WAR_ADDRESS[ChainId.BSC] // WAR Token合约地址
             },
             addAsset: { // 钱包添加Token配置
                 name: "RAW",
                 address: WAR_ADDRESS[ChainId.MATIC], // RAW地址
-                assetsText: 'RAW(Matic)'
+                assetsText: 'RAW(BSC)'
             }
         }
     ]

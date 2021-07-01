@@ -121,7 +121,7 @@ const BridgeCard = (props) => {
         }
     }, [fromChainId])
 
-    const config = bridgeCardConfig(transferData.fromChainId, transferData.toChainId)
+    const config = bridgeCardConfig(fromChainId, toChainId)
 
     // useEffect(()=>{
     //     debounceChangeNetwork(active, chainId)

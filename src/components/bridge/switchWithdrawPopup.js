@@ -70,7 +70,7 @@ const SwitchWithdrawPopup = ({visible, onClose, onExtract, transferData}) => {
                                                 &nbsp;&&nbsp;
                                                 <FormattedMessage id='bridge10' />
                                             </>
-                                        ) : loading ? <FormattedMessage id='waitingText1'/> : <FormattedMessage id='withdraw'/>}
+                                        ) : loading ? <FormattedMessage id='waitingText'/> : <FormattedMessage id='withdraw'/>}
                                     </Button>
                                 </div>
                                 <a className='add_address_metaMask' onClick={onAddToken}>
