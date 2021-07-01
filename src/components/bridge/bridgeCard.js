@@ -108,19 +108,6 @@ const BridgeCard = (props) => {
     // 是否已经授权
     const BURNAllowance = useAllowance(WAR_ADDRESS(chainId), BURN_SWAP_ADDRESS, account)
 
-    useEffect(() => {
-        if ((chainId === ChainId.HECO || chainId === ChainId.BSC) && !visibleSwitchWithdrawPopup) {
-           setFromChainId(chainId)
-        }
-    }, [chainId])
-
-    useEffect(() => {
-        if ((toChainId === fromChainId || !toChainId) && !visibleSwitchWithdrawPopup) {
-            const toChainItem = toChainSelectData.find(i=>i.chainId !== fromChainId)
-            setToChainId(toChainItem.chainId)
-        }
-    }, [fromChainId])
-
     const config = bridgeCardConfig(fromChainId, toChainId)
 
     // useEffect(()=>{
@@ -341,7 +328,13 @@ const BridgeCard = (props) => {
               <p className='bridge_card_from_text'>
                 <FormattedMessage id='bridge7' />
               </p>
-                <ChainSelect chainSelectData={fromChainSelectData} chainId={fromChainId} setChainId={setFromChainId} type='from'/>
+                <ChainSelect chainSelectData={fromChainSelectData} chainId={fromChainId} setChainId={(val) => {
+                    if (val === toChainId) {
+                        const toChainItem = toChainSelectData.find(i => i.chainId !== val)
+                        setToChainId(toChainItem.chainId)
+                    }
+                    setFromChainId(val)
+                }} type='from' loading={loading}/>
             </div>
             <img
               className='bridge_card_transform'
@@ -353,7 +346,13 @@ const BridgeCard = (props) => {
               {/* <p className='bridge_card_from_chain'>
                 <ChainBtn chainId={toChainId} />
               </p> */}
-              <ChainSelect chainSelectData={toChainSelectData} chainId={toChainId} hiddenId={fromChainId} setChainId={setToChainId} type='to'/>
+              <ChainSelect chainSelectData={toChainSelectData} chainId={toChainId} hiddenId={fromChainId} setChainId={(val)=>{
+                  if (val === fromChainId) {
+                      const fromChainItem = fromChainSelectData.find(i=>i.chainId !== val)
+                      setFromChainId(fromChainItem.chainId)
+                  }
+                  setToChainId(val)
+              }} loading={loading}/>
             </div>
           </div>
           <p className='bridge_card_input_title'>
@@ -401,7 +400,7 @@ const BridgeCard = (props) => {
                             changeNetwork(fromChainId).then()
                         }}
                     >
-                        <FormattedMessage id={`poolTextS${config.toChainId}`} />
+                        <FormattedMessage id={`poolTextS${config.fromChainId}`} />
                     </Button>
                 ) : config.isNeedApprove && BURNAllowance < Number(amount) ? (
                     <Button
@@ -443,9 +442,9 @@ const BridgeCard = (props) => {
     )
 }
 
-const ChainSelect = ({ chainSelectData, chainId, hiddenId, setChainId }) => {
+const ChainSelect = ({ chainSelectData, chainId, hiddenId, setChainId, loading}) => {
   return (
-        <Select value={chainId} onChange={setChainId}>
+        <Select value={chainId} onChange={setChainId} disabled={loading}>
             {
                 chainSelectData.map((item) => (
                     hiddenId !== item.chainId &&
