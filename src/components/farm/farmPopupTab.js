@@ -6,6 +6,7 @@ import { mainContext } from '../../reducer'
 import ClaimPopup from './claimPopup'
 import cs from 'classnames'
 import UnstakePopup from './unstakePopup'
+import farm from '../../configs/farm'
 
 const FarmPopupTabPopup = (props) => {
   const { dispatch, state } = useContext(mainContext)
@@ -29,7 +30,9 @@ const FarmPopupTabPopup = (props) => {
                 <a
                   className={cs(
                     'farm_popup_tab',
-                    tabFlag === 'Stake' && 'farm_popup_tab_active'
+                    farmPools && 'farm_popup_tab_' + farmPools.networkId,
+                    tabFlag === 'Stake' && 'farm_popup_tab_active',
+                    tabFlag === 'Stake' && farmPools && 'farm_popup_tab_active_' + farmPools.networkId
                   )}
                   onClick={() => {
                     setTabFlag('Stake')
@@ -41,7 +44,9 @@ const FarmPopupTabPopup = (props) => {
                   <a
                     className={cs(
                       'farm_popup_tab',
-                      tabFlag === 'Claim' && 'farm_popup_tab_active'
+                       farmPools && 'farm_popup_tab_' + farmPools.networkId,
+                       tabFlag === 'Claim' && 'farm_popup_tab_active',
+                       tabFlag === 'Claim' && farmPools && 'farm_popup_tab_active_' + farmPools.networkId
                     )}
                     onClick={() => {
                       setTabFlag('Claim')
@@ -54,7 +59,9 @@ const FarmPopupTabPopup = (props) => {
                 <a
                   className={cs(
                     'farm_popup_tab',
-                    tabFlag === 'Unstake' && 'farm_popup_tab_active'
+                    farmPools && 'farm_popup_tab_' + farmPools.networkId,
+                    tabFlag === 'Unstake' && 'farm_popup_tab_active',
+                    tabFlag === 'Unstake' && farmPools && 'farm_popup_tab_active_' + farmPools.networkId
                   )}
                   onClick={() => {
                     setTabFlag('Unstake')

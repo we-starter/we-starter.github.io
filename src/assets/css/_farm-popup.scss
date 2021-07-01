@@ -21,6 +21,28 @@
     border-color: #0f8c20 !important;
   }
 }
+.ant-btn-primary_56 {
+  background: #F0B90B !important;
+  color: #ffffff;
+  border-color: #F0B90B !important;
+  box-shadow: none;
+  text-shadow: none;
+  &:hover {
+    background: #F3C73B !important;
+    border-color: #F3C73B !important;
+  }
+}
+.ant-btn-primary_137 {
+  background: #8247E5 !important;
+  color: #ffffff;
+  border-color: #8247E5 !important;
+  box-shadow: none;
+  text-shadow: none;
+  &:hover {
+    background: #9B6BEA !important;
+    border-color: #9B6BEA !important;
+  }
+}
 .ant-btn > .ant-btn-loading-icon {
   svg {
     margin-right: 8px;
@@ -30,6 +52,7 @@
     top: 4px;
   }
 }
+
 @media #{$desktop} {
   .farm_popup {
     &_avaliable {
@@ -92,6 +115,34 @@
           margin: 0 30px;
         }
       }
+      .farm_popup_tab_56 {
+        &:hover {
+          color: #22292f;
+          &:after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -2px;
+            width: 100%;
+            height: 4px;
+            background-color: #F0B90B;
+          }
+        }
+      }
+      .farm_popup_tab_137 {
+        &:hover {
+          color: #22292f;
+          &:after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -2px;
+            width: 100%;
+            height: 4px;
+            background-color: #8247E5;
+          }
+        }
+      }
       .farm_popup_tab_active {
         color: #22292f;
         &:after {
@@ -102,6 +153,30 @@
           width: 100%;
           height: 4px;
           background-color: #0f8c20;
+        }
+      }
+      .farm_popup_tab_active_56 {
+        color: #22292f;
+        &:after {
+          content: '';
+          position: absolute;
+          left: 0;
+          bottom: -2px;
+          width: 100%;
+          height: 4px;
+          background-color: #F0B90B;
+        }
+      }
+      .farm_popup_tab_active_137 {
+         color: #22292f;
+        &:after {
+          content: '';
+          position: absolute;
+          left: 0;
+          bottom: -2px;
+          width: 100%;
+          height: 4px;
+          background-color: #8247E5;
         }
       }
     }
@@ -184,6 +259,34 @@
           margin: 0 30px;
         }
       }
+       .farm_popup_tab_56 {
+        &:hover {
+          color: #22292f;
+          &:after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -2px;
+            width: 100%;
+            height: 4px;
+            background-color: #F0B90B;
+          }
+        }
+      }
+      .farm_popup_tab_137 {
+        &:hover {
+          color: #22292f;
+          &:after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -2px;
+            width: 100%;
+            height: 4px;
+            background-color: #8247E5;
+          }
+        }
+      }
       .farm_popup_tab_active {
         color: #22292f;
         &:after {
@@ -194,6 +297,30 @@
           width: 100%;
           height: 4px;
           background-color: #0f8c20;
+        }
+      }
+        .farm_popup_tab_active_56 {
+        color: #22292f;
+        &:after {
+          content: '';
+          position: absolute;
+          left: 0;
+          bottom: -2px;
+          width: 100%;
+          height: 4px;
+          background-color: #F0B90B;
+        }
+      }
+      .farm_popup_tab_active_137 {
+         color: #22292f;
+        &:after {
+          content: '';
+          position: absolute;
+          left: 0;
+          bottom: -2px;
+          width: 100%;
+          height: 4px;
+          background-color: #8247E5;
         }
       }
     }
@@ -276,6 +403,34 @@
           margin: 0 30px;
         }
       }
+       .farm_popup_tab_56 {
+        &:hover {
+          color: #22292f;
+          &:after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -2px;
+            width: 100%;
+            height: 4px;
+            background-color: #F0B90B;
+          }
+        }
+      }
+      .farm_popup_tab_137 {
+        &:hover {
+          color: #22292f;
+          &:after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -2px;
+            width: 100%;
+            height: 4px;
+            background-color: #8247E5;
+          }
+        }
+      }
       .farm_popup_tab_active {
         color: #22292f;
         &:after {
@@ -286,6 +441,30 @@
           width: 100%;
           height: 4px;
           background-color: #0f8c20;
+        }
+      }
+        .farm_popup_tab_active_56 {
+        color: #22292f;
+        &:after {
+          content: '';
+          position: absolute;
+          left: 0;
+          bottom: -2px;
+          width: 100%;
+          height: 4px;
+          background-color: #F0B90B;
+        }
+      }
+      .farm_popup_tab_active_137 {
+         color: #22292f;
+        &:after {
+          content: '';
+          position: absolute;
+          left: 0;
+          bottom: -2px;
+          width: 100%;
+          height: 4px;
+          background-color: #8247E5;
         }
       }
     }
@@ -368,6 +547,34 @@
           margin: 0 30px;
         }
       }
+       .farm_popup_tab_56 {
+        &:hover {
+          color: #22292f;
+          &:after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -2px;
+            width: 100%;
+            height: 4px;
+            background-color: #F0B90B;
+          }
+        }
+      }
+      .farm_popup_tab_137 {
+        &:hover {
+          color: #22292f;
+          &:after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -2px;
+            width: 100%;
+            height: 4px;
+            background-color: #8247E5;
+          }
+        }
+      }
       .farm_popup_tab_active {
         color: #22292f;
         &:after {
@@ -378,6 +585,30 @@
           width: 100%;
           height: 4px;
           background-color: #0f8c20;
+        }
+      }
+        .farm_popup_tab_active_56 {
+        color: #22292f;
+        &:after {
+          content: '';
+          position: absolute;
+          left: 0;
+          bottom: -2px;
+          width: 100%;
+          height: 4px;
+          background-color: #F0B90B;
+        }
+      }
+      .farm_popup_tab_active_137 {
+         color: #22292f;
+        &:after {
+          content: '';
+          position: absolute;
+          left: 0;
+          bottom: -2px;
+          width: 100%;
+          height: 4px;
+          background-color: #8247E5;
         }
       }
     }

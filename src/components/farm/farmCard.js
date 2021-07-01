@@ -83,8 +83,25 @@ const FarmCard = (props) => {
   }, [farmPools, farmPools.balanceOf, farmPools.totalSupply])
 
   return (
-    <div className={`farm_index_card ${farmPools.name}`}>
-      <h3 className='farm_index_card_title'>{farmPools && farmPools.name}</h3>
+    <div
+      className={`farm_index_card ${farmPools.name} ${
+        farmPools && 'farm_index_card_' + farmPools.networkId
+      }`}
+    >
+      <div className='farm_index_card_chainId_content'>
+        <a className={cs('farm_index_card_chainId_box')}>
+          <span className={cs('farm_index_card_chainId')}></span>
+        </a>
+      </div>
+      <h3
+        className={cs(
+          `farm_index_card_title ${
+            farmPools && 'farm_index_card_title_' + farmPools.networkId
+          }`
+        )}
+      >
+        {farmPools && farmPools.name}
+      </h3>
       <div className='farm_index_card_content'>
         <p className='apr'>
           {farmPools &&
@@ -104,7 +121,9 @@ const FarmCard = (props) => {
             {farmPools && farmPools.earnName}
             {farmPools && farmPools.name === 'WAR POOL (DAO)' && (
               <span
-                className='tips'
+                className={cs(
+                  `tips ${farmPools && 'tips_' + farmPools.networkId}`
+                )}
                 onMouseOver={() => setHoverFlag(true)}
                 onMouseOut={() => setHoverFlag(false)}
               >
@@ -124,7 +143,13 @@ const FarmCard = (props) => {
                   ></path>
                 </svg>
                 {hoverFlag && (
-                  <i className='tips_content'>
+                  <i
+                    className={cs(
+                      `tips_content ${
+                        farmPools && 'tips_content_' + farmPools.networkId
+                      }`
+                    )}
+                  >
                     <FormattedMessage id='farm23' />
                   </i>
                 )}
@@ -149,12 +174,11 @@ const FarmCard = (props) => {
               >
                 <span>
                   <span
-                    style={{
-                      display: 'inline-block',
-                      padding: '0 6px',
-                      background: '#C5E5C9',
-                      borderRadius: '3px',
-                    }}
+                    className={cs(
+                      `countdown_time ${
+                        farmPools && 'countdown_time_' + farmPools.networkId
+                      }`
+                    )}
                   >
                     <Timer.Hours />
                     <b>
@@ -163,12 +187,11 @@ const FarmCard = (props) => {
                   </span>{' '}
                   <i>/</i>{' '}
                   <span
-                    style={{
-                      display: 'inline-block',
-                      padding: '0 6px',
-                      background: '#C5E5C9',
-                      borderRadius: '3px',
-                    }}
+                    className={cs(
+                      `countdown_time ${
+                        farmPools && 'countdown_time_' + farmPools.networkId
+                      }`
+                    )}
                   >
                     {' '}
                     <Timer.Minutes />
@@ -178,12 +201,11 @@ const FarmCard = (props) => {
                   </span>
                   <i>/</i>{' '}
                   <span
-                    style={{
-                      display: 'inline-block',
-                      padding: '0 6px',
-                      background: '#C5E5C9',
-                      borderRadius: '3px',
-                    }}
+                    className={cs(
+                      `countdown_time ${
+                        farmPools && 'countdown_time_' + farmPools.networkId
+                      }`
+                    )}
                   >
                     {' '}
                     <Timer.Seconds />
@@ -209,12 +231,11 @@ const FarmCard = (props) => {
               >
                 <span>
                   <span
-                    style={{
-                      display: 'inline-block',
-                      padding: '0 6px',
-                      background: '#C5E5C9',
-                      borderRadius: '3px',
-                    }}
+                    className={cs(
+                      `countdown_time ${
+                        farmPools && 'countdown_time_' + farmPools.networkId
+                      }`
+                    )}
                   >
                     <Timer.Hours />
                     <b>
@@ -223,12 +244,11 @@ const FarmCard = (props) => {
                   </span>{' '}
                   <i>/</i>{' '}
                   <span
-                    style={{
-                      display: 'inline-block',
-                      padding: '0 6px',
-                      background: '#C5E5C9',
-                      borderRadius: '3px',
-                    }}
+                    className={cs(
+                      `countdown_time ${
+                        farmPools && 'countdown_time_' + farmPools.networkId
+                      }`
+                    )}
                   >
                     {' '}
                     <Timer.Minutes />
@@ -254,12 +274,11 @@ const FarmCard = (props) => {
               >
                 <span>
                   <span
-                    style={{
-                      display: 'inline-block',
-                      padding: '0 6px',
-                      background: '#C5E5C9',
-                      borderRadius: '3px',
-                    }}
+                    className={cs(
+                      `countdown_time ${
+                        farmPools && 'countdown_time_' + farmPools.networkId
+                      }`
+                    )}
                   >
                     <Timer.Days />
                     <b>
@@ -268,12 +287,11 @@ const FarmCard = (props) => {
                   </span>{' '}
                   <i>/</i>{' '}
                   <span
-                    style={{
-                      display: 'inline-block',
-                      padding: '0 6px',
-                      background: '#C5E5C9',
-                      borderRadius: '3px',
-                    }}
+                    className={cs(
+                      `countdown_time ${
+                        farmPools && 'countdown_time_' + farmPools.networkId
+                      }`
+                    )}
                   >
                     <Timer.Hours />
                     <b>
@@ -467,7 +485,11 @@ const FarmCard = (props) => {
       </p>
       {farmPools && farmPools.name !== 'WAR POOL (DAO)' && (
         <a
-          className='farm_index_card_getMLP'
+          className={cs(
+            `farm_index_card_getMLP ${
+              farmPools && 'farm_index_card_getMLP_' + farmPools.networkId
+            }`
+          )}
           href={farmPools.byLink}
           target='_black'
         >
@@ -477,7 +499,11 @@ const FarmCard = (props) => {
       )}
       {farmPools && farmPools.name === 'WAR POOL (DAO)' && (
         <a
-          className='farm_index_card_getMLP'
+          className={cs(
+            `farm_index_card_getMLP ${
+              farmPools && 'farm_index_card_getMLP_' + farmPools.networkId
+            }`
+          )}
           onClick={() => {
             dispatch({
               type: HANDLE_WALLET_MODAL,
@@ -490,7 +516,9 @@ const FarmCard = (props) => {
       )}
       <div className='farm_index_card_btn'>
         <a
-          className='deposit_btn'
+          className={cs(
+            `deposit_btn ${farmPools && 'deposit_btn_' + farmPools.networkId}`
+          )}
           onClick={() => {
             dispatch({
               type: HANDLE_WALLET_MODAL,
@@ -530,7 +558,13 @@ const FarmCard = (props) => {
           </a>
         )}
       </div>
-      <div className='farm_index_card_rewards'>
+      <div
+        className={cs(
+          `farm_index_card_rewards ${
+            farmPools && 'farm_index_card_rewards_' + farmPools.networkId
+          }`
+        )}
+      >
         <p className='form-app__inputbox-after-text farm_popup_avaliable'>
           <FormattedMessage
             id='farm6'
@@ -581,7 +615,9 @@ const FarmCard = (props) => {
       </div>
       {farmPools && farmPools.name === 'WAR POOL (DAO)' && (
         <a
-          className='deposit_btn'
+          className={cs(
+            `deposit_btn ${farmPools && 'deposit_btn_' + farmPools.networkId}`
+          )}
           style={{ marginTop: '8px', width: '100%' }}
           onClick={() => {
             dispatch({
