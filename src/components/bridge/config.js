@@ -9,6 +9,7 @@ export const bridgeCardConfig = (fromChainId, toChainId, from_asset_address) => 
             fromChainId: ChainId.BSC,
             toChainId: ChainId.HECO,
             toChainName: "Heco",
+            fromChainName: "BSC",
             toFullName: '',
             type: BRIDGE_TYPE_NORMAL,
             isNeedApprove: false,
@@ -34,6 +35,7 @@ export const bridgeCardConfig = (fromChainId, toChainId, from_asset_address) => 
             fromChainId: ChainId.HECO,
             toChainId: ChainId.BSC,
             toChainName: "BSC",
+            fromChainName: "Heco",
             toFullName: 'Binance Smart Chain',
             isNeedApprove: false,
             type: BRIDGE_TYPE_NORMAL,
@@ -59,6 +61,7 @@ export const bridgeCardConfig = (fromChainId, toChainId, from_asset_address) => 
             fromChainId: ChainId.HECO,
             toChainId: ChainId.MATIC,
             toChainName: "MATIC",
+            fromChainName: "Heco",
             toFullName: '',
             type: BRIDGE_TYPE_BURN,
             isNeedApprove: true,
@@ -84,6 +87,7 @@ export const bridgeCardConfig = (fromChainId, toChainId, from_asset_address) => 
             fromChainId: ChainId.BSC,
             toChainId: ChainId.MATIC,
             toChainName: "MATIC",
+            fromChainName: "BSC",
             toFullName: '',
             type: BRIDGE_TYPE_BURN,
             isNeedApprove: true,
@@ -102,7 +106,7 @@ export const bridgeCardConfig = (fromChainId, toChainId, from_asset_address) => 
             addAsset: { // 钱包添加Token配置
                 name: "RAW",
                 address: WAR_ADDRESS[ChainId.MATIC], // RAW地址
-                assetsText: 'RAW(BSC)'
+                assetsText: 'RAW(Matic)'
             }
         }
     ]

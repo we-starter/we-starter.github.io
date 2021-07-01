@@ -183,6 +183,16 @@ const BridgeCard = (props) => {
         })
     }
 
+    useEffect(() => {
+        if ((chainId === ChainId.HECO || chainId === ChainId.BSC) && !visibleSwitchWithdrawPopup) {
+            if (chainId === toChainId) {
+                const toChainItem = toChainSelectData.find(i => i.chainId !== chainId)
+                setToChainId(toChainItem.chainId)
+            } else {
+                setFromChainId(chainId)
+            }
+        }
+    }, [chainId])
 
     /**
      * 获取签名数据
@@ -294,7 +304,7 @@ const BridgeCard = (props) => {
       <React.Fragment>
         <div className='bridge_card'>
           <div className='bridge_card_title'>
-            <FormattedMessage id='bridge1' />{config.name} {config.toFullName && `(${config.toFullName})`}
+            <FormattedMessage id='bridge1' />{config.toChainName} {config.toFullName && `(${config.toFullName})`}
           </div>
           <div className='deposit__inputbox form-app__inputbox'>
             <div className='form-app__inputbox-control'>
@@ -424,7 +434,7 @@ const BridgeCard = (props) => {
             }
           <div className='lbp_tip'>
             <p>
-                {config.type === BRIDGE_TYPE_BURN && <FormattedMessage id='bridge3' />}
+                {config.type === BRIDGE_TYPE_BURN && (<><FormattedMessage id='bridge300' />WAR({config.fromChainName})<FormattedMessage id='bridge301' /></>)}
             </p>
             <p>
               <FormattedMessage id='bridge4' />
