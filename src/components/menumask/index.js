@@ -26,13 +26,15 @@ export const MenuMask = () => {
   const location = useLocation()
   const { balance } = useBalance(WAR_ADDRESS(chainId))
   const [language, setLanguage] = useState(
-    (state.locale === 'en' && '中文简体') ||
-      (state.locale === 'zh' && 'English')
+    (state.locale === 'en' && 'English') ||
+      (state.locale === 'zh' && '中文简体') ||
+      (state.locale === 'ru' && 'Русский язык')
   )
 
   useEffect(() => {
-    if (state.locale === 'en') setLanguage('中文简体')
-    if (state.locale === 'zh') setLanguage('English')
+    if (state.locale === 'en') setLanguage('English')
+    if (state.locale === 'zh') setLanguage('中文简体')
+    if (state.locale === 'ru') setLanguage('Русский язык')
   }, [state.locale])
 
   const handleMenuItemClick = () => {
@@ -40,9 +42,10 @@ export const MenuMask = () => {
   }
 
   const tabLanguage = (val) => {
-    val = val === 'English' ? 'en' : 'zh'
+    // val = val === 'English' ? 'en' : 'zh'
     if (val === 'en') setLanguage('English')
     if (val === 'zh') setLanguage('中文简体')
+    if (val === 'ru') setLanguage('Русский язык')
     dispatch({
       type: CHANGE_LOCALE,
       locale: val,
@@ -195,10 +198,12 @@ export const MenuMask = () => {
                         </li> */}
           </ul>
           <div className='menumask_language'>
-            <div className='language' onClick={() => tabLanguage(language)}>
+            {/* onClick={() => tabLanguage(language)} */}
+            <div className='language'>
               <img src={globe} alt='' />
-              {language === '中文简体' ? '中文简体' : 'English'}
-              {/* <div
+              {language}
+              {/* {language === '中文简体' ? '中文简体' : 'English'} */}
+              <div
                 className='language-items'
                 style={{
                   position: 'absolute',
@@ -206,34 +211,39 @@ export const MenuMask = () => {
                   transform: 'translate(0)',
                 }}
               >
-                {language === 'ZH-CH' && (
-                  <p
-                    style={{
-                      color: '#22292F',
-                      padding: '0',
-                      marginBottom: '0',
-                    }}
-                    onClick={() => tabLanguage('en')}
-                  >
-                    English
-                  </p>
-                )}
-                {language === 'English' && (
-                  <p
-                    style={{
-                      color: '#22292F',
-                      padding: '0',
-                      marginBottom: '0',
-                    }}
-                    onClick={() => tabLanguage('zh')}
-                  >
-                    中文简体
-                  </p>
-                )}
-              </div> */}
+                <p
+                  style={{
+                    color: '#22292F',
+                    padding: '0',
+                    marginBottom: '0',
+                  }}
+                  onClick={() => tabLanguage('en')}
+                >
+                  English
+                </p>
+                <p
+                  style={{
+                    color: '#22292F',
+                    padding: '0',
+                    marginBottom: '0',
+                  }}
+                  onClick={() => tabLanguage('zh')}
+                >
+                  中文简体
+                </p>
+                <p
+                  style={{
+                    color: '#22292F',
+                    padding: '0',
+                    marginBottom: '0',
+                  }}
+                  onClick={() => tabLanguage('ru')}
+                >
+                  Русский язык
+                </p>
+              </div>
             </div>
             <ul className='footer__links'>
-              
               <li>
                 <a
                   title='title'

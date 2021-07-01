@@ -40,9 +40,9 @@ const PoolsDetail = (props) => {
 
   const { dispatch } = useContext(mainContext)
 
-   if (!pool || chainId !== pool.networkId) {
-     window.location.href = '/'
-   }
+  //  if (!pool || chainId !== pool.networkId) {
+  //    window.location.href = '/'
+  //  }
 
   useEffect(() => {
     const timerId = setTimeout(() => {
@@ -497,6 +497,146 @@ const PoolsDetail = (props) => {
                 )}
               </tbody>
             </table>
+          </div>
+        )}
+        {recordTab === 1 && (
+          <div className='pools_detail_record_title_h5'>
+            <p className='pools_detail_record_title_val'>
+              <FormattedMessage id='invest' />
+              <FormattedMessage id='num' />
+            </p>
+            {(pool && pool.purchasedCurrencyOf.toString()) > 0 ? (
+              <p className='pools_detail_record_title_data'>
+                {fromWei(pool.purchasedCurrencyOf).toFixed(6, 1) * 1}
+                &nbsp;
+                {pool && pool.currency.symbol}
+              </p>
+            ) : (
+              <p className='pools_detail_record_title_data'>-</p>
+            )}
+
+            <p className='pools_detail_record_title_val'>
+              <FormattedMessage id='winningRate' />
+            </p>
+            {(pool && pool.purchasedCurrencyOf.toString()) > 0 ? (
+              <p className='pools_detail_record_title_data'>
+                {pool && pool.type === 1 && pool.quotaOf > 0 && (
+                  <FormattedMessage id='whiteList' />
+                )}
+                {pool &&
+                  pool.type === 0 &&
+                  fromWei(pool.settleable.rate)
+                    .multipliedBy(new BigNumber(100))
+                    .toFixed(2, 1)
+                    .toString() *
+                    1 +
+                    '%'}
+              </p>
+            ) : (
+              <p className='pools_detail_record_title_data'>-</p>
+            )}
+            <p className='pools_detail_record_title_val'>
+              <FormattedMessage id='winningAmount' />
+            </p>
+            {(pool && pool.purchasedCurrencyOf.toString()) > 0 ? (
+              <p className='pools_detail_record_title_data'>
+                {pool &&
+                  pool.type === 0 &&
+                  new BigNumber(
+                    Web3.utils.fromWei(pool.purchasedCurrencyOf, 'ether')
+                  )
+                    .multipliedBy(
+                      new BigNumber(
+                        Web3.utils.fromWei(pool.settleable.rate, 'ether')
+                      )
+                    )
+                    .dividedBy(new BigNumber(pool.price))
+                    .toFixed(6, 1)
+                    .toString() * 1}
+                {pool &&
+                  pool.type === 1 &&
+                  formatAmount(pool.settleable.volume)}
+                &nbsp;
+                {pool && pool.underlying.symbol}
+              </p>
+            ) : (
+              <p className='pools_detail_record_title_data'>-</p>
+            )}
+          </div>
+        )}
+        {recordTab === 2 && (
+          <div className='pools_detail_record_title_h5'>
+            <p className='pools_detail_record_title_val'>
+              <FormattedMessage id='unsettlement' />
+            </p>
+            {(pool && pool.purchasedCurrencyOf.toString()) > 0 ? (
+              <p className='pools_detail_record_title_data'>
+                {pool && formatAmount(pool.settleable.amount)}&nbsp;
+                {pool && pool.currency.symbol}
+                {/* 当 当前时间大于募资结束时间 && 小于结算开始时间则可以领回 */}
+                {pool &&
+                  pool.settleable.amount > 0 &&
+                  pool.status == 1 &&
+                  now >= pool.timeClose &&
+                  now < pool.time && (
+                    <a
+                      style={{ marginLeft: '4px' }}
+                      className='pools_detail_record_btn'
+                      onClick={() => onClaim()}
+                    >
+                      <FormattedMessage id='poolsDetailText5' />
+                    </a>
+                  )}
+              </p>
+            ) : (
+              <p className='pools_detail_record_title_data'>-</p>
+            )}
+
+            <p className='pools_detail_record_title_val'>
+              <FormattedMessage id='obtain' />
+              <FormattedMessage id='num' />
+            </p>
+            {(pool && pool.purchasedCurrencyOf.toString()) > 0 ? (
+              <p className='pools_detail_record_title_data'>
+                {pool && formatAmount(pool.settleable.volume)}&nbsp;
+                {pool && pool.underlying.symbol}
+              </p>
+            ) : (
+              <p className='pools_detail_record_title_data'>-</p>
+            )}
+            {(pool && pool.purchasedCurrencyOf.toString()) > 0 ? (
+              <p className='pools_detail_record_title_data'>
+                {pool &&
+                  pool.type === 0 &&
+                  pool.settleable.volume > 0 &&
+                  pool.status >= 2 &&
+                  now > pool.timeClose &&
+                  now >= pool.time && (
+                    <a
+                      className='pools_detail_record_btn'
+                      onClick={() => onClaim()}
+                    >
+                      <FormattedMessage id='poolsDetailText5' />
+                    </a>
+                  )}
+                {pool &&
+                  pool.type === 1 &&
+                  pool.settleable.volume > 0 &&
+                  pool.settleable.claimedOf == 0 &&
+                  pool.status >= 2 &&
+                  now > pool.timeClose &&
+                  now >= pool.time && (
+                    <a
+                      className='pools_detail_record_btn'
+                      onClick={() => onClaim()}
+                    >
+                      <FormattedMessage id='poolsDetailText5' />
+                    </a>
+                  )}
+              </p>
+            ) : (
+              <p className='pools_detail_record_title_data'></p>
+            )}
           </div>
         )}
       </div>
