@@ -5,12 +5,15 @@ import BigNumber from 'bignumber.js'
 import { useActiveWeb3React } from '../../web3'
 import { HANDLE_WALLET_MODAL } from '../../const'
 import { mainContext } from '../../reducer'
+import { changeNetwork } from '../../connectors'
+import { message } from 'antd'
 import { formatAmount, splitFormat } from '../../utils/format'
 import { useAPR, useMdxARP } from '../../pages/pools/Hooks'
 import { useBalance } from '../../pages/Hooks'
 import Timer from 'react-compound-timer'
 // 处理格式 千位符
 import { formatNumber } from 'accounting'
+import { ChainId } from '../../web3/address'
 
 const FarmCard = (props) => {
   const { chainId } = useActiveWeb3React()
@@ -514,50 +517,77 @@ const FarmCard = (props) => {
           <FormattedMessage id='farm17' /> {farmPools.rewards}
         </a>
       )}
-      <div className='farm_index_card_btn'>
-        <a
-          className={cs(
-            `deposit_btn ${farmPools && 'deposit_btn_' + farmPools.networkId}`
+      {farmPools && farmPools.networkId == chainId && (
+        <div className='farm_index_card_btn'>
+          <a
+            className={cs(
+              `deposit_btn ${farmPools && 'deposit_btn_' + farmPools.networkId}`
+            )}
+            onClick={() => {
+              dispatch({
+                type: HANDLE_WALLET_MODAL,
+                walletModal: 'deposit',
+                pool: farmPools && farmPools,
+              })
+            }}
+          >
+            <FormattedMessage id='farm3' />
+          </a>
+          {farmPools && farmPools.name !== 'WAR POOL (DAO)' && (
+            <a
+              className='claim_btn'
+              onClick={() => {
+                dispatch({
+                  type: HANDLE_WALLET_MODAL,
+                  walletModal: 'claim',
+                  pool: farmPools && farmPools,
+                })
+              }}
+            >
+              <FormattedMessage id='farm16' />
+            </a>
           )}
-          onClick={() => {
-            dispatch({
-              type: HANDLE_WALLET_MODAL,
-              walletModal: 'deposit',
-              pool: farmPools && farmPools,
-            })
-          }}
-        >
-          <FormattedMessage id='farm3' />
-        </a>
-        {farmPools && farmPools.name !== 'WAR POOL (DAO)' && (
+          {farmPools && farmPools.name === 'WAR POOL (DAO)' && (
+            <a
+              className='claim_btn'
+              onClick={() => {
+                dispatch({
+                  type: HANDLE_WALLET_MODAL,
+                  walletModal: 'claim',
+                  pool: farmPools && farmPools,
+                })
+              }}
+            >
+              <FormattedMessage id='farm16' />
+            </a>
+          )}
+        </div>
+      )}
+      {farmPools && farmPools.networkId !== chainId && (
+        <div className='farm_index_card_btn'>
           <a
-            className='claim_btn'
+            className={cs(
+              `deposit_btn ${farmPools && 'deposit_btn_' + farmPools.networkId}`
+            )}
+            style={{ width: '100%' }}
             onClick={() => {
-              dispatch({
-                type: HANDLE_WALLET_MODAL,
-                walletModal: 'claim',
-                pool: farmPools && farmPools,
+              changeNetwork(farmPools.networkId).then(() => {
+                message.success('Switch success')
               })
             }}
           >
-            <FormattedMessage id='farm16' />
+            {farmPools.networkId == ChainId.HECO && (
+              <FormattedMessage id='poolText24' />
+            )}
+            {farmPools.networkId == ChainId.BSC && (
+              <FormattedMessage id='poolText26' />
+            )}
+            {farmPools.networkId == ChainId.MATIC && (
+              <FormattedMessage id='poolText25' />
+            )}
           </a>
-        )}
-        {farmPools && farmPools.name === 'WAR POOL (DAO)' && (
-          <a
-            className='claim_btn'
-            onClick={() => {
-              dispatch({
-                type: HANDLE_WALLET_MODAL,
-                walletModal: 'claim',
-                pool: farmPools && farmPools,
-              })
-            }}
-          >
-            <FormattedMessage id='farm16' />
-          </a>
-        )}
-      </div>
+        </div>
+      )}
       <div
         className={cs(
           `farm_index_card_rewards ${
@@ -613,23 +643,25 @@ const FarmCard = (props) => {
           </p>
         )}
       </div>
-      {farmPools && farmPools.name === 'WAR POOL (DAO)' && (
-        <a
-          className={cs(
-            `deposit_btn ${farmPools && 'deposit_btn_' + farmPools.networkId}`
-          )}
-          style={{ marginTop: '8px', width: '100%' }}
-          onClick={() => {
-            dispatch({
-              type: HANDLE_WALLET_MODAL,
-              walletModal: 'compound',
-              pool: farmPools && farmPools,
-            })
-          }}
-        >
-          <FormattedMessage id='farm21' />
-        </a>
-      )}
+      {farmPools &&
+        farmPools.name === 'WAR POOL (DAO)' &&
+        farmPools.networkId == chainId && (
+          <a
+            className={cs(
+              `deposit_btn ${farmPools && 'deposit_btn_' + farmPools.networkId}`
+            )}
+            style={{ marginTop: '8px', width: '100%' }}
+            onClick={() => {
+              dispatch({
+                type: HANDLE_WALLET_MODAL,
+                walletModal: 'compound',
+                pool: farmPools && farmPools,
+              })
+            }}
+          >
+            <FormattedMessage id='farm21' />
+          </a>
+        )}
     </div>
   )
 }
