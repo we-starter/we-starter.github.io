@@ -86,24 +86,22 @@ export const useHTBalance = () => {
 }
 
 export const useAllowance = (contract_address, address, owner_address, _chainId) => {
-  const { account, active, library } = useActiveWeb3React()
+  const { account, active, library, chainId } = useActiveWeb3React()
   const [allowance, setAllowance] = useState(0)
   const blockHeight = useBlockHeight()
-  const contract = createContractERC20(_chainId)
   useEffect(() => {
-    // if (active) {
-      try {
-        // const contract = getContract(library, ERC20.abi, contract_address)
-        contract.methods
-          .allowance(owner_address, address)
-          .call()
-          .then((res) => {
-            setAllowance(res)
-          })
-      } catch (e) {
-        console.log('load token allowance error:', e)
-      }
-    // }
+    const contract = createContractERC20(chainId)
+    try {
+      // const contract = getContract(library, ERC20.abi, contract_address)
+      contract.methods
+        .allowance(owner_address, address)
+        .call()
+        .then((res) => {
+          setAllowance(res)
+        })
+    } catch (e) {
+      console.log('load token allowance error:', e)
+    }
     return () => {}
   }, [account, library, active, blockHeight])
   return allowance

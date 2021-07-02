@@ -25,7 +25,7 @@ const SwitchWithdrawPopup = ({visible, onClose, onExtract, transferData}) => {
 
     const config = bridgeCardConfig(transferData.fromChainId, transferData.toChainId)
     const onAddToken = async () => {
-        await addToken(config.chainswapContract.address, config.addAsset.name)
+        await addToken(config.chainswapContract.address, config.addAsset.name, config.addAsset.icon)
     }
 
     const onConfirm = () => {

@@ -53,7 +53,7 @@ export const useActiveWeb3React = () => {
   return context.active ? context : contextNetwork
 }
 
-export const addToken = async (address, symbol) =>{
+export const addToken = async (address, symbol, icon) =>{
   try {
     let addTokenClick = await window.ethereum.request({
       method: 'wallet_watchAsset',
@@ -63,7 +63,7 @@ export const addToken = async (address, symbol) =>{
           address,
           symbol,
           decimals: 18,
-          image: '',
+          image: icon,
         },
       },
     })
