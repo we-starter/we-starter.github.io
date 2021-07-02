@@ -2,6 +2,8 @@ import {ChainId, WAR_ADDRESS} from "../../web3/address";
 import ChainSwapAbi from "../../web3/abi/ChainSwap.json";
 import BurnSwapAbi from "../../web3/abi/BurnSwap.json";
 import {BRIDGE_TYPE_BURN, BRIDGE_TYPE_NORMAL} from "./migrateCard";
+import WAR_ICON from '../../assets/icon/WAR@2x.png'
+import RAW_ICON from '../../assets/icon/RAW@2x.png'
 
 export const bridgeCardConfig = (fromChainId, toChainId, from_asset_address) => {
     const config = [
@@ -28,7 +30,14 @@ export const bridgeCardConfig = (fromChainId, toChainId, from_asset_address) => 
             addAsset: { // 钱包添加Token配置
                 name: "WAR",
                 address: WAR_ADDRESS[ChainId.HECO],
-                assetsText: 'WAR(Heco)'
+                assetsText: 'WAR(Heco)',
+                icon: WAR_ICON
+            },
+            assets: {
+                fromAssets: 'WAR',
+                fromAssetsIcon: WAR_ICON,
+                toAssets: 'WAR',
+                toAssetsIcon: WAR_ICON
             }
         },
         {
@@ -54,7 +63,14 @@ export const bridgeCardConfig = (fromChainId, toChainId, from_asset_address) => 
             addAsset: { // 钱包添加Token配置
                 name: "WAR",
                 address: WAR_ADDRESS[ChainId.BSC],
-                assetsText: 'WAR(BSC)'
+                assetsText: 'WAR(BSC)',
+                icon: WAR_ICON
+            },
+            assets: {
+                fromAssets: 'WAR',
+                fromAssetsIcon: WAR_ICON,
+                toAssets: 'WAR',
+                toAssetsIcon: WAR_ICON
             }
         },
         {
@@ -80,7 +96,14 @@ export const bridgeCardConfig = (fromChainId, toChainId, from_asset_address) => 
             addAsset: { // 钱包添加Token配置
                 name: "RAW",
                 address: WAR_ADDRESS[ChainId.MATIC], // RAW地址
-                assetsText: 'RAW(Matic)'
+                assetsText: 'RAW(Matic)',
+                icon: RAW_ICON
+            },
+            assets: {
+                fromAssets: 'WAR',
+                fromAssetsIcon: WAR_ICON,
+                toAssets: 'RAW',
+                toAssetsIcon: RAW_ICON
             }
         },
         {
@@ -106,7 +129,14 @@ export const bridgeCardConfig = (fromChainId, toChainId, from_asset_address) => 
             addAsset: { // 钱包添加Token配置
                 name: "RAW",
                 address: WAR_ADDRESS[ChainId.MATIC], // RAW地址
-                assetsText: 'RAW(Matic)'
+                assetsText: 'RAW(Matic)',
+                icon: RAW_ICON
+            },
+            assets: {
+                fromAssets: 'WAR',
+                fromAssetsIcon: WAR_ICON,
+                toAssets: 'RAW',
+                toAssetsIcon: RAW_ICON
             }
         }
     ]

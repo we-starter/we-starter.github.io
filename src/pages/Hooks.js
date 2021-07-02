@@ -6,6 +6,16 @@ import { getContract, getWeb3, useActiveWeb3React } from '../web3'
 import {ChainId, getGLFStakingAddress, RPC_URLS, WAR_ADDRESS} from '../web3/address'
 import Web3 from "web3";
 
+const _CONTRACT ={}
+const createContractERC20 = (chainId) => {
+  if (_CONTRACT[chainId]){
+    return _CONTRACT[chainId]
+  }
+  var web3 = new Web3(new Web3.providers.HttpProvider(RPC_URLS(chainId)))
+  return _CONTRACT[chainId] = new web3.eth.Contract(ERC20.abi, WAR_ADDRESS(chainId))
+
+}
+
 export const useBalance = (address, networkId = ChainId.HECO) => {
   const { account, active, library } = useActiveWeb3React()
   const [balance, setBalance] = useState(0)
@@ -23,9 +33,7 @@ export const useBalance = (address, networkId = ChainId.HECO) => {
             setBalance(balance)
           })
         } else {
-          // const contract = getContract(library, ERC20.abi, address)
-          var web3 = new Web3(new Web3.providers.HttpProvider(RPC_URLS(networkId)))
-          const contract = new web3.eth.Contract(ERC20.abi, WAR_ADDRESS(networkId))
+          const contract = createContractERC20(networkId)
           contract.methods
             .balanceOf(account)
             .call()
@@ -81,8 +89,7 @@ export const useAllowance = (contract_address, address, owner_address, _chainId)
   const { account, active, library } = useActiveWeb3React()
   const [allowance, setAllowance] = useState(0)
   const blockHeight = useBlockHeight()
-  var web3 = new Web3(new Web3.providers.HttpProvider(RPC_URLS(_chainId))) // _chainId = pool.networkId
-  const contract = new web3.eth.Contract(ERC20.abi, WAR_ADDRESS(_chainId))
+  const contract = createContractERC20(_chainId)
   useEffect(() => {
     // if (active) {
       try {

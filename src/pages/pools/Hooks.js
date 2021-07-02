@@ -59,7 +59,6 @@ export const useStakingInfo = (stakingInfo) => {
   function queryStakingInfo() {
     var web3 = new Web3(new Web3.providers.HttpProvider(RPC_URLS(ChainId.HECO)))
     const contract = new web3.eth.Contract(StakingReward, stakingInfo.stakingAddress)
-
     try {
       contract.methods
         .earned(account)
@@ -907,6 +906,7 @@ export const useFarmInfo = (address = '') => {
             .all(promise_list)
             .then((data) => {
               data = processResult(data)
+              console.log('data', data)
               let [
                 begin,
                 earned,
@@ -1168,9 +1168,6 @@ export const useMdxARP = (
           .multipliedBy(new BigNumber(numToWei(mdex2warPrice)))
           .multipliedBy(new BigNumber(365))
         const apr = totalRewardValue.div(lptValue).toString()
-        if (isNaN(apr)){
-          debugger
-        }
         setApr(apr)
       })
     }
@@ -1189,6 +1186,7 @@ export const useMDexPrice = (address1, address2, amount = 1, path = [], _chainId
     const factory = new Contract(MDEX_FACTORY_ADDRESS(_chainId), MDexFactory)
     const promise_list = [factory.getPair(address1, address2)]
     return multicallProvider.all(promise_list).then((data) => {
+      console.log(3333)
       let [pair_address] = processResult(data)
       const pair_contract = new Contract(pair_address, LPT)
       const mdex_router_contract = new Contract(MDEX_ROUTER_ADDRESS, MDexRouter)

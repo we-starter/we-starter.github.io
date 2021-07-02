@@ -13,7 +13,6 @@ import Web3 from "web3";
 import {BURN_SWAP_ADDRESS, BURN_SWAP_S_ADDRESS, ChainId, RPC_URLS} from "../../web3/address";
 import { getOnlyMultiCallProvider, processResult } from '../../utils/multicall'
 import {Contract} from "ethers-multicall-x";
-import WAR from '../../assets/icon/WAR@2x.png'
 import BSC from '../../assets/icon/BSC@2x.png'
 import HECO from '../../assets/icon/HECO@2x.png'
 import MATIC from '../../assets/icon/MATIC@2x.png'
@@ -171,10 +170,22 @@ const MigrateList = ({onExtractItem, getList}) => {
         <tbody>
           {
             historyData.map((item, index) => {
+              const itemConfig = bridgeCardConfig(item.fromChainId, item.toChainId)
               return (
                 <tr key={index}>
                   <td className='tbody_title'>
-                    <img className='icon' src={WAR} /> WAR
+                    <span>
+                      <img className='icon' src={itemConfig.assets.fromAssetsIcon} /> {itemConfig.assets.fromAssets}
+                    </span>
+                    {
+                      itemConfig.assets.fromAssets !== itemConfig.assets.toAssets &&
+                      <>
+                        <span className='assets_arrow'/>
+                        <span>
+                          <img className='icon' src={itemConfig.assets.toAssetsIcon} /> {itemConfig.assets.toAssets}
+                        </span>
+                      </>
+                    }
                   </td>
                   <td>
                     <img src={CurrencyIcon[item.fromChainId].icon} /> {CurrencyIcon[item.fromChainId].title}
@@ -201,13 +212,25 @@ const MigrateList = ({onExtractItem, getList}) => {
       <div className='bridge_list_table_h5'>
        {
          historyData.map((item, index) => {
+           const itemConfig = bridgeCardConfig(item.fromChainId, item.toChainId)
            return (
              <div className='bridge_list_data' key={index}>
                <div className='bridge_list_data_title'>
-                 <h2><img className='icon' src={WAR} /> WAR</h2>
-                 {
-                   item.status == 2 && <img src={Right} />
-                 }
+                 <div className='from_to_assets'>
+                   <span>
+                      <img className='icon' src={itemConfig.assets.fromAssetsIcon} /> {itemConfig.assets.fromAssets}
+                    </span>
+                   {
+                     itemConfig.assets.fromAssets !== itemConfig.assets.toAssets &&
+                     <>
+                       <span className='assets_arrow'/>
+                        <span>
+                          <img className='icon' src={itemConfig.assets.toAssetsIcon} /> {itemConfig.assets.toAssets}
+                        </span>
+                     </>
+                   }
+                 </div>
+
                </div>
                <div className='bridge_list_data_title'>
                  <div className='bridge_list_data_value'>

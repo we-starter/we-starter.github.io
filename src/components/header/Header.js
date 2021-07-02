@@ -18,6 +18,8 @@ import MATIC from '../../assets/icon/MATIC@2x.png'
 import { useBalance } from '../../pages/Hooks'
 import { CHANGE_LOCALE } from '../../const'
 import { FormattedMessage } from 'react-intl'
+import WAR_ICON from '../../assets/icon/WAR@2x.png'
+import RAW_ICON from '../../assets/icon/RAW@2x.png'
 
 export const Header = () => {
   const { active, account, chainId } = useActiveWeb3React()
@@ -220,7 +222,9 @@ export const Header = () => {
 
             {active && (
               <div className='ht-balance'>
-                <span></span>
+                <span>
+                  <img src={chainId === ChainId.MATIC ? RAW_ICON : WAR_ICON} alt=""/>
+                </span>
                 <p>{formatAmount(balance)}</p>
               </div>
             )}

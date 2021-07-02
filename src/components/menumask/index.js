@@ -2,7 +2,7 @@ import React, { useEffect, useContext, useState } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import { formatAddress, formatAmount } from '../../utils/format'
 import { useActiveWeb3React } from '../../web3'
-import { WAR_ADDRESS } from '../../web3/address'
+import {ChainId, WAR_ADDRESS} from '../../web3/address'
 import WeStarterGuidebookZH from '../../pdfFile/WeStarter -优质资产起跑线.pdf'
 import WeStarterGuidebookEN from '../../pdfFile/WeStarter-Introduction in English.pdf'
 import globe from '../../assets/icon/globe.png'
@@ -18,6 +18,8 @@ import doubleLine from '../../assets/icon/check-double-line.png'
 import { mainContext } from '../../reducer'
 import { FormattedMessage } from 'react-intl'
 import { useHTBalance, useBalance } from '../../pages/Hooks'
+import RAW_ICON from "../../assets/icon/RAW@2x.png";
+import WAR_ICON from "../../assets/icon/WAR@2x.png";
 
 export const MenuMask = () => {
   const { active, account, chainId } = useActiveWeb3React()
@@ -70,7 +72,9 @@ export const MenuMask = () => {
               {/* {active && <img className='exchange' src={Exchange} />} */}
               {active && (
                 <div className='menumask_ht-balance'>
-                  <span></span>
+                  <span>
+                    <img src={chainId === ChainId.MATIC ? RAW_ICON : WAR_ICON} alt=""/>
+                  </span>
                   <p>{formatAmount(balance)}</p>
                 </div>
               )}
