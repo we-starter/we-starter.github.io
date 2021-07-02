@@ -1382,7 +1382,7 @@ export default [
     white_paper: 'https://docsend.com/view/dzyu756wkd2n4izq',
     twitter: 'https://twitter.com/Moma_Finance',
     Telegram_Channel: 'https://t.me/Moma_Official',
-    Github: '-',
+    Github: 'https://github.com/moma-finance/moma-protocol',
     yuque: '-',
     progress: 0,
     status: 0,
