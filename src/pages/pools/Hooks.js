@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react'
 import { getContract, getLogs, useActiveWeb3React } from '../../web3'
 import {
-  ADDRESS_0,
+  ADDRESS_0, ChainId,
   MDEX_ADDRESS,
   MDEX_FACTORY_ADDRESS,
   MDEX_POOL_ADDRESS,
@@ -49,21 +49,16 @@ import {JsonRpcProvider} from "@ethersproject/providers";
 import {debounce} from 'lodash'
 
 export const useStakingInfo = (stakingInfo) => {
-  const { account, library, chainId } = useActiveWeb3React()
+  const { account } = useActiveWeb3React()
   const [earned, setEarned] = useState()
   const [reward, setReward] = useState()
   const [staked, setStaked] = useState()
   const [earnedTotal, setEarnedTotal] = useState()
   const [balance, setBalance] = useState()
 
-  console.log('address', stakingInfo)
-
   function queryStakingInfo() {
-    const contract = getContract(
-      library,
-      StakingReward,
-      stakingInfo.stakingAddress
-    )
+    var web3 = new Web3(new Web3.providers.HttpProvider(RPC_URLS(ChainId.HECO)))
+    const contract = new web3.eth.Contract(StakingReward, stakingInfo.stakingAddress)
 
     try {
       contract.methods
@@ -82,7 +77,6 @@ export const useStakingInfo = (stakingInfo) => {
         .rewards(account)
         .call()
         .then((res) => {
-          console.log('getReward', res)
           setReward(res)
         })
     } catch (e) {
@@ -94,7 +88,6 @@ export const useStakingInfo = (stakingInfo) => {
         .balanceOf(account)
         .call()
         .then((res) => {
-          console.log('staked', res)
           setStaked(res)
         })
     } catch (e) {
@@ -103,22 +96,15 @@ export const useStakingInfo = (stakingInfo) => {
 
     try {
       if (stakingInfo.address) {
-        const tokenContract = getContract(
-          library,
-          StakingReward,
-          stakingInfo.address
-        )
+        const tokenContract = new web3.eth.Contract(StakingReward, stakingInfo.address)
         tokenContract.methods
           .balanceOf(account)
           .call()
           .then((res) => {
-            console.log('balanceOf', res, stakingInfo.address)
             setBalance(res)
           })
       } else {
-        const web3 = new Web3(library.provider)
         web3.eth.getBalance(account).then((res) => {
-          console.log('eth balance', res)
           setBalance(res)
         })
       }
@@ -128,29 +114,19 @@ export const useStakingInfo = (stakingInfo) => {
 
     try {
       if (stakingInfo.address) {
-        const tokenContract = getContract(
-          library,
-          StakingReward,
-          stakingInfo.address
-        )
+        const tokenContract = new web3.eth.Contract(StakingReward, stakingInfo.address)
         tokenContract.methods
           .balanceOf(stakingInfo.stakingAddress)
           .call()
           .then((res) => {
-            console.log('earned total', res)
             setEarnedTotal(res)
           })
       } else {
-        const tokenContract = getContract(
-          library,
-          StakingReward,
-          WETH_ADDRESS(chainId)
-        )
+        const tokenContract = new web3.eth.Contract(StakingReward, WETH_ADDRESS(ChainId.HECO))
         tokenContract.methods
           .balanceOf(stakingInfo.stakingAddress)
           .call()
           .then((res) => {
-            console.log('earned total', res)
             setEarnedTotal(res)
           })
       }
@@ -177,11 +153,89 @@ export const useStakingPoolInfo = () => {
     staking3: [],
   })
 
-  const { chainId } = useActiveWeb3React()
-
   useEffect(() => {
-    console.log('chain id ---->', chainId)
-    switch (chainId) {
+    setStakingInfos({
+      staking1: [
+        {
+          id: 0,
+          title: 'HUSD POOL',
+          symbol: 'HUSD',
+          decimals: 8,
+          address: '0x0298c2b32eae4da002a15f36fdf7615bea3da047',
+          stakingAddress: '0xE9bA85Ef193c02a5583599676d93b408E106b60B',
+          logo: <HUSD />,
+          multiple: <X1 />,
+        },
+        {
+          id: 1,
+          title: 'HBTC POOL',
+          symbol: 'HBTC',
+          address: '0x66a79d23e58475d2738179ca52cd0b41d73f0bea',
+          stakingAddress: '0xDdB7B0a03A98e7814430E8C010D221D010F2cD6F',
+          logo: <HUSD />,
+          multiple: <X1 />,
+        },
+        {
+          id: 3,
+          title: 'MDX POOL',
+          symbol: 'MDX',
+          address: '0x25D2e80cB6B86881Fd7e07dd263Fb79f4AbE033c',
+          stakingAddress: '0x51137287b88F2CcC39f0E32267035Ad46aeB1e9b',
+          logo: <MDX />,
+          multiple: <X1 />,
+        },
+        {
+          id: 4,
+          title: 'HT POOL',
+          symbol: 'HT',
+          address: null,
+          stakingAddress: '0xB65853Ddc2366564e2238c70a0676B886c79dD9b',
+          logo: <HUSD />,
+          multiple: <X2_5 />,
+        },
+      ],
+      staking2: [
+        {
+          id: 0,
+          title: 'WAR-HT POOL',
+          symbol: 'WAR-HT',
+          address: '0x0509ff1628c90890e52874b3b8b8eeaa5a2af101',
+          stakingAddress: '0x7Aa096b705FA16B595F307Ad647912077521d571',
+          logo: <HUSD_HT />,
+          multiple: <X10 />,
+        },
+        {
+          id: 1,
+          title: 'WAR-HUSD POOL',
+          symbol: 'WAR-HUSD',
+          address: '0x8b8389d355eb7b2c6c86e1bb6614c0a4cb28743a',
+          stakingAddress: '0x1E214fd9348F6A35541C64CA668f25b0Cd59B2A6',
+          logo: <HUSD_WAR />,
+          multiple: <X4 />,
+        },
+        {
+          id: 2,
+          title: 'WAR-MDX POOL',
+          symbol: 'WAR-MDX ',
+          address: '0x608b1d5314b6bba219ccc73caa8831f240f1dfa2',
+          stakingAddress: '0x9cd0C27f743a18Ce38acf28F051Baf09C94423Ff',
+          logo: <HUSD_MDX />,
+          multiple: <X2 />,
+        },
+      ],
+      staking3: [
+        {
+          id: 0,
+          title: 'WAR POOL',
+          symbol: 'WAR',
+          address: '0x880bd31775d97Ce7006D1Cc72EbCC36E412E663C',
+          stakingAddress: '0x54aDaC57CED2318fB23D3093d07558C868dCf972',
+          logo: <WAR />,
+          multiple: <X5 />,
+        },
+      ],
+    })
+   /* switch (chainId) {
       case 3:
         setStakingInfos({
           staking1: [
@@ -349,8 +403,9 @@ export const useStakingPoolInfo = () => {
         break
       default:
         setStakingInfos({ staking1: [], staking2: [], staking3: [] })
-    }
-  }, [chainId])
+    }*/
+  }, [])
+
 
   return stakingInfos
 }
@@ -663,7 +718,6 @@ const debounceFn = debounce((pools, account, callback)=>{
     }
   })
 
-  console.log('pool', all.length)
 
   callback(Promise.all(all))
   // Promise.all(all
@@ -680,7 +734,7 @@ const debounceFn = debounce((pools, account, callback)=>{
 }, 1000)
 
 export const usePoolsInfo = (address = '') => {
-  const { account, active, library, chainId } = useActiveWeb3React()
+  const { account} = useActiveWeb3React()
   const blockHeight = useBlockHeight()
 
 
@@ -716,7 +770,6 @@ export const usePoolsInfo = (address = '') => {
   useEffect(() => {
     debounceFn(pools, account,(promise)=>{
       promise.then((pools) => {
-            console.log(pools)
             setPoolsInfo(pools)
           })
           .catch((e) => {
@@ -730,7 +783,7 @@ export const usePoolsInfo = (address = '') => {
 }
 
 export const usePoolsLBPInfo = (address = '') => {
-  const { account, active, library, chainId } = useActiveWeb3React()
+  const { account } = useActiveWeb3React()
   const blockHeight = useBlockHeight()
 
   const now = parseInt(Date.now() / 1000)
@@ -760,12 +813,9 @@ export const usePoolsLBPInfo = (address = '') => {
   })
 
   useEffect(() => {
-    if (library) {
-      const multicallProvider = getMultiCallProvider(library, chainId)
+      const multicallProvider = getOnlyMultiCallProvider(ChainId.HECO)
       Promise.all(
         poolsLBP.map((pool) => {
-          // 链不匹配 不调用合约
-          if (chainId !== pool.networkId) return pool
           // 如果还未开始，则不调用合约
           if (pool.is_coming) return pool
 
@@ -822,14 +872,14 @@ export const usePoolsLBPInfo = (address = '') => {
         .catch((e) => {
           console.log(e, 'usePoolsLBPInfo')
         })
-    }
+
     return () => {}
   }, [account, address, blockHeight])
   return poolsLBPInfo
 }
 
 export const useFarmInfo = (address = '') => {
-  const { account, active, library, chainId } = useActiveWeb3React()
+  const { account } = useActiveWeb3React()
   const blockHeight = useBlockHeight()
 
   const now = parseInt(Date.now() / 1000)
@@ -837,12 +887,9 @@ export const useFarmInfo = (address = '') => {
   const [farmPoolsInfo, setFarmPoolsInfo] = useState(Farm)
 
   useEffect(() => {
-    if (library) {
-      const multicallProvider = getMultiCallProvider(library, chainId)
       Promise.all(
         Farm.map((pool) => {
-          // 链不匹配 不调用合约
-          if (chainId !== pool.networkId) return pool
+          const multicallProvider = getOnlyMultiCallProvider(pool.networkId)
           const pool_contract = new Contract(pool.address, pool.abi)
           const currency_token = new Contract(pool.MLP, ERC20)
           const promise_list = [
@@ -868,7 +915,7 @@ export const useFarmInfo = (address = '') => {
                 currency_allowance,
                 earned2 = 0,
               ] = data
-              console.log(balanceOf, 'balanceOfbalanceOf')
+              // console.log(balanceOf, 'balanceOfbalanceOf')
               return Object.assign({}, pool, {
                 start_at: begin,
                 earned,
@@ -891,18 +938,17 @@ export const useFarmInfo = (address = '') => {
         .catch((err) => {
           console.log(err, 'farm')
         })
-    }
   }, [account, address, blockHeight])
   return farmPoolsInfo
 }
 
 export const useTotalRewards = (address, abi, _chainId) => {
-  const { account, active, library, chainId } = useActiveWeb3React()
   const [total, setTotal] = useState(0)
   const blockHeight = useBlockHeight()
+  var web3 = new Web3(new Web3.providers.HttpProvider(RPC_URLS(_chainId)))
+  const contract = new web3.eth.Contract(abi, address)
   useEffect(() => {
-    if (library && address && _chainId == chainId) {
-      const contract = getContract(library, abi, address)
+    if (address) {
       contract.methods
         .rewards(ADDRESS_0)
         .call()
@@ -911,17 +957,17 @@ export const useTotalRewards = (address, abi, _chainId) => {
         })
     }
     return () => {}
-  }, [active, library, blockHeight])
+  }, [blockHeight])
   return total
 }
 
 export const useSpan = (address, abi, _chainId) => {
-  const { account, active, library, chainId } = useActiveWeb3React()
   const [span, setSpan] = useState(0)
   const blockHeight = useBlockHeight()
   useEffect(() => {
-    if (library && address && _chainId == chainId) {
-      const contract = getContract(library, abi, address)
+    if (address) {
+      var web3 = new Web3(new Web3.providers.HttpProvider(RPC_URLS(_chainId)))
+      const contract = new web3.eth.Contract(abi, address)
       contract.methods
         .rewardsDuration()
         .call()
@@ -930,7 +976,7 @@ export const useSpan = (address, abi, _chainId) => {
         })
     }
     return () => {}
-  }, [active, library, blockHeight])
+  }, [blockHeight])
   return span
 }
 
@@ -946,7 +992,6 @@ export const useAPR = (
   mode = 1,
   _chainId
 ) => {
-  const { account, active, library, chainId } = useActiveWeb3React()
   const blockHeight = useBlockHeight()
   // const [yearReward, setYearReward] = useState(0)
   const [apr, setApr] = useState(0)
@@ -959,7 +1004,8 @@ export const useAPR = (
   const allowance = useAllowance(
     reward1_address,
     pool_address,
-    MINE_MOUNTAIN_ADDRESS(chainId)
+    MINE_MOUNTAIN_ADDRESS(_chainId),
+      _chainId
   )
 
   // 获取奖励1未发放的量
@@ -1003,7 +1049,7 @@ export const useAPR = (
         .multipliedBy(new BigNumber(lptValue))
         .toString()
     )
-  }, [library, lptTotalPrice])
+  }, [lptTotalPrice])
 
   useEffect(() => {
     setRewardsTotalValue(
@@ -1011,44 +1057,37 @@ export const useAPR = (
         .multipliedBy(new BigNumber(reward1Vol))
         .toString()
     )
-  }, [library, rewardsTotalPrice])
+  }, [rewardsTotalPrice])
 
   // 计算奖励的量
   useEffect(() => {
-    if (library && allowance && pool_address && _chainId == chainId) {
+    if (allowance && pool_address) {
       const reward1_vol = new BigNumber(allowance).minus(
         new BigNumber(unClaimReward)
       )
-      console.log(
-        'ara',
-        'reward1_vol',
-        fromWei(reward1_vol.toString()).toString()
-      )
-      console.log('ara', 'allowance', allowance.toString())
-      console.log('ara', 'reward1_vol', reward1_vol.toString())
       setReward1Vol(reward1_vol.toString())
     }
-  }, [library, allowance, unClaimReward, _chainId, chainId])
+  }, [allowance, unClaimReward, _chainId])
+
+  // useEffect(() => {
+  //   console.log('ara', 'rewardsTotalValue', rewardsTotalValue)
+  // }, [rewardsTotalValue])
+  //
+  // useEffect(() => {
+  //   console.log('ara', 'reward1Vol', fromWei(reward1Vol).toString())
+  // }, [reward1Vol])
+  //
+  // useEffect(() => {
+  //   console.log('ara', 'lptTotalValue', lptTotalValue)
+  // }, [lptTotalValue])
+  //
+  // useEffect(() => {
+  //   console.log('ara', 'lptValue', fromWei(lptValue.toString()).toString())
+  //   console.log('ara', 'lptValue', lptValue.toString())
+  // }, [lptValue])
 
   useEffect(() => {
-    console.log('ara', 'rewardsTotalValue', rewardsTotalValue)
-  }, [library, rewardsTotalValue])
-
-  useEffect(() => {
-    console.log('ara', 'reward1Vol', fromWei(reward1Vol).toString())
-  }, [library, reward1Vol])
-
-  useEffect(() => {
-    console.log('ara', 'lptTotalValue', lptTotalValue)
-  }, [library, lptTotalValue])
-
-  useEffect(() => {
-    console.log('ara', 'lptValue', fromWei(lptValue.toString()).toString())
-    console.log('ara', 'lptValue', lptValue.toString())
-  }, [library, lptValue])
-
-  useEffect(() => {
-    if (library && lptTotalValue && rewardsTotalValue && span > 0 && _chainId == chainId) {
+    if (lptTotalValue && rewardsTotalValue && span > 0) {
       const dayRate = new BigNumber(1).div(
         new BigNumber(span).div(new BigNumber(86400))
       )
@@ -1078,8 +1117,7 @@ export const useAPR = (
       }
     }
     return () => {}
-  }, [library, span, lptTotalValue, rewardsTotalValue, blockHeight])
-
+  }, [span, lptTotalValue, rewardsTotalValue, blockHeight])
   return apr
 }
 
@@ -1091,69 +1129,64 @@ export const useMdxARP = (
   _chainId
 ) => {
   // mdx 年释放总量 * 价值 /
-  const { account, active, library, chainId } = useActiveWeb3React()
+  const multicallProvider = getOnlyMultiCallProvider(_chainId)
   const [apr, setApr] = useState(0)
   const blockHeight = useBlockHeight()
 
   const lptValue = useLTPValue(
     lpt_address,
-    chainId && WAR_ADDRESS(chainId),
+      WAR_ADDRESS(ChainId.HECO),
     pool_address,
     pool_abi,
     _chainId
   )
   const [mdex2warPrice, mdex2warPriceFee] = useMDexPrice(
     MDEX_ADDRESS,
-    chainId && WAR_ADDRESS(chainId),
+    WAR_ADDRESS(ChainId.HECO),
     2534.4,
-    [chainId && WHT_ADDRESS(chainId)],
-    _chainId
+    [WHT_ADDRESS(ChainId.HECO)],
+    _chainId, // 取价格的chainId只有在HECO上有
   )
   useEffect(() => {
     if (
-      library &&
       pool_address &&
       lptValue > 0 &&
-      mdex2warPrice > 0 &&
-      _chainId == chainId) {
-      const contract = getContract(library, MDexPool, MDEX_POOL_ADDRESS)
-      const pool_contract = getContract(library, pool_abi, pool_address)
+      mdex2warPrice > 0) {
+      const contract = new Contract(MDEX_POOL_ADDRESS, MDexPool)
+      const pool_contract = new Contract(pool_address, pool_abi)
       const poolId = '0x4c'
       const promiseList = [
-        contract.methods.poolInfo(poolId).call(),
-        pool_contract.methods.totalSupply().call(),
+        contract.poolInfo(poolId),
+        pool_contract.totalSupply(),
       ]
-      Promise.all(promiseList).then((data) => {
+      multicallProvider.all(promiseList).then((data) => {
+        data = processResult(data)
         const [poolInfo, totalSupply] = data
-        const { totalAmount } = poolInfo
-        console.log('totalAmount', totalAmount)
-        console.log('totalSupply', totalSupply)
-        console.log('mdex2warPrice', mdex2warPrice)
+        const totalAmount = poolInfo[5]
         const radio = new BigNumber(totalSupply).div(new BigNumber(totalAmount))
-        console.log('radio', radio.toString())
         const totalRewardValue = radio
           .multipliedBy(new BigNumber(numToWei(mdex2warPrice)))
           .multipliedBy(new BigNumber(365))
-        console.log('mdextotalRewardValue', totalRewardValue.toString())
-        console.log('mdexlptValue', lptValue.toString())
         const apr = totalRewardValue.div(lptValue).toString()
-        console.log('apr', apr)
+        if (isNaN(apr)){
+          debugger
+        }
         setApr(apr)
       })
     }
-  }, [library, lptValue, mdex2warPrice, blockHeight])
+  }, [lptValue, mdex2warPrice, blockHeight])
   return apr
 }
 export const useMDexPrice = (address1, address2, amount = 1, path = [], _chainId) => {
   const FEE_RADIO = '0.003'
-  const { account, active, library, chainId } = useActiveWeb3React()
+  const { account} = useActiveWeb3React()
    const blockHeight = useBlockHeight()
   const [price, setPrice] = useState(0)
   const [fee, setFee] = useState(0)
 
+  const multicallProvider = getOnlyMultiCallProvider(_chainId)
   const getPairPrice = (address1, address2, amount) => {
-    const multicallProvider = getMultiCallProvider(library, chainId)
-    const factory = new Contract(MDEX_FACTORY_ADDRESS(chainId), MDexFactory)
+    const factory = new Contract(MDEX_FACTORY_ADDRESS(_chainId), MDexFactory)
     const promise_list = [factory.getPair(address1, address2)]
     return multicallProvider.all(promise_list).then((data) => {
       let [pair_address] = processResult(data)
@@ -1208,7 +1241,6 @@ export const useMDexPrice = (address1, address2, amount = 1, path = [], _chainId
     _price = amount
     let _fee = '0'
     let _fee_amount = amount.toString()
-    if (_chainId && _chainId !== chainId) return ['0', '0']
     for (let i = 1; i < _path.length; i++) {
       const from_address = _path[i - 1]
       const to_address = _path[i]
@@ -1228,19 +1260,17 @@ export const useMDexPrice = (address1, address2, amount = 1, path = [], _chainId
   }
 
   useEffect(() => {
-    if (library && _chainId == chainId) {
-      if (Web3.utils.isAddress(address1) && amount > 0) {
-        // use path
-        getPrice(address1, address2, amount, path, _chainId).then(
-          ([_price, _fee]) => {
-            setPrice(_price)
-            setFee(_fee)
-          }
-        )
-      }
+    if (Web3.utils.isAddress(address1) && amount > 0) {
+      // use path
+      getPrice(address1, address2, amount, path, _chainId).then(
+        ([_price, _fee]) => {
+          setPrice(_price)
+          setFee(_fee)
+        }
+      )
     }
     return () => {}
-  }, [library, account, blockHeight, address1, address2, amount, chainId])
+  }, [account, blockHeight, address1, address2, amount])
   if (amount == 0) return ['0', '0']
 
   return [price, fee]
@@ -1257,12 +1287,11 @@ export const useLTPValue = (
   pool_abi,
   _chainId
 ) => {
-  const { account, active, library, chainId } = useActiveWeb3React()
   const [value, setValue] = useState(0)
   const blockHeight = useBlockHeight()
   useEffect(() => {
-    if (library && pool_address && _chainId == chainId) {
-      const multicallProvider = getMultiCallProvider(library, chainId)
+    if (pool_address) {
+      const multicallProvider = getOnlyMultiCallProvider(_chainId)
 
       const pool_contract = new Contract(pool_address, pool_abi)
 
@@ -1278,8 +1307,8 @@ export const useLTPValue = (
       multicallProvider
         .all(promise_list)
         .then((data) => {
-          console.log(data)
-          console.log('#############')
+          // console.log(data)
+          // console.log('#############')
           data = processResult(data)
           const [
             token0_address,
@@ -1288,13 +1317,13 @@ export const useLTPValue = (
             totalSupply,
             poolTotalSupply,
           ] = data
-          console.log('_reserve0', _reserve0)
-          console.log('_reserve1', _reserve1)
-          console.log('token0_address', token0_address)
-          console.log('token1_address', token1_address)
-          console.log('token_address', token_address)
-          console.log('totalSupply', totalSupply)
-          console.log('poolTotalSupply', poolTotalSupply)
+          // console.log('_reserve0', _reserve0)
+          // console.log('_reserve1', _reserve1)
+          // console.log('token0_address', token0_address)
+          // console.log('token1_address', token1_address)
+          // console.log('token_address', token_address)
+          // console.log('totalSupply', totalSupply)
+          // console.log('poolTotalSupply', poolTotalSupply)
           if (token_address == token0_address) {
             setValue(
               new BigNumber(_reserve0)
@@ -1323,7 +1352,7 @@ export const useLTPValue = (
         })
     }
     return () => {}
-  }, [library, blockHeight])
+  }, [blockHeight])
   return value
 }
 

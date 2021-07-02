@@ -3,7 +3,7 @@ import { Link, NavLink, useLocation } from 'react-router-dom'
 import { FormattedMessage } from 'react-intl'
 import { withRouter } from 'react-router'
 import { useActiveWeb3React } from '../../web3'
-import { USDT_ADDRESS, WAR_ADDRESS, WHT_ADDRESS } from '../../web3/address'
+import {ChainId, USDT_ADDRESS, WAR_ADDRESS, WHT_ADDRESS} from '../../web3/address'
 import { useMDexPrice } from '../../pages/pools/Hooks'
 import { splitFormat } from '../../utils/format'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
@@ -31,7 +31,7 @@ const Banner = (props) => {
   const poolsLBP = usePoolsLBPInfo()
   const [realTimePrice, setRealTimePrice] = useState('-')
   const [bscPrice, setBscPrice] = useState(0)
-  let timer = useRef() 
+  let timer = useRef()
   const WarTokenAddress =
     WAR_ADDRESS[chainId] || '0x910651F81a605a6Ef35d05527d24A72fecef8bF0'
   // const [_tmp_price_war2ht, _tmp_price_war2ht_fee] = useMDexPrice(
@@ -54,10 +54,10 @@ const Banner = (props) => {
   // }, [_tmp_price_war2ht, _tmp_price_usdt2ht])
 
   const [price, fee] = useMDexPrice(
-    chainId && WAR_ADDRESS(chainId),
-    chainId && USDT_ADDRESS(chainId),
+    chainId && WAR_ADDRESS(ChainId.HECO),
+    chainId && USDT_ADDRESS(ChainId.HECO),
     1,
-    [chainId && WHT_ADDRESS(chainId)],
+    [chainId && WHT_ADDRESS(ChainId.HECO)],
     128
   )
 
@@ -84,7 +84,7 @@ const Banner = (props) => {
          clearInterval(timer.current)
        }
      }
-     
+
    }, [chainId])
 
   useEffect(() => {

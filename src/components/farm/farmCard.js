@@ -13,12 +13,11 @@ import Timer from 'react-compound-timer'
 import { formatNumber } from 'accounting'
 
 const FarmCard = (props) => {
-  const { chainId } = useActiveWeb3React()
   const { dispatch, state } = useContext(mainContext)
   const { pools } = props
   const farmPools = pools
   const [hoverFlag, setHoverFlag] = useState(false)
-  const { balance } = useBalance(farmPools && farmPools.MLP)
+  const { balance } = useBalance(farmPools && farmPools.MLP, props.pools.networkId)
   const [balanceProportion, setBalanceProportion] = useState(0)
   const [now, setNow] = useState(parseInt(Date.now() / 1000))
 
@@ -45,8 +44,6 @@ const FarmCard = (props) => {
 
   const [aprPercentage, setPercentage] = useState('-')
   useEffect(() => {
-    console.log('apr', apr)
-    console.log('mdexApr', mdexApr)
     if (!isNaN(apr) && apr > 0 && (!farmPools.mdexReward || mdexApr > 0)) {
       setPercentage((apr * 100 + mdexApr * 100).toFixed(2))
     }

@@ -10,7 +10,7 @@ import {
   WHT_ADDRESS,
   WMDEX_ADDRESS,
   MDEX_ROUTER_ADDRESS,
-  WETH_ADDRESS,
+  WETH_ADDRESS, ChainId,
 } from '../../web3/address'
 import BigNumber from 'bignumber.js'
 import { getContract, useActiveWeb3React } from '../../web3'
@@ -44,13 +44,13 @@ const BuyCoinPopup = (props) => {
 
   const [outAmount, outFee] = useMDexPrice(
     fromToken,
-    chainId && WAR_ADDRESS(chainId),
+    chainId && WAR_ADDRESS(ChainId.HECO),
     amount,
     middlePath,
       128
   )
   const [radioOutAmount, fee] = useMDexPrice(
-    chainId && WAR_ADDRESS(chainId),
+    chainId && WAR_ADDRESS(ChainId.HECO),
     fromToken,
     1,
     middlePath,
@@ -59,20 +59,20 @@ const BuyCoinPopup = (props) => {
 
   const [HTRadioOutAmount, HTFee] = useMDexPrice(
     fromToken,
-    chainId && WAR_ADDRESS(chainId),
+    chainId && WAR_ADDRESS(ChainId.HECO),
     0.1,
     middlePath,
       128
   )
 
   const USDTAllowance = useAllowance(
-    chainId && USDT_ADDRESS(chainId),
+    chainId && USDT_ADDRESS(ChainId.HECO),
     MDEX_ROUTER_ADDRESS,
     account
   )
 
   const MDEXAllowance = useAllowance(
-    chainId && WMDEX_ADDRESS(chainId),
+    chainId && WMDEX_ADDRESS(ChainId.HECO),
     MDEX_ROUTER_ADDRESS,
     account
   )
@@ -219,7 +219,7 @@ const BuyCoinPopup = (props) => {
       contract.methods
         .swapExactETHForTokens(
           numToWei(minAmount),
-          [WHT_ADDRESS(chainId), WAR_ADDRESS(chainId)],
+          [WHT_ADDRESS(ChainId.HECO), WAR_ADDRESS(ChainId.HECO)],
           account,
           deadline
         )
@@ -244,15 +244,15 @@ const BuyCoinPopup = (props) => {
     } else {
       let methodsAddress = ''
       if (tabFlag === 'USDT') {
-        methodsAddress = USDT_ADDRESS(chainId)
+        methodsAddress = USDT_ADDRESS(ChainId.HECO)
       } else if (tabFlag === 'MDX') {
-        methodsAddress = WMDEX_ADDRESS(chainId)
+        methodsAddress = WMDEX_ADDRESS(ChainId.HECO)
       }
       contract.methods
         .swapExactTokensForTokens(
           numToWei(amount),
           numToWei(minAmount),
-          [methodsAddress, WETH_ADDRESS(chainId), WAR_ADDRESS(chainId)],
+          [methodsAddress, WETH_ADDRESS(ChainId.HECO), WAR_ADDRESS(ChainId.HECO)],
           account,
           deadline
         )

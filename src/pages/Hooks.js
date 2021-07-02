@@ -3,16 +3,16 @@ import StakingRewardsV2 from '../web3/abi/StakingRewardsV2.json'
 import ERC20 from '../web3/abi/ERC20.json'
 import { useBlockHeight, useFarmInfo } from './pools/Hooks'
 import { getContract, getWeb3, useActiveWeb3React } from '../web3'
-import { getGLFStakingAddress } from '../web3/address'
+import {ChainId, getGLFStakingAddress, RPC_URLS, WAR_ADDRESS} from '../web3/address'
+import Web3 from "web3";
 
-export const useBalance = (address) => {
+export const useBalance = (address, networkId = ChainId.HECO) => {
   const { account, active, library } = useActiveWeb3React()
   const [balance, setBalance] = useState(0)
   const blockHeight = useBlockHeight()
   // const pools = useFarmInfo()
 
   useEffect(() => {
-    console.log(active)
     if (library && active) {
       try {
         if (address === '0x0') {
@@ -23,14 +23,13 @@ export const useBalance = (address) => {
             setBalance(balance)
           })
         } else {
-          const contract = getContract(library, ERC20.abi, address)
-
-          console.log('token address:', address)
+          // const contract = getContract(library, ERC20.abi, address)
+          var web3 = new Web3(new Web3.providers.HttpProvider(RPC_URLS(networkId)))
+          const contract = new web3.eth.Contract(ERC20.abi, WAR_ADDRESS(networkId))
           contract.methods
             .balanceOf(account)
             .call()
             .then((res) => {
-              console.log('token totalSupply:', res)
               setBalance(res)
             })
         }
@@ -78,25 +77,26 @@ export const useHTBalance = () => {
   return { balance }
 }
 
-export const useAllowance = (contract_address, address, owner_address) => {
+export const useAllowance = (contract_address, address, owner_address, _chainId) => {
   const { account, active, library } = useActiveWeb3React()
   const [allowance, setAllowance] = useState(0)
   const blockHeight = useBlockHeight()
+  var web3 = new Web3(new Web3.providers.HttpProvider(RPC_URLS(_chainId))) // _chainId = pool.networkId
+  const contract = new web3.eth.Contract(ERC20.abi, WAR_ADDRESS(_chainId))
   useEffect(() => {
-    if (active) {
+    // if (active) {
       try {
-        const contract = getContract(library, ERC20.abi, contract_address)
+        // const contract = getContract(library, ERC20.abi, contract_address)
         contract.methods
           .allowance(owner_address, address)
           .call()
           .then((res) => {
-            console.log('token allowance:', res)
             setAllowance(res)
           })
       } catch (e) {
         console.log('load token allowance error:', e)
       }
-    }
+    // }
     return () => {}
   }, [account, library, active, blockHeight])
   return allowance
