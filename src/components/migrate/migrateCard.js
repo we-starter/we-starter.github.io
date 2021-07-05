@@ -162,6 +162,7 @@ const BridgeCard = (props) => {
         setLoading(true)
         let myContract = new web3.eth.Contract(config.stackContract.abi, config.stackContract.address);
         const params = config.type === BRIDGE_TYPE_BURN ? [web3.utils.toWei(amount, 'ether'), toChainId, account] : [toChainId, account, web3.utils.toWei(amount, 'ether')]
+        console.log(params)
         myContract.methods[config.stackContract.method](...params).send({
             from: account,
             value: web3.utils.toWei('0.005', 'ether')

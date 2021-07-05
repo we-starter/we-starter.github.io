@@ -417,6 +417,7 @@ export function useBlockHeight() {
 
 
 const debounceFn = debounce((pools, account, callback)=>{
+  console.log('pools, account', pools, account)
   const now = parseInt(Date.now() / 1000)
   const all = pools.map((pool) => {
     // 链不匹配 不调用合约
@@ -725,7 +726,6 @@ export const usePoolsInfo = (address = '') => {
   const { account} = useActiveWeb3React()
   const blockHeight = useBlockHeight()
 
-
   const pools = Pools.filter(
     (o) =>
       address === '' || o.address === address
@@ -756,6 +756,7 @@ export const usePoolsInfo = (address = '') => {
   })
 
   useMemo(() => {
+    if (!account) return () =>{}
     debounceFn(pools, account,(promise)=>{
       promise.then((pools) => {
             setPoolsInfo(pools)
@@ -877,6 +878,7 @@ export const useFarmInfo = (address = '') => {
   const [farmPoolsInfo, setFarmPoolsInfo] = useState(pool)
 
   useMemo(() => {
+    if (!account) return () =>{}
     const multicallProvider = getOnlyMultiCallProvider(pool.networkId)
     const pool_contract = new Contract(pool.address, pool.abi)
     const currency_token = new Contract(pool.MLP, ERC20)
