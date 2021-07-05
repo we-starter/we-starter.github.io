@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, {useContext, useEffect, useMemo, useState} from 'react'
 import cs from 'classnames'
 import { FormattedMessage, injectIntl } from 'react-intl'
 import BigNumber from 'bignumber.js'
@@ -6,21 +6,19 @@ import { useActiveWeb3React } from '../../web3'
 import { HANDLE_WALLET_MODAL } from '../../const'
 import { mainContext } from '../../reducer'
 import { formatAmount, splitFormat } from '../../utils/format'
-import { useAPR, useMdxARP } from '../../pages/pools/Hooks'
+import {useAPR, useFarmInfo, useMdxARP} from '../../pages/pools/Hooks'
 import { useBalance } from '../../pages/Hooks'
 import Timer from 'react-compound-timer'
 // 处理格式 千位符
 import { formatNumber } from 'accounting'
 
 const FarmCard = (props) => {
-  const { dispatch, state } = useContext(mainContext)
-  const { pools } = props
-  const farmPools = pools
+  let { pools:farmPools, dispatch} = props
   const [hoverFlag, setHoverFlag] = useState(false)
+  farmPools = useFarmInfo(farmPools.address)
   const { balance } = useBalance(farmPools && farmPools.MLP, props.pools.networkId)
   const [balanceProportion, setBalanceProportion] = useState(0)
   const [now, setNow] = useState(parseInt(Date.now() / 1000))
-
   const apr = useAPR(
     farmPools.address,
     farmPools.abi,
@@ -41,6 +39,7 @@ const FarmCard = (props) => {
     farmPools.rewards1Address,
     farmPools.networkId
   )
+
 
   const [aprPercentage, setPercentage] = useState('-')
   useEffect(() => {
@@ -631,4 +630,7 @@ const FarmCard = (props) => {
   )
 }
 
-export default injectIntl(FarmCard)
+export default injectIntl((props) => {
+  const { dispatch, state } = useContext(mainContext)
+  return useMemo(() => <FarmCard {...props} dispatch/>, [props])
+})

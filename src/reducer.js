@@ -22,7 +22,7 @@ import {
   IS_SUPPORTEDCHAIN,
   CHANGE_SLIPPAGE,
   RANDOM_NUMBER,
-  HANDLE_WITHDRAW_MODAL
+  HANDLE_WITHDRAW_MODAL, BLOCK_HEIGHT
 } from './const'
 
 const mainContext = React.createContext()
@@ -110,11 +110,16 @@ const reducer = (state, action) => {
         ...state,
         randomNumber: action.randomNumber,
       }
-    case HANDLE_WITHDRAW_MODAL: 
+    case HANDLE_WITHDRAW_MODAL:
     return {
       ...state,
       withdrawModal: action.withdrawModal
     }
+    case BLOCK_HEIGHT:
+      return {
+        ...state,
+        blockHeight: action.blockHeight
+      }
     default:
       return state
   }
@@ -144,6 +149,7 @@ const ContextProvider = (props) => {
     toolData: null,
     slippageVal: 10, // 滑点值
     randomNumber: null,
+    blockHeight: 0, // 块高度
   })
   return (
     <mainContext.Provider value={{ state, dispatch }}>

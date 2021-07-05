@@ -25,9 +25,11 @@ export const useBalance = (address, networkId = ChainId.HECO) => {
   useEffect(() => {
     if (library && active) {
       try {
+        // console.log('request___6')
         if (address === '0x0') {
           // 0x0是HT
           const web3 = getWeb3(library)
+
           web3.eth.getBalance(account).then((balance) => {
             console.log(account, balance, 'balance')
             setBalance(balance)
@@ -72,6 +74,8 @@ export const useHTBalance = () => {
     // }
 
     if (library && active) {
+
+      // console.log('request___7')
       const web3 = getWeb3(library)
       web3.eth.getBalance(account).then((balance) => {
         setBalance(balance)
@@ -90,9 +94,14 @@ export const useAllowance = (contract_address, address, owner_address, _chainId)
   const [allowance, setAllowance] = useState(0)
   const blockHeight = useBlockHeight()
   useEffect(() => {
-    const contract = createContractERC20(chainId)
+    if (!_chainId && !chainId){
+      return () => {}
+    }
+    const contract = createContractERC20(_chainId || chainId)
     try {
       // const contract = getContract(library, ERC20.abi, contract_address)
+
+      // console.log('request___8')
       contract.methods
         .allowance(owner_address, address)
         .call()

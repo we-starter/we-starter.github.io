@@ -5,13 +5,11 @@ import { FormattedMessage, injectIntl } from 'react-intl'
 import { FarmBanner } from '../../components/farm/farmBanner'
 import Footer from '../../components/Footer'
 import FarmCard from '../../components/farm/farmCard'
+import farms from '../../configs/farm'
 import { useFarmInfo } from './Hooks'
 import Coming_Small from '../../assets/icon/farm/coming_small@2x.png'
 
 const Farm = (props) => {
-   const { chainId } = useActiveWeb3React()
-  const pools = useFarmInfo()
-
   const isComing = (index) => {
     return (
       <div className='farm_index_card farm_index_coming' key={index}>
@@ -66,11 +64,10 @@ const Farm = (props) => {
         <div className='farm_box_main'>
             <FarmBanner />
             <div className='farm_index'>
-                {pools &&
-                pools.map((item, index) => {
+                { farms.map((item, index) => {
                     return <FarmCard pools={item} key={index} />
                 })}
-                {pools.length < 3 && [1, 2].map(() => isComing(Math.random()))}
+                {/*{pools.length < 3 && [1, 2].map(() => isComing(Math.random()))}*/}
             </div>
         </div>
       <Footer />

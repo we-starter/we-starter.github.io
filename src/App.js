@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, {useContext, useEffect} from 'react'
 import { HashRouter as Router, Switch, Route } from 'react-router-dom'
 import { Web3ReactProvider } from '@web3-react/core'
 import { Web3Provider } from '@ethersproject/providers'
@@ -8,7 +8,7 @@ import { Header } from './components/header/Header'
 
 import ExtractComponents from './pages/pools/extractComponents'
 
-import { ContextProvider } from './reducer'
+import {ContextProvider, mainContext} from './reducer'
 import { InitPage } from './pages/InitPage'
 
 import Footer from './components/Footer'
@@ -28,6 +28,7 @@ function getLibrary(provider) {
 }
 
 function App() {
+
   useEffect(() => {
     const el = document.querySelector('.loader-container')
     if (el) {

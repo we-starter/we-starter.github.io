@@ -61,32 +61,6 @@ const Banner = (props) => {
     128
   )
 
-  const getTokenPrice = () => {
-    toolApi
-      .getWarTokenPrice()
-      .then((res) => {
-        if (res.data.data) {
-          setBscPrice(res.data.data.price)
-        }
-      })
-      .catch((e) => {
-        console.log(e)
-      })
-  }
-   useEffect(() => {
-     clearInterval(timer.current)
-     if (chainId == 56) {
-       getTokenPrice()
-       timer.current = setInterval(() => {
-         getTokenPrice()
-       }, 60000)
-       return () => {
-         clearInterval(timer.current)
-       }
-     }
-
-   }, [chainId])
-
   useEffect(() => {
     if (price * 1 > 0) {
       setRealTimePrice(splitFormat(price, 3))
@@ -268,9 +242,10 @@ const Banner = (props) => {
               </span>
               <span className='banner_related_data_val'>
                 $
-                {chainId == 128
-                  ? realTimePrice
-                  : bscPrice * 1 > 0 ? splitFormat(bscPrice, 3) : '-'}
+                {/*{chainId == 128*/}
+                {/*  ? realTimePrice*/}
+                {/*  : bscPrice * 1 > 0 ? splitFormat(bscPrice, 3) : '-'}*/}
+                {realTimePrice || '-'}
               </span>
             </p>
             {/* href='https://ht.mdex.com/#/swap?outputCurrency=0x910651f81a605a6ef35d05527d24a72fecef8bf0'

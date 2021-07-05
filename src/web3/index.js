@@ -2,9 +2,14 @@ import { useWeb3React as useWeb3ReactCore } from '@web3-react/core'
 import Web3 from 'web3'
 import ethAbi from 'web3-eth-abi'
 import {message} from "antd";
+import {ChainId, RPC_URLS} from "./address";
 
 export function getWeb3(library) {
   return new Web3(library.provider)
+}
+
+export function getHttpWeb3(chainId) {
+  return new Web3(new Web3.providers.HttpProvider(RPC_URLS(chainId)))
 }
 
 export function getContract(library, abi, address) {

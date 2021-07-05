@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react'
+import React, {useContext, useState, useEffect, useMemo} from 'react'
 import { getContract, getLogs, useActiveWeb3React } from '../../web3'
 import {
   ADDRESS_0, ChainId,
@@ -47,6 +47,7 @@ import warnAboutDeprecatedESMImport from 'react-router-dom/es/warnAboutDeprecate
 import { mainContext } from '../../reducer'
 import {JsonRpcProvider} from "@ethersproject/providers";
 import {debounce} from 'lodash'
+import {BLOCK_HEIGHT} from "../../const";
 
 export const useStakingInfo = (stakingInfo) => {
   const { account } = useActiveWeb3React()
@@ -55,7 +56,6 @@ export const useStakingInfo = (stakingInfo) => {
   const [staked, setStaked] = useState()
   const [earnedTotal, setEarnedTotal] = useState()
   const [balance, setBalance] = useState()
-
   function queryStakingInfo() {
     var web3 = new Web3(new Web3.providers.HttpProvider(RPC_URLS(ChainId.HECO)))
     const contract = new web3.eth.Contract(StakingReward, stakingInfo.stakingAddress)
@@ -409,22 +409,10 @@ export const useStakingPoolInfo = () => {
   return stakingInfos
 }
 
+
 export function useBlockHeight() {
-  const { account, active, library } = useActiveWeb3React()
-  const [blockNumber, setBlockNumber] = useState(0)
-  const { dispatch, state } = useContext(mainContext)
-
-  const updateBlockNumber = (blockNumber) => {
-    setBlockNumber(blockNumber)
-  }
-  useEffect(() => {
-    library && library.once('block', updateBlockNumber)
-    return () => {
-      library && library.off('block', updateBlockNumber)
-    }
-  }, [blockNumber, library, state.randomNumber])
-
-  return blockNumber
+  const { state } = useContext(mainContext)
+  return state.blockHeight
 }
 
 
@@ -732,6 +720,7 @@ const debounceFn = debounce((pools, account, callback)=>{
   //     })
 }, 1000)
 
+
 export const usePoolsInfo = (address = '') => {
   const { account} = useActiveWeb3React()
   const blockHeight = useBlockHeight()
@@ -766,7 +755,7 @@ export const usePoolsInfo = (address = '') => {
     })
   })
 
-  useEffect(() => {
+  useMemo(() => {
     debounceFn(pools, account,(promise)=>{
       promise.then((pools) => {
             setPoolsInfo(pools)
@@ -811,7 +800,7 @@ export const usePoolsLBPInfo = (address = '') => {
     })
   })
 
-  useEffect(() => {
+  useMemo(() => {
       const multicallProvider = getOnlyMultiCallProvider(ChainId.HECO)
       Promise.all(
         poolsLBP.map((pool) => {
@@ -881,59 +870,51 @@ export const useFarmInfo = (address = '') => {
   const { account } = useActiveWeb3React()
   const blockHeight = useBlockHeight()
 
+  const pool = Farm.find(o => o.address === address)
+
   const now = parseInt(Date.now() / 1000)
 
-  const [farmPoolsInfo, setFarmPoolsInfo] = useState(Farm)
+  const [farmPoolsInfo, setFarmPoolsInfo] = useState(pool)
 
-  useEffect(() => {
-      Promise.all(
-        Farm.map((pool) => {
-          const multicallProvider = getOnlyMultiCallProvider(pool.networkId)
-          const pool_contract = new Contract(pool.address, pool.abi)
-          const currency_token = new Contract(pool.MLP, ERC20)
-          const promise_list = [
-            pool_contract.begin(), // 开始时间
-            pool_contract.earned(account), // 奖励1
-            pool_contract.totalSupply(), // 总抵押
-            pool_contract.balanceOf(account), // 我的抵押
-            currency_token.allowance(account, pool.address),
-          ]
+  useMemo(() => {
+    const multicallProvider = getOnlyMultiCallProvider(pool.networkId)
+    const pool_contract = new Contract(pool.address, pool.abi)
+    const currency_token = new Contract(pool.MLP, ERC20)
+    const promise_list = [
+      pool_contract.begin(), // 开始时间
+      pool_contract.earned(account), // 奖励1
+      pool_contract.totalSupply(), // 总抵押
+      pool_contract.balanceOf(account), // 我的抵押
+      currency_token.allowance(account, pool.address),
+    ]
 
-          if (pool.rewards2) {
-            promise_list.push(pool_contract.earned2(account))
-          }
-          return multicallProvider
-            .all(promise_list)
-            .then((data) => {
-              data = processResult(data)
-              console.log('data', data)
-              let [
-                begin,
-                earned,
-                totalSupply,
-                balanceOf,
-                currency_allowance,
-                earned2 = 0,
-              ] = data
-              // console.log(balanceOf, 'balanceOfbalanceOf')
-              return Object.assign({}, pool, {
-                start_at: begin,
-                earned,
-                earned2,
-                totalSupply,
-                balanceOf: Web3.utils.fromWei(balanceOf, 'ether'),
-                allowance: currency_allowance,
-              })
-            })
-            .catch((e) => {
-              console.log(e, '==== farm ====')
-              return pool
-            })
-        })
-      )
-        .then((pools) => {
-          console.log(pools)
-          setFarmPoolsInfo(pools)
+    if (pool.rewards2) {
+      promise_list.push(pool_contract.earned2(account))
+    }
+    // console.log('request___1')
+    multicallProvider
+        .all(promise_list)
+        .then((data) => {
+          data = processResult(data)
+          let [
+            begin,
+            earned,
+            totalSupply,
+            balanceOf,
+            currency_allowance,
+            earned2 = 0,
+          ] = data
+          // console.log(balanceOf, 'balanceOfbalanceOf')
+          return Object.assign({}, pool, {
+            start_at: begin,
+            earned,
+            earned2,
+            totalSupply,
+            balanceOf: Web3.utils.fromWei(balanceOf, 'ether'),
+            allowance: currency_allowance,
+          })})
+        .then((pool) => {
+          setFarmPoolsInfo(pool)
         })
         .catch((err) => {
           console.log(err, 'farm')
@@ -947,7 +928,7 @@ export const useTotalRewards = (address, abi, _chainId) => {
   const blockHeight = useBlockHeight()
   var web3 = new Web3(new Web3.providers.HttpProvider(RPC_URLS(_chainId)))
   const contract = new web3.eth.Contract(abi, address)
-  useEffect(() => {
+  useMemo(() => {
     if (address) {
       contract.methods
         .rewards(ADDRESS_0)
@@ -964,7 +945,7 @@ export const useTotalRewards = (address, abi, _chainId) => {
 export const useSpan = (address, abi, _chainId) => {
   const [span, setSpan] = useState(0)
   const blockHeight = useBlockHeight()
-  useEffect(() => {
+  useMemo(() => {
     if (address) {
       var web3 = new Web3(new Web3.providers.HttpProvider(RPC_URLS(_chainId)))
       const contract = new web3.eth.Contract(abi, address)
@@ -1000,6 +981,7 @@ export const useAPR = (
   const [rewardsTotalValue, setRewardsTotalValue] = useState('0')
   const [lptTotalValue, setLptTotalValue] = useState('0')
 
+  // console.log('555555555')
   // 获取奖励1在矿山的总量
   const allowance = useAllowance(
     reward1_address,
@@ -1043,7 +1025,7 @@ export const useAPR = (
     _chainId
   )
 
-  useEffect(() => {
+  useMemo(() => {
     setLptTotalValue(
       new BigNumber(lptTotalPrice)
         .multipliedBy(new BigNumber(lptValue))
@@ -1051,7 +1033,7 @@ export const useAPR = (
     )
   }, [lptTotalPrice])
 
-  useEffect(() => {
+  useMemo(() => {
     setRewardsTotalValue(
       new BigNumber(rewardsTotalPrice)
         .multipliedBy(new BigNumber(reward1Vol))
@@ -1060,7 +1042,7 @@ export const useAPR = (
   }, [rewardsTotalPrice])
 
   // 计算奖励的量
-  useEffect(() => {
+  useMemo(() => {
     if (allowance && pool_address) {
       const reward1_vol = new BigNumber(allowance).minus(
         new BigNumber(unClaimReward)
@@ -1069,24 +1051,8 @@ export const useAPR = (
     }
   }, [allowance, unClaimReward, _chainId])
 
-  // useEffect(() => {
-  //   console.log('ara', 'rewardsTotalValue', rewardsTotalValue)
-  // }, [rewardsTotalValue])
-  //
-  // useEffect(() => {
-  //   console.log('ara', 'reward1Vol', fromWei(reward1Vol).toString())
-  // }, [reward1Vol])
-  //
-  // useEffect(() => {
-  //   console.log('ara', 'lptTotalValue', lptTotalValue)
-  // }, [lptTotalValue])
-  //
-  // useEffect(() => {
-  //   console.log('ara', 'lptValue', fromWei(lptValue.toString()).toString())
-  //   console.log('ara', 'lptValue', lptValue.toString())
-  // }, [lptValue])
 
-  useEffect(() => {
+  useMemo(() => {
     if (lptTotalValue && rewardsTotalValue && span > 0) {
       const dayRate = new BigNumber(1).div(
         new BigNumber(span).div(new BigNumber(86400))
@@ -1147,7 +1113,7 @@ export const useMdxARP = (
     [WHT_ADDRESS(ChainId.HECO)],
     _chainId, // 取价格的chainId只有在HECO上有
   )
-  useEffect(() => {
+  useMemo(() => {
     if (
       pool_address &&
       lptValue > 0 &&
@@ -1159,6 +1125,7 @@ export const useMdxARP = (
         contract.poolInfo(poolId),
         pool_contract.totalSupply(),
       ]
+      // console.log('request___2')
       multicallProvider.all(promiseList).then((data) => {
         data = processResult(data)
         const [poolInfo, totalSupply] = data
@@ -1176,7 +1143,6 @@ export const useMdxARP = (
 }
 export const useMDexPrice = (address1, address2, amount = 1, path = [], _chainId) => {
   const FEE_RADIO = '0.003'
-  const { account} = useActiveWeb3React()
    const blockHeight = useBlockHeight()
   const [price, setPrice] = useState(0)
   const [fee, setFee] = useState(0)
@@ -1185,8 +1151,9 @@ export const useMDexPrice = (address1, address2, amount = 1, path = [], _chainId
   const getPairPrice = (address1, address2, amount) => {
     const factory = new Contract(MDEX_FACTORY_ADDRESS(_chainId), MDexFactory)
     const promise_list = [factory.getPair(address1, address2)]
+
+    // console.log('request___3')
     return multicallProvider.all(promise_list).then((data) => {
-      console.log(3333)
       let [pair_address] = processResult(data)
       const pair_contract = new Contract(pair_address, LPT)
       const mdex_router_contract = new Contract(MDEX_ROUTER_ADDRESS, MDexRouter)
@@ -1196,6 +1163,7 @@ export const useMDexPrice = (address1, address2, amount = 1, path = [], _chainId
         pair_contract.getReserves(),
       ]
 
+      // console.log('request___4')
       return multicallProvider.all(promiseList).then((promiseListData) => {
         const [token0, token1, getReserves] = promiseListData
         const { _reserve0, _reserve1 } = getReserves
@@ -1214,7 +1182,9 @@ export const useMDexPrice = (address1, address2, amount = 1, path = [], _chainId
           ),
         ]
 
+        // console.log('request___5')
         if (token0.toLowerCase() == address2.toLowerCase()) {
+
           return multicallProvider
             .all(mdexRouterList1)
             .then((amountOutData) => {
@@ -1257,18 +1227,20 @@ export const useMDexPrice = (address1, address2, amount = 1, path = [], _chainId
     return [_price, _fee]
   }
 
-  useEffect(() => {
-    if (Web3.utils.isAddress(address1) && amount > 0) {
+  useMemo(() => {
+
+    if (Web3.utils.isAddress(address1) && amount > 0 && blockHeight > 0) {
+      console.log(' blockHeight, address1, address2, amount',  blockHeight, address1, address2, amount)
       // use path
       getPrice(address1, address2, amount, path, _chainId).then(
-        ([_price, _fee]) => {
-          setPrice(_price)
-          setFee(_fee)
-        }
+          ([_price, _fee]) => {
+            setPrice(_price)
+            setFee(_fee)
+          }
       )
     }
     return () => {}
-  }, [account, blockHeight, address1, address2, amount])
+  }, [ blockHeight, address1, address2, amount])
   if (amount == 0) return ['0', '0']
 
   return [price, fee]
@@ -1287,7 +1259,7 @@ export const useLTPValue = (
 ) => {
   const [value, setValue] = useState(0)
   const blockHeight = useBlockHeight()
-  useEffect(() => {
+  useMemo(() => {
     if (pool_address) {
       const multicallProvider = getOnlyMultiCallProvider(_chainId)
 
@@ -1302,6 +1274,7 @@ export const useLTPValue = (
         contract.totalSupply(),
         pool_contract.totalSupply(),
       ]
+      // console.log('request___6')
       multicallProvider
         .all(promise_list)
         .then((data) => {
@@ -1363,7 +1336,7 @@ export const useLTPValue = (
 export const useRewardsValue = (address1, address2, vol) => {
   const [price, fee] = useMDexPrice(address1, address2)
   const [value, setValue] = useState(0)
-  useEffect(() => {
+  useMemo(() => {
     console.log('price', price)
     const _value = new BigNumber(price).multipliedBy(new BigNumber(vol))
     setValue(_value)
