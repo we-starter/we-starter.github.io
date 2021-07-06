@@ -1371,7 +1371,7 @@ export default [
       holders: '-',
       transfers: '-',
     },
-    amount: '138885', // token 总额
+    amount: '138888.88', // token 总额
     pool_info: {
       token_distribution: 'July 6th 2021, 7:00PM SGT',
       min_allocation: '0',
