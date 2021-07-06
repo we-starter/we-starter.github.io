@@ -1349,11 +1349,11 @@ export default [
   },
   {
     name: 'MOMAT',
-    address: '0x1',
+    address: '0xd0E238Ad1BA66C269dA0161E03F9F26eff663d0A',
     abi: OfferingV2,
     start_at: '1625569200',
     is_top: true,
-    is_coming: true, // is_coming 为 true 则不请求合约
+    is_coming: false, // is_coming 为 true 则不请求合约
     currency: {
       address: '0xa71edc38d189767582c38a3145b5873052c3e47a', // 如果是0x0则是ht
       decimal: 18,
@@ -1363,7 +1363,7 @@ export default [
     type: 1,
     isPrivate: true,
     underlying: {
-      address: '0x865bB9A28041259b4baDAFD37799A288aAbbfC8c',
+      address: '0x162edc778dfd179a1e54e4bcaaf650dc293bb2c9',
       decimal: 18,
       symbol: 'MOMAT',
       name: 'MOMAT',
