@@ -130,7 +130,7 @@ export const useConnectWallet = () => {
       return new Promise((reslove, reject) => {
         activate(connector, undefined, true)
           .then((e) => {
-            if (window.ethereum.on) {
+            if ( window.ethereum && window.ethereum.on) {
               // 监听钱包事件
               console.log('注册事件')
               // const { ethereum } = window
@@ -184,7 +184,7 @@ export const useConnectWallet = () => {
 
   useEffect(() => {
     !active && connectWallet(injected)
-    window.ethereum.on('networkChanged', () => {
+    window.ethereum && window.ethereum.on('networkChanged', () => {
       // 切换网络后，尝试连接
       !active && connectWallet(injected)
     })

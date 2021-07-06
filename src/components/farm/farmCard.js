@@ -340,5 +340,5 @@ const FarmCard = (props) => {
 
 export default injectIntl((props) => {
   const { dispatch, state } = useContext(mainContext)
-  return useMemo(() => <FarmCard {...props} dispatch/>, [props])
+  return useMemo(() => <FarmCard {...props} dispatch={dispatch}/>, [props])
 })

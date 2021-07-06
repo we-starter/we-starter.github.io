@@ -1,8 +1,7 @@
-import react, {useEffect, useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import cs from "classnames";
 import {FormattedMessage} from "react-intl";
 import Timer from "react-compound-timer";
-import React from "react";
 
 export default function Countdown({farmPools, aprPercentage, setHoverFlag, hoverFlag}) {
     const [now, setNow] = useState(parseInt(Date.now() / 1000))
@@ -10,7 +9,7 @@ export default function Countdown({farmPools, aprPercentage, setHoverFlag, hover
         let timerId = null
         const fn = () => {
             timerId = setTimeout(() => {
-                const now = parseInt(Date.now() / 1000 - 10000000000)
+                const now = parseInt(Date.now() / 1000)
                 setNow(now)
                 fn()
             }, 1000)
