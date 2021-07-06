@@ -161,13 +161,21 @@
         box-sizing: border-box;
         display: inline-block;
         // margin-top: 20px;
-        padding: 30px 22px 36px 22px;
+        //padding: 30px 22px 36px 22px;
         width: 335px;
         height: 368px;
         background: #fafffc;
         border-radius: 20px;
         vertical-align: top;
-        overflow: hidden;
+        .type_private_box_t{
+          width: 100%;
+          border-radius: 20px;
+          overflow: hidden;
+          padding: 30px 22px 0 22px;
+        }
+        .type_private_box_b{
+          padding: 0 22px 36px 22px;
+        }
         &:nth-child(3n-1) {
           margin: 30px 30px 0;
         }
@@ -680,13 +688,22 @@
         box-sizing: border-box;
         display: inline-block;
         // margin-top: 20px;
-        padding: 30px 22px 36px 22px;
+        //padding: 30px 22px 36px 22px;
         width: 335px;
         height: 368px;
         background: #fff;
         border-radius: 20px;
         vertical-align: top;
-        overflow: hidden;
+        //overflow: hidden;
+        .type_private_box_t{
+          width: 100%;
+          border-radius: 20px;
+          overflow: hidden;
+          padding: 30px 22px 0 22px;
+        }
+        .type_private_box_b{
+          padding: 0 22px 36px 22px;
+        }
         &:nth-child(3n-1) {
           margin: 30px 30px 0;
         }
