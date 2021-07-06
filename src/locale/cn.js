@@ -294,6 +294,16 @@ const zh_CN = {
     'CoinWind旨在打造一个DeFi数字资产银行，推出高收益与安全可靠并存的产品，将用户存入的不同代币汇集到不同的池中，然后根据策略调动某代币池的资金参与不同的流动性挖矿，从而为用户实现更高的收益。CoinWind产品会通过组合策略有效降低流动性挖矿中的无常损失。',
   paulAboutProject1:
     '我们基于当前的跨链网络设计了基础架构，该架构基于全球顶级组织在高频自动交易中针对多个交易场景中的单个基准的报价系统引入和修改。 质押资产报价和套利验证用于构建实时报价验证机制。 在极端情况下，可以通过统计假设检验更平滑地生成价格曲线。',
+  momatAboutProject1:
+    'Moma协议发起于2020年12月，是一种满足用户对借贷市场的流动性、扩展性、投机性需求的解决方案。',
+  momatAboutProject2:
+    'Moma协议通过独创的智能合约工厂，对借贷市场进行生产、管理，加速和聚合，形成了一个可以对借贷流动性与市场多样性进行无限扩展的生态系统。',
+  momatAboutProject3:
+    'Moma协议的四大核心组件，分别为： Factory、Launch Pool、 Lending Pool以及Aggregator。其中，Factory是一个智能合约工厂，它可以对Launch Pool和Lending Pool进行生产和管理。Launch Pool是一种可自定义的用于社区化挖矿的“Pre”- Lending Pool，通过Launch Pool可以进行任何项目的社区化代币分配。Lending Pool是一个可自定义的超额抵押借贷市场池，它可以支持任何市场的Lend和Borrow。Aggregator是一个基于Pool和市场数据的计算与分析器，它可以帮助用户解决存、借以及社区化挖矿的个性化需求。',
+  momatAboutProject4:
+    'Moma协议采用了委员会喂价机制与去中心化喂价机制相结合的独特预言机系统。',
+  momatAboutProject5:
+    '在风险管理方面，Moma协议提供了独创的解决方案，包括：加密资产评级数据库、吹哨人、储备金池、管理质押池。',
   related_title1: '累计金额',
   related_title2: '参与地址总数',
   related_title3: '总成立的池子数',

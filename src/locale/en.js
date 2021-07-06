@@ -295,6 +295,16 @@ const en_US = {
     'CoinWind aims to build a DeFi digital asset bank, launching a product that combines high-yield, safety, and reliability. CoinWind will manage and transfer different tokens deposited by users into different pools, then manage the funds of a certain token pool to participate in different liquidity mining according to different strategies. At last, make higher benefits for all users. CoinWind can effectively reduce the impermanence loss in liquidity mining through a combination strategy.',
   paulAboutProject1:
     'We designed our foundational architecture based on current cross-chain networks, which has introduced and modified based on the quoting system used by global top organizations in high-frequency automatic trading for single benchmark in multiple trading scenarios. Pledged asset quoting and arbitrage validation are used to build real-time quoting validation mechanism. In extreme situations, a price curve can be generated more smoothly by statistical hypothesis-testing.',
+  momatAboutProject1:
+    'Launched in December 2020, Moma Protocol offers a proprietary solution to meet the growing demands for liquidity, scalability and speculation in DeFi lending markets.',
+  momatAboutProject2:
+    'Moma Protocol uses a proprietary smart contract factory to produce, manage, accelerate and aggregate the lending markets, creating an ecosystem that can expand infinitely on lending liquidity and market diversity.',
+  momatAboutProject3:
+    'Four key components of Moma Protcol are Factory, Launch Pool, Lending Pool and Aggregator. Factory is a smart contract factory that can produce and manage Launch Pool and Lending Pool. Launch Pool is a customizable Pre-Lending Pool designed for community mining. Community tokens can be distributed for any projects through the Launch Pool. Lending Pool is a customizable lending market pool with an over-collateralized loan structure. This pool can support lending and borrowing in any markets. Aggregator is a calculator and analyzer based on Pool and market data. It helps users solve their personalized DeFi demands of lending, borrowing and community mining of crypto assets.',
+  momatAboutProject4:
+    'Two mechanisms of Price Feed are used: Committee Price Feed and Decentralized Price Feed.',
+  momatAboutProject5:
+    'Moma Protocol creatively provided its own unique solution in risk management, including four core components: Crypto Asset Risk Rating Database, Whistleblower, Reserve Pool and Staking Management Pool.',
   related_title1: 'Total IWO funds',
   related_title2: 'Total participated addresses',
   related_title3: 'Total established pools',

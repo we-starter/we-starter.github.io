@@ -284,7 +284,7 @@ const PoolsIndex = (props) => {
             {pool && pool.underlying.symbol === 'O3' && <img src={O3} />}
             {pool && pool.underlying.symbol === 'CORA' && <img src={CORRA} />}
             {pool && pool.underlying.symbol === 'COW' && <img src={COW} />}
-
+            {pool && pool.underlying.symbol === 'MOMAT' && <img src={MOMA} />}
             {pool && pool.underlying.symbol === 'PAUL' && <img src={PAUL} />}
             {pool && pool.name}
             {pool && pool.underlying.name === 'LBP' && (
