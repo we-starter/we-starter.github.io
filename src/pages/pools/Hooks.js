@@ -539,7 +539,6 @@ export const usePoolsInfo = (address = '') => {
                 })
               })
               .catch((e) => {
-                console.log(e, '===== usePoolsInfo =====')
                 return pool
               })
           } else if (pool.type === 1) {
