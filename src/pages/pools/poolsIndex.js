@@ -264,7 +264,13 @@ const PoolsIndex = (props) => {
       >
         <div className='type_private_box_t'>
           <div className='pools-type_title'>
-            <a className={cs(pool ? 'pools-type_chaind_box_' + pool.networkId : 'pools-type_chaind_box_128')}>
+            <a
+              className={cs(
+                pool
+                  ? 'pools-type_chaind_box_' + pool.networkId
+                  : 'pools-type_chaind_box_128'
+              )}
+            >
               <span className={cs('pools-type_chaind')}></span>
             </a>
             <p className='pools-type_card_title'>
@@ -279,13 +285,15 @@ const PoolsIndex = (props) => {
                 <img src={CHAINSWAP} />
               )}
               {pool && pool.underlying.symbol === 'WAR' && <img src={WAR} />}
-              {pool && pool.underlying.symbol === 'BLACK' && <img src={BLACK} />}
+              {pool && pool.underlying.symbol === 'BLACK' && (
+                <img src={BLACK} />
+              )}
               {pool && pool.underlying.symbol === 'YFX' && <img src={FX} />}
               {pool && pool.underlying.symbol === 'LEV' && <img src={LEV} />}
               {pool && pool.underlying.symbol === 'O3' && <img src={O3} />}
               {pool && pool.underlying.symbol === 'CORA' && <img src={CORRA} />}
               {pool && pool.underlying.symbol === 'COW' && <img src={COW} />}
-
+              {pool && pool.underlying.symbol === 'MOMAT' && <img src={MOMA} />}
               {pool && pool.underlying.symbol === 'PAUL' && <img src={PAUL} />}
               {pool && pool.name}
               {pool && pool.underlying.name === 'LBP' && (
@@ -344,7 +352,10 @@ const PoolsIndex = (props) => {
               <i>{ratio}</i>
             </p>
             {pool && pool.underlying.name === 'LBP' && (
-              <p className='pools-type_card_ratio' style={{ textAlign: 'right' }}>
+              <p
+                className='pools-type_card_ratio'
+                style={{ textAlign: 'right' }}
+              >
                 <FormattedMessage id='LBPSupply' />
                 <i>
                   {formatNumber(
@@ -355,7 +366,10 @@ const PoolsIndex = (props) => {
               </p>
             )}
             {pool && pool.underlying.name !== 'LBP' && (
-              <p className='pools-type_card_ratio' style={{ textAlign: 'right' }}>
+              <p
+                className='pools-type_card_ratio'
+                style={{ textAlign: 'right' }}
+              >
                 <FormattedMessage id='totalRaised' />
                 <i>
                   {formatNumber(
@@ -381,7 +395,9 @@ const PoolsIndex = (props) => {
                   <i
                     className='pools-type_progress_bar'
                     style={{
-                      width: `${pool.progress > 1 ? 100 : pool.progress * 100}%`,
+                      width: `${
+                        pool.progress > 1 ? 100 : pool.progress * 100
+                      }%`,
                     }}
                   ></i>
                 </a>
@@ -602,7 +618,9 @@ const PoolsIndex = (props) => {
             <a
               className={cs(
                 'pools-type_enter',
-                pool && pool.underlying.name === 'LBP' && 'pools-type_lbp_enter',
+                pool &&
+                  pool.underlying.name === 'LBP' &&
+                  'pools-type_lbp_enter',
                 pool &&
                   (pool.is_coming ||
                     (status === 3 &&
@@ -632,7 +650,7 @@ const PoolsIndex = (props) => {
                           (pool.settleable &&
                             pool.type === 1 &&
                             pool.settleable.claimedOf * 1 !== 0) ||
-                            (pool.settleable && pool.settleable.volume == 0))) ||
+                          (pool.settleable && pool.settleable.volume == 0))) ||
                       (!active && status === 3) ||
                       (status === 3 && pool.underlying.name === 'LBP')),
                   address,
@@ -645,16 +663,26 @@ const PoolsIndex = (props) => {
           )}
           {pool && pool.networkId !== chainId && (
             <a
-              className={cs('pools-type_enter', pool.networkId == ChainId.MATIC && 'pools-type_matic_enter', pool.networkId == ChainId.BSC && 'pools-type_bsc_enter')}
+              className={cs(
+                'pools-type_enter',
+                pool.networkId == ChainId.MATIC && 'pools-type_matic_enter',
+                pool.networkId == ChainId.BSC && 'pools-type_bsc_enter'
+              )}
               onClick={(e) => {
                 changeNetwork(pool.networkId).then(() => {
                   message.success('Switch success')
                 })
               }}
             >
-              {pool.networkId == ChainId.HECO && <FormattedMessage id='poolTextS128' />}
-              {pool.networkId == ChainId.MATIC && <FormattedMessage id='poolTextS137' />}
-              {pool.networkId == ChainId.BSC && <FormattedMessage id='poolTextS56' />}
+              {pool.networkId == ChainId.HECO && (
+                <FormattedMessage id='poolTextS128' />
+              )}
+              {pool.networkId == ChainId.MATIC && (
+                <FormattedMessage id='poolTextS137' />
+              )}
+              {pool.networkId == ChainId.BSC && (
+                <FormattedMessage id='poolTextS56' />
+              )}
             </a>
           )}
           {pool && pool.status == 3 && pool && pool.underlying.name !== 'LBP' && (

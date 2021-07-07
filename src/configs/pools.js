@@ -1292,7 +1292,7 @@ export default [
     Telegram_Channel: 'https://t.me/PaulProtocolV1Community',
     Github: '-',
     yuque: '-',
-    progress: 0,
+    progress: 1,
     status: 0,
     ratio: '1PAUL=0.002USDT',
     time: '1622638800',
@@ -1349,7 +1349,7 @@ export default [
     Telegram_Channel: 'https://t.me/PaulProtocolV1Community',
     Github: '-',
     yuque: '-',
-    progress: 0,
+    progress: 35.19,
     status: 0,
     ratio: '1PAUL=?LPT',
     time: '1622638800',
@@ -1370,6 +1370,63 @@ export default [
     total: '$1,759,500', // 参与资金规模
     poolType: 0, // 值为 1 代表定向
     networkId: 128,
+  },
+  {
+    name: 'MOMAT',
+    address: '0xd0E238Ad1BA66C269dA0161E03F9F26eff663d0A',
+    abi: OfferingV2,
+    start_at: '1625569200',
+    is_top: true,
+    is_coming: false, // is_coming 为 true 则不请求合约
+    currency: {
+      address: '0xa71edc38d189767582c38a3145b5873052c3e47a', // 如果是0x0则是ht
+      decimal: 18,
+      symbol: 'USDT',
+    },
+    icon: '',
+    type: 1,
+    isPrivate: true,
+    underlying: {
+      address: '0x162edc778dfd179a1e54e4bcaaf650dc293bb2c9',
+      decimal: 18,
+      symbol: 'MOMAT',
+      name: 'MOMAT',
+      total_supply: '100,000,000',
+      holders: '-',
+      transfers: '-',
+    },
+    amount: '138888.88', // token 总额
+    pool_info: {
+      token_distribution: 'July 6th 2021, 7:00PM SGT',
+      min_allocation: '0',
+      max_allocation: '100 USDT',
+      min_swap_level: '50,000 USDT',
+    },
+    website: 'https://moma.finance/',
+    white_paper: 'https://docsend.com/view/dzyu756wkd2n4izq',
+    twitter: 'https://twitter.com/Moma_Finance',
+    Telegram_Channel: 'https://t.me/Moma_Official',
+    Github: 'https://github.com/moma-finance/moma-protocol',
+    yuque: '-',
+    progress: 0.97,
+    status: 0,
+    ratio: '1MOMAT=0.36USDT',
+    time: '1625576400',
+    purchasedCurrencyOf: 0,
+    totalPurchasedAmount: '50000000000000000000000',
+    totalPurchasedUnderlying: '0',
+    totalPurchasedCurrency: '0',
+    is_flash: false,
+    link_url: 'https://moma.finance/', // 跳转外链接
+    project_introduction:
+      'Moma Protocol offers a proprietary solution to meet the growing demands for liquidity, scalability and speculation in DeFi lending markets.',
+    duration: '', // 完成时间
+    totalApplicants: '500', // 申请总人数
+    winningRate: '-', // 申请中签率
+    committed: '', // 超募比例
+    total: '', // 参与资金规模
+    poolType: 0, // 值为 1 代表定向
+    networkId: 128
   },
   // 测试合约配置
   // {

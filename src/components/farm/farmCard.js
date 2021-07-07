@@ -5,6 +5,8 @@ import BigNumber from 'bignumber.js'
 import { useActiveWeb3React } from '../../web3'
 import { HANDLE_WALLET_MODAL } from '../../const'
 import { mainContext } from '../../reducer'
+import { changeNetwork } from '../../connectors'
+import { message } from 'antd'
 import { formatAmount, splitFormat } from '../../utils/format'
 import {useAPR, useFarmInfo, useMdxARP} from '../../pages/pools/Hooks'
 import { useBalance } from '../../pages/Hooks'
@@ -12,12 +14,14 @@ import Timer from 'react-compound-timer'
 import Countdown from './countdown'
 // 处理格式 千位符
 import { formatNumber } from 'accounting'
+import { ChainId } from '../../web3/address'
 
 const FarmCard = (props) => {
   let { pools:farmPools, dispatch} = props
   const [hoverFlag, setHoverFlag] = useState(false)
   farmPools = useFarmInfo(farmPools.address)
   const { balance } = useBalance(farmPools && farmPools.MLP, props.pools.networkId)
+  const { chainId } = useActiveWeb3React()
   const [balanceProportion, setBalanceProportion] = useState(0)
   // const [now, setNow] = useState(parseInt(Date.now() / 1000))
   const apr = useAPR(
@@ -99,7 +103,12 @@ const FarmCard = (props) => {
       >
         {farmPools && farmPools.name}
       </h3>
-      <Countdown farmPools={farmPools} aprPercentage={aprPercentage} hoverFlag={hoverFlag} setHoverFlag={setHoverFlag}/>
+      <Countdown
+        farmPools={farmPools}
+        aprPercentage={aprPercentage}
+        hoverFlag={hoverFlag}
+        setHoverFlag={setHoverFlag}
+      />
       <p className='farm_index_card_value'>
         <FormattedMessage id='farm10' />
         {farmPools && farmPools.icon && (
@@ -218,50 +227,77 @@ const FarmCard = (props) => {
           <FormattedMessage id='farm17' /> {farmPools.rewards}
         </a>
       )}
-      <div className='farm_index_card_btn'>
-        <a
-          className={cs(
-            `deposit_btn ${farmPools && 'deposit_btn_' + farmPools.networkId}`
+      {farmPools && farmPools.networkId == chainId && (
+        <div className='farm_index_card_btn'>
+          <a
+            className={cs(
+              `deposit_btn ${farmPools && 'deposit_btn_' + farmPools.networkId}`
+            )}
+            onClick={() => {
+              dispatch({
+                type: HANDLE_WALLET_MODAL,
+                walletModal: 'deposit',
+                pool: farmPools && farmPools,
+              })
+            }}
+          >
+            <FormattedMessage id='farm3' />
+          </a>
+          {farmPools && farmPools.name !== 'WAR POOL (DAO)' && (
+            <a
+              className='claim_btn'
+              onClick={() => {
+                dispatch({
+                  type: HANDLE_WALLET_MODAL,
+                  walletModal: 'claim',
+                  pool: farmPools && farmPools,
+                })
+              }}
+            >
+              <FormattedMessage id='farm16' />
+            </a>
           )}
-          onClick={() => {
-            dispatch({
-              type: HANDLE_WALLET_MODAL,
-              walletModal: 'deposit',
-              pool: farmPools && farmPools,
-            })
-          }}
-        >
-          <FormattedMessage id='farm3' />
-        </a>
-        {farmPools && farmPools.name !== 'WAR POOL (DAO)' && (
+          {farmPools && farmPools.name === 'WAR POOL (DAO)' && (
+            <a
+              className='claim_btn'
+              onClick={() => {
+                dispatch({
+                  type: HANDLE_WALLET_MODAL,
+                  walletModal: 'claim',
+                  pool: farmPools && farmPools,
+                })
+              }}
+            >
+              <FormattedMessage id='farm16' />
+            </a>
+          )}
+        </div>
+      )}
+      {farmPools && farmPools.networkId !== chainId && (
+        <div className='farm_index_card_btn'>
           <a
-            className='claim_btn'
+            className={cs(
+              `deposit_btn ${farmPools && 'deposit_btn_' + farmPools.networkId}`
+            )}
+            style={{ width: '100%' }}
             onClick={() => {
-              dispatch({
-                type: HANDLE_WALLET_MODAL,
-                walletModal: 'claim',
-                pool: farmPools && farmPools,
+              changeNetwork(farmPools.networkId).then(() => {
+                message.success('Switch success')
               })
             }}
           >
-            <FormattedMessage id='farm16' />
+            {farmPools.networkId == ChainId.HECO && (
+              <FormattedMessage id='poolTextS128' />
+            )}
+            {farmPools.networkId == ChainId.BSC && (
+              <FormattedMessage id='poolTextS56' />
+            )}
+            {farmPools.networkId == ChainId.MATIC && (
+              <FormattedMessage id='poolTextS137' />
+            )}
           </a>
-        )}
-        {farmPools && farmPools.name === 'WAR POOL (DAO)' && (
-          <a
-            className='claim_btn'
-            onClick={() => {
-              dispatch({
-                type: HANDLE_WALLET_MODAL,
-                walletModal: 'claim',
-                pool: farmPools && farmPools,
-              })
-            }}
-          >
-            <FormattedMessage id='farm16' />
-          </a>
-        )}
-      </div>
+        </div>
+      )}
       <div
         className={cs(
           `farm_index_card_rewards ${
@@ -317,23 +353,25 @@ const FarmCard = (props) => {
           </p>
         )}
       </div>
-      {farmPools && farmPools.name === 'WAR POOL (DAO)' && (
-        <a
-          className={cs(
-            `deposit_btn ${farmPools && 'deposit_btn_' + farmPools.networkId}`
-          )}
-          style={{ marginTop: '8px', width: '100%' }}
-          onClick={() => {
-            dispatch({
-              type: HANDLE_WALLET_MODAL,
-              walletModal: 'compound',
-              pool: farmPools && farmPools,
-            })
-          }}
-        >
-          <FormattedMessage id='farm21' />
-        </a>
-      )}
+      {farmPools &&
+        farmPools.name === 'WAR POOL (DAO)' &&
+        farmPools.networkId == chainId && (
+          <a
+            className={cs(
+              `deposit_btn ${farmPools && 'deposit_btn_' + farmPools.networkId}`
+            )}
+            style={{ marginTop: '8px', width: '100%' }}
+            onClick={() => {
+              dispatch({
+                type: HANDLE_WALLET_MODAL,
+                walletModal: 'compound',
+                pool: farmPools && farmPools,
+              })
+            }}
+          >
+            <FormattedMessage id='farm21' />
+          </a>
+        )}
     </div>
   )
 }
