@@ -1270,7 +1270,7 @@ export default [
     Telegram_Channel: 'https://t.me/PaulProtocolV1Community',
     Github: '-',
     yuque: '-',
-    progress: 0,
+    progress: 1,
     status: 0,
     ratio: '1PAUL=0.002USDT',
     time: '1622638800',
@@ -1326,7 +1326,7 @@ export default [
     Telegram_Channel: 'https://t.me/PaulProtocolV1Community',
     Github: '-',
     yuque: '-',
-    progress: 0,
+    progress: 35.19,
     status: 0,
     ratio: '1PAUL=?LPT',
     time: '1622638800',
@@ -1384,7 +1384,7 @@ export default [
     Telegram_Channel: 'https://t.me/Moma_Official',
     Github: 'https://github.com/moma-finance/moma-protocol',
     yuque: '-',
-    progress: 0,
+    progress: 0.97,
     status: 0,
     ratio: '1MOMAT=0.36USDT',
     time: '1625576400',
@@ -1402,6 +1402,7 @@ export default [
     committed: '', // 超募比例
     total: '', // 参与资金规模
     poolType: 0, // 值为 1 代表定向
+    networkId: 128
   },
   // 测试合约配置
   // {
