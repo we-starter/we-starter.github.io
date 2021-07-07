@@ -21,6 +21,7 @@ const FarmCard = (props) => {
   const [hoverFlag, setHoverFlag] = useState(false)
   farmPools = useFarmInfo(farmPools.address)
   const { balance } = useBalance(farmPools && farmPools.MLP, props.pools.networkId)
+  console.log('balance', balance)
   const { chainId } = useActiveWeb3React()
   const [balanceProportion, setBalanceProportion] = useState(0)
   // const [now, setNow] = useState(parseInt(Date.now() / 1000))
@@ -82,7 +83,7 @@ const FarmCard = (props) => {
       setBalanceProportion(0)
     }
   }, [farmPools, farmPools.balanceOf, farmPools.totalSupply])
-
+  console.log('farmPools', farmPools)
   return (
     <div
       className={`farm_index_card ${farmPools.name} ${

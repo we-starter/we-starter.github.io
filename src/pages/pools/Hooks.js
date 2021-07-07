@@ -878,20 +878,22 @@ export const useFarmInfo = (address = '') => {
   const [farmPoolsInfo, setFarmPoolsInfo] = useState(pool)
 
   useMemo(() => {
-    if (!account) return () =>{}
     const multicallProvider = getOnlyMultiCallProvider(pool.networkId)
     const pool_contract = new Contract(pool.address, pool.abi)
     const currency_token = new Contract(pool.MLP, ERC20)
     const promise_list = [
       pool_contract.begin(), // 开始时间
-      pool_contract.earned(account), // 奖励1
       pool_contract.totalSupply(), // 总抵押
-      pool_contract.balanceOf(account), // 我的抵押
-      currency_token.allowance(account, pool.address),
     ]
-
-    if (pool.rewards2) {
-      promise_list.push(pool_contract.earned2(account))
+    if (account) {
+      if (pool.rewards2) {
+        promise_list.push(pool_contract.earned2(account))
+      }
+      promise_list.push(
+          pool_contract.earned(account), // 奖励1
+          pool_contract.balanceOf(account), // 我的抵押
+          currency_token.allowance(account, pool.address),
+      )
     }
     // console.log('request___1')
     multicallProvider
@@ -900,11 +902,11 @@ export const useFarmInfo = (address = '') => {
           data = processResult(data)
           let [
             begin,
-            earned,
             totalSupply,
-            balanceOf,
-            currency_allowance,
             earned2 = 0,
+            earned=0,
+            balanceOf=0,
+            currency_allowance=0,
           ] = data
           // console.log(balanceOf, 'balanceOfbalanceOf')
           return Object.assign({}, pool, {

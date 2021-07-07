@@ -6,17 +6,15 @@ import { getContract, getWeb3, useActiveWeb3React } from '../web3'
 import {ChainId, getGLFStakingAddress, RPC_URLS, WAR_ADDRESS} from '../web3/address'
 import Web3 from "web3";
 
-const _CONTRACT ={}
-const createContractERC20 = (chainId) => {
-  if (_CONTRACT[chainId]){
-    return _CONTRACT[chainId]
-  }
+
+const createContractERC20 = (chainId, address) => {
+
   var web3 = new Web3(new Web3.providers.HttpProvider(RPC_URLS(chainId)))
-  return _CONTRACT[chainId] = new web3.eth.Contract(ERC20.abi, WAR_ADDRESS(chainId))
+  return  new web3.eth.Contract(ERC20.abi, address)//WAR_ADDRESS(chainId)
 
 }
 
-export const useBalance = (address, networkId = ChainId.HECO) => {
+export const useBalance = (address, networkId=ChainId.HECO) => {
   const { account, active, library } = useActiveWeb3React()
   const [balance, setBalance] = useState(0)
   const blockHeight = useBlockHeight()
@@ -35,7 +33,17 @@ export const useBalance = (address, networkId = ChainId.HECO) => {
             setBalance(balance)
           })
         } else {
-          const contract = createContractERC20(networkId)
+          console.log('address__', address)
+          const contract = createContractERC20(networkId, address)
+          // const contract = getContract(library, ERC20.abi, address)
+          console.log('token address:', address)
+          contract.methods
+              .balanceOf(account)
+              .call()
+              .then((res) => {
+                console.log('token totalSupply:', res)
+                setBalance(res)
+              })
           contract.methods
             .balanceOf(account)
             .call()
@@ -97,7 +105,7 @@ export const useAllowance = (contract_address, address, owner_address, _chainId)
     if (!_chainId && !chainId){
       return () => {}
     }
-    const contract = createContractERC20(_chainId || chainId)
+    const contract = createContractERC20(_chainId || chainId, contract_address)
     try {
       // const contract = getContract(library, ERC20.abi, contract_address)
 
