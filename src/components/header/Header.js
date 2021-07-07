@@ -24,7 +24,7 @@ import RAW_ICON from '../../assets/icon/RAW@2x.png'
 export const Header = () => {
   const { active, account, chainId } = useActiveWeb3React()
   const { dispatch, state } = useContext(mainContext)
-  const { balance } = useBalance(WAR_ADDRESS(chainId))
+  const { balance } = useBalance(WAR_ADDRESS(chainId), chainId)
   const [language, setLanguage] = useState(
     (state.locale === 'en' && 'English') ||
       (state.locale === 'zh' && '中文简体') ||
