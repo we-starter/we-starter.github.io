@@ -78,7 +78,7 @@ const BridgeCard = (props) => {
     const { intl } = props
     const { account, active, library, chainId } = useActiveWeb3React()
 
-    const { balance } = useBalance(WAR_ADDRESS(chainId))
+    const { balance } = useBalance(WAR_ADDRESS(chainId), chainId)
     const [pool, setPool] = useState([])
     const [amount, setAmount] = useState('')
     const [approve, setApprove] = useState(true)
