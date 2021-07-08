@@ -903,10 +903,10 @@ export const useFarmInfo = (address = '') => {
           let [
             begin,
             totalSupply,
-            earned2 = 0,
+            earned=0,
             balanceOf=0,
             currency_allowance=0,
-            earned=0,
+            earned2 = 0,
           ] = data
           // console.log(balanceOf, 'balanceOfbalanceOf')
           const newPool = Object.assign({}, pool, {
