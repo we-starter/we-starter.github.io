@@ -1230,7 +1230,6 @@ export const useMDexPrice = (address1, address2, amount = 1, path = [], _chainId
     return [_price, _fee]
   }
 
-  console.trace()
   useMemo(() => {
     console.log('7878', Web3.utils.isAddress(address1) , amount , blockHeight , address1)
     if (Web3.utils.isAddress(address1) && amount > 0 && blockHeight > 0) {
