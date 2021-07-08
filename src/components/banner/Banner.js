@@ -54,10 +54,10 @@ const Banner = (props) => {
   // }, [_tmp_price_war2ht, _tmp_price_usdt2ht])
 
   const [price, fee] = useMDexPrice(
-    chainId && WAR_ADDRESS(ChainId.HECO),
-    chainId && USDT_ADDRESS(ChainId.HECO),
+    WAR_ADDRESS(ChainId.HECO),
+    USDT_ADDRESS(ChainId.HECO),
     1,
-    [chainId && WHT_ADDRESS(ChainId.HECO)],
+    [WHT_ADDRESS(ChainId.HECO)],
     128
   )
 

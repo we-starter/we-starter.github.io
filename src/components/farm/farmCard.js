@@ -6,7 +6,7 @@ import { useActiveWeb3React } from '../../web3'
 import { HANDLE_WALLET_MODAL } from '../../const'
 import { mainContext } from '../../reducer'
 import { changeNetwork } from '../../connectors'
-import { message } from 'antd'
+import {Button, message} from 'antd'
 import { formatAmount, splitFormat } from '../../utils/format'
 import {useAPR, useFarmInfo, useMdxARP} from '../../pages/pools/Hooks'
 import { useBalance } from '../../pages/Hooks'
@@ -276,7 +276,7 @@ const FarmCard = (props) => {
       )}
       {farmPools && farmPools.networkId !== chainId && (
         <div className='farm_index_card_btn'>
-          <a
+          <Button
             className={cs(
               `deposit_btn ${farmPools && 'deposit_btn_' + farmPools.networkId}`
             )}
@@ -286,6 +286,7 @@ const FarmCard = (props) => {
                 message.success('Switch success')
               })
             }}
+            disabled={!window.ethereum}
           >
             {farmPools.networkId == ChainId.HECO && (
               <FormattedMessage id='poolTextS128' />
@@ -296,7 +297,7 @@ const FarmCard = (props) => {
             {farmPools.networkId == ChainId.MATIC && (
               <FormattedMessage id='poolTextS137' />
             )}
-          </a>
+          </Button>
         </div>
       )}
       <div
