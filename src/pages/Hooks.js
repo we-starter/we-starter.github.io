@@ -29,19 +29,15 @@ export const useBalance = (address, networkId=ChainId.HECO) => {
           const web3 = getWeb3(library)
 
           web3.eth.getBalance(account).then((balance) => {
-            console.log(account, balance, 'balance')
             setBalance(balance)
           })
         } else {
-          console.log('address__', address)
           const contract = createContractERC20(networkId, address)
           // const contract = getContract(library, ERC20.abi, address)
-          console.log('token address:', address)
           contract.methods
               .balanceOf(account)
               .call()
               .then((res) => {
-                console.log('token totalSupply:', res)
                 setBalance(res)
               })
           contract.methods

@@ -64,7 +64,6 @@ export const useStakingInfo = (stakingInfo) => {
         .earned(account)
         .call()
         .then((res) => {
-          console.log('earned', res)
           setEarned(res)
         })
     } catch (e) {
@@ -417,7 +416,6 @@ export function useBlockHeight() {
 
 
 const debounceFn = debounce((pools, account, callback)=>{
-  console.log('pools, account', pools, account)
   const now = parseInt(Date.now() / 1000)
   const all = pools.map((pool) => {
     // 链不匹配 不调用合约
@@ -917,7 +915,6 @@ export const useFarmInfo = (address = '') => {
             balanceOf: Web3.utils.fromWei(String(balanceOf), 'ether'),
             allowance: currency_allowance,
           })
-          console.log('pool__', newPool)
           setFarmPoolsInfo(newPool)
         })
 
@@ -1215,7 +1212,6 @@ export const useMDexPrice = (address1, address2, amount = 1, path = [], _chainId
       const from_address = _path[i - 1]
       const to_address = _path[i]
       _price = await getPairPrice(from_address, to_address, _price)
-      console.log('_price', _price)
       // _fee = _fee + _fee_amount * FEE_RADIO
       // _fee_amount = _fee_amount - _fee_amount * FEE_RADIO
       _fee = new BigNumber(_fee)
@@ -1231,12 +1227,10 @@ export const useMDexPrice = (address1, address2, amount = 1, path = [], _chainId
   }
 
   useMemo(() => {
-    console.log('7878', Web3.utils.isAddress(address1) , amount , blockHeight , address1)
     if (Web3.utils.isAddress(address1) && amount > 0 && blockHeight > 0) {
       // use path
       getPrice(address1, address2, amount, path, _chainId).then(
           ([_price, _fee]) => {
-            console.log('_price, _fee', _price, _fee)
             setPrice(_price)
             setFee(_fee)
           }
@@ -1340,7 +1334,6 @@ export const useRewardsValue = (address1, address2, vol) => {
   const [price, fee] = useMDexPrice(address1, address2)
   const [value, setValue] = useState(0)
   useMemo(() => {
-    console.log('price', price)
     const _value = new BigNumber(price).multipliedBy(new BigNumber(vol))
     setValue(_value)
     return () => {}
