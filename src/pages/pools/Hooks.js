@@ -900,7 +900,6 @@ export const useFarmInfo = (address = '') => {
         .all(promise_list)
         .then((data) => {
           data = processResult(data)
-          console.log('data', data)
           let [
             begin,
             totalSupply,
