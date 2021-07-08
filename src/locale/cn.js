@@ -360,7 +360,7 @@ const zh_CN = {
   bridge300: '注意：该迁移不可逆，',
   bridge301: '将会彻底转化成 RAW(Matic)',
   bridge4: 'Powered by BlackHole & ChainSwap',
-  bridge5: 'History',
+  bridge5: '历史',
   bridge6: 'Assets',
   bridge7: 'From',
   bridge8: 'To',

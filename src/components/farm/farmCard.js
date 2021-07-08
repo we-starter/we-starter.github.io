@@ -20,6 +20,7 @@ const FarmCard = (props) => {
   let { pools:farmPools, dispatch} = props
   const [hoverFlag, setHoverFlag] = useState(false)
   farmPools = useFarmInfo(farmPools.address)
+  console.log('farmPools__', farmPools, farmPools.balanceOf)
   const { balance } = useBalance(farmPools && farmPools.MLP, props.pools.networkId)
   console.log('balance', balance)
   const { chainId } = useActiveWeb3React()

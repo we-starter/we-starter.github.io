@@ -886,14 +886,14 @@ export const useFarmInfo = (address = '') => {
       pool_contract.totalSupply(), // 总抵押
     ]
     if (account) {
-      if (pool.rewards2) {
-        promise_list.push(pool_contract.earned2(account))
-      }
       promise_list.push(
           pool_contract.earned(account), // 奖励1
           pool_contract.balanceOf(account), // 我的抵押
           currency_token.allowance(account, pool.address),
       )
+      if (pool.rewards2) {
+        promise_list.push(pool_contract.earned2(account))
+      }
     }
     // console.log('request___1')
     multicallProvider
@@ -905,9 +905,9 @@ export const useFarmInfo = (address = '') => {
             begin,
             totalSupply,
             earned2 = 0,
-            earned=0,
-            balanceOf='0',
+            balanceOf=0,
             currency_allowance=0,
+            earned=0,
           ] = data
           // console.log(balanceOf, 'balanceOfbalanceOf')
           const newPool = Object.assign({}, pool, {
@@ -915,7 +915,7 @@ export const useFarmInfo = (address = '') => {
             earned,
             earned2,
             totalSupply,
-            balanceOf: Web3.utils.fromWei(balanceOf, 'ether'),
+            balanceOf: Web3.utils.fromWei(String(balanceOf), 'ether'),
             allowance: currency_allowance,
           })
           console.log('pool__', newPool)

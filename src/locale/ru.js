@@ -356,7 +356,7 @@ const ru = {
   bridge300: 'Notice: Irreversible migration, ',
   bridge301: ' will be transferred to RAW(Matic) forever.',
   bridge4: 'Powered by BlackHole & ChainSwap',
-  bridge5: 'History',
+  bridge5: 'история',
   bridge6: 'Assets',
   bridge7: 'From',
   bridge8: 'To',
