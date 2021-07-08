@@ -339,7 +339,13 @@
       &:hover {
         background-color: #00b900;
       }
-
+      &.disabled{
+        background-color: #B6B9BC;
+        &:hover{
+          background-color: #B6B9BC;
+          color: #ffffff;
+        }
+      }
     }
     .deposit_btn_56 {
       background: #F0B90B;
@@ -723,6 +729,13 @@
       &:hover {
         background-color: #00b900;
       }
+      &.disabled{
+        background-color: #B6B9BC;
+        &:hover{
+          background-color: #B6B9BC;
+          color: #ffffff;
+        }
+      }
     }
      .deposit_btn_56 {
       background: #F0B90B;
@@ -1100,6 +1113,13 @@
       &:hover {
         background-color: #00b900;
       }
+      &.disabled{
+        background-color: #B6B9BC;
+        &:hover{
+          background-color: #B6B9BC;
+          color: #ffffff;
+        }
+      }
     }
      .deposit_btn_56 {
       background: #F0B90B;
@@ -1476,6 +1496,13 @@
       border: 0;
       &:hover {
         background-color: #00b900;
+      }
+      &.disabled{
+        background-color: #B6B9BC;
+        &:hover{
+          background-color: #B6B9BC;
+          color: #ffffff;
+        }
       }
     }
      .deposit_btn_56 {

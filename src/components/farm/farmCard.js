@@ -44,7 +44,26 @@ const FarmCard = (props) => {
     farmPools.rewards1Address,
     farmPools.networkId
   )
-
+  const [now, setNow] = useState(parseInt(Date.now() / 1000))
+  const isFinish = farmPools && farmPools.dueDate && farmPools.dueDate <= now && farmPools.openDate < now
+  useEffect(() => {
+    let timerId = null
+    const fn = () => {
+      timerId = setTimeout(() => {
+        const now = parseInt(Date.now() / 1000)
+        setNow(now)
+        if (isFinish){
+          clearTimeout(timerId)
+        } else {
+          fn()
+        }
+      }, 1000)
+    }
+    fn()
+    return () => {
+      clearTimeout(timerId)
+    }
+  }, [])
 
   const [aprPercentage, setPercentage] = useState('-')
   useMemo(() => {
@@ -107,6 +126,8 @@ const FarmCard = (props) => {
         aprPercentage={aprPercentage}
         hoverFlag={hoverFlag}
         setHoverFlag={setHoverFlag}
+        now={now}
+        isFinish={isFinish}
       />
       <p className='farm_index_card_value'>
         <FormattedMessage id='farm10' />
@@ -228,9 +249,10 @@ const FarmCard = (props) => {
       )}
       {farmPools && farmPools.networkId == chainId && (
         <div className='farm_index_card_btn'>
-          <a
+          <Button
+              disabled={isFinish}
             className={cs(
-              `deposit_btn ${farmPools && 'deposit_btn_' + farmPools.networkId}`
+              `deposit_btn ${farmPools && 'deposit_btn_' + farmPools.networkId} ${isFinish ? 'disabled': ''}`,
             )}
             onClick={() => {
               dispatch({
@@ -241,7 +263,7 @@ const FarmCard = (props) => {
             }}
           >
             <FormattedMessage id='farm3' />
-          </a>
+          </Button>
           {farmPools && farmPools.name !== 'WAR POOL (DAO)' && (
             <a
               className='claim_btn'
@@ -249,7 +271,10 @@ const FarmCard = (props) => {
                 dispatch({
                   type: HANDLE_WALLET_MODAL,
                   walletModal: 'claim',
-                  pool: farmPools && farmPools,
+                  pool: farmPools && {
+                    ...farmPools,
+                    isFinish: isFinish
+                  },
                 })
               }}
             >
@@ -263,7 +288,10 @@ const FarmCard = (props) => {
                 dispatch({
                   type: HANDLE_WALLET_MODAL,
                   walletModal: 'claim',
-                  pool: farmPools && farmPools,
+                  pool: farmPools && {
+                    ...farmPools,
+                    isFinish: isFinish
+                  },
                 })
               }}
             >

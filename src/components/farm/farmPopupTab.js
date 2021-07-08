@@ -13,12 +13,14 @@ const FarmPopupTabPopup = (props) => {
   const { intl, icon, onClose, pool } = props
   const farmPools = pool
   const [tabFlag, setTabFlag] = useState(
+      farmPools.isFinish ? 'Unstake' :
     state.walletModal === 'deposit'
       ? 'Stake'
       : farmPools && farmPools.name !== 'WAR POOL (DAO)'
       ? 'Claim'
       : 'Unstake'
   )
+
 
   return (
     <div className='modal'>
@@ -27,22 +29,24 @@ const FarmPopupTabPopup = (props) => {
           <div className='form-app__inner deposit farm_popup_box'>
             <div className='farm_popup_tab_box'>
               <div className='farm_popup_tab_content'>
-                <a
-                  className={cs(
-                    'farm_popup_tab',
-                    farmPools && 'farm_popup_tab_' + farmPools.networkId,
-                    tabFlag === 'Stake' && 'farm_popup_tab_active',
-                    tabFlag === 'Stake' &&
-                      farmPools &&
-                      'farm_popup_tab_active_' + farmPools.networkId
-                  )}
-                  onClick={() => {
-                    setTabFlag('Stake')
-                  }}
-                >
-                  <FormattedMessage id='farm3' />
-                </a>
-                {farmPools && farmPools.name !== 'WAR POOL (DAO)' && (
+                {
+                  !farmPools.isFinish && <a
+                      className={cs(
+                          'farm_popup_tab',
+                          farmPools && 'farm_popup_tab_' + farmPools.networkId,
+                          tabFlag === 'Stake' && 'farm_popup_tab_active',
+                          tabFlag === 'Stake' &&
+                          farmPools &&
+                          'farm_popup_tab_active_' + farmPools.networkId
+                      )}
+                      onClick={() => {
+                        setTabFlag('Stake')
+                      }}
+                  >
+                    <FormattedMessage id='farm3' />
+                  </a>
+                }
+                {farmPools && farmPools.name !== 'WAR POOL (DAO)'  && !farmPools.isFinish &&  (
                   <a
                     className={cs(
                       'farm_popup_tab',
@@ -78,10 +82,10 @@ const FarmPopupTabPopup = (props) => {
               </div>
               <a className='farm_popup_close_btn' onClick={onClose}></a>
             </div>
-            {tabFlag === 'Stake' && (
+            {tabFlag === 'Stake' && !farmPools.isFinish && (
               <DepositPopup pool={farmPools} onClose={onClose} />
             )}
-            {tabFlag === 'Claim' &&
+            {tabFlag === 'Claim' && !farmPools.isFinish &&
               farmPools &&
               farmPools.name !== 'WAR POOL (DAO)' && (
                 <ClaimPopup pool={farmPools} onClose={onClose} />

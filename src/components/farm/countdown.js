@@ -3,22 +3,8 @@ import cs from "classnames";
 import {FormattedMessage} from "react-intl";
 import Timer from "react-compound-timer";
 
-export default function Countdown({farmPools, aprPercentage, setHoverFlag, hoverFlag}) {
-    const [now, setNow] = useState(parseInt(Date.now() / 1000))
-    useEffect(() => {
-        let timerId = null
-        const fn = () => {
-            timerId = setTimeout(() => {
-                const now = parseInt(Date.now() / 1000)
-                setNow(now)
-                fn()
-            }, 1000)
-        }
-        fn()
-        return () => {
-            clearTimeout(timerId)
-        }
-    }, [])
+export default function Countdown({farmPools, aprPercentage, setHoverFlag, hoverFlag, now, isFinish}) {
+
 
     let left_time = 0
     if (farmPools && farmPools.openDate > now) {
@@ -226,10 +212,7 @@ export default function Countdown({farmPools, aprPercentage, setHoverFlag, hover
                 </span>
                         </Timer>
                     )}
-                    {farmPools &&
-                    farmPools.dueDate &&
-                    farmPools.dueDate <= now &&
-                    farmPools.openDate < now && (
+                    {isFinish && (
                         <span>
                   <FormattedMessage id='completed' />
                 </span>
