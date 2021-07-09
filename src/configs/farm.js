@@ -4,13 +4,13 @@ import { getRemainTime } from '../utils/time'
 
 export default [
   {
-    name: 'WAR-HT LPT',
-    icon: 'WAR-HT_small@2x.png',
+    name: 'WAR-USDT LPT',
+    icon: 'WAR-USDT_small@2x.png',
     rewards1: 'WAR',
-    rewards2: 'MDX',
+    rewards2: '',
     address: '0xE22da09d0B847291076bF5691a9D3908eB8CbAFe', // 超募合约地址
     rewards1Address: '0x910651F81a605a6Ef35d05527d24A72fecef8bF0',
-    rewards2Address: '0x25D2e80cB6B86881Fd7e07dd263Fb79f4AbE033c',
+    rewards2Address: '',
     // apr
     valueAprToken: '0x910651F81a605a6Ef35d05527d24A72fecef8bF0', // WAR
     valueAprPath: [
@@ -23,7 +23,7 @@ export default [
 
     MLP: '0xe4e55c9203ac398a0f0b98bd096b70d9778eca6a',
     byLink:
-      'https://ht.mdex.com/#/add/HT/0x910651F81a605a6Ef35d05527d24A72fecef8bF0',
+      'http://ht.mdex.com/#/add/0xa71EdC38d189767582C38A3145b5873052c3e47a/0x910651F81a605a6Ef35d05527d24A72fecef8bF0',
     abi: StakingPool,
     start_at: '',
     time: '',
@@ -33,7 +33,7 @@ export default [
     status: 0,
     rewards: 'LPT',
     decimal: 18,
-    is_coming: false,
+    is_coming: true,
     mdexReward: true,
   },
   {
@@ -99,5 +99,38 @@ export default [
     decimal: 18,
     is_coming: false,
     mdexReward: false,
+  },
+  {
+    name: 'WAR-HT LPT',
+    icon: 'WAR-HT_small@2x.png',
+    rewards1: 'WAR',
+    rewards2: 'MDX',
+    address: '0xE22da09d0B847291076bF5691a9D3908eB8CbAFe', // 超募合约地址
+    rewards1Address: '0x910651F81a605a6Ef35d05527d24A72fecef8bF0',
+    rewards2Address: '0x25D2e80cB6B86881Fd7e07dd263Fb79f4AbE033c',
+    // apr
+    valueAprToken: '0x910651F81a605a6Ef35d05527d24A72fecef8bF0', // WAR
+    valueAprPath: [
+      '0x5545153CCFcA01fbd7Dd11C0b23ba694D9509A6F', // WHT
+    ],
+    rewardsAprPath: [
+      '0x5545153CCFcA01fbd7Dd11C0b23ba694D9509A6F', // WHT
+    ],
+    settleToken: '0xa71EdC38d189767582C38A3145b5873052c3e47a',
+
+    MLP: '0xe4e55c9203ac398a0f0b98bd096b70d9778eca6a',
+    byLink:
+      'https://ht.mdex.com/#/add/HT/0x910651F81a605a6Ef35d05527d24A72fecef8bF0',
+    abi: StakingPool,
+    start_at: '',
+    time: '',
+    dueDate: '1625821200',
+    openDate: '1622552400',
+    earnName: 'APR',
+    status: 0,
+    rewards: 'LPT',
+    decimal: 18,
+    is_coming: false,
+    mdexReward: true,
   },
 ]
