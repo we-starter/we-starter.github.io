@@ -7,15 +7,13 @@ export default [
     name: 'WAR-USDT LPT',
     icon: 'WAR-USDT_small@2x.png',
     rewards1: 'WAR',
-    rewards2: '',
+    rewards2: null,
     address: '0xE22da09d0B847291076bF5691a9D3908eB8CbAFe', // 超募合约地址
     rewards1Address: '0x910651F81a605a6Ef35d05527d24A72fecef8bF0',
-    rewards2Address: '',
+    rewards2Address: null,
     // apr
     valueAprToken: '0x910651F81a605a6Ef35d05527d24A72fecef8bF0', // WAR
-    valueAprPath: [
-      '0x5545153CCFcA01fbd7Dd11C0b23ba694D9509A6F', // WHT
-    ],
+    valueAprPath: [],
     rewardsAprPath: [
       '0x5545153CCFcA01fbd7Dd11C0b23ba694D9509A6F', // WHT
     ],
@@ -34,7 +32,7 @@ export default [
     rewards: 'LPT',
     decimal: 18,
     is_coming: true,
-    mdexReward: true,
+    mdexReward: false,
   },
   {
     name: 'WAR POOL (DAO)',
