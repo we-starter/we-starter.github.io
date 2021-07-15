@@ -14,10 +14,10 @@ export default [
     // apr
     valueAprToken: '0x910651F81a605a6Ef35d05527d24A72fecef8bF0', // WAR
     valueAprPath: [
-      '0x5545153CCFcA01fbd7Dd11C0b23ba694D9509A6F', // WHT
+
     ],
     rewardsAprPath: [
-      '0x5545153CCFcA01fbd7Dd11C0b23ba694D9509A6F', // WHT
+
     ],
     settleToken: '0xa71EdC38d189767582C38A3145b5873052c3e47a',
 
@@ -35,6 +35,9 @@ export default [
     decimal: 18,
     is_coming: true,
     mdexReward: true,
+    mdexDaily: 1534.46,
+    mdexPid: '0x5a'
+
   },
   {
     name: 'WAR POOL (DAO)',
@@ -67,6 +70,9 @@ export default [
     decimal: 18,
     is_coming: false,
     mdexReward: false,
+    mdexDaily: 0,
+    mdexPid: ''
+
   },
   {
     name: 'PAUL-USDT LPT',
@@ -99,6 +105,8 @@ export default [
     decimal: 18,
     is_coming: false,
     mdexReward: false,
+    mdexDaily: 0,
+    mdexPid: ''
   },
   {
     name: 'WAR-HT LPT',
@@ -131,6 +139,8 @@ export default [
     rewards: 'LPT',
     decimal: 18,
     is_coming: false,
-    mdexReward: true,
+    mdexReward: false,
+    mdexDaily: 0,
+    mdexPid: '0x4c'
   },
 ]

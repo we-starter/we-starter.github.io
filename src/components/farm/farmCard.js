@@ -36,7 +36,8 @@ const FarmCard = (props) => {
     farmPools.mdexReward ? farmPools.address : null,
     farmPools.abi,
     farmPools.MLP,
-    farmPools.rewards1Address
+    farmPools.mdexDaily,
+    farmPools.mdexPid
   )
   const [aprPercentage, setPercentage] = useState('-')
   useEffect(() => {
