@@ -1050,7 +1050,8 @@ export const useMdxARP = (
   pool_address,
   pool_abi,
   lpt_address,
-  reward1_address
+  daily,
+  pid,
 ) => {
   // mdx 年释放总量 * 价值 /
   const { account, active, library, chainId } = useActiveWeb3React()
@@ -1066,16 +1067,15 @@ export const useMdxARP = (
   const [mdex2warPrice, mdex2warPriceFee] = useMDexPrice(
     MDEX_ADDRESS,
     chainId && WAR_ADDRESS(chainId),
-    2534.40,
-    [chainId &&  WHT_ADDRESS(chainId)]
+    daily,
+    [chainId &&  USDT_ADDRESS(chainId)]
   )
   useEffect(() => {
     if (library && pool_address && lptValue > 0 && mdex2warPrice > 0) {
       const contract = getContract(library, MDexPool, MDEX_POOL_ADDRESS)
       const pool_contract = getContract(library, pool_abi, pool_address)
-      const poolId = '0x4c'
       const promiseList = [
-        contract.methods.poolInfo(poolId).call(),
+        contract.methods.poolInfo(pid).call(),
         pool_contract.methods.totalSupply().call(),
       ]
       Promise.all(promiseList).then((data) => {
@@ -1147,6 +1147,11 @@ export const useMDexPrice = (address1, address2, amount = 1, path = []) => {
               return Web3.utils.fromWei(amountOut, 'ether')
             })
         } else if (token1.toLowerCase() == address2.toLowerCase()) {
+          console.log(
+            numToWei(amount),
+            _reserve0,
+            _reserve1
+          )
           return multicallProvider
             .all(mdexRouterList2)
             .then((amountOutData) => {

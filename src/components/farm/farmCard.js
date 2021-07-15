@@ -36,7 +36,8 @@ const FarmCard = (props) => {
     farmPools.mdexReward ? farmPools.address : null,
     farmPools.abi,
     farmPools.MLP,
-    farmPools.rewards1Address
+    farmPools.mdexDaily,
+    farmPools.mdexPid
   )
   const [aprPercentage, setPercentage] = useState('-')
   useEffect(() => {
@@ -82,10 +83,11 @@ const FarmCard = (props) => {
       <h3 className='farm_index_card_title'>{farmPools && farmPools.name}</h3>
       <div className='farm_index_card_content'>
         <p className='apr'>
+          {/* farmPools.openDate 带有倒计时 */}
           {farmPools &&
             farmPools.name === 'WAR POOL (DAO)' &&
             farmPools.openDate > now &&
-            '--'}
+            '-%'}
           {farmPools &&
             farmPools.name === 'WAR POOL (DAO)' &&
             farmPools.openDate < now &&
@@ -94,7 +96,12 @@ const FarmCard = (props) => {
               : aprPercentage + '%')}
           {farmPools &&
             farmPools.name !== 'WAR POOL (DAO)' &&
+            !farmPools.start_at &&
             aprPercentage + '%'}
+          {farmPools &&
+            farmPools.name !== 'WAR POOL (DAO)' &&
+            farmPools.start_at &&
+            (farmPools.start_at > now ? '-%' : aprPercentage + '%')}
           <span className='content_name'>
             {farmPools && farmPools.earnName}
             {farmPools && farmPools.name === 'WAR POOL (DAO)' && (
