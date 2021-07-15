@@ -8,7 +8,7 @@ export default [
     icon: 'WAR-USDT_small@2x.png',
     rewards1: 'WAR',
     rewards2: 'MDX',
-    address: '0xE22da09d0B847291076bF5691a9D3908eB8CbAFe', // 超募合约地址
+    address: '0x777d69a99fE220471f23e2643007f9d086B7d714', // 超募合约地址
     rewards1Address: '0x910651F81a605a6Ef35d05527d24A72fecef8bF0',
     rewards2Address: '0x25D2e80cB6B86881Fd7e07dd263Fb79f4AbE033c',
     // apr
@@ -21,7 +21,7 @@ export default [
     ],
     settleToken: '0xa71EdC38d189767582C38A3145b5873052c3e47a',
 
-    MLP: '0xe4e55c9203ac398a0f0b98bd096b70d9778eca6a',
+    MLP: '0x2eAB1e47Bf1660bf6De9437BD061db666111e041',
     byLink:
       'http://ht.mdex.com/#/add/0xa71EdC38d189767582C38A3145b5873052c3e47a/0x910651F81a605a6Ef35d05527d24A72fecef8bF0',
     abi: StakingPool,
@@ -124,7 +124,7 @@ export default [
     abi: StakingPool,
     start_at: '',
     time: '',
-    dueDate: '1625821200',
+    dueDate: '1626350400',
     openDate: '1622552400',
     earnName: 'APR',
     status: 0,
