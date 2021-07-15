@@ -87,7 +87,7 @@ const FarmCard = (props) => {
           {farmPools &&
             farmPools.name === 'WAR POOL (DAO)' &&
             farmPools.openDate > now &&
-            '--'}
+            '-%'}
           {farmPools &&
             farmPools.name === 'WAR POOL (DAO)' &&
             farmPools.openDate < now &&
@@ -101,7 +101,7 @@ const FarmCard = (props) => {
           {farmPools &&
             farmPools.name !== 'WAR POOL (DAO)' &&
             farmPools.start_at &&
-            (farmPools.start_at > now ? '--' : aprPercentage + '%')}
+            (farmPools.start_at > now ? '-%' : aprPercentage + '%')}
           <span className='content_name'>
             {farmPools && farmPools.earnName}
             {farmPools && farmPools.name === 'WAR POOL (DAO)' && (
