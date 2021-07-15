@@ -13,19 +13,15 @@ export default [
     rewards2Address: '0x25D2e80cB6B86881Fd7e07dd263Fb79f4AbE033c',
     // apr
     valueAprToken: '0x910651F81a605a6Ef35d05527d24A72fecef8bF0', // WAR
-    valueAprPath: [
-
-    ],
-    rewardsAprPath: [
-
-    ],
+    valueAprPath: [],
+    rewardsAprPath: [],
     settleToken: '0xa71EdC38d189767582C38A3145b5873052c3e47a',
 
     MLP: '0x2eAB1e47Bf1660bf6De9437BD061db666111e041',
     byLink:
       'http://ht.mdex.com/#/add/0xa71EdC38d189767582C38A3145b5873052c3e47a/0x910651F81a605a6Ef35d05527d24A72fecef8bF0',
     abi: StakingPool,
-    start_at: '',
+    start_at: '1626350400',
     time: '',
     dueDate: null,
     openDate: null,
@@ -36,8 +32,7 @@ export default [
     is_coming: true,
     mdexReward: true,
     mdexDaily: 1534.46,
-    mdexPid: '0x5a'
-
+    mdexPid: '0x5a',
   },
   {
     name: 'WAR POOL (DAO)',
@@ -71,8 +66,7 @@ export default [
     is_coming: false,
     mdexReward: false,
     mdexDaily: 0,
-    mdexPid: ''
-
+    mdexPid: '',
   },
   {
     name: 'PAUL-USDT LPT',
@@ -106,7 +100,7 @@ export default [
     is_coming: false,
     mdexReward: false,
     mdexDaily: 0,
-    mdexPid: ''
+    mdexPid: '',
   },
   {
     name: 'WAR-HT LPT',
@@ -141,6 +135,6 @@ export default [
     is_coming: false,
     mdexReward: false,
     mdexDaily: 0,
-    mdexPid: '0x4c'
+    mdexPid: '0x4c',
   },
 ]
