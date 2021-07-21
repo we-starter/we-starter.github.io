@@ -49,33 +49,29 @@ const DepositPopup = (props) => {
     setFee(_fee)
   }, [])
 
-   useEffect(() => {
-     setFarmPools(props.pool)
-   }, [props])
+  useEffect(() => {
+    setFarmPools(props.pool)
+  }, [props])
 
-useEffect(() => {
-  const timerId = setTimeout(() => {
-    const nowTime = parseInt(Date.now() / 1000)
-    setNowTime(nowTime)
-  }, 1000)
-  return () => {
-    clearTimeout(timerId)
-  }
-}, [nowTime])
+  useEffect(() => {
+    const timerId = setTimeout(() => {
+      const nowTime = parseInt(Date.now() / 1000)
+      setNowTime(nowTime)
+    }, 1000)
+    return () => {
+      clearTimeout(timerId)
+    }
+  }, [nowTime])
 
   let disableBtn = false
-  if (
-    farmPools &&
-    !farmPools.dueDate &&
-    farmPools.openDate > nowTime
-  ) {
+  if (farmPools && !farmPools.dueDate && farmPools.openDate > nowTime) {
     disableBtn = true
   }
-    useEffect(() => {
-      if (farmPools && farmPools.allowance > 0) {
-        setApprove(false)
-      }
-    }, [farmPools, farmPools && farmPools.allowance, state.randomNumber])
+  useEffect(() => {
+    if (farmPools && farmPools.allowance > 0) {
+      setApprove(false)
+    }
+  }, [farmPools, farmPools && farmPools.allowance, state.randomNumber])
 
   const onMax = () => {
     let max = balance
@@ -112,10 +108,10 @@ useEffect(() => {
       })
       .on('receipt', (_, receipt) => {
         console.log('approve success')
-         dispatch({
-           type: RANDOM_NUMBER,
-           randomNumber: Math.random(),
-         })
+        dispatch({
+          type: RANDOM_NUMBER,
+          randomNumber: Math.random(),
+        })
         setLoadFlag(false)
         setApprove(false)
       })
@@ -146,7 +142,7 @@ useEffect(() => {
     if (disableBtn) {
       return false
     }
-     if (loadFlag) return
+    if (loadFlag) return
     setLoadFlag(true)
     const pool_contract = getContract(library, farmPools.abi, farmPools.address)
     pool_contract.methods
@@ -230,7 +226,8 @@ useEffect(() => {
             <div
               className={cs(
                 `form-app__inputbox-up-pref ${
-                  farmPools && 'form-app__inputbox-up-pref_' + farmPools.networkId
+                  farmPools &&
+                  'form-app__inputbox-up-pref_' + farmPools.networkId
                 }`
               )}
             >
@@ -246,7 +243,7 @@ useEffect(() => {
               'farm_index_card_getMLP_' + farmPools.networkId
             }`
           )}
-          href='https://ht.mdex.com/#/add/HT/0x910651F81a605a6Ef35d05527d24A72fecef8bF0'
+          href={farmPools && farmPools.byLink}
           target='_black'
         >
           <FormattedMessage id='farm13' /> {farmPools && farmPools.name}(

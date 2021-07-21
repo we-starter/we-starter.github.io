@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useMemo, useState} from 'react'
+import React, { useContext, useEffect, useMemo, useState } from 'react'
 import cs from 'classnames'
 import { FormattedMessage, injectIntl } from 'react-intl'
 import BigNumber from 'bignumber.js'
@@ -6,9 +6,9 @@ import { useActiveWeb3React } from '../../web3'
 import { HANDLE_WALLET_MODAL } from '../../const'
 import { mainContext } from '../../reducer'
 import { changeNetwork } from '../../connectors'
-import {Button, message} from 'antd'
+import { Button, message } from 'antd'
 import { formatAmount, splitFormat } from '../../utils/format'
-import {useAPR, useFarmInfo, useMdxARP} from '../../pages/pools/Hooks'
+import { useAPR, useFarmInfo, useMdxARP } from '../../pages/pools/Hooks'
 import { useBalance } from '../../pages/Hooks'
 import Timer from 'react-compound-timer'
 import Countdown from './countdown'
@@ -17,10 +17,13 @@ import { formatNumber } from 'accounting'
 import { ChainId } from '../../web3/address'
 
 const FarmCard = (props) => {
-  let { pools:farmPools, dispatch} = props
+  let { pools: farmPools, dispatch } = props
   const [hoverFlag, setHoverFlag] = useState(false)
   farmPools = useFarmInfo(farmPools.address)
-  const { balance } = useBalance(farmPools && farmPools.MLP, props.pools.networkId)
+  const { balance } = useBalance(
+    farmPools && farmPools.MLP,
+    props.pools.networkId
+  )
   const { chainId } = useActiveWeb3React()
   const [balanceProportion, setBalanceProportion] = useState(0)
   // const [now, setNow] = useState(parseInt(Date.now() / 1000))
@@ -41,18 +44,23 @@ const FarmCard = (props) => {
     farmPools.mdexReward ? farmPools.address : null,
     farmPools.abi,
     farmPools.MLP,
-    farmPools.rewards1Address,
-    farmPools.networkId
+    farmPools.networkId,
+    farmPools.mdexDaily,
+    farmPools.mdexPid
   )
   const [now, setNow] = useState(parseInt(Date.now() / 1000))
-  const isFinish = farmPools && farmPools.dueDate && farmPools.dueDate <= now && farmPools.openDate < now
+  const isFinish =
+    farmPools &&
+    farmPools.dueDate &&
+    farmPools.dueDate <= now &&
+    farmPools.openDate < now
   useEffect(() => {
     let timerId = null
     const fn = () => {
       timerId = setTimeout(() => {
         const now = parseInt(Date.now() / 1000)
         setNow(now)
-        if (isFinish){
+        if (isFinish) {
           clearTimeout(timerId)
         } else {
           fn()
@@ -250,9 +258,11 @@ const FarmCard = (props) => {
       {farmPools && farmPools.networkId == chainId && (
         <div className='farm_index_card_btn'>
           <Button
-              disabled={isFinish}
+            disabled={isFinish}
             className={cs(
-              `deposit_btn ${farmPools && 'deposit_btn_' + farmPools.networkId} ${isFinish ? 'disabled': ''}`,
+              `deposit_btn ${
+                farmPools && 'deposit_btn_' + farmPools.networkId
+              } ${isFinish ? 'disabled' : ''}`
             )}
             onClick={() => {
               dispatch({
@@ -273,7 +283,7 @@ const FarmCard = (props) => {
                   walletModal: 'claim',
                   pool: farmPools && {
                     ...farmPools,
-                    isFinish: isFinish
+                    isFinish: isFinish,
                   },
                 })
               }}
@@ -290,7 +300,7 @@ const FarmCard = (props) => {
                   walletModal: 'claim',
                   pool: farmPools && {
                     ...farmPools,
-                    isFinish: isFinish
+                    isFinish: isFinish,
                   },
                 })
               }}
@@ -406,5 +416,5 @@ const FarmCard = (props) => {
 
 export default injectIntl((props) => {
   const { dispatch, state } = useContext(mainContext)
-  return useMemo(() => <FarmCard {...props} dispatch={dispatch}/>, [props])
+  return useMemo(() => <FarmCard {...props} dispatch={dispatch} />, [props])
 })
