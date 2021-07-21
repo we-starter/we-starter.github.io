@@ -39,8 +39,7 @@ import { TXStatusModal } from '../components/Modals/TXStatusModal'
 import SwitchWithdrawPopup from '../components/migrate/switchWithdrawPopup'
 import WithdrawSuccessPopup from '../components/migrate/withdrawSuccessPopup'
 import toolApi from '../apis/toolApi'
-import {useConnectWallet} from "../connectors";
-
+import { useConnectWallet } from '../connectors'
 
 export const InitPage = () => {
   const { dispatch, state } = useContext(mainContext)
@@ -66,7 +65,7 @@ export const InitPage = () => {
     pool,
     showMenuMaskModal,
     changeNetworkStatus,
-    withdrawModal
+    withdrawModal,
   } = state
 
   console.log(state, 'state')
@@ -399,7 +398,7 @@ export const InitPage = () => {
                   withdrawModal: null,
                 })
               }
-              onChange={() => { }}
+              onChange={() => {}}
             />
           </div>
         </div>
