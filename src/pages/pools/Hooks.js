@@ -1109,7 +1109,7 @@ export const useMdxARP = (
     MDEX_ADDRESS,
     WAR_ADDRESS(ChainId.HECO),
     daily,
-    [WHT_ADDRESS(ChainId.HECO)],
+    [USDT_ADDRESS(ChainId.HECO)],
     _chainId // 取价格的chainId只有在HECO上有
   )
   useMemo(() => {
