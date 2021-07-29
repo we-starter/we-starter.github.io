@@ -1500,7 +1500,7 @@ export default [
     yuque: '-',
     progress: 0,
     status: 0,
-    ratio: '1XNFT=0.8USDT',
+    ratio: '1XNFT=?WAR',
     time: '1627639200',
     purchasedCurrencyOf: 0,
     totalPurchasedAmount: '10000000000000000000000',
