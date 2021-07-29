@@ -300,6 +300,12 @@ const zh_CN = {
     'Moma协议采用了委员会喂价机制与去中心化喂价机制相结合的独特预言机系统。',
   momatAboutProject5:
     '在风险管理方面，Moma协议提供了独创的解决方案，包括：加密资产评级数据库、吹哨人、储备金池、管理质押池。',
+  xNFTAboutProject1:
+    'xNFT Protocol，致力于实现NFT的快速发行与自动化交易协议，相关的生态产品还包括：DigiCenter数字藏品钱包、xNFT Oracle 价格预言机、聚合市场 NFTMarketcap、收益聚合器 NFTBank、链上加密艺术画廊NFTPark等。',
+  xNFTAboutProject2:
+    'xNFT Protocol 已获得 Huobi Ventures、LD Capital、Fundamental Labs、Gateio.labs、Continue Capital、隆领资本、Dealean Capital、Signum、安比实验室、Mars Blockchain、LinkVC、Primitive Ventures、DU Capital、Redline Capital、DragonRoark Fund、499Block、Crasolum、7’O Clock Foundation、YBB foundation、LatticeX Foundation等全球多家知名机构投资。',
+  xNFTAboutProject3:
+    'Primitive Ventures 创始合伙人、全球知名区块链投资人 Dovey Wan 为 xNFT Protocol 战略顾问。',
   related_title1: '累计金额',
   related_title2: '参与地址总数',
   related_title3: '总成立的池子数',

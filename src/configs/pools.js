@@ -1402,8 +1402,123 @@ export default [
     committed: '', // 超募比例
     total: '', // 参与资金规模
     poolType: 0, // 值为 1 代表定向
-    networkId: 128
+    networkId: 128,
   },
+  {
+    name: 'XNFT',
+    address: '0x01',
+    abi: StarterV3,
+    start_at: '1627635600',
+    is_top: true,
+    is_coming: true, // is_coming 为 true 则不请求合约
+    currency: {
+      address: '0xa71edc38d189767582c38a3145b5873052c3e47a', // 如果是0x0则是ht
+      decimal: 18,
+      symbol: 'USDT',
+    },
+    icon: '',
+    type: 0,
+    isPrivate: true,
+    underlying: {
+      address: '0xE5944B50DF84001a36c7DE0d5Cb4da7ab21407D2',
+      decimal: 18,
+      symbol: 'XNFT',
+      name: 'XNFT',
+      total_supply: '10,000,000,000',
+      holders: '-',
+      transfers: '-',
+    },
+    amount: '25000', // token 总额
+    pool_info: {
+      token_distribution: 'July 30th 2021, 5:00PM SGT',
+      min_allocation: '',
+      max_allocation: '',
+      min_swap_level: '20,000 USDT',
+    },
+    website: 'https://xnft.net/',
+    white_paper: 'https://xnft.net/xNFT_Protocol_Whitepaper_EN.pdf',
+    twitter: 'https://twitter.com/xNFT_Protocol?s=09',
+    Telegram_Channel: 'https://t.me/xNFT_Global',
+    Github: '-',
+    yuque: '-',
+    progress: 0,
+    status: 0,
+    ratio: '1XNFT=0.8USDT',
+    time: '1627638000',
+    purchasedCurrencyOf: 0,
+    totalPurchasedAmount: '20000000000000000000000',
+    totalPurchasedUnderlying: '0',
+    totalPurchasedCurrency: '0',
+    is_flash: false,
+    link_url: 'https://xnft.net/', // 跳转外链接
+    project_introduction:
+      'The xNFT Protocol is an underlying technology that supports NFT transactions',
+    duration: '', // 完成时间
+    totalApplicants: '', // 申请总人数
+    winningRate: '-', // 申请中签率
+    committed: '', // 超募比例
+    total: '$1,759,500', // 参与资金规模
+    poolType: 0, // 值为 1 代表定向
+    networkId: 128,
+  },
+  {
+    name: 'XNFT',
+    address: '0x02',
+    abi: OfferingV2,
+    start_at: '1627635600',
+    is_top: true,
+    is_coming: true, // is_coming 为 true 则不请求合约
+    currency: {
+      address: '0xa71edc38d189767582c38a3145b5873052c3e47a', // 如果是0x0则是ht
+      decimal: 18,
+      symbol: 'USDT',
+    },
+    icon: '',
+    type: 1,
+    isPrivate: true,
+    underlying: {
+      address: '0xE5944B50DF84001a36c7DE0d5Cb4da7ab21407D2',
+      decimal: 18,
+      symbol: 'XNFT',
+      name: 'XNFT',
+      total_supply: '100,000,000',
+      holders: '-',
+      transfers: '-',
+    },
+    amount: '12500', // token 总额
+    pool_info: {
+      token_distribution: 'July 30th 2021, 5:00PM SGT',
+      min_allocation: '0',
+      max_allocation: '100 USDT',
+      min_swap_level: '10,000 USDT',
+    },
+    website: 'https://xnft.net/',
+    white_paper: 'https://xnft.net/xNFT_Protocol_Whitepaper_EN.pdf',
+    twitter: 'https://twitter.com/xNFT_Protocol?s=09',
+    Telegram_Channel: 'https://t.me/xNFT_Global',
+    Github: '-',
+    yuque: '-',
+    progress: 0,
+    status: 0,
+    ratio: '1XNFT=?WAR',
+    time: '1627639200',
+    purchasedCurrencyOf: 0,
+    totalPurchasedAmount: '10000000000000000000000',
+    totalPurchasedUnderlying: '0',
+    totalPurchasedCurrency: '0',
+    is_flash: false,
+    link_url: 'https://xnft.net/', // 跳转外链接
+    project_introduction:
+      'The xNFT Protocol is an underlying technology that supports NFT transactions',
+    duration: '', // 完成时间
+    totalApplicants: '500', // 申请总人数
+    winningRate: '-', // 申请中签率
+    committed: '', // 超募比例
+    total: '', // 参与资金规模
+    poolType: 0, // 值为 1 代表定向
+    networkId: 128,
+  },
+
   // 测试合约配置
   // {
   //   name: 'WAR',

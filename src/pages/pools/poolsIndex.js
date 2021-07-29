@@ -12,6 +12,7 @@ import MATTER from '../../assets/icon/MATTER@2x.png'
 import FIX from '../../assets/icon/FIX@2x.png'
 import COOK from '../../assets/icon/COOK@2x.png'
 import CHAINSWAP from '../../assets/icon/chainswap.png'
+import X_NFT from '../../assets/icon/X_NFT.png'
 import noDataPng from '../../assets/icon/noData@2x.png'
 import HUOBI from '../../assets/icon/huobi.png'
 import Metamask from '../../assets/icon/Metamask@2x.png'
@@ -269,6 +270,7 @@ const PoolsIndex = (props) => {
             {pool && pool.underlying.symbol === 'TOKEN' && (
               <img src={CHAINSWAP} />
             )}
+            {pool && pool.underlying.symbol === 'XNFT' && <img src={X_NFT} />}
             {pool && pool.underlying.symbol === 'WAR' && <img src={WAR} />}
             {pool && pool.underlying.symbol === 'BLACK' && <img src={BLACK} />}
             {pool && pool.underlying.symbol === 'YFX' && <img src={FX} />}
