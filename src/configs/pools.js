@@ -1406,11 +1406,11 @@ export default [
   },
   {
     name: 'XNFT',
-    address: '0x01',
+    address: '0xc0e9750C52FD244BEF8d35420bF578961A639136',
     abi: StarterV3,
     start_at: '1627635600',
     is_top: true,
-    is_coming: true, // is_coming 为 true 则不请求合约
+    is_coming: false, // is_coming 为 true 则不请求合约
     currency: {
       address: '0xa71edc38d189767582c38a3145b5873052c3e47a', // 如果是0x0则是ht
       decimal: 18,
@@ -1424,7 +1424,7 @@ export default [
       decimal: 18,
       symbol: 'XNFT',
       name: 'XNFT',
-      total_supply: '10,000,000,000',
+      total_supply: '100,000,000',
       holders: '-',
       transfers: '-',
     },
@@ -1444,7 +1444,7 @@ export default [
     progress: 0,
     status: 0,
     ratio: '1XNFT=0.8USDT',
-    time: '1627638000',
+    time: '1627639200',
     purchasedCurrencyOf: 0,
     totalPurchasedAmount: '20000000000000000000000',
     totalPurchasedUnderlying: '0',
@@ -1463,15 +1463,15 @@ export default [
   },
   {
     name: 'XNFT',
-    address: '0x02',
+    address: '0x2f81F0E24bc029D70a89E55E4De234CeB0B1E099',
     abi: OfferingV2,
     start_at: '1627635600',
     is_top: true,
-    is_coming: true, // is_coming 为 true 则不请求合约
+    is_coming: false, // is_coming 为 true 则不请求合约
     currency: {
-      address: '0xa71edc38d189767582c38a3145b5873052c3e47a', // 如果是0x0则是ht
+      address: '0x910651F81a605a6Ef35d05527d24A72fecef8bF0', // 如果是0x0则是ht
       decimal: 18,
-      symbol: 'USDT',
+      symbol: 'WAR',
     },
     icon: '',
     type: 1,
@@ -1489,8 +1489,8 @@ export default [
     pool_info: {
       token_distribution: 'July 30th 2021, 5:00PM SGT',
       min_allocation: '0',
-      max_allocation: '100 USDT',
-      min_swap_level: '10,000 USDT',
+      max_allocation: '666 WAR',
+      min_swap_level: '66,600 WAR',
     },
     website: 'https://xnft.net/',
     white_paper: 'https://xnft.net/xNFT_Protocol_Whitepaper_EN.pdf',
@@ -1500,10 +1500,10 @@ export default [
     yuque: '-',
     progress: 0,
     status: 0,
-    ratio: '1XNFT=?WAR',
+    ratio: '1XNFT=5.328WAR',
     time: '1627639200',
     purchasedCurrencyOf: 0,
-    totalPurchasedAmount: '10000000000000000000000',
+    totalPurchasedAmount: '66600000000000000000000',
     totalPurchasedUnderlying: '0',
     totalPurchasedCurrency: '0',
     is_flash: false,
@@ -1511,7 +1511,7 @@ export default [
     project_introduction:
       'The xNFT Protocol is an underlying technology that supports NFT transactions',
     duration: '', // 完成时间
-    totalApplicants: '500', // 申请总人数
+    totalApplicants: '150', // 申请总人数
     winningRate: '-', // 申请中签率
     committed: '', // 超募比例
     total: '', // 参与资金规模
