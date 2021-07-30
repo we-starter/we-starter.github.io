@@ -1444,7 +1444,7 @@ export default [
     progress: 0,
     status: 0,
     ratio: '1XNFT=0.8USDT',
-    time: '1627638000',
+    time: '1627639200',
     purchasedCurrencyOf: 0,
     totalPurchasedAmount: '20000000000000000000000',
     totalPurchasedUnderlying: '0',
