@@ -956,6 +956,19 @@ const PoolsDetail = (props) => {
                   </a>
                 </>
               )}
+              {pool && pool.underlying.symbol === 'XNFT' && (
+                <>
+                  <a className='no_link'>
+                    <FormattedMessage id='xNFTAboutProject1' />
+                  </a>
+                  <a className='no_link'>
+                    <FormattedMessage id='xNFTAboutProject2' />
+                  </a>
+                  <a className='no_link'>
+                    <FormattedMessage id='xNFTAboutProject3' />
+                  </a>
+                </>
+              )}
             </div>
           )}
         </div>

@@ -306,6 +306,12 @@ const en_US = {
     'Two mechanisms of Price Feed are used: Committee Price Feed and Decentralized Price Feed.',
   momatAboutProject5:
     'Moma Protocol creatively provided its own unique solution in risk management, including four core components: Crypto Asset Risk Rating Database, Whistleblower, Reserve Pool and Staking Management Pool.',
+  xNFTAboutProject1:
+    'xNFT Protocol, dedicated to realizing the rapid issuance of NFT and automated transaction protocols, is related to ecological products - DigiCenter collection wallet, xNFT Oracle, aggregation market NFTMarketcap, revenue aggregator NFTBank, encryption art gallery NFTPark, etc. ',
+  xNFTAboutProject2:
+    "xNFT Protocol has acquired the investment from Huobi Ventures, LD Capital, Fundamental Labs, Gateio.labs, Continue Capital, Longling Capital, Dealean Capital, Signum, Anbi Lab, Mars Blockchain, LinkVC, Primitive Ventures, DU Capital, Redline Capital, DragonRoark Fund, 499Block, Crasolum, 7'O Clock Foundation, YBB foundation, LatticeX Foundation and many other well-known institutions around the world.",
+  xNFTAboutProject3:
+    'Dovey Wan, the founder and partner of Primitive Ventures and a famous blockchain investor, is the xNFT Protocol strategic advisor.',
   related_title1: 'Total IWO funds',
   related_title2: 'Total participated addresses',
   related_title3: 'Total established pools',

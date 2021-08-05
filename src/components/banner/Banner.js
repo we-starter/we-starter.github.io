@@ -233,6 +233,7 @@ const Banner = (props) => {
           target='_blank'
         ></a> */}
         </div>
+
         <div className='banner_related'>
           <div className='banner_related_data'>
             <img src={Icon4} />
