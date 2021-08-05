@@ -30,6 +30,7 @@
       }
       .tips_content {
         position: absolute;
+        z-index: 99;
         bottom: 30px;
         left: 50%;
         transform: translateX(-50%);

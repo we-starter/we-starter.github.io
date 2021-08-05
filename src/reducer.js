@@ -22,7 +22,8 @@ import {
   IS_SUPPORTEDCHAIN,
   CHANGE_SLIPPAGE,
   RANDOM_NUMBER,
-  HANDLE_WITHDRAW_MODAL, BLOCK_HEIGHT
+  HANDLE_WITHDRAW_MODAL, BLOCK_HEIGHT,
+  NOT_ACCESS_MODAL
 } from './const'
 
 const mainContext = React.createContext()
@@ -120,6 +121,11 @@ const reducer = (state, action) => {
         ...state,
         blockHeight: action.blockHeight
       }
+    case NOT_ACCESS_MODAL:
+      return {
+        ...state,
+        notAccessModal: action.notAccessModal
+      }
     default:
       return state
   }
@@ -150,6 +156,7 @@ const ContextProvider = (props) => {
     slippageVal: 10, // 滑点值
     randomNumber: null,
     blockHeight: 0, // 块高度
+    notAccessModal: false
   })
   return (
     <mainContext.Provider value={{ state, dispatch }}>

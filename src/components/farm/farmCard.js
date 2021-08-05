@@ -3,7 +3,7 @@ import cs from 'classnames'
 import { FormattedMessage, injectIntl } from 'react-intl'
 import BigNumber from 'bignumber.js'
 import { useActiveWeb3React } from '../../web3'
-import { HANDLE_WALLET_MODAL } from '../../const'
+import {HANDLE_WALLET_MODAL, NOT_ACCESS_MODAL} from '../../const'
 import { mainContext } from '../../reducer'
 import { changeNetwork } from '../../connectors'
 import { Button, message } from 'antd'
@@ -116,6 +116,7 @@ const FarmCard = (props) => {
       setBalanceProportion(0)
     }
   }, [farmPools, farmPools.balanceOf, farmPools.totalSupply])
+  const notStart = !farmPools || farmPools.start_at * 1000 > new Date().getTime()
   return (
     <div
       className={`farm_index_card ${farmPools.name} ${
@@ -266,14 +267,22 @@ const FarmCard = (props) => {
       )}
       {farmPools && farmPools.networkId == chainId && (
         <div className='farm_index_card_btn'>
+          {/*<FormattedMessage id="cannotProject"/>*/}
           <Button
-            disabled={isFinish || notAllow}
+            disabled={notStart || isFinish}
             className={cs(
               `deposit_btn ${
                 farmPools && 'deposit_btn_' + farmPools.networkId
-              } ${(isFinish || notAllow) ? 'disabled' : ''}`
+              } ${(notStart || isFinish) ? 'disabled' : ''}`
             )}
             onClick={() => {
+              if (notAllow) {
+                dispatch({
+                  type: NOT_ACCESS_MODAL,
+                  notAccessModal: true,
+                })
+                return
+              }
               dispatch({
                 type: HANDLE_WALLET_MODAL,
                 walletModal: 'deposit',
@@ -285,9 +294,16 @@ const FarmCard = (props) => {
           </Button>
           {farmPools && (
             <Button
-              className={'claim_btn' + (notAllow ? ' disabled' : '')}
-              disabled={notAllow}
+              className={'claim_btn' + (notStart ? ' disabled' : '')}
+              disabled={notStart}
               onClick={() => {
+                if (notAllow) {
+                  dispatch({
+                    type: NOT_ACCESS_MODAL,
+                    notAccessModal: true,
+                  })
+                  return
+                }
                 dispatch({
                   type: HANDLE_WALLET_MODAL,
                   walletModal: 'claim',
@@ -423,7 +439,7 @@ const FarmCard = (props) => {
             <span className="access-type-text">
               <FormattedMessage id='private' />
             </span>
-            <img src={AllowPrivateIcon} alt=""/>
+            <img src={notAllow ? AllowPrivateIcon : AllowPublicIcon} alt=""/>
           </div>
         </div>
         )

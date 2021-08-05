@@ -8,6 +8,7 @@ import {
   ClaimRewardModal,
   StakedTokensModal,
   FailedTransactionModal,
+  NotAccessModal,
   ApproveFailedTransactionModal,
   WaitingWalletConfirmModal,
   TransactionModal,
@@ -66,6 +67,7 @@ export const InitPage = () => {
     showMenuMaskModal,
     changeNetworkStatus,
     withdrawModal,
+    notAccessModal
   } = state
 
   console.log(state, 'state')
@@ -133,6 +135,15 @@ export const InitPage = () => {
           </div>
         </div>
       )}
+      {notAccessModal && (
+        <div className='modal-show'>
+          <div className='wrapper' style={{ zIndex: 11 }}>
+            <NotAccessModal />
+          </div>
+        </div>
+      )}
+
+
       {/* 授权失败弹框 */}
       {showApproveFailedTransactionModal && (
         <div className='modal-show'>
