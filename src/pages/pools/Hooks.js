@@ -1339,3 +1339,27 @@ export const useRewardsValue = (address1, address2, vol) => {
   }, [price])
   return value
 }
+
+export const useAllow = (pool) => {
+  const { account } = useActiveWeb3React()
+  const [allow, setArrow] = useState(false)
+
+  useMemo(() => {
+    if (account) {
+      if (pool.accessType === 'private') {
+        const multicallProvider = getOnlyMultiCallProvider(pool.networkId)
+        const contract = new Contract(pool.address, pool.abi)
+        multicallProvider.all([
+          contract.allowList(account),
+        ]).then((data)=>{
+          const [allow_] = processResult(data)
+          setArrow({
+            'false': false,
+            'true': true
+          }[allow_])
+        })
+      }
+    }
+  }, [account])
+  return allow
+}

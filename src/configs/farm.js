@@ -2,7 +2,45 @@ import StakingPool from '../web3/abi/StakingPool.json'
 import StakingPool3 from '../web3/abi/StakingPool3.json'
 import { getRemainTime } from '../utils/time'
 
+import AllowListStakePool from '../web3/abi/AllowListStakePool.json'
 export default [
+  {
+    name: 'xNFT',
+    title: 'xNFT POOL',
+    icon: 'PAUL-HT_small@2x.png',
+    rewards1: 'WAR',
+    rewards2: null,
+    address: '0x64245650abF2F3ed4f761873c986A10AAFe7C909', // 超募合约地址
+    rewards1Address: '0x910651F81a605a6Ef35d05527d24A72fecef8bF0',
+    rewards2Address: null,
+    // apr
+    valueAprToken: '0x910651F81a605a6Ef35d05527d24A72fecef8bF0', // WAR
+    valueAprPath: [],
+    rewardsAprPath: [],
+    settleToken: '0xa71EdC38d189767582C38A3145b5873052c3e47a',//usdt
+
+    MLP: '0xe5944b50df84001a36c7de0d5cb4da7ab21407d2',//stakingToken
+    byLink:
+      'https://ht.mdex.com/#/swap?outputCurrency=0xe5944b50df84001a36c7de0d5cb4da7ab21407d2',
+    abi: AllowListStakePool,
+    start_at: '1628179200',
+    time: '',
+    dueDate: '1629907200',
+    openDate: '1628179200',
+    earnName: 'APR',
+    status: 0,
+    rewards: 'xNFT',
+    decimal: 18,
+    is_coming: false,
+    mdexReward: false,
+    networkId: 128,
+    lpToken: '',
+    mdexDaily: 1534.46,
+    mdexPid: '0x5a',
+    accessType: 'private', // 私有的需要白名单权限
+  },
+
+
   {
     name: 'WAR-USDT LPT',
     icon: 'WAR-HT_small@2x.png',
@@ -144,6 +182,12 @@ export default [
     mdexDaily: 0,
     mdexPid: '',
   },
+
+
+
+
+
+
   // {
   //   name: 'WAR-BUSD LPT',
   //   icon: 'PAUL-HT_small@2x.png',

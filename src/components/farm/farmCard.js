@@ -8,13 +8,16 @@ import { mainContext } from '../../reducer'
 import { changeNetwork } from '../../connectors'
 import { Button, message } from 'antd'
 import { formatAmount, splitFormat } from '../../utils/format'
-import { useAPR, useFarmInfo, useMdxARP } from '../../pages/pools/Hooks'
+import {useAllow, useAPR, useFarmInfo, useMdxARP} from '../../pages/pools/Hooks'
 import { useBalance } from '../../pages/Hooks'
 import Timer from 'react-compound-timer'
 import Countdown from './countdown'
 // 处理格式 千位符
 import { formatNumber } from 'accounting'
 import { ChainId } from '../../web3/address'
+import AllowPublicIcon from '../../assets/icon/home_N01_night@2x.png'
+import AllowPrivateIcon from '../../assets/icon/home_N02_night@2x.png'
+import Tips from '../../assets/icon/06 icon／minor／info@2x.png'
 
 const FarmCard = (props) => {
   let { pools: farmPools, dispatch } = props
@@ -39,6 +42,10 @@ const FarmCard = (props) => {
     farmPools.earnName === 'APY' ? 2 : 1,
     farmPools.networkId
   )
+  // 白名单 allow=0为不在白名单
+  const allow = useAllow(farmPools)
+  const notAllow = farmPools.accessType ==='private' && !allow
+
 
   const mdexApr = useMdxARP(
     farmPools.mdexReward ? farmPools.address : null,
@@ -127,7 +134,7 @@ const FarmCard = (props) => {
           }`
         )}
       >
-        {farmPools && farmPools.name}
+        {farmPools && (farmPools.title || farmPools.name)}
       </h3>
       <Countdown
         farmPools={farmPools}
@@ -234,8 +241,10 @@ const FarmCard = (props) => {
           href={farmPools.byLink}
           target='_black'
         >
-          <FormattedMessage id='farm13' /> {farmPools && farmPools.name}(
-          {farmPools && farmPools.lpToken})
+          <FormattedMessage id='farm13' /> {farmPools && farmPools.name}
+          {farmPools && farmPools.lpToken && <span>
+            ({farmPools.lpToken})
+          </span>}
         </a>
       )}
       {farmPools && farmPools.name === 'WAR POOL (DAO)' && (
@@ -258,11 +267,11 @@ const FarmCard = (props) => {
       {farmPools && farmPools.networkId == chainId && (
         <div className='farm_index_card_btn'>
           <Button
-            disabled={isFinish}
+            disabled={isFinish || notAllow}
             className={cs(
               `deposit_btn ${
                 farmPools && 'deposit_btn_' + farmPools.networkId
-              } ${isFinish ? 'disabled' : ''}`
+              } ${(isFinish || notAllow) ? 'disabled' : ''}`
             )}
             onClick={() => {
               dispatch({
@@ -274,9 +283,10 @@ const FarmCard = (props) => {
           >
             <FormattedMessage id='farm3' />
           </Button>
-          {farmPools && farmPools.name !== 'WAR POOL (DAO)' && (
-            <a
-              className='claim_btn'
+          {farmPools && (
+            <Button
+              className={'claim_btn' + (notAllow ? ' disabled' : '')}
+              disabled={notAllow}
               onClick={() => {
                 dispatch({
                   type: HANDLE_WALLET_MODAL,
@@ -289,24 +299,7 @@ const FarmCard = (props) => {
               }}
             >
               <FormattedMessage id='farm16' />
-            </a>
-          )}
-          {farmPools && farmPools.name === 'WAR POOL (DAO)' && (
-            <a
-              className='claim_btn'
-              onClick={() => {
-                dispatch({
-                  type: HANDLE_WALLET_MODAL,
-                  walletModal: 'claim',
-                  pool: farmPools && {
-                    ...farmPools,
-                    isFinish: isFinish,
-                  },
-                })
-              }}
-            >
-              <FormattedMessage id='farm16' />
-            </a>
+            </Button>
           )}
         </div>
       )}
@@ -410,6 +403,56 @@ const FarmCard = (props) => {
             <FormattedMessage id='farm21' />
           </a>
         )}
+      {
+        farmPools.accessType === 'private' && (
+          <div className='farm_pools_card_access'>
+          <div
+            className='farm_pools_card_access_title'
+          >
+            <FormattedMessage id='accessType' />
+          </div>
+          <div className="farm_pools_card_access_content">
+            <span
+              className='tips'
+            >
+              <img src={Tips} alt=""/>
+              <i className='tips_content'>
+                <FormattedMessage id='privateTips' />
+              </i>
+            </span>
+            <span className="access-type-text">
+              <FormattedMessage id='private' />
+            </span>
+            <img src={AllowPrivateIcon} alt=""/>
+          </div>
+        </div>
+        )
+      }
+      {
+        farmPools.accessType === 'public' && (
+          <div className='farm_pools_card_access'>
+            <div
+              className='farm_pools_card_access_title'
+            >
+              <FormattedMessage id='accessType' />
+            </div>
+            <div className="farm_pools_card_access_content">
+            <span
+              className='tips'
+            >
+              <img src={Tips} alt=""/>
+              <i className='tips_content'>
+                <FormattedMessage id='publicTips' />
+              </i>
+            </span>
+              <span className="access-type-text">
+              <FormattedMessage id='public' />
+            </span>
+              <img src={AllowPublicIcon} alt=""/>
+            </div>
+          </div>
+        )
+      }
     </div>
   )
 }

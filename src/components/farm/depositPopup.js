@@ -246,8 +246,11 @@ const DepositPopup = (props) => {
           href={farmPools && farmPools.byLink}
           target='_black'
         >
-          <FormattedMessage id='farm13' /> {farmPools && farmPools.name}(
-          {farmPools && farmPools.lpToken})
+          <FormattedMessage id='farm13' /> {farmPools && farmPools.name}
+          {
+            farmPools && farmPools.lpToken && (
+              <span>({farmPools && farmPools.lpToken})</span>)
+          }
         </a>
       )}
       {farmPools && farmPools.name === 'WAR POOL (DAO)' && (

@@ -1,3 +1,71 @@
+.farm_pools_card_access{
+  display: flex;
+  padding: 10px 0;
+  .farm_pools_card_access_title{
+    color: #7A7F82;
+    line-height: 24px;
+    font-size: 14px;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+  }
+  .farm_pools_card_access_content{
+    flex: 1;
+    display: flex;
+    align-items: center;
+    flex-direction: row-reverse;
+    font-weight: bold;
+    img{
+      width: 24px;
+      height: 24px;
+    }
+    .access-type-text{
+      margin: 0 5px 0 6px;
+    }
+    .tips{
+      position: relative;
+      img{
+        width: 20px;
+        height: 20px;
+      }
+      .tips_content {
+        position: absolute;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        padding: 0 10px;
+        margin-top: 0 !important;
+        height: 24px;
+        font-style: normal;
+        font-size: 12px;
+        color: #22292f;
+        line-height: 24px !important;
+        background: #e1dfd9;
+        border-radius: 3px;
+        white-space: nowrap;
+        font-weight: 400;
+        &::after {
+          content: '';
+          display: inline-block;
+          position: absolute;
+          bottom: -5px;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 0;
+          height: 0;
+          border-top: 7px solid #e1dfd9;
+          border-left: 7px solid transparent;
+          border-right: 7px solid transparent;
+        }
+        display: none;
+      }
+      &:hover .tips_content{
+        display: block;
+      }
+    }
+  }
+}
+
 @media #{$desktop} {
   .farm_box {
     min-width: 1080px;
@@ -24,7 +92,7 @@
       padding: 42px 30px 0;
       margin-top: 30px;
       width: 332px;
-      height: 440px;
+      height: 450px;
       background: #e0f8e3;
       border-radius: 20px;
       vertical-align: top;
@@ -112,6 +180,10 @@
     .WAR-USDT:after {
       background: url('../icon/farm/WAR-USDT@2x.png') no-repeat;
       background-size: 100% 100%;
+    }
+    .xNFT:after {
+      background: url('../icon/farm/X_NFT.png') no-repeat;
+      background-size: 50px 50px;
     }
     &_coming {
       background: #f2f0eb;
@@ -278,7 +350,7 @@
       line-height: 28px;
       img {
         display: inline-block;
-        width: 36px;
+        //width: 36px;
         height: 22px;
       }
       span {
@@ -418,7 +490,7 @@
       padding: 42px 30px 0;
       margin-top: 30px;
       width: 332px;
-      height: 440px;
+      height: 450px;
       background: #e0f8e3;
       border-radius: 20px;
       vertical-align: top;
@@ -506,6 +578,10 @@
     .WAR-USDT:after {
       background: url('../icon/farm/WAR-USDT@2x.png') no-repeat;
       background-size: 100% 100%;
+    }
+    .xNFT:after {
+      background: url('../icon/farm/X_NFT.png') no-repeat;
+      background-size: 50px 50px;
     }
     &_coming {
       background: #f2f0eb;
@@ -672,7 +748,7 @@
       line-height: 28px;
       img {
         display: inline-block;
-        width: 36px;
+        //width: 36px;
         height: 22px;
       }
       span {
@@ -810,7 +886,7 @@
       padding: 42px 30px 0;
       margin-top: 44px;
       width: 332px;
-      height: 440px;
+      height: 450px;
       background: #e0f8e3;
       border-radius: 20px;
       &:after {
@@ -894,6 +970,10 @@
     .WAR-USDT:after {
       background: url('../icon/farm/WAR-USDT@2x.png') no-repeat;
       background-size: 100% 100%;
+    }
+    .xNFT:after {
+      background: url('../icon/farm/X_NFT.png') no-repeat;
+      background-size: 50px 50px;
     }
     &_coming {
       background: #f2f0eb;
@@ -1060,7 +1140,7 @@
       line-height: 28px;
       img {
         display: inline-block;
-        width: 36px;
+        //width: 36px;
         height: 22px;
       }
       span {
@@ -1198,7 +1278,7 @@
       padding: 42px 30px 0;
       margin-top: 44px;
       width: 332px;
-      height: 440px;
+      height: 450px;
       background: #e0f8e3;
       border-radius: 20px;
       &:after {
@@ -1282,6 +1362,10 @@
     .WAR-USDT:after {
       background: url('../icon/farm/WAR-USDT@2x.png') no-repeat;
       background-size: 100% 100%;
+    }
+    .xNFT:after {
+      background: url('../icon/farm/X_NFT.png') no-repeat;
+      background-size: 50px 50px;
     }
     &_coming {
       background: #f2f0eb;
@@ -1448,7 +1532,7 @@
       line-height: 28px;
       img {
         display: inline-block;
-        width: 36px;
+        //width: 36px;
         height: 22px;
       }
       span {
