@@ -988,13 +988,13 @@ export const useAPR = (
     MINE_MOUNTAIN_ADDRESS(_chainId),
     _chainId
   )
-  console.log('allowance', allowance)
+  // console.log('allowance', allowance)
   // 获取奖励1未发放的量
   const unClaimReward = useTotalRewards(pool_address, pool_abi, _chainId)
 
-  console.log('allowance unClaimReward', unClaimReward)
+  // console.log('allowance unClaimReward', unClaimReward)
   const span = useSpan(pool_address, pool_abi, _chainId)
-  console.log('span', span)
+  // console.log('span', span)
   // 奖励1的价值
   // const reward1 = useRewardsValue(reward1_address, WAR_ADDRESS(chainId), yearReward)
 
@@ -1023,12 +1023,12 @@ export const useAPR = (
     rewardsAprPath,
     _chainId
   )
-  console.log('allowance', {
-    allowance,
-    lptValue: lptValue.toString(),
-    lptTotalPrice: lptTotalPrice,
-    rewardsTotalPrice: rewardsTotalPrice
-  })
+  // console.log('allowance', {
+  //   allowance,
+  //   lptValue: lptValue.toString(),
+  //   lptTotalPrice: lptTotalPrice,
+  //   rewardsTotalPrice: rewardsTotalPrice
+  // })
   useMemo(() => {
     setLptTotalValue(
       new BigNumber(lptTotalPrice)
@@ -1051,13 +1051,13 @@ export const useAPR = (
       const reward1_vol = new BigNumber(allowance).minus(
         new BigNumber(unClaimReward)
       )
-      console.log('reward1_vol', reward1_vol.toString())
+      // console.log('reward1_vol', reward1_vol.toString())
       setReward1Vol(reward1_vol.toString())
     }
   }, [allowance, unClaimReward, _chainId])
 
   useMemo(() => {
-    console.log('rewardsTotalValue', rewardsTotalValue)
+    // console.log('rewardsTotalValue', rewardsTotalValue)
     if (lptTotalValue && rewardsTotalValue && span > 0) {
       const dayRate = new BigNumber(1).div(
         new BigNumber(span).div(new BigNumber(86400))
@@ -1069,9 +1069,6 @@ export const useAPR = (
           .multipliedBy(new BigNumber(rewardsTotalValue))
           .multipliedBy(new BigNumber(365))
           .toFixed(0, 1)
-        console.log('dayRate', dayRate.toString())
-        console.log('yearReward', yearReward.toString())
-        console.log('lptTotalValue', lptTotalValue.toString())
         // setYearReward(yearReward)
         if (yearReward > 0) {
           const _arp = new BigNumber(yearReward)
@@ -1199,7 +1196,7 @@ export const useMDexPrice = (
               return Web3.utils.fromWei(amountOut, 'ether')
             })
         } else if (token1.toLowerCase() == address2.toLowerCase()) {
-          console.log(numToWei(amount), _reserve0, _reserve1)
+          // console.log(numToWei(amount), _reserve0, _reserve1)
           return multicallProvider
             .all(mdexRouterList2)
             .then((amountOutData) => {
