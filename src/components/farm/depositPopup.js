@@ -236,6 +236,17 @@ const DepositPopup = (props) => {
           </div>
         </div>
       </div>
+      {farmPools && farmPools.svipFlag && (
+        <p className='min_amount_mortgage'>
+          <FormattedMessage
+            id='farm25'
+            values={{
+              num: farmPools && farmPools.minAmountMortgage,
+              icon: farmPools && farmPools.rewards,
+            }}
+          />
+        </p>
+      )}
       {farmPools && farmPools.name !== 'WAR POOL (DAO)' && (
         <a
           className={cs(
@@ -247,10 +258,9 @@ const DepositPopup = (props) => {
           target='_black'
         >
           <FormattedMessage id='farm13' /> {farmPools && farmPools.name}
-          {
-            farmPools && farmPools.lpToken && (
-              <span>({farmPools && farmPools.lpToken})</span>)
-          }
+          {farmPools && farmPools.lpToken && (
+            <span>({farmPools && farmPools.lpToken})</span>
+          )}
         </a>
       )}
       {farmPools && farmPools.name === 'WAR POOL (DAO)' && (

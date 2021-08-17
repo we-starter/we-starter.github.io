@@ -871,9 +871,7 @@ export const usePoolsLBPInfo = (address = '') => {
 export const useFarmInfo = (address = '') => {
   const { account } = useActiveWeb3React()
   const blockHeight = useBlockHeight()
-
   const pool = Farm.find((o) => o.address === address)
-
   const now = parseInt(Date.now() / 1000)
 
   const [farmPoolsInfo, setFarmPoolsInfo] = useState(pool)

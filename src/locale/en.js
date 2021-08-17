@@ -351,6 +351,8 @@ const en_US = {
   farm21: 'Compound',
   farm22: 'Compound {icon} Earned',
   farm23: 'Compound daily',
+  farm24: 'SVIP are enabled to join in the special IWO Pool',
+  farm25: 'Min Staking {num} {icon}',
   buyPopup1: 'Slippage Tolerance',
   buyPopup2: 'Price Impact',
   buyPopup3: 'Minimum received',

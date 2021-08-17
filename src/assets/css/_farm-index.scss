@@ -93,7 +93,7 @@
       padding: 42px 30px 0;
       margin-top: 30px;
       width: 332px;
-      height: 450px;
+      height: 470px;
       background: #e0f8e3;
       border-radius: 20px;
       vertical-align: top;
@@ -207,11 +207,21 @@
       }
     }
     &_card_title {
+      display: flex;
+      align-items: center;
       margin-bottom: 0;
       font-size: 20px;
       font-family: HelveticaNeue-Bold, HelveticaNeue;
       color: #0f8c20;
       line-height: 26px;
+    }
+    .svip {
+      display: inline-block;
+      margin-left: 4px;
+      width: 34px;
+      height: 18px;
+      background: url('../icon/farm/SVIP@2x.png') no-repeat;
+      background-size: 100% 100%;
     }
     &_card_title_56 {
       color: #f0b90b;
@@ -469,6 +479,12 @@
   .farm_popup_avaliable {
     margin-top: 0;
     line-height: 24px !important;
+  }
+  .vip_tip {
+    margin: 8px 0 0;
+    font-size: 12px;
+    font-family: HelveticaNeue;
+    color: #7A7F82;
   }
 }
 @media #{$mdWidth} {
@@ -491,7 +507,7 @@
       padding: 42px 30px 0;
       margin-top: 30px;
       width: 332px;
-      height: 450px;
+      height: 470px;
       background: #e0f8e3;
       border-radius: 20px;
       vertical-align: top;
@@ -605,11 +621,21 @@
       }
     }
     &_card_title {
+      display: flex;
+      align-items: center;
       margin-bottom: 0;
       font-size: 20px;
       font-family: HelveticaNeue-Bold, HelveticaNeue;
       color: #0f8c20;
       line-height: 26px;
+    }
+    .svip {
+      display: inline-block;
+      margin-left: 4px;
+      width: 34px;
+      height: 18px;
+      background: url('../icon/farm/SVIP@2x.png') no-repeat;
+      background-size: 100% 100%;
     }
     &_card_title_56 {
       color: #f0b90b;
@@ -867,6 +893,12 @@
   .farm_popup_avaliable {
     margin-top: 0;
     line-height: 24px !important;
+  }
+  .vip_tip {
+    margin: 8px 0 0;
+    font-size: 12px;
+    font-family: HelveticaNeue;
+    color: #7A7F82;
   }
 }
 @media #{$smWidth} {
@@ -887,7 +919,7 @@
       padding: 42px 30px 0;
       margin-top: 44px;
       width: 332px;
-      height: 450px;
+      height: 470px;
       background: #e0f8e3;
       border-radius: 20px;
       &:after {
@@ -997,11 +1029,21 @@
       }
     }
     &_card_title {
+      display: flex;
+      align-items: center;
       margin-bottom: 0;
       font-size: 20px;
       font-family: HelveticaNeue-Bold, HelveticaNeue;
       color: #0f8c20;
       line-height: 26px;
+    }
+    .svip {
+      display: inline-block;
+      margin-left: 4px;
+      width: 34px;
+      height: 18px;
+      background: url('../icon/farm/SVIP@2x.png') no-repeat;
+      background-size: 100% 100%;
     }
     &_card_title_56 {
       color: #f0b90b;
@@ -1259,6 +1301,12 @@
   .farm_popup_avaliable {
     margin-top: 0;
     line-height: 24px !important;
+  }
+  .vip_tip {
+    margin: 8px 0 0;
+    font-size: 12px;
+    font-family: HelveticaNeue;
+    color: #7A7F82;
   }
 }
 @media #{$xsWidth} {
@@ -1279,7 +1327,7 @@
       padding: 42px 30px 0;
       margin-top: 44px;
       width: 332px;
-      height: 450px;
+      height: 470px;
       background: #e0f8e3;
       border-radius: 20px;
       &:after {
@@ -1389,11 +1437,21 @@
       }
     }
     &_card_title {
+      display: flex;
+      align-items: center;
       margin-bottom: 0;
       font-size: 20px;
       font-family: HelveticaNeue-Bold, HelveticaNeue;
       color: #0f8c20;
       line-height: 26px;
+    }
+    .svip {
+      display: inline-block;
+      margin-left: 4px;
+      width: 34px;
+      height: 18px;
+      background: url('../icon/farm/SVIP@2x.png') no-repeat;
+      background-size: 100% 100%;
     }
     &_card_title_56 {
       color: #f0b90b;
@@ -1651,5 +1709,11 @@
   .farm_popup_avaliable {
     margin-top: 0;
     line-height: 24px !important;
+  }
+  .vip_tip {
+    margin: 8px 0 0;
+    font-size: 12px;
+    font-family: HelveticaNeue;
+    color: #7A7F82;
   }
 }
