@@ -77,7 +77,7 @@ export default [
     icon: 'PAUL-HT_small@2x.png',
     rewards1: 'WAR',
     rewards2: null,
-    address: '0xF01f44B1b5770d3c5dc54FE1455786d1227736CC',
+    address: '0x980Dc14CCff09f8fc1843939c23590dE75b32e8b',
     rewards1Address: '0x910651F81a605a6Ef35d05527d24A72fecef8bF0',
     rewards2Address: null,
     // apr
