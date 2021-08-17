@@ -64,7 +64,7 @@ const DepositPopup = (props) => {
   }, [nowTime])
   let disableBtn = false
   if (farmPools && !farmPools.dueDate && farmPools.openDate > nowTime) {
-    disableBtn = true
+    // disableBtn = true
   }
   useEffect(() => {
     if (farmPools && farmPools.allowance > 0) {
