@@ -141,6 +141,11 @@ const DepositPopup = (props) => {
     if (disableBtn) {
       return false
     }
+    if ((farmPools &&
+          farmPools.minAmountMortgage &&
+          amount - 0 < farmPools.minAmountMortgage - 0)) {
+      return false
+    }
     if (loadFlag) return
     setLoadFlag(true)
     const pool_contract = getContract(library, farmPools.abi, farmPools.address)
