@@ -240,7 +240,9 @@ const PoolsDetail = (props) => {
       <div className='pools_detail_btn_box'>
         {/* pool.timeClose * 1 > now  timeClose 是超募的claim余额的结束时间 */}
         <a
-          className={`pools_detail_btn ${pool ? 'pools_detail_btn_' + pool.networkId : ''} ${
+          className={`pools_detail_btn ${
+            pool ? 'pools_detail_btn_' + pool.networkId : ''
+          } ${
             pool &&
             pool.status === 1 &&
             (pool.timeClose === 0 || pool.timeClose * 1 > now)
@@ -276,7 +278,11 @@ const PoolsDetail = (props) => {
           <FormattedMessage id='poolsDetailText3' />
         </a>
         <a
-          className={cs(`pools_detail_btn ${pool ? 'pools_detail_btn_' + pool.networkId : ''}`)}
+          className={cs(
+            `pools_detail_btn ${
+              pool ? 'pools_detail_btn_' + pool.networkId : ''
+            }`
+          )}
           href={getScanLink(chainId, address, 'address')}
           target='_blank'
         >
@@ -966,6 +972,13 @@ const PoolsDetail = (props) => {
                   </a>
                   <a className='no_link'>
                     <FormattedMessage id='xNFTAboutProject3' />
+                  </a>
+                </>
+              )}
+              {pool && pool.underlying.symbol === 'PLUT' && (
+                <>
+                  <a className='no_link'>
+                    <FormattedMessage id='plutAboutProject1' />
                   </a>
                 </>
               )}

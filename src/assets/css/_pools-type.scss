@@ -228,7 +228,8 @@
         margin-right: 6px;
       }
       .pools-type_card_title {
-        display: inline-block;
+        display: flex;
+        align-items: center;
         margin-bottom: 0;
         font-size: 16px;
         font-weight: bold;
@@ -498,6 +499,14 @@
       width: 182px;
       height: 100px;
     }
+    .svip {
+      display: inline-block;
+      margin-left: 4px;
+      width: 34px;
+      height: 18px;
+      background: url('../icon/farm/SVIP@2x.png') no-repeat;
+      background-size: 100% 100%;
+    }
     &_warning {
       display: inline-block;
     }
@@ -756,7 +765,8 @@
         margin-right: 6px;
       }
       .pools-type_card_title {
-        display: inline-block;
+        display: flex;
+        align-items: center;
         margin-bottom: 0;
         font-size: 16px;
         font-weight: bold;
@@ -1025,6 +1035,14 @@
       width: 182px;
       height: 100px;
     }
+    .svip {
+      display: inline-block;
+      margin-left: 4px;
+      width: 34px;
+      height: 18px;
+      background: url('../icon/farm/SVIP@2x.png') no-repeat;
+      background-size: 100% 100%;
+    }
     &_warning {
       display: inline-block;
     }
@@ -1264,7 +1282,8 @@
         margin-right: 6px;
       }
       .pools-type_card_title {
-        display: inline-block;
+        display: flex;
+        align-items: center;
         margin-bottom: 0;
         font-size: 16px;
         font-weight: bold;
@@ -1530,6 +1549,14 @@
       float: right;
       width: 182px;
       height: 100px;
+    }
+    .svip {
+      display: inline-block;
+      margin-left: 4px;
+      width: 34px;
+      height: 18px;
+      background: url('../icon/farm/SVIP@2x.png') no-repeat;
+      background-size: 100% 100%;
     }
     &_warning {
       display: inline-block;
@@ -1770,7 +1797,8 @@
         margin-right: 6px;
       }
       .pools-type_card_title {
-        display: inline-block;
+        display: flex;
+        align-items: center;
         margin-bottom: 0;
         font-size: 16px;
         font-weight: bold;
@@ -2035,6 +2063,14 @@
       float: right;
       width: 182px;
       height: 100px;
+    }
+    .svip {
+      display: inline-block;
+      margin-left: 4px;
+      width: 34px;
+      height: 18px;
+      background: url('../icon/farm/SVIP@2x.png') no-repeat;
+      background-size: 100% 100%;
     }
     &_warning {
       display: inline-block;

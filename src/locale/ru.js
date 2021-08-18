@@ -300,6 +300,24 @@ const ru = {
     ' CoinWind ставит перед собой цель создать банк цифровых активов DeFi, выведя на рынок продукт, сочетающий в себе высокую доходность, безопасность и надежность. CoinWind выполнит управление и передаст различные токены, депонированные пользователями в различные пулы, затем управлять средствами того или иного пула токенов, чтобы участвовать в майнинге ликвидности в соответствии с различными стратегиями. Ну и наконец — повышать выгоду для всех пользователей. CoinWind может эффективно снизить временную потерю при майнинге ликвидности посредством стратегии комбинирования.',
   paulAboutProject1:
     ' Мы спроектировали свою фундаментальную архитектуру на основе сетей кросс-цепочек. Она была введена и изменялась на основе системы котировок, использующейся ведущими мировыми организациями при высокочастотной автоматической торговле с учетом единого контрольного ориентира при нескольких сценариях торговли. Для построения механизма подтверждения котировки в реальном времени используется котировка заложенных активов и арбитражное подтверждение. В экстремальных ситуациях ценовую кривую можно создать более плавной посредством проверки статистической гипотезы.',
+  momatAboutProject1:
+    'Launched in December 2020, Moma Protocol offers a proprietary solution to meet the growing demands for liquidity, scalability and speculation in DeFi lending markets.',
+  momatAboutProject2:
+    'Moma Protocol uses a proprietary smart contract factory to produce, manage, accelerate and aggregate the lending markets, creating an ecosystem that can expand infinitely on lending liquidity and market diversity.',
+  momatAboutProject3:
+    'Four key components of Moma Protcol are Factory, Launch Pool, Lending Pool and Aggregator. Factory is a smart contract factory that can produce and manage Launch Pool and Lending Pool. Launch Pool is a customizable Pre-Lending Pool designed for community mining. Community tokens can be distributed for any projects through the Launch Pool. Lending Pool is a customizable lending market pool with an over-collateralized loan structure. This pool can support lending and borrowing in any markets. Aggregator is a calculator and analyzer based on Pool and market data. It helps users solve their personalized DeFi demands of lending, borrowing and community mining of crypto assets.',
+  momatAboutProject4:
+    'Two mechanisms of Price Feed are used: Committee Price Feed and Decentralized Price Feed.',
+  momatAboutProject5:
+    'Moma Protocol creatively provided its own unique solution in risk management, including four core components: Crypto Asset Risk Rating Database, Whistleblower, Reserve Pool and Staking Management Pool.',
+  xNFTAboutProject1:
+    'xNFT Protocol, dedicated to realizing the rapid issuance of NFT and automated transaction protocols, is related to ecological products - DigiCenter collection wallet, xNFT Oracle, aggregation market NFTMarketcap, revenue aggregator NFTBank, encryption art gallery NFTPark, etc. ',
+  xNFTAboutProject2:
+    "xNFT Protocol has acquired the investment from Huobi Ventures, LD Capital, Fundamental Labs, Gateio.labs, Continue Capital, Longling Capital, Dealean Capital, Signum, Anbi Lab, Mars Blockchain, LinkVC, Primitive Ventures, DU Capital, Redline Capital, DragonRoark Fund, 499Block, Crasolum, 7'O Clock Foundation, YBB foundation, LatticeX Foundation and many other well-known institutions around the world.",
+  xNFTAboutProject3:
+    'Dovey Wan, the founder and partner of Primitive Ventures and a famous blockchain investor, is the xNFT Protocol strategic advisor.',
+  plutAboutProject1:
+    'DePlutus, next-generation DeFi asset management protocol for both professional and retail investors to initiate, manage and invest in the on-chain crypto funds.',
   related_title1: 'Всего средства IWO',
   related_title2: 'Всего участвовавших адресов',
   related_title3: 'Всего созданных пулов',

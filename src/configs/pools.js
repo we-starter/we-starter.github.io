@@ -1542,6 +1542,178 @@ export default [
     poolType: 0, // 值为 1 代表定向
     networkId: 128,
   },
+  {
+    name: 'PLUT',
+    address: '0x1',
+    abi: OfferingV2,
+    start_at: '1629439200',
+    is_top: true,
+    is_coming: true, // is_coming 为 true 则不请求合约
+    currency: {
+      address: '0xa71edc38d189767582c38a3145b5873052c3e47a', // 如果是0x0则是ht
+      decimal: 18,
+      symbol: 'USDT',
+    },
+    icon: '',
+    type: 1,
+    isPrivate: true,
+    underlying: {
+      address: '',
+      decimal: 18,
+      symbol: 'PLUT',
+      name: 'PLUT',
+      total_supply: '100,000,000',
+      holders: '-',
+      transfers: '-',
+    },
+    amount: '250000', // token 总额
+    pool_info: {
+      token_distribution: 'August 20th 2021, 2:00PM SGT',
+      min_allocation: '0',
+      max_allocation: '200 USDT',
+      min_swap_level: '20,000 USDT',
+    },
+    website: 'https://deplutus.finance/',
+    white_paper: '-',
+    twitter: 'https://twitter.com/FinancePlutus',
+    Telegram_Channel: 'https://t.me/Deplutus',
+    Github: 'https://github.com/DePlutus',
+    yuque: '-',
+    progress: 0,
+    status: 0,
+    ratio: '1PLUL=?USDT',
+    time: '1629455400',
+    purchasedCurrencyOf: 0,
+    totalPurchasedAmount: '20000000000000000000000',
+    totalPurchasedUnderlying: '0',
+    totalPurchasedCurrency: '0',
+    is_flash: false,
+    link_url: 'https://deplutus.finance/', // 跳转外链接
+    project_introduction:
+      'DePlutus, next-generation DeFi asset management protocol for both professional and retail investors to initiate, manage and invest in the on-chain crypto funds.',
+    duration: '', // 完成时间
+    totalApplicants: '100', // 申请总人数
+    winningRate: '-', // 申请中签率
+    committed: '', // 超募比例
+    total: '', // 参与资金规模
+    poolType: 0, // 值为 1 代表定向
+    networkId: 56,
+    svipFlag: true
+  },
+  {
+    name: 'PLUT',
+    address: '0x2',
+    abi: OfferingV2,
+    start_at: '1629439200',
+    is_top: true,
+    is_coming: true, // is_coming 为 true 则不请求合约
+    currency: {
+      address: '0xa71edc38d189767582c38a3145b5873052c3e47a', // 如果是0x0则是ht
+      decimal: 18,
+      symbol: 'USDT',
+    },
+    icon: '',
+    type: 1,
+    isPrivate: true,
+    underlying: {
+      address: '',
+      decimal: 18,
+      symbol: 'PLUT',
+      name: 'PLUT',
+      total_supply: '100,000,000',
+      holders: '-',
+      transfers: '-',
+    },
+    amount: '250000', // token 总额
+    pool_info: {
+      token_distribution: 'August 20th 2021, 2:00PM SGT',
+      min_allocation: '0',
+      max_allocation: '100 USDT',
+      min_swap_level: '20,000 USDT',
+    },
+    website: 'https://deplutus.finance/',
+    white_paper: '-',
+    twitter: 'https://twitter.com/FinancePlutus',
+    Telegram_Channel: 'https://t.me/Deplutus',
+    Github: 'https://github.com/DePlutus',
+    yuque: '-',
+    progress: 0,
+    status: 0,
+    ratio: '1PLUL=?USDT',
+    time: '1629455400',
+    purchasedCurrencyOf: 0,
+    totalPurchasedAmount: '20000000000000000000000',
+    totalPurchasedUnderlying: '0',
+    totalPurchasedCurrency: '0',
+    is_flash: false,
+    link_url: 'https://deplutus.finance/', // 跳转外链接
+    project_introduction:
+      'DePlutus, next-generation DeFi asset management protocol for both professional and retail investors to initiate, manage and invest in the on-chain crypto funds.',
+    duration: '', // 完成时间
+    totalApplicants: '200', // 申请总人数
+    winningRate: '-', // 申请中签率
+    committed: '', // 超募比例
+    total: '', // 参与资金规模
+    poolType: 0, // 值为 1 代表定向
+    networkId: 56,
+  },
+  {
+    name: 'PLUT',
+    address: '0x3',
+    abi: StarterV3,
+    start_at: '1629439200',
+    is_top: true,
+    is_coming: true, // is_coming 为 true 则不请求合约
+    currency: {
+      address: '0xa71edc38d189767582c38a3145b5873052c3e47a', // 如果是0x0则是ht
+      decimal: 18,
+      symbol: 'USDT',
+    },
+    icon: '',
+    type: 0,
+    isPrivate: true,
+    underlying: {
+      address: '',
+      decimal: 18,
+      symbol: 'PLUT',
+      name: 'PLUT',
+      total_supply: '100,000,000',
+      holders: '-',
+      transfers: '-',
+    },
+    amount: '125000', // token 总额
+    pool_info: {
+      token_distribution: 'August 20th 2021, 2:00PM SGT',
+      min_allocation: '',
+      max_allocation: '',
+      min_swap_level: '10,000 USDT',
+    },
+    website: 'https://deplutus.finance/',
+    white_paper: '-',
+    twitter: 'https://twitter.com/FinancePlutus',
+    Telegram_Channel: 'https://t.me/Deplutus',
+    Github: 'https://github.com/DePlutus',
+    yuque: '-',
+    progress: 0,
+    status: 0,
+    ratio: '1PLUL=?USDT',
+    time: '1629455400',
+    purchasedCurrencyOf: 0,
+    totalPurchasedAmount: '10000000000000000000000',
+    totalPurchasedUnderlying: '0',
+    totalPurchasedCurrency: '0',
+    is_flash: false,
+    link_url: 'https://deplutus.finance/', // 跳转外链接
+    project_introduction:
+      'DePlutus, next-generation DeFi asset management protocol for both professional and retail investors to initiate, manage and invest in the on-chain crypto funds.',
+    duration: '', // 完成时间
+    totalApplicants: '', // 申请总人数
+    winningRate: '-', // 申请中签率
+    committed: '', // 超募比例
+    total: '', // 参与资金规模
+    poolType: 0, // 值为 1 代表定向
+    networkId: 56,
+  },
 
   // 测试合约配置
   // {
