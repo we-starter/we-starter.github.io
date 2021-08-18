@@ -51,6 +51,9 @@ const DepositPopup = (props) => {
 
   useEffect(() => {
     setFarmPools(props.pool)
+    if (farmPools && farmPools.minAmountMortgage) {
+      setAmount(farmPools.minAmountMortgage)
+    }
   }, [props])
 
   useEffect(() => {
