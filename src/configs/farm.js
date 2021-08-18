@@ -107,7 +107,7 @@ export default [
     mdexDaily: 0,
     mdexPid: '',
     svipFlag: true,
-    minAmountMortgage: '10,000'
+    minAmountMortgage: '10',
   },
   {
     name: 'xNFT',

@@ -62,7 +62,6 @@ const DepositPopup = (props) => {
       clearTimeout(timerId)
     }
   }, [nowTime])
-
   let disableBtn = false
   if (farmPools && !farmPools.dueDate && farmPools.openDate > nowTime) {
     disableBtn = true
@@ -241,7 +240,7 @@ const DepositPopup = (props) => {
           <FormattedMessage
             id='farm25'
             values={{
-              num: farmPools && farmPools.minAmountMortgage,
+              num: farmPools && formatNumber(farmPools.minAmountMortgage),
               icon: farmPools && farmPools.rewards,
             }}
           />
@@ -298,7 +297,11 @@ const DepositPopup = (props) => {
           <Button
             type='primary'
             className={cs(
-              disableBtn && 'disable_btn',
+              (disableBtn ||
+                (farmPools &&
+                  farmPools.minAmountMortgage &&
+                  amount - 0 < farmPools.minAmountMortgage - 0)) &&
+                'disable_btn',
               farmPools && 'ant-btn-primary_' + farmPools.networkId
             )}
             onClick={onConfirm}
