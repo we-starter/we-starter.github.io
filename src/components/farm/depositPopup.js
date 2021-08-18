@@ -33,7 +33,7 @@ const DepositPopup = (props) => {
   const { account, active, library, chainId } = useActiveWeb3React()
   const { dispatch, state } = useContext(mainContext)
   const [approve, setApprove] = useState(true)
-  const [amount, setAmount] = useState('')
+  const [amount, setAmount] = useState(farmPools && farmPools.minAmountMortgage ? farmPools.minAmountMortgage : '')
   const [fee, setFee] = useState(0)
   const [loadFlag, setLoadFlag] = useState(false)
   const [nowTime, setNowTime] = useState(parseInt(Date.now() / 1000))
@@ -62,10 +62,9 @@ const DepositPopup = (props) => {
       clearTimeout(timerId)
     }
   }, [nowTime])
-
   let disableBtn = false
   if (farmPools && !farmPools.dueDate && farmPools.openDate > nowTime) {
-    disableBtn = true
+    // disableBtn = true
   }
   useEffect(() => {
     if (farmPools && farmPools.allowance > 0) {
@@ -140,6 +139,11 @@ const DepositPopup = (props) => {
       return false
     }
     if (disableBtn) {
+      return false
+    }
+    if ((farmPools &&
+          farmPools.minAmountMortgage &&
+          amount - 0 < farmPools.minAmountMortgage - 0)) {
       return false
     }
     if (loadFlag) return
@@ -236,6 +240,17 @@ const DepositPopup = (props) => {
           </div>
         </div>
       </div>
+      {farmPools && farmPools.svipFlag && (
+        <p className='min_amount_mortgage'>
+          <FormattedMessage
+            id='farm25'
+            values={{
+              num: farmPools && formatNumber(farmPools.minAmountMortgage),
+              icon: farmPools && farmPools.rewards,
+            }}
+          />
+        </p>
+      )}
       {farmPools && farmPools.name !== 'WAR POOL (DAO)' && (
         <a
           className={cs(
@@ -247,10 +262,9 @@ const DepositPopup = (props) => {
           target='_black'
         >
           <FormattedMessage id='farm13' /> {farmPools && farmPools.name}
-          {
-            farmPools && farmPools.lpToken && (
-              <span>({farmPools && farmPools.lpToken})</span>)
-          }
+          {farmPools && farmPools.lpToken && (
+            <span>({farmPools && farmPools.lpToken})</span>
+          )}
         </a>
       )}
       {farmPools && farmPools.name === 'WAR POOL (DAO)' && (
@@ -288,7 +302,11 @@ const DepositPopup = (props) => {
           <Button
             type='primary'
             className={cs(
-              disableBtn && 'disable_btn',
+              (disableBtn ||
+                (farmPools &&
+                  farmPools.minAmountMortgage &&
+                  amount - 0 < farmPools.minAmountMortgage - 0)) &&
+                'disable_btn',
               farmPools && 'ant-btn-primary_' + farmPools.networkId
             )}
             onClick={onConfirm}

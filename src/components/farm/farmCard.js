@@ -116,6 +116,7 @@ const FarmCard = (props) => {
       setBalanceProportion(0)
     }
   }, [farmPools, farmPools.balanceOf, farmPools.totalSupply])
+
   const notStart = !farmPools || farmPools.start_at * 1000 > new Date().getTime()
   return (
     <div
@@ -136,6 +137,7 @@ const FarmCard = (props) => {
         )}
       >
         {farmPools && (farmPools.title || farmPools.name)}
+        {farmPools && farmPools.svipFlag && <span className='svip'></span>}
       </h3>
       <Countdown
         farmPools={farmPools}
@@ -243,9 +245,7 @@ const FarmCard = (props) => {
           target='_black'
         >
           <FormattedMessage id='farm13' /> {farmPools && farmPools.name}
-          {farmPools && farmPools.lpToken && <span>
-            ({farmPools.lpToken})
-          </span>}
+          {farmPools && farmPools.lpToken && <span>({farmPools.lpToken})</span>}
         </a>
       )}
       {farmPools && farmPools.name === 'WAR POOL (DAO)' && (
@@ -273,7 +273,7 @@ const FarmCard = (props) => {
             className={cs(
               `deposit_btn ${
                 farmPools && 'deposit_btn_' + farmPools.networkId
-              } ${(notStart || isFinish) ? 'disabled' : ''}`
+              } ${notStart || isFinish ? 'disabled' : ''}`
             )}
             onClick={() => {
               if (notAllow) {
@@ -419,56 +419,49 @@ const FarmCard = (props) => {
             <FormattedMessage id='farm21' />
           </a>
         )}
-      {
-        farmPools.accessType === 'private' && (
-          <div className='farm_pools_card_access'>
-          <div
-            className='farm_pools_card_access_title'
-          >
+      {farmPools.accessType === 'private' && (
+        <div className='farm_pools_card_access'>
+          <div className='farm_pools_card_access_title'>
             <FormattedMessage id='accessType' />
           </div>
-          <div className="farm_pools_card_access_content">
-            <span
-              className='tips'
-            >
-              <img src={Tips} alt=""/>
+          <div className='farm_pools_card_access_content'>
+            <span className='tips'>
+              <img src={Tips} alt='' />
               <i className='tips_content'>
                 <FormattedMessage id='privateTips' />
               </i>
             </span>
-            <span className="access-type-text">
+            <span className='access-type-text'>
               <FormattedMessage id='private' />
             </span>
-            <img src={notAllow ? AllowPrivateIcon : AllowPublicIcon} alt=""/>
+            <img src={notAllow ? AllowPrivateIcon : AllowPublicIcon} alt='' />
           </div>
         </div>
-        )
-      }
-      {
-        farmPools.accessType === 'public' && (
-          <div className='farm_pools_card_access'>
-            <div
-              className='farm_pools_card_access_title'
-            >
-              <FormattedMessage id='accessType' />
-            </div>
-            <div className="farm_pools_card_access_content">
-            <span
-              className='tips'
-            >
-              <img src={Tips} alt=""/>
+      )}
+      {farmPools.accessType === 'public' && (
+        <div className='farm_pools_card_access'>
+          <div className='farm_pools_card_access_title'>
+            <FormattedMessage id='accessType' />
+          </div>
+          <div className='farm_pools_card_access_content'>
+            <span className='tips'>
+              <img src={Tips} alt='' />
               <i className='tips_content'>
                 <FormattedMessage id='publicTips' />
               </i>
             </span>
-              <span className="access-type-text">
+            <span className='access-type-text'>
               <FormattedMessage id='public' />
             </span>
-              <img src={AllowPublicIcon} alt=""/>
-            </div>
+            <img src={AllowPublicIcon} alt='' />
           </div>
-        )
-      }
+        </div>
+      )}
+      {farmPools && farmPools.svipFlag && (
+        <p className='vip_tip'>
+          <FormattedMessage id='farm24' />
+        </p>
+      )}
     </div>
   )
 }

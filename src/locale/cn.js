@@ -350,6 +350,8 @@ const zh_CN = {
   farm21: '复投',
   farm22: 'Compound {icon} Earned',
   farm23: '每日进行复投',
+  farm24: 'SVIP 用户可以参加指定的 IWO 特权池',
+  farm25: '每次最低抵押数量 {num} {icon}',
   buyPopup1: '滑点',
   buyPopup2: '价格影响',
   buyPopup3: '最低收到',
@@ -378,6 +380,6 @@ const zh_CN = {
   switchTo: '切换到',
   withdraw: '提取',
   add: '添加',
-  to: '到'
+  to: '到',
 }
 export default zh_CN

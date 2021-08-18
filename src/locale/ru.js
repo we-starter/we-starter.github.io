@@ -340,6 +340,8 @@ const ru = {
   farm21: 'Составлено',
   farm22: 'Составлено {значок} заработанное',
   farm23: 'Составлено на ежедневной основе',
+  farm24: 'SVIP are enabled to join in the special IWO Pool',
+  farm25: 'Min Staking {number} {icon}',
   buyPopup1: 'Устойчивость к сокращению',
   buyPopup2: 'Влияние на цену',
   buyPopup3: 'Минимум получено',
@@ -368,7 +370,6 @@ const ru = {
   switchTo: 'Переключиться в',
   withdraw: 'Снять со счета',
   add: 'добавить',
-  to: 'кому'
-
+  to: 'кому',
 }
 export default ru
