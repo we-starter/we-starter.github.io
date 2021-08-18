@@ -1558,7 +1558,7 @@ export default [
     type: 1,
     isPrivate: true,
     underlying: {
-      address: '',
+      address: '0x888888d87d85bc11549b17907e8f589214eb90c2',
       decimal: 18,
       symbol: 'PLUT',
       name: 'PLUT',
@@ -1574,7 +1574,7 @@ export default [
       min_swap_level: '20,000 USDT',
     },
     website: 'https://deplutus.finance/',
-    white_paper: '-',
+    white_paper: 'https://deplutus.finance/static/deplutus-white-paper.pdf',
     twitter: 'https://twitter.com/FinancePlutus',
     Telegram_Channel: 'https://t.me/Deplutus',
     Github: 'https://github.com/DePlutus',
@@ -1598,7 +1598,7 @@ export default [
     total: '', // 参与资金规模
     poolType: 0, // 值为 1 代表定向
     networkId: 56,
-    svipFlag: true
+    svipFlag: true,
   },
   {
     name: 'PLUT',
@@ -1616,7 +1616,7 @@ export default [
     type: 1,
     isPrivate: true,
     underlying: {
-      address: '',
+      address: '0x888888d87d85bc11549b17907e8f589214eb90c2',
       decimal: 18,
       symbol: 'PLUT',
       name: 'PLUT',
@@ -1632,7 +1632,7 @@ export default [
       min_swap_level: '20,000 USDT',
     },
     website: 'https://deplutus.finance/',
-    white_paper: '-',
+    white_paper: 'https://deplutus.finance/static/deplutus-white-paper.pdf',
     twitter: 'https://twitter.com/FinancePlutus',
     Telegram_Channel: 'https://t.me/Deplutus',
     Github: 'https://github.com/DePlutus',
@@ -1673,7 +1673,7 @@ export default [
     type: 0,
     isPrivate: true,
     underlying: {
-      address: '',
+      address: '0x888888d87d85bc11549b17907e8f589214eb90c2',
       decimal: 18,
       symbol: 'PLUT',
       name: 'PLUT',
@@ -1689,7 +1689,7 @@ export default [
       min_swap_level: '10,000 USDT',
     },
     website: 'https://deplutus.finance/',
-    white_paper: '-',
+    white_paper: 'https://deplutus.finance/static/deplutus-white-paper.pdf',
     twitter: 'https://twitter.com/FinancePlutus',
     Telegram_Channel: 'https://t.me/Deplutus',
     Github: 'https://github.com/DePlutus',
