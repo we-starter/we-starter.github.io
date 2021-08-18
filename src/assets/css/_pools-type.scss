@@ -170,7 +170,6 @@
         .type_private_box_t{
           width: 100%;
           border-radius: 20px;
-          overflow: hidden;
           padding: 30px 22px 0 22px;
         }
         .type_private_box_b{
@@ -365,11 +364,10 @@
       right: -22px;
       top: -30px;
       z-index: 0;
-      width: 0;
-      height: 0;
-      border-top: 62px solid #DCE7E1;
-      border-bottom: 62px solid transparent;
-      border-left: 62px solid transparent;
+      width: 62px;
+      height: 62px;
+      background: url('../icon/pool_heco_arrow.svg') no-repeat;
+      background-size: 100% 100%;
       .pools-type_chaind {
         position: absolute;
         right: 6px;
@@ -386,11 +384,10 @@
       right: -22px;
       top: -30px;
       z-index: 0;
-      width: 0;
-      height: 0;
-      border-top: 62px solid #FFEEB9;
-      border-bottom: 62px solid transparent;
-      border-left: 62px solid transparent;
+      width: 62px;
+      height: 62px;
+      background: url('../icon/pool_bsc_arrow.svg') no-repeat;
+      background-size: 100% 100%;
       .pools-type_chaind {
         position: absolute;
         right: 6px;
@@ -407,11 +404,10 @@
         right: -22px;
         top: -30px;
         z-index: 0;
-        width: 0;
-        height: 0;
-        border-top: 62px solid #E1CFFF;
-        border-bottom: 62px solid transparent;
-        border-left: 62px solid transparent;
+        width: 62px;
+        height: 62px;
+        background: url('../icon/pool_polygon_arrow.svg') no-repeat;
+        background-size: 100% 100%;
        .pools-type_chaind {
         position: absolute;
         right: 6px;
@@ -707,7 +703,6 @@
         .type_private_box_t{
           width: 100%;
           border-radius: 20px;
-          overflow: hidden;
           padding: 30px 22px 0 22px;
         }
         .type_private_box_b{
@@ -896,16 +891,15 @@
         }
       }
     }
-       &_chaind_box_128 {
+    &_chaind_box_128 {
       position: absolute;
       right: -22px;
       top: -30px;
       z-index: 0;
-      width: 0;
-      height: 0;
-      border-top: 62px solid #DCE7E1;
-      border-bottom: 62px solid transparent;
-      border-left: 62px solid transparent;
+      width: 62px;
+      height: 62px;
+      background: url('../icon/pool_heco_arrow.svg') no-repeat;
+      background-size: 100% 100%;
       .pools-type_chaind {
         position: absolute;
         right: 6px;
@@ -922,11 +916,10 @@
       right: -22px;
       top: -30px;
       z-index: 0;
-      width: 0;
-      height: 0;
-      border-top: 62px solid #FFEEB9;
-      border-bottom: 62px solid transparent;
-      border-left: 62px solid transparent;
+      width: 62px;
+      height: 62px;
+      background: url('../icon/pool_bsc_arrow.svg') no-repeat;
+      background-size: 100% 100%;
       .pools-type_chaind {
         position: absolute;
         right: 6px;
@@ -943,11 +936,10 @@
         right: -22px;
         top: -30px;
         z-index: 0;
-        width: 0;
-        height: 0;
-        border-top: 62px solid #E1CFFF;
-        border-bottom: 62px solid transparent;
-        border-left: 62px solid transparent;
+        width: 62px;
+        height: 62px;
+        background: url('../icon/pool_polygon_arrow.svg') no-repeat;
+        background-size: 100% 100%;
        .pools-type_chaind {
         position: absolute;
         right: 6px;
@@ -1232,7 +1224,7 @@
         background: #fff;
         border-radius: 20px;
         vertical-align: top;
-        overflow: hidden;
+        // overflow: hidden;
       }
       .lpt_link {
         font-size: 12px;
@@ -1411,16 +1403,15 @@
         }
       }
     }
-       &_chaind_box_128 {
+    &_chaind_box_128 {
       position: absolute;
       right: -22px;
       top: -30px;
       z-index: 0;
-      width: 0;
-      height: 0;
-      border-top: 62px solid #DCE7E1;
-      border-bottom: 62px solid transparent;
-      border-left: 62px solid transparent;
+      width: 62px;
+      height: 62px;
+      background: url('../icon/pool_heco_arrow.svg') no-repeat;
+      background-size: 100% 100%;
       .pools-type_chaind {
         position: absolute;
         right: 6px;
@@ -1437,11 +1428,10 @@
       right: -22px;
       top: -30px;
       z-index: 0;
-      width: 0;
-      height: 0;
-      border-top: 62px solid #FFEEB9;
-      border-bottom: 62px solid transparent;
-      border-left: 62px solid transparent;
+      width: 62px;
+      height: 62px;
+      background: url('../icon/pool_bsc_arrow.svg') no-repeat;
+      background-size: 100% 100%;
       .pools-type_chaind {
         position: absolute;
         right: 6px;
@@ -1458,11 +1448,10 @@
         right: -22px;
         top: -30px;
         z-index: 0;
-        width: 0;
-        height: 0;
-        border-top: 62px solid #E1CFFF;
-        border-bottom: 62px solid transparent;
-        border-left: 62px solid transparent;
+        width: 62px;
+        height: 62px;
+        background: url('../icon/pool_polygon_arrow.svg') no-repeat;
+        background-size: 100% 100%;
        .pools-type_chaind {
         position: absolute;
         right: 6px;
@@ -1747,7 +1736,7 @@
         background: #fff;
         border-radius: 20px;
         vertical-align: top;
-        overflow: hidden;
+        // overflow: hidden;
       }
       .lpt_link {
         font-size: 12px;
@@ -1925,16 +1914,15 @@
         }
       }
     }
-       &_chaind_box_128 {
+    &_chaind_box_128 {
       position: absolute;
       right: -22px;
       top: -30px;
       z-index: 0;
-      width: 0;
-      height: 0;
-      border-top: 62px solid #DCE7E1;
-      border-bottom: 62px solid transparent;
-      border-left: 62px solid transparent;
+      width: 62px;
+      height: 62px;
+      background: url('../icon/pool_heco_arrow.svg') no-repeat;
+      background-size: 100% 100%;
       .pools-type_chaind {
         position: absolute;
         right: 6px;
@@ -1951,11 +1939,10 @@
       right: -22px;
       top: -30px;
       z-index: 0;
-      width: 0;
-      height: 0;
-      border-top: 62px solid #FFEEB9;
-      border-bottom: 62px solid transparent;
-      border-left: 62px solid transparent;
+      width: 62px;
+      height: 62px;
+      background: url('../icon/pool_bsc_arrow.svg') no-repeat;
+      background-size: 100% 100%;
       .pools-type_chaind {
         position: absolute;
         right: 6px;
@@ -1972,11 +1959,10 @@
         right: -22px;
         top: -30px;
         z-index: 0;
-        width: 0;
-        height: 0;
-        border-top: 62px solid #E1CFFF;
-        border-bottom: 62px solid transparent;
-        border-left: 62px solid transparent;
+        width: 62px;
+        height: 62px;
+        background: url('../icon/pool_polygon_arrow.svg') no-repeat;
+        background-size: 100% 100%;
        .pools-type_chaind {
         position: absolute;
         right: 6px;
