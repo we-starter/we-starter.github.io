@@ -33,7 +33,7 @@ const DepositPopup = (props) => {
   const { account, active, library, chainId } = useActiveWeb3React()
   const { dispatch, state } = useContext(mainContext)
   const [approve, setApprove] = useState(true)
-  const [amount, setAmount] = useState('')
+  const [amount, setAmount] = useState(farmPools && farmPools.minAmountMortgage ? farmPools.minAmountMortgage : '')
   const [fee, setFee] = useState(0)
   const [loadFlag, setLoadFlag] = useState(false)
   const [nowTime, setNowTime] = useState(parseInt(Date.now() / 1000))
