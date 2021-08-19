@@ -1716,118 +1716,118 @@ export default [
   },
 
   // 测试合约配置
-  {
-    name: 'WT1',
-    address: '0x3cFa2c67F62c1647256C4F6555a8703B0887814e',
-    abi: OfferingV2,
-    start_at: '1629352800',
-    is_top: true,
-    is_coming: false, // is_coming 为 true 则不请求合约
-    currency: {
-      address: '0x4993fD2E9D175488712CdbE64Be71d4dcD184123', // 如果是0x0则是ht
-      decimal: 18,
-      symbol: 'WT1',
-    },
-    icon: '',
-    type: 1,
-    isPrivate: true,
-    underlying: {
-      address: '0x26a0cb10b78bf2d7e13236fa3acddb80b2a5f8c4',
-      decimal: 18,
-      symbol: 'WT2',
-      name: 'WT2',
-      total_supply: '100,000,000',
-      holders: '-',
-      transfers: '-',
-    },
-    amount: '250000', // token 总额
-    pool_info: {
-      token_distribution: 'August 20th 2021, 2:00PM SGT',
-      min_allocation: '0',
-      max_allocation: '100 USDT',
-      min_swap_level: '20,000 USDT',
-    },
-    website: 'https://deplutus.finance/',
-    white_paper: 'https://deplutus.finance/static/deplutus-white-paper.pdf',
-    twitter: 'https://twitter.com/FinancePlutus',
-    Telegram_Channel: 'https://t.me/Deplutus',
-    Github: 'https://github.com/DePlutus',
-    yuque: '-',
-    progress: 0,
-    status: 0,
-    ratio: '1WT1=?USDT',
-    time: '1629363600',
-    purchasedCurrencyOf: 0,
-    totalPurchasedAmount: '20000000000000000000000',
-    totalPurchasedUnderlying: '0',
-    totalPurchasedCurrency: '0',
-    is_flash: false,
-    link_url: 'https://deplutus.finance/', // 跳转外链接
-    project_introduction:
-      'DePlutus, next-generation DeFi asset management protocol for both professional and retail investors to initiate, manage and invest in the on-chain crypto funds.',
-    duration: '', // 完成时间
-    totalApplicants: '200', // 申请总人数
-    winningRate: '-', // 申请中签率
-    committed: '', // 超募比例
-    total: '', // 参与资金规模
-    poolType: 0, // 值为 1 代表定向
-    networkId: 56,
-  },
-  {
-    name: 'WT1',
-    address: '0x3F5a08a00E1D3D8cAa4D80Cc3799cd63F5ae7257',
-    abi: StarterV3,
-    start_at: '1629352800',
-    is_top: true,
-    is_coming: false, // is_coming 为 true 则不请求合约
-    currency: {
-      address: '0x4993fD2E9D175488712CdbE64Be71d4dcD184123', // 如果是0x0则是ht
-      decimal: 18,
-      symbol: 'WT1',
-    },
-    icon: '',
-    type: 0,
-    isPrivate: true,
-    underlying: {
-      address: '0x26a0cb10b78bf2d7e13236fa3acddb80b2a5f8c4',
-      decimal: 18,
-      symbol: 'WT2',
-      name: 'WT2',
-      total_supply: '100,000,000',
-      holders: '-',
-      transfers: '-',
-    },
-    amount: '125000', // token 总额
-    pool_info: {
-      token_distribution: 'August 20th 2021, 2:00PM SGT',
-      min_allocation: '',
-      max_allocation: '',
-      min_swap_level: '10,000 USDT',
-    },
-    website: 'https://deplutus.finance/',
-    white_paper: 'https://deplutus.finance/static/deplutus-white-paper.pdf',
-    twitter: 'https://twitter.com/FinancePlutus',
-    Telegram_Channel: 'https://t.me/Deplutus',
-    Github: 'https://github.com/DePlutus',
-    yuque: '-',
-    progress: 0,
-    status: 0,
-    ratio: '1WT1=?USDT',
-    time: '1629363600',
-    purchasedCurrencyOf: 0,
-    totalPurchasedAmount: '10000000000000000000000',
-    totalPurchasedUnderlying: '0',
-    totalPurchasedCurrency: '0',
-    is_flash: false,
-    link_url: 'https://deplutus.finance/', // 跳转外链接
-    project_introduction:
-      'DePlutus, next-generation DeFi asset management protocol for both professional and retail investors to initiate, manage and invest in the on-chain crypto funds.',
-    duration: '', // 完成时间
-    totalApplicants: '', // 申请总人数
-    winningRate: '-', // 申请中签率
-    committed: '', // 超募比例
-    total: '', // 参与资金规模
-    poolType: 0, // 值为 1 代表定向
-    networkId: 56,
-  },
+  // {
+  //   name: 'WT1',
+  //   address: '0x3cFa2c67F62c1647256C4F6555a8703B0887814e',
+  //   abi: OfferingV2,
+  //   start_at: '1629352800',
+  //   is_top: true,
+  //   is_coming: false, // is_coming 为 true 则不请求合约
+  //   currency: {
+  //     address: '0x4993fD2E9D175488712CdbE64Be71d4dcD184123', // 如果是0x0则是ht
+  //     decimal: 18,
+  //     symbol: 'WT1',
+  //   },
+  //   icon: '',
+  //   type: 1,
+  //   isPrivate: true,
+  //   underlying: {
+  //     address: '0x26a0cb10b78bf2d7e13236fa3acddb80b2a5f8c4',
+  //     decimal: 18,
+  //     symbol: 'WT2',
+  //     name: 'WT2',
+  //     total_supply: '100,000,000',
+  //     holders: '-',
+  //     transfers: '-',
+  //   },
+  //   amount: '250000', // token 总额
+  //   pool_info: {
+  //     token_distribution: 'August 20th 2021, 2:00PM SGT',
+  //     min_allocation: '0',
+  //     max_allocation: '100 USDT',
+  //     min_swap_level: '20,000 USDT',
+  //   },
+  //   website: 'https://deplutus.finance/',
+  //   white_paper: 'https://deplutus.finance/static/deplutus-white-paper.pdf',
+  //   twitter: 'https://twitter.com/FinancePlutus',
+  //   Telegram_Channel: 'https://t.me/Deplutus',
+  //   Github: 'https://github.com/DePlutus',
+  //   yuque: '-',
+  //   progress: 0,
+  //   status: 0,
+  //   ratio: '1WT1=?USDT',
+  //   time: '1629363600',
+  //   purchasedCurrencyOf: 0,
+  //   totalPurchasedAmount: '20000000000000000000000',
+  //   totalPurchasedUnderlying: '0',
+  //   totalPurchasedCurrency: '0',
+  //   is_flash: false,
+  //   link_url: 'https://deplutus.finance/', // 跳转外链接
+  //   project_introduction:
+  //     'DePlutus, next-generation DeFi asset management protocol for both professional and retail investors to initiate, manage and invest in the on-chain crypto funds.',
+  //   duration: '', // 完成时间
+  //   totalApplicants: '200', // 申请总人数
+  //   winningRate: '-', // 申请中签率
+  //   committed: '', // 超募比例
+  //   total: '', // 参与资金规模
+  //   poolType: 0, // 值为 1 代表定向
+  //   networkId: 56,
+  // },
+  // {
+  //   name: 'WT1',
+  //   address: '0x3F5a08a00E1D3D8cAa4D80Cc3799cd63F5ae7257',
+  //   abi: StarterV3,
+  //   start_at: '1629352800',
+  //   is_top: true,
+  //   is_coming: false, // is_coming 为 true 则不请求合约
+  //   currency: {
+  //     address: '0x4993fD2E9D175488712CdbE64Be71d4dcD184123', // 如果是0x0则是ht
+  //     decimal: 18,
+  //     symbol: 'WT1',
+  //   },
+  //   icon: '',
+  //   type: 0,
+  //   isPrivate: true,
+  //   underlying: {
+  //     address: '0x26a0cb10b78bf2d7e13236fa3acddb80b2a5f8c4',
+  //     decimal: 18,
+  //     symbol: 'WT2',
+  //     name: 'WT2',
+  //     total_supply: '100,000,000',
+  //     holders: '-',
+  //     transfers: '-',
+  //   },
+  //   amount: '125000', // token 总额
+  //   pool_info: {
+  //     token_distribution: 'August 20th 2021, 2:00PM SGT',
+  //     min_allocation: '',
+  //     max_allocation: '',
+  //     min_swap_level: '10,000 USDT',
+  //   },
+  //   website: 'https://deplutus.finance/',
+  //   white_paper: 'https://deplutus.finance/static/deplutus-white-paper.pdf',
+  //   twitter: 'https://twitter.com/FinancePlutus',
+  //   Telegram_Channel: 'https://t.me/Deplutus',
+  //   Github: 'https://github.com/DePlutus',
+  //   yuque: '-',
+  //   progress: 0,
+  //   status: 0,
+  //   ratio: '1WT1=?USDT',
+  //   time: '1629363600',
+  //   purchasedCurrencyOf: 0,
+  //   totalPurchasedAmount: '10000000000000000000000',
+  //   totalPurchasedUnderlying: '0',
+  //   totalPurchasedCurrency: '0',
+  //   is_flash: false,
+  //   link_url: 'https://deplutus.finance/', // 跳转外链接
+  //   project_introduction:
+  //     'DePlutus, next-generation DeFi asset management protocol for both professional and retail investors to initiate, manage and invest in the on-chain crypto funds.',
+  //   duration: '', // 完成时间
+  //   totalApplicants: '', // 申请总人数
+  //   winningRate: '-', // 申请中签率
+  //   committed: '', // 超募比例
+  //   total: '', // 参与资金规模
+  //   poolType: 0, // 值为 1 代表定向
+  //   networkId: 56,
+  // },
 ]
