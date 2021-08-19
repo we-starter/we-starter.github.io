@@ -246,6 +246,8 @@ const en_US = {
   accessType: 'Access Type',
   private: 'Private',
   public: 'Public',
+  svip: 'SVIP',
+  svipTips: 'This Pool is only for SVIP',
   privateTips: 'Private pool, only for users in whitelist',
   publicTips: 'Public offering pool, prorated by the amount of funds',
   publicTips1: 'Public offering pool',
@@ -312,6 +314,8 @@ const en_US = {
     "xNFT Protocol has acquired the investment from Huobi Ventures, LD Capital, Fundamental Labs, Gateio.labs, Continue Capital, Longling Capital, Dealean Capital, Signum, Anbi Lab, Mars Blockchain, LinkVC, Primitive Ventures, DU Capital, Redline Capital, DragonRoark Fund, 499Block, Crasolum, 7'O Clock Foundation, YBB foundation, LatticeX Foundation and many other well-known institutions around the world.",
   xNFTAboutProject3:
     'Dovey Wan, the founder and partner of Primitive Ventures and a famous blockchain investor, is the xNFT Protocol strategic advisor.',
+  plutAboutProject1:
+    'DePlutus, next-generation DeFi asset management protocol for both professional and retail investors to initiate, manage and invest in the on-chain crypto funds.',
   related_title1: 'Total IWO funds',
   related_title2: 'Total participated addresses',
   related_title3: 'Total established pools',

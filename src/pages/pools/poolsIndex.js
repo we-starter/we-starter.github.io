@@ -5,37 +5,27 @@ import { withRouter } from 'react-router'
 import { changeNetwork } from '../../connectors'
 import { ChainId } from '../../web3/address'
 import { message } from 'antd'
-import HUSD from '../../assets/icon/HUSD@2x.png'
-import DFT from '../../assets/icon/DFT@2x.png'
-import WAR from '../../assets/icon/WAR@2x.png'
-import BLACK from '../../assets/icon/BLACK@2x.png'
-import DORA from '../../assets/icon/DoraFactory@2x.png'
-import timePng from '../../assets/icon/time@2x.png'
-import MATTER from '../../assets/icon/MATTER@2x.png'
-import FIX from '../../assets/icon/FIX@2x.png'
-import COOK from '../../assets/icon/COOK@2x.png'
-import CHAINSWAP from '../../assets/icon/chainswap.png'
-import X_NFT from '../../assets/icon/X_NFT.png'
 import noDataPng from '../../assets/icon/noData@2x.png'
-import HUOBI from '../../assets/icon/huobi.png'
-import Metamask from '../../assets/icon/Metamask@2x.png'
-import TokenPocket from '../../assets/icon/tokenPocket.png'
-import AoLink from '../../assets/icon/aolink.png'
-import BitKeep from '../../assets/icon/bitkeep.png'
-import Bingoo from '../../assets/icon/bingoo.png'
 import WARLBP from '../../assets/image/W@2x.png'
 import BLACKLBP from '../../assets/image/B@2x.png'
 import PAULLBP from '../../assets/image/PaulLbp.png'
-import FX from '../../assets/icon/FX.png'
+import FIX from '../../assets/icon/FIX.png'
 import LEV from '../../assets/icon/LEV.png'
 import O3 from '../../assets/icon/O3.png'
-import CORRA from '../../assets/icon/CORRA.png'
+import DORA from '../../assets/icon/DORA.png'
 import COW from '../../assets/icon/COW.png'
-import MOMA from '../../assets/icon/moma.png'
-import PAUL from '../../assets/icon/paul.png'
-import BSC from '../../assets/icon/BSC@2x.png'
-import HECO from '../../assets/icon/HECO@2x.png'
-import MATIC from '../../assets/icon/MATIC@2x.png'
+import MOMAT from '../../assets/icon/MOMAT.png'
+import PAUL from '../../assets/icon/PAUL.png'
+import DFT from '../../assets/icon/DFT.png'
+import COOK from '../../assets/icon/COOK.png'
+import XNFT from '../../assets/icon/XNFT.png'
+import WAR from '../../assets/icon/WAR.png'
+import YFX from '../../assets/icon/YFX.png'
+import CORA from '../../assets/icon/CORA.png'
+import PLUT from '../../assets/icon/PLUT.png'
+import MATTER from '../../assets/icon/MATTER.png'
+import TOKEN from '../../assets/icon/TOKEN.png'
+import BLACK from '../../assets/icon/BLACK.png'
 
 import HyperPay from '../../assets/icon/HyperPay-Logo@2x.png'
 import { usePoolsInfo, usePoolsLBPInfo } from './Hooks'
@@ -47,7 +37,6 @@ import Web3 from 'web3'
 import { formatAmount } from '../../utils/format'
 import Timer from 'react-compound-timer'
 import { useActiveWeb3React } from '../../web3'
-import { mainContext } from '../../reducer'
 import Banner from '../../components/banner/Banner'
 
 const PoolsIndex = (props) => {
@@ -248,7 +237,7 @@ const PoolsIndex = (props) => {
         left_time = (time - now) * 1000
       }
     }
-
+    
     return (
       <div
         className={cs(
@@ -263,7 +252,6 @@ const PoolsIndex = (props) => {
         }
         key={pool.address}
       >
-
         <div className='type_private_box_t'>
           <div className='pools-type_title'>
             <a
@@ -284,21 +272,23 @@ const PoolsIndex = (props) => {
               {pool && pool.underlying.symbol === 'DORA' && <img src={DORA} />}
               {pool && pool.underlying.symbol === 'COOK' && <img src={COOK} />}
               {pool && pool.underlying.symbol === 'TOKEN' && (
-                <img src={CHAINSWAP} />
+                <img src={TOKEN} />
               )}
-              {pool && pool.underlying.symbol === 'XNFT' && <img src={X_NFT} />}
+              {pool && pool.underlying.symbol === 'XNFT' && <img src={XNFT} />}
               {pool && pool.underlying.symbol === 'WAR' && <img src={WAR} />}
               {pool && pool.underlying.symbol === 'BLACK' && (
                 <img src={BLACK} />
               )}
-              {pool && pool.underlying.symbol === 'YFX' && <img src={FX} />}
+              {pool && pool.underlying.symbol === 'YFX' && <img src={YFX} />}
               {pool && pool.underlying.symbol === 'LEV' && <img src={LEV} />}
               {pool && pool.underlying.symbol === 'O3' && <img src={O3} />}
-              {pool && pool.underlying.symbol === 'CORA' && <img src={CORRA} />}
+              {pool && pool.underlying.symbol === 'CORA' && <img src={CORA} />}
               {pool && pool.underlying.symbol === 'COW' && <img src={COW} />}
-              {pool && pool.underlying.symbol === 'MOMAT' && <img src={MOMA} />}
+              {pool && pool.underlying.symbol === 'MOMAT' && <img src={MOMAT} />}
               {pool && pool.underlying.symbol === 'PAUL' && <img src={PAUL} />}
+              {pool && pool.underlying.symbol === 'PLUT' && <img src={PLUT} />}
               {pool && pool.name}
+              {pool && pool.svipFlag && <span className='svip'></span>}
               {pool && pool.underlying.name === 'LBP' && (
                 <a className='pools-type_card_warning'>
                   <span
@@ -311,7 +301,6 @@ const PoolsIndex = (props) => {
                         <FormattedMessage id='publicTips2' />
                       </i>
                     )}
-
                   </span>
                 </a>
               )}
@@ -422,7 +411,7 @@ const PoolsIndex = (props) => {
               >
                 <FormattedMessage id='accessType' />
               </p>
-              {type === 1 && (
+              {type === 1 && !(pool && pool.svipFlag) && (
                 <p
                   className='pools-type_card_ratio pools-type_card_access'
                   style={{ textAlign: 'right' }}
@@ -439,6 +428,28 @@ const PoolsIndex = (props) => {
                     {hoverFlag === index && (
                       <i className='tips_content'>
                         <FormattedMessage id='privateTips' />
+                      </i>
+                    )}
+                  </span>
+                </p>
+              )}
+              {type === 1 && pool && pool.svipFlag && (
+                <p
+                  className='pools-type_card_ratio pools-type_card_access'
+                  style={{ textAlign: 'right' }}
+                >
+                  <span
+                    className={cs('crown', quotaOf > 0 && 'crown-highlight')}
+                  ></span>
+                  <FormattedMessage id='svip' />
+                  <span
+                    className='tips'
+                    onMouseOver={() => setHoverFlag(index)}
+                    onMouseOut={() => setHoverFlag(null)}
+                  >
+                    {hoverFlag === index && (
+                      <i className='tips_content'>
+                        <FormattedMessage id='svipTips' />
                       </i>
                     )}
                   </span>
@@ -622,6 +633,8 @@ const PoolsIndex = (props) => {
             <a
               className={cs(
                 'pools-type_enter',
+                pool.networkId == ChainId.MATIC && 'pools-type_matic_enter',
+                pool.networkId == ChainId.BSC && 'pools-type_bsc_enter',
                 pool &&
                   pool.underlying.name === 'LBP' &&
                   'pools-type_lbp_enter',

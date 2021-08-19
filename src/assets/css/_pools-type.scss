@@ -170,7 +170,6 @@
         .type_private_box_t{
           width: 100%;
           border-radius: 20px;
-          overflow: hidden;
           padding: 30px 22px 0 22px;
         }
         .type_private_box_b{
@@ -228,7 +227,8 @@
         margin-right: 6px;
       }
       .pools-type_card_title {
-        display: inline-block;
+        display: flex;
+        align-items: center;
         margin-bottom: 0;
         font-size: 16px;
         font-weight: bold;
@@ -364,11 +364,10 @@
       right: -22px;
       top: -30px;
       z-index: 0;
-      width: 0;
-      height: 0;
-      border-top: 62px solid #DCE7E1;
-      border-bottom: 62px solid transparent;
-      border-left: 62px solid transparent;
+      width: 62px;
+      height: 62px;
+      background: url('../icon/pool_heco_arrow.svg') no-repeat;
+      background-size: 100% 100%;
       .pools-type_chaind {
         position: absolute;
         right: 6px;
@@ -385,11 +384,10 @@
       right: -22px;
       top: -30px;
       z-index: 0;
-      width: 0;
-      height: 0;
-      border-top: 62px solid #FFEEB9;
-      border-bottom: 62px solid transparent;
-      border-left: 62px solid transparent;
+      width: 62px;
+      height: 62px;
+      background: url('../icon/pool_bsc_arrow.svg') no-repeat;
+      background-size: 100% 100%;
       .pools-type_chaind {
         position: absolute;
         right: 6px;
@@ -406,11 +404,10 @@
         right: -22px;
         top: -30px;
         z-index: 0;
-        width: 0;
-        height: 0;
-        border-top: 62px solid #E1CFFF;
-        border-bottom: 62px solid transparent;
-        border-left: 62px solid transparent;
+        width: 62px;
+        height: 62px;
+        background: url('../icon/pool_polygon_arrow.svg') no-repeat;
+        background-size: 100% 100%;
        .pools-type_chaind {
         position: absolute;
         right: 6px;
@@ -438,6 +435,12 @@
           height: 8px;
           background: #0f8c20;
           border-radius: 5px;
+        }
+        .pools-type_progress_bar_56 {
+          background: #F0B90B;
+        }
+        .pools-type_progress_bar_137 {
+          background: #8247E5;
         }
       }
       p {
@@ -497,6 +500,14 @@
       float: right;
       width: 182px;
       height: 100px;
+    }
+    .svip {
+      display: inline-block;
+      margin-left: 4px;
+      width: 34px;
+      height: 18px;
+      background: url('../icon/farm/SVIP@2x.png') no-repeat;
+      background-size: 100% 100%;
     }
     &_warning {
       display: inline-block;
@@ -698,7 +709,6 @@
         .type_private_box_t{
           width: 100%;
           border-radius: 20px;
-          overflow: hidden;
           padding: 30px 22px 0 22px;
         }
         .type_private_box_b{
@@ -756,7 +766,8 @@
         margin-right: 6px;
       }
       .pools-type_card_title {
-        display: inline-block;
+        display: flex;
+        align-items: center;
         margin-bottom: 0;
         font-size: 16px;
         font-weight: bold;
@@ -886,16 +897,15 @@
         }
       }
     }
-       &_chaind_box_128 {
+    &_chaind_box_128 {
       position: absolute;
       right: -22px;
       top: -30px;
       z-index: 0;
-      width: 0;
-      height: 0;
-      border-top: 62px solid #DCE7E1;
-      border-bottom: 62px solid transparent;
-      border-left: 62px solid transparent;
+      width: 62px;
+      height: 62px;
+      background: url('../icon/pool_heco_arrow.svg') no-repeat;
+      background-size: 100% 100%;
       .pools-type_chaind {
         position: absolute;
         right: 6px;
@@ -912,11 +922,10 @@
       right: -22px;
       top: -30px;
       z-index: 0;
-      width: 0;
-      height: 0;
-      border-top: 62px solid #FFEEB9;
-      border-bottom: 62px solid transparent;
-      border-left: 62px solid transparent;
+      width: 62px;
+      height: 62px;
+      background: url('../icon/pool_bsc_arrow.svg') no-repeat;
+      background-size: 100% 100%;
       .pools-type_chaind {
         position: absolute;
         right: 6px;
@@ -933,11 +942,10 @@
         right: -22px;
         top: -30px;
         z-index: 0;
-        width: 0;
-        height: 0;
-        border-top: 62px solid #E1CFFF;
-        border-bottom: 62px solid transparent;
-        border-left: 62px solid transparent;
+        width: 62px;
+        height: 62px;
+        background: url('../icon/pool_polygon_arrow.svg') no-repeat;
+        background-size: 100% 100%;
        .pools-type_chaind {
         position: absolute;
         right: 6px;
@@ -1024,6 +1032,14 @@
       float: right;
       width: 182px;
       height: 100px;
+    }
+    .svip {
+      display: inline-block;
+      margin-left: 4px;
+      width: 34px;
+      height: 18px;
+      background: url('../icon/farm/SVIP@2x.png') no-repeat;
+      background-size: 100% 100%;
     }
     &_warning {
       display: inline-block;
@@ -1214,7 +1230,7 @@
         background: #fff;
         border-radius: 20px;
         vertical-align: top;
-        overflow: hidden;
+        // overflow: hidden;
       }
       .lpt_link {
         font-size: 12px;
@@ -1264,7 +1280,8 @@
         margin-right: 6px;
       }
       .pools-type_card_title {
-        display: inline-block;
+        display: flex;
+        align-items: center;
         margin-bottom: 0;
         font-size: 16px;
         font-weight: bold;
@@ -1392,16 +1409,15 @@
         }
       }
     }
-       &_chaind_box_128 {
+    &_chaind_box_128 {
       position: absolute;
       right: -22px;
       top: -30px;
       z-index: 0;
-      width: 0;
-      height: 0;
-      border-top: 62px solid #DCE7E1;
-      border-bottom: 62px solid transparent;
-      border-left: 62px solid transparent;
+      width: 62px;
+      height: 62px;
+      background: url('../icon/pool_heco_arrow.svg') no-repeat;
+      background-size: 100% 100%;
       .pools-type_chaind {
         position: absolute;
         right: 6px;
@@ -1418,11 +1434,10 @@
       right: -22px;
       top: -30px;
       z-index: 0;
-      width: 0;
-      height: 0;
-      border-top: 62px solid #FFEEB9;
-      border-bottom: 62px solid transparent;
-      border-left: 62px solid transparent;
+      width: 62px;
+      height: 62px;
+      background: url('../icon/pool_bsc_arrow.svg') no-repeat;
+      background-size: 100% 100%;
       .pools-type_chaind {
         position: absolute;
         right: 6px;
@@ -1439,11 +1454,10 @@
         right: -22px;
         top: -30px;
         z-index: 0;
-        width: 0;
-        height: 0;
-        border-top: 62px solid #E1CFFF;
-        border-bottom: 62px solid transparent;
-        border-left: 62px solid transparent;
+        width: 62px;
+        height: 62px;
+        background: url('../icon/pool_polygon_arrow.svg') no-repeat;
+        background-size: 100% 100%;
        .pools-type_chaind {
         position: absolute;
         right: 6px;
@@ -1530,6 +1544,14 @@
       float: right;
       width: 182px;
       height: 100px;
+    }
+    .svip {
+      display: inline-block;
+      margin-left: 4px;
+      width: 34px;
+      height: 18px;
+      background: url('../icon/farm/SVIP@2x.png') no-repeat;
+      background-size: 100% 100%;
     }
     &_warning {
       display: inline-block;
@@ -1720,7 +1742,7 @@
         background: #fff;
         border-radius: 20px;
         vertical-align: top;
-        overflow: hidden;
+        // overflow: hidden;
       }
       .lpt_link {
         font-size: 12px;
@@ -1770,7 +1792,8 @@
         margin-right: 6px;
       }
       .pools-type_card_title {
-        display: inline-block;
+        display: flex;
+        align-items: center;
         margin-bottom: 0;
         font-size: 16px;
         font-weight: bold;
@@ -1897,16 +1920,15 @@
         }
       }
     }
-       &_chaind_box_128 {
+    &_chaind_box_128 {
       position: absolute;
       right: -22px;
       top: -30px;
       z-index: 0;
-      width: 0;
-      height: 0;
-      border-top: 62px solid #DCE7E1;
-      border-bottom: 62px solid transparent;
-      border-left: 62px solid transparent;
+      width: 62px;
+      height: 62px;
+      background: url('../icon/pool_heco_arrow.svg') no-repeat;
+      background-size: 100% 100%;
       .pools-type_chaind {
         position: absolute;
         right: 6px;
@@ -1923,11 +1945,10 @@
       right: -22px;
       top: -30px;
       z-index: 0;
-      width: 0;
-      height: 0;
-      border-top: 62px solid #FFEEB9;
-      border-bottom: 62px solid transparent;
-      border-left: 62px solid transparent;
+      width: 62px;
+      height: 62px;
+      background: url('../icon/pool_bsc_arrow.svg') no-repeat;
+      background-size: 100% 100%;
       .pools-type_chaind {
         position: absolute;
         right: 6px;
@@ -1944,11 +1965,10 @@
         right: -22px;
         top: -30px;
         z-index: 0;
-        width: 0;
-        height: 0;
-        border-top: 62px solid #E1CFFF;
-        border-bottom: 62px solid transparent;
-        border-left: 62px solid transparent;
+        width: 62px;
+        height: 62px;
+        background: url('../icon/pool_polygon_arrow.svg') no-repeat;
+        background-size: 100% 100%;
        .pools-type_chaind {
         position: absolute;
         right: 6px;
@@ -2035,6 +2055,14 @@
       float: right;
       width: 182px;
       height: 100px;
+    }
+    .svip {
+      display: inline-block;
+      margin-left: 4px;
+      width: 34px;
+      height: 18px;
+      background: url('../icon/farm/SVIP@2x.png') no-repeat;
+      background-size: 100% 100%;
     }
     &_warning {
       display: inline-block;

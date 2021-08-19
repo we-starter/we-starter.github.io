@@ -248,6 +248,8 @@ const zh_CN = {
   accessType: '进入方式',
   private: '白名单兑换池',
   public: '无限制兑换池',
+  svip: 'SVIP',
+  svipTips: '该池仅面向 SVIP 开放',
   privateTips: '这是一个私有池，只有获得白名单才能兑换',
   publicTips: '这是一个公有池，按照资金比例配售',
   publicTips1: '这是一个公有池',
@@ -311,6 +313,8 @@ const zh_CN = {
     'xNFT Protocol 已获得 Huobi Ventures、LD Capital、Fundamental Labs、Gateio.labs、Continue Capital、隆领资本、Dealean Capital、Signum、安比实验室、Mars Blockchain、LinkVC、Primitive Ventures、DU Capital、Redline Capital、DragonRoark Fund、499Block、Crasolum、7’O Clock Foundation、YBB foundation、LatticeX Foundation等全球多家知名机构投资。',
   xNFTAboutProject3:
     'Primitive Ventures 创始合伙人、全球知名区块链投资人 Dovey Wan 为 xNFT Protocol 战略顾问。',
+  plutAboutProject1:
+    'DePlutus协议——新一代DeFi资产管理协议，构建链上金融基础设施，开启属于每个人的链上基金时代。',
   related_title1: '累计金额',
   related_title2: '参与地址总数',
   related_title3: '总成立的池子数',

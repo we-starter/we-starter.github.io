@@ -444,9 +444,7 @@ const debounceFn = debounce((pools, account, callback) => {
     const multicallProvider = getOnlyMultiCallProvider(pool.networkId)
 
     const pool_contract = new Contract(pool.address, pool.abi)
-
     const underlying_token = new Contract(pool.underlying.address, ERC20)
-
     if (pool.type === 0) {
       const promise_list = [
         pool_contract.price(), // 结算时间点
@@ -467,6 +465,7 @@ const debounceFn = debounce((pools, account, callback) => {
         .all(promise_list)
         .then((data) => {
           data = processResult(data)
+
           let [
             price,
             totalPurchasedCurrency,
@@ -485,7 +484,6 @@ const debounceFn = debounce((pools, account, callback) => {
             total_rate,
           ] = totalSettleable
           const [completed_, amount, volume, rate] = settleable
-
           let status = pool.status || 0 // 即将上线
           const timeClose = time
           if (timeSettle) {
@@ -529,7 +527,7 @@ const debounceFn = debounce((pools, account, callback) => {
           Object.assign(pool.currency, {
             allowance: currency_allowance,
           })
-
+         
           return Object.assign({}, pool, {
             ratio: `1${pool.underlying.symbol}=${formatAmount(price, 18, 5)}${
               pool.currency.symbol
@@ -662,7 +660,7 @@ const debounceFn = debounce((pools, account, callback) => {
           Object.assign(pool.currency, {
             allowance: currency_allowance,
           })
-
+          
           return Object.assign({}, pool, {
             ratio: `1${pool.underlying.symbol}=${
               __ratio.toFixed(5, 1).toString() * 1
@@ -741,7 +739,6 @@ export const usePoolsInfo = (address = '') => {
     if (status === 0) {
       status = now < item.start_at ? 0 : now < item.time ? 1 : 2
     }
-
     return Object.assign(item, {
       quotaOf: 0, //设置默认不在白名单
       status: status,
@@ -756,7 +753,7 @@ export const usePoolsInfo = (address = '') => {
     })
   })
 
-  useMemo(() => {
+  useEffect(() => {
     if (!account) return () => {}
     debounceFn(pools, account, (promise) => {
       promise

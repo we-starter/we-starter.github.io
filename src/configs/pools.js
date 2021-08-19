@@ -3,11 +3,29 @@ import Starter from '../web3/abi/Starter.json'
 import StarterV2 from '../web3/abi/StarterV2.json'
 import StarterV3 from '../web3/abi/StarterV3.json'
 import OfferingV2 from '../web3/abi/OfferingV2.json'
+import FIX from '../assets/icon/FIX.png'
+import LEV from '../assets/icon/LEV.png'
+import O3 from '../assets/icon/O3.png'
+import DORA from '../assets/icon/DORA.png'
+import COW from '../assets/icon/COW.png'
+import MOMAT from '../assets/icon/MOMAT.png'
+import PAUL from '../assets/icon/PAUL.png'
+import DFT from '../assets/icon/DFT.png'
+import COOK from '../assets/icon/COOK.png'
+import XNFT from '../assets/icon/XNFT.png'
+import WAR from '../assets/icon/WAR.png'
+import YFX from '../assets/icon/YFX.png'
+import CORA from '../assets/icon/CORA.png'
+import PLUT from '../assets/icon/PLUT.png'
+import MATTER from '../assets/icon/MATTER.png'
+import TOKEN from '../assets/icon/TOKEN.png'
+import BLACK from '../assets/icon/BLACK.png'
 
 export default [
   {
     name: 'MATTER',
     address: '0x4F7d4aCF1A2d92C5b64a7365e3cD2185c91F9e40',
+    icon: MATTER,
     abi: Offering,
     start_at: '1614432600',
     is_top: true,
@@ -64,6 +82,7 @@ export default [
   {
     name: 'dFuture',
     address: '0xd9019793189E12ac91892b4D4622E3A315a289Fc',
+    icon: DFT,
     abi: Starter,
     start_at: '1614690000',
     is_top: true,
@@ -121,6 +140,7 @@ export default [
   {
     name: 'FIX',
     address: '0x24DE0C0F84Ca06D9A8225e031D294dfF405bC6aB',
+    icon: FIX,
     abi: Offering,
     start_at: '1615377600',
     is_top: true,
@@ -178,6 +198,7 @@ export default [
   {
     name: 'FIX',
     address: '0x1bCaC989BA76C293f56b2Ae7490d5375977F6eb4',
+    icon: FIX,
     abi: Starter,
     start_at: '1615381200',
     is_top: true,
@@ -235,6 +256,7 @@ export default [
   {
     name: 'DORA',
     address: '0x637567F333f3C13Ee8d3814563476F848De86A39',
+    icon: DORA,
     abi: Offering,
     start_at: '1616392800',
     is_top: true,
@@ -292,6 +314,7 @@ export default [
   {
     name: 'Cook',
     address: '0x746ED583756026c5340Fdc8026D2EA7E44b93De0',
+    icon: COOK,
     abi: OfferingV2,
     start_at: '1617199200',
     is_top: true,
@@ -349,6 +372,7 @@ export default [
   {
     name: 'Cook',
     address: '0xFC5405759Fb8dDB3f90c2d3d238ea50eEbE5618B',
+    icon: COOK,
     abi: StarterV2,
     start_at: '1617200400',
     is_top: true,
@@ -406,6 +430,7 @@ export default [
   {
     name: 'ChainSwap',
     address: '0x543A2aE552D993342A92e87AeFc966B69534A798', // 超募合约地址
+    icon: TOKEN,
     abi: StarterV3,
     start_at: '1619092800',
     is_top: true,
@@ -463,6 +488,7 @@ export default [
   {
     name: 'WAR(Influencer)',
     address: '0x2E9d797e1A0342630938aE28B6A32DA7D04B525B',
+    icon: WAR,
     abi: OfferingV2,
     start_at: '1619697600',
     is_top: true,
@@ -520,6 +546,7 @@ export default [
   {
     name: 'WAR',
     address: '0x77968c29755794ABABbD58661E9Ee55A1c900e1F',
+    icon: WAR,
     abi: OfferingV2,
     start_at: '1619697600',
     is_top: true,
@@ -577,6 +604,7 @@ export default [
   {
     name: 'WAR',
     address: '0xC36C08879EfbAdDbEbaF8D1EF878E660476E3905',
+    icon: WAR,
     abi: StarterV2,
     start_at: '1619698800',
     is_top: true,
@@ -634,6 +662,7 @@ export default [
   {
     name: 'BLACK',
     address: '0x60c393C658904B102C12041055fcA36B5C72e038',
+    icon: BLACK,
     abi: OfferingV2,
     start_at: '1619611200',
     is_top: true,
@@ -691,6 +720,7 @@ export default [
   {
     name: 'BLACK',
     address: '0xB616eBb93262B51143962e6826Ec0552915A13c2',
+    icon: BLACK,
     abi: StarterV2,
     start_at: '1619611200',
     is_top: true,
@@ -748,6 +778,7 @@ export default [
   {
     name: 'Lever',
     address: '0xa09dcb3b2066da2f17e2a1657c347a34038b8946',
+    icon: LEV,
     abi: StarterV3,
     start_at: '1620054000',
     is_top: true,
@@ -805,6 +836,7 @@ export default [
   {
     name: 'YFX.COM',
     address: '0xD795d35875089514818AF643558d6f354C8803A7',
+    icon: YFX,
     abi: OfferingV2,
     start_at: '1620295200',
     is_top: true,
@@ -862,6 +894,7 @@ export default [
   {
     name: 'YFX.COM',
     address: '0x4c1A48cB2e3AEEf598f3a461160ec24056e52911',
+    icon: YFX,
     abi: StarterV3,
     start_at: '1620296400',
     is_top: true,
@@ -919,6 +952,7 @@ export default [
   {
     name: 'O3 Swap',
     address: '0x9210D73229b56786221Ab9e55Bd077BE4910BeA7', // 超募合约地址
+    icon: O3,
     abi: StarterV3,
     start_at: '1620822000', //1620820800
     is_top: true,
@@ -976,6 +1010,7 @@ export default [
   {
     name: 'O3 Swap',
     address: '0x126a7f7071eD74Dc3495c3EB9b6a472BC446f2D2', // 超募合约地址
+    icon: O3,
     abi: OfferingV2,
     start_at: '1620820800',
     is_top: true,
@@ -1033,6 +1068,7 @@ export default [
   {
     name: 'CORA',
     address: '0xe10d741127da509dD965C31B55b524Aed76E6EDD',
+    icon: CORA,
     abi: OfferingV2,
     start_at: '1621083600',
     is_top: true,
@@ -1090,6 +1126,7 @@ export default [
   {
     name: 'COW',
     address: '0xC0310106dA3f24676a90EFd289644c2DFb3aad65',
+    icon: COW,
     abi: OfferingV2,
     start_at: '1621940400',
     is_top: true,
@@ -1146,6 +1183,7 @@ export default [
   {
     name: 'COW(Influencer)',
     address: '0x566D9d153b1eA0e9B16D35cDf04a03E645F321A8',
+    icon: COW,
     abi: OfferingV2,
     start_at: '1621940400',
     is_top: true,
@@ -1202,6 +1240,7 @@ export default [
   {
     name: 'COW(Star)',
     address: '0x9224Ddc3FB9993AFAf8914B50843128ffa4C3336',
+    icon: COW,
     abi: OfferingV2,
     start_at: '1621940400',
     is_top: true,
@@ -1258,6 +1297,7 @@ export default [
   {
     name: 'PAUL',
     address: '0xF32f2F0e71F89B145c3c3408f5beC2714e9291ea',
+    icon: PAUL,
     abi: OfferingV2,
     start_at: '1622548800',
     is_top: true,
@@ -1315,6 +1355,7 @@ export default [
   {
     name: 'PAUL',
     address: '0x7AC61a6eC0Efd0Acff9A9a5d7510d38CfaF2AfEa',
+    icon: PAUL,
     abi: StarterV3,
     start_at: '1622548800',
     is_top: true,
@@ -1374,6 +1415,7 @@ export default [
   {
     name: 'MOMAT',
     address: '0xd0E238Ad1BA66C269dA0161E03F9F26eff663d0A',
+    icon: MOMAT,
     abi: OfferingV2,
     start_at: '1625569200',
     is_top: true,
@@ -1431,6 +1473,7 @@ export default [
   {
     name: 'XNFT',
     address: '0xc0e9750C52FD244BEF8d35420bF578961A639136',
+    icon: XNFT,
     abi: StarterV3,
     start_at: '1627635600',
     is_top: true,
@@ -1488,6 +1531,7 @@ export default [
   {
     name: 'XNFT',
     address: '0x2f81F0E24bc029D70a89E55E4De234CeB0B1E099',
+    icon: XNFT,
     abi: OfferingV2,
     start_at: '1627635600',
     is_top: true,
@@ -1542,116 +1586,297 @@ export default [
     poolType: 0, // 值为 1 代表定向
     networkId: 128,
   },
+  {
+    name: 'PLUT',
+    address: '0x1',
+    icon: PLUT,
+    abi: OfferingV2,
+    start_at: '1629439200',
+    is_top: true,
+    is_coming: true, // is_coming 为 true 则不请求合约
+    currency: {
+      address: '0x55d398326f99059ff775485246999027b3197955', // 如果是0x0则是ht
+      decimal: 18,
+      symbol: 'USDT',
+    },
+    icon: '',
+    type: 1,
+    isPrivate: true,
+    underlying: {
+      address: '0x888888d87d85bc11549b17907e8f589214eb90c2',
+      decimal: 18,
+      symbol: 'PLUT',
+      name: 'PLUT',
+      total_supply: '1,000,000,000',
+      holders: '-',
+      transfers: '-',
+    },
+    amount: '250000', // token 总额
+    pool_info: {
+      token_distribution: 'August 20th 2021, 2:00PM SGT',
+      min_allocation: '0',
+      max_allocation: '200 USDT',
+      min_swap_level: '14,000 USDT',
+    },
+    website: 'https://deplutus.finance/',
+    white_paper: 'https://deplutus.finance/static/deplutus-white-paper.pdf',
+    twitter: 'https://twitter.com/FinancePlutus',
+    Telegram_Channel: 'https://t.me/Deplutus',
+    Github: 'https://github.com/DePlutus',
+    yuque: '-',
+    progress: 0,
+    status: 0,
+    ratio: '1PLUL=?USDT',
+    time: '1629455400',
+    purchasedCurrencyOf: 0,
+    totalPurchasedAmount: '14000000000000000000000',
+    totalPurchasedUnderlying: '0',
+    totalPurchasedCurrency: '0',
+    is_flash: false,
+    link_url: 'https://deplutus.finance/', // 跳转外链接
+    project_introduction:
+      'DePlutus, next-generation DeFi asset management protocol for both professional and retail investors to initiate, manage and invest in the on-chain crypto funds.',
+    duration: '', // 完成时间
+    totalApplicants: '70', // 申请总人数
+    winningRate: '-', // 申请中签率
+    committed: '', // 超募比例
+    total: '', // 参与资金规模
+    poolType: 0, // 值为 1 代表定向
+    networkId: 56,
+    svipFlag: true,
+  },
+  {
+    name: 'PLUT',
+    address: '0x2',
+    icon: PLUT,
+    abi: OfferingV2,
+    start_at: '1629439200',
+    is_top: true,
+    is_coming: true, // is_coming 为 true 则不请求合约
+    currency: {
+      address: '0x55d398326f99059ff775485246999027b3197955', // 如果是0x0则是ht
+      decimal: 18,
+      symbol: 'USDT',
+    },
+    icon: '',
+    type: 1,
+    isPrivate: true,
+    underlying: {
+      address: '0x888888d87d85bc11549b17907e8f589214eb90c2',
+      decimal: 18,
+      symbol: 'PLUT',
+      name: 'PLUT',
+      total_supply: '1,000,000,000',
+      holders: '-',
+      transfers: '-',
+    },
+    amount: '250000', // token 总额
+    pool_info: {
+      token_distribution: 'August 20th 2021, 2:00PM SGT',
+      min_allocation: '0',
+      max_allocation: '100 USDT',
+      min_swap_level: '26,000 USDT',
+    },
+    website: 'https://deplutus.finance/',
+    white_paper: 'https://deplutus.finance/static/deplutus-white-paper.pdf',
+    twitter: 'https://twitter.com/FinancePlutus',
+    Telegram_Channel: 'https://t.me/Deplutus',
+    Github: 'https://github.com/DePlutus',
+    yuque: '-',
+    progress: 0,
+    status: 0,
+    ratio: '1PLUL=?USDT',
+    time: '1629455400',
+    purchasedCurrencyOf: 0,
+    totalPurchasedAmount: '26000000000000000000000',
+    totalPurchasedUnderlying: '0',
+    totalPurchasedCurrency: '0',
+    is_flash: false,
+    link_url: 'https://deplutus.finance/', // 跳转外链接
+    project_introduction:
+      'DePlutus, next-generation DeFi asset management protocol for both professional and retail investors to initiate, manage and invest in the on-chain crypto funds.',
+    duration: '', // 完成时间
+    totalApplicants: '260', // 申请总人数
+    winningRate: '-', // 申请中签率
+    committed: '', // 超募比例
+    total: '', // 参与资金规模
+    poolType: 0, // 值为 1 代表定向
+    networkId: 56,
+  },
+  {
+    name: 'PLUT',
+    address: '0x3',
+    icon: PLUT,
+    abi: StarterV3,
+    start_at: '1629439200',
+    is_top: true,
+    is_coming: true, // is_coming 为 true 则不请求合约
+    currency: {
+      address: '0x55d398326f99059ff775485246999027b3197955', // 如果是0x0则是ht
+      decimal: 18,
+      symbol: 'USDT',
+    },
+    icon: '',
+    type: 0,
+    isPrivate: true,
+    underlying: {
+      address: '0x888888d87d85bc11549b17907e8f589214eb90c2',
+      decimal: 18,
+      symbol: 'PLUT',
+      name: 'PLUT',
+      total_supply: '1,000,000,000',
+      holders: '-',
+      transfers: '-',
+    },
+    amount: '125000', // token 总额
+    pool_info: {
+      token_distribution: 'August 20th 2021, 2:00PM SGT',
+      min_allocation: '',
+      max_allocation: '',
+      min_swap_level: '10,000 USDT',
+    },
+    website: 'https://deplutus.finance/',
+    white_paper: 'https://deplutus.finance/static/deplutus-white-paper.pdf',
+    twitter: 'https://twitter.com/FinancePlutus',
+    Telegram_Channel: 'https://t.me/Deplutus',
+    Github: 'https://github.com/DePlutus',
+    yuque: '-',
+    progress: 0,
+    status: 0,
+    ratio: '1PLUL=?USDT',
+    time: '1629455400',
+    purchasedCurrencyOf: 0,
+    totalPurchasedAmount: '10000000000000000000000',
+    totalPurchasedUnderlying: '0',
+    totalPurchasedCurrency: '0',
+    is_flash: false,
+    link_url: 'https://deplutus.finance/', // 跳转外链接
+    project_introduction:
+      'DePlutus, next-generation DeFi asset management protocol for both professional and retail investors to initiate, manage and invest in the on-chain crypto funds.',
+    duration: '', // 完成时间
+    totalApplicants: '', // 申请总人数
+    winningRate: '-', // 申请中签率
+    committed: '', // 超募比例
+    total: '', // 参与资金规模
+    poolType: 0, // 值为 1 代表定向
+    networkId: 56,
+  },
 
   // 测试合约配置
   // {
-  //   name: 'WAR',
-  //   address: '0xC0b748Ad9C984060B5b50EE040fd232e0e6F7A7d',
+  //   name: 'WT1',
+  //   address: '0x3cFa2c67F62c1647256C4F6555a8703B0887814e',
+  //   icon: PLUT,
   //   abi: OfferingV2,
-  //   start_at: '1620820800',
+  //   start_at: '1629352800',
   //   is_top: true,
   //   is_coming: false, // is_coming 为 true 则不请求合约
   //   currency: {
-  //     address: '0xa71edc38d189767582c38a3145b5873052c3e47a', // 如果是0x0则是ht
+  //     address: '0x4993fD2E9D175488712CdbE64Be71d4dcD184123', // 如果是0x0则是ht
   //     decimal: 18,
-  //     symbol: 'USDT',
+  //     symbol: 'WT1',
   //   },
   //   icon: '',
   //   type: 1,
   //   isPrivate: true,
   //   underlying: {
-  //     address: '0x910651F81a605a6Ef35d05527d24A72fecef8bF0', // 地址有问题
+  //     address: '0x26a0cb10b78bf2d7e13236fa3acddb80b2a5f8c4',
   //     decimal: 18,
-  //     symbol: 'WAR',
-  //     name: 'WAR',
+  //     symbol: 'WT2',
+  //     name: 'WT2',
   //     total_supply: '100,000,000',
   //     holders: '-',
   //     transfers: '-',
   //   },
-  //   amount: '120000',
+  //   amount: '250000', // token 总额
   //   pool_info: {
-  //     token_distribution: 'May 14th 2021, 6:00PM SGT',
+  //     token_distribution: 'August 20th 2021, 2:00PM SGT',
   //     min_allocation: '0',
-  //     max_allocation: '0.01 USDT',
-  //     min_swap_level: '1 USDT',
+  //     max_allocation: '100 USDT',
+  //     min_swap_level: '20,000 USDT',
   //   },
-  //   website: 'https://www.westarter.org',
-  //   white_paper: '-',
-  //   twitter: 'https://twitter.com/westarter_org',
-  //   Telegram_Channel: 'https://t.me/westarter_official',
-  //   Github: 'https://github.com/we-starter',
+  //   website: 'https://deplutus.finance/',
+  //   white_paper: 'https://deplutus.finance/static/deplutus-white-paper.pdf',
+  //   twitter: 'https://twitter.com/FinancePlutus',
+  //   Telegram_Channel: 'https://t.me/Deplutus',
+  //   Github: 'https://github.com/DePlutus',
   //   yuque: '-',
   //   progress: 0,
   //   status: 0,
-  //   ratio: '1WAR=1USDT', // 兑换比例需要确认
-  //   time: '1620986400',
+  //   ratio: '1WT1=?USDT',
+  //   time: '1629363600',
   //   purchasedCurrencyOf: 0,
-  //   totalPurchasedAmount: '1600000000000000000000',
+  //   totalPurchasedAmount: '20000000000000000000000',
   //   totalPurchasedUnderlying: '0',
   //   totalPurchasedCurrency: '0',
   //   is_flash: false,
-  //   link_url: 'https://www.westarter.org', // 跳转外链接
+  //   link_url: 'https://deplutus.finance/', // 跳转外链接
   //   project_introduction:
-  //     'WeStarter is a cross-chain token initial swap platform which based on HECO network. Through the fluency of the product and sufficient industry resources, it carries the requirement of funds and resources for a variety of asset types. With the role of gatekeeper, through the decentralized incentive and governance mechanism of tokens, to achieve the goal of selecting high-quality assets.',
-  // duration: '', // 完成时间
-  // totalApplicants: '', // 申请总人数
-  // winningRate: '', // 申请中签率
-  // committed: '', // 超募比例
-  // total: '', // 参与资金规模
+  //     'DePlutus, next-generation DeFi asset management protocol for both professional and retail investors to initiate, manage and invest in the on-chain crypto funds.',
+  //   duration: '', // 完成时间
+  //   totalApplicants: '200', // 申请总人数
+  //   winningRate: '-', // 申请中签率
+  //   committed: '', // 超募比例
+  //   total: '', // 参与资金规模
+  //   poolType: 0, // 值为 1 代表定向
+  //   networkId: 56,
   // },
   // {
-  //   name: 'WAR',
-  //   address: '0xAe24b9F01EbBA7b5163D5A5a0d30F4935241E2d8',
-  //   abi: StarterV2,
-  //   start_at: '1620871200',
+  //   name: 'WT1',
+  //   address: '0x3F5a08a00E1D3D8cAa4D80Cc3799cd63F5ae7257',
+  //   icon: PLUT,
+  //   abi: StarterV3,
+  //   start_at: '1629352800',
   //   is_top: true,
-  //   is_coming: false,
+  //   is_coming: false, // is_coming 为 true 则不请求合约
   //   currency: {
-  //     address: '0xa71edc38d189767582c38a3145b5873052c3e47a', // 如果是0x0则是ht
+  //     address: '0x4993fD2E9D175488712CdbE64Be71d4dcD184123', // 如果是0x0则是ht
   //     decimal: 18,
-  //     symbol: 'USDT',
+  //     symbol: 'WT1',
   //   },
   //   icon: '',
   //   type: 0,
-  //   isPrivate: false,
+  //   isPrivate: true,
   //   underlying: {
-  //     address: '0x910651F81a605a6Ef35d05527d24A72fecef8bF0', // 地址有问题
+  //     address: '0x26a0cb10b78bf2d7e13236fa3acddb80b2a5f8c4',
   //     decimal: 18,
-  //     symbol: 'WAR',
-  //     name: 'WAR',
+  //     symbol: 'WT2',
+  //     name: 'WT2',
   //     total_supply: '100,000,000',
   //     holders: '-',
   //     transfers: '-',
   //   },
-  //   amount: '120000',
+  //   amount: '125000', // token 总额
   //   pool_info: {
-  //     token_distribution: 'May 14th 2021, 6:00PM SGT',
+  //     token_distribution: 'August 20th 2021, 2:00PM SGT',
   //     min_allocation: '',
   //     max_allocation: '',
-  //     min_swap_level: '1 USDT',
+  //     min_swap_level: '10,000 USDT',
   //   },
-  //   website: 'https://www.westarter.org',
-  //   white_paper: '-',
-  //   twitter: 'https://twitter.com/westarter_org',
-  //   Telegram_Channel: 'https://t.me/westarter_official',
-  //   Github: 'https://github.com/we-starter',
+  //   website: 'https://deplutus.finance/',
+  //   white_paper: 'https://deplutus.finance/static/deplutus-white-paper.pdf',
+  //   twitter: 'https://twitter.com/FinancePlutus',
+  //   Telegram_Channel: 'https://t.me/Deplutus',
+  //   Github: 'https://github.com/DePlutus',
   //   yuque: '-',
   //   progress: 0,
   //   status: 0,
-  //   ratio: '1WAR=1USDT',
-  //   time: '1620986400',
+  //   ratio: '1WT1=?USDT',
+  //   time: '1629363600',
   //   purchasedCurrencyOf: 0,
-  //   totalPurchasedAmount: '1600000000000000000000',
+  //   totalPurchasedAmount: '10000000000000000000000',
   //   totalPurchasedUnderlying: '0',
   //   totalPurchasedCurrency: '0',
   //   is_flash: false,
-  //   link_url: 'https://www.westarter.org', // 跳转外链接
+  //   link_url: 'https://deplutus.finance/', // 跳转外链接
   //   project_introduction:
-  //     'WeStarter is a cross-chain token initial swap platform which based on HECO network. Through the fluency of the product and sufficient industry resources, it carries the requirement of funds and resources for a variety of asset types. With the role of gatekeeper, through the decentralized incentive and governance mechanism of tokens, to achieve the goal of selecting high-quality assets.',
-  // duration: '', // 完成时间
-  // totalApplicants: '', // 申请总人数
-  // winningRate: '', // 申请中签率
-  // committed: '', // 超募比例
-  // total: '', // 参与资金规模
+  //     'DePlutus, next-generation DeFi asset management protocol for both professional and retail investors to initiate, manage and invest in the on-chain crypto funds.',
+  //   duration: '', // 完成时间
+  //   totalApplicants: '', // 申请总人数
+  //   winningRate: '-', // 申请中签率
+  //   committed: '', // 超募比例
+  //   total: '', // 参与资金规模
+  //   poolType: 0, // 值为 1 代表定向
+  //   networkId: 56,
   // },
 ]
