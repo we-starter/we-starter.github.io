@@ -1650,7 +1650,7 @@ export default [
     project_introduction:
       'DePlutus, next-generation DeFi asset management protocol for both professional and retail investors to initiate, manage and invest in the on-chain crypto funds.',
     duration: '', // 完成时间
-    totalApplicants: '200', // 申请总人数
+    totalApplicants: '260', // 申请总人数
     winningRate: '-', // 申请中签率
     committed: '', // 超募比例
     total: '', // 参与资金规模
