@@ -3,6 +3,7 @@ import { usage } from 'browserslist'
 import { formatAmount, numToWei, splitFormat } from '../../utils/format'
 import { getRandomIntInclusive } from '../../utils/index'
 import { Select } from 'antd'
+import cs from 'classnames'
 import { Button } from 'antd'
 import { useBalance, useAllowance } from '../../pages/Hooks'
 import Web3 from 'web3'
@@ -307,7 +308,8 @@ const PoolsJoin = (props) => {
               <FormattedMessage id='poolText17' />
               <a className='farm_popup_close_btn' onClick={onClose}></a>
             </h1>
-            <p className='form-app__tip'>{pool && pool.ratio}</p>
+            
+            <p className={cs(`form-app__tip ${pool && 'form-app__tip_' + pool.networkId }`)}>{pool && pool.ratio}</p>
             {/*<Select*/}
             {/*  defaultValue='lucy'*/}
             {/*  style={{ width: 120 }}*/}
@@ -368,8 +370,17 @@ const PoolsJoin = (props) => {
                   />
                 </div>
 
-                <div className='form-app__inputbox-up' onClick={onMax}>
-                  <div className='form-app__inputbox-up-pref'>
+                <div className={cs(
+                  `form-app__inputbox-up ${
+                  pool && 'form-app__inputbox-up_' + pool.networkId
+                  }`
+                )} onClick={onMax}>
+                  <div className={cs(
+                    `form-app__inputbox-up-pref ${
+                    pool &&
+                    'form-app__inputbox-up-pref_' + pool.networkId
+                    }`
+                  )}>
                     <FormattedMessage id='poolText19' />
                   </div>
                 </div>
@@ -378,11 +389,11 @@ const PoolsJoin = (props) => {
 
             <div className='form-app__submit form-app__submit--row'>
               {approve ? (
-                <Button type='primary' onClick={onApprove} loading={loadFlag}>
+                <Button type='primary' className={cs(pool && 'ant-btn-primary_' + pool.networkId )} onClick={onApprove} loading={loadFlag}>
                   <FormattedMessage id='poolText21' />
                 </Button>
               ) : (
-                <Button type='primary' onClick={onConfirm} loading={loadFlag}>
+                <Button type='primary' className={cs(pool && 'ant-btn-primary_' + pool.networkId)} onClick={onConfirm} loading={loadFlag}>
                   <FormattedMessage id='poolText22' />
                 </Button>
               )}
