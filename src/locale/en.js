@@ -246,6 +246,8 @@ const en_US = {
   accessType: 'Access Type',
   private: 'Private',
   public: 'Public',
+  svip: 'SVIP',
+  svipTips: 'This Pool is only for SVIP',
   privateTips: 'Private pool, only for users in whitelist',
   publicTips: 'Public offering pool, prorated by the amount of funds',
   publicTips1: 'Public offering pool',

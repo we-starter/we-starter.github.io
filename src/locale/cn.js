@@ -248,6 +248,8 @@ const zh_CN = {
   accessType: '进入方式',
   private: '白名单兑换池',
   public: '无限制兑换池',
+  svip: 'SVIP',
+  svipTips: '该池仅面向 SVIP 开放',
   privateTips: '这是一个私有池，只有获得白名单才能兑换',
   publicTips: '这是一个公有池，按照资金比例配售',
   publicTips1: '这是一个公有池',

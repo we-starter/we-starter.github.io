@@ -247,11 +247,11 @@ const PoolsIndex = (props) => {
               <span className={cs('pools-type_chaind')}></span>
             </a>
             <p className='pools-type_card_title'>
-              {/* {pool && pool.underlying.symbol && (
+              {pool && pool.underlying.symbol && pool.underlying.symbol !== 'WT1' && (
                 <img
                   src={require(`../../assets/icon/${pool.underlying.symbol}.png`)}
                 />
-              )} */}
+              )}
               {pool && pool.name}
               {pool && pool.svipFlag && <span className='svip'></span>}
               {pool && pool.underlying.name === 'LBP' && (
@@ -376,7 +376,7 @@ const PoolsIndex = (props) => {
               >
                 <FormattedMessage id='accessType' />
               </p>
-              {type === 1 && (
+              {type === 1 && !(pool && pool.svipFlag) && (
                 <p
                   className='pools-type_card_ratio pools-type_card_access'
                   style={{ textAlign: 'right' }}
@@ -393,6 +393,28 @@ const PoolsIndex = (props) => {
                     {hoverFlag === index && (
                       <i className='tips_content'>
                         <FormattedMessage id='privateTips' />
+                      </i>
+                    )}
+                  </span>
+                </p>
+              )}
+              {type === 1 && pool && pool.svipFlag && (
+                <p
+                  className='pools-type_card_ratio pools-type_card_access'
+                  style={{ textAlign: 'right' }}
+                >
+                  <span
+                    className={cs('crown', quotaOf > 0 && 'crown-highlight')}
+                  ></span>
+                  <FormattedMessage id='svip' />
+                  <span
+                    className='tips'
+                    onMouseOver={() => setHoverFlag(index)}
+                    onMouseOut={() => setHoverFlag(null)}
+                  >
+                    {hoverFlag === index && (
+                      <i className='tips_content'>
+                        <FormattedMessage id='svipTips' />
                       </i>
                     )}
                   </span>

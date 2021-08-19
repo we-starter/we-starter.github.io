@@ -249,6 +249,8 @@ const ru = {
   accessType: 'Тип доступа',
   private: 'Частный',
   public: 'Общественный',
+  svip: 'SVIP',
+  svipTips: 'This Pool is only for SVIP',
   privateTips: 'Частный пул только для пользователей в белом списке',
   publicTips:
     ' Пул публичного предложения, разделенный пропорционально количеству средств',

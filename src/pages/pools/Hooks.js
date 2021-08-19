@@ -446,7 +446,6 @@ const debounceFn = debounce((pools, account, callback) => {
     const pool_contract = new Contract(pool.address, pool.abi)
 
     const underlying_token = new Contract(pool.underlying.address, ERC20)
-
     if (pool.type === 0) {
       const promise_list = [
         pool_contract.price(), // 结算时间点
@@ -467,6 +466,7 @@ const debounceFn = debounce((pools, account, callback) => {
         .all(promise_list)
         .then((data) => {
           data = processResult(data)
+
           let [
             price,
             totalPurchasedCurrency,
@@ -485,7 +485,6 @@ const debounceFn = debounce((pools, account, callback) => {
             total_rate,
           ] = totalSettleable
           const [completed_, amount, volume, rate] = settleable
-
           let status = pool.status || 0 // 即将上线
           const timeClose = time
           if (timeSettle) {
@@ -662,7 +661,9 @@ const debounceFn = debounce((pools, account, callback) => {
           Object.assign(pool.currency, {
             allowance: currency_allowance,
           })
-
+          console.log(pool.name, `1${pool.underlying.symbol}=${
+            __ratio.toFixed(5, 1).toString() * 1
+            }${pool.currency.symbol}`, 'ratio3333333')
           return Object.assign({}, pool, {
             ratio: `1${pool.underlying.symbol}=${
               __ratio.toFixed(5, 1).toString() * 1
