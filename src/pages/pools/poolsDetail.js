@@ -43,7 +43,7 @@ const PoolsDetail = (props) => {
   //  if (!pool || chainId !== pool.networkId) {
   //    window.location.href = '/'
   //  }
-
+  console.log(pool, 'poolpool')
   useEffect(() => {
     const timerId = setTimeout(() => {
       const now = parseInt(Date.now() / 1000)

@@ -444,7 +444,6 @@ const debounceFn = debounce((pools, account, callback) => {
     const multicallProvider = getOnlyMultiCallProvider(pool.networkId)
 
     const pool_contract = new Contract(pool.address, pool.abi)
-
     const underlying_token = new Contract(pool.underlying.address, ERC20)
     if (pool.type === 0) {
       const promise_list = [
@@ -740,7 +739,6 @@ export const usePoolsInfo = (address = '') => {
     if (status === 0) {
       status = now < item.start_at ? 0 : now < item.time ? 1 : 2
     }
-
     return Object.assign(item, {
       quotaOf: 0, //设置默认不在白名单
       status: status,
