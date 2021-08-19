@@ -34,7 +34,7 @@ const PoolsJoin = (props) => {
   const [loadFlag, setLoadFlag] = useState(false)
 
   const currency_address = pool ? pool.currency.address : '0x0'
-  const { balance = 0 } = useBalance(currency_address)
+  const { balance = 0 } = useBalance(currency_address, pool.networkId)
   const handleChange = (value) => {
     console.log(`selected ${value}`)
   }
