@@ -770,6 +770,7 @@ export const usePoolsInfo = (address = '') => {
     })
     return () => {}
   }, [account, address, blockHeight])
+  console.log(poolsInfo, 'info')
   return poolsInfo
 }
 

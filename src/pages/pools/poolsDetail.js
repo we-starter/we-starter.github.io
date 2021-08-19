@@ -245,7 +245,7 @@ const PoolsDetail = (props) => {
           } ${
             pool &&
             pool.status === 1 &&
-            (pool.timeClose === 0 || pool.timeClose * 1 > now)
+            (pool.timeClose - 0 === 0 || pool.timeClose * 1 > now)
               ? 'pools_detail_btn_active ' +
                 ('pools_detail_btn_active_' + pool.networkId)
               : 'pools_detail_btn_disable'
