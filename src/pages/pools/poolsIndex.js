@@ -247,13 +247,13 @@ const PoolsIndex = (props) => {
               <span className={cs('pools-type_chaind')}></span>
             </a>
             <p className='pools-type_card_title'>
-              {pool && pool.underlying.symbol && (
+              {/* {pool && pool.underlying.symbol && (
                 <img
                   src={require('../../assets/icon/' +
                     pool.underlying.symbol +
                     '.png')}
                 />
-              )}
+              )} */}
               {pool && pool.name}
               {pool && pool.svipFlag && <span className='svip'></span>}
               {pool && pool.underlying.name === 'LBP' && (
