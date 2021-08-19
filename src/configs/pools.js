@@ -1571,7 +1571,7 @@ export default [
       token_distribution: 'August 20th 2021, 2:00PM SGT',
       min_allocation: '0',
       max_allocation: '200 USDT',
-      min_swap_level: '20,000 USDT',
+      min_swap_level: '14,000 USDT',
     },
     website: 'https://deplutus.finance/',
     white_paper: 'https://deplutus.finance/static/deplutus-white-paper.pdf',
@@ -1584,7 +1584,7 @@ export default [
     ratio: '1PLUL=?USDT',
     time: '1629455400',
     purchasedCurrencyOf: 0,
-    totalPurchasedAmount: '20000000000000000000000',
+    totalPurchasedAmount: '14000000000000000000000',
     totalPurchasedUnderlying: '0',
     totalPurchasedCurrency: '0',
     is_flash: false,
@@ -1592,7 +1592,7 @@ export default [
     project_introduction:
       'DePlutus, next-generation DeFi asset management protocol for both professional and retail investors to initiate, manage and invest in the on-chain crypto funds.',
     duration: '', // 完成时间
-    totalApplicants: '100', // 申请总人数
+    totalApplicants: '70', // 申请总人数
     winningRate: '-', // 申请中签率
     committed: '', // 超募比例
     total: '', // 参与资金规模
@@ -1629,7 +1629,7 @@ export default [
       token_distribution: 'August 20th 2021, 2:00PM SGT',
       min_allocation: '0',
       max_allocation: '100 USDT',
-      min_swap_level: '20,000 USDT',
+      min_swap_level: '26,000 USDT',
     },
     website: 'https://deplutus.finance/',
     white_paper: 'https://deplutus.finance/static/deplutus-white-paper.pdf',
@@ -1642,7 +1642,7 @@ export default [
     ratio: '1PLUL=?USDT',
     time: '1629455400',
     purchasedCurrencyOf: 0,
-    totalPurchasedAmount: '20000000000000000000000',
+    totalPurchasedAmount: '26000000000000000000000',
     totalPurchasedUnderlying: '0',
     totalPurchasedCurrency: '0',
     is_flash: false,
