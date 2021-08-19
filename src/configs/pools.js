@@ -1550,7 +1550,7 @@ export default [
     is_top: true,
     is_coming: true, // is_coming 为 true 则不请求合约
     currency: {
-      address: '0xa71edc38d189767582c38a3145b5873052c3e47a', // 如果是0x0则是ht
+      address: '0x55d398326f99059ff775485246999027b3197955', // 如果是0x0则是ht
       decimal: 18,
       symbol: 'USDT',
     },
@@ -1608,7 +1608,7 @@ export default [
     is_top: true,
     is_coming: true, // is_coming 为 true 则不请求合约
     currency: {
-      address: '0xa71edc38d189767582c38a3145b5873052c3e47a', // 如果是0x0则是ht
+      address: '0x55d398326f99059ff775485246999027b3197955', // 如果是0x0则是ht
       decimal: 18,
       symbol: 'USDT',
     },
@@ -1665,7 +1665,7 @@ export default [
     is_top: true,
     is_coming: true, // is_coming 为 true 则不请求合约
     currency: {
-      address: '0xa71edc38d189767582c38a3145b5873052c3e47a', // 如果是0x0则是ht
+      address: '0x55d398326f99059ff775485246999027b3197955', // 如果是0x0则是ht
       decimal: 18,
       symbol: 'USDT',
     },
@@ -1724,7 +1724,7 @@ export default [
     is_top: true,
     is_coming: false, // is_coming 为 true 则不请求合约
     currency: {
-      address: '0xa71edc38d189767582c38a3145b5873052c3e47a', // 如果是0x0则是ht
+      address: '0x55d398326f99059ff775485246999027b3197955', // 如果是0x0则是ht
       decimal: 18,
       symbol: 'USDT',
     },
@@ -1781,7 +1781,7 @@ export default [
     is_top: true,
     is_coming: false, // is_coming 为 true 则不请求合约
     currency: {
-      address: '0xa71edc38d189767582c38a3145b5873052c3e47a', // 如果是0x0则是ht
+      address: '0x55d398326f99059ff775485246999027b3197955', // 如果是0x0则是ht
       decimal: 18,
       symbol: 'USDT',
     },

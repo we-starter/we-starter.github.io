@@ -528,7 +528,7 @@ const debounceFn = debounce((pools, account, callback) => {
           Object.assign(pool.currency, {
             allowance: currency_allowance,
           })
-
+         
           return Object.assign({}, pool, {
             ratio: `1${pool.underlying.symbol}=${formatAmount(price, 18, 5)}${
               pool.currency.symbol
@@ -661,9 +661,7 @@ const debounceFn = debounce((pools, account, callback) => {
           Object.assign(pool.currency, {
             allowance: currency_allowance,
           })
-          console.log(pool.name, `1${pool.underlying.symbol}=${
-            __ratio.toFixed(5, 1).toString() * 1
-            }${pool.currency.symbol}`, 'ratio3333333')
+          
           return Object.assign({}, pool, {
             ratio: `1${pool.underlying.symbol}=${
               __ratio.toFixed(5, 1).toString() * 1
@@ -757,7 +755,7 @@ export const usePoolsInfo = (address = '') => {
     })
   })
 
-  useMemo(() => {
+  useEffect(() => {
     if (!account) return () => {}
     debounceFn(pools, account, (promise) => {
       promise
@@ -771,7 +769,6 @@ export const usePoolsInfo = (address = '') => {
     })
     return () => {}
   }, [account, address, blockHeight])
-  console.log(poolsInfo, 'info')
   return poolsInfo
 }
 

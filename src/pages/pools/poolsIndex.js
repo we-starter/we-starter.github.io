@@ -220,7 +220,7 @@ const PoolsIndex = (props) => {
         left_time = (time - now) * 1000
       }
     }
-
+    
     return (
       <div
         className={cs(
