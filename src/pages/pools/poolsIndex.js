@@ -249,9 +249,7 @@ const PoolsIndex = (props) => {
             <p className='pools-type_card_title'>
               {pool && pool.underlying.symbol && (
                 <img
-                  src={require('../../assets/icon/' +
-                    pool.underlying.symbol +
-                    '.png')}
+                  src={require(`../../assets/icon/${pool.underlying.symbol}.png`)}
                 />
               )}
               {pool && pool.name}
