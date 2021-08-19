@@ -264,7 +264,29 @@ const PoolsIndex = (props) => {
               <span className={cs('pools-type_chaind')}></span>
             </a>
             <p className='pools-type_card_title'>
-              {pool && pool.underlying.symbol && pool.underlying.symbol !== 'WT1' && <img src={PLUT} />}
+              {pool && pool.underlying.symbol === 'MATTER' && (
+                <img src={MATTER} />
+              )}
+              {pool && pool.underlying.symbol === 'DFT' && <img src={DFT} />}
+              {pool && pool.underlying.symbol === 'FIX' && <img src={FIX} />}
+              {pool && pool.underlying.symbol === 'DORA' && <img src={DORA} />}
+              {pool && pool.underlying.symbol === 'COOK' && <img src={COOK} />}
+              {pool && pool.underlying.symbol === 'TOKEN' && (
+                <img src={TOKEN} />
+              )}
+              {pool && pool.underlying.symbol === 'XNFT' && <img src={XNFT} />}
+              {pool && pool.underlying.symbol === 'WAR' && <img src={WAR} />}
+              {pool && pool.underlying.symbol === 'BLACK' && (
+                <img src={BLACK} />
+              )}
+              {pool && pool.underlying.symbol === 'YFX' && <img src={YFX} />}
+              {pool && pool.underlying.symbol === 'LEV' && <img src={LEV} />}
+              {pool && pool.underlying.symbol === 'O3' && <img src={O3} />}
+              {pool && pool.underlying.symbol === 'CORA' && <img src={CORA} />}
+              {pool && pool.underlying.symbol === 'COW' && <img src={COW} />}
+              {pool && pool.underlying.symbol === 'MOMAT' && <img src={MOMAT} />}
+              {pool && pool.underlying.symbol === 'PAUL' && <img src={PAUL} />}
+              {pool && pool.underlying.symbol === 'PLUT' && <img src={PLUT} />}
               {pool && pool.name}
               {pool && pool.svipFlag && <span className='svip'></span>}
               {pool && pool.underlying.name === 'LBP' && (
@@ -364,7 +386,7 @@ const PoolsIndex = (props) => {
               <div className='pools-type_percentage'>
                 <a>
                   <i
-                    className={cs(`pools-type_progress_bar ${pool && 'pools-type_progress_bar_' + pool.networkId}`)}
+                    className='pools-type_progress_bar'
                     style={{
                       width: `${
                         pool.progress > 1 ? 100 : pool.progress * 100
