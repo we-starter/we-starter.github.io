@@ -9,23 +9,6 @@ import noDataPng from '../../assets/icon/noData@2x.png'
 import WARLBP from '../../assets/image/W@2x.png'
 import BLACKLBP from '../../assets/image/B@2x.png'
 import PAULLBP from '../../assets/image/PaulLbp.png'
-import FIX from '../../assets/icon/FIX.png'
-import LEV from '../../assets/icon/LEV.png'
-import O3 from '../../assets/icon/O3.png'
-import DORA from '../../assets/icon/DORA.png'
-import COW from '../../assets/icon/COW.png'
-import MOMAT from '../../assets/icon/MOMAT.png'
-import PAUL from '../../assets/icon/PAUL.png'
-import DFT from '../../assets/icon/DFT.png'
-import COOK from '../../assets/icon/COOK.png'
-import XNFT from '../../assets/icon/XNFT.png'
-import WAR from '../../assets/icon/WAR.png'
-import YFX from '../../assets/icon/YFX.png'
-import CORA from '../../assets/icon/CORA.png'
-import PLUT from '../../assets/icon/PLUT.png'
-import MATTER from '../../assets/icon/MATTER.png'
-import TOKEN from '../../assets/icon/TOKEN.png'
-import BLACK from '../../assets/icon/BLACK.png'
 
 import HyperPay from '../../assets/icon/HyperPay-Logo@2x.png'
 import { usePoolsInfo, usePoolsLBPInfo } from './Hooks'
@@ -264,29 +247,9 @@ const PoolsIndex = (props) => {
               <span className={cs('pools-type_chaind')}></span>
             </a>
             <p className='pools-type_card_title'>
-              {pool && pool.underlying.symbol === 'MATTER' && (
-                <img src={MATTER} />
+              {pool && pool.icon && (
+                <img src={pool.icon} />
               )}
-              {pool && pool.underlying.symbol === 'DFT' && <img src={DFT} />}
-              {pool && pool.underlying.symbol === 'FIX' && <img src={FIX} />}
-              {pool && pool.underlying.symbol === 'DORA' && <img src={DORA} />}
-              {pool && pool.underlying.symbol === 'COOK' && <img src={COOK} />}
-              {pool && pool.underlying.symbol === 'TOKEN' && (
-                <img src={TOKEN} />
-              )}
-              {pool && pool.underlying.symbol === 'XNFT' && <img src={XNFT} />}
-              {pool && pool.underlying.symbol === 'WAR' && <img src={WAR} />}
-              {pool && pool.underlying.symbol === 'BLACK' && (
-                <img src={BLACK} />
-              )}
-              {pool && pool.underlying.symbol === 'YFX' && <img src={YFX} />}
-              {pool && pool.underlying.symbol === 'LEV' && <img src={LEV} />}
-              {pool && pool.underlying.symbol === 'O3' && <img src={O3} />}
-              {pool && pool.underlying.symbol === 'CORA' && <img src={CORA} />}
-              {pool && pool.underlying.symbol === 'COW' && <img src={COW} />}
-              {pool && pool.underlying.symbol === 'MOMAT' && <img src={MOMAT} />}
-              {pool && pool.underlying.symbol === 'PAUL' && <img src={PAUL} />}
-              {pool && pool.underlying.symbol === 'PLUT' && <img src={PLUT} />}
               {pool && pool.name}
               {pool && pool.svipFlag && <span className='svip'></span>}
               {pool && pool.underlying.name === 'LBP' && (

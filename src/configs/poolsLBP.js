@@ -1,5 +1,7 @@
 import LBP from '../web3/abi/LBP.json'
 import LBPV2 from '../web3/abi/LBPV2.json'
+import PAUL from '../assets/icon/PAUL.png'
+import BLACK from '../assets/icon/BLACK.png'
 
 export default [
   {
@@ -14,7 +16,7 @@ export default [
       decimal: 18,
       symbol: 'HT',
     },
-    icon: '',
+    icon: BLACK,
     type: 2,
     isPrivate: false,
     ratio: '1BLACK=0.0027HT', // 兑换比例需要确认
@@ -63,7 +65,7 @@ export default [
       decimal: 18,
       symbol: 'USDT',
     },
-    icon: '',
+    icon: PAUL,
     type: 2,
     isPrivate: false,
     ratio: '1PAUL=0.002USDT', // 兑换比例需要确认

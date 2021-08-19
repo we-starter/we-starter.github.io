@@ -35,7 +35,6 @@ export default [
       symbol: 'HT',
       decimal: 18,
     },
-    icon: '',
     type: 1, // 非1 则为公有池，为1 则为私有池
     isPrivate: true,
     underlying: {
@@ -92,7 +91,6 @@ export default [
       decimal: 18,
       symbol: 'USDT',
     },
-    icon: '',
     type: 0,
     isPrivate: false,
     underlying: {
@@ -150,7 +148,6 @@ export default [
       decimal: 18,
       symbol: 'HT',
     },
-    icon: '',
     type: 1,
     isPrivate: true,
     underlying: {
@@ -208,7 +205,6 @@ export default [
       decimal: 18,
       symbol: 'HT',
     },
-    icon: '',
     type: 0,
     isPrivate: false,
     underlying: {
@@ -266,7 +262,6 @@ export default [
       decimal: 18,
       symbol: 'HT',
     },
-    icon: '',
     type: 1,
     isPrivate: true,
     underlying: {
@@ -324,7 +319,6 @@ export default [
       decimal: 18,
       symbol: 'USDT',
     },
-    icon: '',
     type: 1,
     isPrivate: true,
     underlying: {
@@ -382,7 +376,6 @@ export default [
       decimal: 18,
       symbol: 'USDT',
     },
-    icon: '',
     type: 0,
     isPrivate: false,
     underlying: {
@@ -440,7 +433,6 @@ export default [
       decimal: 18,
       symbol: 'USDT',
     },
-    icon: '',
     type: 0,
     isPrivate: false,
     underlying: {
@@ -498,7 +490,6 @@ export default [
       decimal: 18,
       symbol: 'HT',
     },
-    icon: '',
     type: 1,
     isPrivate: true,
     underlying: {
@@ -556,7 +547,6 @@ export default [
       decimal: 18,
       symbol: 'HT',
     },
-    icon: '',
     type: 1,
     isPrivate: true,
     underlying: {
@@ -614,7 +604,6 @@ export default [
       decimal: 18,
       symbol: 'HT',
     },
-    icon: '',
     type: 0,
     isPrivate: false,
     underlying: {
@@ -672,7 +661,6 @@ export default [
       decimal: 18,
       symbol: 'HT',
     },
-    icon: '',
     type: 1,
     isPrivate: true,
     underlying: {
@@ -730,7 +718,6 @@ export default [
       decimal: 18,
       symbol: 'HT',
     },
-    icon: '',
     type: 0,
     isPrivate: false,
     underlying: {
@@ -788,7 +775,6 @@ export default [
       decimal: 18,
       symbol: 'USDT',
     },
-    icon: '',
     type: 0,
     isPrivate: false,
     underlying: {
@@ -846,7 +832,6 @@ export default [
       decimal: 18,
       symbol: 'HT',
     },
-    icon: '',
     type: 1,
     isPrivate: false,
     underlying: {
@@ -904,7 +889,6 @@ export default [
       decimal: 18,
       symbol: 'HT',
     },
-    icon: '',
     type: 0,
     isPrivate: false,
     underlying: {
@@ -962,7 +946,6 @@ export default [
       decimal: 18,
       symbol: 'USDT',
     },
-    icon: '',
     type: 0,
     isPrivate: false,
     underlying: {
@@ -1020,7 +1003,6 @@ export default [
       decimal: 18,
       symbol: 'USDT',
     },
-    icon: '',
     type: 1,
     isPrivate: false,
     underlying: {
@@ -1078,7 +1060,6 @@ export default [
       decimal: 18,
       symbol: 'USDT',
     },
-    icon: '',
     type: 1,
     isPrivate: true,
     underlying: {
@@ -1136,7 +1117,6 @@ export default [
       decimal: 18,
       symbol: 'HT',
     },
-    icon: '',
     type: 1,
     isPrivate: true,
     underlying: {
@@ -1193,7 +1173,6 @@ export default [
       decimal: 18,
       symbol: 'HT',
     },
-    icon: '',
     type: 1,
     isPrivate: true,
     underlying: {
@@ -1250,7 +1229,6 @@ export default [
       decimal: 18,
       symbol: 'HT',
     },
-    icon: '',
     type: 1,
     isPrivate: true,
     underlying: {
@@ -1307,7 +1285,6 @@ export default [
       decimal: 18,
       symbol: 'USDT',
     },
-    icon: '',
     type: 1,
     isPrivate: true,
     underlying: {
@@ -1365,7 +1342,6 @@ export default [
       decimal: 18,
       symbol: 'LPT',
     },
-    icon: '',
     type: 0,
     isPrivate: true,
     underlying: {
@@ -1425,7 +1401,6 @@ export default [
       decimal: 18,
       symbol: 'USDT',
     },
-    icon: '',
     type: 1,
     isPrivate: true,
     underlying: {
@@ -1483,7 +1458,6 @@ export default [
       decimal: 18,
       symbol: 'USDT',
     },
-    icon: '',
     type: 0,
     isPrivate: true,
     underlying: {
@@ -1541,7 +1515,6 @@ export default [
       decimal: 18,
       symbol: 'WAR',
     },
-    icon: '',
     type: 1,
     isPrivate: true,
     underlying: {
@@ -1599,7 +1572,6 @@ export default [
       decimal: 18,
       symbol: 'USDT',
     },
-    icon: '',
     type: 1,
     isPrivate: true,
     underlying: {
@@ -1658,7 +1630,6 @@ export default [
       decimal: 18,
       symbol: 'USDT',
     },
-    icon: '',
     type: 1,
     isPrivate: true,
     underlying: {
@@ -1716,7 +1687,6 @@ export default [
       decimal: 18,
       symbol: 'USDT',
     },
-    icon: '',
     type: 0,
     isPrivate: true,
     underlying: {
@@ -1776,7 +1746,6 @@ export default [
   //     decimal: 18,
   //     symbol: 'WT1',
   //   },
-  //   icon: '',
   //   type: 1,
   //   isPrivate: true,
   //   underlying: {
@@ -1834,7 +1803,6 @@ export default [
   //     decimal: 18,
   //     symbol: 'WT1',
   //   },
-  //   icon: '',
   //   type: 0,
   //   isPrivate: true,
   //   underlying: {
