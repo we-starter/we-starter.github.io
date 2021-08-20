@@ -965,6 +965,30 @@
         color: #22292f;
         line-height: 26px;
       }
+      .pools_detail_record_btn {
+        display: inline-block;
+        padding: 0 8px;
+        font-size: 14px;
+        color: #ffffff;
+        line-height: 24px;
+        background: #0f8c20;
+        border-radius: 12px;
+        text-align: right;
+      }
+      .pools_detail_record_btn_56 {
+        background: #F0B90B;
+        text-align: right;
+        &:hover {
+          background-color: #F3C73B;
+        }
+      }
+      .pools_detail_record_btn_137 {
+        background: #8247E5;
+        text-align: right;
+        &:hover {
+          background-color: #9B6BEA;
+        }
+      }
     }
     &_record_title {
       display: none;
@@ -1363,6 +1387,30 @@
         font-weight: 500;
         color: #22292f;
         line-height: 26px;
+      }
+      .pools_detail_record_btn {
+        display: inline-block;
+        padding: 0 8px;
+        font-size: 14px;
+        color: #ffffff;
+        line-height: 24px;
+        background: #0f8c20;
+        border-radius: 12px;
+        text-align: right;
+      }
+      .pools_detail_record_btn_56 {
+        background: #F0B90B;
+        text-align: right;
+        &:hover {
+          background-color: #F3C73B;
+        }
+      }
+      .pools_detail_record_btn_137 {
+        background: #8247E5;
+        text-align: right;
+        &:hover {
+          background-color: #9B6BEA;
+        }
       }
     }
     &_record_title {
