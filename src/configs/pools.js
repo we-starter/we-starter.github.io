@@ -1561,12 +1561,12 @@ export default [
   },
   {
     name: 'PLUT',
-    address: '0x1',
+    address: '0xD7f14B37E827f9123D66A77524547a6ff59108B1',
     icon: PLUT,
     abi: OfferingV2,
     start_at: '1629439200',
     is_top: true,
-    is_coming: true, // is_coming 为 true 则不请求合约
+    is_coming: false, // is_coming 为 true 则不请求合约
     currency: {
       address: '0x55d398326f99059ff775485246999027b3197955', // 如果是0x0则是ht
       decimal: 18,
@@ -1598,7 +1598,7 @@ export default [
     yuque: '-',
     progress: 0,
     status: 0,
-    ratio: '1PLUL=?USDT',
+    ratio: '1PLUL=0.08USDT',
     time: '1629455400',
     purchasedCurrencyOf: 0,
     totalPurchasedAmount: '14000000000000000000000',
@@ -1619,12 +1619,12 @@ export default [
   },
   {
     name: 'PLUT',
-    address: '0x2',
+    address: '0xf79cc2F945Cfbec06d6EB65D3959a55e30FA9762',
     icon: PLUT,
     abi: OfferingV2,
     start_at: '1629439200',
     is_top: true,
-    is_coming: true, // is_coming 为 true 则不请求合约
+    is_coming: false, // is_coming 为 true 则不请求合约
     currency: {
       address: '0x55d398326f99059ff775485246999027b3197955', // 如果是0x0则是ht
       decimal: 18,
@@ -1656,7 +1656,7 @@ export default [
     yuque: '-',
     progress: 0,
     status: 0,
-    ratio: '1PLUL=?USDT',
+    ratio: '1PLUL=0.08USDT',
     time: '1629455400',
     purchasedCurrencyOf: 0,
     totalPurchasedAmount: '26000000000000000000000',
@@ -1676,12 +1676,12 @@ export default [
   },
   {
     name: 'PLUT',
-    address: '0x3',
+    address: '0x11B259f96175bE7A2B877676E58D3a749c378e62',
     icon: PLUT,
     abi: StarterV3,
     start_at: '1629439200',
     is_top: true,
-    is_coming: true, // is_coming 为 true 则不请求合约
+    is_coming: false, // is_coming 为 true 则不请求合约
     currency: {
       address: '0x55d398326f99059ff775485246999027b3197955', // 如果是0x0则是ht
       decimal: 18,
@@ -1713,7 +1713,7 @@ export default [
     yuque: '-',
     progress: 0,
     status: 0,
-    ratio: '1PLUL=?USDT',
+    ratio: '1PLUL=0.08USDT',
     time: '1629455400',
     purchasedCurrencyOf: 0,
     totalPurchasedAmount: '10000000000000000000000',
