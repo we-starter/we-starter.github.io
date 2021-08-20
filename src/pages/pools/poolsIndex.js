@@ -247,9 +247,7 @@ const PoolsIndex = (props) => {
               <span className={cs('pools-type_chaind')}></span>
             </a>
             <p className='pools-type_card_title'>
-              {pool && pool.icon && (
-                <img src={pool.icon} />
-              )}
+              {pool && pool.icon && <img src={pool.icon} />}
               {pool && pool.name}
               {pool && pool.svipFlag && <span className='svip'></span>}
               {pool && pool.underlying.name === 'LBP' && (
@@ -349,7 +347,11 @@ const PoolsIndex = (props) => {
               <div className='pools-type_percentage'>
                 <a>
                   <i
-                    className='pools-type_progress_bar'
+                    className={cs(
+                      `pools-type_progress_bar ${
+                        'pools-type_progress_bar_' + pool.networkId
+                      }`
+                    )}
                     style={{
                       width: `${
                         pool.progress > 1 ? 100 : pool.progress * 100
@@ -769,7 +771,9 @@ const PoolsIndex = (props) => {
         <div className='pools-type_percentage'>
           <a>
             <i
-              className='pools-type_progress_bar'
+              className={cs(
+                `pools-type_progress_bar`
+              )}
               style={{
                 width: `0%`,
               }}
