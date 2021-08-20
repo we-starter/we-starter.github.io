@@ -1583,7 +1583,7 @@ export default [
       holders: '-',
       transfers: '-',
     },
-    amount: '250000', // token 总额
+    amount: '175000', // token 总额
     pool_info: {
       token_distribution: 'August 20th 2021, 2:00PM SGT',
       min_allocation: '0',
@@ -1641,7 +1641,7 @@ export default [
       holders: '-',
       transfers: '-',
     },
-    amount: '250000', // token 总额
+    amount: '325000', // token 总额
     pool_info: {
       token_distribution: 'August 20th 2021, 2:00PM SGT',
       min_allocation: '0',
