@@ -155,7 +155,7 @@ const PoolsJoin = (props) => {
           .offerHT()
           .send({
             from: account,
-            value: Web3.utils.toWei(`${amount}`, 'ether'),
+            value: numToWei(`${amount}`, pool.currency.decimal),
           })
           .on('receipt', (_, receipt) => {
             console.log('BOT staking success')
@@ -184,7 +184,7 @@ const PoolsJoin = (props) => {
           })
       } else {
         pool_contract.methods
-          .offer(Web3.utils.toWei(`${amount}`, 'ether'))
+          .offer(numToWei(`${amount}`, pool.currency.decimal))
           .send({
             from: account,
           })
