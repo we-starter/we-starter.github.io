@@ -8,6 +8,7 @@ import {
   HANDLE_WALLET_MODAL,
 } from '../../const'
 import metamask from '../../assets/icon/metamask.png'
+import Coin98 from '../../assets/icon/coin98@2x.png'
 import close from '../../assets/icon/close.png'
 import BSC from '../../assets/icon/BSC@2x.png'
 import HECO from '../../assets/icon/HECO@2x.png'
@@ -155,7 +156,9 @@ export const WalletConnect = ({ onClose, onCancel }) => {
 
                 <div
                   onClick={() => {
-                    connectWallet(walletConnector[netWorkFlag]).then(() => {
+                    connectWallet(
+                      walletConnector[netWorkFlag]
+                    ).then(() => {
                       dispatch({
                         type: HANDLE_WALLET_MODAL,
                         walletModal: null,
@@ -190,6 +193,22 @@ export const WalletConnect = ({ onClose, onCancel }) => {
                   {/* <p>
                     <FormattedMessage id='accountText9' />
                   </p> */}
+                </div>
+              </div>
+
+              <div className='form-app__inner__wallets' style={{marginTop: '10px'}}>
+                <div
+                  onClick={() => {
+                    connectWallet(injected, netWorkFlag, 'coin98').then(() => {
+                      dispatch({
+                        type: HANDLE_WALLET_MODAL,
+                        walletModal: null,
+                      })
+                    })
+                  }}
+                  className='form-app__inner__wallets__item'
+                >
+                  <img src={Coin98} />
                 </div>
               </div>
             </div>
