@@ -130,7 +130,7 @@ export default [
 
     MLP: '0x888888d87d85Bc11549b17907E8f589214EB90c2', //stakingToken
     byLink:
-      'https://ht.mdex.com/#/swap?outputCurrency=0x888888d87d85Bc11549b17907E8f589214EB90c2',
+      'https://pancakeswap.finance/swap#/swap?outputCurrency=0x888888d87d85Bc11549b17907E8f589214EB90c2',
     abi: AllowListStakePool,
     start_at: '1630324800',
     time: '',
@@ -147,6 +147,7 @@ export default [
     mdexDaily: 1534.46,
     mdexPid: '0x5a',
     accessType: 'private', // 私有的需要白名单权限
+    maxAmountMortgage: 2500, //最多抵押
   },
   {
     name: 'xNFT',

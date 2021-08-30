@@ -362,6 +362,7 @@ const ru = {
   farm23: 'Составлено на ежедневной основе',
   farm24: 'SVIP are enabled to join in the special IWO Pool',
   farm25: 'Min Staking {number} {icon}',
+  farm26: 'Max Staking {number} {icon}',
   buyPopup1: 'Устойчивость к сокращению',
   buyPopup2: 'Влияние на цену',
   buyPopup3: 'Минимум получено',

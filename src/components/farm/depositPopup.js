@@ -73,9 +73,11 @@ const DepositPopup = (props) => {
   }, [farmPools, farmPools && farmPools.allowance, state.randomNumber])
 
   const onMax = () => {
-    let max = balance
-
-    setAmount(formatAmount(max, farmPools && farmPools.decimal, 6))
+    let max = formatAmount(balance, farmPools && farmPools.decimal, 6)
+    if (farmPools.maxAmountMortgage){
+      max = Math.min(max, farmPools.maxAmountMortgage)
+    }
+    setAmount(max)
   }
 
   const onChange = (e) => {
@@ -86,7 +88,11 @@ const DepositPopup = (props) => {
       re.test(value) ||
       (value.split('.').length === 2 && value.slice(value.length - 1) === '.')
     ) {
-      setAmount(value)
+      let v = value
+      if (farmPools.maxAmountMortgage){
+        v = Math.min(value, farmPools.maxAmountMortgage)
+      }
+      setAmount(v)
     }
   }
 
@@ -246,6 +252,17 @@ const DepositPopup = (props) => {
             id='farm25'
             values={{
               num: farmPools && formatNumber(farmPools.minAmountMortgage),
+              icon: farmPools && farmPools.rewards,
+            }}
+          />
+        </p>
+      )}
+      {farmPools && farmPools.maxAmountMortgage && (
+        <p className='min_amount_mortgage'>
+          <FormattedMessage
+            id='farm26'
+            values={{
+              num: farmPools && formatNumber(farmPools.maxAmountMortgage),
               icon: farmPools && farmPools.rewards,
             }}
           />
