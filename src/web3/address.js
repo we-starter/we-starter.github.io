@@ -89,7 +89,7 @@ export function MDEX_ROUTER_ADDRESS(chainId) {
 export function MINE_MOUNTAIN_ADDRESS(chainId) {
   switch (chainId) {
     case ChainId.BSC:
-      return '0xEEC6169616d6E50560E52460A2C74f74Cdf57b6F'
+      return '0x2A75B4284D8A98F47D0Cc4B45943ce7C1461C2E8'
     case ChainId.HECO:
       return '0xEEC6169616d6E50560E52460A2C74f74Cdf57b6F'
     default:

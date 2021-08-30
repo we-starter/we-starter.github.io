@@ -963,7 +963,8 @@ export const useAPR = (
   rewardsAprPath,
   settleToken,
   mode = 1,
-  _chainId
+  _chainId,
+  farmPools
 ) => {
   const blockHeight = useBlockHeight()
   // const [yearReward, setYearReward] = useState(0)
@@ -997,7 +998,7 @@ export const useAPR = (
     valueAprToken,
     pool_address,
     pool_abi,
-    _chainId
+    _chainId,
   )
 
   // 通过转换后的lpt价格
@@ -1006,7 +1007,10 @@ export const useAPR = (
     settleToken,
     1,
     valueAprPath,
-    _chainId
+    _chainId,
+    farmPools,
+  true,
+    false
   )
   // 奖励转换后的价格
   const [rewardsTotalPrice] = useMDexPrice(
@@ -1014,8 +1018,10 @@ export const useAPR = (
     settleToken,
     1,
     rewardsAprPath,
-    _chainId
+    _chainId,
+    farmPools
   )
+  // console.log('lptTotalPrice', lptTotalPrice.toString(), rewardsTotalPrice.toString(), lptValue.toString())
   // console.log('allowance', {
   //   allowance,
   //   lptValue: lptValue.toString(),
@@ -1023,24 +1029,27 @@ export const useAPR = (
   //   rewardsTotalPrice: rewardsTotalPrice
   // })
   useMemo(() => {
+
     setLptTotalValue(
       new BigNumber(lptTotalPrice)
         .multipliedBy(new BigNumber(lptValue))
         .toString()
     )
-  }, [lptTotalPrice])
+  }, [lptTotalPrice, lptValue])
 
   useMemo(() => {
+    // console.log('rewardsTotalPrice', rewardsTotalPrice, reward1Vol)
     setRewardsTotalValue(
       new BigNumber(rewardsTotalPrice)
         .multipliedBy(new BigNumber(reward1Vol))
         .toString()
     )
-  }, [rewardsTotalPrice])
+  }, [rewardsTotalPrice, reward1Vol])
 
   // 计算奖励的量
   useMemo(() => {
     if (allowance && pool_address) {
+      // console.log('allowance', allowance, unClaimReward)
       const reward1_vol = new BigNumber(allowance).minus(
         new BigNumber(unClaimReward)
       )
@@ -1049,11 +1058,16 @@ export const useAPR = (
     }
   }, [allowance, unClaimReward, _chainId])
 
+  // console.log('xxxxx', lptTotalValue , rewardsTotalValue , span)
+
   useMemo(() => {
     // console.log('rewardsTotalValue', rewardsTotalValue)
     if (lptTotalValue && rewardsTotalValue && span > 0) {
+      const startAt = farmPools.start_at
+      const now = parseInt(new Date().getTime() / 1000)
       const dayRate = new BigNumber(1).div(
-        new BigNumber(span).div(new BigNumber(86400))
+        new BigNumber((Number(startAt) + Number(span) - now))
+          .div(new BigNumber(86400))
       )
 
       if (mode === 1) {
@@ -1063,6 +1077,7 @@ export const useAPR = (
           .multipliedBy(new BigNumber(365))
           .toFixed(0, 1)
         // setYearReward(yearReward)
+        // console.log('yearReward', yearReward, lptTotalValue)
         if (yearReward > 0) {
           const _arp = new BigNumber(yearReward)
             .div(new BigNumber(lptTotalValue))
@@ -1091,7 +1106,8 @@ export const useMdxARP = (
   lpt_address,
   _chainId,
   daily,
-  pid
+  pid,
+  farmPools
 ) => {
   // mdx 年释放总量 * 价值 /
   const multicallProvider = getOnlyMultiCallProvider(_chainId)
@@ -1111,6 +1127,7 @@ export const useMdxARP = (
     daily,
     [USDT_ADDRESS(ChainId.HECO)],
     _chainId, // 取价格的chainId只有在HECO上有
+    farmPools,
     pool_address
   )
   useMemo(() => {
@@ -1140,7 +1157,9 @@ export const useMDexPrice = (
   amount = 1,
   path = [],
   _chainId,
-  mdexReward = true
+  farmPools,
+  mdexReward = true,
+  passMdexReward = true
 ) => {
   const FEE_RADIO = '0.003'
   const blockHeight = useBlockHeight()
@@ -1234,9 +1253,12 @@ export const useMDexPrice = (
   }
 
   useMemo(() => {
-    console.log('mdexReward', mdexReward)
-    if ( mdexReward && Web3.utils.isAddress(address1) && amount > 0 && blockHeight > 0) {
+    if (address1 === farmPools.rewards1Address && farmPools.rewards_price && passMdexReward){
+      // 配置上静态写死的奖励的价格
+      setPrice(farmPools.rewards_price)
+    } else if ( mdexReward && Web3.utils.isAddress(address1) && amount > 0 && blockHeight > 0) {
       // use path
+      console.log('address1, address2', address1, address2)
       getPrice(address1, address2, amount, path, _chainId).then(
         ([_price, _fee]) => {
           setPrice(_price)
@@ -1338,16 +1360,16 @@ export const useLTPValue = (
  * @param address2 计价的token
  * @param vol
  */
-export const useRewardsValue = (address1, address2, vol) => {
-  const [price, fee] = useMDexPrice(address1, address2)
-  const [value, setValue] = useState(0)
-  useMemo(() => {
-    const _value = new BigNumber(price).multipliedBy(new BigNumber(vol))
-    setValue(_value)
-    return () => {}
-  }, [price])
-  return value
-}
+// export const useRewardsValue = (address1, address2, vol) => {
+//   const [price, fee] = useMDexPrice(address1, address2)
+//   const [value, setValue] = useState(0)
+//   useMemo(() => {
+//     const _value = new BigNumber(price).multipliedBy(new BigNumber(vol))
+//     setValue(_value)
+//     return () => {}
+//   }, [price])
+//   return value
+// }
 
 export const useAllow = (pool) => {
   const { account } = useActiveWeb3React()

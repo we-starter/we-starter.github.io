@@ -73,9 +73,14 @@ const DepositPopup = (props) => {
   }, [farmPools, farmPools && farmPools.allowance, state.randomNumber])
 
   const onMax = () => {
-    let max = formatAmount(balance, farmPools && farmPools.decimal, 6)
+    if (!farmPools){
+      return
+    }
+    // 减去用户已经质押的
+    let max = formatAmount(balance, farmPools.decimal, 6)
     if (farmPools.maxAmountMortgage){
-      max = Math.min(max, farmPools.maxAmountMortgage)
+      const reduce = new BigNumber(farmPools.maxAmountMortgage).minus(new BigNumber(farmPools.balanceOf)).toFixed(6)*1
+      max = Math.min(max, reduce)
     }
     setAmount(max)
   }
