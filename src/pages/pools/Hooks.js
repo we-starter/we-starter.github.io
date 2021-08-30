@@ -1253,7 +1253,7 @@ export const useMDexPrice = (
   }
 
   useMemo(() => {
-    if (address1 === farmPools.rewards1Address && farmPools.rewards_price && passMdexReward){
+    if (farmPools && address1 === farmPools.rewards1Address && farmPools.rewards_price && passMdexReward){
       // 配置上静态写死的奖励的价格
       setPrice(farmPools.rewards_price)
     } else if ( mdexReward && Web3.utils.isAddress(address1) && amount > 0 && blockHeight > 0) {
