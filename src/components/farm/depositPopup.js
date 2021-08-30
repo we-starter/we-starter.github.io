@@ -38,7 +38,7 @@ const DepositPopup = (props) => {
   const [loadFlag, setLoadFlag] = useState(false)
   const [nowTime, setNowTime] = useState(parseInt(Date.now() / 1000))
 
-  const { balance } = useBalance(farmPools && farmPools.MLP)
+  const { balance } = useBalance(farmPools && farmPools.MLP, farmPools.networkId)
 
   useEffect(() => {
     const gas_limit = new BigNumber('1006182')

@@ -19,7 +19,6 @@ import { abi as ERC20 } from '../../web3/abi/ERC20.json'
 import LPT from '../../web3/abi/LPT.json'
 import MDexFactory from '../../web3/abi/MDexFactory.json'
 import MDexPool from '../../web3/abi/MDexPool.json'
-import MDexRouter from '../../web3/abi/MDexRouter.json'
 import Pools from '../../configs/pools'
 import Farm from '../../configs/farm'
 import Web3 from 'web3'
@@ -1111,7 +1110,8 @@ export const useMdxARP = (
     WAR_ADDRESS(ChainId.HECO),
     daily,
     [USDT_ADDRESS(ChainId.HECO)],
-    _chainId // 取价格的chainId只有在HECO上有
+    _chainId, // 取价格的chainId只有在HECO上有
+    pool_address
   )
   useMemo(() => {
     if (pool_address && lptValue > 0 && mdex2warPrice > 0) {
@@ -1139,7 +1139,8 @@ export const useMDexPrice = (
   address2,
   amount = 1,
   path = [],
-  _chainId
+  _chainId,
+  mdexReward = true
 ) => {
   const FEE_RADIO = '0.003'
   const blockHeight = useBlockHeight()
@@ -1148,14 +1149,16 @@ export const useMDexPrice = (
 
   const multicallProvider = getOnlyMultiCallProvider(_chainId)
   const getPairPrice = (address1, address2, amount) => {
-    const factory = new Contract(MDEX_FACTORY_ADDRESS(_chainId), MDexFactory)
+    const factoryConfig = MDEX_FACTORY_ADDRESS(_chainId)
+    const factory = new Contract(factoryConfig.address, factoryConfig.abi)
     const promise_list = [factory.getPair(address1, address2)]
 
     // console.log('request___3')
     return multicallProvider.all(promise_list).then((data) => {
       let [pair_address] = processResult(data)
       const pair_contract = new Contract(pair_address, LPT)
-      const mdex_router_contract = new Contract(MDEX_ROUTER_ADDRESS, MDexRouter)
+      const routerConfig = MDEX_ROUTER_ADDRESS(_chainId)
+      const mdex_router_contract = new Contract(routerConfig.address, routerConfig.abi)
       const promiseList = [
         pair_contract.token0(),
         pair_contract.token1(),
@@ -1190,7 +1193,6 @@ export const useMDexPrice = (
               return Web3.utils.fromWei(amountOut, 'ether')
             })
         } else if (token1.toLowerCase() == address2.toLowerCase()) {
-          // console.log(numToWei(amount), _reserve0, _reserve1)
           return multicallProvider
             .all(mdexRouterList2)
             .then((amountOutData) => {
@@ -1203,6 +1205,10 @@ export const useMDexPrice = (
   }
 
   const getPrice = async (address1, address2, amount, path, _chainId) => {
+    if (address1 === address2) {
+      return ['1', '0.003']
+    }
+    console.log(address1, address2, amount, path, _chainId);
     const _path = [address1, ...path, address2]
     let _price = 0
     _price = amount
@@ -1223,11 +1229,13 @@ export const useMDexPrice = (
         )
         .toString()
     }
+    console.log('_price, _fee', _price, _fee)
     return [_price, _fee]
   }
 
   useMemo(() => {
-    if (Web3.utils.isAddress(address1) && amount > 0 && blockHeight > 0) {
+    console.log('mdexReward', mdexReward)
+    if ( mdexReward && Web3.utils.isAddress(address1) && amount > 0 && blockHeight > 0) {
       // use path
       getPrice(address1, address2, amount, path, _chainId).then(
         ([_price, _fee]) => {

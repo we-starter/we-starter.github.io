@@ -23,6 +23,7 @@ const FarmCard = (props) => {
   let { pools: farmPools, dispatch } = props
   const [hoverFlag, setHoverFlag] = useState(false)
   farmPools = useFarmInfo(farmPools.address)
+  console.log('farmPools', farmPools)
   const { balance } = useBalance(
     farmPools && farmPools.MLP,
     props.pools.networkId
