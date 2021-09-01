@@ -23,6 +23,7 @@ const FarmCard = (props) => {
   let { pools: farmPools, dispatch } = props
   const [hoverFlag, setHoverFlag] = useState(false)
   farmPools = useFarmInfo(farmPools.address)
+  console.log('farmPools', farmPools)
   const { balance } = useBalance(
     farmPools && farmPools.MLP,
     props.pools.networkId
@@ -40,7 +41,8 @@ const FarmCard = (props) => {
     farmPools.rewardsAprPath,
     farmPools.settleToken,
     farmPools.earnName === 'APY' ? 2 : 1,
-    farmPools.networkId
+    farmPools.networkId,
+    farmPools
   )
   // 白名单 allow=0为不在白名单
   const allow = useAllow(farmPools)
@@ -53,7 +55,8 @@ const FarmCard = (props) => {
     farmPools.MLP,
     farmPools.networkId,
     farmPools.mdexDaily,
-    farmPools.mdexPid
+    farmPools.mdexPid,
+    farmPools
   )
   const [now, setNow] = useState(parseInt(Date.now() / 1000))
   const isFinish =
@@ -83,7 +86,10 @@ const FarmCard = (props) => {
   const [aprPercentage, setPercentage] = useState('-')
   useMemo(() => {
     if (!isNaN(apr) && apr > 0 && (!farmPools.mdexReward || mdexApr > 0)) {
-      setPercentage((apr * 100 + mdexApr * 100).toFixed(2))
+      let apr_ = (apr * 100 + mdexApr * 100).toFixed(2)
+      if (isFinite(apr_)){
+        setPercentage(apr_)
+      }
     }
   }, [apr, mdexApr])
 

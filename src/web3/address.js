@@ -1,3 +1,5 @@
+import MDexFactory from './abi/MDexFactory.json'
+import MDexRouter from '../web3/abi/MDexRouter.json'
 export const ChainId = {
   BSC: 56,
   HECO: 128,
@@ -14,7 +16,6 @@ export const ADDRESS_0 = '0x0000000000000000000000000000000000000000'
 
 export const MDEX_POOL_ADDRESS = '0xFB03e11D93632D97a8981158A632Dd5986F5E909'
 export const MDEX_ADDRESS = '0x25D2e80cB6B86881Fd7e07dd263Fb79f4AbE033c'
-export const MDEX_ROUTER_ADDRESS = '0xED7d5F38C79115ca12fe6C0041abb22F0A06C300'
 
 
 export function WETH_ADDRESS(chainId) {
@@ -46,18 +47,49 @@ export function WAR_ADDRESS(chainId) {
 export function MDEX_FACTORY_ADDRESS(chainId) {
   switch (chainId) {
     case ChainId.BSC:
-      return '0xb0b670fc1F7724119963018DB0BfA86aDb22d941'
+      return {
+        address: '0xcA143Ce32Fe78f1f7019d7d551a6402fC5350c73',
+        abi: MDexFactory
+      }
     case ChainId.HECO:
-      return '0xb0b670fc1F7724119963018DB0BfA86aDb22d941'
+      return {
+        address: '0xb0b670fc1F7724119963018DB0BfA86aDb22d941',
+        abi: MDexFactory
+      }
     default:
-      return '0xb0b670fc1F7724119963018DB0BfA86aDb22d941'
+      return {
+        address: '0xb0b670fc1F7724119963018DB0BfA86aDb22d941',
+        abi: MDexFactory
+      }
   }
 }
+export function MDEX_ROUTER_ADDRESS(chainId) {
+  switch (chainId) {
+    case ChainId.BSC:
+      return {
+        address: '0x10ED43C718714eb63d5aA57B78B54704E256024E',
+        abi: MDexRouter
+      }
+    case ChainId.HECO:
+      return {
+        address: '0xED7d5F38C79115ca12fe6C0041abb22F0A06C300',
+        abi: MDexRouter
+      }
+    default:
+      return {
+        address: '0xED7d5F38C79115ca12fe6C0041abb22F0A06C300',
+        abi: MDexRouter
+      }
+  }
+}
+
+
+
 
 export function MINE_MOUNTAIN_ADDRESS(chainId) {
   switch (chainId) {
     case ChainId.BSC:
-      return '0xEEC6169616d6E50560E52460A2C74f74Cdf57b6F'
+      return '0x2A75B4284D8A98F47D0Cc4B45943ce7C1461C2E8'
     case ChainId.HECO:
       return '0xEEC6169616d6E50560E52460A2C74f74Cdf57b6F'
     default:

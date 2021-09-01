@@ -38,7 +38,7 @@ const DepositPopup = (props) => {
   const [loadFlag, setLoadFlag] = useState(false)
   const [nowTime, setNowTime] = useState(parseInt(Date.now() / 1000))
 
-  const { balance } = useBalance(farmPools && farmPools.MLP)
+  const { balance } = useBalance(farmPools && farmPools.MLP, farmPools.networkId)
 
   useEffect(() => {
     const gas_limit = new BigNumber('1006182')
@@ -73,9 +73,16 @@ const DepositPopup = (props) => {
   }, [farmPools, farmPools && farmPools.allowance, state.randomNumber])
 
   const onMax = () => {
-    let max = balance
-
-    setAmount(formatAmount(max, farmPools && farmPools.decimal, 6))
+    if (!farmPools){
+      return
+    }
+    // 减去用户已经质押的
+    let max = formatAmount(balance, farmPools.decimal, 6)
+    if (farmPools.maxAmountMortgage){
+      const reduce = new BigNumber(farmPools.maxAmountMortgage).minus(new BigNumber(farmPools.balanceOf)).toFixed(6)*1
+      max = Math.min(max, reduce)
+    }
+    setAmount(max)
   }
 
   const onChange = (e) => {
@@ -86,7 +93,11 @@ const DepositPopup = (props) => {
       re.test(value) ||
       (value.split('.').length === 2 && value.slice(value.length - 1) === '.')
     ) {
-      setAmount(value)
+      let v = value
+      if (farmPools.maxAmountMortgage){
+        v = Math.min(value, farmPools.maxAmountMortgage)
+      }
+      setAmount(v)
     }
   }
 
@@ -246,6 +257,17 @@ const DepositPopup = (props) => {
             id='farm25'
             values={{
               num: farmPools && formatNumber(farmPools.minAmountMortgage),
+              icon: farmPools && farmPools.rewards,
+            }}
+          />
+        </p>
+      )}
+      {farmPools && farmPools.maxAmountMortgage && (
+        <p className='min_amount_mortgage'>
+          <FormattedMessage
+            id='farm26'
+            values={{
+              num: farmPools && formatNumber(farmPools.maxAmountMortgage),
               icon: farmPools && farmPools.rewards,
             }}
           />

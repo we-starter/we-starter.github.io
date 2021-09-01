@@ -356,6 +356,7 @@ const zh_CN = {
   farm23: '每日进行复投',
   farm24: 'SVIP 用户可以参加指定的 IWO 特权池',
   farm25: '每次最低抵押数量 {num} {icon}',
+  farm26: '每次最高抵押数量 {num} {icon}',
   buyPopup1: '滑点',
   buyPopup2: '价格影响',
   buyPopup3: '最低收到',

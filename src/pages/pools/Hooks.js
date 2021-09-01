@@ -19,7 +19,6 @@ import { abi as ERC20 } from '../../web3/abi/ERC20.json'
 import LPT from '../../web3/abi/LPT.json'
 import MDexFactory from '../../web3/abi/MDexFactory.json'
 import MDexPool from '../../web3/abi/MDexPool.json'
-import MDexRouter from '../../web3/abi/MDexRouter.json'
 import Pools from '../../configs/pools'
 import Farm from '../../configs/farm'
 import Web3 from 'web3'
@@ -964,7 +963,8 @@ export const useAPR = (
   rewardsAprPath,
   settleToken,
   mode = 1,
-  _chainId
+  _chainId,
+  farmPools
 ) => {
   const blockHeight = useBlockHeight()
   // const [yearReward, setYearReward] = useState(0)
@@ -998,7 +998,7 @@ export const useAPR = (
     valueAprToken,
     pool_address,
     pool_abi,
-    _chainId
+    _chainId,
   )
 
   // 通过转换后的lpt价格
@@ -1007,7 +1007,10 @@ export const useAPR = (
     settleToken,
     1,
     valueAprPath,
-    _chainId
+    _chainId,
+    farmPools,
+  true,
+    false
   )
   // 奖励转换后的价格
   const [rewardsTotalPrice] = useMDexPrice(
@@ -1015,8 +1018,10 @@ export const useAPR = (
     settleToken,
     1,
     rewardsAprPath,
-    _chainId
+    _chainId,
+    farmPools
   )
+  // console.log('lptTotalPrice', lptTotalPrice.toString(), rewardsTotalPrice.toString(), lptValue.toString())
   // console.log('allowance', {
   //   allowance,
   //   lptValue: lptValue.toString(),
@@ -1024,24 +1029,27 @@ export const useAPR = (
   //   rewardsTotalPrice: rewardsTotalPrice
   // })
   useMemo(() => {
+
     setLptTotalValue(
       new BigNumber(lptTotalPrice)
         .multipliedBy(new BigNumber(lptValue))
         .toString()
     )
-  }, [lptTotalPrice])
+  }, [lptTotalPrice, lptValue])
 
   useMemo(() => {
+    // console.log('rewardsTotalPrice', rewardsTotalPrice, reward1Vol)
     setRewardsTotalValue(
       new BigNumber(rewardsTotalPrice)
         .multipliedBy(new BigNumber(reward1Vol))
         .toString()
     )
-  }, [rewardsTotalPrice])
+  }, [rewardsTotalPrice, reward1Vol])
 
   // 计算奖励的量
   useMemo(() => {
     if (allowance && pool_address) {
+      // console.log('allowance', allowance, unClaimReward)
       const reward1_vol = new BigNumber(allowance).minus(
         new BigNumber(unClaimReward)
       )
@@ -1050,11 +1058,16 @@ export const useAPR = (
     }
   }, [allowance, unClaimReward, _chainId])
 
+  // console.log('xxxxx', lptTotalValue , rewardsTotalValue , span)
+
   useMemo(() => {
     // console.log('rewardsTotalValue', rewardsTotalValue)
     if (lptTotalValue && rewardsTotalValue && span > 0) {
+      const startAt = farmPools.start_at
+      const now = parseInt(new Date().getTime() / 1000)
       const dayRate = new BigNumber(1).div(
-        new BigNumber(span).div(new BigNumber(86400))
+        new BigNumber((Number(startAt) + Number(span) - now))
+          .div(new BigNumber(86400))
       )
 
       if (mode === 1) {
@@ -1064,6 +1077,7 @@ export const useAPR = (
           .multipliedBy(new BigNumber(365))
           .toFixed(0, 1)
         // setYearReward(yearReward)
+        // console.log('yearReward', yearReward, lptTotalValue)
         if (yearReward > 0) {
           const _arp = new BigNumber(yearReward)
             .div(new BigNumber(lptTotalValue))
@@ -1092,7 +1106,8 @@ export const useMdxARP = (
   lpt_address,
   _chainId,
   daily,
-  pid
+  pid,
+  farmPools
 ) => {
   // mdx 年释放总量 * 价值 /
   const multicallProvider = getOnlyMultiCallProvider(_chainId)
@@ -1111,7 +1126,9 @@ export const useMdxARP = (
     WAR_ADDRESS(ChainId.HECO),
     daily,
     [USDT_ADDRESS(ChainId.HECO)],
-    _chainId // 取价格的chainId只有在HECO上有
+    _chainId, // 取价格的chainId只有在HECO上有
+    farmPools,
+    pool_address
   )
   useMemo(() => {
     if (pool_address && lptValue > 0 && mdex2warPrice > 0) {
@@ -1139,7 +1156,10 @@ export const useMDexPrice = (
   address2,
   amount = 1,
   path = [],
-  _chainId
+  _chainId,
+  farmPools,
+  mdexReward = true,
+  passMdexReward = true
 ) => {
   const FEE_RADIO = '0.003'
   const blockHeight = useBlockHeight()
@@ -1148,14 +1168,16 @@ export const useMDexPrice = (
 
   const multicallProvider = getOnlyMultiCallProvider(_chainId)
   const getPairPrice = (address1, address2, amount) => {
-    const factory = new Contract(MDEX_FACTORY_ADDRESS(_chainId), MDexFactory)
+    const factoryConfig = MDEX_FACTORY_ADDRESS(_chainId)
+    const factory = new Contract(factoryConfig.address, factoryConfig.abi)
     const promise_list = [factory.getPair(address1, address2)]
 
     // console.log('request___3')
     return multicallProvider.all(promise_list).then((data) => {
       let [pair_address] = processResult(data)
       const pair_contract = new Contract(pair_address, LPT)
-      const mdex_router_contract = new Contract(MDEX_ROUTER_ADDRESS, MDexRouter)
+      const routerConfig = MDEX_ROUTER_ADDRESS(_chainId)
+      const mdex_router_contract = new Contract(routerConfig.address, routerConfig.abi)
       const promiseList = [
         pair_contract.token0(),
         pair_contract.token1(),
@@ -1190,7 +1212,6 @@ export const useMDexPrice = (
               return Web3.utils.fromWei(amountOut, 'ether')
             })
         } else if (token1.toLowerCase() == address2.toLowerCase()) {
-          // console.log(numToWei(amount), _reserve0, _reserve1)
           return multicallProvider
             .all(mdexRouterList2)
             .then((amountOutData) => {
@@ -1203,6 +1224,10 @@ export const useMDexPrice = (
   }
 
   const getPrice = async (address1, address2, amount, path, _chainId) => {
+    if (address1 === address2) {
+      return ['1', '0.003']
+    }
+    console.log(address1, address2, amount, path, _chainId);
     const _path = [address1, ...path, address2]
     let _price = 0
     _price = amount
@@ -1223,12 +1248,17 @@ export const useMDexPrice = (
         )
         .toString()
     }
+    console.log('_price, _fee', _price, _fee)
     return [_price, _fee]
   }
 
   useMemo(() => {
-    if (Web3.utils.isAddress(address1) && amount > 0 && blockHeight > 0) {
+    if (farmPools && address1 === farmPools.rewards1Address && farmPools.rewards_price && passMdexReward){
+      // 配置上静态写死的奖励的价格
+      setPrice(farmPools.rewards_price)
+    } else if ( mdexReward && Web3.utils.isAddress(address1) && amount > 0 && blockHeight > 0) {
       // use path
+      console.log('address1, address2', address1, address2)
       getPrice(address1, address2, amount, path, _chainId).then(
         ([_price, _fee]) => {
           setPrice(_price)
@@ -1330,16 +1360,16 @@ export const useLTPValue = (
  * @param address2 计价的token
  * @param vol
  */
-export const useRewardsValue = (address1, address2, vol) => {
-  const [price, fee] = useMDexPrice(address1, address2)
-  const [value, setValue] = useState(0)
-  useMemo(() => {
-    const _value = new BigNumber(price).multipliedBy(new BigNumber(vol))
-    setValue(_value)
-    return () => {}
-  }, [price])
-  return value
-}
+// export const useRewardsValue = (address1, address2, vol) => {
+//   const [price, fee] = useMDexPrice(address1, address2)
+//   const [value, setValue] = useState(0)
+//   useMemo(() => {
+//     const _value = new BigNumber(price).multipliedBy(new BigNumber(vol))
+//     setValue(_value)
+//     return () => {}
+//   }, [price])
+//   return value
+// }
 
 export const useAllow = (pool) => {
   const { account } = useActiveWeb3React()

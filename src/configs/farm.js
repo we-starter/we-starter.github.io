@@ -3,7 +3,12 @@ import StakingPool3 from '../web3/abi/StakingPool3.json'
 import { getRemainTime } from '../utils/time'
 
 import AllowListStakePool from '../web3/abi/AllowListStakePool.json'
+import {ChainId} from "../web3/address";
+import {numToWei} from "../utils/format";
+
 export default [
+  // 核心池
+
   {
     name: 'WAR-USDT LPT',
     icon: 'WAR-HT_small@2x.png',
@@ -108,6 +113,46 @@ export default [
     mdexPid: '',
     svipFlag: true,
     minAmountMortgage: '10000',
+  },
+
+  // 临时池
+
+  {
+    name: 'PLUT',
+    title: 'PLUT POOL',
+    icon: 'PAUL-HT_small@2x.png',
+    rewards1: 'WAR',
+    rewards2: null,
+    address: '0x3194863Cb969434F334ef648a7f77Fee740670c6', // 超募合约地址
+    rewards1Address: '0x910651F81a605a6Ef35d05527d24A72fecef8bF0', // BSC上的WAR
+    rewards2Address: null,
+    // apr
+    valueAprToken: '0x888888d87d85Bc11549b17907E8f589214EB90c2', //MLP
+    valueAprPath: [],
+    rewardsAprPath: [],
+    settleToken: '0x55d398326f99059fF775485246999027B3197955',//bsc的usdt
+
+    MLP: '0x888888d87d85Bc11549b17907E8f589214EB90c2', //stakingToken
+    byLink:
+      'https://pancakeswap.finance/swap#/swap?outputCurrency=0x888888d87d85Bc11549b17907E8f589214EB90c2',
+    abi: AllowListStakePool,
+    start_at: '1630324800',
+    time: '',
+    dueDate: '1632052800',
+    openDate: '1630324800',
+    earnName: 'APR',
+    status: 0,
+    rewards: 'PLUT',
+    decimal: 18,
+    is_coming: false,
+    mdexReward: false,
+    networkId: ChainId.BSC,
+    lpToken: '',
+    mdexDaily: 1534.46,
+    mdexPid: '0x5a',
+    accessType: 'private', // 私有的需要白名单权限
+    maxAmountMortgage: 2500, //最多抵押
+    rewards_price:'0.23',//写死的奖励的价格，用于计算apr
   },
   {
     name: 'xNFT',
