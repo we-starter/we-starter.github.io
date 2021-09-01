@@ -8,11 +8,11 @@ let axioss = axios.create({
 })
 let toolApi = {
   getTotalNumAddresses(data) {
-    return axioss.get('hms/v1/project/stat?project_id=' + data)
+    return axioss.get('/v1/project/stat?project_id=' + data)
   },
   getWarTokenPrice(data) {
     return axioss.get(
-      'hms/v1/project/token?address=' +
+      '/v1/project/token?address=' +
         '0x910651F81a605a6Ef35d05527d24A72fecef8bF0'
     )
   }
