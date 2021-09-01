@@ -1,0 +1,258 @@
+[
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "pool",
+        "type": "address"
+      },
+      {
+        "internalType": "address[]",
+        "name": "stakePath",
+        "type": "address[]"
+      },
+      {
+        "internalType": "address[]",
+        "name": "rewardsPath",
+        "type": "address[]"
+      },
+      {
+        "internalType": "address",
+        "name": "mine",
+        "type": "address"
+      }
+    ],
+    "name": "getApr",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "apr",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "pool",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "mine",
+        "type": "address"
+      }
+    ],
+    "name": "getDailyRewards",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "dailyRewards",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "pool",
+        "type": "address"
+      },
+      {
+        "internalType": "address[]",
+        "name": "reserve0Path",
+        "type": "address[]"
+      },
+      {
+        "internalType": "address[]",
+        "name": "rewardsPath",
+        "type": "address[]"
+      },
+      {
+        "internalType": "address",
+        "name": "mine",
+        "type": "address"
+      }
+    ],
+    "name": "getLPTApr",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "apr",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "pool",
+        "type": "address"
+      },
+      {
+        "internalType": "address[]",
+        "name": "reserve0Path",
+        "type": "address[]"
+      }
+    ],
+    "name": "getLPTStakeValue",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "value",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address[]",
+        "name": "path",
+        "type": "address[]"
+      }
+    ],
+    "name": "getPrice",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "decimals",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "pool",
+        "type": "address"
+      },
+      {
+        "internalType": "address[]",
+        "name": "collateralPath",
+        "type": "address[]"
+      },
+      {
+        "internalType": "address[]",
+        "name": "underlyingPath",
+        "type": "address[]"
+      },
+      {
+        "internalType": "address[]",
+        "name": "rewardsPath",
+        "type": "address[]"
+      },
+      {
+        "internalType": "address",
+        "name": "mine",
+        "type": "address"
+      }
+    ],
+    "name": "getShortApr",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "apr",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "pool",
+        "type": "address"
+      },
+      {
+        "internalType": "address[]",
+        "name": "collateralPath",
+        "type": "address[]"
+      },
+      {
+        "internalType": "address[]",
+        "name": "underlyingPath",
+        "type": "address[]"
+      }
+    ],
+    "name": "getShortStakeValue",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "value",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "pool",
+        "type": "address"
+      },
+      {
+        "internalType": "address[]",
+        "name": "path",
+        "type": "address[]"
+      }
+    ],
+    "name": "getTokenStakeValue",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "value",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+      },
+      {
+        "internalType": "address[]",
+        "name": "path",
+        "type": "address[]"
+      }
+    ],
+    "name": "getTokenValue",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "value",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  }
+]

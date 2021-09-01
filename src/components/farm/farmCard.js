@@ -8,7 +8,7 @@ import { mainContext } from '../../reducer'
 import { changeNetwork } from '../../connectors'
 import { Button, message } from 'antd'
 import { formatAmount, splitFormat } from '../../utils/format'
-import {useAllow, useAPR, useFarmInfo, useMdxARP} from '../../pages/pools/Hooks'
+import {useAllow, useFarmInfo} from '../../pages/pools/Hooks'
 import { useBalance } from '../../pages/Hooks'
 import Timer from 'react-compound-timer'
 import Countdown from './countdown'
@@ -22,8 +22,7 @@ import Tips from '../../assets/icon/06 icon／minor／info@2x.png'
 const FarmCard = (props) => {
   let { pools: farmPools, dispatch } = props
   const [hoverFlag, setHoverFlag] = useState(false)
-  farmPools = useFarmInfo(farmPools.address)
-  console.log('farmPools', farmPools)
+  farmPools = useFarmInfo(farmPools)
   const { balance } = useBalance(
     farmPools && farmPools.MLP,
     props.pools.networkId
@@ -31,33 +30,10 @@ const FarmCard = (props) => {
   const { chainId } = useActiveWeb3React()
   const [balanceProportion, setBalanceProportion] = useState(0)
   // const [now, setNow] = useState(parseInt(Date.now() / 1000))
-  const apr = useAPR(
-    farmPools.address,
-    farmPools.abi,
-    farmPools.MLP,
-    farmPools.rewards1Address,
-    farmPools.valueAprToken,
-    farmPools.valueAprPath,
-    farmPools.rewardsAprPath,
-    farmPools.settleToken,
-    farmPools.earnName === 'APY' ? 2 : 1,
-    farmPools.networkId,
-    farmPools
-  )
   // 白名单 allow=0为不在白名单
   const allow = useAllow(farmPools)
   const notAllow = farmPools.accessType ==='private' && !allow
 
-
-  const mdexApr = useMdxARP(
-    farmPools.mdexReward ? farmPools.address : null,
-    farmPools.abi,
-    farmPools.MLP,
-    farmPools.networkId,
-    farmPools.mdexDaily,
-    farmPools.mdexPid,
-    farmPools
-  )
   const [now, setNow] = useState(parseInt(Date.now() / 1000))
   const isFinish =
     farmPools &&
@@ -82,16 +58,6 @@ const FarmCard = (props) => {
       clearTimeout(timerId)
     }
   }, [])
-
-  const [aprPercentage, setPercentage] = useState('-')
-  useMemo(() => {
-    if (!isNaN(apr) && apr > 0 && (!farmPools.mdexReward || mdexApr > 0)) {
-      let apr_ = (apr * 100 + mdexApr * 100).toFixed(2)
-      if (isFinite(apr_)){
-        setPercentage(apr_)
-      }
-    }
-  }, [apr, mdexApr])
 
   // useMemo(() => {
   //   const timerId = setTimeout(() => {
@@ -147,7 +113,6 @@ const FarmCard = (props) => {
       </h3>
       <Countdown
         farmPools={farmPools}
-        aprPercentage={aprPercentage}
         hoverFlag={hoverFlag}
         setHoverFlag={setHoverFlag}
         now={now}

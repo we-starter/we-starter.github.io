@@ -53,7 +53,15 @@ import { mainContext } from '../../reducer'
 import { JsonRpcProvider } from '@ethersproject/providers'
 import { debounce } from 'lodash'
 import { BLOCK_HEIGHT } from '../../const'
-
+import CalcAbi from '../../web3/abi/Calc.json'
+// 计算apr的合约
+const CALC_ADDRESS = '0x16784f7c44c3d578e3fbe1273a277db56c0d0bd5'
+const sameAddress = (address1, address2) => {
+  if (address1.toLowerCase() === address2.toLowerCase()) {
+    return [address1]
+  }
+  return [address1, address2]
+}
 export const useStakingInfo = (stakingInfo) => {
   const { account } = useActiveWeb3React()
   const [earned, setEarned] = useState()
@@ -863,11 +871,9 @@ export const usePoolsLBPInfo = (address = '') => {
   return poolsLBPInfo
 }
 
-export const useFarmInfo = (address = '') => {
+export const useFarmInfo = (pool) => {
   const { account } = useActiveWeb3React()
   const blockHeight = useBlockHeight()
-  const pool = Farm.find((o) => o.address === address)
-  const now = parseInt(Date.now() / 1000)
 
   const [farmPoolsInfo, setFarmPoolsInfo] = useState(pool)
 
@@ -879,6 +885,23 @@ export const useFarmInfo = (address = '') => {
       pool_contract.begin(), // 开始时间
       pool_contract.totalSupply(), // 总抵押
     ]
+
+    const now = new Date().getTime() / 1000
+    const hasApr = pool.dueDate > now || !pool.dueDate
+    // 还没结束，算apr
+    if (hasApr) {
+      if (pool.poolType === 1) {
+        const calc_contract = new Contract(CALC_ADDRESS, CalcAbi)
+        // 单池奖励1 apr
+        promise_list.push(
+          calc_contract.getApr(
+            pool.address,
+            sameAddress(pool.MLP, pool.settleToken),
+            sameAddress(pool.rewards1Address, pool.settleToken),
+            MINE_MOUNTAIN_ADDRESS(pool.networkId)))
+      }
+    }
+
     if (account) {
       promise_list.push(
         pool_contract.earned(account), // 奖励1
@@ -892,14 +915,28 @@ export const useFarmInfo = (address = '') => {
     // console.log('request___1')
     multicallProvider.all(promise_list).then((data) => {
       data = processResult(data)
-      let [
-        begin,
-        totalSupply,
+      const begin = data[0],
+        totalSupply = data[1]
+
+      let
+        APR = 0,
+        APR2=0,
         earned = 0,
         balanceOf = 0,
         currency_allowance = 0,
-        earned2 = 0,
-      ] = data
+        earned2 = 0
+
+      if (hasApr) {
+        if (pool.poolType === 1) {
+          APR = data[2]
+          earned = data[3]
+            balanceOf = data[4]
+            currency_allowance = data[5]
+            earned2 = data[6]
+        }
+      }
+      const APR_ = fromWei(new BigNumber(APR).plus(new BigNumber(APR2)).toString(), 18).multipliedBy(100).toFixed(2)
+      console.log('APR_', APR_)
       // console.log(balanceOf, 'balanceOfbalanceOf')
       const newPool = Object.assign({}, pool, {
         start_at: begin,
@@ -908,10 +945,11 @@ export const useFarmInfo = (address = '') => {
         totalSupply,
         balanceOf: Web3.utils.fromWei(String(balanceOf), 'ether'),
         allowance: currency_allowance,
+        APR: APR_
       })
       setFarmPoolsInfo(newPool)
     })
-  }, [account, address, blockHeight])
+  }, [account, blockHeight])
   return farmPoolsInfo
 }
 
@@ -1151,6 +1189,7 @@ export const useMdxARP = (
   }, [lptValue, mdex2warPrice, blockHeight])
   return apr
 }
+
 export const useMDexPrice = (
   address1,
   address2,

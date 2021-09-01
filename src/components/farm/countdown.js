@@ -12,22 +12,11 @@ export default function Countdown({farmPools, aprPercentage, setHoverFlag, hover
     } else if (farmPools && farmPools.dueDate > now) {
         left_time = (farmPools.dueDate - now) * 1000
     }
+    let isEnd = now > farmPools.dueDate
     return (
         <div className='farm_index_card_content'>
             <p className='apr'>
-                {farmPools &&
-                farmPools.name === 'WAR POOL (DAO)' &&
-                farmPools.openDate > now &&
-                '--'}
-                {farmPools &&
-                farmPools.name === 'WAR POOL (DAO)' &&
-                farmPools.openDate < now &&
-                (aprPercentage * 1 > 999999.99
-                    ? '999999.99%'
-                    : aprPercentage + '%')}
-                {farmPools &&
-                farmPools.name !== 'WAR POOL (DAO)' &&
-                aprPercentage + '%'}
+              {isEnd || !farmPools || !farmPools.APR ? '--' : farmPools.APR} %
                 <span className='content_name'>
             {farmPools && farmPools.earnName}
                     {farmPools && farmPools.name === 'WAR POOL (DAO)' && (
