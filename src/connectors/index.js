@@ -1,7 +1,9 @@
-import React, {useCallback, useEffect} from 'react'
+import React, { useContext, useCallback, useEffect } from 'react'
 import {InjectedConnector, NoEthereumProviderError, UserRejectedRequestError} from '@web3-react/injected-connector'
 import { WalletConnectConnector } from '@web3-react/walletconnect-connector'
 import {ChainId, SCAN_ADDRESS} from '../web3/address'
+import { message } from 'antd'
+import { mainContext } from '../reducer'
 import {UnsupportedChainIdError, useWeb3React} from "@web3-react/core";
 
 export const POLLING_INTERVAL = 12000
@@ -84,21 +86,21 @@ const networkConf = {
 
 export const changeNetwork = (chainId) => {
   return new Promise(reslove => {
-    const {ethereum} = window
-    if(ethereum && ethereum.isMetaMask && networkConf[chainId]){
+    const { ethereum } = window 
+    if (ethereum && (ethereum.isMetaMask || ethereum.isCoin98) && networkConf[chainId]) {
       ethereum
         .request({
           method: 'wallet_addEthereumChain',
           params: [
             {
-              ...networkConf[chainId]
-            }
+              ...networkConf[chainId],
+            },
           ],
         })
         .then(() => {
           setTimeout(reslove, 500)
         })
-    }else{
+    } else {
       reslove()
     }
   })
@@ -125,12 +127,24 @@ export function getScanLink(chainId, data, type) {
 
 export const useConnectWallet = () => {
   const {activate, deactivate, active} = useWeb3React()
-  const connectWallet = useCallback((connector, chainId) => {
+  const { dispatch, state } = useContext(mainContext)
+  const connectWallet = useCallback((connector, chainId, walletFlag = '') => {
     return changeNetwork(chainId).then(() => {
       return new Promise((reslove, reject) => {
         activate(connector, undefined, true)
           .then((e) => {
-            if ( window.ethereum && window.ethereum.on) {
+            if (
+              walletFlag &&
+              walletFlag === 'coin98' &&
+              !(window.ethereum.isCoin98 || window.coin98)
+            ) {
+              message.error(
+                state.locale === 'zh'
+                  ? '请安装Coin98钱包'
+                  : 'Please Install Coin98 Wallet From Chrome WebStore'
+              )
+            }
+            if (window.ethereum && window.ethereum.on) {
               // 监听钱包事件
               console.log('注册事件')
               // const { ethereum } = window
@@ -156,7 +170,6 @@ export const useConnectWallet = () => {
               window.ethereum.on('message', (e) => {
                 console.log('message', e)
               })
-
             }
             reslove(e)
           })
@@ -178,9 +191,7 @@ export const useConnectWallet = () => {
           })
       })
     })
-
-
-  },[])
+  }, [])
 
   useEffect(() => {
     !active && connectWallet(injected)
