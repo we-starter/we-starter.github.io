@@ -315,6 +315,10 @@ const zh_CN = {
     'Primitive Ventures 创始合伙人、全球知名区块链投资人 Dovey Wan 为 xNFT Protocol 战略顾问。',
   plutAboutProject1:
     'DePlutus协议——新一代DeFi资产管理协议，构建链上金融基础设施，开启属于每个人的链上基金时代。',
+  phmAboutProject1:
+    'Phantom 是一个支持合成资产创建及NFT 发行的跨链DeFi 协议，依托智能合约让用户可以使用主流的加密货币、NFT 作为抵押品，然后以去中心化的方式创建合成资产Phant（也叫做pAssets) ，可合成的资产包含加密货币衍生品以及大宗商品，股票，债券等传统金融产品。让更多人可以低门槛的形式参与到多元化的品类投资中。',
+  phmAboutProject2:
+    '合成资产在传统金融行业里，是专门为大投资者设计的一种工具。合成资产的优势在于能够模拟真实资产价格走向，投资者不用承受资产转移的成本和风险，就可以在一个平台方便的参与其他品类的投资。而 Phantom 利用 DeFi 技术，让广大交易者可以生成或投资 pAsset，以低门槛的方式参与到 NFT、加密资产、预测、股票等市场的投资中。',
   related_title1: '累计金额',
   related_title2: '参与地址总数',
   related_title3: '总成立的池子数',

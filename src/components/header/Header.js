@@ -119,7 +119,7 @@ export const Header = () => {
                 <li className='menu__item'>
                   <a
                     href={
-                      language === 'English'
+                      language === '中文简体'
                         ? WeStarterGuidebookZH
                         : WeStarterGuidebookEN
                     }
@@ -133,7 +133,7 @@ export const Header = () => {
                 <li className='menu__item'>
                   <a
                     href={
-                      language === 'English'
+                      language === '中文简体'
                         ? 'https://westarter.medium.com/westarter-tutorial-how-to-set-up-the-heco-wallets-5d8bfc253c78'
                         : 'https://westarter.medium.com/westarter-tutorial-how-to-set-up-the-heco-wallets-5d8bfc253c78 '
                     }
@@ -223,7 +223,10 @@ export const Header = () => {
             {active && (
               <div className='ht-balance'>
                 <span>
-                  <img src={chainId === ChainId.MATIC ? RAW_ICON : WAR_ICON} alt=""/>
+                  <img
+                    src={chainId === ChainId.MATIC ? RAW_ICON : WAR_ICON}
+                    alt=''
+                  />
                 </span>
                 <p>{formatAmount(balance)}</p>
               </div>

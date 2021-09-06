@@ -20,6 +20,7 @@ import PLUT from '../assets/icon/PLUT.png'
 import MATTER from '../assets/icon/MATTER.png'
 import TOKEN from '../assets/icon/TOKEN.png'
 import BLACK from '../assets/icon/BLACK.png'
+import PHM from '../assets/icon/PHM.png'
 
 export default [
   {
@@ -1723,6 +1724,182 @@ export default [
     link_url: 'https://deplutus.finance/', // 跳转外链接
     project_introduction:
       'DePlutus, next-generation DeFi asset management protocol for both professional and retail investors to initiate, manage and invest in the on-chain crypto funds.',
+    duration: '', // 完成时间
+    totalApplicants: '', // 申请总人数
+    winningRate: '-', // 申请中签率
+    committed: '', // 超募比例
+    total: '', // 参与资金规模
+    poolType: 0, // 值为 1 代表定向
+    networkId: 56,
+  },
+
+  {
+    name: 'PHM',
+    address: '0x0',
+    icon: PHM,
+    abi: OfferingV2,
+    start_at: '1631016000',
+    is_top: true,
+    is_coming: true, // is_coming 为 true 则不请求合约
+    currency: {
+      address: '0x55d398326f99059ff775485246999027b3197955', // 如果是0x0则是ht
+      decimal: 18,
+      symbol: 'USDT',
+    },
+    type: 1,
+    isPrivate: true,
+    underlying: {
+      address: '-',
+      decimal: 18,
+      symbol: 'PHM',
+      name: 'PHM',
+      total_supply: '10,000,000,000',
+      holders: '-',
+      transfers: '-',
+    },
+    amount: '1000000', // token 总额
+    pool_info: {
+      token_distribution: 'Sept 7th 2021, 8:00PM SGT',
+      min_allocation: '0',
+      max_allocation: '100 USDT',
+      min_swap_level: '5,000 USDT',
+    },
+    website: 'https://phm.finance/',
+    white_paper:
+      'https://phantom-defi.s3.us-east-2.amazonaws.com/PhantomIntroduction.pdf',
+    twitter: 'https://twitter.com/PhantomDefi',
+    Telegram_Channel: 'https://t.me/PhantomProtocol',
+    Github: '-',
+    yuque: '-',
+    progress: 0,
+    status: 0,
+    ratio: '1PHM=?USDT',
+    time: '1631102400',
+    purchasedCurrencyOf: 0,
+    totalPurchasedAmount: '5000000000000000000000',
+    totalPurchasedUnderlying: '0',
+    totalPurchasedCurrency: '0',
+    is_flash: false,
+    link_url: 'https://phm.finance/', // 跳转外链接
+    project_introduction:
+      'Phantom Protocol is a next-generation “DeFi+NFT” solution that supports NFT issuance and fractional trading. Phantom is incubated by Conflux and invested by LD Capital, NGC Ventures, Kyros Ventures, Gate Labs, DFG, MXC among others',
+    duration: '', // 完成时间
+    totalApplicants: '50', // 申请总人数
+    winningRate: '-', // 申请中签率
+    committed: '', // 超募比例
+    total: '', // 参与资金规模
+    poolType: 0, // 值为 1 代表定向
+    networkId: 56,
+    svipFlag: true,
+  },
+  {
+    name: 'PHM',
+    address: '0x1',
+    icon: PHM,
+    abi: OfferingV2,
+    start_at: '1631016000',
+    is_top: true,
+    is_coming: true, // is_coming 为 true 则不请求合约
+    currency: {
+      address: '0x55d398326f99059ff775485246999027b3197955', // 如果是0x0则是ht
+      decimal: 18,
+      symbol: 'USDT',
+    },
+    type: 1,
+    isPrivate: true,
+    underlying: {
+      address: '-',
+      decimal: 18,
+      symbol: 'PHM',
+      name: 'PHM',
+      total_supply: '10,000,000,000',
+      holders: '-',
+      transfers: '-',
+    },
+    amount: '5000000', // token 总额
+    pool_info: {
+      token_distribution: 'Sept 7th 2021, 8:00PM SGT',
+      min_allocation: '0',
+      max_allocation: '100 USDT',
+      min_swap_level: '25,000 USDT',
+    },
+    website: 'https://phm.finance/',
+    white_paper:
+      'https://phantom-defi.s3.us-east-2.amazonaws.com/PhantomIntroduction.pdf',
+    twitter: 'https://twitter.com/PhantomDefi',
+    Telegram_Channel: 'https://t.me/PhantomProtocol',
+    Github: '-',
+    yuque: '-',
+    progress: 0,
+    status: 0,
+    ratio: '1PHM=?USDT',
+    time: '1631102400',
+    purchasedCurrencyOf: 0,
+    totalPurchasedAmount: '25000000000000000000000',
+    totalPurchasedUnderlying: '0',
+    totalPurchasedCurrency: '0',
+    is_flash: false,
+    link_url: 'https://phm.finance/', // 跳转外链接
+    project_introduction:
+      'Phantom Protocol is a next-generation “DeFi+NFT” solution that supports NFT issuance and fractional trading. Phantom is incubated by Conflux and invested by LD Capital, NGC Ventures, Kyros Ventures, Gate Labs, DFG, MXC among others',
+    duration: '', // 完成时间
+    totalApplicants: '250', // 申请总人数
+    winningRate: '-', // 申请中签率
+    committed: '', // 超募比例
+    total: '', // 参与资金规模
+    poolType: 0, // 值为 1 代表定向
+    networkId: 56,
+  },
+  {
+    name: 'PHM',
+    address: '0x2',
+    icon: PHM,
+    abi: StarterV3,
+    start_at: '1631016000',
+    is_top: true,
+    is_coming: true, // is_coming 为 true 则不请求合约
+    currency: {
+      address: '0x55d398326f99059ff775485246999027b3197955', // 如果是0x0则是ht
+      decimal: 18,
+      symbol: 'USDT',
+    },
+    type: 0,
+    isPrivate: true,
+    underlying: {
+      address: '-',
+      decimal: 18,
+      symbol: 'PHM',
+      name: 'PHM',
+      total_supply: '10,000,000,000',
+      holders: '-',
+      transfers: '-',
+    },
+    amount: '4000000', // token 总额
+    pool_info: {
+      token_distribution: 'Sept 7th 2021, 8:00PM SGT',
+      min_allocation: '',
+      max_allocation: '',
+      min_swap_level: '20,000 USDT',
+    },
+    website: 'https://phm.finance/',
+    white_paper:
+      'https://phantom-defi.s3.us-east-2.amazonaws.com/PhantomIntroduction.pdf',
+    twitter: 'https://twitter.com/PhantomDefi',
+    Telegram_Channel: 'https://t.me/PhantomProtocol',
+    Github: '-',
+    yuque: '-',
+    progress: 0,
+    status: 0,
+    ratio: '1PHM=?USDT',
+    time: '1631102400',
+    purchasedCurrencyOf: 0,
+    totalPurchasedAmount: '20000000000000000000000',
+    totalPurchasedUnderlying: '0',
+    totalPurchasedCurrency: '0',
+    is_flash: false,
+    link_url: 'https://phm.finance/', // 跳转外链接
+    project_introduction:
+      'Phantom Protocol is a next-generation “DeFi+NFT” solution that supports NFT issuance and fractional trading. Phantom is incubated by Conflux and invested by LD Capital, NGC Ventures, Kyros Ventures, Gate Labs, DFG, MXC among others',
     duration: '', // 完成时间
     totalApplicants: '', // 申请总人数
     winningRate: '-', // 申请中签率
