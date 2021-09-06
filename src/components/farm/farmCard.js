@@ -31,33 +31,33 @@ const FarmCard = (props) => {
   const { chainId } = useActiveWeb3React()
   const [balanceProportion, setBalanceProportion] = useState(0)
   // const [now, setNow] = useState(parseInt(Date.now() / 1000))
-  const apr = useAPR(
-    farmPools.address,
-    farmPools.abi,
-    farmPools.MLP,
-    farmPools.rewards1Address,
-    farmPools.valueAprToken,
-    farmPools.valueAprPath,
-    farmPools.rewardsAprPath,
-    farmPools.settleToken,
-    farmPools.earnName === 'APY' ? 2 : 1,
-    farmPools.networkId,
-    farmPools
-  )
+  // const apr = useAPR(
+  //   farmPools.address,
+  //   farmPools.abi,
+  //   farmPools.MLP,
+  //   farmPools.rewards1Address,
+  //   farmPools.valueAprToken,
+  //   farmPools.valueAprPath,
+  //   farmPools.rewardsAprPath,
+  //   farmPools.settleToken,
+  //   farmPools.earnName === 'APY' ? 2 : 1,
+  //   farmPools.networkId,
+  //   farmPools
+  // )
   // 白名单 allow=0为不在白名单
   const allow = useAllow(farmPools)
   const notAllow = farmPools.accessType ==='private' && !allow
 
 
-  const mdexApr = useMdxARP(
-    farmPools.mdexReward ? farmPools.address : null,
-    farmPools.abi,
-    farmPools.MLP,
-    farmPools.networkId,
-    farmPools.mdexDaily,
-    farmPools.mdexPid,
-    farmPools
-  )
+  // const mdexApr = useMdxARP(
+  //   farmPools.mdexReward ? farmPools.address : null,
+  //   farmPools.abi,
+  //   farmPools.MLP,
+  //   farmPools.networkId,
+  //   farmPools.mdexDaily,
+  //   farmPools.mdexPid,
+  //   farmPools
+  // )
   const [now, setNow] = useState(parseInt(Date.now() / 1000))
   const isFinish =
     farmPools &&
@@ -81,17 +81,17 @@ const FarmCard = (props) => {
     return () => {
       clearTimeout(timerId)
     }
-  }, [])
+  }, [isFinish])
 
-  const [aprPercentage, setPercentage] = useState('-')
-  useMemo(() => {
-    if (!isNaN(apr) && apr > 0 && (!farmPools.mdexReward || mdexApr > 0)) {
-      let apr_ = (apr * 100 + mdexApr * 100).toFixed(2)
-      if (isFinite(apr_)){
-        setPercentage(apr_)
-      }
-    }
-  }, [apr, mdexApr])
+  // const [aprPercentage, setPercentage] = useState('-')
+  // useMemo(() => {
+  //   if (!isNaN(apr) && apr > 0 && (!farmPools.mdexReward || mdexApr > 0)) {
+  //     let apr_ = (apr * 100 + mdexApr * 100).toFixed(2)
+  //     if (isFinite(apr_)){
+  //       setPercentage(apr_)
+  //     }
+  //   }
+  // }, [apr, mdexApr])
 
   // useMemo(() => {
   //   const timerId = setTimeout(() => {
@@ -121,7 +121,7 @@ const FarmCard = (props) => {
     } else {
       setBalanceProportion(0)
     }
-  }, [farmPools, farmPools.balanceOf, farmPools.totalSupply])
+  }, [farmPools])
 
   const notStart = !farmPools || farmPools.start_at * 1000 > new Date().getTime()
   return (
@@ -147,7 +147,7 @@ const FarmCard = (props) => {
       </h3>
       <Countdown
         farmPools={farmPools}
-        aprPercentage={aprPercentage}
+        aprPercentage={farmPools && farmPools.APR || '-'}
         hoverFlag={hoverFlag}
         setHoverFlag={setHoverFlag}
         now={now}
@@ -166,18 +166,18 @@ const FarmCard = (props) => {
           farmPools.totalSupply &&
           farmPools.name !== 'WAR POOL (DAO)'
             ? formatNumber(
-                formatAmount(farmPools.totalSupply, farmPools.decimal, 6),
-                {
-                  thousand: ',',
-                  decimal: '.',
-                  precision:
-                    formatAmount(farmPools.totalSupply) - 0 > 0 ? 6 : 0,
-                }
-              )
+              formatAmount(farmPools.totalSupply, farmPools.decimal, 6),
+              {
+                thousand: ',',
+                decimal: '.',
+                precision:
+                  formatAmount(farmPools.totalSupply) - 0 > 0 ? 6 : 0,
+              }
+            )
             : farmPools &&
-              farmPools.totalSupply &&
-              farmPools.name === 'WAR POOL (DAO)'
-            ? formatNumber(
+            farmPools.totalSupply &&
+            farmPools.name === 'WAR POOL (DAO)'
+              ? formatNumber(
                 formatAmount(farmPools.totalSupply, farmPools.decimal, 4),
                 {
                   thousand: ',',
@@ -186,7 +186,7 @@ const FarmCard = (props) => {
                     formatAmount(farmPools.totalSupply) - 0 > 0 ? 4 : 0,
                 }
               )
-            : '--'}
+              : '--'}
         </span>
       </p>
       <p className='farm_index_card_value'>
@@ -196,17 +196,17 @@ const FarmCard = (props) => {
           farmPools.balanceOf &&
           farmPools.name !== 'WAR POOL (DAO)'
             ? formatNumber(splitFormat(farmPools.balanceOf, 6), {
-                thousand: ',',
-                decimal: '.',
-                precision: farmPools.balanceOf - 0 > 0 ? 6 : 0,
-              }) +
-              '(' +
-              (balanceProportion - 0 === 0 ? '0.00' : balanceProportion) +
-              '%)'
+              thousand: ',',
+              decimal: '.',
+              precision: farmPools.balanceOf - 0 > 0 ? 6 : 0,
+            }) +
+            '(' +
+            (balanceProportion - 0 === 0 ? '0.00' : balanceProportion) +
+            '%)'
             : farmPools &&
-              farmPools.balanceOf &&
-              farmPools.name === 'WAR POOL (DAO)'
-            ? formatNumber(splitFormat(farmPools.balanceOf, 4), {
+            farmPools.balanceOf &&
+            farmPools.name === 'WAR POOL (DAO)'
+              ? formatNumber(splitFormat(farmPools.balanceOf, 4), {
                 thousand: ',',
                 decimal: '.',
                 precision: farmPools.balanceOf - 0 > 0 ? 4 : 0,
@@ -214,7 +214,7 @@ const FarmCard = (props) => {
               '(' +
               (balanceProportion - 0 === 0 ? '0.00' : balanceProportion) +
               '%)'
-            : '--'}
+              : '--'}
         </span>
       </p>
       <p className='farm_index_card_value'>
@@ -225,19 +225,19 @@ const FarmCard = (props) => {
           farmPools.balanceOf &&
           farmPools.name !== 'WAR POOL (DAO)'
             ? formatNumber(formatAmount(balance, farmPools.decimal, 6), {
-                thousand: ',',
-                decimal: '.',
-                precision: formatAmount(balance) - 0 > 0 ? 6 : 0,
-              })
+              thousand: ',',
+              decimal: '.',
+              precision: formatAmount(balance) - 0 > 0 ? 6 : 0,
+            })
             : farmPools &&
-              farmPools.balanceOf &&
-              farmPools.name === 'WAR POOL (DAO)'
-            ? formatNumber(formatAmount(balance, farmPools.decimal, 4), {
+            farmPools.balanceOf &&
+            farmPools.name === 'WAR POOL (DAO)'
+              ? formatNumber(formatAmount(balance, farmPools.decimal, 4), {
                 thousand: ',',
                 decimal: '.',
                 precision: formatAmount(balance) - 0 > 0 ? 4 : 0,
               })
-            : '--'}
+              : '--'}
         </span>
       </p>
       {farmPools && farmPools.name !== 'WAR POOL (DAO)' && (
@@ -368,17 +368,17 @@ const FarmCard = (props) => {
             farmPools.earned &&
             farmPools.name !== 'WAR POOL (DAO)'
               ? formatNumber(
-                  formatAmount(farmPools.earned, farmPools.decimal, 6),
-                  {
-                    thousand: ',',
-                    decimal: '.',
-                    precision: formatAmount(farmPools.earned) - 0 > 0 ? 6 : 0,
-                  }
-                )
+                formatAmount(farmPools.earned, farmPools.decimal, 6),
+                {
+                  thousand: ',',
+                  decimal: '.',
+                  precision: formatAmount(farmPools.earned) - 0 > 0 ? 6 : 0,
+                }
+              )
               : farmPools &&
-                farmPools.earned &&
-                farmPools.name === 'WAR POOL (DAO)'
-              ? formatNumber(
+              farmPools.earned &&
+              farmPools.name === 'WAR POOL (DAO)'
+                ? formatNumber(
                   formatAmount(farmPools.earned, farmPools.decimal, 4),
                   {
                     thousand: ',',
@@ -386,7 +386,7 @@ const FarmCard = (props) => {
                     precision: formatAmount(farmPools.earned) - 0 > 0 ? 4 : 0,
                   }
                 )
-              : '--'}
+                : '--'}
           </span>
         </p>
         {farmPools.rewards2 && (
@@ -398,33 +398,33 @@ const FarmCard = (props) => {
             <span>
               {farmPools && farmPools.earned2
                 ? formatNumber(
-                    formatAmount(farmPools.earned2, farmPools.decimal, 6),
-                    formatAmount(farmPools.earned2) - 0 > 0 ? 6 : 0
-                  )
+                  formatAmount(farmPools.earned2, farmPools.decimal, 6),
+                  formatAmount(farmPools.earned2) - 0 > 0 ? 6 : 0
+                )
                 : '--'}
             </span>
           </p>
         )}
       </div>
       {farmPools &&
-        farmPools.name === 'WAR POOL (DAO)' &&
-        farmPools.networkId == chainId && (
-          <a
-            className={cs(
-              `deposit_btn ${farmPools && 'deposit_btn_' + farmPools.networkId}`
-            )}
-            style={{ marginTop: '8px', width: '100%' }}
-            onClick={() => {
-              dispatch({
-                type: HANDLE_WALLET_MODAL,
-                walletModal: 'compound',
-                pool: farmPools && farmPools,
-              })
-            }}
-          >
-            <FormattedMessage id='farm21' />
-          </a>
-        )}
+      farmPools.name === 'WAR POOL (DAO)' &&
+      farmPools.networkId == chainId && (
+        <a
+          className={cs(
+            `deposit_btn ${farmPools && 'deposit_btn_' + farmPools.networkId}`
+          )}
+          style={{ marginTop: '8px', width: '100%' }}
+          onClick={() => {
+            dispatch({
+              type: HANDLE_WALLET_MODAL,
+              walletModal: 'compound',
+              pool: farmPools && farmPools,
+            })
+          }}
+        >
+          <FormattedMessage id='farm21' />
+        </a>
+      )}
       {farmPools.accessType === 'private' && (
         <div className='farm_pools_card_access'>
           <div className='farm_pools_card_access_title'>
@@ -474,5 +474,5 @@ const FarmCard = (props) => {
 
 export default injectIntl((props) => {
   const { dispatch, state } = useContext(mainContext)
-  return useMemo(() => <FarmCard {...props} dispatch={dispatch} />, [props])
+  return useMemo(() => <FarmCard {...props} dispatch={dispatch} />, [dispatch, props])
 })
