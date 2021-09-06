@@ -1735,12 +1735,12 @@ export default [
 
   {
     name: 'PHM',
-    address: '0x0',
+    address: '0x5397a1D525221EC635be6D49255Bf9282FddF383',
     icon: PHM,
     abi: OfferingV2,
     start_at: '1631016000',
     is_top: true,
-    is_coming: true, // is_coming 为 true 则不请求合约
+    is_coming: false, // is_coming 为 true 则不请求合约
     currency: {
       address: '0x55d398326f99059ff775485246999027b3197955', // 如果是0x0则是ht
       decimal: 18,
@@ -1749,7 +1749,7 @@ export default [
     type: 1,
     isPrivate: true,
     underlying: {
-      address: '-',
+      address: '0x4399AE7538c33cA24edD4C28C5dd7Ce9a80acF81',
       decimal: 18,
       symbol: 'PHM',
       name: 'PHM',
@@ -1794,12 +1794,12 @@ export default [
   },
   {
     name: 'PHM',
-    address: '0x1',
+    address: '0xdFC7CAb10c2Bc9bCDe8331b08c6e975DDc3B26A1',
     icon: PHM,
     abi: OfferingV2,
     start_at: '1631016000',
     is_top: true,
-    is_coming: true, // is_coming 为 true 则不请求合约
+    is_coming: false, // is_coming 为 true 则不请求合约
     currency: {
       address: '0x55d398326f99059ff775485246999027b3197955', // 如果是0x0则是ht
       decimal: 18,
@@ -1808,7 +1808,7 @@ export default [
     type: 1,
     isPrivate: true,
     underlying: {
-      address: '-',
+      address: '0x4399AE7538c33cA24edD4C28C5dd7Ce9a80acF81',
       decimal: 18,
       symbol: 'PHM',
       name: 'PHM',
@@ -1852,12 +1852,12 @@ export default [
   },
   {
     name: 'PHM',
-    address: '0x2',
+    address: '0xB41406092fd636d85616a501b8CF67A04dfc021d',
     icon: PHM,
     abi: StarterV3,
     start_at: '1631016000',
     is_top: true,
-    is_coming: true, // is_coming 为 true 则不请求合约
+    is_coming: false, // is_coming 为 true 则不请求合约
     currency: {
       address: '0x55d398326f99059ff775485246999027b3197955', // 如果是0x0则是ht
       decimal: 18,
@@ -1866,7 +1866,7 @@ export default [
     type: 0,
     isPrivate: true,
     underlying: {
-      address: '-',
+      address: '0x4399AE7538c33cA24edD4C28C5dd7Ce9a80acF81',
       decimal: 18,
       symbol: 'PHM',
       name: 'PHM',
