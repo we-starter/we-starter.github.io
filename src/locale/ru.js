@@ -320,6 +320,10 @@ const ru = {
     'Dovey Wan, the founder and partner of Primitive Ventures and a famous blockchain investor, is the xNFT Protocol strategic advisor.',
   plutAboutProject1:
     'DePlutus, next-generation DeFi asset management protocol for both professional and retail investors to initiate, manage and invest in the on-chain crypto funds.',
+  phmAboutProject1:
+    'Phantom is a cross-chain DeFi protocol that supports synthetic asset generation and NFT issuance. Untilizing smart contracts, Phantom allowing individuals to build synthetic assets (pAssets)  in a decentralized manner with mainstream cryptocurrencies or NFT as collateral. Phantom enables more people to join in a diverse range of investments by lowering the obstacles to entry.',
+  phmAboutProject2:
+    'Synthetic assets are a tool primarily designed for large investors in the traditional financial industry. The benefit of synthetic assets is that they can imitate real-world asset price movements, allowing investors to participate in other investment categories from the comfort of a unified platform without the cost and risk of asset transfers.',
   related_title1: 'Всего средства IWO',
   related_title2: 'Всего участвовавших адресов',
   related_title3: 'Всего созданных пулов',
