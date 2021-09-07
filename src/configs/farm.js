@@ -22,8 +22,10 @@ export default [
     valueAprPath: [],
     rewardsAprPath: [],
     settleToken: '0xa71EdC38d189767582C38A3145b5873052c3e47a',
-
+    reserve0: '0x910651F81a605a6Ef35d05527d24A72fecef8bF0',// WAR
+    reserve0Decimal: 18,
     MLP: '0x2eAB1e47Bf1660bf6De9437BD061db666111e041',
+    mlpDecimal: 18,
     byLink:
       'http://ht.mdex.com/#/add/0xa71EdC38d189767582C38A3145b5873052c3e47a/0x910651F81a605a6Ef35d05527d24A72fecef8bF0',
     abi: StakingPool,
@@ -41,6 +43,7 @@ export default [
     lpToken: 'MDEX LP Token',
     mdexDaily: 1534.46,
     mdexPid: '0x5a',
+    poolType: 2, // 1单池，2LP，2sort
   },
   {
     name: 'WAR POOL (DAO)',
@@ -76,6 +79,7 @@ export default [
     networkId: 128,
     mdexDaily: 0,
     mdexPid: '',
+    poolType: 1, // 1单池，2LP，2sort
   },
   {
     name: 'WAR POOL (DAO)',
@@ -113,6 +117,7 @@ export default [
     mdexPid: '',
     svipFlag: true,
     minAmountMortgage: '10000',
+    poolType: 1, // 1单池，2LP，2sort
   },
 
   // 临时池
@@ -153,6 +158,7 @@ export default [
     accessType: 'private', // 私有的需要白名单权限
     maxAmountMortgage: 2500, //最多抵押
     rewards_price:'0.23',//写死的奖励的价格，用于计算apr
+    poolType: 1, // 1单池，2LP，2sort
   },
   {
     name: 'xNFT',
@@ -188,6 +194,7 @@ export default [
     mdexDaily: 1534.46,
     mdexPid: '0x5a',
     accessType: 'private', // 私有的需要白名单权限
+    poolType: 1, // 1单池，2LP，2sort
   },
   {
     name: 'WAR-HT LPT',
@@ -225,6 +232,7 @@ export default [
     networkId: 128,
     mdexPid: '0x4c',
     lpToken: 'MDEX LP Token',
+    poolType: 2, // 1单池，2LP，2sort
   },
   {
     name: 'PAUL-USDT LPT',
@@ -261,6 +269,7 @@ export default [
     lpToken: 'MDEX LP Token',
     mdexDaily: 0,
     mdexPid: '',
+    poolType: 2, // 1单池，2LP，2sort
   },
 
   // {

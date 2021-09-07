@@ -17,6 +17,19 @@ export const ADDRESS_0 = '0x0000000000000000000000000000000000000000'
 export const MDEX_POOL_ADDRESS = '0xFB03e11D93632D97a8981158A632Dd5986F5E909'
 export const MDEX_ADDRESS = '0x25D2e80cB6B86881Fd7e07dd263Fb79f4AbE033c'
 
+// 计算apr的合约
+export function CALC_ADDRESS(chainId){
+  switch (chainId) {
+    case ChainId.BSC:
+      return ''
+    case ChainId.HECO:
+      return '0x61daB662761e0fc90935a49DB9c48dF2C01C1780'
+    case ChainId.MATIC:
+      return '0xd9020a0e9aca29bec5a36e8fc4feff37255606e4'
+    default:
+      return ''
+  }
+}
 
 export function WETH_ADDRESS(chainId) {
   switch (chainId) {
