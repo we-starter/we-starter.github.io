@@ -1361,23 +1361,27 @@ export const useAllow = (pool) => {
 const getApr = (pool) => {
   const multicallProvider = getOnlyMultiCallProvider(pool.networkId)
   const pool_contract = new Contract(pool.address, pool.abi)
-  // const rewards_contract = new Contract(pool.rewards1Address, ERC20)
-  console.log('xxxx', pool.MLP, pool.settleToken)
+  const rewards_contract = new Contract(pool.rewards1Address, ERC20)
+  // console.log('xxxx', pool.MLP, pool.settleToken)
   const promiseAll = [
-    // rewards_contract.allowance(MINE_MOUNTAIN_ADDRESS(pool.networkId), pool.address),// 获取奖励1在矿山的总量
+    rewards_contract.allowance(MINE_MOUNTAIN_ADDRESS(pool.networkId), pool.address),// 获取奖励1在矿山的总量
     pool_contract.rewardsDuration(), // span
     pool_contract.rewards(ADDRESS_0), // 获取奖励1未发放的量
   ]
   return multicallProvider.all(promiseAll).then(async data => {
     data = processResult(data)
-    const [ span, rewards] = data
+    const [allowance, span, rewards] = data
+    // 剩余
+    const dRewards = new BigNumber(allowance).minus(new BigNumber(rewards))
+    // console.log('dRewards', dRewards.toString())
     const [stakePrice] = await getPrice(pool.MLP, pool.settleToken, 1, [], pool.networkId)
     // 年奖励 = 奖励未发放的量 * 转成USDC的价值(price) * (1/奖励天数((span/86400)-(当前时间-开始时间)/86400)) * 365
     const now = parseInt(new Date().getTime() / 1000)
     const yearRate = new BigNumber(1).div(
       new BigNumber((Number(pool.start_at) + Number(span) - now))
         .div(new BigNumber(86400))
-    ).multipliedBy(rewards).multipliedBy(365)
+    ).multipliedBy(dRewards).multipliedBy(365).multipliedBy(new BigNumber(pool.rewards_price))
+
     // 总质押价值
     const stakeTokenValue = fromWei(new BigNumber(pool.totalSupply).multipliedBy(new BigNumber(stakePrice)).toString(), pool.mlpDecimal)
     const apr = yearRate.div(stakeTokenValue)
