@@ -31,19 +31,6 @@ const FarmCard = (props) => {
   const { chainId } = useActiveWeb3React()
   const [balanceProportion, setBalanceProportion] = useState(0)
   // const [now, setNow] = useState(parseInt(Date.now() / 1000))
-  // const apr = useAPR(
-  //   farmPools.address,
-  //   farmPools.abi,
-  //   farmPools.MLP,
-  //   farmPools.rewards1Address,
-  //   farmPools.valueAprToken,
-  //   farmPools.valueAprPath,
-  //   farmPools.rewardsAprPath,
-  //   farmPools.settleToken,
-  //   farmPools.earnName === 'APY' ? 2 : 1,
-  //   farmPools.networkId,
-  //   farmPools
-  // )
   // 白名单 allow=0为不在白名单
   const allow = useAllow(farmPools)
   const notAllow = farmPools.accessType ==='private' && !allow
@@ -109,6 +96,21 @@ const FarmCard = (props) => {
   // } else if (farmPools && farmPools.dueDate > now) {
   //   left_time = (farmPools.dueDate - now) * 1000
   // }
+
+  // const apr = useAPR(
+  //   farmPools.address,
+  //   farmPools.abi,
+  //   farmPools.MLP,
+  //   farmPools.rewards1Address,
+  //   farmPools.valueAprToken,
+  //   farmPools.valueAprPath,
+  //   farmPools.rewardsAprPath,
+  //   farmPools.settleToken,
+  //   farmPools.earnName === 'APY' ? 2 : 1,
+  //   farmPools.networkId,
+  //   farmPools
+  // )
+
   useMemo(() => {
     if (farmPools && farmPools.balanceOf * 1 && farmPools.totalSupply) {
       setBalanceProportion(

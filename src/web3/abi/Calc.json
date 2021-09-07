@@ -8,6 +8,40 @@
       },
       {
         "internalType": "address[]",
+        "name": "reserve0Path",
+        "type": "address[]"
+      },
+      {
+        "internalType": "uint256",
+        "name": "dailyRewards",
+        "type": "uint256"
+      },
+      {
+        "internalType": "address[]",
+        "name": "rewardsPath",
+        "type": "address[]"
+      }
+    ],
+    "name": "getSwapRewardLPTApr",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "apr",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "pool",
+        "type": "address"
+      },
+      {
+        "internalType": "address[]",
         "name": "stakePath",
         "type": "address[]"
       },
