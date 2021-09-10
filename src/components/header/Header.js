@@ -108,7 +108,7 @@ export const Header = () => {
                 {/*)}*/}
                 <li className='menu__item'>
                   <a
-                    href='https://forms.gle/n6M5tJ46KtEfEDQz9'
+                    href='https://docs.google.com/forms/d/e/1FAIpQLSe28QjmQyzrO98dsIKpmyGXq3J-_hHvNQx4l1LEvsnkv0fapQ/viewform?usp=sf_link'
                     target='_blank'
                     className='menu__link'
                     onClick={handleMenuItemClick}

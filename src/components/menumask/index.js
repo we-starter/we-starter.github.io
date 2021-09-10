@@ -73,7 +73,10 @@ export const MenuMask = () => {
               {active && (
                 <div className='menumask_ht-balance'>
                   <span>
-                    <img src={chainId === ChainId.MATIC ? RAW_ICON : WAR_ICON} alt=""/>
+                    <img
+                      src={chainId === ChainId.MATIC ? RAW_ICON : WAR_ICON}
+                      alt=''
+                    />
                   </span>
                   <p>{formatAmount(balance)}</p>
                 </div>
@@ -173,7 +176,7 @@ export const MenuMask = () => {
 
             <li className='menumask_item'>
               <a
-                href='https://forms.gle/n6M5tJ46KtEfEDQz9'
+                href='https://docs.google.com/forms/d/e/1FAIpQLSe28QjmQyzrO98dsIKpmyGXq3J-_hHvNQx4l1LEvsnkv0fapQ/viewform?usp=sf_link'
                 target='_blank'
                 className='menumask_item-guide menumask_link'
                 onClick={handleMenuItemClick}
@@ -265,7 +268,6 @@ export const MenuMask = () => {
               </div>
             </div>
             <ul className='footer__links'>
-
               <li>
                 <a
                   title='title'
