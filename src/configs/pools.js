@@ -1925,7 +1925,7 @@ export default [
     type: 1,
     isPrivate: true,
     underlying: {
-      address: '0xEdDEB2ff49830f3aa30Fee2F7FaBC5136845304a',
+      address: '-',
       decimal: 18,
       symbol: 'HCT',
       name: 'HCT',
@@ -1940,7 +1940,7 @@ export default [
       max_allocation: '100 USDT',
       min_swap_level: '5,000 USDT',
     },
-    website: 'https://test.hurricaneswap.com/#/',
+    website: 'https://hurricaneswap.com/',
     white_paper: 'https://test.hurricaneswap.com/whitepaper/',
     twitter: 'https://twitter.com/hurricaneswap?s=21',
     Telegram_Channel: 'https://t.me/HurricaneSwap',
@@ -1955,7 +1955,7 @@ export default [
     totalPurchasedUnderlying: '0',
     totalPurchasedCurrency: '0',
     is_flash: false,
-    link_url: 'https://test.hurricaneswap.com/#/', // 跳转外链接
+    link_url: 'https://hurricaneswap.com/', // 跳转外链接
     project_introduction:
       'HurricaneSwap is a liquidity cross-chain swap based on Avalanche',
     duration: '', // 完成时间
@@ -1983,7 +1983,7 @@ export default [
     type: 1,
     isPrivate: true,
     underlying: {
-      address: '0xEdDEB2ff49830f3aa30Fee2F7FaBC5136845304a',
+      address: '-',
       decimal: 18,
       symbol: 'HCT',
       name: 'HCT',
@@ -1998,7 +1998,7 @@ export default [
       max_allocation: '100 USDT',
       min_swap_level: '25,000 USDT',
     },
-    website: 'https://test.hurricaneswap.com/#/',
+    website: 'https://hurricaneswap.com/',
     white_paper: 'https://test.hurricaneswap.com/whitepaper/',
     twitter: 'https://twitter.com/hurricaneswap?s=21',
     Telegram_Channel: 'https://t.me/HurricaneSwap',
@@ -2013,7 +2013,7 @@ export default [
     totalPurchasedUnderlying: '0',
     totalPurchasedCurrency: '0',
     is_flash: false,
-    link_url: 'https://test.hurricaneswap.com/#/', // 跳转外链接
+    link_url: 'https://hurricaneswap.com/', // 跳转外链接
     project_introduction:
       'HurricaneSwap is a liquidity cross-chain swap based on Avalanche',
     duration: '', // 完成时间
@@ -2040,7 +2040,7 @@ export default [
     type: 0,
     isPrivate: true,
     underlying: {
-      address: '0xEdDEB2ff49830f3aa30Fee2F7FaBC5136845304a',
+      address: '-',
       decimal: 18,
       symbol: 'HCT',
       name: 'HCT',
@@ -2055,7 +2055,7 @@ export default [
       max_allocation: '',
       min_swap_level: '20,000 USDT',
     },
-    website: 'https://test.hurricaneswap.com/#/',
+    website: 'https://hurricaneswap.com/',
     white_paper: 'https://test.hurricaneswap.com/whitepaper/',
     twitter: 'https://twitter.com/hurricaneswap?s=21',
     Telegram_Channel: 'https://t.me/HurricaneSwap',
@@ -2070,7 +2070,7 @@ export default [
     totalPurchasedUnderlying: '0',
     totalPurchasedCurrency: '0',
     is_flash: false,
-    link_url: 'https://test.hurricaneswap.com/#/', // 跳转外链接
+    link_url: 'https://hurricaneswap.com/', // 跳转外链接
     project_introduction:
       'HurricaneSwap is a liquidity cross-chain swap based on Avalanche',
     duration: '', // 完成时间
