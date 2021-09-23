@@ -289,11 +289,13 @@ const PoolsDetail = (props) => {
           <FormattedMessage id='poolsDetailText4' />
         </a>
       </div>
-      <div className='pools_detail_tips_box'>
-        <p className='pools_detail_tips'>
-          <FormattedMessage id='poolsDetailText22' />
-        </p>
-      </div>
+      {pool && pool.underlying.symbol === 'HCT' && (
+        <div className='pools_detail_tips_box'>
+          <p className='pools_detail_tips'>
+            <FormattedMessage id='poolsDetailText22' />
+          </p>
+        </div>
+      )}
       <div className='pools_detail_record'>
         {pool &&
           pool.type === 1 &&
