@@ -101,7 +101,7 @@ const Banner = (props) => {
             {/* <span>
               <FormattedMessage id='bannerText1' /> :{' '}
             </span>{' '} */}
-            <a href=''className='huobi_logo'></a>
+            <a href='' className='huobi_logo'></a>
             <a href='' className='huobi_logo binance_logo'></a>
             <a href='' className='huobi_logo polygon_logo'></a>
           </div>
@@ -242,8 +242,7 @@ const Banner = (props) => {
                 <FormattedMessage id='farm18' />
               </span>
               <span className='banner_related_data_val'>
-                $
-                {/*{chainId == 128*/}
+                ${/*{chainId == 128*/}
                 {/*  ? realTimePrice*/}
                 {/*  : bscPrice * 1 > 0 ? splitFormat(bscPrice, 3) : '-'}*/}
                 {realTimePrice || '-'}
@@ -272,7 +271,9 @@ const Banner = (props) => {
               <span className='banner_related_data_title'>
                 <FormattedMessage id='related_title1' />
               </span>
-              <span className='banner_related_data_val'>$1,087,294,900</span>
+              <span className='banner_related_data_val'>
+                $1,116,682,800
+              </span>
             </p>
           </div>
           <div className='banner_related_data'>
@@ -282,7 +283,7 @@ const Banner = (props) => {
                 <FormattedMessage id='related_title2' />
               </span>
               <span className='banner_related_data_val'>
-                {(state.toolData && state.toolData.address_count) || '-'}
+                {state.toolData || '-'}
               </span>
             </p>
           </div>

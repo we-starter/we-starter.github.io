@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from 'react'
 import { WalletConnect } from '../components/account/WalletConnect'
 import { UnsupportedChainIdError, useWeb3React } from '@web3-react/core'
 import { mainContext } from '../reducer'
+import BigNumber from 'bignumber.js'
 import {
   StakeModal,
   UnstakeModal,
@@ -72,19 +73,21 @@ export const InitPage = () => {
 
   console.log(state, 'state')
   useEffect(() => {
-    toolApi
-      .getTotalNumAddresses(1)
-      .then((res) => {
-        if (res.data.data) {
-          dispatch({
-            type: TOOL_DATA,
-            toolData: res.data.data,
-          })
-        }
-      })
-      .catch((e) => {
-        console.log(e)
-      })
+    Promise.all([
+      toolApi.getTotalNumAddresses(1),
+      toolApi.getTotalNumAddresses(5),
+    ])
+    .then(res => {
+      if (res[0].data.data && res[1].data.data) {
+        let total = new BigNumber(res[0].data.data.address_count)
+          .plus(new BigNumber(res[1].data.data.address_count))
+          .toString()
+        dispatch({
+          type: TOOL_DATA,
+          toolData: total,
+        })
+      }
+    })
   }, [])
 
   return (
