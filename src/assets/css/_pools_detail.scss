@@ -16,8 +16,22 @@
       display: flex;
       justify-content: center;
       margin: 0 auto;
-      padding-bottom: 60px;
+      padding-bottom: 16px;
       text-align: center;
+    }
+    &_tips_box {
+      margin: 0 auto 46px;
+      width: 640px;
+      text-align: center;
+    }
+    &_tips {
+      display: inline-block;
+      margin-bottom: 0;
+      padding: 6px 8px;
+      font-size: 12px;
+      color: #ff6400;
+      background: #fff3f0;
+      border-radius: 5px;
     }
     &_btn {
       display: flex;
@@ -415,8 +429,22 @@
       display: flex;
       justify-content: center;
       margin: 0 auto;
-      padding-bottom: 60px;
+      padding-bottom: 16px;
       text-align: center;
+    }
+     &_tips_box {
+      margin: 0 auto 46px;
+      width: 640px;
+      text-align: center;
+    }
+    &_tips {
+      display: inline-block;
+      margin-bottom: 0;
+      padding: 6px 8px;
+      font-size: 12px;
+      color: #ff6400;
+      background: #fff3f0;
+      border-radius: 5px;
     }
     &_btn {
       display: flex;
@@ -808,8 +836,22 @@
       display: flex;
       justify-content: center;
       margin: 0 auto;
-      padding-bottom: 40px;
+      padding-bottom: 16px;
       text-align: center;
+    }
+    &_tips_box {
+      margin: 0 auto 36px;
+      width: 320px;
+      text-align: center;
+    }
+    &_tips {
+      display: inline-block;
+      margin-bottom: 0;
+      padding: 6px 8px;
+      font-size: 12px;
+      color: #ff6400;
+      background: #fff3f0;
+      border-radius: 5px;
     }
     &_btn {
       display: flex;
@@ -1231,8 +1273,22 @@
       display: flex;
       justify-content: center;
       margin: 0 auto;
-      padding-bottom: 40px;
+      padding-bottom: 16px;
       text-align: center;
+    }
+    &_tips_box {
+      margin: 0 auto 36px;
+      width: 320px;
+      text-align: center;
+    }
+    &_tips {
+      display: inline-block;
+      margin-bottom: 0;
+      padding: 6px 8px;
+      font-size: 12px;
+      color: #ff6400;
+      background: #fff3f0;
+      border-radius: 5px;
     }
     &_btn {
       display: flex;
