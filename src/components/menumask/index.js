@@ -154,22 +154,22 @@ export const MenuMask = () => {
                 <span className='menumask__hot'></span>
               </NavLink>
             </li>
-            {/*{active && (*/}
-            {/*  <li className='menumask_item'>*/}
-            {/*    <NavLink*/}
-            {/*      to='/migrate'*/}
-            {/*      className='menumask_link'*/}
-            {/*      onClick={() =>*/}
-            {/*        dispatch({*/}
-            {/*          type: HANDLE_SHOW_MENUMASK_MODAL,*/}
-            {/*          showMenuMaskModal: false,*/}
-            {/*        })*/}
-            {/*      }*/}
-            {/*    >*/}
-            {/*      <FormattedMessage id='bridge' />*/}
-            {/*    </NavLink>*/}
-            {/*  </li>*/}
-            {/*)}*/}
+            {active && (
+              <li className='menumask_item'>
+                <NavLink
+                  to='/migrate'
+                  className='menumask_link'
+                  onClick={() =>
+                    dispatch({
+                      type: HANDLE_SHOW_MENUMASK_MODAL,
+                      showMenuMaskModal: false,
+                    })
+                  }
+                >
+                  <FormattedMessage id='bridge' />
+                </NavLink>
+              </li>
+            )}
 
             <li className='menumask_item'>
               <a

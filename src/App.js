@@ -51,7 +51,7 @@ function App() {
             <Switch>
               <Route exact path={['/']} component={PoolsIndex}></Route>
               <Route exact path='/farm' component={Farm}></Route>
-              {/*<Route exact path='/migrate' component={Migrate}></Route>*/}
+              <Route exact path='/migrate' component={Migrate}></Route>
               <Route
                 exact
                 path='/pools/detail/:address'
