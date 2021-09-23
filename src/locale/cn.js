@@ -90,6 +90,8 @@ const zh_CN = {
   poolsDetailText19: '超募比例',
   poolsDetailText20: '参与资金规模',
   poolsDetailText21: '定向',
+  poolsDetailText22:
+    '该项目代币尚未正式发行,可能存在不确定性风险, 请知晓. WeStarter 不承担任何投资损失责任。',
   poolsIndexText1: '兑换比例',
   poolsIndexText2: '当前进度',
   poolsIndexText3: '兑换',

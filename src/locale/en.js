@@ -89,6 +89,8 @@ const en_US = {
   poolsDetailText19: 'Committed',
   poolsDetailText20: 'Total',
   poolsDetailText21: 'Special',
+  poolsDetailText22:
+    "FYI: HCT hasn't officially launched on-chain with uncertainty in. Westarter will not be held responsible for any investment losses.",
   poolsIndexText1: 'Ratio',
   poolsIndexText2: 'Progress',
   poolsIndexText3: 'Enter Pool',

@@ -90,6 +90,8 @@ const ru = {
   poolsDetailText19: 'Подтверждено',
   poolsDetailText20: 'Всего',
   poolsDetailText21: 'Специальный',
+  poolsDetailText22:
+    "FYI: HCT hasn't officially launched on-chain with uncertainty in. Westarter will not be held responsible for any investment losses.",
   poolsIndexText1: 'Коэффициент',
   poolsIndexText2: 'Ход',
   poolsIndexText3: 'Ввести пул',
