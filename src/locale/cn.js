@@ -319,6 +319,14 @@ const zh_CN = {
     'Phantom 是一个支持合成资产创建及NFT 发行的跨链DeFi 协议，依托智能合约让用户可以使用主流的加密货币、NFT 作为抵押品，然后以去中心化的方式创建合成资产Phant（也叫做pAssets) ，可合成的资产包含加密货币衍生品以及大宗商品，股票，债券等传统金融产品。让更多人可以低门槛的形式参与到多元化的品类投资中。',
   phmAboutProject2:
     '合成资产在传统金融行业里，是专门为大投资者设计的一种工具。合成资产的优势在于能够模拟真实资产价格走向，投资者不用承受资产转移的成本和风险，就可以在一个平台方便的参与其他品类的投资。而 Phantom 利用 DeFi 技术，让广大交易者可以生成或投资 pAsset，以低门槛的方式参与到 NFT、加密资产、预测、股票等市场的投资中。',
+  hctAboutProject1:
+    'HurricaneSwap是一个建立在Avalanche上的跨链DEX。通过独创的LP跨链桥机制（Roke Protocol），HurricaneSwap旨在提供一种更有效的、更先进的跨链交易机制，让用户无障碍地跨链交换资产，并为他们提供高效且低费用的跨链交易体验。',
+  hctAboutProject2:
+    'HurricaneSwap创新性地提出了一种流动性跨链方式。LP跨链，LP在源链上提供交易对的流动性，通过协议将流动性映射到HurricaneSwap，我们称该协议为 "Roke Protocol"。',
+  hctAboutProject3:
+    'HurricaneStation是资产跨链的第一站。根据HurricaneSwap中支持的跨链资产（aToken）类型，Station将部署相应的基础链上。流动性供应者可以将其资产锁定在Station中，生成LP代币，并通过Roke Protocol实现流动性跨链，为HurricaneSwap提供流动性并获取收益。',
+  hctAboutProject4:
+    'HurricaneAlliance旨在通过 "单币跨链桥 "和套利策略来缩小HurricaneSwap的价格差距，改善用户体验，并为套利者带来可观利润。将获取套利的权利与链上治理及节点绑定，还能促进Alliance节点自发地保护HurricaneSwap利益。',
   related_title1: '累计金额',
   related_title2: '参与地址总数',
   related_title3: '总成立的池子数',

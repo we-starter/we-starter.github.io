@@ -992,6 +992,22 @@ const PoolsDetail = (props) => {
                   </a>
                 </>
               )}
+              {pool && pool.underlying.symbol === 'HCT' && (
+                <>
+                  <a className='no_link'>
+                    <FormattedMessage id='hctAboutProject1' />
+                  </a>
+                  <a className='no_link'>
+                    <FormattedMessage id='hctAboutProject2' />
+                  </a>
+                  <a className='no_link'>
+                    <FormattedMessage id='hctAboutProject3' />
+                  </a>
+                  <a className='no_link'>
+                    <FormattedMessage id='hctAboutProject4' />
+                  </a>
+                </>
+              )}
             </div>
           )}
         </div>

@@ -21,6 +21,7 @@ import MATTER from '../assets/icon/MATTER.png'
 import TOKEN from '../assets/icon/TOKEN.png'
 import BLACK from '../assets/icon/BLACK.png'
 import PHM from '../assets/icon/PHM.png'
+import HCT from '../assets/icon/HCT.png'
 
 export default [
   {
@@ -1908,7 +1909,178 @@ export default [
     poolType: 0, // 值为 1 代表定向
     networkId: 56,
   },
-
+  {
+    name: 'HCT',
+    address: '0x1',
+    icon: HCT,
+    abi: OfferingV2,
+    start_at: '1632664800',
+    is_top: true,
+    is_coming: true, // is_coming 为 true 则不请求合约
+    currency: {
+      address: '0xa71edc38d189767582c38a3145b5873052c3e47a', // 如果是0x0则是ht
+      decimal: 18,
+      symbol: 'USDT',
+    },
+    type: 1,
+    isPrivate: true,
+    underlying: {
+      address: '-',
+      decimal: 18,
+      symbol: 'HCT',
+      name: 'HCT',
+      total_supply: '2,000,000,000',
+      holders: '-',
+      transfers: '-',
+    },
+    amount: '166666.66', // token 总额
+    pool_info: {
+      token_distribution: 'Sept 26th 2021, 10:00PM SGT',
+      min_allocation: '0',
+      max_allocation: '100 USDT',
+      min_swap_level: '5,000 USDT',
+    },
+    website: 'https://hurricaneswap.com/',
+    white_paper: 'https://test.hurricaneswap.com/whitepaper/',
+    twitter: 'https://twitter.com/hurricaneswap?s=21',
+    Telegram_Channel: 'https://t.me/HurricaneSwap',
+    Github: '-',
+    yuque: '-',
+    progress: 0,
+    status: 0,
+    ratio: '1HCT=0.03USDT',
+    time: '1631102400',
+    purchasedCurrencyOf: 0,
+    totalPurchasedAmount: '5000000000000000000000',
+    totalPurchasedUnderlying: '0',
+    totalPurchasedCurrency: '0',
+    is_flash: false,
+    link_url: 'https://hurricaneswap.com/', // 跳转外链接
+    project_introduction:
+      'HurricaneSwap is a liquidity cross-chain swap based on Avalanche',
+    duration: '', // 完成时间
+    totalApplicants: '50', // 申请总人数
+    winningRate: '-', // 申请中签率
+    committed: '', // 超募比例
+    total: '', // 参与资金规模
+    poolType: 0, // 值为 1 代表定向
+    networkId: 128,
+    svipFlag: true,
+  },
+  {
+    name: 'HCT',
+    address: '0x2',
+    icon: HCT,
+    abi: OfferingV2,
+    start_at: '1632664800',
+    is_top: true,
+    is_coming: true, // is_coming 为 true 则不请求合约
+    currency: {
+      address: '0xa71edc38d189767582c38a3145b5873052c3e47a', // 如果是0x0则是ht
+      decimal: 18,
+      symbol: 'USDT',
+    },
+    type: 1,
+    isPrivate: true,
+    underlying: {
+      address: '-',
+      decimal: 18,
+      symbol: 'HCT',
+      name: 'HCT',
+      total_supply: '2,000,000,000',
+      holders: '-',
+      transfers: '-',
+    },
+    amount: '833333.33', // token 总额
+    pool_info: {
+      token_distribution: 'Sept 26th 2021, 10:00PM SGT',
+      min_allocation: '0',
+      max_allocation: '100 USDT',
+      min_swap_level: '25,000 USDT',
+    },
+    website: 'https://hurricaneswap.com/',
+    white_paper: 'https://test.hurricaneswap.com/whitepaper/',
+    twitter: 'https://twitter.com/hurricaneswap?s=21',
+    Telegram_Channel: 'https://t.me/HurricaneSwap',
+    Github: '-',
+    yuque: '-',
+    progress: 0,
+    status: 0,
+    ratio: '1HCT=0.03USDT',
+    time: '1631102400',
+    purchasedCurrencyOf: 0,
+    totalPurchasedAmount: '25000000000000000000000',
+    totalPurchasedUnderlying: '0',
+    totalPurchasedCurrency: '0',
+    is_flash: false,
+    link_url: 'https://hurricaneswap.com/', // 跳转外链接
+    project_introduction:
+      'HurricaneSwap is a liquidity cross-chain swap based on Avalanche',
+    duration: '', // 完成时间
+    totalApplicants: '250', // 申请总人数
+    winningRate: '-', // 申请中签率
+    committed: '', // 超募比例
+    total: '', // 参与资金规模
+    poolType: 0, // 值为 1 代表定向
+    networkId: 128,
+  },
+  {
+    name: 'HCT',
+    address: '0x3',
+    icon: HCT,
+    abi: StarterV3,
+    start_at: '1632664800',
+    is_top: true,
+    is_coming: true, // is_coming 为 true 则不请求合约
+    currency: {
+      address: '0xa71edc38d189767582c38a3145b5873052c3e47a', // 如果是0x0则是ht
+      decimal: 18,
+      symbol: 'USDT',
+    },
+    type: 0,
+    isPrivate: true,
+    underlying: {
+      address: '-',
+      decimal: 18,
+      symbol: 'HCT',
+      name: 'HCT',
+      total_supply: '2,000,000,000',
+      holders: '-',
+      transfers: '-',
+    },
+    amount: '666666.667', // token 总额
+    pool_info: {
+      token_distribution: 'Sept 26th 2021, 10:00PM SGT',
+      min_allocation: '',
+      max_allocation: '',
+      min_swap_level: '20,000 USDT',
+    },
+    website: 'https://hurricaneswap.com/',
+    white_paper: 'https://test.hurricaneswap.com/whitepaper/',
+    twitter: 'https://twitter.com/hurricaneswap?s=21',
+    Telegram_Channel: 'https://t.me/HurricaneSwap',
+    Github: '-',
+    yuque: '-',
+    progress: 0,
+    status: 0,
+    ratio: '1HCT=0.03USDT',
+    time: '1631102400',
+    purchasedCurrencyOf: 0,
+    totalPurchasedAmount: '20000000000000000000000',
+    totalPurchasedUnderlying: '0',
+    totalPurchasedCurrency: '0',
+    is_flash: false,
+    link_url: 'https://hurricaneswap.com/', // 跳转外链接
+    project_introduction:
+      'HurricaneSwap is a liquidity cross-chain swap based on Avalanche',
+    duration: '', // 完成时间
+    totalApplicants: '', // 申请总人数
+    winningRate: '-', // 申请中签率
+    committed: '', // 超募比例
+    total: '', // 参与资金规模
+    poolType: 0, // 值为 1 代表定向
+    networkId: 128,
+  },
   // 测试合约配置
   // {
   //   name: 'WT1',

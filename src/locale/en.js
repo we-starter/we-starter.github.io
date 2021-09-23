@@ -320,6 +320,14 @@ const en_US = {
     'Phantom is a cross-chain DeFi protocol that supports synthetic asset generation and NFT issuance. Untilizing smart contracts, Phantom allowing individuals to build synthetic assets (pAssets)  in a decentralized manner with mainstream cryptocurrencies or NFT as collateral. Phantom enables more people to join in a diverse range of investments by lowering the obstacles to entry.',
   phmAboutProject2:
     'Synthetic assets are a tool primarily designed for large investors in the traditional financial industry. The benefit of synthetic assets is that they can imitate real-world asset price movements, allowing investors to participate in other investment categories from the comfort of a unified platform without the cost and risk of asset transfers.',
+  hctAboutProject1:
+    'HurricaneSwap is a proprietary cross-chain DEX built on Avalanche. With the innovative LP-bridge mechanism (Roke Protocol), HurricaneSwap aims to provide a more efficient method and an advanced cross transaction mechanism to allow users to exchange their assets without network isolation, and provides users with a high-performance and low-fees cross transaction experience.',
+  hctAboutProject2:
+    'HurricaneSwap innovatively proposes a liquidity cross-chain method: LP cross-chain, where LP provides liquidity of trading pairs in the source chain and the protocol bridge the liquidity to HurricaneSwap. The protocol that implements the LP cross-chain that we call "Roke Protocol."',
+  hctAboutProject3:
+    'HurricaneStation is the first stop of asset cross-chain. Based on the cross-chain asset (aToken) supported in HurricaneSwap, Station will deploy on the specific chain of the cross-asset. Liquidity Providers could lock their assets in Station, generate LP token, and realize liquidity cross-chain through Roke Protocol to provide liquidity for HurricaneSwap and receive the benefits.',
+  hctAboutProject4:
+    'HurricaneAlliance aims to narrow the price gap by using a "single token cross-chain bridge" and arbitrage strategy, improving user experience and bringing considerable profit to the arbitrageur. Binding the right to earn arbitrage profit with on-chain governance and nodes can promote nodes to protect the exchange interests spontaneously.',
   related_title1: 'Total IWO funds',
   related_title2: 'Total participated addresses',
   related_title3: 'Total established pools',
