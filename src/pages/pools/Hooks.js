@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect, useMemo } from 'react'
-import { getContract, getLogs, useActiveWeb3React } from '../../web3'
+import {getContract, getHttpWeb3, getLogs, useActiveWeb3React} from '../../web3'
 import {
   ADDRESS_0,
   ChainId,
@@ -441,7 +441,7 @@ export function useBlockHeight() {
 
 const debounceFn = debounce((pools, account, callback) => {
   const now = parseInt(Date.now() / 1000)
-  const all = pools.map((pool) => {
+  const all = pools.map(async (pool) => {
     // 链不匹配 不调用合约
     // if (chainId !== pool.networkId) return pool
     // 如果还未开始，则不调用合约
@@ -454,6 +454,8 @@ const debounceFn = debounce((pools, account, callback) => {
 
     const pool_contract = new Contract(pool.address, pool.abi)
     const underlying_token = new Contract(pool.underlying.address, ERC20)
+
+    const currency_contract = new Contract(pool.currency.address, ERC20)
     if (pool.type === 0) {
       const promise_list = [
         pool_contract.price(), // 结算时间点
@@ -463,6 +465,15 @@ const debounceFn = debounce((pools, account, callback) => {
         pool_contract.settleable(account),
         pool_contract.totalSettledUnderlying(),
       ]
+      let balanceOf = 0
+      // 获取链上的原生资产,
+      if (pool.currency.is_ht){
+        const web3 = getHttpWeb3(pool.networkId)
+        balanceOf = await web3.eth.getBalance(pool.address)
+      } else {
+        // 或者合约的余额
+        promise_list.push(currency_contract.balanceOf(pool.address))
+      }
 
       // 追加可能存在的
       pool_contract.time && promise_list.push(pool_contract.time())
@@ -474,7 +485,6 @@ const debounceFn = debounce((pools, account, callback) => {
         .all(promise_list)
         .then((data) => {
           data = processResult(data)
-
           let [
             price,
             totalPurchasedCurrency,
@@ -482,10 +492,20 @@ const debounceFn = debounce((pools, account, callback) => {
             totalSettleable,
             settleable,
             totalSettledUnderlying,
-            time = 0,
-            timeSettle = 0,
-            currency_allowance = 0,
           ] = data
+          let time = 0,timeSettle = 0,currency_allowance = 0
+
+          if (pool.currency.is_ht) {
+            time = data[6]
+            timeSettle = data[7]
+            currency_allowance = data[8]
+          } else {
+            balanceOf = data[6]
+            time = data[7]
+            timeSettle = data[8]
+            currency_allowance = data[9]
+          }
+
           const [
             total_completed_,
             total_amount,
@@ -521,6 +541,19 @@ const debounceFn = debounce((pools, account, callback) => {
             .multipliedBy(new BigNumber(price))
             .div(new BigNumber(Web3.utils.toWei('1', 'ether')))
 
+          // 手动计算rate，合约取的将弃用
+          // 1. 取合约地址的usdt/ht/bnb的余额
+          // 2. 中签率： totalPurchasedAmount / 余额  > 1 ? 1 : rate
+          const new_rate = Math.min(totalPurchasedAmount.div(new BigNumber(balanceOf)).toNumber(), 1).toString()
+
+          console.log('new_rate', new_rate, totalPurchasedAmount.toString(), balanceOf.toString())
+          // 3. 当前用户购买的数量(USDT) * rate * ratio = 预计能获得的token
+          // const obtain_amount = new BigNumber(purchasedCurrencyOf).multipliedBy(rate).div(price)
+          // 4. 剩余usdt 当前用户购买的数量(USDT) * ( 1 - rate)
+          // const surplus_amount = new BigNumber(purchasedCurrencyOf).multipliedBy(1 - rate)
+
+          console.log('rate', rate)
+
           const totalPurchasedUnderlying = Web3.utils.toWei(
             new BigNumber(totalPurchasedCurrency)
               .dividedBy(new BigNumber(price))
@@ -536,6 +569,8 @@ const debounceFn = debounce((pools, account, callback) => {
           Object.assign(pool.currency, {
             allowance: currency_allowance,
           })
+
+          console.log('total_rate', total_rate, rate)
 
           return Object.assign({}, pool, {
             ratio: `1${pool.underlying.symbol}=${formatAmount(price, 18, 5)}${
@@ -566,7 +601,7 @@ const debounceFn = debounce((pools, account, callback) => {
               completed_,
               amount,
               volume,
-              rate,
+              rate: rate <= 0 ? Web3.utils.toWei(new_rate, 'ether') : rate
             },
           })
         })
@@ -574,7 +609,8 @@ const debounceFn = debounce((pools, account, callback) => {
           console.log(e, '===== usePoolsInfo =====')
           return pool
         })
-    } else if (pool.type === 1) {
+    }
+    else if (pool.type === 1) {
       // TODO 默认HT，后面需要根据通货来查询进度
       let currency_decimals = pool.currency.decimal
       // 白名单是offering合约
