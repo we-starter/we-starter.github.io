@@ -1914,7 +1914,7 @@ export default [
     address: '0xc8229C2d6Dc87f25d6763BD92E5945e820750729',
     icon: HCT,
     abi: OfferingV2,
-    start_at: '1632664800',
+    start_at: '1632744000',
     is_top: true,
     is_coming: false, // is_coming 为 true 则不请求合约
     currency: {
@@ -1972,7 +1972,7 @@ export default [
     address: '0x3704Bd52d8E7AeDCE6b4647713BC678Bb15A7aa6',
     icon: HCT,
     abi: OfferingV2,
-    start_at: '1632664800',
+    start_at: '1632744000',
     is_top: true,
     is_coming: false, // is_coming 为 true 则不请求合约
     currency: {
