@@ -548,7 +548,7 @@ const debounceFn = debounce((pools, account, callback) => {
           // 2. 中签率： totalPurchasedAmount / 余额  > 1 ? 1 : rate
           const new_rate = Math.min(totalPurchasedAmount.div(new BigNumber(balanceOf)).toNumber(), 1).toString()
 
-          // console.log('new_rate', new_rate, totalPurchasedAmount.toString(), balanceOf.toString())
+          console.log('new_rate', new_rate, totalPurchasedAmount.toString(), balanceOf.toString())
           // 3. 当前用户购买的数量(USDT) * rate * ratio = 预计能获得的token
           // const obtain_amount = new BigNumber(purchasedCurrencyOf).multipliedBy(rate).div(price)
           // 4. 剩余usdt 当前用户购买的数量(USDT) * ( 1 - rate)
@@ -605,7 +605,8 @@ const debounceFn = debounce((pools, account, callback) => {
               completed_,
               amount,
               volume,
-              rate: rate < 10 ? Web3.utils.toWei(new_rate, 'ether') : rate
+              rate: rate < 10 ? new BigNumber(new_rate).multipliedBy(new BigNumber(10).pow(18)) : rate,
+              // rate: rate < 10 ? Web3.utils.toWei(`${new_rate}`, 'ether') : rate,
             },
           })
         })
