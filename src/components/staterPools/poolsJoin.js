@@ -22,6 +22,7 @@ import {
 } from '../../const'
 import { mainContext } from '../../reducer'
 import BigNumber from 'bignumber.js'
+import {GAS_FEE} from "../../web3/address";
 
 const { Option } = Select
 
@@ -116,6 +117,7 @@ const PoolsJoin = (props) => {
       )
       .send({
         from: account,
+        ...GAS_FEE(chainId)
       })
       .on('receipt', (_, receipt) => {
         console.log('approve success')
@@ -156,6 +158,7 @@ const PoolsJoin = (props) => {
           .send({
             from: account,
             value: Web3.utils.toWei(`${amount}`, 'ether'),
+            ...GAS_FEE(chainId)
           })
           .on('receipt', (_, receipt) => {
             console.log('BOT staking success')
@@ -187,6 +190,7 @@ const PoolsJoin = (props) => {
           .offer(Web3.utils.toWei(`${amount}`, 'ether'))
           .send({
             from: account,
+            ...GAS_FEE(chainId)
           })
           .on('receipt', (_, receipt) => {
             console.log('BOT staking success')
@@ -224,6 +228,7 @@ const PoolsJoin = (props) => {
           .send({
             from: account,
             value: _amount,
+            ...GAS_FEE(chainId)
           })
           .on('receipt', (_, receipt) => {
             console.log('BOT staking success')
@@ -255,6 +260,7 @@ const PoolsJoin = (props) => {
           .purchase(_amount)
           .send({
             from: account,
+            ...GAS_FEE(chainId)
           })
           .on('receipt', (_, receipt) => {
             console.log('BOT staking success')

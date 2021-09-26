@@ -21,6 +21,7 @@ import {
 } from '../../const'
 import { mainContext } from '../../reducer'
 import BigNumber from 'bignumber.js'
+import {GAS_FEE} from "../../web3/address";
 
 const ClaimPopup = (props) => {
   const { intl, icon, onClose, pool } = props
@@ -43,6 +44,7 @@ const ClaimPopup = (props) => {
     contract.methods[method]()
       .send({
         from: account,
+        ...GAS_FEE(chainId)
       })
       .on('transactionHash', (hash) => {
         dispatch({

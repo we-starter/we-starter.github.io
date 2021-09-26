@@ -23,6 +23,7 @@ import { FormattedMessage, injectIntl } from 'react-intl'
 import BigNumber from 'bignumber.js'
 import { formatAmount, fromWei } from '../../utils/format'
 import {getScanLink} from "../../connectors";
+import {GAS_FEE} from "../../web3/address";
 
 const PoolsDetail = (props) => {
   const { address } = props.match.params
@@ -82,6 +83,7 @@ const PoolsDetail = (props) => {
         .claim()
         .send({
           from: account,
+          ...GAS_FEE(chainId)
         })
         .on('transactionHash', (hash) => {
           dispatch({
@@ -116,6 +118,7 @@ const PoolsDetail = (props) => {
         .settle()
         .send({
           from: account,
+          ...GAS_FEE(chainId)
         })
         .on('transactionHash', (hash) => {
           dispatch({

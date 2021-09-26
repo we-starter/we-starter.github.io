@@ -10,7 +10,7 @@ import {
   WHT_ADDRESS,
   WMDEX_ADDRESS,
   MDEX_ROUTER_ADDRESS,
-  WETH_ADDRESS, ChainId,
+  WETH_ADDRESS, ChainId, GAS_FEE,
 } from '../../web3/address'
 import BigNumber from 'bignumber.js'
 import { getContract, useActiveWeb3React } from '../../web3'
@@ -179,6 +179,7 @@ const BuyCoinPopup = (props) => {
       )
       .send({
         from: account,
+        ...GAS_FEE(chainId)
       })
       .on('receipt', (_, receipt) => {
         console.log('approve success')
@@ -226,6 +227,7 @@ const BuyCoinPopup = (props) => {
         .send({
           from: account,
           value: numToWei(amount),
+          ...GAS_FEE(chainId)
         })
         .on('receipt', (_, receipt) => {
           console.log('success')
@@ -258,6 +260,7 @@ const BuyCoinPopup = (props) => {
         )
         .send({
           from: account,
+          ...GAS_FEE(chainId)
         })
         .on('receipt', (_, receipt) => {
           console.log('approve success')
