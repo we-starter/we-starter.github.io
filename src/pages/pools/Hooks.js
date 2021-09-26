@@ -453,7 +453,7 @@ const debounceFn = debounce((pools, account, callback) => {
     const multicallProvider = getOnlyMultiCallProvider(pool.networkId)
 
     const pool_contract = new Contract(pool.address, pool.abi)
-    const underlying_token = new Contract(pool.underlying.address, ERC20)
+    const underlying_token = pool.underlying.address ? new Contract(pool.underlying.address, ERC20) : null
 
     const currency_contract = new Contract(pool.currency.address, ERC20)
     if (pool.type === 0) {
@@ -632,8 +632,7 @@ const debounceFn = debounce((pools, account, callback) => {
       ]
       currency_token &&
         promise_list.push(currency_token.allowance(account, pool.address))
-      pool.underlying.address &&
-        underlying_token &&
+      underlying_token &&
         promise_list.push(underlying_token.decimals())
 
       return multicallProvider
@@ -654,7 +653,6 @@ const debounceFn = debounce((pools, account, callback) => {
             currency_allowance = 0,
             underlying_decimals = 18,
           ] = data
-          
           let status = pool.status || 0 // 即将上线
           if (start_at < now && status < 1) {
             // 募集中
