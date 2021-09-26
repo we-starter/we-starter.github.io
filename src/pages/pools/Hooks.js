@@ -53,9 +53,9 @@ import { mainContext } from '../../reducer'
 import { JsonRpcProvider } from '@ethersproject/providers'
 import { debounce } from 'lodash'
 import { BLOCK_HEIGHT } from '../../const'
-import {CALC_ADDRESS} from '../../web3/address'
+import { CALC_ADDRESS } from '../../web3/address'
 import CalcAbi from '../../web3/abi/Calc.json'
-import {toWei} from 'web3-utils'
+import { toWei } from 'web3-utils'
 
 const sameAddress = (address1, address2) => {
   if (address1.toLowerCase() === address2.toLowerCase()) {
@@ -462,6 +462,7 @@ const debounceFn = debounce((pools, account, callback) => {
         pool_contract.totalSettleable(),
         pool_contract.settleable(account),
         pool_contract.totalSettledUnderlying(),
+        pool_contract.underlying()
       ]
 
       // 追加可能存在的
@@ -482,6 +483,7 @@ const debounceFn = debounce((pools, account, callback) => {
             totalSettleable,
             settleable,
             totalSettledUnderlying,
+            underlyingAddress,
             time = 0,
             timeSettle = 0,
             currency_allowance = 0,
@@ -536,6 +538,9 @@ const debounceFn = debounce((pools, account, callback) => {
           Object.assign(pool.currency, {
             allowance: currency_allowance,
           })
+          Object.assign(pool.underlying, {
+            address: underlyingAddress === '0x0000000000000000000000000000000000000000' ? '-' : underlyingAddress,
+          })
 
           return Object.assign({}, pool, {
             ratio: `1${pool.underlying.symbol}=${formatAmount(price, 18, 5)}${
@@ -588,9 +593,9 @@ const debounceFn = debounce((pools, account, callback) => {
         pool_contract.quotaOf(account), // 最大申购额度
         pool_contract.offeredOf(account), // 已经认购的量
         pool_contract.claimedOf(account), // 已经领取的量
-        underlying_token.decimals(),
+        pool_contract.token(),
       ]
-
+      pool.underlying.address && underlying_token && promise_list.push(underlying_token.decimals())
       currency_token &&
         promise_list.push(currency_token.allowance(account, pool.address))
 
@@ -608,6 +613,7 @@ const debounceFn = debounce((pools, account, callback) => {
             quotaOf,
             offeredOf,
             claimedOf,
+            tokenAddress,
             underlying_decimals,
             currency_allowance = 0,
           ] = data
@@ -669,6 +675,12 @@ const debounceFn = debounce((pools, account, callback) => {
           Object.assign(pool.currency, {
             allowance: currency_allowance,
           })
+           Object.assign(pool.underlying, {
+             address:
+               tokenAddress === '0x0000000000000000000000000000000000000000'
+                 ? '-'
+                 : tokenAddress,
+           })
           return Object.assign({}, pool, {
             ratio: `1${pool.underlying.symbol}=${
               __ratio.toFixed(5, 1).toString() * 1
@@ -873,8 +885,6 @@ export const usePoolsLBPInfo = (address = '') => {
   return poolsLBPInfo
 }
 
-
-
 export const useTotalRewards = (address, abi, _chainId) => {
   const [total, setTotal] = useState(0)
   const blockHeight = useBlockHeight()
@@ -958,7 +968,7 @@ export const useAPR = (
     valueAprToken,
     pool_address,
     pool_abi,
-    _chainId,
+    _chainId
   )
 
   // 通过转换后的lpt价格
@@ -969,7 +979,7 @@ export const useAPR = (
     valueAprPath,
     _chainId,
     farmPools,
-  true,
+    true,
     false
   )
   // 奖励转换后的价格
@@ -989,7 +999,6 @@ export const useAPR = (
   //   rewardsTotalPrice: rewardsTotalPrice
   // })
   useMemo(() => {
-
     setLptTotalValue(
       new BigNumber(lptTotalPrice)
         .multipliedBy(new BigNumber(lptValue))
@@ -1026,8 +1035,9 @@ export const useAPR = (
       const startAt = farmPools.start_at
       const now = parseInt(new Date().getTime() / 1000)
       const dayRate = new BigNumber(1).div(
-        new BigNumber((Number(startAt) + Number(span) - now))
-          .div(new BigNumber(86400))
+        new BigNumber(Number(startAt) + Number(span) - now).div(
+          new BigNumber(86400)
+        )
       )
 
       if (mode === 1) {
@@ -1124,7 +1134,10 @@ const getPairPrice = (address1, address2, amount, _chainId) => {
     let [pair_address] = processResult(data)
     const pair_contract = new Contract(pair_address, LPT)
     const routerConfig = MDEX_ROUTER_ADDRESS(_chainId)
-    const mdex_router_contract = new Contract(routerConfig.address, routerConfig.abi)
+    const mdex_router_contract = new Contract(
+      routerConfig.address,
+      routerConfig.abi
+    )
     const promiseList = [
       pair_contract.token0(),
       pair_contract.token1(),
@@ -1152,19 +1165,15 @@ const getPairPrice = (address1, address2, amount, _chainId) => {
 
       // console.log('request___5')
       if (token0.toLowerCase() == address2.toLowerCase()) {
-        return multicallProvider
-          .all(mdexRouterList1)
-          .then((amountOutData) => {
-            let [amountOut] = processResult(amountOutData)
-            return Web3.utils.fromWei(amountOut, 'ether')
-          })
+        return multicallProvider.all(mdexRouterList1).then((amountOutData) => {
+          let [amountOut] = processResult(amountOutData)
+          return Web3.utils.fromWei(amountOut, 'ether')
+        })
       } else if (token1.toLowerCase() == address2.toLowerCase()) {
-        return multicallProvider
-          .all(mdexRouterList2)
-          .then((amountOutData) => {
-            let [amountOut] = processResult(amountOutData)
-            return Web3.utils.fromWei(amountOut, 'ether')
-          })
+        return multicallProvider.all(mdexRouterList2).then((amountOutData) => {
+          let [amountOut] = processResult(amountOutData)
+          return Web3.utils.fromWei(amountOut, 'ether')
+        })
       }
     })
   })
@@ -1173,7 +1182,7 @@ const getPrice = async (address1, address2, amount, path, _chainId) => {
   if (address1 === address2) {
     return ['1', '0.003']
   }
-  console.log(address1, address2, amount, path, _chainId);
+  console.log(address1, address2, amount, path, _chainId)
   const _path = [address1, ...path, address2]
   let _price = 0
   _price = amount
@@ -1189,9 +1198,7 @@ const getPrice = async (address1, address2, amount, path, _chainId) => {
       .plus(new BigNumber(_fee_amount).multipliedBy(new BigNumber(FEE_RADIO)))
       .toString()
     _fee_amount = new BigNumber(_fee_amount)
-      .minus(
-        new BigNumber(_fee_amount).multipliedBy(new BigNumber(FEE_RADIO))
-      )
+      .minus(new BigNumber(_fee_amount).multipliedBy(new BigNumber(FEE_RADIO)))
       .toString()
   }
   console.log('_price, _fee', _price, _fee)
@@ -1211,13 +1218,21 @@ export const useMDexPrice = (
   const [price, setPrice] = useState(0)
   const [fee, setFee] = useState(0)
 
-
-
   useMemo(() => {
-    if (farmPools && address1 === farmPools.rewards1Address && farmPools.rewards_price && passMdexReward){
+    if (
+      farmPools &&
+      address1 === farmPools.rewards1Address &&
+      farmPools.rewards_price &&
+      passMdexReward
+    ) {
       // 配置上静态写死的奖励的价格
       setPrice(farmPools.rewards_price)
-    } else if ( mdexReward && Web3.utils.isAddress(address1) && amount > 0 && blockHeight > 0) {
+    } else if (
+      mdexReward &&
+      Web3.utils.isAddress(address1) &&
+      amount > 0 &&
+      blockHeight > 0
+    ) {
       // use path
       console.log('address1, address2', address1, address2)
       getPrice(address1, address2, amount, path, _chainId).then(
@@ -1341,21 +1356,20 @@ export const useAllow = (pool) => {
       if (pool.accessType === 'private') {
         const multicallProvider = getOnlyMultiCallProvider(pool.networkId)
         const contract = new Contract(pool.address, pool.abi)
-        multicallProvider.all([
-          contract.allowList(account),
-        ]).then((data)=>{
+        multicallProvider.all([contract.allowList(account)]).then((data) => {
           const [allow_] = processResult(data)
-          setArrow({
-            'false': false,
-            'true': true
-          }[allow_])
+          setArrow(
+            {
+              false: false,
+              true: true,
+            }[allow_]
+          )
         })
       }
     }
   }, [account])
   return allow
 }
-
 
 // 临时的获取apr （配置价格固定生效）
 const getApr = (pool) => {
@@ -1364,26 +1378,45 @@ const getApr = (pool) => {
   const rewards_contract = new Contract(pool.rewards1Address, ERC20)
   // console.log('xxxx', pool.MLP, pool.settleToken)
   const promiseAll = [
-    rewards_contract.allowance(MINE_MOUNTAIN_ADDRESS(pool.networkId), pool.address),// 获取奖励1在矿山的总量
+    rewards_contract.allowance(
+      MINE_MOUNTAIN_ADDRESS(pool.networkId),
+      pool.address
+    ), // 获取奖励1在矿山的总量
     pool_contract.rewardsDuration(), // span
     pool_contract.rewards(ADDRESS_0), // 获取奖励1未发放的量
   ]
-  return multicallProvider.all(promiseAll).then(async data => {
+  return multicallProvider.all(promiseAll).then(async (data) => {
     data = processResult(data)
     const [allowance, span, rewards] = data
     // 剩余
     const dRewards = new BigNumber(allowance).minus(new BigNumber(rewards))
     // console.log('dRewards', dRewards.toString())
-    const [stakePrice] = await getPrice(pool.MLP, pool.settleToken, 1, [], pool.networkId)
+    const [stakePrice] = await getPrice(
+      pool.MLP,
+      pool.settleToken,
+      1,
+      [],
+      pool.networkId
+    )
     // 年奖励 = 奖励未发放的量 * 转成USDC的价值(price) * (1/奖励天数((span/86400)-(当前时间-开始时间)/86400)) * 365
     const now = parseInt(new Date().getTime() / 1000)
-    const yearRate = new BigNumber(1).div(
-      new BigNumber((Number(pool.start_at) + Number(span) - now))
-        .div(new BigNumber(86400))
-    ).multipliedBy(dRewards).multipliedBy(365).multipliedBy(new BigNumber(pool.rewards_price))
+    const yearRate = new BigNumber(1)
+      .div(
+        new BigNumber(Number(pool.start_at) + Number(span) - now).div(
+          new BigNumber(86400)
+        )
+      )
+      .multipliedBy(dRewards)
+      .multipliedBy(365)
+      .multipliedBy(new BigNumber(pool.rewards_price))
 
     // 总质押价值
-    const stakeTokenValue = fromWei(new BigNumber(pool.totalSupply).multipliedBy(new BigNumber(stakePrice)).toString(), pool.mlpDecimal)
+    const stakeTokenValue = fromWei(
+      new BigNumber(pool.totalSupply)
+        .multipliedBy(new BigNumber(stakePrice))
+        .toString(),
+      pool.mlpDecimal
+    )
     const apr = yearRate.div(stakeTokenValue)
     return apr
   })
@@ -1412,7 +1445,6 @@ export const useFarmInfo = (address = '') => {
       const calc_contract = new Contract(CALC_ADDRESS(pool.networkId), CalcAbi)
       if (pool.poolType === 1) {
         if (pool.rewards_price) {
-
         } else {
           // 单池奖励1 apr
           promise_list.push(
@@ -1420,7 +1452,9 @@ export const useFarmInfo = (address = '') => {
               pool.address,
               [pool.MLP],
               [pool.rewards1Address],
-              MINE_MOUNTAIN_ADDRESS(pool.networkId)))
+              MINE_MOUNTAIN_ADDRESS(pool.networkId)
+            )
+          )
         }
       } else if (pool.poolType === 2) {
         // LP  奖励1 apr
@@ -1429,7 +1463,9 @@ export const useFarmInfo = (address = '') => {
             pool.address,
             sameAddress(pool.reserve0, pool.settleToken),
             sameAddress(pool.rewards1Address, pool.settleToken),
-            MINE_MOUNTAIN_ADDRESS(pool.networkId)))
+            MINE_MOUNTAIN_ADDRESS(pool.networkId)
+          )
+        )
         // LP 奖励2 apr
         promise_list.push(
           calc_contract.getSwapRewardLPTApr(
@@ -1437,7 +1473,8 @@ export const useFarmInfo = (address = '') => {
             sameAddress(pool.reserve0, pool.settleToken),
             numToWei(pool.mdexDaily, pool.reserve0Decimal),
             sameAddress(pool.rewards2Address, pool.settleToken)
-          ))
+          )
+        )
       }
     }
     if (account) {
@@ -1456,8 +1493,7 @@ export const useFarmInfo = (address = '') => {
       const begin = data[0],
         totalSupply = data[1]
 
-      let
-        APR = 0,
+      let APR = 0,
         APR2 = 0,
         earned = 0,
         balanceOf = 0,
@@ -1468,7 +1504,7 @@ export const useFarmInfo = (address = '') => {
         if (pool.rewards_price) {
           APR = await getApr({
             ...pool,
-            totalSupply
+            totalSupply,
           })
           earned = data[2]
           balanceOf = data[3]
@@ -1489,13 +1525,16 @@ export const useFarmInfo = (address = '') => {
         balanceOf = data[5]
         currency_allowance = data[6]
         earned2 = data[7]
-      }else if (account) {
+      } else if (account) {
         earned = data[2]
         balanceOf = data[3]
         currency_allowance = data[4]
         earned2 = data[5]
       }
-      let APR_ = fromWei(new BigNumber(APR).plus(new BigNumber(APR2)).toString(), 18).toString()
+      let APR_ = fromWei(
+        new BigNumber(APR).plus(new BigNumber(APR2)).toString(),
+        18
+      ).toString()
       if (pool.earnName === 'APY') {
         APR_ = (1 + APR_ / 365) ** 365 - 1
       }
@@ -1507,11 +1546,10 @@ export const useFarmInfo = (address = '') => {
         totalSupply,
         balanceOf: fromWei(balanceOf, 18),
         allowance: currency_allowance,
-        APR: hasApr ? (APR_ * 100).toFixed(2) : '-'
+        APR: hasApr ? (APR_ * 100).toFixed(2) : '-',
       })
       setFarmPoolsInfo(newPool)
     })
   }, [account, address, blockHeight])
   return farmPoolsInfo
 }
-
