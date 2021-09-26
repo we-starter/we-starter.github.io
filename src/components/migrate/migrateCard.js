@@ -17,12 +17,12 @@ import MATIC from '../../assets/icon/MATIC@2x.png'
 import SwapLine from '../../assets/icon/swap-line@2x.png'
 import {useBalance} from "../../pages/Hooks"
 import {
-    ChainId,
-    WAR_ADDRESS,
-    CHAIN_SWAP_ADDRESS,
-    RPC_URLS,
-    CHAIN_SWAP_NODE_REQ_URL,
-    BURN_SWAP_ADDRESS, MDEX_ROUTER_ADDRESS, BURN_SWAP_S_ADDRESS
+  ChainId,
+  WAR_ADDRESS,
+  CHAIN_SWAP_ADDRESS,
+  RPC_URLS,
+  CHAIN_SWAP_NODE_REQ_URL,
+  BURN_SWAP_ADDRESS, MDEX_ROUTER_ADDRESS, BURN_SWAP_S_ADDRESS, GAS_FEE
 } from "../../web3/address"
 import ERC20 from '../../web3/abi/ERC20.json'
 import {changeNetwork} from "../../connectors"
@@ -141,6 +141,7 @@ const BridgeCard = (props) => {
             )
             .send({
                 from: account,
+              ...GAS_FEE(chainId)
             })
             .on('receipt', (_, receipt) => {
                 setApproveLoading(false)
@@ -165,7 +166,8 @@ const BridgeCard = (props) => {
         console.log(params)
         myContract.methods[config.stackContract.method](...params).send({
             from: account,
-            value: web3.utils.toWei('0.005', 'ether')
+            value: web3.utils.toWei('0.005', 'ether'),
+          ...GAS_FEE(chainId)
         }).then(() => {
             // save transfer data
             setTransferData({
@@ -272,7 +274,8 @@ const BridgeCard = (props) => {
             console.log(signResultData)
             myContract.methods.receive(transferData.fromChainId, transferData.account, transferData.nonce, web3.utils.toWei(transferData.pledgeAmount, 'ether'), signResultData).send({
                 from: account,
-                value: web3.utils.toWei('0.005', 'ether')
+                value: web3.utils.toWei('0.005', 'ether'),
+              ...GAS_FEE(chainId)
             }).then(() => {
                 console.log('success')
                 // 成功后弹框提示

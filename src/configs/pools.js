@@ -1925,7 +1925,7 @@ export default [
     type: 1,
     isPrivate: true,
     underlying: {
-      address: '-',
+      address: '',
       decimal: 18,
       symbol: 'HCT',
       name: 'HCT',
@@ -1983,7 +1983,7 @@ export default [
     type: 1,
     isPrivate: true,
     underlying: {
-      address: '-',
+      address: '',
       decimal: 18,
       symbol: 'HCT',
       name: 'HCT',
@@ -2040,7 +2040,7 @@ export default [
     type: 0,
     isPrivate: true,
     underlying: {
-      address: '-',
+      address: '',
       decimal: 18,
       symbol: 'HCT',
       name: 'HCT',
@@ -2063,7 +2063,7 @@ export default [
     yuque: '-',
     progress: 0,
     status: 0,
-    ratio: '1HCT=0.03USDT',
+    ratio: '1HCT=?USDT',
     time: '1633874400',
     purchasedCurrencyOf: 0,
     totalPurchasedAmount: '20000000000000000000000',

@@ -26,6 +26,7 @@ import {
 } from '../../const'
 import { mainContext } from '../../reducer'
 import BigNumber from 'bignumber.js'
+import {GAS_FEE} from "../../web3/address";
 
 const DepositPopup = (props) => {
   const { intl, icon, onClose, pool } = props
@@ -115,6 +116,7 @@ const DepositPopup = (props) => {
       )
       .send({
         from: account,
+        ...GAS_FEE(chainId)
       })
       .on('receipt', (_, receipt) => {
         console.log('approve success')
@@ -164,6 +166,7 @@ const DepositPopup = (props) => {
       .stake(Web3.utils.toWei(`${amount}`, 'ether'))
       .send({
         from: account,
+        ...GAS_FEE(chainId)
       })
       .on('receipt', (_, receipt) => {
         console.log('BOT staking success')

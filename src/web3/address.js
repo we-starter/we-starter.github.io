@@ -1,5 +1,6 @@
 import MDexFactory from './abi/MDexFactory.json'
 import MDexRouter from '../web3/abi/MDexRouter.json'
+import Web3 from "web3";
 export const ChainId = {
   BSC: 56,
   HECO: 128,
@@ -178,3 +179,13 @@ export const CHAIN_SWAP_NODE_REQ_URL = [
   'https://node4.chainswap.exchange/web/getSignDataSyn',
   'https://node5.chainswap.exchange/web/getSignDataSyn',
 ]
+
+export function GAS_FEE(chainId) {
+  return {
+    [ChainId.HECO]: {
+      maxFeePerGas: Web3.utils.toWei('8', 'gwei'),
+      gasPrice: Web3.utils.toWei('5', 'gwei'),
+      maxPriorityFeePerGas: Web3.utils.toWei('5', 'gwei'),
+    }
+  }[chainId]
+}

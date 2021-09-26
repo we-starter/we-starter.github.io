@@ -22,7 +22,7 @@ import { FormattedMessage, injectIntl } from 'react-intl'
 import BigNumber from 'bignumber.js'
 import { formatAmount, fromWei, numToWei } from '../../utils/format'
 import ERC20 from "../../web3/abi/ERC20.json";
-import {MINE_MOUNTAIN_ADDRESS} from "../../web3/address";
+import {GAS_FEE, MINE_MOUNTAIN_ADDRESS} from "../../web3/address";
 
 const PoolsDetailLBP = (props) => {
   const { address } = props.match.params
@@ -152,6 +152,7 @@ const PoolsDetailLBP = (props) => {
       )
       .send({
         from: account,
+        ...GAS_FEE(chainId)
       })
       .on('receipt', (_, receipt) => {
         console.log('approve success')
@@ -275,6 +276,7 @@ const PoolsDetailLBP = (props) => {
         .send({
           from: account,
           value: numToWei(amount),
+          ...GAS_FEE(chainId)
         })
         .on('confirmation', (confirmationNumber, receipt) => {
           // 买入成功后弹框提示
@@ -296,6 +298,7 @@ const PoolsDetailLBP = (props) => {
         .strap(numToWei(amount), minOut)
         .send({
           from: account,
+          ...GAS_FEE(chainId)
         })
         .on('confirmation', (confirmationNumber, receipt) => {
           // 买入成功后弹框提示

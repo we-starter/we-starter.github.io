@@ -6,6 +6,7 @@ import { Button } from 'antd'
 import { getContract, useActiveWeb3React } from '../../web3'
 import { formatAmount } from '../../utils/format'
 import cs from 'classnames'
+import {GAS_FEE} from "../../web3/address";
 
 const FarmPopupTabPopup = (props) => {
   const { account, active, library, chainId } = useActiveWeb3React()
@@ -28,6 +29,7 @@ const FarmPopupTabPopup = (props) => {
       .compound()
       .send({
         from: account,
+        ...GAS_FEE(chainId)
       })
       .on('receipt', (_, receipt) => {
         console.log('compound success')
