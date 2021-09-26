@@ -630,9 +630,11 @@ const debounceFn = debounce((pools, account, callback) => {
         pool_contract.claimedOf(account), // 已经领取的量
         pool_contract.token(),
       ]
-      pool.underlying.address && underlying_token && promise_list.push(underlying_token.decimals())
       currency_token &&
         promise_list.push(currency_token.allowance(account, pool.address))
+      pool.underlying.address &&
+        underlying_token &&
+        promise_list.push(underlying_token.decimals())
 
       return multicallProvider
         .all(promise_list)
@@ -649,10 +651,10 @@ const debounceFn = debounce((pools, account, callback) => {
             offeredOf,
             claimedOf,
             tokenAddress,
-            underlying_decimals,
             currency_allowance = 0,
+            underlying_decimals = 18,
           ] = data
-          !pool.underlying.address && (underlying_decimals = 18)
+          
           let status = pool.status || 0 // 即将上线
           if (start_at < now && status < 1) {
             // 募集中
