@@ -2063,7 +2063,7 @@ export default [
     yuque: '-',
     progress: 0,
     status: 0,
-    ratio: '1HCT=0.03USDT',
+    ratio: '1HCT=?USDT',
     time: '1633874400',
     purchasedCurrencyOf: 0,
     totalPurchasedAmount: '20000000000000000000000',

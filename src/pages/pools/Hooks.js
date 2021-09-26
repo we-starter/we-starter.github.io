@@ -475,12 +475,11 @@ const debounceFn = debounce((pools, account, callback) => {
         .all(promise_list)
         .then((data) => {
           data = processResult(data)
-
           let [
             price,
             totalPurchasedCurrency,
             purchasedCurrencyOf,
-            totalSettleable,
+            totalSettleable = {},
             settleable,
             totalSettledUnderlying,
             underlyingAddress,
@@ -617,6 +616,7 @@ const debounceFn = debounce((pools, account, callback) => {
             underlying_decimals,
             currency_allowance = 0,
           ] = data
+          !pool.underlying.address && (underlying_decimals = 18)
           let status = pool.status || 0 // 即将上线
           if (start_at < now && status < 1) {
             // 募集中
@@ -669,7 +669,6 @@ const debounceFn = debounce((pools, account, callback) => {
           if (offeredOf > 0) {
             is_join = true
           }
-
           // TODO 后续申购物为Token时，需要设置allowance
           // --- 用USDT兑换时需要allowance ---
           Object.assign(pool.currency, {
@@ -760,7 +759,7 @@ export const usePoolsInfo = (address = '') => {
       status = now < item.start_at ? 0 : now < item.time ? 1 : 2
     }
     return Object.assign(item, {
-      quotaOf: 0, //设置默认不在白名单
+      quotaOf: item.quotaOf || 0, //设置默认不在白名单
       status: status,
       timeClose: item.timeClose || '0',
       // progress: status === 3 ? 1 : 0,
@@ -772,7 +771,6 @@ export const usePoolsInfo = (address = '') => {
       },
     })
   })
-
   useEffect(() => {
     if (!account) return () => {}
     debounceFn(pools, account, (promise) => {
