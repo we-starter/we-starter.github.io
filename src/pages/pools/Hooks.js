@@ -605,7 +605,7 @@ const debounceFn = debounce((pools, account, callback) => {
               completed_,
               amount,
               volume,
-              rate: rate < 10 ? new BigNumber(new_rate).multipliedBy(new BigNumber(10).pow(18)) : rate,
+              rate: rate < 10 ? new BigNumber(new_rate).multipliedBy(new BigNumber(10).pow(18)).toString() : rate,
               // rate: rate < 10 ? Web3.utils.toWei(`${new_rate}`, 'ether') : rate,
             },
           })
