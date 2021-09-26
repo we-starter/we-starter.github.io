@@ -1911,12 +1911,12 @@ export default [
   },
   {
     name: 'HCT',
-    address: '0x1',
+    address: '0xc8229C2d6Dc87f25d6763BD92E5945e820750729',
     icon: HCT,
     abi: OfferingV2,
     start_at: '1632664800',
     is_top: true,
-    is_coming: true, // is_coming 为 true 则不请求合约
+    is_coming: false, // is_coming 为 true 则不请求合约
     currency: {
       address: '0xa71edc38d189767582c38a3145b5873052c3e47a', // 如果是0x0则是ht
       decimal: 18,
@@ -1969,12 +1969,12 @@ export default [
   },
   {
     name: 'HCT',
-    address: '0x2',
+    address: '0x3704Bd52d8E7AeDCE6b4647713BC678Bb15A7aa6',
     icon: HCT,
     abi: OfferingV2,
     start_at: '1632664800',
     is_top: true,
-    is_coming: true, // is_coming 为 true 则不请求合约
+    is_coming: false, // is_coming 为 true 则不请求合约
     currency: {
       address: '0xa71edc38d189767582c38a3145b5873052c3e47a', // 如果是0x0则是ht
       decimal: 18,
@@ -2026,12 +2026,12 @@ export default [
   },
   {
     name: 'HCT',
-    address: '0x3',
+    address: '0x8035E67664d20d70535746E4529A94708d190D9f',
     icon: HCT,
     abi: StarterV3,
     start_at: '1632664800',
     is_top: true,
-    is_coming: true, // is_coming 为 true 则不请求合约
+    is_coming: false, // is_coming 为 true 则不请求合约
     currency: {
       address: '0xa71edc38d189767582c38a3145b5873052c3e47a', // 如果是0x0则是ht
       decimal: 18,
