@@ -159,7 +159,7 @@ const PoolsIndex = (props) => {
           </span>
         )
       case 1:
-        if (timeClose === 0 || timeClose > now) {
+        if (timeClose - 0 === 0 || timeClose > now) {
           return (
             <span className='pools-type_progress_status'>
               <FormattedMessage id='recruit' />
