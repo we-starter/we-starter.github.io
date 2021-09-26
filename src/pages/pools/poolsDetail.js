@@ -787,7 +787,11 @@ const PoolsDetail = (props) => {
                         <span>
                           <FormattedMessage id='poolsDetailText14' />
                         </span>
-                        <span>{pool && pool.underlying.address}</span>
+                        <span>
+                          {pool &&
+                            pool.underlying.address &&
+                            pool.underlying.address || '-'}
+                         </span>
                       </p>
                     </td>
                   </tr>

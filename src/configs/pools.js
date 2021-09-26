@@ -1925,7 +1925,7 @@ export default [
     type: 1,
     isPrivate: true,
     underlying: {
-      address: '',
+      address: null,
       decimal: 18,
       symbol: 'HCT',
       name: 'HCT',
@@ -1983,7 +1983,7 @@ export default [
     type: 1,
     isPrivate: true,
     underlying: {
-      address: '',
+      address: null,
       decimal: 18,
       symbol: 'HCT',
       name: 'HCT',
@@ -2040,7 +2040,7 @@ export default [
     type: 0,
     isPrivate: true,
     underlying: {
-      address: '',
+      address: null,
       decimal: 18,
       symbol: 'HCT',
       name: 'HCT',
