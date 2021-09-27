@@ -341,7 +341,7 @@ const BuyCoinPopup = (props) => {
                 onClick={() => {
                   setTabFlag('MDX')
                   setFromToken(WMDEX_ADDRESS(chainId))
-                  setMiddlePath([WHT_ADDRESS(chainId)])
+                  setMiddlePath([USDT_ADDRESS(chainId)])
                 }}
               >
                 MDX
