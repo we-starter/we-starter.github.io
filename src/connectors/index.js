@@ -9,7 +9,7 @@ import {UnsupportedChainIdError, useWeb3React} from "@web3-react/core";
 export const POLLING_INTERVAL = 12000
 
 export const injected = new InjectedConnector({
-  supportedChainIds: [ChainId.HECO, ChainId.BSC, ChainId.MATIC],
+  supportedChainIds: [ChainId.HECO, ChainId.BSC, ChainId.MATIC, ChainId.LOCALHOST],
 })
 
 
@@ -86,7 +86,7 @@ const networkConf = {
 
 export const changeNetwork = (chainId) => {
   return new Promise(reslove => {
-    const { ethereum } = window 
+    const { ethereum } = window
     if (ethereum && (ethereum.isMetaMask || ethereum.isCoin98) && networkConf[chainId]) {
       ethereum
         .request({
