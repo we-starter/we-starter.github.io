@@ -2148,7 +2148,7 @@ export default [
     is_top: true,
     is_coming: false, // is_coming 为 true 则不请求合约
     currency: {
-      address: '0x0463a8F393b1Ce1Daccd42AB602EBd58F736E89a', // 如果是0x0则是ht
+      address: '0xa71edc38d189767582c38a3145b5873052c3e47a', // 如果是0x0则是ht
       decimal: 18,
       symbol: 'USDT',
     },
