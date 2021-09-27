@@ -245,7 +245,7 @@ export const MenuMask = () => {
                 >
                   English
                 </p>
-                <p
+                {/* <p
                   style={{
                     color: '#22292F',
                     padding: '0',
@@ -254,7 +254,7 @@ export const MenuMask = () => {
                   onClick={() => tabLanguage('zh')}
                 >
                   中文简体
-                </p>
+                </p> */}
                 <p
                   style={{
                     color: '#22292F',
