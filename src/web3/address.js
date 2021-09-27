@@ -4,7 +4,8 @@ import Web3 from "web3";
 export const ChainId = {
   BSC: 56,
   HECO: 128,
-  MATIC: 137
+  MATIC: 137,
+  LOCALHOST: 31337
 }
 
 export const SCAN_ADDRESS = {
@@ -187,5 +188,5 @@ export function GAS_FEE(chainId) {
       gasPrice: Web3.utils.toWei('5', 'gwei'),
       maxPriorityFeePerGas: Web3.utils.toWei('5', 'gwei'),
     }
-  }[chainId]||{}
+  }[chainId]
 }

@@ -2084,24 +2084,24 @@ export default [
   // 测试合约配置
   // {
   //   name: 'WT1',
-  //   address: '0x3cFa2c67F62c1647256C4F6555a8703B0887814e',
+  //   address: '0x93F9d20682B0b8c96Ed2E1EB7Ea51F059df5fcFB',
   //   icon: PLUT,
   //   abi: OfferingV2,
-  //   start_at: '1629352800',
+  //   start_at: '1632677400',
   //   is_top: true,
   //   is_coming: false, // is_coming 为 true 则不请求合约
   //   currency: {
-  //     address: '0x4993fD2E9D175488712CdbE64Be71d4dcD184123', // 如果是0x0则是ht
+  //     address: '0xa71edc38d189767582c38a3145b5873052c3e47a', // 如果是0x0则是ht
   //     decimal: 18,
-  //     symbol: 'WT1',
+  //     symbol: 'USDT',
   //   },
   //   type: 1,
   //   isPrivate: true,
   //   underlying: {
-  //     address: '0x26a0cb10b78bf2d7e13236fa3acddb80b2a5f8c4',
+  //     address: '0xff41cabcbe80a64606d011234e7b5a576b1bed87',
   //     decimal: 18,
-  //     symbol: 'WT2',
-  //     name: 'WT2',
+  //     symbol: 'WT1',
+  //     name: 'WT1',
   //     total_supply: '100,000,000',
   //     holders: '-',
   //     transfers: '-',
@@ -2110,7 +2110,7 @@ export default [
   //   pool_info: {
   //     token_distribution: 'August 20th 2021, 2:00PM SGT',
   //     min_allocation: '0',
-  //     max_allocation: '100 USDT',
+  //     max_allocation: '0.1 USDT',
   //     min_swap_level: '20,000 USDT',
   //   },
   //   website: 'https://deplutus.finance/',
@@ -2121,8 +2121,8 @@ export default [
   //   yuque: '-',
   //   progress: 0,
   //   status: 0,
-  //   ratio: '1WT1=?USDT',
-  //   time: '1629363600',
+  //   ratio: '1WT1=0.03USDT',
+  //   time: '1632733200',
   //   purchasedCurrencyOf: 0,
   //   totalPurchasedAmount: '20000000000000000000000',
   //   totalPurchasedUnderlying: '0',
@@ -2137,28 +2137,28 @@ export default [
   //   committed: '', // 超募比例
   //   total: '', // 参与资金规模
   //   poolType: 0, // 值为 1 代表定向
-  //   networkId: 56,
+  //   networkId: 128,
   // },
   // {
   //   name: 'WT1',
-  //   address: '0x3F5a08a00E1D3D8cAa4D80Cc3799cd63F5ae7257',
+  //   address: '0x0463a8F393b1Ce1Daccd42AB602EBd58F736E89a',
   //   icon: PLUT,
   //   abi: StarterV3,
   //   start_at: '1629352800',
   //   is_top: true,
   //   is_coming: false, // is_coming 为 true 则不请求合约
   //   currency: {
-  //     address: '0x4993fD2E9D175488712CdbE64Be71d4dcD184123', // 如果是0x0则是ht
+  //     address: '0xa71edc38d189767582c38a3145b5873052c3e47a', // 如果是0x0则是ht
   //     decimal: 18,
-  //     symbol: 'WT1',
+  //     symbol: 'USDT',
   //   },
   //   type: 0,
   //   isPrivate: true,
   //   underlying: {
-  //     address: '0x26a0cb10b78bf2d7e13236fa3acddb80b2a5f8c4',
+  //     address: '0xff41cabcbe80a64606d011234e7b5a576b1bed87',
   //     decimal: 18,
-  //     symbol: 'WT2',
-  //     name: 'WT2',
+  //     symbol: 'WT1',
+  //     name: 'WT1',
   //     total_supply: '100,000,000',
   //     holders: '-',
   //     transfers: '-',
@@ -2178,8 +2178,8 @@ export default [
   //   yuque: '-',
   //   progress: 0,
   //   status: 0,
-  //   ratio: '1WT1=?USDT',
-  //   time: '1629363600',
+  //   ratio: '1WT1=0.03USDT',
+  //   time: '1632733200',
   //   purchasedCurrencyOf: 0,
   //   totalPurchasedAmount: '10000000000000000000000',
   //   totalPurchasedUnderlying: '0',
@@ -2194,6 +2194,6 @@ export default [
   //   committed: '', // 超募比例
   //   total: '', // 参与资金规模
   //   poolType: 0, // 值为 1 代表定向
-  //   networkId: 56,
+  //   networkId: 128,
   // },
 ]

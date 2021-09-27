@@ -161,12 +161,12 @@ export const Header = () => {
                 className='language-items'
                 style={{ top: '40px', bottom: 'auto' }}
               >
-                <p
+                {/* <p
                   style={{ padding: '0', marginBottom: '0' }}
                   onClick={() => tabLanguage('zh')}
                 >
                   中文简体
-                </p>
+                </p> */}
                 <p
                   style={{ padding: '0', marginBottom: '0' }}
                   onClick={() => tabLanguage('en')}
