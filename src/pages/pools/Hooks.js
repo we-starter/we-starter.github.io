@@ -1588,3 +1588,38 @@ export const useFarmInfo = (address = '') => {
   }, [account, address, blockHeight])
   return farmPoolsInfo
 }
+
+// 获取价格-购买war弹窗
+export const useAmountsOut = (path, amount, _chainId) => {
+  const [outAmount, setOutAmount] = useState(0)
+  const [fee, setFee] = useState(0)
+  // const [outAmountTotal, setOutAmountTotal] = useState(0)
+
+
+  useMemo(() => {
+    if (amount > 0) {
+      const routerConfig = MDEX_ROUTER_ADDRESS(_chainId)
+      const mdex_router_contract = new Contract(
+        routerConfig.address,
+        routerConfig.abi
+      )
+      const multicallProvider = getOnlyMultiCallProvider(_chainId)
+      multicallProvider.all([mdex_router_contract.getAmountsOut(numToWei(amount, 18), path)]).then(data_ => {
+        const data = processResult(data_)[0]
+        const outAmountTotal_ = fromWei(data[data.length - 1], 18).toFixed(6)*1
+        // setOutAmountTotal(outAmountTotal_)
+        // 1 - (1-0.003)^len
+        const fee_ = new BigNumber(amount).multipliedBy(
+          new BigNumber(1).minus((new BigNumber(1).minus(new BigNumber(0.003))).pow(path.length - 1))
+        ).toFixed(6)*1
+        console.log('outAmount, outFee, new', outAmountTotal_, fee_, path.length)
+        setFee(fee_)
+        setOutAmount(outAmountTotal_)
+      })
+    }
+  }, [amount, path])
+  if (!amount){
+    return [0, 0]
+  }
+  return [outAmount, fee]
+}

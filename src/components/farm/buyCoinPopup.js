@@ -21,7 +21,7 @@ import HT from '../../assets/icon/HT@2x.png'
 import USDT from '../../assets/icon/USDT@2x.png'
 import SWAPLINE from '../../assets/icon/swap-line@2x.png'
 import { FormattedMessage } from 'react-intl'
-import { useMDexPrice } from '../../pages/pools/Hooks'
+import {useAmountsOut, useMDexPrice} from '../../pages/pools/Hooks'
 import { mainContext } from '../../reducer'
 import { RANDOM_NUMBER } from '../../const'
 
@@ -40,15 +40,23 @@ const BuyCoinPopup = (props) => {
   const HTbalance = useHTBalance()
   const USDTBalance = useBalance(USDT_ADDRESS(chainId))
   const MDEXBalance = useBalance(WMDEX_ADDRESS(chainId))
-  const [middlePath, setMiddlePath] = useState([])
+  const [middlePath, setMiddlePath] = useState([USDT_ADDRESS(chainId)])
 
-  const [outAmount, outFee] = useMDexPrice(
-    fromToken,
-    chainId && WAR_ADDRESS(ChainId.HECO),
+  // const [outAmount, outFee] = useMDexPrice(
+  //   fromToken,
+  //   chainId && WAR_ADDRESS(ChainId.HECO),
+  //   amount,
+  //   middlePath,
+  //     128
+  // )
+  // console.log('outAmount, outFee, old', outAmount, outFee)
+
+  const [outAmount, outFee] =  useAmountsOut(
+    [fromToken, ...middlePath, WAR_ADDRESS(ChainId.HECO)],
     amount,
-    middlePath,
-      128
+    ChainId.HECO
   )
+
   const [radioOutAmount, fee] = useMDexPrice(
     chainId && WAR_ADDRESS(ChainId.HECO),
     fromToken,
@@ -67,13 +75,13 @@ const BuyCoinPopup = (props) => {
 
   const USDTAllowance = useAllowance(
     chainId && USDT_ADDRESS(ChainId.HECO),
-    MDEX_ROUTER_ADDRESS,
+    MDEX_ROUTER_ADDRESS(chainId).address,
     account
   )
 
   const MDEXAllowance = useAllowance(
     chainId && WMDEX_ADDRESS(ChainId.HECO),
-    MDEX_ROUTER_ADDRESS,
+    MDEX_ROUTER_ADDRESS(chainId).address,
     account
   )
 
@@ -174,12 +182,12 @@ const BuyCoinPopup = (props) => {
     const contract = getContract(library, ERC20.abi, contractAddress)
     contract.methods
       .approve(
-        MDEX_ROUTER_ADDRESS,
+        MDEX_ROUTER_ADDRESS(chainId).address,
         '0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff'
       )
       .send({
         from: account,
-        ...GAS_FEE(chainId)
+        // ...GAS_FEE(chainId)
       })
       .on('receipt', (_, receipt) => {
         console.log('approve success')
@@ -214,7 +222,7 @@ const BuyCoinPopup = (props) => {
     }
     if (loadFlag) return
     setLoadFlag(true)
-    const contract = getContract(library, MDexRouter, MDEX_ROUTER_ADDRESS)
+    const contract = getContract(library, MDexRouter, MDEX_ROUTER_ADDRESS(chainId).address)
     const deadline = parseInt(Date.now() / 1000) + 60 * 20
     if (tabFlag === 'HT') {
       contract.methods
@@ -307,7 +315,7 @@ const BuyCoinPopup = (props) => {
                 onClick={() => {
                   setTabFlag('HT')
                   setFromToken(WHT_ADDRESS(chainId))
-                  setMiddlePath([])
+                  setMiddlePath([USDT_ADDRESS(chainId)])
                 }}
               >
                 HT
@@ -320,7 +328,7 @@ const BuyCoinPopup = (props) => {
                 onClick={() => {
                   setTabFlag('USDT')
                   setFromToken(USDT_ADDRESS(chainId))
-                  setMiddlePath([WHT_ADDRESS(chainId)])
+                  setMiddlePath([])
                 }}
               >
                 USDT
