@@ -548,7 +548,7 @@ const debounceFn = debounce((pools, account, callback) => {
           // 2. 中签率： totalPurchasedAmount / 余额  > 1 ? 1 : rate
           const new_rate = Math.min(totalPurchasedAmount.div(new BigNumber(balanceOf)).toNumber(), 1).toString()
 
-          console.log('new_rate', new_rate, totalPurchasedAmount.toString(), balanceOf.toString())
+          // console.log('new_rate', new_rate, totalPurchasedAmount.toString(), balanceOf.toString())
           // 3. 当前用户购买的数量(USDT) * rate * ratio = 预计能获得的token
           // const obtain_amount = new BigNumber(purchasedCurrencyOf).multipliedBy(rate).div(price)
           // 4. 剩余usdt 当前用户购买的数量(USDT) * ( 1 - rate)
@@ -633,8 +633,9 @@ const debounceFn = debounce((pools, account, callback) => {
       currency_token &&
         promise_list.push(currency_token.allowance(account, pool.address))
 
-  underlying_token &&
-    promise_list.push(underlying_token.decimals())
+      underlying_token &&
+        promise_list.push(underlying_token.decimals())
+
       return multicallProvider
         .all(promise_list)
         .then((data) => {
