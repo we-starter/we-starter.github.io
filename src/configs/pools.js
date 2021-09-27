@@ -2098,7 +2098,7 @@ export default [
     type: 1,
     isPrivate: true,
     underlying: {
-      address: '0x4993fD2E9D175488712CdbE64Be71d4dcD184123',
+      address: '0xff41cabcbe80a64606d011234e7b5a576b1bed87',
       decimal: 18,
       symbol: 'WT1',
       name: 'WT1',
@@ -2141,7 +2141,7 @@ export default [
   },
   {
     name: 'WT1',
-    address: '0x3F5a08a00E1D3D8cAa4D80Cc3799cd63F5ae7257',
+    address: '0x0463a8F393b1Ce1Daccd42AB602EBd58F736E89a',
     icon: PLUT,
     abi: StarterV3,
     start_at: '1629352800',
@@ -2155,7 +2155,7 @@ export default [
     type: 0,
     isPrivate: true,
     underlying: {
-      address: '0x4993fD2E9D175488712CdbE64Be71d4dcD184123',
+      address: '0xff41cabcbe80a64606d011234e7b5a576b1bed87',
       decimal: 18,
       symbol: 'WT1',
       name: 'WT1',
