@@ -187,5 +187,5 @@ export function GAS_FEE(chainId) {
       gasPrice: Web3.utils.toWei('5', 'gwei'),
       maxPriorityFeePerGas: Web3.utils.toWei('5', 'gwei'),
     }
-  }[chainId]
+  }[chainId]||{}
 }
