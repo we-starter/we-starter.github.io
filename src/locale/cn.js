@@ -400,5 +400,16 @@ const zh_CN = {
   withdraw: '提取',
   add: '添加',
   to: '到',
+  applicationText1: '无许可，社区自治 IWO',
+  applicationText2: '发起提案',
+  applicationText3: '进行中',
+  applicationText4: '已结束',
+  applicationText5: '当前没有任何提案',
+  applicationText6: 'Project',
+  applicationText7: 'Total Raise',
+  applicationText8: 'Vote',
+  applicationText9: 'Closed',
+  applicationText10: 'Success',
+  applicationText11: 'Failed',
 }
 export default zh_CN

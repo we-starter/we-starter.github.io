@@ -16,6 +16,8 @@ import PoolsIndex from './pages/pools/poolsIndex'
 import PoolsDetail from './pages/pools/poolsDetail'
 import PoolsDetailLBP from './pages/pools/poolsDetailLBP'
 import Farm from './pages/pools/farm'
+import Application from './pages/pools/application'
+import Vote from './pages/pools/vote'
 import Migrate from './pages/pools/migrate'
 import ScrollToTop from './components/ScrollTop'
 import Intl from './locale/intl'
@@ -62,6 +64,8 @@ function App() {
                 path='/pools/detailLBP/:address'
                 component={PoolsDetailLBP}
               ></Route>
+              <Route exact path='/application' component={Application}></Route>
+              <Route exact path='/application/vote' component={Vote}></Route>
             </Switch>
             <InitPage />
             {/* <Footer /> */}
