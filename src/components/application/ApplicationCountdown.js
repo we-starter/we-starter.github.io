@@ -4,13 +4,13 @@ import { FormattedMessage } from 'react-intl'
 import Timer from 'react-compound-timer'
 
 export default function ApplicationCountdown({}) {
-  let left_time = 0
+  let left_time = '1635325200'
   return (
-    <div className='application_countdown_box'>
+    <>
       {left_time > 0 && (
         <p className='application_countdown'>
           <span className='countdown'>
-            <FormattedMessage id='farm8' />:
+            <FormattedMessage id='farm8' />:{' '}
           </span>
           <Timer
             initialTime={left_time}
@@ -56,6 +56,6 @@ export default function ApplicationCountdown({}) {
           <FormattedMessage id='applicationText10' />
         </p>
       )}
-    </div>
+    </>
   )
 }
