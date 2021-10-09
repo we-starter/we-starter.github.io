@@ -1,3 +1,48 @@
+
+
+.apply-input {
+  height: 48px;
+  border: 3px solid #E8F4EF;
+  border-radius: 8px;
+
+  .ant-input-suffix {
+    font-size: 16px;
+    font-family: Montserrat-Bold, Montserrat;
+    font-weight: bold;
+    color: #4F4F4F;
+  }
+
+  &.ant-input-affix-wrapper:not(.ant-input-affix-wrapper-disabled):hover, &:hover,&:focus, &.ant-input-focused {
+    border-width: 2px !important;
+    border-right-width: 2px !important;
+    border-color: #00C57B !important;
+  }
+
+  input {
+    font-size: 16px !important;
+  }
+
+  .date-icon {
+    width: 24px;
+    height: 24px;
+  }
+
+  width: 100%;
+}
+
+.ant-picker-cell-in-view.ant-picker-cell-selected .ant-picker-cell-inner, .ant-picker-cell-in-view.ant-picker-cell-range-start .ant-picker-cell-inner, .ant-picker-cell-in-view.ant-picker-cell-range-end .ant-picker-cell-inner {
+  color: #fff;
+  background: #0F8C20;
+}
+
+.ant-picker-cell-in-view.ant-picker-cell-today .ant-picker-cell-inner::before {
+  border-color: #0F8C20;
+}
+
+.ant-picker-now-btn:hover {
+  color: #0F8C20;
+}
+/////
 .apply-page {
   width: 100%;
   height: 100%;
@@ -5,14 +50,6 @@
   .footer {
     position: relative !important;
   }
-}
-
-.apply-view {
-  width: 424px;
-  max-width: 90vw;
-  min-height: calc(100% - 80px);
-  margin: 100px auto 0;
-  padding-bottom: 50px;
 
   .apply-view-back {
     color: #03A678;
@@ -39,6 +76,14 @@
     line-height: 34px;
     margin-top: 12px;
   }
+}
+
+.apply-view {
+  width: 424px;
+  max-width: 90vw;
+  min-height: calc(100% - 80px);
+  margin: 100px auto 0;
+  padding-bottom: 50px;
 
   .nft-card {
     position: relative;
@@ -125,6 +170,8 @@
             color: #4F4F4F;
             line-height: 20px;
             margin-bottom: 0;
+            word-wrap:break-word;
+            word-break:break-all;
           }
 
           p {
@@ -135,6 +182,8 @@
             color: #959595;
             line-height: 19px;
             margin-bottom: 0;
+            word-wrap:break-word;
+            word-break:break-all;
           }
         }
       }
@@ -221,6 +270,7 @@
         font-weight: 400;
         color: #959595;
         margin-bottom: 5px;
+        white-space: break-spaces;
       }
 
       h2 {
@@ -266,8 +316,8 @@
 
   .apply-btn {
     height: 48px;
-    background: #00C57B!important;
-    border-color: #00C57B!important;
+    background: #00C57B !important;
+    border-color: #00C57B !important;
     box-shadow: 0px 4px 8px 0px rgba(5, 11, 36, 0.02);
     border-radius: 24px;
     margin: 16px 0;
@@ -276,7 +326,8 @@
     font-weight: bold;
     color: #FFFFFF;
   }
-  .role-title{
+
+  .role-title {
     font-size: 16px;
     font-family: Montserrat-Bold, Montserrat;
     font-weight: bold;
@@ -285,13 +336,15 @@
     margin-bottom: 16px;
   }
 }
+
 @media (max-width: 470px) {
-  .apply-view{
+  .apply-view {
     .nft-card {
       .arrow-l {
         left: -15px;
         background: #ffffff;
       }
+
       .arrow-r {
         right: -15px;
         background: #ffffff;
@@ -299,45 +352,104 @@
     }
   }
 }
+/////
 
-.apply-input {
-  height: 48px;
-  border: 3px solid #E8F4EF;
-  border-radius: 8px;
-
-  .ant-input-suffix {
+.apply-info-view{
+  .apply-view-title{
+    margin-bottom: 40px;
+  }
+  .form-item{
+    padding: 9px 0;
+    .form-item-title{
+      position: relative;
+      display: flex;
+      font-size: 16px;
+      font-family: Montserrat-Bold, Montserrat;
+      font-weight: bold;
+      color: #4F4F4F;
+      line-height: 19px;
+      margin-bottom: 10px;
+      .title{
+        display: flex;
+        align-items: center;
+        flex: 1;
+      }
+      .desc{
+        display: flex;
+        align-items: center;
+        font-size: 14px;
+        font-family: Montserrat-Light, Montserrat;
+        font-weight: 300;
+        color: #959595;
+        line-height: 18px;
+        padding-right: 2px;
+        strong{
+          font-weight: bold;
+          color: #4F4F4F;
+        }
+      }
+      .required{
+        display: flex;
+        align-items: center;
+        font-size: 18px;
+        line-height: 18px;
+        color: #FFCA20;
+      }
+    }
+    .upload-img{
+      position: relative;
+      width: 100%;
+      height: 120px;
+      background: #FFFFFF;
+      border-radius: 4px;
+      border: 3px solid #E8F4EF;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      input{
+        position: absolute;
+        left: 0;
+        top: 0;
+        z-index: 1;
+        opacity: 0;
+        width: 100%;
+        height: 100%;
+        cursor: pointer;
+      }
+      img{
+        width: 100px;
+        height: 100px;
+      }
+    }
+    .tip-txt{
+      font-size: 14px;
+      font-family: Montserrat-Light, Montserrat;
+      font-weight: 300;
+      color: #959595;
+      line-height: 18px;
+      margin-top: 8px;
+      margin-bottom: 0;
+    }
+  }
+  .create-btn{
+    display: block;
+    margin: 50px auto;
+    width: 120px;
+    height: 48px;
+    background: #00C57B!important;
+    border-color: #00C57B!important;
+    border-radius: 24px;
     font-size: 16px;
-    font-family: Montserrat-Bold, Montserrat;
-    font-weight: bold;
-    color: #4F4F4F;
+    font-family: Montserrat-Medium, Montserrat;
+    font-weight: 500;
+    color: #FFFFFF;
+    line-height: 19px;
+    &:hover{
+      background: #00C57B!important;
+      border-color: #00C57B!important;
+      opacity: 0.9;
+    }
   }
-
-  &:hover {
-    border-width: 2px !important;
-    border-color: #d0dad6 !important;
-  }
-
-  input {
-    font-size: 16px !important;
-  }
-
-  .date-icon {
-    width: 24px;
-    height: 24px;
-  }
-
-  width: 100%;
 }
 
-.ant-picker-cell-in-view.ant-picker-cell-selected .ant-picker-cell-inner, .ant-picker-cell-in-view.ant-picker-cell-range-start .ant-picker-cell-inner, .ant-picker-cell-in-view.ant-picker-cell-range-end .ant-picker-cell-inner {
-  color: #fff;
-  background: #0F8C20;
-}
-
-.ant-picker-cell-in-view.ant-picker-cell-today .ant-picker-cell-inner::before {
-  border-color: #0F8C20;
-}
-
-.ant-picker-now-btn:hover {
-  color: #0F8C20;
-}

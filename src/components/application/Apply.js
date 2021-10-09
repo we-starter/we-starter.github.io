@@ -16,7 +16,8 @@ import moment from 'moment'
 import {useMDexPrice} from "../../pages/pools/Hooks";
 import {ChainId, USDT_ADDRESS, WAR_ADDRESS, WHT_ADDRESS} from "../../web3/address";
 import BigNumber from "bignumber.js";
-import {uploadIPFSJson} from "../../utils/ipfs";
+import {getIPFSFile, uploadIPFSJson} from "../../utils/ipfs";
+import ApplyInfoView from './ApplyInfo'
 
 const TIME_FORMAT = 'YYYY-MM-DD HH:mm:ss'
 export default function Apply() {
@@ -29,28 +30,14 @@ export default function Apply() {
   )
   const price_ = price > 0 ? new BigNumber(price).toFixed(6) * 1 : '-'
 
-  const [data, setData] = useState({
-    id: '121',
-    name: 'TAT',
-    tokenTicker: 'Thetan Arena',
-    logo: CreateIcon,
-    website: 'hssssss',
-    twitter: '321321',
-    discord: '3213',
-    telegram: '32131',
-    medium: '32131',
-    whitePaper: '',
-    tokenInformation: '',
-    descEN: '',
-    descZH: '',
-    totalRaise: ''
-  })
+  const [showInfoPage, setShowInfoPage] = useState(false)
+  const [data, setData] = useState(null)
   const [amount, setAmount] = useState('')
-  const [startTime, setStartTime] = useState(moment('2021-10-29 00:00:00'))
+  const [startTime, setStartTime] = useState(() => data ? moment(data) : '')
   const [loading, setLoading] = useState(false)
   const onApply = ()=> {
     if (!data || !amount || amount < 0 || !startTime){
-      return message.warning('Please input the information completely')
+      return message.warning('Please Enter information completely')
     }
     setLoading(true)
     uploadIPFSJson({
@@ -62,6 +49,9 @@ export default function Apply() {
       console.log(res)
     })
   }
+  if (showInfoPage){
+    return <div className="apply-view"><ApplyInfoView data={data} setData={setData} setShowInfoPage={setShowInfoPage}/></div>
+  }
   return (
     <div className="apply-view">
       <div className="apply-view-back">
@@ -70,12 +60,12 @@ export default function Apply() {
       </div>
       <h2 className="apply-view-title">Apply</h2>
       <div className="nft-card">
-        <p className="nft-card-title">ID:{data.id}</p>
+        <p className="nft-card-title">ID:{data && data.id}</p>
         {
           data ? (
-            <div className="nft-card-info">
+            <div className="nft-card-info" onClick={() => setShowInfoPage(true)}>
               <div className="nft-card-info-t">
-                <img src={data.logo} alt=""/>
+                <img src={getIPFSFile(data.logo)} alt=""/>
                 <div>
                   <h2>{data.name}</h2>
                   <p>{data.tokenTicker}</p>
@@ -91,7 +81,7 @@ export default function Apply() {
             </div>
           ) : (
             <div className="create-view">
-              <img src={CreateIcon} alt="create"/>
+              <img src={CreateIcon} alt="create" onClick={() => setShowInfoPage(true)}/>
               <p>Create new Project NFT Card</p>
             </div>
           )
@@ -140,7 +130,7 @@ export default function Apply() {
       />
       <div className="info-tips">
         <img src={TipsIcon} alt="tips"/>
-        <div>从投票开始计时，周期为 3 天，资金将在投票结束后5天后释放</div>
+        <div>从投票开始计时，周期为 <strong>3</strong> 天，资金将在投票结束后 <strong>5</strong> 天后释放</div>
       </div>
         <Button type="primary" size="large" className="apply-btn" loading={loading} onClick={onApply}>Apply</Button>
       <h2 className="role-title">规则</h2>
