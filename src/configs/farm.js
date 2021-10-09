@@ -41,7 +41,7 @@ export default [
     mdexReward: true,
     networkId: 128,
     lpToken: 'MDEX LP Token',
-    mdexDaily: 1534.46,
+    mdexDaily: 762.97,
     mdexPid: '0x5a',
     poolType: 2, // 1单池，2LP，2sort
   },
