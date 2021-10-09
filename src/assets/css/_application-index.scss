@@ -111,10 +111,11 @@
           border: 2px solid #00C57B;
         }
       }
-      &_tab_active {
+      .application_content_tab_active {
         color: #03A678;
         border: 2px solid #00C57B;
       }
+
     }
     .no-data {
       display: flex;
@@ -194,7 +195,7 @@
           border: 2px solid #00C57B;
         }
       }
-      &_tab_active {
+      .application_content_tab_active {
         color: #03A678;
         border: 2px solid #00C57B;
       }
@@ -277,7 +278,7 @@
           border: 2px solid #00C57B;
         }
       }
-      &_tab_active {
+      .application_content_tab_active {
         color: #03A678;
         border: 2px solid #00C57B;
       }
