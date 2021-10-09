@@ -17,7 +17,8 @@ import PoolsDetail from './pages/pools/poolsDetail'
 import PoolsDetailLBP from './pages/pools/poolsDetailLBP'
 import Farm from './pages/pools/farm'
 import Application from './pages/pools/application'
-import Vote from './pages/pools/vote'
+import Vote from './pages/pools/VoteApply'
+import VoteApply from './pages/pools/VoteApply'
 import Migrate from './pages/pools/migrate'
 import ScrollToTop from './components/ScrollTop'
 import Intl from './locale/intl'
@@ -66,6 +67,7 @@ function App() {
               ></Route>
               <Route exact path='/application' component={Application}></Route>
               <Route exact path='/application/vote' component={Vote}></Route>
+              <Route exact path='/application/apply' component={VoteApply}></Route>
             </Switch>
             <InitPage />
             {/* <Footer /> */}

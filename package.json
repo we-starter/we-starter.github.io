@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@ant-design/icons": "^4.7.0",
     "@ethersproject/contracts": "^5.0.5",
     "@ethersproject/providers": "^5.0.12",
     "@ethersproject/solidity": "^5.0.5",
@@ -33,6 +34,7 @@
     "dayjs": "^1.10.4",
     "ethers-multicall-x": "^0.2.2",
     "lodash": "^4.17.21",
+    "moment": "^2.29.1",
     "node-sass": "^4.14.1",
     "qs": "^6.10.1",
     "react": "^16.13.1",
