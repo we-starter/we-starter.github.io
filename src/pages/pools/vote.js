@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import cs from 'classnames'
 import { FormattedMessage, injectIntl } from 'react-intl'
 import { NavLink } from 'react-router-dom'
+import { getIPFSJson, getIPFSFile } from '../../utils/ipfs'
 import Footer from '../../components/Footer'
 import BreadCrumbs from '../../components/application/BreadCrumbs'
 import ApplicationCountdown from '../../components/application/ApplicationCountdown'
@@ -10,16 +11,31 @@ import VotePopup from '../../components/application/votePopup'
 import CannotVotePopup from '../../components/application/cannotVotePopup'
 
 const Vote = (props) => {
+  const [voteDetail, setVoteDetail] = useState(null)
   const [isModalVisible, setIsModalVisible] = useState(false)
   const [isVoteModalVisible, setIsVoteModalVisible] = useState(false)
   const [isCannotVoteModalVisible, setIsCannotVoteModalVisible] = useState(false)
-  
+  useEffect(() => {
+     getIPFSJson('QmP2DeyoyoT19Pe4G3Fxcb2wvDAwHZ4ejrXK9HDz3ZQqTj')
+       .then((res) => {
+           console.log(res.data, 'voteDetail')
+         if (res.data) {
+           setVoteDetail(res.data)
+         }
+       })
+       .catch((e) => {
+         console.log(e, 'e')
+       })
+  }, [])
+
   return (
     <div style={{ position: 'relative' }}>
       <div className='vote'>
         <div className='vote_box'>
-          <BreadCrumbs toUrl='/application' name='Proposals' />
-          <h2 className='vote_title'>Vote</h2>
+          <BreadCrumbs toUrl='/application' name='applicationText15' />
+          <h2 className='vote_title'>
+            <FormattedMessage id='applicationText8' />
+          </h2>
           <div className='vote_box_card'>
             <div className='vote_box_card_title'>
               <i>ID:01</i>
@@ -29,35 +45,22 @@ const Vote = (props) => {
             </div>
             <div className='vote_box_card_content'>
               <div className='vote_box_card_content_box'>
-                <img src={require('../../assets/icon/WAR.png')} />
+                <img src={getIPFSFile(voteDetail && voteDetail.logo)} />
                 <p className='vote_box_card_content_title'>
-                  <FormattedMessage id='applicationText6' />
-                  <span>Thetan Arena</span>
+                  {voteDetail && voteDetail.name}
+                  <span>{voteDetail && voteDetail.website}</span>
                 </p>
               </div>
               <ul className='link_url'>
                 <li>
                   <a
                     title='title'
-                    href='https://twitter.com/westarter_org'
+                    href={voteDetail && voteDetail.twitter}
                     target='_blank'
                     rel='noopener'
                   >
                     <svg width='24' height='24' viewBox='0 0 30 30'>
                       <path d='M27.7 7.07c-.95.42-1.96.7-3 .82A5.25 5.25 0 0027 5a10.45 10.45 0 01-3.32 1.27 5.23 5.23 0 00-8.9 4.77A14.84 14.84 0 014 5.57a5.21 5.21 0 001.61 6.98 5.21 5.21 0 01-2.36-.65v.06a5.23 5.23 0 004.2 5.13c-.78.21-1.59.24-2.37.1a5.23 5.23 0 004.88 3.62 10.49 10.49 0 01-7.74 2.17 14.79 14.79 0 008.02 2.35c9.61 0 14.87-7.97 14.87-14.88 0-.22 0-.45-.02-.67 1.03-.74 1.91-1.66 2.61-2.7v-.01z' />
-                    </svg>
-                  </a>
-                </li>
-
-                <li>
-                  <a
-                    title='title'
-                    href='https://t.me/westarter_official'
-                    target='_blank'
-                    rel='noopener'
-                  >
-                    <svg width='24' height='24' viewBox='0 0 30 30'>
-                      <path d='M15 27.5a12.5 12.5 0 110-25 12.5 12.5 0 010 25zm-3.89-11.04h.02l1.09 3.58c.14.39.33.46.56.43.24-.03.36-.16.52-.3l1.48-1.44 3.19 2.36c.58.32 1 .15 1.14-.54l2.07-9.78c.23-.91-.17-1.28-.87-.98l-12.17 4.7c-.83.33-.82.8-.15 1l3.12.97z' />
                     </svg>
                   </a>
                 </li>
@@ -78,12 +81,12 @@ const Vote = (props) => {
                 <li>
                   <a
                     title='title'
-                    href='https://medium.com/@westarter'
+                    href={voteDetail && voteDetail.telegram}
                     target='_blank'
-                    rel='noopener noreferrer'
+                    rel='noopener'
                   >
                     <svg width='24' height='24' viewBox='0 0 30 30'>
-                      <path d='M5 3.75h20A1.25 1.25 0 0126.25 5v20A1.25 1.25 0 0125 26.25H5A1.25 1.25 0 013.75 25V5A1.25 1.25 0 015 3.75zm16.63 16.18c-.13-.07-.2-.25-.2-.38V10c0-.13.07-.31.2-.44l1.19-1.38v-.06h-4.27l-3.2 8.1-3.64-8.1H7.3v.06l1.13 1.57c.26.25.32.63.32.94v6.9c.06.38 0 .82-.19 1.2l-1.7 2.32v.06h4.52v-.06L9.7 18.86a1.93 1.93 0 01-.19-1.2V11.4c.06.12.13.12.19.37l4.27 9.54h.06l4.15-10.35c-.07.38-.07.82-.07 1.13v7.4c0 .2-.06.32-.18.45l-1.26 1.19v.06h6.15v-.06l-1.2-1.2z' />
+                      <path d='M15 27.5a12.5 12.5 0 110-25 12.5 12.5 0 010 25zm-3.89-11.04h.02l1.09 3.58c.14.39.33.46.56.43.24-.03.36-.16.52-.3l1.48-1.44 3.19 2.36c.58.32 1 .15 1.14-.54l2.07-9.78c.23-.91-.17-1.28-.87-.98l-12.17 4.7c-.83.33-.82.8-.15 1l3.12.97z' />
                     </svg>
                   </a>
                 </li>
@@ -91,24 +94,12 @@ const Vote = (props) => {
                 <li>
                   <a
                     title='title'
-                    href='https://t.me/westarter_chinese'
+                    href='https://medium.com/@westarter'
                     target='_blank'
-                    rel='noopener'
+                    rel='noopener noreferrer'
                   >
-                    <svg
-                      t='1614403990515'
-                      className='icon'
-                      viewBox='0 0 1024 1024'
-                      version='1.1'
-                      xmlns='http://www.w3.org/2000/svg'
-                      p-id='529'
-                      width='18'
-                      height='24'
-                    >
-                      <path
-                        d='M1020.416112 161.2512l-154.536 729.312c-10.7952 51.808-42.0432 64.3328-85.2224 40.4208L545.446512 756.7696l-113.0608 109.88c-13.0688 13.0944-23.8624 23.912-47.1568 23.912l15.9088-240.8256L837.472112 255.76c19.3152-17.648-3.9792-26.1888-29.5456-10.816L269.328112 585.9712 36.388912 511.9584c-49.9968-14.2336-50.5664-48.9616 11.3616-74.0128l907.328-350.7072c41.4736-18.7872 81.2448 10.248 65.336 74.0128zM148.048112 72c34.816 0 57.12 14.144 70.992 44.608l-35.632 18.496c-4.896-15.776-14.96-26.384-35.36-26.384-24.208 0-40.256 16.32-40.256 46.24v30.464c0 29.92 16.048 46.24 40.256 46.24 20.4 0 32.096-12.784 37.808-28.288l33.728 19.584c-14.144 28.832-36.72 45.424-71.536 45.424-51.136 0-84.048-32.64-84.048-96.832C64.000112 107.36 96.912112 72 148.048112 72z m148.72 3.264l51.952 89.76 18.224 38.08h0.816v-127.84h38.896V265.12h-45.152l-51.952-89.76-18.224-38.08h-0.816v127.84h-38.896V75.264h45.152z'
-                        p-id='530'
-                      ></path>
+                    <svg width='24' height='24' viewBox='0 0 30 30'>
+                      <path d='M5 3.75h20A1.25 1.25 0 0126.25 5v20A1.25 1.25 0 0125 26.25H5A1.25 1.25 0 013.75 25V5A1.25 1.25 0 015 3.75zm16.63 16.18c-.13-.07-.2-.25-.2-.38V10c0-.13.07-.31.2-.44l1.19-1.38v-.06h-4.27l-3.2 8.1-3.64-8.1H7.3v.06l1.13 1.57c.26.25.32.63.32.94v6.9c.06.38 0 .82-.19 1.2l-1.7 2.32v.06h4.52v-.06L9.7 18.86a1.93 1.93 0 01-.19-1.2V11.4c.06.12.13.12.19.37l4.27 9.54h.06l4.15-10.35c-.07.38-.07.82-.07 1.13v7.4c0 .2-.06.32-.18.45l-1.26 1.19v.06h6.15v-.06l-1.2-1.2z' />
                     </svg>
                   </a>
                 </li>
@@ -139,11 +130,11 @@ const Vote = (props) => {
               </p>
               <p className='vote_box_progress_content_title'>
                 <FormattedMessage id='applicationText6' />
-                <span>Thetan Arena</span>
+                <span>{voteDetail && voteDetail.name}</span>
               </p>
               <p className='vote_box_progress_content_title'>
                 <FormattedMessage id='applicationText7' />
-                <span>$200,000</span>
+                <span>${voteDetail && voteDetail.totalRaise}</span>
               </p>
               <p className='vote_box_progress_content_btn'>
                 <a className='vote_btn' onClick={() => setIsModalVisible(true)}>
@@ -161,14 +152,21 @@ const Vote = (props) => {
                   <span style={{ width: '80px' }}></span>
                 </a>
               </p>
-              <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between',marginTop: '42px'}}>
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  marginTop: '42px',
+                }}
+              >
                 <p className='vote_box_progress_content_title'>
                   <FormattedMessage id='applicationText6' />
-                  <span>Thetan Arena</span>
+                  <span>{voteDetail && voteDetail.name}</span>
                 </p>
                 <p className='vote_box_progress_content_title'>
                   <FormattedMessage id='applicationText7' />
-                  <span>$200,000</span>
+                  <span>${voteDetail && voteDetail.totalRaise}</span>
                 </p>
               </div>
               <p className='vote_box_progress_content_btn'>
@@ -183,35 +181,56 @@ const Vote = (props) => {
           </div>
           <div className='vote_box_information'>
             <h3 className='vote_box_information_title'>
-              Project Information
+              <FormattedMessage id='applicationText12' />
             </h3>
-            <p className='vote_box_information_about'>To learn more about APENFT, the chefs advise you to visit their official communication channels:</p>
+            <p className='vote_box_information_about'>
+              <FormattedMessage id='applicationText13' />
+            </p>
             <div className='vote_box_information_url'>
-              <p>Website: <span>https://</span></p>
-              <p>Whitepaper: <span>https://</span></p>
-              <p>Telegram: <span>https://</span></p>
-              <p>Explorer: <span>https://</span></p>
-            </div>
-            <p className='vote_box_information_about'>The Syrup Pool:<br />Stake CAKE tokens to earn APENFT’s $NFT tokens!</p>
-            <div className='vote_box_information_info'>
               <p>
-                <span>content</span>
-                <span>content</span>
-                <span>content</span>
+                Website: <span>{voteDetail && voteDetail.website}</span>
               </p>
               <p>
-                <span>content</span>
+                Whitepaper: <span>{voteDetail && voteDetail.whitePaper}</span>
+              </p>
+              <p>
+                Telegram: <span>{voteDetail && voteDetail.telegram}</span>
+              </p>
+              <p>
+                Explorer: <span>https://Explorer</span>
+              </p>
+            </div>
+            <p className='vote_box_information_about'>
+              <FormattedMessage id='applicationText14' />
+            </p>
+            <div className='vote_box_information_info'>
+              <p>
+                <span>{voteDetail && voteDetail.descEN}</span>
+              </p>
+              <p>
+                <span>{voteDetail && voteDetail.descZH}</span>
                 <span>content</span>
                 <span>content</span>
               </p>
             </div>
           </div>
         </div>
-        <ApplicationClaimPopup visible={isModalVisible} onClose={() => setIsModalVisible(false)} />
-        <VotePopup pool={null} visible={isVoteModalVisible} onClose={() => setIsVoteModalVisible(false)} />
-        <CannotVotePopup pool={null} visible={isCannotVoteModalVisible} onClose={() => setIsCannotVoteModalVisible(false)} />
+        <ApplicationClaimPopup
+          visible={isModalVisible}
+          onClose={() => setIsModalVisible(false)}
+        />
+        <VotePopup
+          pool={null}
+          visible={isVoteModalVisible}
+          onClose={() => setIsVoteModalVisible(false)}
+        />
+        <CannotVotePopup
+          pool={null}
+          visible={isCannotVoteModalVisible}
+          onClose={() => setIsCannotVoteModalVisible(false)}
+        />
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   )
 }

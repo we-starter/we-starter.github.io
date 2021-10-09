@@ -411,5 +411,11 @@ const zh_CN = {
   applicationText9: 'Closed',
   applicationText10: 'Success',
   applicationText11: 'Failed',
+  applicationText12: 'Project Information',
+  applicationText13:
+    'To learn more about APENFT, the chefs advise you to visit their official communication channels:',
+  applicationText14:
+    'The Syrup Pool: Stake CAKE tokens to earn APENFT’s $NFT tokens!',
+  applicationText15: 'Proposals',
 }
 export default zh_CN

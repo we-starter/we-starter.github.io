@@ -11,6 +11,7 @@ const Application = (props) => {
   const changeFlag = (val) => {
     setStatusFlag(val)
   }
+
   return (
     <div style={{ position: 'relative' }}>
       <ApplicationBanner />

@@ -7,7 +7,9 @@ export default function BreadCrumbs({ name, toUrl }) {
   return (
     <NavLink to={toUrl} className='bread_crumbs'>
       <img src={require('../../assets/icon/application/back@2x.png')} />
-      <span>{name}</span>
+      <span>
+        <FormattedMessage id={name} />
+      </span>
     </NavLink>
   )
 }
