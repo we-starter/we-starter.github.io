@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="34px" height="34px" viewBox="0 0 34 34" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>切片</title>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="IWO_apply_Create" transform="translate(-694.000000, -329.000000)">
+            <g id="编组" transform="translate(694.000000, 329.000000)">
+                <g id="chevron_right" transform="translate(17.000000, 17.000000) scale(-1, 1) translate(-17.000000, -17.000000) translate(13.000000, 10.000000)" fill="#4F4F4F" fill-rule="nonzero">
+                    <polygon id="路径" points="7.7131 7 1.70209 0.99001 0.28809 2.40401 4.8881 7.004 0.28809 11.597 1.70209 13.011"></polygon>
+                </g>
+                <rect id="矩形" stroke="#4F4F4F" stroke-width="2" x="0" y="0" width="34" height="34" rx="4"></rect>
+            </g>
+        </g>
+    </g>
+</svg>
