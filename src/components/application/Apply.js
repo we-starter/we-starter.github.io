@@ -18,6 +18,7 @@ import {ChainId, USDT_ADDRESS, WAR_ADDRESS, WHT_ADDRESS} from "../../web3/addres
 import BigNumber from "bignumber.js";
 import {getIPFSFile, uploadIPFSJson} from "../../utils/ipfs";
 import ApplyInfoView from './ApplyInfo'
+import {NavLink} from "react-router-dom";
 
 const TIME_FORMAT = 'YYYY-MM-DD HH:mm:ss'
 export default function Apply() {
@@ -54,10 +55,10 @@ export default function Apply() {
   }
   return (
     <div className="apply-view">
-      <div className="apply-view-back">
+      <NavLink to='/application' className="apply-view-back">
         <img src={BackIcon} alt="Back"/>
         <span>Proposals</span>
-      </div>
+      </NavLink>
       <h2 className="apply-view-title">Apply</h2>
       <div className="nft-card">
         <p className="nft-card-title">ID:{data && data.id}</p>

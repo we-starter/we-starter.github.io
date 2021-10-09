@@ -9,9 +9,9 @@ export const ApplicationBanner = () => {
         <h3 className='application_banner_title'>
           <FormattedMessage id='applicationText1' />
         </h3>
-        <a className='application_banner_content'>
+        <NavLink to='/application/apply' className='application_banner_content'>
           <FormattedMessage id='applicationText2' />
-        </a>
+        </NavLink>
       </div>
     </div>
   )
