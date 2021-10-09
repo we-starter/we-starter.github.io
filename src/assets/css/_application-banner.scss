@@ -3,6 +3,7 @@
     display: flex;
     justify-content: center;
     width: 100%;
+    min-width: 1080px;
     height: 380px;
     margin: 100px auto 0;
     background-color: #E7F4EF;
@@ -41,10 +42,11 @@
   }
 }
 @media #{$mdWidth} {
-    .application_banner {
+  .application_banner {
     display: flex;
     justify-content: center;
     width: 100%;
+    min-width: 1080px;
     height: 380px;
     margin: 100px auto 0;
     background-color: #E7F4EF;

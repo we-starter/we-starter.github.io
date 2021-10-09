@@ -5,14 +5,21 @@ import { NavLink } from 'react-router-dom'
 import Footer from '../../components/Footer'
 import BreadCrumbs from '../../components/application/BreadCrumbs'
 import ApplicationCountdown from '../../components/application/ApplicationCountdown'
+import ApplicationClaimPopup from '../../components/application/claimPopup'
+import VotePopup from '../../components/application/votePopup'
+import CannotVotePopup from '../../components/application/cannotVotePopup'
 
 const Vote = (props) => {
+  const [isModalVisible, setIsModalVisible] = useState(false)
+  const [isVoteModalVisible, setIsVoteModalVisible] = useState(false)
+  const [isCannotVoteModalVisible, setIsCannotVoteModalVisible] = useState(false)
+  
   return (
     <div style={{ position: 'relative' }}>
       <div className='vote'>
         <div className='vote_box'>
           <BreadCrumbs toUrl='/application' name='Proposals' />
-          <h2 classNam='vote_title'>Vote</h2>
+          <h2 className='vote_title'>Vote</h2>
           <div className='vote_box_card'>
             <div className='vote_box_card_title'>
               <i>ID:01</i>
@@ -118,9 +125,9 @@ const Vote = (props) => {
             >
               <ApplicationCountdown />
               <p className='vote_box_progress_content_btn'>
-                <NavLink to='/application/vote'>
+                <a onClick={() => setIsVoteModalVisible(true)}>
                   <FormattedMessage id='applicationText8' />
-                </NavLink>
+                </a>
               </p>
             </div>
             <div className='vote_box_progress_content'>
@@ -139,7 +146,7 @@ const Vote = (props) => {
                 <span>$200,000</span>
               </p>
               <p className='vote_box_progress_content_btn'>
-                <a className='vote_btn'>
+                <a className='vote_btn' onClick={() => setIsModalVisible(true)}>
                   <FormattedMessage id='claim' />
                 </a>
               </p>
@@ -165,16 +172,44 @@ const Vote = (props) => {
                 </p>
               </div>
               <p className='vote_box_progress_content_btn'>
-                <NavLink to='/application/vote'>
+                <a onClick={() => setIsVoteModalVisible(true)}>
                   <FormattedMessage id='applicationText8' />
-                </NavLink>
-                <a>
+                </a>
+                <a onClick={() => setIsModalVisible(true)}>
                   <FormattedMessage id='claim' />
                 </a>
               </p>
             </div>
           </div>
+          <div className='vote_box_information'>
+            <h3 className='vote_box_information_title'>
+              Project Information
+            </h3>
+            <p className='vote_box_information_about'>To learn more about APENFT, the chefs advise you to visit their official communication channels:</p>
+            <div className='vote_box_information_url'>
+              <p>Website: <span>https://</span></p>
+              <p>Whitepaper: <span>https://</span></p>
+              <p>Telegram: <span>https://</span></p>
+              <p>Explorer: <span>https://</span></p>
+            </div>
+            <p className='vote_box_information_about'>The Syrup Pool:<br />Stake CAKE tokens to earn APENFT’s $NFT tokens!</p>
+            <div className='vote_box_information_info'>
+              <p>
+                <span>content</span>
+                <span>content</span>
+                <span>content</span>
+              </p>
+              <p>
+                <span>content</span>
+                <span>content</span>
+                <span>content</span>
+              </p>
+            </div>
+          </div>
         </div>
+        <ApplicationClaimPopup visible={isModalVisible} onClose={() => setIsModalVisible(false)} />
+        <VotePopup pool={null} visible={isVoteModalVisible} onClose={() => setIsVoteModalVisible(false)} />
+        <CannotVotePopup pool={null} visible={isCannotVoteModalVisible} onClose={() => setIsCannotVoteModalVisible(false)} />
       </div>
       <Footer />
     </div>

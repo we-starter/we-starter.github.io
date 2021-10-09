@@ -4,8 +4,10 @@ import { FormattedMessage, injectIntl } from 'react-intl'
 import { mainContext } from '../../reducer'
 import ApplicationCountdown from './ApplicationCountdown'
 import { NavLink } from 'react-router-dom'
+import ApplicationClaimPopup from './claimPopup'
 
 export const InProgressCard = () => {
+  const [isModalVisible, setIsModalVisible] = useState(false)
   return (
     <div className='application_card'>
       <div className='application_card_title'>
@@ -35,7 +37,7 @@ export const InProgressCard = () => {
             <FormattedMessage id='applicationText8' />
           </NavLink>
           {/* <a className='disable_failed'><FormattedMessage id='applicationText9' /></a> */}
-          <a>
+          <a onClick={() => setIsModalVisible(true)}>
             <FormattedMessage id='claim' />
           </a>
         </p>
@@ -65,11 +67,12 @@ export const InProgressCard = () => {
           <a className='disable_failed'>
             <FormattedMessage id='applicationText9' />
           </a>
-          <a>
+          <a onClick={() => setIsModalVisible(true)}>
             <FormattedMessage id='claim' />
           </a>
         </p>
       </div>
+      <ApplicationClaimPopup visible={isModalVisible} onClose={() => setIsModalVisible(false)} />
     </div>
   )
 }
