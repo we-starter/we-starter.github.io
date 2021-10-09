@@ -39,36 +39,7 @@
         color: #4F4F4F;
       }
     }
-    .application_countdown {
-      margin: 0;
-      .countdown {
-        font-size: 14px;
-        font-family: Montserrat-Bold, Montserrat;
-        font-weight: bold;
-        color: #4F4F4F;
-        line-height: 18px;
-      }
-      .countdown_time {
-        display: inline-block;
-        width: 22px;
-        height: 22px;
-        font-size: 14px;
-        font-family: Montserrat-SemiBold, Montserrat;
-        font-weight: 600;
-        color: #4F4F4F;
-        line-height: 22px;
-        border-radius: 4px;
-        text-align: center;
-        border: 1px solid #C9D7D1;
-      }
-      i {
-        font-size: 14px;
-        font-family: Montserrat-SemiBold, Montserrat;
-        font-weight: 600;
-        color: #959595;
-        line-height: 16px;
-      }
-    }
+    
     &_content_h5 {
       display: none;
     }
@@ -162,6 +133,36 @@
       }
     }
   }
+  .application_countdown {
+      margin: 0;
+      .countdown {
+        font-size: 14px;
+        font-family: Montserrat-Bold, Montserrat;
+        font-weight: bold;
+        color: #4F4F4F;
+        line-height: 18px;
+      }
+      .countdown_time {
+        display: inline-block;
+        width: 22px;
+        height: 22px;
+        font-size: 14px;
+        font-family: Montserrat-SemiBold, Montserrat;
+        font-weight: 600;
+        color: #4F4F4F;
+        line-height: 22px;
+        border-radius: 4px;
+        text-align: center;
+        border: 1px solid #C9D7D1;
+      }
+      i {
+        font-size: 14px;
+        font-family: Montserrat-SemiBold, Montserrat;
+        font-weight: 600;
+        color: #959595;
+        line-height: 16px;
+      }
+    }
 }
 @media #{$mdWidth} {
   .application_card {
@@ -204,36 +205,7 @@
         color: #4F4F4F;
       }
     }
-    .application_countdown {
-      margin: 0;
-      .countdown {
-        font-size: 14px;
-        font-family: Montserrat-Bold, Montserrat;
-        font-weight: bold;
-        color: #4F4F4F;
-        line-height: 18px;
-      }
-      .countdown_time {
-        display: inline-block;
-        width: 22px;
-        height: 22px;
-        font-size: 14px;
-        font-family: Montserrat-SemiBold, Montserrat;
-        font-weight: 600;
-        color: #4F4F4F;
-        line-height: 22px;
-        border-radius: 4px;
-        text-align: center;
-        border: 1px solid #C9D7D1;
-      }
-      i {
-        font-size: 14px;
-        font-family: Montserrat-SemiBold, Montserrat;
-        font-weight: 600;
-        color: #959595;
-        line-height: 16px;
-      }
-    }
+   
     &_content_h5 {
       display: none;
     }
@@ -327,6 +299,36 @@
       }
     }
   }
+   .application_countdown {
+      margin: 0;
+      .countdown {
+        font-size: 14px;
+        font-family: Montserrat-Bold, Montserrat;
+        font-weight: bold;
+        color: #4F4F4F;
+        line-height: 18px;
+      }
+      .countdown_time {
+        display: inline-block;
+        width: 22px;
+        height: 22px;
+        font-size: 14px;
+        font-family: Montserrat-SemiBold, Montserrat;
+        font-weight: 600;
+        color: #4F4F4F;
+        line-height: 22px;
+        border-radius: 4px;
+        text-align: center;
+        border: 1px solid #C9D7D1;
+      }
+      i {
+        font-size: 14px;
+        font-family: Montserrat-SemiBold, Montserrat;
+        font-weight: 600;
+        color: #959595;
+        line-height: 16px;
+      }
+    }
 }
 @media #{$smWidth} {
   .application_card {
@@ -369,36 +371,7 @@
         color: #4F4F4F;
       }
     }
-    .application_countdown {
-      margin: 0;
-      .countdown {
-        font-size: 14px;
-        font-family: Montserrat-Bold, Montserrat;
-        font-weight: bold;
-        color: #4F4F4F;
-        line-height: 18px;
-      }
-      .countdown_time {
-        display: inline-block;
-        width: 22px;
-        height: 22px;
-        font-size: 14px;
-        font-family: Montserrat-SemiBold, Montserrat;
-        font-weight: 600;
-        color: #4F4F4F;
-        line-height: 22px;
-        border-radius: 4px;
-        text-align: center;
-        border: 1px solid #C9D7D1;
-      }
-      i {
-        font-size: 14px;
-        font-family: Montserrat-SemiBold, Montserrat;
-        font-weight: 600;
-        color: #959595;
-        line-height: 16px;
-      }
-    }
+  
     &_content {
       display: none;
     }
@@ -516,6 +489,36 @@
       }
     }
   }
+    .application_countdown {
+      margin: 0;
+      .countdown {
+        font-size: 14px;
+        font-family: Montserrat-Bold, Montserrat;
+        font-weight: bold;
+        color: #4F4F4F;
+        line-height: 18px;
+      }
+      .countdown_time {
+        display: inline-block;
+        width: 22px;
+        height: 22px;
+        font-size: 14px;
+        font-family: Montserrat-SemiBold, Montserrat;
+        font-weight: 600;
+        color: #4F4F4F;
+        line-height: 22px;
+        border-radius: 4px;
+        text-align: center;
+        border: 1px solid #C9D7D1;
+      }
+      i {
+        font-size: 14px;
+        font-family: Montserrat-SemiBold, Montserrat;
+        font-weight: 600;
+        color: #959595;
+        line-height: 16px;
+      }
+    }
 }
 @media #{$xsWidth} {
   .application_card {
@@ -558,36 +561,7 @@
         color: #4F4F4F;
       }
     }
-    .application_countdown {
-      margin: 0;
-      .countdown {
-        font-size: 14px;
-        font-family: Montserrat-Bold, Montserrat;
-        font-weight: bold;
-        color: #4F4F4F;
-        line-height: 18px;
-      }
-      .countdown_time {
-        display: inline-block;
-        width: 22px;
-        height: 22px;
-        font-size: 14px;
-        font-family: Montserrat-SemiBold, Montserrat;
-        font-weight: 600;
-        color: #4F4F4F;
-        line-height: 22px;
-        border-radius: 4px;
-        text-align: center;
-        border: 1px solid #C9D7D1;
-      }
-      i {
-        font-size: 14px;
-        font-family: Montserrat-SemiBold, Montserrat;
-        font-weight: 600;
-        color: #959595;
-        line-height: 16px;
-      }
-    }
+  
     &_content {
       display: none;
     }
@@ -705,4 +679,34 @@
       }
     }
   }
+   .application_countdown {
+      margin: 0;
+      .countdown {
+        font-size: 14px;
+        font-family: Montserrat-Bold, Montserrat;
+        font-weight: bold;
+        color: #4F4F4F;
+        line-height: 18px;
+      }
+      .countdown_time {
+        display: inline-block;
+        width: 22px;
+        height: 22px;
+        font-size: 14px;
+        font-family: Montserrat-SemiBold, Montserrat;
+        font-weight: 600;
+        color: #4F4F4F;
+        line-height: 22px;
+        border-radius: 4px;
+        text-align: center;
+        border: 1px solid #C9D7D1;
+      }
+      i {
+        font-size: 14px;
+        font-family: Montserrat-SemiBold, Montserrat;
+        font-weight: 600;
+        color: #959595;
+        line-height: 16px;
+      }
+    }
 }

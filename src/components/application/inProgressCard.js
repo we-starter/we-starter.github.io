@@ -10,7 +10,9 @@ export const InProgressCard = () => {
     <div className='application_card'>
       <div className='application_card_title'>
         <i>ID:01</i>
-        <ApplicationCountdown />
+        <div className='application_countdown_box'>
+          <ApplicationCountdown />
+        </div>
       </div>
       <div className='application_card_content'>
         <img src={require('../../assets/icon/WAR.png')} />
