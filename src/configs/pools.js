@@ -1925,7 +1925,7 @@ export default [
     type: 1,
     isPrivate: true,
     underlying: {
-      address: '0xa7cE2772BD145AbD033D2d8d5b2c47A7F5Da1b75',
+      address: '0x45C13620B55C35A5f539d26E88247011Eb10fDbd',
       decimal: 18,
       symbol: 'HCT',
       name: 'HCT',
@@ -1983,7 +1983,7 @@ export default [
     type: 1,
     isPrivate: true,
     underlying: {
-      address: '0xa7cE2772BD145AbD033D2d8d5b2c47A7F5Da1b75',
+      address: '0x45C13620B55C35A5f539d26E88247011Eb10fDbd',
       decimal: 18,
       symbol: 'HCT',
       name: 'HCT',
@@ -2040,7 +2040,7 @@ export default [
     type: 0,
     isPrivate: true,
     underlying: {
-      address: '0xa7cE2772BD145AbD033D2d8d5b2c47A7F5Da1b75',
+      address: '0x45C13620B55C35A5f539d26E88247011Eb10fDbd',
       decimal: 18,
       symbol: 'HCT',
       name: 'HCT',
