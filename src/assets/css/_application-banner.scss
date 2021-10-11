@@ -1,12 +1,35 @@
 @media #{$desktop} {
   .application_banner {
+    position: relative;
     display: flex;
     justify-content: center;
     width: 100%;
     min-width: 1080px;
     height: 380px;
     margin: 100px auto 0;
-    background-color: #E7F4EF;
+    background: #E7F4EF;
+    &:after {
+      content: '';
+      position: absolute;
+      width: 350px;
+      height: 238px;
+      right: 0;
+      bottom: 0;
+      background: url('../icon/application/w.svg') no-repeat;
+      background-size: 100% 100%;
+    }
+    &:before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      min-width: 1080px;
+      height: 30px;
+      left: 0;
+      bottom: -6px;
+      z-index: 1;
+      background: url('../icon/application/banner_bg.svg');
+      background-repeat: repeat-x;
+    }
     &_center {
        display: flex;
       justify-content: center;
@@ -43,13 +66,35 @@
 }
 @media #{$mdWidth} {
   .application_banner {
+    position: relative;
     display: flex;
     justify-content: center;
     width: 100%;
     min-width: 1080px;
     height: 380px;
     margin: 100px auto 0;
-    background-color: #E7F4EF;
+    background: #E7F4EF;
+    &:after {
+      content: '';
+      position: absolute;
+      width: 350px;
+      height: 238px;
+      right: 0;
+      bottom: 0;
+      background: url('../icon/application/w.svg') no-repeat;
+      background-size: 100% 100%;
+    }
+    &:before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 35px;
+      left: 0;
+      bottom: -8px;
+      z-index: 1;
+      background: url('../icon/application/banner_bg.svg') no-repeat;
+      background-size: 100% 100%;
+    }
     &_center {
        display: flex;
       justify-content: center;
@@ -86,12 +131,34 @@
 }
 @media #{$smWidth} {
   .application_banner {
+    position: relative;
     display: flex;
     justify-content: center;
     width: 100%;
     height: 198px;
     margin: 78px auto 0;
     background-color: #E7F4EF;
+    &:after {
+      content: '';
+      position: absolute;
+      width: 174px;
+      height: 118px;
+      right: 0;
+      bottom: 0;
+      background: url('../icon/application/w.svg') no-repeat;
+      background-size: 100% 100%;
+    }
+    &:before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 23px;
+      left: 0;
+      bottom: -8px;
+      z-index: 1;
+      background: url('../icon/application/banner_bg.svg') no-repeat;
+      background-size: 100% 100%;
+    }
     &_center {
        display: flex;
       justify-content: center;
@@ -128,12 +195,34 @@
 }
 @media #{$xsWidth} {
   .application_banner {
+    position: relative;
     display: flex;
     justify-content: center;
     width: 350px;
     height: 198px;
     margin: 78px auto 0;
     background-color: #E7F4EF;
+    &:after {
+      content: '';
+      position: absolute;
+      width: 174px;
+      height: 118px;
+      right: 0;
+      bottom: 0;
+      background: url('../icon/application/w.svg') no-repeat;
+      background-size: 100% 100%;
+    }
+    &:before {
+      content: '';
+      position: absolute;
+      width: 350px;
+      height: 23px;
+      left: 0;
+      bottom: -8px;
+      z-index: 1;
+      background: url('../icon/application/banner_bg.svg') no-repeat;
+      background-size: 100% 100%;
+    }
     &_center {
        display: flex;
       justify-content: center;
