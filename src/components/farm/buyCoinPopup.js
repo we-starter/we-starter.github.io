@@ -253,16 +253,19 @@ const BuyCoinPopup = (props) => {
         })
     } else {
       let methodsAddress = ''
+      let path = ''
       if (tabFlag === 'USDT') {
         methodsAddress = USDT_ADDRESS(ChainId.HECO)
+        path = [methodsAddress, WAR_ADDRESS(ChainId.HECO)]
       } else if (tabFlag === 'MDX') {
         methodsAddress = WMDEX_ADDRESS(ChainId.HECO)
+        path = [methodsAddress, USDT_ADDRESS(ChainId.HECO), WAR_ADDRESS(ChainId.HECO)]
       }
       contract.methods
         .swapExactTokensForTokens(
           numToWei(amount),
           numToWei(minAmount),
-          [methodsAddress, WETH_ADDRESS(ChainId.HECO), WAR_ADDRESS(ChainId.HECO)],
+          path,
           account,
           deadline
         )
