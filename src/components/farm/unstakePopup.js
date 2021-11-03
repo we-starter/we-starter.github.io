@@ -172,8 +172,7 @@ const UnstakePopup = (props) => {
           <FormattedMessage id='farm5' />
         </button>
       </div>
-      {
-        !farmPools.notReward1 && <p
+      <p
           className='form-app__inputbox-after-text farm_popup_avaliable'
           style={{ marginTop: '20px' }}
         >
@@ -207,7 +206,7 @@ const UnstakePopup = (props) => {
               : '--'}
         </span>
         </p>
-      }
+
       {farmPools.rewards2 && (
         <p className='form-app__inputbox-after-text farm_popup_avaliable'>
           <FormattedMessage

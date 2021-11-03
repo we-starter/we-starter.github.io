@@ -360,9 +360,7 @@ const FarmCard = (props) => {
           }`
         )}
       >
-        {
-          !farmPools.notReward1 && (
-            <p className='form-app__inputbox-after-text farm_popup_avaliable'>
+        <p className='form-app__inputbox-after-text farm_popup_avaliable'>
               <FormattedMessage
                 id='farm6'
                 values={{ coin: farmPools && farmPools.rewards1 }}
@@ -393,8 +391,6 @@ const FarmCard = (props) => {
                 : '--'}
           </span>
             </p>
-          )
-        }
         {farmPools.rewards2 && (
           <p className='form-app__inputbox-after-text farm_popup_avaliable'>
             <FormattedMessage

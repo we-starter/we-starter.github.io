@@ -10,79 +10,6 @@ export default [
   // 核心池
 
   {
-    name: 'WAR-USDT LPT',
-    icon: 'MDX@2x.png',
-    rewards1: 'WAR',
-    rewards2: 'MDX',
-    address: '0x777d69a99fE220471f23e2643007f9d086B7d714', // 超募合约地址
-    rewards1Address: '0x25D2e80cB6B86881Fd7e07dd263Fb79f4AbE033c', // war rewards is zero
-    rewards2Address: '0x25D2e80cB6B86881Fd7e07dd263Fb79f4AbE033c',
-    // apr
-    valueAprToken: '0x910651F81a605a6Ef35d05527d24A72fecef8bF0', // WAR
-    valueAprPath: [],
-    rewardsAprPath: [],
-    settleToken: '0xa71EdC38d189767582C38A3145b5873052c3e47a',
-    reserve0: '0x910651F81a605a6Ef35d05527d24A72fecef8bF0',// WAR
-    reserve0Decimal: 18,
-    MLP: '0x2eAB1e47Bf1660bf6De9437BD061db666111e041',
-    mlpDecimal: 18,
-    byLink:
-      'http://ht.mdex.com/#/add/0xa71EdC38d189767582C38A3145b5873052c3e47a/0x910651F81a605a6Ef35d05527d24A72fecef8bF0',
-    abi: StakingPool,
-    start_at: '1626350400',
-    time: '',
-    dueDate: null,
-    openDate: null,
-    earnName: 'APR',
-    status: 0,
-    rewards: 'LPT',
-    decimal: 18,
-    is_coming: true,
-    mdexReward: true,
-    networkId: 128,
-    lpToken: 'MDEX LP Token',
-    mdexDaily: 762.97,
-    mdexPid: '0x5a',
-    poolType: 2, // 1单池，2LP，2sort
-    notReward1: true
-  },
-  {
-    name: 'WAR POOL (DAO)',
-    icon: 'PAUL-HT_small@2x.png',
-    rewards1: 'WAR',
-    rewards2: null,
-    address: '0xF01f44B1b5770d3c5dc54FE1455786d1227736CC',
-    rewards1Address: '0x910651F81a605a6Ef35d05527d24A72fecef8bF0',
-    rewards2Address: null,
-    // apr
-    valueAprToken: '0x910651F81a605a6Ef35d05527d24A72fecef8bF0', // WAR
-    valueAprPath: [
-      '0x5545153CCFcA01fbd7Dd11C0b23ba694D9509A6F', // WHT
-    ],
-    rewardsAprPath: [
-      '0x5545153CCFcA01fbd7Dd11C0b23ba694D9509A6F', // WHT
-    ],
-    settleToken: '0xa71EdC38d189767582C38A3145b5873052c3e47a', //usdt
-    MLP: '0x910651F81a605a6Ef35d05527d24A72fecef8bF0', // WAR
-    byLink:
-      'https://ht.mdex.com/#/swap?outputCurrency=0x910651f81a605a6ef35d05527d24a72fecef8bf0',
-    abi: StakingPool3,
-    start_at: '',
-    time: '',
-    openDate: '1623153600',
-    dueDate: null,
-    earnName: 'APY',
-    status: 0,
-    rewards: 'WAR',
-    decimal: 18,
-    is_coming: false,
-    mdexReward: false,
-    networkId: 128,
-    mdexDaily: 0,
-    mdexPid: '',
-    poolType: 1, // 1单池，2LP，2sort
-  },
-  {
     name: 'WAR POOL (DAO)',
     icon: 'PAUL-HT_small@2x.png',
     rewards1: 'WAR',
@@ -118,6 +45,78 @@ export default [
     mdexPid: '',
     svipFlag: true,
     minAmountMortgage: '10000',
+    poolType: 1, // 1单池，2LP，2sort
+  },
+  {
+    name: 'WAR-USDT LPT',
+    icon: 'MDX@2x.png',
+    rewards1: 'WAR',
+    rewards2: 'MDX',
+    address: '0x777d69a99fE220471f23e2643007f9d086B7d714', // 超募合约地址
+    rewards1Address: '0x25D2e80cB6B86881Fd7e07dd263Fb79f4AbE033c', // war rewards is zero
+    rewards2Address: '0x25D2e80cB6B86881Fd7e07dd263Fb79f4AbE033c',
+    // apr
+    valueAprToken: '0x910651F81a605a6Ef35d05527d24A72fecef8bF0', // WAR
+    valueAprPath: [],
+    rewardsAprPath: [],
+    settleToken: '0xa71EdC38d189767582C38A3145b5873052c3e47a',
+    reserve0: '0x910651F81a605a6Ef35d05527d24A72fecef8bF0',// WAR
+    reserve0Decimal: 18,
+    MLP: '0x2eAB1e47Bf1660bf6De9437BD061db666111e041',
+    mlpDecimal: 18,
+    byLink:
+      'http://ht.mdex.com/#/add/0xa71EdC38d189767582C38A3145b5873052c3e47a/0x910651F81a605a6Ef35d05527d24A72fecef8bF0',
+    abi: StakingPool,
+    start_at: '1626350400',
+    time: '',
+    dueDate: null,
+    openDate: null,
+    earnName: 'APR',
+    status: 0,
+    rewards: 'LPT',
+    decimal: 18,
+    is_coming: true,
+    mdexReward: true,
+    networkId: 128,
+    lpToken: 'MDEX LP Token',
+    mdexDaily: 762.97,
+    mdexPid: '0x5a',
+    poolType: 2, // 1单池，2LP，2sort
+  },
+  {
+    name: 'WAR POOL (DAO)',
+    icon: 'PAUL-HT_small@2x.png',
+    rewards1: 'WAR',
+    rewards2: null,
+    address: '0xF01f44B1b5770d3c5dc54FE1455786d1227736CC',
+    rewards1Address: '0x910651F81a605a6Ef35d05527d24A72fecef8bF0',
+    rewards2Address: null,
+    // apr
+    valueAprToken: '0x910651F81a605a6Ef35d05527d24A72fecef8bF0', // WAR
+    valueAprPath: [
+      '0x5545153CCFcA01fbd7Dd11C0b23ba694D9509A6F', // WHT
+    ],
+    rewardsAprPath: [
+      '0x5545153CCFcA01fbd7Dd11C0b23ba694D9509A6F', // WHT
+    ],
+    settleToken: '0xa71EdC38d189767582C38A3145b5873052c3e47a', //usdt
+    MLP: '0x910651F81a605a6Ef35d05527d24A72fecef8bF0', // WAR
+    byLink:
+      'https://ht.mdex.com/#/swap?outputCurrency=0x910651f81a605a6ef35d05527d24a72fecef8bf0',
+    abi: StakingPool3,
+    start_at: '',
+    time: '',
+    openDate: '1623153600',
+    dueDate: null,
+    earnName: 'APY',
+    status: 0,
+    rewards: 'WAR',
+    decimal: 18,
+    is_coming: false,
+    mdexReward: false,
+    networkId: 128,
+    mdexDaily: 0,
+    mdexPid: '',
     poolType: 1, // 1单池，2LP，2sort
   },
 
