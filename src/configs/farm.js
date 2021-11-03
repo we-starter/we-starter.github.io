@@ -11,7 +11,7 @@ export default [
 
   {
     name: 'WAR-USDT LPT',
-    icon: 'WAR-HT_small@2x.png',
+    icon: 'MDX@2x.png',
     rewards1: 'WAR',
     rewards2: 'MDX',
     address: '0x777d69a99fE220471f23e2643007f9d086B7d714', // 超募合约地址
