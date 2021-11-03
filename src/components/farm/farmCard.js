@@ -360,12 +360,14 @@ const FarmCard = (props) => {
           }`
         )}
       >
-        <p className='form-app__inputbox-after-text farm_popup_avaliable'>
-              <FormattedMessage
-                id='farm6'
-                values={{ coin: farmPools && farmPools.rewards1 }}
-              />
-              <span>
+        {
+          // WAR-USDT LPT special
+          !(farmPools && farmPools.address === '0x777d69a99fE220471f23e2643007f9d086B7d714' && Number(farmPools.earned) === 0 || !farmPools.earned)  && <p className='form-app__inputbox-after-text farm_popup_avaliable'>
+            <FormattedMessage
+              id='farm6'
+              values={{ coin: farmPools && farmPools.rewards1 }}
+            />
+            <span>
             {farmPools &&
             farmPools.earned &&
             farmPools.name !== 'WAR POOL (DAO)'
@@ -390,7 +392,8 @@ const FarmCard = (props) => {
                 )
                 : '--'}
           </span>
-            </p>
+          </p>
+        }
         {farmPools.rewards2 && (
           <p className='form-app__inputbox-after-text farm_popup_avaliable'>
             <FormattedMessage

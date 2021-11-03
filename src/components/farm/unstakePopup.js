@@ -172,15 +172,18 @@ const UnstakePopup = (props) => {
           <FormattedMessage id='farm5' />
         </button>
       </div>
-      <p
-          className='form-app__inputbox-after-text farm_popup_avaliable'
-          style={{ marginTop: '20px' }}
-        >
-          <FormattedMessage
-            id='farm6'
-            values={{ coin: (farmPools && farmPools.rewards1) || '--' }}
-          />
-          <span>
+      {
+        !(farmPools && farmPools.address === '0x777d69a99fE220471f23e2643007f9d086B7d714' && Number(farmPools.earned) === 0 || !farmPools.earned) && (
+
+          <p
+            className='form-app__inputbox-after-text farm_popup_avaliable'
+            style={{ marginTop: '20px' }}
+          >
+            <FormattedMessage
+              id='farm6'
+              values={{ coin: (farmPools && farmPools.rewards1) || '--' }}
+            />
+            <span>
           {farmPools && farmPools.earned && farmPools.name !== 'WAR POOL (DAO)'
             ? formatNumber(
               formatAmount(farmPools.earned, farmPools.decimal, 6),
@@ -205,7 +208,9 @@ const UnstakePopup = (props) => {
               )
               : '--'}
         </span>
-        </p>
+          </p>
+        )
+      }
 
       {farmPools.rewards2 && (
         <p className='form-app__inputbox-after-text farm_popup_avaliable'>
