@@ -53,7 +53,7 @@ export default [
     rewards1: 'WAR',
     rewards2: 'MDX',
     address: '0x777d69a99fE220471f23e2643007f9d086B7d714', // 超募合约地址
-    rewards1Address: '0x25D2e80cB6B86881Fd7e07dd263Fb79f4AbE033c', // war rewards is zero
+    rewards1Address: '0x910651F81a605a6Ef35d05527d24A72fecef8bF0', // war rewards is zero
     rewards2Address: '0x25D2e80cB6B86881Fd7e07dd263Fb79f4AbE033c',
     // apr
     valueAprToken: '0x910651F81a605a6Ef35d05527d24A72fecef8bF0', // WAR
