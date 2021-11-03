@@ -80,25 +80,25 @@ const ClaimPopup = (props) => {
   return (
     <div style={{ paddingTop: '30px' }}>
       <p className='form-app__inputbox-after-text farm_popup_avaliable'>
-        <FormattedMessage
-          id='farm6'
-          values={{ coin: farmPools && farmPools.rewards1 }}
-        />
-        <span>
+          <FormattedMessage
+            id='farm6'
+            values={{ coin: farmPools && farmPools.rewards1 }}
+          />
+          <span>
           {farmPools && farmPools.earned
             ? formatNumber(
-                formatAmount(farmPools.earned, farmPools.decimal, 6),
-                {
-                  thousand: ',',
-                  decimal: '.',
-                  precision: formatAmount(farmPools.earned) - 0 > 0 ? 6 : 0,
-                }
-              ) +
-              ' ' +
-              farmPools.rewards1
+              formatAmount(farmPools.earned, farmPools.decimal, 6),
+              {
+                thousand: ',',
+                decimal: '.',
+                precision: formatAmount(farmPools.earned) - 0 > 0 ? 6 : 0,
+              }
+            ) +
+            ' ' +
+            farmPools.rewards1
             : '--'}
         </span>
-      </p>
+        </p>
       {farmPools.rewards2 && (
         <p className='form-app__inputbox-after-text farm_popup_avaliable'>
           <FormattedMessage

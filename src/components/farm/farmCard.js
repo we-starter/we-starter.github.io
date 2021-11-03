@@ -361,11 +361,11 @@ const FarmCard = (props) => {
         )}
       >
         <p className='form-app__inputbox-after-text farm_popup_avaliable'>
-          <FormattedMessage
-            id='farm6'
-            values={{ coin: farmPools && farmPools.rewards1 }}
-          />
-          <span>
+              <FormattedMessage
+                id='farm6'
+                values={{ coin: farmPools && farmPools.rewards1 }}
+              />
+              <span>
             {farmPools &&
             farmPools.earned &&
             farmPools.name !== 'WAR POOL (DAO)'
@@ -390,7 +390,7 @@ const FarmCard = (props) => {
                 )
                 : '--'}
           </span>
-        </p>
+            </p>
         {farmPools.rewards2 && (
           <p className='form-app__inputbox-after-text farm_popup_avaliable'>
             <FormattedMessage
