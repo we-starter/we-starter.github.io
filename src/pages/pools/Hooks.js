@@ -1567,7 +1567,7 @@ export const useFarmInfo = (address = '') => {
         earned2 = data[5]
       }
       let APR_ = fromWei(
-        new BigNumber(APR).plus(new BigNumber(APR2)).toString(),
+        new BigNumber(pool.notReward1 ? '0' : APR).plus(new BigNumber(APR2)).toString(),
         18
       ).toString()
       if (pool.earnName === 'APY') {

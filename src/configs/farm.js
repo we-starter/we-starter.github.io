@@ -11,11 +11,11 @@ export default [
 
   {
     name: 'WAR-USDT LPT',
-    icon: 'WAR-HT_small@2x.png',
+    icon: 'MDX@2x.png',
     rewards1: 'WAR',
     rewards2: 'MDX',
     address: '0x777d69a99fE220471f23e2643007f9d086B7d714', // 超募合约地址
-    rewards1Address: '0x910651F81a605a6Ef35d05527d24A72fecef8bF0',
+    rewards1Address: '0x25D2e80cB6B86881Fd7e07dd263Fb79f4AbE033c', // war rewards is zero
     rewards2Address: '0x25D2e80cB6B86881Fd7e07dd263Fb79f4AbE033c',
     // apr
     valueAprToken: '0x910651F81a605a6Ef35d05527d24A72fecef8bF0', // WAR
@@ -44,6 +44,7 @@ export default [
     mdexDaily: 762.97,
     mdexPid: '0x5a',
     poolType: 2, // 1单池，2LP，2sort
+    notReward1: true
   },
   {
     name: 'WAR POOL (DAO)',
