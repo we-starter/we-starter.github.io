@@ -25,7 +25,7 @@ export function CALC_ADDRESS(chainId){
     case ChainId.BSC:
       return ''
     case ChainId.HECO:
-      return '0x61daB662761e0fc90935a49DB9c48dF2C01C1780'
+      return '0x96721F86f86bf34ac77Edd8437bA15dAC24cF265'
     case ChainId.MATIC:
       return '0xd9020a0e9aca29bec5a36e8fc4feff37255606e4'
     default:
