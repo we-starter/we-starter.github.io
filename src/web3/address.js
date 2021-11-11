@@ -26,8 +26,10 @@ export function CALC_ADDRESS(chainId){
       return '0x47B714C7F255e8953615fDC6dD118c48b2be2b65'
     case ChainId.HECO:
       return '0xd1ecd16C4e0D2bd7AD87C3620027F463E31F71dA'
+    case ChainId.LOCALHOST:
+      return '0xd1ecd16C4e0D2bd7AD87C3620027F463E31F71dA'
     default:
-      return ''
+      return '0xd1ecd16C4e0D2bd7AD87C3620027F463E31F71dA'
   }
 }
 
@@ -167,7 +169,8 @@ export function RPC_URLS (chainId) {
     return {
       [ChainId.HECO]: 'https://http-mainnet-node.huobichain.com',
       [ChainId.BSC]: 'https://bsc-dataseed.binance.org/',
-      [ChainId.MATIC]: 'https://rpc-mainnet.maticvigil.com'
+      [ChainId.MATIC]: 'https://rpc-mainnet.maticvigil.com',
+      [ChainId.LOCALHOST]: 'http://localhost:8545'
     }[chainId]
 }
 
