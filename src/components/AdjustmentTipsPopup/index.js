@@ -38,14 +38,16 @@ export default function AdjustmentTipsPopup() {
                       <FormattedMessage id='adjustmentTips5' />
                     </Checkbox>
                   </div>
-                  <button
-                    style={{ flex: 0 }}
-                    className='btn btn--medium'
-                    disabled={!check}
-                    onClick={onConfirm}
-                    type='button'>
-                    <FormattedMessage id='modalsText47' />
-                  </button>
+                  <div>
+                    <button
+                      style={{ flex: 0 }}
+                      className='btn btn--medium'
+                      disabled={!check}
+                      onClick={onConfirm}
+                      type='button'>
+                      <FormattedMessage id='modalsText47' />
+                    </button>
+                  </div>
                 </div>
               </div>
 

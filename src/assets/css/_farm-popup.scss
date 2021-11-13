@@ -62,6 +62,16 @@
     display: flex;
     align-items: center;
   }
+  &>div:nth-child(2){
+    button{
+      color: #ffffff;
+      background: #0f8c20;
+      padding: 0 20px;
+      height: 46px;
+      line-height: 40px;
+      border-radius: 10px;
+    }
+  }
 }
 @media #{$desktop} {
   .farm_popup {
