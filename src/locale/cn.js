@@ -1,3 +1,5 @@
+import AdjustmentTipsPopup from "../components/AdjustmentTipsPopup";
+
 const zh_CN = {
   fundraisingPool: '兑换池',
   farm: '农场',
@@ -400,5 +402,11 @@ const zh_CN = {
   withdraw: '提取',
   add: '添加',
   to: '到',
+  adjustmentTips1: '亲爱的用户：',
+  adjustmentTips2: 'WeStarter近期做出一系列运营调整，现将限制以下国家IP访问：',
+  adjustmentTips3: '日本、古巴、伊朗、中国内地、中国香港、中国澳门、朝鲜、苏丹、叙利亚、美利坚合众国及其海外领地（美属萨摩亚、关岛、北马里亚纳群岛、波多黎各和美属维京群岛）、加拿大、新加坡。',
+  adjustmentTips4: '感谢您对WeStarter的支持！',
+  adjustmentTips5: '我已确认不属于以上地区',
+
 }
 export default zh_CN

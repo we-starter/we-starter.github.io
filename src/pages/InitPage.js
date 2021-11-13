@@ -42,6 +42,7 @@ import SwitchWithdrawPopup from '../components/migrate/switchWithdrawPopup'
 import WithdrawSuccessPopup from '../components/migrate/withdrawSuccessPopup'
 import toolApi from '../apis/toolApi'
 import { useConnectWallet } from '../connectors'
+import AdjustmentTipsPopup from "../components/AdjustmentTipsPopup";
 
 export const InitPage = () => {
   const { dispatch, state } = useContext(mainContext)
@@ -92,6 +93,7 @@ export const InitPage = () => {
 
   return (
     <>
+      <AdjustmentTipsPopup />
       {/*<img src={satellite} className="satellite"/>*/}
       {showMenuMaskModal && (
         <MenuMask

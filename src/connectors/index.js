@@ -146,7 +146,6 @@ export const useConnectWallet = () => {
             }
             if (window.ethereum && window.ethereum.on) {
               // 监听钱包事件
-              console.log('注册事件')
               // const { ethereum } = window
               window.ethereum.on('accountsChanged', (accounts) => {
                 if (accounts.length === 0) {
