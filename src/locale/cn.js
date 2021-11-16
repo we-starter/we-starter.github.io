@@ -420,6 +420,11 @@ const zh_CN = {
     'The Syrup Pool: Stake CAKE tokens to earn APENFT’s $NFT tokens!',
   applicationText15: 'Proposals',
 
+  applicationText26 : '建议上传 SVG 格式的图片，PNG 等其他格式建议分辨率为 400 * 400',
+  applicationText27 : '发起投票提案时，要抵押此金额的{percentage}',
+  applicationText28: '请仔细核对输入的信息，创建成功后会铸造 HECO-721 NFT Token，信息不可更改。如需更改需要创建新的 Project NFT Card',
+  applicationText29: '创建新的',
+
   adjustmentTips1: '亲爱的用户：',
   adjustmentTips2: 'WeStarter近期做出一系列运营调整，现将限制以下国家IP访问：',
   adjustmentTips3: '日本、古巴、伊朗、中国内地、中国香港、中国澳门、朝鲜、苏丹、叙利亚、美利坚合众国及其海外领地（美属萨摩亚、关岛、北马里亚纳群岛、波多黎各和美属维京群岛）、加拿大、新加坡。',

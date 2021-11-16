@@ -1,8 +1,18 @@
 import React, {useState} from "react";
 import BackIcon from "../../assets/icon/application/back@2x.png";
 import {Button, Input, message} from "antd";
-import {getIPFSFile, uploadIPFSFile} from "../../utils/ipfs";
+import {getIPFSFile, uploadIPFSFile, uploadIPFSJson} from "../../utils/ipfs";
 import {LoadingOutlined} from '@ant-design/icons'
+import {FormattedMessage} from "react-intl";
+import {getContract, useActiveWeb3React} from "../../web3";
+import Web3 from "web3";
+import {GAS_FEE} from "../../web3/address";
+import {
+  HANDLE_SHOW_SUCCESS_TRANSACTION_MODAL,
+  HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
+  waitingForInit
+} from "../../const";
+import {voteNFT, voteMain} from '../../web3/address'
 
 const FromItem = ({children, title, required = true, desc}) => {
   return (
@@ -33,10 +43,13 @@ const INFO_TEMPLATE = {
   totalRaise: ''
 }
 
-export default function ApplyInfo({data, setData, setShowInfoPage}) {
-  const [info, setInfo] = useState(() => data || INFO_TEMPLATE)
-  const [logo, setLogo] = useState(() => (data || INFO_TEMPLATE).logo)
+export default function ApplyInfo({setShowInfoPage, getNftCards}) {
+  const [info, setInfo] = useState(() => INFO_TEMPLATE)
+  const [logo, setLogo] = useState(() => (INFO_TEMPLATE).logo)
   const [uploadLoading, setUploading] = useState(false)
+  const [loading, setLoading] = useState(false)
+  const {library, account, chainId} = useActiveWeb3React()
+
   const onChangeInfo = (value, key) => {
     const _info = JSON.parse(JSON.stringify(info))
     _info[key] = value
@@ -60,7 +73,6 @@ export default function ApplyInfo({data, setData, setShowInfoPage}) {
       ...info,
       logo
     }
-    console.log('info_', info_)
     for (let i in info_) {
       if (!info_[i]) {
         return message.warning('Please Enter information completely')
@@ -69,8 +81,29 @@ export default function ApplyInfo({data, setData, setShowInfoPage}) {
     if (info_.totalRaise <= 0) {
       return message.warning('Please Enter Total Raise')
     }
-    setData(JSON.parse(JSON.stringify(info_)))
-    setShowInfoPage(false)
+    setLoading(true)
+    uploadIPFSJson(info_).then(res => {
+      const contract = getContract(library, voteNFT.abi, voteNFT.address)
+      contract.methods
+        .createProjNFTCard(res)
+        .send({
+          from: account,
+          ...GAS_FEE(chainId)
+        })
+        .on('receipt', (_, receipt) => {
+          message.success('Create Success')
+          getNftCards()
+          setLoading(false)
+          setShowInfoPage(false)
+        })
+        .on('error', (err, receipt) => {
+          setLoading(false)
+        })
+    }).catch(() => {
+      message.error('fail')
+      setLoading(false)
+    })
+
   }
   return (
     <div className="apply-info-view">
@@ -90,11 +123,11 @@ export default function ApplyInfo({data, setData, setShowInfoPage}) {
         <div className="upload-img">
           {
             uploadLoading ? <LoadingOutlined size={40} style={{fontSize: '16px', color: '#08c'}}/> : logo ?
-              <img src={getIPFSFile(logo)} alt=""/> : <span>选择文件</span>
+              <img src={getIPFSFile(logo)} alt=""/> : <span>Choose File</span>
           }
           <input type="file" accept="image/*" onChange={changeFile}/>
         </div>
-        <p className="tip-txt">* 建议上传 SVG 格式的图片，PNG 等其他格式建议分辨率为 400 * 400</p>
+        <p className="tip-txt">* <FormattedMessage id="applicationText26"/> </p>
       </FromItem>
       <FromItem title="Website URL">
         <Input className="apply-input" value={info.website} onInput={e => onChangeInfo(e.target.value, 'website')}/>
@@ -121,12 +154,14 @@ export default function ApplyInfo({data, setData, setShowInfoPage}) {
         <Input.TextArea rows={4} className="apply-input" value={info.descZH}
                         onInput={e => onChangeInfo(e.target.value, 'descZH')}/>
       </FromItem>
-      <FromItem title="Total Raise($)" desc={<span>发起投票提案时，要抵押此金额的<strong>20%</strong></span>}>
+      <FromItem title="Total Raise($)" desc={<span><FormattedMessage id="applicationText27" values={{
+        percentage: <strong>20%</strong>
+      }}/> </span>}>
         <Input className="apply-input" type="number" value={info.totalRaise}
                onInput={e => onChangeInfo(e.target.value, 'totalRaise')}/>
-        <p className="tip-txt">请仔细核对输入的信息，创建成功后会铸造 HECO-721 NFT Token，信息不可更改。如需更改需要创建新的 Project NFT Card</p>
+        <p className="tip-txt"><FormattedMessage id="applicationText28"/></p>
       </FromItem>
-      <Button type="primary" className="create-btn" onClick={onCreate}>{data ? 'Edit' : 'Create'}</Button>
+      <Button type="primary" className="create-btn" onClick={onCreate} loading={loading}>Create</Button>
     </div>
   )
 }

@@ -114,12 +114,7 @@
 
       &.disabled {
         cursor: not-allowed;
-      }
-    }
-
-    .arrow-l {
-      &.disabled {
-        transform: translateY(-50%) rotate(180deg) !important;
+        opacity: 0.5;
       }
     }
 
@@ -127,10 +122,6 @@
       left: auto;
       right: -66px;
       transform: translateY(-50%) rotate(180deg) !important;
-
-      &.disabled {
-        transform: translateY(-50%) rotate(0) !important;
-      }
     }
 
     .nft-card-title {
@@ -235,7 +226,7 @@
 
   .tip-txt {
     width: 100%;
-    height: 22px;
+    min-height: 22px;
     font-size: 16px;
     font-family: Montserrat-Regular, Montserrat;
     font-weight: 400;
@@ -373,6 +364,7 @@
         display: flex;
         align-items: center;
         flex: 1;
+        white-space: nowrap;
       }
       .desc{
         display: flex;
@@ -440,7 +432,6 @@
     }
   }
   .create-btn{
-    display: block;
     margin: 50px auto;
     width: 120px;
     height: 48px;
@@ -452,6 +443,14 @@
     font-weight: 500;
     color: #FFFFFF;
     line-height: 19px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    svg{
+      margin-right: 0!important;
+      width: 20px!important;
+      height: 20px!important;
+    }
     &:hover{
       background: #00C57B!important;
       border-color: #00C57B!important;

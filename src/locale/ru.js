@@ -423,6 +423,12 @@ const ru = {
   applicationText14:
     'The Syrup Pool: Stake CAKE tokens to earn APENFT’s $NFT tokens!',
   applicationText15: 'Proposals',
+
+  applicationText26 : 'It is recommended to upload pictures in SVG format, and the recommended resolution for other formats such as PNG is 400 * 400',
+  applicationText27 : 'When initiating a voting proposal, {percentage} of this amount must be pledged',
+  applicationText28: 'Please check the entered information carefully, HECO-721 NFT Token will be minted after successful creation, and the information cannot be changed. If you need to change, you need to create a new Project NFT Card',
+  applicationText29: 'Create a new',
+
   adjustmentTips1: 'Dear users,',
   adjustmentTips2: 'WeStarter recently made a series of operational changes that will now restrict IP access to the following countries:',
   adjustmentTips3: 'Japan, Cuba, Iran, Mainland China, Hong Kong China, Macao China, The Democratic People\'s Republic of Korea, Sudan, Syria, United States of America and its Overseas Territories (American Samoa, Guam, Northern Mariana Islands, Puerto Rico and THE United States Virgin Islands), Canada and Singapore.',
