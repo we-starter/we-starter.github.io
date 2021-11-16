@@ -2,6 +2,9 @@
   max-width: 100%;
   width: 100%;
 }
+.margin-b-20{
+  margin-bottom: 20px;
+}
 .ant-btn-primary {
   padding: 0 16px;
   width: 100%;
@@ -52,7 +55,24 @@
     top: 4px;
   }
 }
-
+.check-footer{
+  display: flex;
+  &>div:nth-child(1){
+    flex: 1;
+    display: flex;
+    align-items: center;
+  }
+  &>div:nth-child(2){
+    button{
+      color: #ffffff;
+      background: #0f8c20;
+      padding: 0 20px;
+      height: 46px;
+      line-height: 40px;
+      border-radius: 10px;
+    }
+  }
+}
 @media #{$desktop} {
   .farm_popup {
     &_avaliable {

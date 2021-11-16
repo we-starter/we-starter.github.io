@@ -23,11 +23,9 @@ export const MDEX_ADDRESS = '0x25D2e80cB6B86881Fd7e07dd263Fb79f4AbE033c'
 export function CALC_ADDRESS(chainId){
   switch (chainId) {
     case ChainId.BSC:
-      return ''
+      return '0x47B714C7F255e8953615fDC6dD118c48b2be2b65'
     case ChainId.HECO:
-      return '0x61daB662761e0fc90935a49DB9c48dF2C01C1780'
-    case ChainId.MATIC:
-      return '0xd9020a0e9aca29bec5a36e8fc4feff37255606e4'
+      return '0xd1ecd16C4e0D2bd7AD87C3620027F463E31F71dA'
     default:
       return ''
   }
@@ -185,8 +183,9 @@ export function GAS_FEE(chainId) {
   return {
     [ChainId.HECO]: {
       maxFeePerGas: Web3.utils.toWei('8', 'gwei'),
-      gasPrice: Web3.utils.toWei('5', 'gwei'),
+      // gasPrice: Web3.utils.toWei('5', 'gwei'),
       maxPriorityFeePerGas: Web3.utils.toWei('5', 'gwei'),
+      type: '0x2',
     }
   }[chainId]
 }

@@ -163,7 +163,7 @@ const UnstakePopup = (props) => {
         </div>
       </div>
 
-      <div className='form-app__submit form-app__submit--row'>
+      <div className='form-app__submit form-app__submit--row margin-b-20'>
         <button
           type='button'
           className='btn btn--medium compound_claim'
@@ -172,30 +172,33 @@ const UnstakePopup = (props) => {
           <FormattedMessage id='farm5' />
         </button>
       </div>
-      <p
-        className='form-app__inputbox-after-text farm_popup_avaliable'
-        style={{ marginTop: '20px' }}
-      >
-        <FormattedMessage
-          id='farm6'
-          values={{ coin: (farmPools && farmPools.rewards1) || '--' }}
-        />
-        <span>
+      {
+        !(farmPools && farmPools.address === '0x777d69a99fE220471f23e2643007f9d086B7d714' && Number(farmPools.earned) === 0 || !farmPools.earned) && (
+
+          <p
+            className='form-app__inputbox-after-text farm_popup_avaliable'
+            style={{ marginTop: '20px' }}
+          >
+            <FormattedMessage
+              id='farm6'
+              values={{ coin: (farmPools && farmPools.rewards1) || '--' }}
+            />
+            <span>
           {farmPools && farmPools.earned && farmPools.name !== 'WAR POOL (DAO)'
             ? formatNumber(
-                formatAmount(farmPools.earned, farmPools.decimal, 6),
-                {
-                  thousand: ',',
-                  decimal: '.',
-                  precision: formatAmount(farmPools.earned) - 0 > 0 ? 6 : 0,
-                }
-              ) +
-              ' ' +
-              farmPools.rewards1
+              formatAmount(farmPools.earned, farmPools.decimal, 6),
+              {
+                thousand: ',',
+                decimal: '.',
+                precision: formatAmount(farmPools.earned) - 0 > 0 ? 6 : 0,
+              }
+            ) +
+            ' ' +
+            farmPools.rewards1
             : farmPools &&
-              farmPools.earned &&
-              farmPools.name === 'WAR POOL (DAO)'
-            ? formatNumber(
+            farmPools.earned &&
+            farmPools.name === 'WAR POOL (DAO)'
+              ? formatNumber(
                 formatAmount(farmPools.earned, farmPools.decimal, 4),
                 {
                   thousand: ',',
@@ -203,9 +206,12 @@ const UnstakePopup = (props) => {
                   precision: formatAmount(farmPools.earned) - 0 > 0 ? 4 : 0,
                 }
               )
-            : '--'}
+              : '--'}
         </span>
-      </p>
+          </p>
+        )
+      }
+
       {farmPools.rewards2 && (
         <p className='form-app__inputbox-after-text farm_popup_avaliable'>
           <FormattedMessage

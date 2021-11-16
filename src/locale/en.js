@@ -418,5 +418,11 @@ const en_US = {
   applicationText14:
     'The Syrup Pool: Stake CAKE tokens to earn APENFT’s $NFT tokens!',
   applicationText15: 'Proposals',
+  adjustmentTips1: 'Dear users,',
+  adjustmentTips2: 'WeStarter recently made a series of operational changes that will now restrict IP access to the following countries:',
+  adjustmentTips3: 'Japan, Cuba, Iran, Mainland China, Hong Kong China, Macao China, The Democratic People\'s Republic of Korea, Sudan, Syria, United States of America and its Overseas Territories (American Samoa, Guam, Northern Mariana Islands, Puerto Rico and THE United States Virgin Islands), Canada and Singapore.',
+  adjustmentTips4: 'Thank you for supporting WeStarter!',
+  adjustmentTips5: 'I\'m not from these regions.',
+
 }
 export default en_US

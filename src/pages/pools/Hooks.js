@@ -1464,17 +1464,37 @@ export const useFarmInfo = (address = '') => {
   const now = parseInt(Date.now() / 1000)
 
   const [farmPoolsInfo, setFarmPoolsInfo] = useState(pool)
+  const [reward2Radio, setReward2Radio] = useState(0)
+
+  const multicallProvider = getOnlyMultiCallProvider(pool.networkId)
+
+  const hasApr = pool.dueDate > now || !pool.dueDate
 
   useMemo(() => {
-    const multicallProvider = getOnlyMultiCallProvider(pool.networkId)
+    if(hasApr && pool.poolType === 2 && pool.rewards2) {
+      const contract = new Contract(MDEX_POOL_ADDRESS, MDexPool)
+      const pool_contract = new Contract(pool.address, pool.abi)
+      const promiseList = [contract.poolInfo(pool.mdexPid), pool_contract.totalSupply()]
+      // // console.log('request___2')
+      multicallProvider.all(promiseList).then((data) => {
+        data = processResult(data)
+        const [poolInfo, totalSupply] = data
+        const totalAmount = poolInfo[5]
+        const radio = new BigNumber(totalSupply).div(new BigNumber(totalAmount)).toFixed(4)
+        setReward2Radio(radio)
+      })
+    }
+  }, [blockHeight])
+
+  useMemo(() => {
     const pool_contract = new Contract(pool.address, pool.abi)
     const currency_token = new Contract(pool.MLP, ERC20)
     const promise_list = [
       pool_contract.begin(), // 开始时间
       pool_contract.totalSupply(), // 总抵押
     ]
-    const now = new Date().getTime() / 1000
-    const hasApr = pool.dueDate > now || !pool.dueDate
+
+
     // 还没结束，算apr
     if (hasApr) {
       const calc_contract = new Contract(CALC_ADDRESS(pool.networkId), CalcAbi)
@@ -1501,15 +1521,17 @@ export const useFarmInfo = (address = '') => {
             MINE_MOUNTAIN_ADDRESS(pool.networkId)
           )
         )
-        // LP 奖励2 apr
-        promise_list.push(
-          calc_contract.getSwapRewardLPTApr(
-            pool.address,
-            sameAddress(pool.reserve0, pool.settleToken),
-            numToWei(pool.mdexDaily, pool.reserve0Decimal),
-            sameAddress(pool.rewards2Address, pool.settleToken)
+
+        if(pool.rewards2 && reward2Radio > 0){
+          promise_list.push(
+            calc_contract.getSwapRewardLPTApr(
+              pool.address,
+              sameAddress(pool.reserve0, pool.settleToken),
+              numToWei(pool.mdexDaily * reward2Radio, pool.reserve0Decimal),
+              sameAddress(pool.rewards2Address, pool.settleToken)
+            )
           )
-        )
+        }
       }
     }
     if (account) {
@@ -1574,6 +1596,7 @@ export const useFarmInfo = (address = '') => {
         APR_ = (1 + APR_ / 365) ** 365 - 1
       }
       // console.log(balanceOf, 'balanceOfbalanceOf')
+      const format_APR = (APR_ * 100).toFixed(2)
       const newPool = Object.assign({}, pool, {
         start_at: begin,
         earned,
@@ -1581,11 +1604,11 @@ export const useFarmInfo = (address = '') => {
         totalSupply,
         balanceOf: fromWei(balanceOf, 18),
         allowance: currency_allowance,
-        APR: hasApr ? (APR_ * 100).toFixed(2) : '-',
+        APR: hasApr && format_APR > 0 ? format_APR : '-',
       })
       setFarmPoolsInfo(newPool)
     })
-  }, [account, address, blockHeight])
+  }, [account, address, reward2Radio, blockHeight])
   return farmPoolsInfo
 }
 
