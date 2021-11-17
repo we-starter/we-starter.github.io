@@ -418,7 +418,8 @@ const en_US = {
   applicationText14:
     'The Syrup Pool: Stake CAKE tokens to earn APENFT’s $NFT tokens!',
   applicationText15: 'Proposals',
-
+  applicationText16:'My Support',
+  applicationText17: 'Claimable',
   applicationText26 : 'It is recommended to upload pictures in SVG format, and the recommended resolution for other formats such as PNG is 400 * 400',
   applicationText27 : 'When initiating a voting proposal, {percentage} of this amount must be pledged',
   applicationText28: 'Please check the entered information carefully, HECO-721 NFT Token will be minted after successful creation, and the information cannot be changed. If you need to change, you need to create a new Project NFT Card',

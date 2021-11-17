@@ -1,76 +1,45 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState, useMemo } from 'react'
 import { usage } from 'browserslist'
 import cs from 'classnames'
-import { formatAmount, numToWei, splitFormat } from '../../utils/format'
-import { getRandomIntInclusive } from '../../utils/index'
-import { Button, Modal } from 'antd'
-import { useBalance } from '../../pages/Hooks'
+import { formatAmount, numToWei } from '../../utils/format'
+import { Button, Modal, message } from 'antd'
+import { useBalance, useAllowance } from '../../pages/Hooks'
 import Web3 from 'web3'
-import { HANDLE_WALLET_MODAL } from '../../const'
 import { getContract, useActiveWeb3React } from '../../web3'
 import { injectIntl } from 'react-intl'
 import ERC20 from '../../web3/abi/ERC20.json'
+import { WAR_ADDRESS, ChainId, GAS_FEE, voteMain } from '../../web3/address'
 // 处理格式 千位符
 import { formatNumber } from 'accounting'
 import { FormattedMessage } from 'react-intl'
-import { useFarmInfo } from '../../pages/pools/Hooks'
-import {
-  HANDLE_SHOW_FAILED_TRANSACTION_MODAL,
-  HANDLE_SHOW_TRANSACTION_MODAL,
-  HANDLE_SHOW_SUCCESS_TRANSACTION_MODAL,
-  HANDLE_SHOW_APPROVE_FAILED_TRANSACTION_MODAL,
-  HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
-  waitingForInit,
-  waitingPending,
-  RANDOM_NUMBER,
-} from '../../const'
 import { mainContext } from '../../reducer'
 import BigNumber from 'bignumber.js'
-import { GAS_FEE } from "../../web3/address";
 
 const VotePopup = (props) => {
-  const { intl, icon, onClose, pool, visible } = props
-  const [farmPools, setFarmPools] = useState(pool)
+  const { intl, onClose, propID, visible } = props
   const { account, active, library, chainId } = useActiveWeb3React()
+  const allowance = useAllowance(
+    WAR_ADDRESS(ChainId.HECO),
+    voteMain.address,
+    account,
+    ChainId.HECO
+  )
   const { dispatch, state } = useContext(mainContext)
   const [approve, setApprove] = useState(true)
-  const [amount, setAmount] = useState(farmPools && farmPools.minAmountMortgage ? farmPools.minAmountMortgage : '')
-  const [fee, setFee] = useState(0)
+  const [amount, setAmount] = useState('')
   const [loadFlag, setLoadFlag] = useState(false)
-  const balance = 0
 
-  // const { balance } = useBalance(farmPools && farmPools.MLP, farmPools.networkId)
-
-  useEffect(() => {
-    const gas_limit = new BigNumber('1006182')
-    const gas_price = new BigNumber(
-      Web3.utils.toWei(`${getRandomIntInclusive(5, 20)}`, 'gwei')
-    )
-    const _fee = gas_limit.multipliedBy(gas_price).toString()
-    setFee(_fee)
-  }, [])
+  const { balance = 0 } = useBalance(WAR_ADDRESS(ChainId.HECO), ChainId.HECO)
 
   useEffect(() => {
-    setFarmPools(props.pool)
-  }, [props])
-
-
-  useEffect(() => {
-    if (farmPools && farmPools.allowance > 0) {
+    if (allowance > 0) {
       setApprove(false)
     }
-  }, [farmPools, farmPools && farmPools.allowance, state.randomNumber])
+  }, [allowance])
+
 
   const onMax = () => {
-    if (!farmPools) {
-      return
-    }
-    // 减去用户已经质押的
-    let max = formatAmount(balance, farmPools.decimal, 6)
-    if (farmPools.maxAmountMortgage) {
-      const reduce = new BigNumber(farmPools.maxAmountMortgage).minus(new BigNumber(farmPools.balanceOf)).toFixed(6) * 1
-      max = Math.min(max, reduce)
-    }
+    let max = formatAmount(balance, 18, 6)
     setAmount(max)
   }
 
@@ -83,9 +52,6 @@ const VotePopup = (props) => {
       (value.split('.').length === 2 && value.slice(value.length - 1) === '.')
     ) {
       let v = value
-      if (farmPools.maxAmountMortgage) {
-        v = Math.min(value, farmPools.maxAmountMortgage)
-      }
       setAmount(v)
     }
   }
@@ -96,10 +62,10 @@ const VotePopup = (props) => {
     }
     if (loadFlag) return
     setLoadFlag(true)
-    const contract = getContract(library, ERC20.abi, farmPools.MLP)
+    const contract = getContract(library, ERC20.abi, WAR_ADDRESS(chainId))
     contract.methods
       .approve(
-        farmPools.address,
+        voteMain.address,
         '0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff'
       )
       .send({
@@ -107,24 +73,12 @@ const VotePopup = (props) => {
         ...GAS_FEE(chainId)
       })
       .on('receipt', (_, receipt) => {
-        console.log('approve success')
-        dispatch({
-          type: RANDOM_NUMBER,
-          randomNumber: Math.random(),
-        })
+        message.success('Approve Success')
         setLoadFlag(false)
         setApprove(false)
       })
       .on('error', (err, receipt) => {
         console.log('approve error', err)
-        dispatch({
-          type: HANDLE_SHOW_APPROVE_FAILED_TRANSACTION_MODAL,
-          showApproveFailedTransactionModal: true,
-        })
-        dispatch({
-          type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
-          showWaitingWalletConfirmModal: waitingForInit,
-        })
         setLoadFlag(false)
       })
   }
@@ -133,61 +87,44 @@ const VotePopup = (props) => {
     if (!active) {
       return false
     }
-    if (!amount) {
+    if (!(amount - 0) || formatAmount(balance) < amount) {
       return false
     }
     if (isNaN(parseInt(amount))) {
       return false
     }
-    if ((farmPools &&
-      farmPools.minAmountMortgage &&
-      amount - 0 < farmPools.minAmountMortgage - 0)) {
-      return false
-    }
     if (loadFlag) return
     setLoadFlag(true)
-    const pool_contract = getContract(library, farmPools.abi, farmPools.address)
+    const pool_contract = getContract(library, voteMain.abi, voteMain.address)
     pool_contract.methods
-      .stake(Web3.utils.toWei(`${amount}`, 'ether'))
+      .vote(propID, 1, Web3.utils.toWei(`${amount}`, 'ether'))
       .send({
         from: account,
-        ...GAS_FEE(chainId)
+        ...GAS_FEE(chainId),
       })
       .on('receipt', (_, receipt) => {
-        console.log('BOT staking success')
-        dispatch({
-          type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
-          showWaitingWalletConfirmModal: waitingForInit,
-        })
-        dispatch({
-          type: HANDLE_SHOW_SUCCESS_TRANSACTION_MODAL,
-          showSuccessTransactionModal: true,
-        })
+        message.success('Success')
         setLoadFlag(false)
         onClose()
       })
       .on('error', (err, receipt) => {
-        console.log('BOT staking error', err)
-        dispatch({
-          type: HANDLE_SHOW_FAILED_TRANSACTION_MODAL,
-          showFailedTransactionModal: true,
-        })
-        dispatch({
-          type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
-          showWaitingWalletConfirmModal: waitingForInit,
-        })
+        console.log('error', err)
         setLoadFlag(false)
       })
   }
 
   return (
-    <Modal style={{ paddingBottom: '0', top: '40%' }} title='Vote' visible={visible} onCancel={onClose} footer={null}>
+    <Modal
+      style={{ paddingBottom: '0', top: '40%' }}
+      title='Vote'
+      visible={visible}
+      onCancel={onClose}
+      footer={null}
+    >
       <div>
         <p className='form-app__inputbox-after-text farm_popup_avaliable'>
           <FormattedMessage id='farm4' />
-          <span>
-            --
-        </span>
+          <span>{balance && formatAmount(balance)} WAR</span>
         </p>
 
         <div className='deposit__inputbox form-app__inputbox'>
@@ -205,17 +142,14 @@ const VotePopup = (props) => {
 
             <div
               className={cs(
-                `form-app__inputbox-up ${
-                farmPools && 'form-app__inputbox-up_' + farmPools.networkId
-                }`
+                `form-app__inputbox-up ${'form-app__inputbox-up_' + 128}`
               )}
               onClick={onMax}
             >
               <div
                 className={cs(
                   `form-app__inputbox-up-pref ${
-                  farmPools &&
-                  'form-app__inputbox-up-pref_' + farmPools.networkId, 'vote_popup_onMax'
+                    ('form-app__inputbox-up-pref_' + 128, 'vote_popup_onMax')
                   }`
                 )}
               >
@@ -224,24 +158,11 @@ const VotePopup = (props) => {
             </div>
           </div>
         </div>
-        {farmPools && farmPools.maxAmountMortgage && (
-          <p className='min_amount_mortgage'>
-            <FormattedMessage
-              id='farm26'
-              values={{
-                num: farmPools && formatNumber(farmPools.maxAmountMortgage),
-                icon: farmPools && farmPools.rewards,
-              }}
-            />
-          </p>
-        )}
         <div className='form-app__submit form-app__submit--row'>
           {approve && (
             <Button
               type='primary'
-              className={cs(
-                farmPools && 'ant-btn-primary_' + farmPools.networkId, 'vote_popup_btn'
-              )}
+              className={cs('ant-btn-primary_' + 128, 'vote_popup_btn')}
               onClick={onApprove}
               loading={loadFlag}
             >
@@ -252,17 +173,11 @@ const VotePopup = (props) => {
           {!approve && (
             <Button
               type='primary'
-              className={cs(
-                  (farmPools &&
-                    farmPools.minAmountMortgage &&
-                    amount - 0 < farmPools.minAmountMortgage - 0) &&
-                'disable_btn',
-                farmPools && 'ant-btn-primary_' + farmPools.networkId, 'vote_popup_btn'
-              )}
+              className={cs('ant-btn-primary_' + 128, 'vote_popup_btn')}
               onClick={onConfirm}
               loading={loadFlag}
             >
-              <FormattedMessage id='farm3' />
+              <FormattedMessage id='workShopText5' />
             </Button>
           )}
         </div>

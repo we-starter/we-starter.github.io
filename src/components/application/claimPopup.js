@@ -2,30 +2,20 @@ import React, { useContext, useEffect, useState } from 'react'
 import { usage } from 'browserslist'
 import { formatAmount, numToWei, splitFormat } from '../../utils/format'
 import { getRandomIntInclusive } from '../../utils/index'
-import { Modal } from 'antd'
-import { useBalance } from '../../pages/Hooks'
+import { Modal, message } from 'antd'
 import Web3 from 'web3'
+import { GAS_FEE, voteMain } from '../../web3/address'
 // 处理格式 千位符
 import { formatNumber } from 'accounting'
 import { getContract, useActiveWeb3React } from '../../web3'
 import { injectIntl } from 'react-intl'
 import ERC20 from '../../web3/abi/ERC20.json'
 import { FormattedMessage } from 'react-intl'
-
-import {
-  HANDLE_SHOW_FAILED_TRANSACTION_MODAL,
-  HANDLE_SHOW_TRANSACTION_MODAL,
-  HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
-  waitingForInit,
-  waitingPending,
-} from '../../const'
 import { mainContext } from '../../reducer'
 import BigNumber from 'bignumber.js'
-import { GAS_FEE } from "../../web3/address";
 
 const ApplicationClaimPopup = (props) => {
-  const { intl, icon, onClose, pool, visible } = props
-  const farmPools = pool
+  const { intl, onClose, propID, usersData, visible } = props
   const { account, active, library, chainId } = useActiveWeb3React()
   const { dispatch } = useContext(mainContext)
 
@@ -33,59 +23,41 @@ const ApplicationClaimPopup = (props) => {
     if (!active) {
       return false
     }
-    if (!(farmPools && farmPools.balanceOf)) {
+    if (
+      !(usersData && usersData.claimed) ||
+      !(usersData && usersData.totalVote)
+    ) {
       return false
     }
-    if (isNaN(parseInt(farmPools && farmPools.balanceOf))) {
-      return false
-    }
-    const contract = getContract(library, farmPools.abi, farmPools.address)
-    const method = pool.rewards2 ? 'getDoubleReward' : 'getReward'
-    contract.methods[method]()
+    const contract = getContract(library, voteMain.abi, voteMain.address)
+    contract.methods
+      .claim(propID)
       .send({
         from: account,
-        ...GAS_FEE(chainId)
+        ...GAS_FEE(chainId),
       })
-      .on('transactionHash', (hash) => {
-        dispatch({
-          type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
-          showWaitingWalletConfirmModal: { ...waitingPending, hash },
-        })
-      })
+      .on('transactionHash', (hash) => {})
       .on('receipt', (_, receipt) => {
-        console.log('BOT staking success')
-        dispatch({
-          type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
-          showWaitingWalletConfirmModal: waitingForInit,
-        })
-        dispatch({
-          type: HANDLE_SHOW_TRANSACTION_MODAL,
-          showTransactionModal: true,
-        })
+        message.success('Claim Success')
         onClose()
       })
       .on('error', (err, receipt) => {
-        console.log('BOT staking error', err)
-        dispatch({
-          type: HANDLE_SHOW_FAILED_TRANSACTION_MODAL,
-          showFailedTransactionModal: true,
-        })
-        dispatch({
-          type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
-          showWaitingWalletConfirmModal: waitingForInit,
-        })
+        console.log('claim error', err)
       })
   }
   return (
-    <Modal style={{ paddingBottom: '0', top: '40%' }} title='Claim' visible={visible} onCancel={onClose} footer={null}>
+    <Modal
+      style={{ paddingBottom: '0', top: '40%' }}
+      title='Claim'
+      visible={visible}
+      onCancel={onClose}
+      footer={null}
+    >
       <div>
         <p className='form-app__inputbox-after-text farm_popup_avaliable'>
-          <FormattedMessage
-            id='farm6'
-            values={{ coin: 'WAR' }}
-          />
+          <FormattedMessage id='farm6' values={{ coin: 'WAR' }} />
           <span>
-            {'--'}
+            {usersData && usersData.claimed ? usersData.totalVote : '0'} WAR
           </span>
         </p>
 
@@ -100,7 +72,6 @@ const ApplicationClaimPopup = (props) => {
         </div>
       </div>
     </Modal>
-    
   )
 }
 

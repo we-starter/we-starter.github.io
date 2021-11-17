@@ -1,5 +1,10 @@
 import React, {useContext, useEffect} from 'react'
-import { HashRouter as Router, Switch, Route } from 'react-router-dom'
+import {
+  // HashRouter as Router,
+  BrowserRouter as Router,
+  Switch,
+  Route
+} from 'react-router-dom'
 import { Web3ReactProvider } from '@web3-react/core'
 import { Web3Provider } from '@ethersproject/providers'
 import 'antd/dist/antd.css'

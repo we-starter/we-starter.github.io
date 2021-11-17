@@ -3,8 +3,9 @@ import cs from 'classnames'
 import { FormattedMessage } from 'react-intl'
 import Timer from 'react-compound-timer'
 
-export default function ApplicationCountdown({}) {
-  let left_time = '1635325200'
+export default function ApplicationCountdown(props) {
+  let left_time = props.time
+  console.log(left_time, 'left_time')
   return (
     <>
       {left_time > 0 && (

@@ -1,9 +1,11 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useMemo, useEffect, useState } from 'react'
 import cs from 'classnames'
 import { FormattedMessage, injectIntl } from 'react-intl'
-import { NavLink } from 'react-router-dom'
-import { getIPFSJson, getIPFSFile } from '../../utils/ipfs'
-import Footer from '../../components/Footer'
+import { getIPFSFile } from '../../utils/ipfs'
+import { getContract, useActiveWeb3React } from '../../web3'
+import { formatAmount } from '../../utils/format'
+import { message } from 'antd'
+import { GAS_FEE, voteMain } from '../../web3/address'
 import BreadCrumbs from '../../components/application/BreadCrumbs'
 import ApplicationCountdown from '../../components/application/ApplicationCountdown'
 import ApplicationClaimPopup from '../../components/application/claimPopup'
@@ -11,22 +13,38 @@ import VotePopup from '../../components/application/votePopup'
 import CannotVotePopup from '../../components/application/cannotVotePopup'
 
 const Vote = (props) => {
+  const { account, active, library, chainId } = useActiveWeb3React()
   const [voteDetail, setVoteDetail] = useState(null)
   const [isModalVisible, setIsModalVisible] = useState(false)
   const [isVoteModalVisible, setIsVoteModalVisible] = useState(false)
   const [isCannotVoteModalVisible, setIsCannotVoteModalVisible] = useState(false)
+  const [usersData, setUsersData] = useState({})
+
   useEffect(() => {
-     getIPFSJson('QmP2DeyoyoT19Pe4G3Fxcb2wvDAwHZ4ejrXK9HDz3ZQqTj')
-       .then((res) => {
-           console.log(res.data, 'voteDetail')
-         if (res.data) {
-           setVoteDetail(res.data)
-         }
-       })
-       .catch((e) => {
-         console.log(e, 'e')
-       })
+    setVoteDetail(props.location.state.detailData)
   }, [])
+
+  const getUsers = () => {
+    if (!active) {
+      return false
+    }
+    const pool_contract = getContract(library, voteMain.abi, voteMain.address)
+    pool_contract.methods
+      .users(voteDetail.ProjectId, account)
+      .call()
+      .then((res) => {
+        setUsersData(res)
+      })
+      .catch((err) => {
+        console.log('error', err)
+      })
+  }
+
+  useMemo(() => {
+    if (voteDetail && voteDetail.ProjectId) {
+      getUsers()
+    }
+  }, [voteDetail])
 
   return (
     <div style={{ position: 'relative' }}>
@@ -38,7 +56,7 @@ const Vote = (props) => {
           </h2>
           <div className='vote_box_card'>
             <div className='vote_box_card_title'>
-              <i>ID:01</i>
+              <i>ID:{voteDetail && voteDetail.id}</i>
               <p className='vote_countdown_ongoing'>
                 <FormattedMessage id='applicationText10' />
               </p>
@@ -114,7 +132,7 @@ const Vote = (props) => {
                 justifyContent: 'space-between',
               }}
             >
-              <ApplicationCountdown />
+              <ApplicationCountdown time={voteDetail && voteDetail.begin} />
               <p className='vote_box_progress_content_btn'>
                 <a onClick={() => setIsVoteModalVisible(true)}>
                   <FormattedMessage id='applicationText8' />
@@ -129,12 +147,21 @@ const Vote = (props) => {
                 </a>
               </p>
               <p className='vote_box_progress_content_title'>
-                <FormattedMessage id='applicationText6' />
-                <span>{voteDetail && voteDetail.name}</span>
+                <FormattedMessage id='applicationText16' />
+                <span>
+                  {(usersData &&
+                    usersData.totalVote &&
+                    formatAmount(usersData.totalVote)) ||
+                    '0'}{' '}
+                  WAR
+                </span>
               </p>
               <p className='vote_box_progress_content_title'>
-                <FormattedMessage id='applicationText7' />
-                <span>${voteDetail && voteDetail.totalRaise}</span>
+                <FormattedMessage id='applicationText17' />
+                <span>
+                  {usersData && usersData.claimed ? usersData.totalVote : '0'}{' '}
+                  WAR
+                </span>
               </p>
               <p className='vote_box_progress_content_btn'>
                 <a className='vote_btn' onClick={() => setIsModalVisible(true)}>
@@ -196,9 +223,9 @@ const Vote = (props) => {
               <p>
                 Telegram: <span>{voteDetail && voteDetail.telegram}</span>
               </p>
-              <p>
+              {/* <p>
                 Explorer: <span>https://Explorer</span>
-              </p>
+              </p> */}
             </div>
             <p className='vote_box_information_about'>
               <FormattedMessage id='applicationText14' />
@@ -209,18 +236,18 @@ const Vote = (props) => {
               </p>
               <p>
                 <span>{voteDetail && voteDetail.descZH}</span>
-                <span>content</span>
-                <span>content</span>
               </p>
             </div>
           </div>
         </div>
         <ApplicationClaimPopup
           visible={isModalVisible}
+          propID={voteDetail && voteDetail.ProjectId}
+          usersData={usersData}
           onClose={() => setIsModalVisible(false)}
         />
         <VotePopup
-          pool={null}
+          propID={voteDetail && voteDetail.ProjectId}
           visible={isVoteModalVisible}
           onClose={() => setIsVoteModalVisible(false)}
         />

@@ -1,30 +1,95 @@
 import React, { useContext, useEffect, useMemo, useState } from 'react'
 import cs from 'classnames'
 import { FormattedMessage, injectIntl } from 'react-intl'
+import { voteMain } from '../../web3/address'
+import { getContract, useActiveWeb3React } from '../../web3'
+import { useBalance, useAllowance } from '../../pages/Hooks'
 import { mainContext } from '../../reducer'
+import { getIPFSJson, getIPFSFile } from '../../utils/ipfs'
 import ApplicationCountdown from './ApplicationCountdown'
+import { fromWei } from '../../utils/format'
+import BigNumber from 'bignumber.js'
 import { NavLink } from 'react-router-dom'
 import ApplicationClaimPopup from './claimPopup'
 
-export const InProgressCard = () => {
+export const InProgressCard = (props) => {
+  const { listData } = props
+  console.log(listData, 'listData')
+  const { library, account, active } = useActiveWeb3React()
   const [isModalVisible, setIsModalVisible] = useState(false)
+  const [detailData, setDetailData] = useState({})
+  const [progressData, setProgressData] = useState('')
+
+  const getVotesData = (propId) => {
+    if (!active) {
+      return false
+    }
+    const pool_contract = getContract(library, voteMain.abi, voteMain.address)
+    pool_contract.methods
+      .getVotes(propId)
+      .call()
+      .then((res) => {
+        setProgressData(
+          fromWei(
+            new BigNumber(res[1])
+              .div(new BigNumber(listData.voteMax))
+              .toString()
+          )
+        )
+        console.log(
+          fromWei(
+            new BigNumber(res[1])
+              .div(new BigNumber(listData.voteMax))
+              .toString(),
+            6
+          ),
+          'progressDataprogressDataprogressData'
+        )
+      })
+      .catch((err) => {
+        console.log('error', err)
+      })
+  }
+
+  useMemo(() => {
+    if (listData && listData.tokenURI) {
+      getIPFSJson(listData.tokenURI)
+        .then((res) => {
+          if (res.data) {
+            res.data.ProjectId = listData.ProjectId
+            res.data.id = listData.id
+            res.data.begin = listData.begin
+            res.data.voteMax = listData.voteMax
+            setDetailData(res.data)
+          }
+        })
+        .catch((e) => {
+          console.log(e, 'e')
+        })
+    }
+    if (listData && listData.ProjectId) {
+      getVotesData(listData.ProjectId)
+    }
+  }, [listData])
+
   return (
     <div className='application_card'>
       <div className='application_card_title'>
-        <i>ID:01</i>
+        <i>ID:{listData.id}</i>
+
         <div className='application_countdown_box'>
-          <ApplicationCountdown />
+          <ApplicationCountdown time={listData.begin} />
         </div>
       </div>
       <div className='application_card_content'>
-        <img src={require('../../assets/icon/WAR.png')} />
+        <img src={getIPFSFile(detailData && detailData.logo)} />
         <p className='application_card_content_title'>
           <FormattedMessage id='applicationText6' />
-          <span>Thetan Arena</span>
+          <span>{detailData && detailData.name}</span>
         </p>
         <p className='application_card_content_title'>
           <FormattedMessage id='applicationText7' />
-          <span>$200,000</span>
+          <span>${detailData && detailData.totalRaise}</span>
         </p>
         <p className='application_card_content_title application_card_content_progress'>
           <FormattedMessage id='poolsIndexText2' />
@@ -33,25 +98,42 @@ export const InProgressCard = () => {
           </a>
         </p>
         <p className='application_card_content_btn'>
-          <NavLink to='/application/vote'>
+          <NavLink
+            to={{
+              pathname: `/application/vote`,
+              state: {
+                detailData: detailData,
+              },
+            }}
+          >
             <FormattedMessage id='applicationText8' />
           </NavLink>
           {/* <a className='disable_failed'><FormattedMessage id='applicationText9' /></a> */}
-          <a onClick={() => setIsModalVisible(true)}>
+          {/* <a onClick={() => setIsModalVisible(true)}>
             <FormattedMessage id='claim' />
-          </a>
+          </a> */}
+          <NavLink
+            to={{
+              pathname: `/application/vote`,
+              state: {
+                detailData: detailData,
+              },
+            }}
+          >
+            <FormattedMessage id='claim' />
+          </NavLink>
         </p>
       </div>
       <div className='application_card_content_h5'>
-        <img src={require('../../assets/icon/WAR.png')} />
+        <img src={getIPFSFile(detailData && detailData.logo)} />
         <p className='application_card_content_title_h5'>
           <FormattedMessage id='applicationText6' />
-          <span>Thetan Arena</span>
+          <span>{detailData && detailData.name}</span>
         </p>
         <div className='application_card_content_h5_box'>
           <p className='application_card_content_title'>
             <FormattedMessage id='applicationText7' />
-            <span>$200,000</span>
+            <span>${detailData && detailData.totalRaise}</span>
           </p>
           <p className='application_card_content_title application_card_content_progress'>
             <FormattedMessage id='poolsIndexText2' />
@@ -67,12 +149,26 @@ export const InProgressCard = () => {
           <a className='disable_failed'>
             <FormattedMessage id='applicationText9' />
           </a>
-          <a onClick={() => setIsModalVisible(true)}>
+          {/* <a onClick={() => setIsModalVisible(true)}>
             <FormattedMessage id='claim' />
-          </a>
+          </a> */}
+          <NavLink
+            to={{
+              pathname: `/application/vote`,
+              state: {
+                detailData: detailData,
+              },
+            }}
+          >
+            <FormattedMessage id='claim' />
+          </NavLink>
         </p>
       </div>
-      <ApplicationClaimPopup visible={isModalVisible} onClose={() => setIsModalVisible(false)} />
+      {/* <ApplicationClaimPopup
+        visible={isModalVisible}
+        tokenUrl={listData.tokenURI}
+        onClose={() => setIsModalVisible(false)}
+      /> */}
     </div>
   )
 }
