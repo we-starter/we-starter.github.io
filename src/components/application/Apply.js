@@ -256,7 +256,7 @@ export default function Apply() {
           </div>
           <div className="tab-info-item">
             <p><FormattedMessage id="applicationText32"/></p>
-            <h2>${ipfsData && ipfsData.totalRaise} </h2>
+            <h2>${ipfsData && ipfsData.totalRaise || '-'} </h2>
           </div>
           <div className="tab-info-item">
             <p><FormattedMessage id="applicationText33"/></p>
@@ -279,7 +279,7 @@ export default function Apply() {
         />
         <div className="info-tips">
           <img src={TipsIcon} alt="tips"/>
-          <div><FormattedMessage id="applicationText35" values={{day1: <strong>3</strong>, dat2: <strong>5</strong>}}/></div>
+          <div><FormattedMessage id="applicationText35" values={{day1: <strong>3</strong>, day2: <strong>5</strong>}}/></div>
         </div>
 
         <div className={cs({"button-group": true, mr: isApprove.token})}>
