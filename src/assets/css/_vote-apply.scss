@@ -43,6 +43,158 @@
   color: #0F8C20;
 }
 /////
+
+
+.nft-card {
+  position: relative;
+  width: 100%;
+  min-height: 220px;
+  background: #FFFFFF;
+  border-radius: 16px;
+  border: 4px solid #E7F4EF;
+  margin-top: 40px;
+  transition: all 200ms;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  &:hover {
+    box-shadow: 6px 6px 0px 0px #E7F4EF;
+  }
+
+  .arrow-l, .arrow-r {
+    position: absolute;
+    left: -66px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 34px;
+    height: 34px;
+    cursor: pointer;
+
+    &:hover {
+      opacity: 0.8;
+    }
+
+    &.disabled {
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
+  }
+
+  .arrow-r {
+    left: auto;
+    right: -66px;
+    transform: translateY(-50%) rotate(180deg) !important;
+  }
+
+  .nft-card-title {
+    font-size: 18px;
+    font-family: Montserrat-Bold, Montserrat;
+    font-weight: bold;
+    color: #4F4F4F;
+    line-height: 22px;
+    border-bottom: 4px solid #E7F4EF;
+    padding: 16px 20px;
+    margin: 0;
+  }
+
+  .nft-card-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    .nft-spin{
+      flex: 1;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .nft-card-info-t {
+      display: flex;
+      padding: 23px 0 19px 26px;
+
+      img {
+        width: 53px;
+        height: 53px;
+      }
+
+      div {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        padding: 7px 11px;
+
+        h2 {
+          flex: 1;
+          font-size: 18px;
+          font-family: Montserrat-Bold, Montserrat;
+          font-weight: bold;
+          color: #4F4F4F;
+          line-height: 20px;
+          margin-bottom: 0;
+          word-wrap:break-word;
+          word-break:break-all;
+        }
+
+        p {
+          flex: 1;
+          font-size: 16px;
+          font-family: Montserrat-Bold, Montserrat;
+          font-weight: bold;
+          color: #959595;
+          line-height: 19px;
+          margin-bottom: 0;
+          word-wrap:break-word;
+          word-break:break-all;
+        }
+      }
+    }
+
+    .url-list {
+      padding-left: 4px;
+
+      a {
+        display: inline-block;
+        width: 40px;
+        height: 40px;
+        background: #E7F4EF;
+        border-radius: 8px;
+        margin-left: 16px;
+        padding: 8px;
+
+        img {
+          width: 24px;
+          height: 24px;
+        }
+      }
+    }
+  }
+
+  .create-view {
+    text-align: center;
+
+    img {
+      width: 56px;
+      height: 56px;
+      margin: 27px auto 0 auto;
+      cursor: pointer;
+
+      &:hover {
+        opacity: 0.9;
+      }
+    }
+
+    p {
+      font-size: 16px;
+      font-family: PingFangSC-Semibold, PingFang SC;
+      font-weight: 600;
+      color: #959595;
+      line-height: 22px;
+      margin-top: 15px;
+    }
+  }
+}
+
 .apply-page {
   width: 100%;
   height: 100%;
@@ -85,145 +237,32 @@
   margin: 100px auto 0;
   padding-bottom: 50px;
 
-  .nft-card {
-    position: relative;
-    width: 100%;
-    min-height: 220px;
-    background: #FFFFFF;
-    border-radius: 16px;
-    border: 4px solid #E7F4EF;
-    margin-top: 40px;
-    transition: all 200ms;
-
-    &:hover {
-      box-shadow: 6px 6px 0px 0px #E7F4EF;
-    }
-
-    .arrow-l, .arrow-r {
-      position: absolute;
-      left: -66px;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 34px;
-      height: 34px;
-      cursor: pointer;
-
-      &:hover {
-        opacity: 0.8;
-      }
-
-      &.disabled {
-        cursor: not-allowed;
-        opacity: 0.5;
-      }
-    }
-
-    .arrow-r {
-      left: auto;
-      right: -66px;
-      transform: translateY(-50%) rotate(180deg) !important;
-    }
-
-    .nft-card-title {
-      font-size: 18px;
-      font-family: Montserrat-Bold, Montserrat;
-      font-weight: bold;
-      color: #4F4F4F;
-      line-height: 22px;
-      border-bottom: 4px solid #E7F4EF;
-      padding: 16px 20px;
-      margin: 0;
-    }
-
-    .nft-card-info {
-      cursor: pointer;
-
-      .nft-card-info-t {
-        display: flex;
-        padding: 23px 0 19px 26px;
-
-        img {
-          width: 53px;
-          height: 53px;
-        }
-
-        div {
-          flex: 1;
-          display: flex;
-          flex-direction: column;
-          padding: 7px 11px;
-
-          h2 {
-            flex: 1;
-            font-size: 18px;
-            font-family: Montserrat-Bold, Montserrat;
-            font-weight: bold;
-            color: #4F4F4F;
-            line-height: 20px;
-            margin-bottom: 0;
-            word-wrap:break-word;
-            word-break:break-all;
-          }
-
-          p {
-            flex: 1;
-            font-size: 16px;
-            font-family: Montserrat-Bold, Montserrat;
-            font-weight: bold;
-            color: #959595;
-            line-height: 19px;
-            margin-bottom: 0;
-            word-wrap:break-word;
-            word-break:break-all;
-          }
-        }
-      }
-
-      .url-list {
-        padding-left: 4px;
-
-        a {
-          display: inline-block;
-          width: 40px;
-          height: 40px;
-          background: #E7F4EF;
-          border-radius: 8px;
-          margin-left: 16px;
-          padding: 8px;
-
-          img {
-            width: 24px;
-            height: 24px;
-          }
-        }
-      }
-    }
-
-    .create-view {
-      text-align: center;
-
-      img {
-        width: 56px;
-        height: 56px;
-        margin: 27px auto 0 auto;
-        cursor: pointer;
-
-        &:hover {
-          opacity: 0.9;
-        }
-      }
-
-      p {
-        font-size: 16px;
-        font-family: PingFangSC-Semibold, PingFang SC;
-        font-weight: 600;
-        color: #959595;
-        line-height: 22px;
-        margin-top: 15px;
-      }
+  .button-group{
+  display: flex;
+  &.mr {
+    button {
+      flex: 1;
+      margin-right: 32px;
     }
   }
-
+  button{
+    flex: 1;
+    margin-right: 6px;
+    &:nth-last-child(1){
+      margin-right: 0;
+    }
+    &:nth-child(1){
+      background: #00C57B!important;
+      color: #ffffff!important;
+      border: 0!important;
+      cursor: pointer!important;
+    }
+    cursor: default!important;
+    background: #ffffff!important;
+    color: #D8D8D8!important;
+    border: 3px solid #D8D8D8!important;
+  }
+}
   .tip-txt {
     width: 100%;
     min-height: 22px;
@@ -284,7 +323,6 @@
   .info-tips {
     display: flex;
     margin-top: 12px;
-
     img {
       width: 24px;
       height: 24px;
@@ -325,6 +363,49 @@
     color: #4F4F4F;
     line-height: 19px;
     margin-bottom: 16px;
+  }
+  .nft-create-view{
+    width: 480px;
+    min-height: 414px;
+    max-width: 100vw;
+    background: #F2F0EB;
+    border-radius: 8px;
+    padding: 22px 28px;
+    .nft-create-view-title{
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      img{
+        width: 48px;
+        height: 48px;
+        margin-bottom: 8px;
+      }
+      p{
+        margin-bottom: 18px;
+      }
+    }
+    .nft-card{
+      margin-top: 0;
+    }
+    .nft-create-view-footer{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      &>span{
+        font-size: 14px;
+        font-family: HelveticaNeue;
+        color: #03A678;
+        line-height: 16px;
+        margin-right: 20px;
+        cursor: pointer;
+      }
+      .apply-btn{
+        height: 40px;
+        width: auto;
+      }
+    }
   }
 }
 

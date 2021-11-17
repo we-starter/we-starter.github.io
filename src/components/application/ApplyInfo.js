@@ -5,14 +5,10 @@ import {getIPFSFile, uploadIPFSFile, uploadIPFSJson} from "../../utils/ipfs";
 import {LoadingOutlined} from '@ant-design/icons'
 import {FormattedMessage} from "react-intl";
 import {getContract, useActiveWeb3React} from "../../web3";
-import Web3 from "web3";
 import {GAS_FEE} from "../../web3/address";
-import {
-  HANDLE_SHOW_SUCCESS_TRANSACTION_MODAL,
-  HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
-  waitingForInit
-} from "../../const";
+import SuccessSvg from '../../assets/image/susccess-green.png'
 import {voteNFT, voteMain} from '../../web3/address'
+import NFTCard from "./NFTCard";
 
 const FromItem = ({children, title, required = true, desc}) => {
   return (
@@ -33,21 +29,22 @@ const INFO_TEMPLATE = {
   logo: "",
   website: '',
   twitter: '',
-  // discord: '',
+  discord: '',
   telegram: '',
   whitePaper: '',
-  // medium: '',
+  medium: '',
   tokenInformation: '',
   descEN: '',
   descZH: '',
   totalRaise: ''
 }
 
-export default function ApplyInfo({setShowInfoPage, getNftCards}) {
-  const [info, setInfo] = useState(() => INFO_TEMPLATE)
-  const [logo, setLogo] = useState(() => (INFO_TEMPLATE).logo)
+export default function ApplyInfo({setShowInfoPage, getNftCards, ipfsData, nftData}) {
+  const [info, setInfo] = useState(() => ipfsData || INFO_TEMPLATE)
+  const [logo, setLogo] = useState(() => (ipfsData || INFO_TEMPLATE).logo)
   const [uploadLoading, setUploading] = useState(false)
   const [loading, setLoading] = useState(false)
+  const [showSuccess, setShowSuccess] = useState(false)
   const {library, account, chainId} = useActiveWeb3React()
 
   const onChangeInfo = (value, key) => {
@@ -58,7 +55,7 @@ export default function ApplyInfo({setShowInfoPage, getNftCards}) {
   const changeFile = (e) => {
     const file = e.target.files[0]
     if (file) {
-      if (file.size > 8*1024*1024) {
+      if (file.size > 8 * 1024 * 1024) {
         return message.warning("Size Limit 8M")
       }
       setUploading(true)
@@ -74,7 +71,7 @@ export default function ApplyInfo({setShowInfoPage, getNftCards}) {
       logo
     }
     for (let i in info_) {
-      if (!info_[i]) {
+      if (!info_[i] && !(i === 'discord' || i === 'medium')) {
         return message.warning('Please Enter information completely')
       }
     }
@@ -91,10 +88,12 @@ export default function ApplyInfo({setShowInfoPage, getNftCards}) {
           ...GAS_FEE(chainId)
         })
         .on('receipt', (_, receipt) => {
+          console.log('ccc',_,receipt)
           message.success('Create Success')
           getNftCards()
           setLoading(false)
-          setShowInfoPage(false)
+          // onChangeInfo('tokenId', _.events.Transfer.retuenValues.tokenId)
+          setShowSuccess(true)
         })
         .on('error', (err, receipt) => {
           setLoading(false)
@@ -125,9 +124,9 @@ export default function ApplyInfo({setShowInfoPage, getNftCards}) {
             uploadLoading ? <LoadingOutlined size={40} style={{fontSize: '16px', color: '#08c'}}/> : logo ?
               <img src={getIPFSFile(logo)} alt=""/> : <span>Choose File</span>
           }
-          <input type="file" accept="image/*" onChange={changeFile}/>
+          {!ipfsData && <input type="file" accept="image/*" onChange={changeFile}/>}
         </div>
-        <p className="tip-txt">* <FormattedMessage id="applicationText26"/> </p>
+        {!ipfsData && <p className="tip-txt">* <FormattedMessage id="applicationText26"/></p>}
       </FromItem>
       <FromItem title="Website URL">
         <Input className="apply-input" value={info.website} onInput={e => onChangeInfo(e.target.value, 'website')}/>
@@ -137,6 +136,12 @@ export default function ApplyInfo({setShowInfoPage, getNftCards}) {
       </FromItem>
       <FromItem title="Telegram Handle">
         <Input className="apply-input" value={info.telegram} onInput={e => onChangeInfo(e.target.value, 'telegram')}/>
+      </FromItem>
+      <FromItem title="Discord URL" required={false}>
+        <Input className="apply-input" value={info.discord} onInput={e => onChangeInfo(e.target.value, 'discord')}/>
+      </FromItem>
+      <FromItem title="Medium URL" required={false}>
+        <Input className="apply-input" value={info.medium} onInput={e => onChangeInfo(e.target.value, 'medium')}/>
       </FromItem>
       <FromItem title="White Paper URL">
         <Input className="apply-input" value={info.whitePaper}
@@ -159,9 +164,32 @@ export default function ApplyInfo({setShowInfoPage, getNftCards}) {
       }}/> </span>}>
         <Input className="apply-input" type="number" value={info.totalRaise}
                onInput={e => onChangeInfo(e.target.value, 'totalRaise')}/>
-        <p className="tip-txt"><FormattedMessage id="applicationText28"/></p>
+        {!ipfsData && <p className="tip-txt"><FormattedMessage id="applicationText28"/></p>}
       </FromItem>
-      <Button type="primary" className="create-btn" onClick={onCreate} loading={loading}>Create</Button>
+      {!ipfsData && <Button type="primary" className="create-btn" onClick={onCreate} loading={loading}>Create</Button>}
+
+      {
+        showSuccess && (<div className='modal-show'>
+          <div className='wrapper'>
+            <div className='modal'>
+              <div className='modal__box'>
+                <div className="nft-create-view">
+                  <div className="nft-create-view-title">
+                    <img src={SuccessSvg} alt=""/>
+                    <p>Create Success</p>
+                  </div>
+                  <NFTCard nftData={nftData} ipfsData={ipfsData} preView={true}/>
+                  <div className="nft-create-view-footer">
+                    <span onClick={() => setShowSuccess(false)}>cancel</span>
+                    <Button type="primary" size="large" className="apply-btn" onClick={() => setShowInfoPage(false)}>Go
+                      to proposal application</Button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>)
+      }
     </div>
   )
 }
