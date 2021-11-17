@@ -11,7 +11,7 @@ import MediumIcon from '../../assets/icon/application/medium.svg'
 import TipsIcon from '../../assets/icon/application/tips.svg'
 import DateIcon from '../../assets/icon/application/date.svg'
 import cs from 'classnames'
-import {Button, DatePicker, Input, message} from "antd";
+import {Button, DatePicker, Input, message, Spin} from "antd";
 import moment from 'moment'
 import {useMDexPrice} from "../../pages/pools/Hooks";
 import {ChainId, GAS_FEE, USDT_ADDRESS, voteMain, voteNFT, WAR_ADDRESS, WHT_ADDRESS} from "../../web3/address";
@@ -26,6 +26,8 @@ import {getContract, useActiveWeb3React} from "../../web3";
 import {numToWei} from "../../utils/format";
 import ERC20 from "../../web3/abi/ERC20.json";
 import axios from "axios";
+import {cloneDeep} from "lodash";
+import NFTCard from "./NFTCard";
 
 const TIME_FORMAT = 'YYYY-MM-DD HH:mm:ss'
 export default function Apply() {
@@ -41,35 +43,40 @@ export default function Apply() {
 
   const [showInfoPage, setShowInfoPage] = useState(false)
   const [nftList, setNFTList] = useState([])
-  const [nftIndex, setNFTIndex] = useState(0)
-  const [nftData, setNFTData] = useState(null)
+  const [nftIndex, setNFTIndex] = useState(-1)
+  const nftData = nftList[nftIndex]
+  const ipfsData = nftData ? nftData.ipfsData : null
   const [amount, setAmount] = useState('')
   const [startTime, setStartTime] = useState('')
-  const [loading, setLoading] = useState(false)
-  const [isApproveNFT, setIsApproveNFT] = useState(false)
-  const [isApproveToken, setIsApproveToken] = useState(false)
+  const [submitLoading, setSubmitLoading] = useState(false)
 
-  const getNftCard = () => {
-    if (nftList[nftIndex]){
-      getIPFSJson(nftList[nftIndex].tokenURI).then(res=>{
-        setNFTData({
-          ...res.data,
-          ...nftList[nftIndex]
-        })
-        getApproved()
+  const [approveNFTLoading, setApproveNFTLoading] = useState(false)
+  const [approveWARLoading, setApproveWARLoading] = useState(false)
+  const [loadLoading, setLoadLoading] = useState(false)
+
+  const [isApprove, setIsApprove] = useState({})
+
+  const getNftCard = (_nftIndex) => {
+    const nftIndex_ = _nftIndex || nftIndex
+    if (nftList[nftIndex_].ipfsData){
+      return
+    }
+    if (nftList[nftIndex_]){
+      getIPFSJson(nftList[nftIndex_].tokenURI).then(async ({data: ipfsData})=>{
+        const nftList_ = cloneDeep(nftList)
+        nftList_[nftIndex_].ipfsData = ipfsData
+        setNFTList(nftList_)
       })
-    } else {
-      setNFTData(null)
     }
   }
   const getNftCards = () => {
-    setNFTData(null)
+    setLoadLoading(true)
     axios({
       method: 'post',
       url: 'https://graph.westarter.org/heco/subgraphs/name/westarter/governance',
       data: {
         query: `{
-          projects(first: 1000, skip:0, where: { holder: "${account}" }) {
+          projects(first: 1000, skip:0, where: { holder: "${account}" }, orderBy:tokenId) {
               id
               holder
               tokenId
@@ -81,10 +88,13 @@ export default function Apply() {
       const nftList = res.data.data.projects || []
       setNFTList(nftList)
       setNFTIndex(nftList.length - 1)
+      getApproved(nftList)
     })
   }
   useMemo(() => {
-    getNftCard()
+    if (nftList[nftIndex]){
+      getNftCard(nftIndex)
+    }
   }, [nftIndex, nftList])
 
   useMemo(() => {
@@ -92,26 +102,32 @@ export default function Apply() {
       getNftCards()
     }
   }, [account])
-
-  const getApproved = (tokenId) => {
-    return
+  const getApproved = (nftList) => {
     const multicallProvider = getOnlyMultiCallProvider(ChainId.HECO)
     const contractNFT = new Contract(voteNFT.address, voteNFT.abi)
     const contractToken = new Contract(WAR_ADDRESS(chainId), ERC20.abi)
-    const calls = [
-      contractNFT.getApproved(tokenId),
-      contractToken.allowance(account, voteMain.address)
-    ]
-    multicallProvider.all(calls).then(data => {
+    const calls = [contractToken.allowance(account, voteMain.address)]
+    for (let i = 0; i < nftList.length; i++) {
+      calls.push(contractNFT.getApproved(nftList[i].tokenId))
+    }
+    return multicallProvider.all(calls).then(data => {
       data = processResult(data)
-      setIsApproveNFT(data[0])
-      setIsApproveToken(data[1] > 0)
+      const isApprove_ = {}
+      isApprove_.token = data.shift(0) > 0
+      for (let i = 0; i < data.length; i++) {
+        isApprove_['nft_' + nftList[i].tokenId] = data[i] === voteMain.address
+      }
+      setLoadLoading(false)
+      setIsApprove(isApprove_)
     })
   }
 
   const onApproveNFT = () => {
+    if (!isApprove.token){
+      return
+    }
     const contract = getContract(library, voteNFT.abi, voteNFT.address)
-    setLoading(true)
+    setApproveNFTLoading(true)
     contract.methods
       .approve(voteMain.address, nftData.tokenId)
       .send({
@@ -120,17 +136,16 @@ export default function Apply() {
       })
       .on('receipt', async (_, receipt) => {
         message.success('Approve Success')
-        await getApproved()
-        setLoading(false)
+        await getApproved(nftList)
+        setApproveNFTLoading(false)
       })
       .on('error', (err, receipt) => {
-        setLoading(false)
+        setApproveNFTLoading(false)
       })
   }
 
   const onApproveToken = () => {
-    const tokenId = ''
-    setLoading(true)
+    setApproveWARLoading(true)
     const contract = getContract(library, ERC20.abi, WAR_ADDRESS(chainId))
     contract.methods
       .approve(voteMain.address, '0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff')
@@ -140,25 +155,32 @@ export default function Apply() {
       })
       .on('receipt', async (_, receipt) => {
         message.success('Approve Success')
-        await getApproved()
-        setLoading(false)
+        await getApproved(nftList)
+        setApproveWARLoading(false)
       })
       .on('error', (err, receipt) => {
-        setLoading(false)
+        setApproveWARLoading(false)
       })
   }
 
   const onApply = () => {
+    if (!isApprove['nft_' + nftData.tokenId] || !isApprove.token){
+      return
+    }
     if (!amount || amount < 0 || !startTime) {
       return message.warning('Please Enter information completely')
     }
-    setLoading(true)
-    const tokenId = ''
+    if (!price){
+      return message.warning('Wait a minute, getting the price ...')
+    }
+    setSubmitLoading(true)
     const contract = getContract(library, voteMain.abi, voteMain.address)
-    setLoading(true)
+    setSubmitLoading(true)
     const begin = ~~(new Date(startTime).getTime() / 1000)
+    // demo Description(En)  777 6 1000000000000000000 272531000000000000 4000000000000000000 1637164800
+    console.log('params', ipfsData.name, ipfsData.descEN, nftData.tokenId, numToWei(ipfsData.totalRaise, 18), numToWei(price_, 18), numToWei(amount, 18), begin)
     contract.methods
-      .propose(nftData.name, '', nftData.id, numToWei(nftData.totalRaise, 18), numToWei(price_, 18), numToWei(amount, 18), begin)
+      .propose(ipfsData.name, ipfsData.descEN, nftData.tokenId, numToWei(ipfsData.totalRaise, 18), numToWei(price_, 18), numToWei(amount, 18), begin)
       .send({
         from: account,
         ...GAS_FEE(chainId)
@@ -166,48 +188,40 @@ export default function Apply() {
       .on('receipt', async (_, receipt) => {
         message.success('Create Success')
         getNftCards()
-        setLoading(false)
+        setSubmitLoading(false)
       })
       .on('error', (err, receipt) => {
-        setLoading(false)
+        setSubmitLoading(false)
       })
   }
 
-  const onSubmit = () => {
-    if (!isApproveNFT) {
-      return {
-        fn: onApproveNFT,
-        txt: 'Approve NFT'
-      }
-    }
-    if (!isApproveToken) {
-      return {
-        fn: onApproveToken,
-        txt: 'Approve Token'
-      }
-    }
-    return {
-      fn: onApply,
-      txt: 'Apply'
-    }
-  }
-  const submitBtnA = onSubmit()
-
-  const onPrev = () => {
-    if (nftIndex !== 0){
+  const onPrev = (e) => {
+    if (nftIndex !== 0 && !approveNFTLoading && !approveWARLoading && !submitLoading){
       setNFTIndex(nftIndex - 1)
     }
+    e.stopPropagation()
+    return false
   }
-  const onNext = () => {
-    if (nftIndex < nftList.length){
+  const onNext = (e) => {
+    if (nftIndex < nftList.length && !approveNFTLoading && !approveWARLoading && !submitLoading){
       setNFTIndex(nftIndex + 1)
     }
+    e.stopPropagation()
+    return false
+  }
+
+  const suggestedAmount = () => {
+    if (price && ipfsData?.totalRaise){
+      return (ipfsData.totalRaise / price).toFixed(2)*1
+    }
+    return '-'
   }
 
   if (showInfoPage) {
-    return <div className="apply-view"><ApplyInfoView setShowInfoPage={setShowInfoPage} getNftCards={getNftCards}/>
+    return <div className="apply-view"><ApplyInfoView setShowInfoPage={setShowInfoPage} ipfsData={ipfsData} getNftCards={getNftCards} nftData={nftData}/>
     </div>
   }
+
   return (
     <div className="apply-view">
       <NavLink to='/application' className="apply-view-back">
@@ -215,93 +229,90 @@ export default function Apply() {
         <span>Proposals</span>
       </NavLink>
       <h2 className="apply-view-title">Apply</h2>
-      <div className="nft-card">
-        <p className="nft-card-title">ID: {nftData && nftData.tokenId}</p>
-        {
-          nftData ? (
-            <div className="nft-card-info" onClick={() => setShowInfoPage(true)}>
-              <div className="nft-card-info-t">
-                <img src={getIPFSFile(nftData.logo)} alt=""/>
-                <div>
-                  <h2>{nftData.name}</h2>
-                  <p>{nftData.tokenTicker}</p>
-                </div>
-              </div>
-              <div className="url-list">
-                {nftData.website &&
-                <a href={nftData.website} target="_blank"><img src={WebsiteIcon} alt="website"/></a>}
-                {nftData.twitter &&
-                <a href={nftData.twitter} target="_blank"><img src={TwitterIcon} alt="twitter"/></a>}
-                {nftData.discord &&
-                <a href={nftData.discord} target="_blank"><img src={DiscordIcon} alt="discord"/></a>}
-                {nftData.telegram &&
-                <a href={nftData.telegram} target="_blank"><img src={TelegramIcon} alt="telegram"/></a>}
-                {nftData.medium && <a href={nftData.medium} target="_blank"><img src={MediumIcon} alt="medium"/></a>}
-              </div>
-            </div>
-          ) : (
-            <div className="create-view">
-              <img src={CreateIcon} alt="create" onClick={() => setShowInfoPage(true)}/>
-              <p>Create new Project NFT Card</p>
-            </div>
-          )
-        }
-        <img className={cs({
-          'arrow-l': true,
-          'disabled': nftIndex === 0
-        })} src={LeftArrowBlackIcon} alt="prev" onClick={onPrev}/>
-        <img className={cs({
-          'arrow-r': true,
-          'disabled': nftIndex >= nftList.length
-        })} src={LeftArrowBlackIcon} alt="next" onClick={onNext}/>
-      </div>
-      <div className="tip-txt">
-        <div><FormattedMessage id="applicationText29"/> Project NFT Card</div>
-        <div>什么是 NFT Card？</div>
-      </div>
-      <Input suffix="WAR" className="apply-input" type="number" value={amount}
-             onInput={e => setAmount(e.target.value)}/>
-      <div className="tab-info">
-        <div className="tab-info-item">
-          <p>WAR 当前价</p>
-          <h2>${price_}</h2>
+
+      <Spin spinning={loadLoading}>
+        <span onClick={() => setShowInfoPage(true)}>
+        <NFTCard ipfsData={ipfsData} nftData={nftData}>
+          <img className={cs({
+            'arrow-l': true,
+            'disabled': nftIndex === 0
+          })} src={LeftArrowBlackIcon} alt="prev" onClick={onPrev}/>
+          <img className={cs({
+            'arrow-r': true,
+            'disabled': nftIndex >= nftList.length
+          })} src={LeftArrowBlackIcon} alt="next" onClick={onNext}/>
+        </NFTCard>
+        </span>
+        <div className="tip-txt">
+          <div><FormattedMessage id="applicationText29"/> Project NFT Card</div>
+          <div><FormattedMessage id="applicationText30"/></div>
         </div>
-        <div className="tab-info-item">
-          <p>项目申请募资</p>
-          <h2>$500,000 </h2>
+        <Input suffix="WAR" className="apply-input" type="number" value={amount}
+               onInput={e => setAmount(e.target.value)}/>
+        <div className="tab-info">
+          <div className="tab-info-item">
+            <p>WAR <FormattedMessage id="applicationText31"/></p>
+            <h2>${price_}</h2>
+          </div>
+          <div className="tab-info-item">
+            <p><FormattedMessage id="applicationText32"/></p>
+            <h2>${ipfsData && ipfsData.totalRaise || '-'} </h2>
+          </div>
+          <div className="tab-info-item">
+            <p><FormattedMessage id="applicationText33"/></p>
+            <h2>{suggestedAmount()} WAR</h2>
+          </div>
         </div>
-        <div className="tab-info-item">
-          <p>建议抵押金额</p>
-          <h2>123434.54 WAR</h2>
+        <div className="info-tips">
+          <img src={TipsIcon} alt="tips"/>
+          <div><FormattedMessage id="applicationText34"/></div>
         </div>
-      </div>
-      <div className="info-tips">
-        <img src={TipsIcon} alt="tips"/>
-        <div>抵押的 WAR 价值不能小于总募资金额，否则影响后续的募资计划</div>
-      </div>
-      <DatePicker
-        className="apply-input date-picker"
-        format={TIME_FORMAT}
-        defaultValue={startTime}
-        placeholder="请选择开始时间"
-        allowClear={false}
-        suffixIcon={<img src={DateIcon} className="date-icon" alt=""/>}
-        showTime={{defaultValue: moment('00:00:00', 'HH:mm:ss')}}
-        onOk={setStartTime}
-      />
-      <div className="info-tips">
-        <img src={TipsIcon} alt="tips"/>
-        <div>从投票开始计时，周期为 <strong>3</strong> 天，资金将在投票结束后 <strong>5</strong> 天后释放</div>
-      </div>
-      <Button type="primary" size="large" className="apply-btn" loading={loading}
-              onClick={submitBtnA.fn}>{submitBtnA.txt}</Button>
-      <h2 className="role-title">规则</h2>
-      <div className="info-tips">
-        <div>如果提案在周期内，等于或者超过项目 IWO 总额度的 50%，则为成功，投票方和项目发起人（提案人）可以在 5 天后 Claim 回来自己的 WAR</div>
-      </div>
-      <div className="info-tips">
-        <div>如果提案在周期内，低于项目方 IWO 总额度的 50%，则为失败。提案抵押金额的 50% 将空投给投票方，余下 50% 抵押金额将燃烧。投票方可以在 5 天后 Claim 回来自己的 WAR。</div>
-      </div>
+        <DatePicker
+          className="apply-input date-picker"
+          format={TIME_FORMAT}
+          defaultValue={startTime}
+          placeholder="start time"
+          allowClear={false}
+          suffixIcon={<img src={DateIcon} className="date-icon" alt=""/>}
+          showTime={{defaultValue: moment('00:00:00', 'HH:mm:ss')}}
+          onOk={setStartTime}
+        />
+        <div className="info-tips">
+          <img src={TipsIcon} alt="tips"/>
+          <div><FormattedMessage id="applicationText35" values={{day1: <strong>3</strong>, day2: <strong>5</strong>}}/></div>
+        </div>
+
+        <div className={cs({"button-group": true, mr: isApprove.token})}>
+          {
+            !nftData ? (
+              <Button type="primary" size="large" className="apply-btn"
+                      onClick={()=>setShowInfoPage(true)}>Create</Button>
+            ) : (
+              <React.Fragment>
+                {
+                  !isApprove.token && (<Button type="primary" size="large" className="apply-btn" loading={approveWARLoading}
+                                               onClick={onApproveToken}>Approve WAR</Button>)
+                }
+                {
+                  !isApprove['nft_' + nftData.tokenId] && (<Button type="primary" size="large" className="apply-btn" loading={approveNFTLoading}
+                                               onClick={onApproveNFT}>Approve NFT</Button>)
+                }
+                <Button type="primary" size="large" className="apply-btn" loading={submitLoading}
+                        onClick={onApply}>Confirm</Button>
+              </React.Fragment>
+            )
+          }
+
+
+        </div>
+        <h2 className="role-title"><FormattedMessage id="applicationText36"/></h2>
+        <div className="info-tips">
+          <div><FormattedMessage id="applicationText37"/></div>
+        </div>
+        <div className="info-tips">
+          <div><FormattedMessage id="applicationText38"/></div>
+        </div>
+      </Spin>
     </div>
   )
 }
