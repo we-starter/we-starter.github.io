@@ -28,6 +28,7 @@ import ERC20 from "../../web3/abi/ERC20.json";
 import axios from "axios";
 import {cloneDeep} from "lodash";
 import NFTCard from "./NFTCard";
+import {changeNetwork} from "../../connectors";
 
 const TIME_FORMAT = 'YYYY-MM-DD HH:mm:ss'
 export default function Apply() {
@@ -284,6 +285,10 @@ export default function Apply() {
 
         <div className={cs({"button-group": true, mr: isApprove.token})}>
           {
+            !account || (chainId !== ChainId.HECO && chainId !== ChainId.LOCALHOST) ? (
+                <Button type="primary" size="large" className="apply-btn"
+                        onClick={()=>changeNetwork(ChainId.HECO)}>Switch To HECO</Button>
+              ) :
             !nftData ? (
               <Button type="primary" size="large" className="apply-btn"
                       onClick={()=>setShowInfoPage(true)}>Create</Button>
