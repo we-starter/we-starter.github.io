@@ -277,6 +277,7 @@ export default function Apply() {
           suffixIcon={<img src={DateIcon} className="date-icon" alt=""/>}
           showTime={{defaultValue: moment('00:00:00', 'HH:mm:ss')}}
           onOk={setStartTime}
+          showNow={false}
         />
         <div className="info-tips">
           <img src={TipsIcon} alt="tips"/>
