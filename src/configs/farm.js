@@ -44,7 +44,7 @@ export default [
     mdexDaily: 0,
     mdexPid: '',
     svipFlag: true,
-    minAmountMortgage: '50000',
+    minAmountMortgage: '20000',
     poolType: 1, // 1单池，2LP，2sort
   },
   {
