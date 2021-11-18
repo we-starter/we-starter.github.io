@@ -14,7 +14,6 @@ import ApplicationClaimPopup from './claimPopup'
 
 export const InProgressCard = (props) => {
   const { listData } = props
-  console.log(listData, 'listData')
   const { library, account, active } = useActiveWeb3React()
   const [isModalVisible, setIsModalVisible] = useState(false)
   const [detailData, setDetailData] = useState({})
@@ -41,13 +40,13 @@ export const InProgressCard = (props) => {
       })
   }
 
-  useMemo(() => {
+  useEffect(() => {
     if (listData && listData.ProjectId) {
       getVotesData(listData.ProjectId)
     }
-  }, [listData])
+  }, [listData, active])
 
-  useMemo(() => {
+  useEffect(() => {
     if (listData && listData.tokenURI && progressData) {
       getIPFSJson(listData.tokenURI)
         .then((res) => {
@@ -57,6 +56,8 @@ export const InProgressCard = (props) => {
             res.data.begin = listData.begin
             res.data.voteMax = listData.voteMax
             res.data.progressData = progressData
+            res.data.left_time = listData.left_time
+            res.data.status = listData.status
             setDetailData(res.data)
           }
         })
@@ -64,7 +65,7 @@ export const InProgressCard = (props) => {
           console.log(e, 'e')
         })
     }
-  }, [listData, progressData])
+  }, [listData.left_time, progressData, active])
 
   return (
     <div className='application_card'>
@@ -72,7 +73,10 @@ export const InProgressCard = (props) => {
         <i>ID:{listData.id}</i>
 
         <div className='application_countdown_box'>
-          <ApplicationCountdown time={listData && listData.begin} />
+          <ApplicationCountdown
+            left_time={listData && listData.left_time}
+            status={listData && listData.status}
+          />
         </div>
       </div>
       <div className='application_card_content'>
@@ -136,17 +140,25 @@ export const InProgressCard = (props) => {
           <p className='application_card_content_title application_card_content_progress'>
             <FormattedMessage id='poolsIndexText2' />
             <a>
-              <span style={{ width: '80px' }}></span>
+              <span
+                style={{
+                  width: `${progressData > 1 ? 100 : progressData * 100}%`,
+                }}
+              ></span>
             </a>
           </p>
         </div>
         <p className='application_card_content_btn'>
-          {/* <NavLink to='/application/vote'>
+          <NavLink
+            to={{
+              pathname: `/application/vote`,
+              state: {
+                detailData: detailData,
+              },
+            }}
+          >
             <FormattedMessage id='applicationText8' />
-          </NavLink> */}
-          <a className='disable_failed'>
-            <FormattedMessage id='applicationText9' />
-          </a>
+          </NavLink>
           {/* <a onClick={() => setIsModalVisible(true)}>
             <FormattedMessage id='claim' />
           </a> */}

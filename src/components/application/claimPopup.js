@@ -15,7 +15,7 @@ import { mainContext } from '../../reducer'
 import BigNumber from 'bignumber.js'
 
 const ApplicationClaimPopup = (props) => {
-  const { intl, onClose, propID, usersData, visible } = props
+  const { intl, onClose, voteDate, usersData, visible, getUser } = props
   const { account, active, library, chainId } = useActiveWeb3React()
   const { dispatch } = useContext(mainContext)
 
@@ -24,14 +24,14 @@ const ApplicationClaimPopup = (props) => {
       return false
     }
     if (
-      !(usersData && usersData.claimed) ||
+      !(voteDate && voteDate.isClaim) ||
       !(usersData && usersData.totalVote)
     ) {
       return false
     }
     const contract = getContract(library, voteMain.abi, voteMain.address)
     contract.methods
-      .claim(propID)
+      .claim(voteDate.ProjectId)
       .send({
         from: account,
         ...GAS_FEE(chainId),
@@ -40,6 +40,7 @@ const ApplicationClaimPopup = (props) => {
       .on('receipt', (_, receipt) => {
         message.success('Claim Success')
         onClose()
+        getUser()
       })
       .on('error', (err, receipt) => {
         console.log('claim error', err)
@@ -57,7 +58,7 @@ const ApplicationClaimPopup = (props) => {
         <p className='form-app__inputbox-after-text farm_popup_avaliable'>
           <FormattedMessage id='farm6' values={{ coin: 'WAR' }} />
           <span>
-            {usersData && usersData.claimed ? usersData.totalVote : '0'} WAR
+            {voteDate && voteDate.isClaim ? usersData.totalVote : '0'} WAR
           </span>
         </p>
 

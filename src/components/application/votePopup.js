@@ -16,7 +16,7 @@ import { mainContext } from '../../reducer'
 import BigNumber from 'bignumber.js'
 
 const VotePopup = (props) => {
-  const { intl, onClose, propID, visible } = props
+  const { intl, onClose, propID, visible, getUser } = props
   const { account, active, library, chainId } = useActiveWeb3React()
   const allowance = useAllowance(
     WAR_ADDRESS(ChainId.HECO),
@@ -106,6 +106,7 @@ const VotePopup = (props) => {
         message.success('Success')
         setLoadFlag(false)
         onClose()
+        getUser()
       })
       .on('error', (err, receipt) => {
         console.log('error', err)

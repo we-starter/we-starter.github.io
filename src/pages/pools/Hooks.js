@@ -22,6 +22,7 @@ import MDexPool from '../../web3/abi/MDexPool.json'
 import Pools from '../../configs/pools'
 import Farm from '../../configs/farm'
 import Web3 from 'web3'
+import { voteMain } from '../../web3/address'
 import { ReactComponent as HUSD } from '../../assets/logo/HUSD.svg'
 import { ReactComponent as HT } from '../../assets/logo/HT.svg'
 import { ReactComponent as MDX } from '../../assets/logo/MDX.svg'
@@ -1645,4 +1646,40 @@ export const useAmountsOut = (path, amount, _chainId) => {
     return [0, 0]
   }
   return [outAmount, fee]
+}
+
+export const VoteSpanVal = () => {
+  const { account, active, library } = useActiveWeb3React()
+  const blockHeight = useBlockHeight()
+  const [val, setVal] = useState('')
+  useEffect(() => {
+    const multicallProvider = getOnlyMultiCallProvider(ChainId.HECO)
+    const pool_contract = new Contract(voteMain.address, voteMain.abi)
+    multicallProvider.all([pool_contract.voteSpan()]).then((res) => {
+      setVal(res)
+    })
+    .catch((err) => {
+      console.log('error', err)
+    })
+  }, [library, account, active, blockHeight])  
+  return val
+}
+
+export const VoteEndToClaimSpan = () => {
+  const { account, active, library } = useActiveWeb3React()
+  const blockHeight = useBlockHeight()
+  const [claimSpanVal, setClaimSpanVal] = useState('')
+  useEffect(() => {
+    const multicallProvider = getOnlyMultiCallProvider(ChainId.HECO)
+    const pool_contract = new Contract(voteMain.address, voteMain.abi)
+    multicallProvider
+      .all([pool_contract.voteEndToClaimSpan()])
+      .then((res) => {
+        setClaimSpanVal(res)
+      })
+      .catch((err) => {
+        console.log('error', err)
+      })
+  }, [account, active, blockHeight, library])
+  return claimSpanVal
 }

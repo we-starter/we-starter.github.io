@@ -1,4 +1,4 @@
-import React, { useMemo, useEffect, useState } from 'react'
+import React, { useMemo, useEffect, useState, useContext } from 'react'
 import cs from 'classnames'
 import { FormattedMessage, injectIntl } from 'react-intl'
 import { getIPFSFile } from '../../utils/ipfs'
@@ -6,7 +6,7 @@ import { getContract, useActiveWeb3React } from '../../web3'
 import { formatAmount } from '../../utils/format'
 import { useBlockHeight } from './Hooks'
 import { message } from 'antd'
-import { GAS_FEE, voteMain } from '../../web3/address'
+import { voteMain } from '../../web3/address'
 import BreadCrumbs from '../../components/application/BreadCrumbs'
 import ApplicationCountdown from '../../components/application/ApplicationCountdown'
 import ApplicationClaimPopup from '../../components/application/claimPopup'
@@ -23,8 +23,9 @@ const Vote = (props) => {
   const [usersData, setUsersData] = useState({})
 
   useEffect(() => {
-    setVoteDetail(props.location.state.detailData)
-  }, [blockHeight])
+    props.location.state.detailData &&
+      setVoteDetail(props.location.state.detailData)
+  }, [props.location.state.detailData, active, blockHeight])
 
   const getUsers = () => {
     if (!active) {
@@ -42,11 +43,23 @@ const Vote = (props) => {
       })
   }
 
-  useMemo(() => {
+  useEffect(() => {
     if (voteDetail && voteDetail.ProjectId) {
       getUsers()
     }
-  }, [voteDetail, blockHeight])
+  }, [voteDetail, blockHeight, active])
+
+  const setDisableBtn = () => {
+    if (voteDetail && voteDetail.status === 1) {
+      setIsVoteModalVisible(true)
+    }
+  }
+
+  const setDisableClaimBtn = () => {
+    if (voteDetail && voteDetail.status === 2 && voteDetail.isClaim) {
+      setIsModalVisible(true)
+    }
+  }
 
   return (
     <div style={{ position: 'relative' }}>
@@ -60,7 +73,12 @@ const Vote = (props) => {
             <div className='vote_box_card_title'>
               <i>ID:{voteDetail && voteDetail.id}</i>
               <p className='vote_countdown_ongoing'>
-                <FormattedMessage id='applicationText10' />
+                {voteDetail && voteDetail.status === 2
+                  ? '已结束'
+                  : voteDetail && voteDetail.status === 1
+                  ? '进行中'
+                  : '即将开始'}
+                {/* <FormattedMessage id='applicationText10' /> */}
               </p>
             </div>
             <div className='vote_box_card_content'>
@@ -134,9 +152,19 @@ const Vote = (props) => {
                 justifyContent: 'space-between',
               }}
             >
-              <ApplicationCountdown time={voteDetail && voteDetail.begin} />
+              <ApplicationCountdown
+                left_time={voteDetail && voteDetail.left_time}
+                status={voteDetail && voteDetail.status}
+              />
               <p className='vote_box_progress_content_btn'>
-                <a onClick={() => setIsVoteModalVisible(true)}>
+                <a
+                  onClick={() => setDisableBtn()}
+                  className={cs(
+                    voteDetail &&
+                      (voteDetail.status === 2 || voteDetail.status === 0) &&
+                      'disable_failed'
+                  )}
+                >
                   <FormattedMessage id='applicationText8' />
                 </a>
               </p>
@@ -172,24 +200,49 @@ const Vote = (props) => {
               <p className='vote_box_progress_content_title'>
                 <FormattedMessage id='applicationText17' />
                 <span>
-                  {usersData && usersData.claimed ? usersData.totalVote : '0'}{' '}
+                  {voteDetail && voteDetail.isClaim
+                    ? formatAmount(usersData.totalVote)
+                    : '0'}{' '}
                   WAR
                 </span>
               </p>
               <p className='vote_box_progress_content_btn'>
-                <a className='vote_btn' onClick={() => setIsModalVisible(true)}>
+                <a
+                  className={cs(
+                    'vote_btn',
+                    voteDetail &&
+                      voteDetail.status !== 2 &&
+                      !voteDetail.isClaim &&
+                      'disable_failed'
+                  )}
+                  onClick={() => setDisableClaimBtn()}
+                >
                   <FormattedMessage id='claim' />
                 </a>
               </p>
             </div>
           </div>
           <div className='vote_box_progress_h5'>
-            <ApplicationCountdown />
+            <ApplicationCountdown
+              left_time={voteDetail && voteDetail.left_time}
+              status={voteDetail && voteDetail.status}
+            />
             <div className='vote_box_progress_content'>
               <p className='vote_box_progress_content_title vote_box_progress_content_progress'>
                 <FormattedMessage id='poolsIndexText2' />
                 <a>
-                  <span style={{ width: '80px' }}></span>
+                  <span
+                    style={{
+                      width: `${
+                        (voteDetail &&
+                          voteDetail.progressData &&
+                          (voteDetail.progressData > 1
+                            ? 100
+                            : voteDetail.progressData * 100)) ||
+                        0
+                      }%`,
+                    }}
+                  ></span>
                 </a>
               </p>
               <div
@@ -201,19 +254,46 @@ const Vote = (props) => {
                 }}
               >
                 <p className='vote_box_progress_content_title'>
-                  <FormattedMessage id='applicationText6' />
-                  <span>{voteDetail && voteDetail.name}</span>
+                  <FormattedMessage id='applicationText16' />
+                  <span>
+                    {(usersData &&
+                      usersData.totalVote &&
+                      formatAmount(usersData.totalVote)) ||
+                      '0'}{' '}
+                    WAR
+                  </span>
                 </p>
                 <p className='vote_box_progress_content_title'>
-                  <FormattedMessage id='applicationText7' />
-                  <span>${voteDetail && voteDetail.totalRaise}</span>
+                  <FormattedMessage id='applicationText17' />
+                  <span>
+                    {voteDetail && voteDetail.isClaim
+                      ? formatAmount(usersData.totalVote)
+                      : '0'}{' '}
+                    WAR
+                  </span>
                 </p>
               </div>
-              <p className='vote_box_progress_content_btn'>
-                <a onClick={() => setIsVoteModalVisible(true)}>
+
+              <p className={cs('vote_box_progress_content_btn')}>
+                <a
+                  className={cs(
+                    voteDetail &&
+                      (voteDetail.status === 2 || voteDetail.status === 0) &&
+                      'disable_failed'
+                  )}
+                  onClick={() => setDisableBtn()}
+                >
                   <FormattedMessage id='applicationText8' />
                 </a>
-                <a onClick={() => setIsModalVisible(true)}>
+                <a
+                  className={cs(
+                    voteDetail &&
+                      voteDetail.status !== 2 &&
+                      !voteDetail.isClaim &&
+                      'disable_failed'
+                  )}
+                  onClick={() => setDisableClaimBtn()}
+                >
                   <FormattedMessage id='claim' />
                 </a>
               </p>
@@ -255,14 +335,16 @@ const Vote = (props) => {
         </div>
         <ApplicationClaimPopup
           visible={isModalVisible}
-          propID={voteDetail && voteDetail.ProjectId}
+          voteDate={voteDetail}
           usersData={usersData}
           onClose={() => setIsModalVisible(false)}
+          getUser={getUsers}
         />
         <VotePopup
           propID={voteDetail && voteDetail.ProjectId}
           visible={isVoteModalVisible}
           onClose={() => setIsVoteModalVisible(false)}
+          getUser={getUsers}
         />
         <CannotVotePopup
           pool={null}

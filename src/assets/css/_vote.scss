@@ -202,6 +202,14 @@
         color: #FFFFFF;
         background: #00C57B;
       }
+      .disable_failed {
+        color: #D8D8D8 !important;
+        border: 3px solid #D8D8D8;
+        background: transparent !important;
+        &:hover {
+          box-shadow: none;
+        }
+      }
     }
     &_box_progress_h5 {
       display: none;
@@ -452,6 +460,14 @@
         color: #FFFFFF;
         background: #00C57B;
       }
+       .disable_failed {
+        color: #D8D8D8 !important;
+        border: 3px solid #D8D8D8;
+        background: transparent !important;
+        &:hover {
+          box-shadow: none;
+        }
+      }
     }
     &_box_progress_h5 {
       display: none;
@@ -701,6 +717,14 @@
           background: #00C57B;
         }
       }
+       .disable_failed {
+        color: #D8D8D8 !important;
+        border: 3px solid #D8D8D8;
+        background: transparent !important;
+        &:hover {
+          box-shadow: none;
+        }
+      }
     }
     &_box_information {
        margin: 0 auto;
@@ -947,6 +971,14 @@
           font-weight: 600;
           color: #FFFFFF;
           background: #00C57B;
+        }
+      }
+       .disable_failed {
+        color: #D8D8D8 !important;
+        border: 3px solid #D8D8D8;
+        background: transparent !important;
+        &:hover {
+          box-shadow: none;
         }
       }
     }
