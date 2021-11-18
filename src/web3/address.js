@@ -184,10 +184,10 @@ export const CHAIN_SWAP_NODE_REQ_URL = [
 export function GAS_FEE(chainId) {
   return {
     [ChainId.HECO]: {
-      // maxFeePerGas: Web3.utils.toWei('8', 'gwei'),
-      // // gasPrice: Web3.utils.toWei('5', 'gwei'),
-      // maxPriorityFeePerGas: Web3.utils.toWei('5', 'gwei'),
-      // type: '0x2',
+      maxFeePerGas: Web3.utils.toWei('8', 'gwei'),
+      // gasPrice: Web3.utils.toWei('5', 'gwei'),
+      maxPriorityFeePerGas: Web3.utils.toWei('5', 'gwei'),
+      type: '0x2',
     }
   }[chainId]
 }
