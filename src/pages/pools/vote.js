@@ -4,6 +4,7 @@ import { FormattedMessage, injectIntl } from 'react-intl'
 import { getIPFSFile } from '../../utils/ipfs'
 import { getContract, useActiveWeb3React } from '../../web3'
 import { formatAmount } from '../../utils/format'
+import { useBlockHeight } from './Hooks'
 import { message } from 'antd'
 import { GAS_FEE, voteMain } from '../../web3/address'
 import BreadCrumbs from '../../components/application/BreadCrumbs'
@@ -14,6 +15,7 @@ import CannotVotePopup from '../../components/application/cannotVotePopup'
 
 const Vote = (props) => {
   const { account, active, library, chainId } = useActiveWeb3React()
+  const { blockHeight } = useBlockHeight()
   const [voteDetail, setVoteDetail] = useState(null)
   const [isModalVisible, setIsModalVisible] = useState(false)
   const [isVoteModalVisible, setIsVoteModalVisible] = useState(false)
@@ -22,7 +24,7 @@ const Vote = (props) => {
 
   useEffect(() => {
     setVoteDetail(props.location.state.detailData)
-  }, [])
+  }, [blockHeight])
 
   const getUsers = () => {
     if (!active) {
@@ -44,7 +46,7 @@ const Vote = (props) => {
     if (voteDetail && voteDetail.ProjectId) {
       getUsers()
     }
-  }, [voteDetail])
+  }, [voteDetail, blockHeight])
 
   return (
     <div style={{ position: 'relative' }}>
@@ -143,7 +145,18 @@ const Vote = (props) => {
               <p className='vote_box_progress_content_title vote_box_progress_content_progress'>
                 <FormattedMessage id='poolsIndexText2' />
                 <a>
-                  <span style={{ width: '80px' }}></span>
+                  <span
+                    style={{
+                      width: `${
+                        (voteDetail &&
+                          voteDetail.progressData &&
+                          (voteDetail.progressData > 1
+                            ? 100
+                            : voteDetail.progressData * 100)) ||
+                        0
+                      }%`,
+                    }}
+                  ></span>
                 </a>
               </p>
               <p className='vote_box_progress_content_title'>

@@ -7,7 +7,7 @@ import { useBalance, useAllowance } from '../../pages/Hooks'
 import { mainContext } from '../../reducer'
 import { getIPFSJson, getIPFSFile } from '../../utils/ipfs'
 import ApplicationCountdown from './ApplicationCountdown'
-import { fromWei } from '../../utils/format'
+import { formatAmount } from '../../utils/format'
 import BigNumber from 'bignumber.js'
 import { NavLink } from 'react-router-dom'
 import ApplicationClaimPopup from './claimPopup'
@@ -30,20 +30,10 @@ export const InProgressCard = (props) => {
       .call()
       .then((res) => {
         setProgressData(
-          fromWei(
-            new BigNumber(res[1])
-              .div(new BigNumber(listData.voteMax))
-              .toString()
-          )
-        )
-        console.log(
-          fromWei(
-            new BigNumber(res[1])
-              .div(new BigNumber(listData.voteMax))
-              .toString(),
-            6
-          ),
-          'progressDataprogressDataprogressData'
+          new BigNumber(formatAmount(res[1]))
+            .div(new BigNumber(formatAmount(listData.voteMax)))
+            .toFixed(2, 1)
+            .toString()
         )
       })
       .catch((err) => {
@@ -52,7 +42,13 @@ export const InProgressCard = (props) => {
   }
 
   useMemo(() => {
-    if (listData && listData.tokenURI) {
+    if (listData && listData.ProjectId) {
+      getVotesData(listData.ProjectId)
+    }
+  }, [listData])
+
+  useMemo(() => {
+    if (listData && listData.tokenURI && progressData) {
       getIPFSJson(listData.tokenURI)
         .then((res) => {
           if (res.data) {
@@ -60,6 +56,7 @@ export const InProgressCard = (props) => {
             res.data.id = listData.id
             res.data.begin = listData.begin
             res.data.voteMax = listData.voteMax
+            res.data.progressData = progressData
             setDetailData(res.data)
           }
         })
@@ -67,10 +64,7 @@ export const InProgressCard = (props) => {
           console.log(e, 'e')
         })
     }
-    if (listData && listData.ProjectId) {
-      getVotesData(listData.ProjectId)
-    }
-  }, [listData])
+  }, [listData, progressData])
 
   return (
     <div className='application_card'>
@@ -78,7 +72,7 @@ export const InProgressCard = (props) => {
         <i>ID:{listData.id}</i>
 
         <div className='application_countdown_box'>
-          <ApplicationCountdown time={listData.begin} />
+          <ApplicationCountdown time={listData && listData.begin} />
         </div>
       </div>
       <div className='application_card_content'>
@@ -94,7 +88,11 @@ export const InProgressCard = (props) => {
         <p className='application_card_content_title application_card_content_progress'>
           <FormattedMessage id='poolsIndexText2' />
           <a>
-            <span style={{ width: '80px' }}></span>
+            <span
+              style={{
+                width: `${progressData > 1 ? 100 : progressData * 100}%`,
+              }}
+            ></span>
           </a>
         </p>
         <p className='application_card_content_btn'>
