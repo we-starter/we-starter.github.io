@@ -1,13 +1,6 @@
 import React, {useMemo, useState} from "react";
 import BackIcon from '../../assets/icon/application/back@2x.png'
 import LeftArrowBlackIcon from '../../assets/icon/application/left-arrow-black.svg'
-import LeftArrowGrayIcon from '../../assets/icon/application/left-arrow-gray.svg'
-import CreateIcon from '../../assets/icon/application/create.svg'
-import WebsiteIcon from '../../assets/icon/application/website.svg'
-import TwitterIcon from '../../assets/icon/application/twitter.svg'
-import DiscordIcon from '../../assets/icon/application/discord.svg'
-import TelegramIcon from '../../assets/icon/application/tme.svg'
-import MediumIcon from '../../assets/icon/application/medium.svg'
 import TipsIcon from '../../assets/icon/application/tips.svg'
 import DateIcon from '../../assets/icon/application/date.svg'
 import cs from 'classnames'
@@ -16,7 +9,7 @@ import moment from 'moment'
 import {useMDexPrice} from "../../pages/pools/Hooks";
 import {ChainId, GAS_FEE, USDT_ADDRESS, voteMain, voteNFT, WAR_ADDRESS, WHT_ADDRESS} from "../../web3/address";
 import BigNumber from "bignumber.js";
-import {getIPFSFile, getIPFSJson, uploadIPFSJson} from "../../utils/ipfs";
+import {getIPFSJson} from "../../utils/ipfs";
 import ApplyInfoView from './ApplyInfo'
 import {NavLink} from "react-router-dom";
 import {FormattedMessage} from "react-intl";
@@ -245,7 +238,10 @@ export default function Apply() {
         </NFTCard>
         </span>
         <div className="tip-txt">
-          <div><FormattedMessage id="applicationText29"/> Project NFT Card</div>
+          <div style={{cursor: 'pointer'}} onClick={() => {
+            setNFTIndex(nftList.length)
+            setShowInfoPage(true)
+          }}><FormattedMessage id="applicationText29"/> Project NFT Card</div>
           <div><FormattedMessage id="applicationText30"/></div>
         </div>
         <Input suffix="WAR" className="apply-input" type="number" value={amount}
@@ -277,6 +273,7 @@ export default function Apply() {
           suffixIcon={<img src={DateIcon} className="date-icon" alt=""/>}
           showTime={{defaultValue: moment('00:00:00', 'HH:mm:ss')}}
           onOk={setStartTime}
+          showNow={false}
         />
         <div className="info-tips">
           <img src={TipsIcon} alt="tips"/>
