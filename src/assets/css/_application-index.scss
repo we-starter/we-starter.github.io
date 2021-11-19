@@ -11,7 +11,7 @@
       padding-bottom: 10px;
       a {
         display: inline-block;
-        padding: 0 40px;
+        padding: 0 32px;
         height: 32px;
         line-height: 30px;
         font-size: 14px;
@@ -20,8 +20,8 @@
         color: #4F4F4F;
         border-radius: 8px;
         border: 2px solid transparent;
-        &:first-child {
-          margin-right: 34px;
+        &:nth-child(2) {
+          margin:0  24px;
         }
         &:hover {
           color: #03A678;
@@ -94,7 +94,7 @@
       padding-bottom: 10px;
       a {
         display: inline-block;
-        padding: 0 40px;
+        padding: 0 32px;
         height: 32px;
         line-height: 30px;
         font-size: 14px;
@@ -103,8 +103,8 @@
         color: #4F4F4F;
         border-radius: 8px;
         border: 2px solid transparent;
-        &:first-child {
-          margin-right: 34px;
+        &:nth-child(2) {
+          margin:0  24px;
         }
         &:hover {
           color: #03A678;
@@ -178,7 +178,7 @@
       padding-bottom: 10px;
       a {
         display: inline-block;
-        padding: 0 40px;
+        padding: 0 24px;
         height: 32px;
         line-height: 30px;
         font-size: 14px;
@@ -187,8 +187,8 @@
         color: #4F4F4F;
         border-radius: 8px;
         border: 2px solid transparent;
-        &:first-child {
-          margin-right: 34px;
+        &:nth-child(2) {
+          margin:0  20px;
         }
         &:hover {
           color: #03A678;
@@ -261,7 +261,7 @@
       padding-bottom: 10px;
       a {
         display: inline-block;
-        padding: 0 40px;
+        padding: 0 24px;
         height: 32px;
         line-height: 30px;
         font-size: 14px;
@@ -270,8 +270,8 @@
         color: #4F4F4F;
         border-radius: 8px;
         border: 2px solid transparent;
-        &:first-child {
-          margin-right: 34px;
+        &:nth-child(2) {
+          margin:0  20px;
         }
         &:hover {
           color: #03A678;

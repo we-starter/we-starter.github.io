@@ -135,8 +135,7 @@ const Application = (props) => {
               changeFlag(0)
             }}
           >
-            即将开始
-            {/* <FormattedMessage id='applicationText3' /> */}
+            <FormattedMessage id='applicationText18' />
           </a>
           <a
             className={cs(statusFlag === 1 && 'application_content_tab_active')}
@@ -173,10 +172,10 @@ const Application = (props) => {
             </div>
           ) : (
             cardDataList.map((item, index) => {
-            return (
-              item.status === statusFlag && (
-                <InProgressCard listData={item} key={index} />
-              )
+              return (
+                item.status === statusFlag && (
+                  <InProgressCard listData={item} key={index} />
+                )
               )
             })
           )}
