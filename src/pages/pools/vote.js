@@ -22,6 +22,7 @@ const Vote = (props) => {
   const [isVoteModalVisible, setIsVoteModalVisible] = useState(false)
   const [isCannotVoteModalVisible, setIsCannotVoteModalVisible] = useState(false)
   const [usersData, setUsersData] = useState({})
+  const [voteLogoUrl, setVoteLogoUrl] = useState('')
 
   useEffect(() => {
     props.location.state.detailData &&
@@ -51,6 +52,12 @@ const Vote = (props) => {
     }
   }, [voteDetail, blockHeight, active, account])
 
+  useEffect(() => {
+    if (voteDetail && voteDetail.logo) {
+      setVoteLogoUrl(getIPFSFile(voteDetail && voteDetail.logo))
+    }
+  }, [voteDetail])
+    
   const setDisableBtn = () => {
     if (voteDetail && voteDetail.status === 1) {
       setIsVoteModalVisible(true)
@@ -88,7 +95,9 @@ const Vote = (props) => {
             </div>
             <div className='vote_box_card_content'>
               <div className='vote_box_card_content_box'>
-                <img src={getIPFSFile(voteDetail && voteDetail.logo)} />
+                {!voteLogoUrl && <p className='placeholder_map'></p>}
+                {voteLogoUrl && <img src={voteLogoUrl} />}
+                {/* <img src={getIPFSFile(voteDetail && voteDetail.logo)} /> */}
                 <p className='vote_box_card_content_title'>
                   {voteDetail && voteDetail.name}
                   <span>{voteDetail && voteDetail.website}</span>
@@ -115,7 +124,10 @@ const Vote = (props) => {
                     target='_blank'
                     rel='noopener'
                   >
-                    <img style={{width: '24px', height: '24px'}} src={bookMarkLine} />
+                    <img
+                      style={{ width: '24px', height: '24px' }}
+                      src={bookMarkLine}
+                    />
                   </a>
                 </li>
                 {/* <li>
@@ -196,7 +208,7 @@ const Vote = (props) => {
               )}
             </div>
             <div className='vote_box_progress_content'>
-              <p className='vote_box_progress_content_title vote_box_progress_content_progress'>
+              <div className='vote_box_progress_content_title vote_box_progress_content_progress'>
                 <p style={{ display: 'flex', justifyContent: 'space-between' }}>
                   <a className='vote_progress_title'>
                     <FormattedMessage id='poolsIndexText2' />(
@@ -220,7 +232,7 @@ const Vote = (props) => {
                     }}
                   ></span>
                 </a>
-              </p>
+              </div>
               <p className='vote_box_progress_content_title'>
                 <FormattedMessage id='applicationText16' />
                 <span>
@@ -260,7 +272,7 @@ const Vote = (props) => {
               successStatus={voteDetail && voteDetail.successStatus}
             />
             <div className='vote_box_progress_content'>
-              <p className='vote_box_progress_content_title vote_box_progress_content_progress'>
+              <div className='vote_box_progress_content_title vote_box_progress_content_progress'>
                 <p style={{ display: 'flex', justifyContent: 'space-between' }}>
                   <a className='vote_progress_title'>
                     <FormattedMessage id='poolsIndexText2' />(
@@ -284,7 +296,7 @@ const Vote = (props) => {
                     }}
                   ></span>
                 </a>
-              </p>
+              </div>
               <div
                 style={{
                   display: 'flex',

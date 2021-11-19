@@ -18,6 +18,7 @@ export const InProgressCard = (props) => {
   const { library, account, active } = useActiveWeb3React()
   const [isModalVisible, setIsModalVisible] = useState(false)
   const [detailData, setDetailData] = useState({})
+  const [logoUrl, setLogoUrl] = useState('')
   let progressData = VotesData(
     listData && listData.ProjectId,
     listData && listData.voteMax
@@ -48,6 +49,12 @@ export const InProgressCard = (props) => {
     }
   }, [listData.left_time, progressData, active, successPercentVal])
 
+  useEffect(() => {
+    if (detailData && detailData.logo) {
+      setLogoUrl(getIPFSFile(detailData && detailData.logo))
+    }
+  }, [detailData])
+
   return (
     <div className='application_card'>
       <div className='application_card_title'>
@@ -62,8 +69,8 @@ export const InProgressCard = (props) => {
         </div>
       </div>
       <div className='application_card_content'>
-        {/* <p className='placeholder_map'></p> */}
-        <img src={getIPFSFile(detailData && detailData.logo)} />
+        {!logoUrl && <p className='placeholder_map'></p>}
+        {logoUrl && <img src={logoUrl} />}
         <p className='application_card_content_title'>
           <FormattedMessage id='applicationText6' />
           <span>{detailData && detailData.name}</span>

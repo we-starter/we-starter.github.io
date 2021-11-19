@@ -88,6 +88,7 @@ const Application = (props) => {
   // 0 countdown   1 voting   2 end   3 claim time
   useEffect(() => {
     if (cardDataList.length) {
+      console.log(cardDataList, 'cardDataListcardDataListcardDataList')
       cardDataList.map((item) => {
         let begin_time = item.begin * 1000
         if (begin_time - now_time > 0) {
