@@ -2,8 +2,8 @@ import React, { useContext, useEffect, useMemo, useState } from 'react'
 import cs from 'classnames'
 import { FormattedMessage, injectIntl } from 'react-intl'
 import { voteMain } from '../../web3/address'
+import Web3 from 'web3'
 import { getContract, useActiveWeb3React } from '../../web3'
-import { useBalance, useAllowance } from '../../pages/Hooks'
 import { mainContext } from '../../reducer'
 import { getIPFSJson, getIPFSFile } from '../../utils/ipfs'
 import ApplicationCountdown from './ApplicationCountdown'
@@ -11,40 +11,18 @@ import { formatAmount } from '../../utils/format'
 import BigNumber from 'bignumber.js'
 import { NavLink } from 'react-router-dom'
 import ApplicationClaimPopup from './claimPopup'
+import { SuccessPercent, VotesData } from '../../pages/pools/Hooks'
 
 export const InProgressCard = (props) => {
   const { listData } = props
   const { library, account, active } = useActiveWeb3React()
   const [isModalVisible, setIsModalVisible] = useState(false)
   const [detailData, setDetailData] = useState({})
-  const [progressData, setProgressData] = useState('')
-
-  const getVotesData = (propId) => {
-    if (!active) {
-      return false
-    }
-    const pool_contract = getContract(library, voteMain.abi, voteMain.address)
-    pool_contract.methods
-      .getVotes(propId)
-      .call()
-      .then((res) => {
-        setProgressData(
-          new BigNumber(formatAmount(res[1]))
-            .div(new BigNumber(formatAmount(listData.voteMax)))
-            .toFixed(2, 1)
-            .toString()
-        )
-      })
-      .catch((err) => {
-        console.log('error', err)
-      })
-  }
-
-  useEffect(() => {
-    if (listData && listData.ProjectId) {
-      getVotesData(listData.ProjectId)
-    }
-  }, [listData, active])
+  let progressData = VotesData(
+    listData && listData.ProjectId,
+    listData && listData.voteMax
+  )
+  let successPercentVal = SuccessPercent()
 
   useEffect(() => {
     if (listData && listData.tokenURI && progressData) {
@@ -58,6 +36,9 @@ export const InProgressCard = (props) => {
             res.data.progressData = progressData
             res.data.left_time = listData.left_time
             res.data.status = listData.status
+            res.data.isClaim = listData.isClaim
+            res.data.claim_time = listData.claim_time
+            res.data.successStatus = progressData * 100 >= successPercentVal
             setDetailData(res.data)
           }
         })
@@ -65,7 +46,7 @@ export const InProgressCard = (props) => {
           console.log(e, 'e')
         })
     }
-  }, [listData.left_time, progressData, active])
+  }, [listData.left_time, progressData, active, successPercentVal])
 
   return (
     <div className='application_card'>
@@ -76,6 +57,7 @@ export const InProgressCard = (props) => {
           <ApplicationCountdown
             left_time={listData && listData.left_time}
             status={listData && listData.status}
+            successStatus={progressData * 100 >= successPercentVal}
           />
         </div>
       </div>
