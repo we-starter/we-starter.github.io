@@ -164,9 +164,9 @@ export default function Apply() {
     if (!amount || amount < 0 || !startTime) {
       return message.warning('Please Enter information completely')
     }
-    if (amount < 10000) {
-      return message.warning('The quantity cannot be less than 10000 WAR')
-    }
+    // if (amount < 10000) {
+    //   return message.warning('The quantity cannot be less than 10000 WAR')
+    // }
     if (amount < suggestedAmount() * 0.2) {
       return message.warning(`At least 20%(About ${Math.ceil(suggestedAmount() * 0.2)} WAR)`)
     }
