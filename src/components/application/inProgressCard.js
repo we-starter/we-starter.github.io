@@ -39,7 +39,7 @@ export const InProgressCard = (props) => {
             res.data.status = listData.status
             res.data.isClaim = listData.isClaim
             res.data.claim_time = listData.claim_time
-            res.data.successStatus = progressData * 100 >= successPercentVal
+            res.data.successStatus = progressData * 100 >= 100
             setDetailData(res.data)
           }
         })
@@ -64,7 +64,7 @@ export const InProgressCard = (props) => {
           <ApplicationCountdown
             left_time={listData && listData.left_time}
             status={listData && listData.status}
-            successStatus={progressData * 100 >= successPercentVal}
+            successStatus={progressData * 100 >= 100}
           />
         </div>
       </div>
@@ -84,7 +84,7 @@ export const InProgressCard = (props) => {
           <a>
             <span
               style={{
-                width: `${progressData > 1 ? 100 : progressData * 100}%`,
+                width: `${progressData >= 1 ? 100 : progressData * 100}%`,
               }}
             ></span>
           </a>

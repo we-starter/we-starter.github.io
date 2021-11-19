@@ -21,7 +21,7 @@ import BigNumber from 'bignumber.js'
 const Application = (props) => {
   const { account, active, library, chainId } = useActiveWeb3React()
   const { blockHeight } = useBlockHeight()
-  const [statusFlag, setStatusFlag] = useState('InProgress')
+  const [statusFlag, setStatusFlag] = useState(1)
   const [cardDataList, setCardDataList] = useState([])
   const [progressData, setProgressData] = useState('')
   const [loading, setLoading] = useState(false)
@@ -130,44 +130,33 @@ const Application = (props) => {
       <div className='application_content'>
         <div className='application_content_tab'>
           <a
-            className={cs(
-              statusFlag === 'InProgress' && 'application_content_tab_active'
-            )}
+            className={cs(statusFlag === 0 && 'application_content_tab_active')}
             onClick={() => {
-              changeFlag('InProgress')
+              changeFlag(0)
+            }}
+          >
+            即将开始
+            {/* <FormattedMessage id='applicationText3' /> */}
+          </a>
+          <a
+            className={cs(statusFlag === 1 && 'application_content_tab_active')}
+            onClick={() => {
+              changeFlag(1)
             }}
           >
             <FormattedMessage id='applicationText3' />
           </a>
           <a
-            className={cs(
-              statusFlag === 'over' && 'application_content_tab_active'
-            )}
+            className={cs(statusFlag === 2 && 'application_content_tab_active')}
             onClick={() => {
-              changeFlag('over')
+              changeFlag(2)
             }}
           >
             <FormattedMessage id='applicationText4' />
           </a>
         </div>
         <Spin spinning={loading}>
-          {statusFlag === 'InProgress' &&
-            cardDataList.map((item, index) => {
-              return (
-                item.status !== 2 && (
-                  <InProgressCard listData={item} key={index} />
-                )
-              )
-            })}
-          {statusFlag === 'over' &&
-            cardDataList.map((item, index) => {
-              return (
-                item.status === 2 && (
-                  <InProgressCard listData={item} key={index} />
-                )
-              )
-            })}
-          {!cardDataList.length && (
+          {!cardDataList.filter((item) => item.status === statusFlag).length ? (
             <div className='no-data'>
               <img
                 src={require('../../assets/icon/noData@2x.png')}
@@ -182,6 +171,14 @@ const Application = (props) => {
                 </a>
               </p>
             </div>
+          ) : (
+            cardDataList.map((item, index) => {
+            return (
+              item.status === statusFlag && (
+                <InProgressCard listData={item} key={index} />
+              )
+              )
+            })
           )}
         </Spin>
       </div>

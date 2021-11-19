@@ -40,6 +40,7 @@ const Vote = (props) => {
       .call()
       .then((res) => {
         setUsersData(res)
+        console.log(res, 'ressssssssss')
       })
       .catch((err) => {
         console.log('error', err)
@@ -224,7 +225,7 @@ const Vote = (props) => {
                       width: `${
                         (voteDetail &&
                           voteDetail.progressData &&
-                          (voteDetail.progressData > 1
+                          (voteDetail.progressData >= 1
                             ? 100
                             : voteDetail.progressData * 100)) ||
                         0
@@ -246,7 +247,7 @@ const Vote = (props) => {
               <p className='vote_box_progress_content_title'>
                 <FormattedMessage id='applicationText17' />
                 <span>
-                  {voteDetail && voteDetail.isClaim
+                  {voteDetail && voteDetail.isClaim && !usersData.claimed
                     ? formatAmount(usersData.totalVote, 18, 6)
                     : '0'}{' '}
                   WAR
@@ -319,7 +320,7 @@ const Vote = (props) => {
                 <p className='vote_box_progress_content_title'>
                   <FormattedMessage id='applicationText17' />
                   <span>
-                    {voteDetail && voteDetail.isClaim
+                    {voteDetail && voteDetail.isClaim && !usersData.claimed
                       ? formatAmount(usersData.totalVote, 18, 6)
                       : '0'}{' '}
                     WAR
