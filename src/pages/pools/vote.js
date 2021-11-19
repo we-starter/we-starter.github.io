@@ -6,7 +6,7 @@ import { getContract, useActiveWeb3React } from '../../web3'
 import { formatAmount } from '../../utils/format'
 import { useBlockHeight } from './Hooks'
 import bookMarkLine from '../../assets/icon/application/book-mark-line.svg'
-import { message } from 'antd'
+import { mainContext } from '../../reducer'
 import { voteMain } from '../../web3/address'
 import BreadCrumbs from '../../components/application/BreadCrumbs'
 import ApplicationCountdown from '../../components/application/ApplicationCountdown'
@@ -23,6 +23,7 @@ const Vote = (props) => {
   const [isCannotVoteModalVisible, setIsCannotVoteModalVisible] = useState(false)
   const [usersData, setUsersData] = useState({})
   const [voteLogoUrl, setVoteLogoUrl] = useState('')
+  const { dispatch, state } = useContext(mainContext)
 
   useEffect(() => {
     props.location.state.detailData &&
@@ -39,7 +40,6 @@ const Vote = (props) => {
       .call()
       .then((res) => {
         setUsersData(res)
-        console.log(voteDetail, res, 'resusers')
       })
       .catch((err) => {
         console.log('error', err)
@@ -83,21 +83,21 @@ const Vote = (props) => {
               <i>ID:{voteDetail && voteDetail.id}</i>
               <p className='vote_countdown_ongoing'>
                 {voteDetail &&
-                  (voteDetail.status === 2 && voteDetail.successStatus
-                    ? 'success'
-                    : voteDetail.status === 2 && !voteDetail.successStatus
-                    ? 'Fail'
-                    : voteDetail && voteDetail.status === 1
-                    ? '进行中'
-                    : '即将开始')}
-                {/* <FormattedMessage id='applicationText10' /> */}
+                  (voteDetail.status === 2 && voteDetail.successStatus ? (
+                    <FormattedMessage id='applicationText10' />
+                  ) : voteDetail.status === 2 && !voteDetail.successStatus ? (
+                    <FormattedMessage id='applicationText11' />
+                  ) : voteDetail && voteDetail.status === 1 ? (
+                    <FormattedMessage id='applicationText3' />
+                  ) : (
+                    <FormattedMessage id='applicationText18' />
+                  ))}
               </p>
             </div>
             <div className='vote_box_card_content'>
               <div className='vote_box_card_content_box'>
                 {!voteLogoUrl && <p className='placeholder_map'></p>}
                 {voteLogoUrl && <img src={voteLogoUrl} />}
-                {/* <img src={getIPFSFile(voteDetail && voteDetail.logo)} /> */}
                 <p className='vote_box_card_content_title'>
                   {voteDetail && voteDetail.name}
                   <span>{voteDetail && voteDetail.website}</span>
@@ -106,7 +106,7 @@ const Vote = (props) => {
               <ul className='link_url'>
                 <li>
                   <a
-                    title='title'
+                    title='twitter'
                     href={voteDetail && voteDetail.twitter}
                     target='_blank'
                     rel='noopener'
@@ -119,7 +119,7 @@ const Vote = (props) => {
 
                 <li>
                   <a
-                    title='title'
+                    title='whitePaper'
                     href={voteDetail && voteDetail.whitePaper}
                     target='_blank'
                     rel='noopener'
@@ -132,7 +132,7 @@ const Vote = (props) => {
                 </li>
                 {/* <li>
                   <a
-                    title='title'
+                    title='github'
                     href='https://github.com/we-starter'
                     target='_blank'
                     rel='noopener'
@@ -144,7 +144,7 @@ const Vote = (props) => {
                 </li> */}
                 <li>
                   <a
-                    title='title'
+                    title='telegram'
                     href={voteDetail && voteDetail.telegram}
                     target='_blank'
                     rel='noopener'
@@ -156,7 +156,7 @@ const Vote = (props) => {
                 </li>
                 <li>
                   <a
-                    title='title'
+                    title='medium'
                     href={voteDetail && voteDetail.medium}
                     target='_blank'
                     rel='noopener noreferrer'
@@ -190,7 +190,7 @@ const Vote = (props) => {
                       : '0'
                   }
                   status={3}
-                  title={'claim'}
+                  title='applicationText19'
                   successStatus={voteDetail && voteDetail.successStatus}
                 />
               )}
@@ -212,7 +212,7 @@ const Vote = (props) => {
                 <p style={{ display: 'flex', justifyContent: 'space-between' }}>
                   <a className='vote_progress_title'>
                     <FormattedMessage id='poolsIndexText2' />(
-                    {voteDetail && (voteDetail.progressData * 100).toFixed(0)})%
+                    {voteDetail && (voteDetail.progressData * 100).toFixed(0)}%)
                   </a>
                   <a>
                     {voteDetail && formatAmount(voteDetail.voteMax, 18, 6)} WAR
@@ -276,7 +276,8 @@ const Vote = (props) => {
                 <p style={{ display: 'flex', justifyContent: 'space-between' }}>
                   <a className='vote_progress_title'>
                     <FormattedMessage id='poolsIndexText2' />(
-                    {voteDetail && (voteDetail.progressData * 100).toFixed(0)})%
+                    {voteDetail && (voteDetail.progressData * 100).toFixed(0)}
+                    %)
                   </a>
                   <a>
                     {voteDetail && formatAmount(voteDetail.voteMax, 18, 6)} WAR
@@ -388,10 +389,12 @@ const Vote = (props) => {
             </p>
             <div className='vote_box_information_info'>
               <p>
-                <span>{voteDetail && voteDetail.descEN}</span>
-              </p>
-              <p>
-                <span>{voteDetail && voteDetail.descZH}</span>
+                {state.locale == 'en' && (
+                  <span>{voteDetail && voteDetail.descEN}</span>
+                )}
+                {state.locale == 'zh' && (
+                  <span>{voteDetail && voteDetail.descZH}</span>
+                )}
               </p>
             </div>
           </div>

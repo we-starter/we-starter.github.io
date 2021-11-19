@@ -10,11 +10,11 @@ export default function ApplicationCountdown({ left_time, status, successStatus,
         <p className='application_countdown'>
           <span className='countdown'>
             {title ? (
-              title
+              <FormattedMessage id={title} />
             ) : status === 0 ? (
               <FormattedMessage id='farm8' />
             ) : (
-              '进行中'
+              <FormattedMessage id='applicationText3' />
             )}
             :{' '}
           </span>
@@ -57,14 +57,12 @@ export default function ApplicationCountdown({ left_time, status, successStatus,
       )}
       {status === 2 && successStatus && (
         <p className='success'>
-          {/* <FormattedMessage id='applicationText10' /> */}
-          Success
+          <FormattedMessage id='applicationText10' />
         </p>
       )}
       {status === 2 && !successStatus && (
         <p className='success'>
-          {/* <FormattedMessage id='applicationText10' /> */}
-          Fail
+          <FormattedMessage id='applicationText11' />
         </p>
       )}
     </>

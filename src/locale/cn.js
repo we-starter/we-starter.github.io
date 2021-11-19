@@ -419,26 +419,38 @@ const zh_CN = {
   applicationText14:
     'The Syrup Pool: Stake CAKE tokens to earn APENFT’s $NFT tokens!',
   applicationText15: 'Proposals',
+  applicationText16: 'My Support',
+  applicationText17: 'Claimable',
+  applicationText18: '即将开始',
+  applicationText19: 'Claim',
 
-  applicationText26 : '建议上传 SVG 格式的图片，PNG 等其他格式建议分辨率为 400 * 400',
-  applicationText27 : '发起投票提案时，要抵押此金额的{percentage}',
-  applicationText28: '请仔细核对输入的信息，创建成功后会铸造 HECO-721 NFT Token，信息不可更改。如需更改需要创建新的 Project NFT Card',
+  applicationText26:
+    '建议上传 SVG 格式的图片，PNG 等其他格式建议分辨率为 400 * 400',
+  applicationText27: '发起投票提案时，要抵押此金额的{percentage}',
+  applicationText28:
+    '请仔细核对输入的信息，创建成功后会铸造 HECO-721 NFT Token，信息不可更改。如需更改需要创建新的 Project NFT Card',
   applicationText29: '创建新的',
   applicationText30: '什么是 NFT Card？',
   applicationText31: '当前价',
   applicationText32: '项目申请募资',
   applicationText33: '建议抵押金额',
-  applicationText34: '抵押的 WAR 价值不能小于总募资金额，否则影响后续的募资计划',
-  applicationText35: "从投票开始计时，周期为 {day1} 天，资金将在投票结束后 {day2} 天后释放",
+  applicationText34:
+    '抵押的 WAR 价值不能小于总募资金额，否则影响后续的募资计划',
+  applicationText35:
+    '从投票开始计时，周期为 {day1} 天，资金将在投票结束后 {day2} 天后释放',
   applicationText36: '规则',
-  applicationText37: '如果提案在周期内，等于或者超过项目 IWO 总额度的 50%，则为成功，投票方和项目发起人（提案人）可以在 5 天后 Claim 回来自己的 WAR',
-  applicationText38: '如果提案在周期内，低于项目方 IWO 总额度的 50%，则为失败。提案抵押金额的 50% 将空投给投票方，余下 50% 抵押金额将燃烧。投票方可以在 5 天后 Claim 回来自己的 WAR。',
-  applicationText39: 'NFT Card 是由项目发起方提供的项目官方信息, WeStarter 将这些信息铸造成 NFT, 铸造完成后, 所有的信息不可更改.',
+  applicationText37:
+    '如果提案在周期内，等于或者超过项目 IWO 总额度的 50%，则为成功，投票方和项目发起人（提案人）可以在 5 天后 Claim 回来自己的 WAR',
+  applicationText38:
+    '如果提案在周期内，低于项目方 IWO 总额度的 50%，则为失败。提案抵押金额的 50% 将空投给投票方，余下 50% 抵押金额将燃烧。投票方可以在 5 天后 Claim 回来自己的 WAR。',
+  applicationText39:
+    'NFT Card 是由项目发起方提供的项目官方信息, WeStarter 将这些信息铸造成 NFT, 铸造完成后, 所有的信息不可更改.',
 
   adjustmentTips1: '亲爱的用户：',
   adjustmentTips2: 'WeStarter近期做出一系列运营调整，现将限制以下国家IP访问：',
-  adjustmentTips3: '日本、古巴、伊朗、中国内地、中国香港、中国澳门、朝鲜、苏丹、叙利亚、美利坚合众国及其海外领地（美属萨摩亚、关岛、北马里亚纳群岛、波多黎各和美属维京群岛）、加拿大、新加坡。',
+  adjustmentTips3:
+    '日本、古巴、伊朗、中国内地、中国香港、中国澳门、朝鲜、苏丹、叙利亚、美利坚合众国及其海外领地（美属萨摩亚、关岛、北马里亚纳群岛、波多黎各和美属维京群岛）、加拿大、新加坡。',
   adjustmentTips4: '感谢您对WeStarter的支持！',
-  adjustmentTips5: '我已确认不属于以上地区'
+  adjustmentTips5: '我已确认不属于以上地区',
 }
 export default zh_CN
