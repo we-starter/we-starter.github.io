@@ -35,11 +35,11 @@ export const useBalance = (address, networkId=ChainId.HECO) => {
           const contract = createContractERC20(networkId, address)
           // const contract = getContract(library, ERC20.abi, address)
           contract.methods
-              .balanceOf(account)
-              .call()
-              .then((res) => {
-                setBalance(res)
-              })
+            .balanceOf(account)
+            .call()
+            .then((res) => {
+              setBalance(res)
+            })
           contract.methods
             .balanceOf(account)
             .call()
@@ -51,7 +51,7 @@ export const useBalance = (address, networkId=ChainId.HECO) => {
         console.log('load token balance error:', e)
       }
     }
-  }, [active, blockHeight])
+  }, [active, blockHeight, account])
 
   return { balance }
 }
@@ -98,7 +98,7 @@ export const useAllowance = (contract_address, address, owner_address, _chainId)
   const [allowance, setAllowance] = useState(0)
   const blockHeight = useBlockHeight()
   useEffect(() => {
-    if (!_chainId && !chainId){
+    if (!_chainId && !chainId) {
       return () => {}
     }
     const contract = createContractERC20(_chainId || chainId, contract_address)
@@ -116,6 +116,6 @@ export const useAllowance = (contract_address, address, owner_address, _chainId)
       console.log('load token allowance error:', e)
     }
     return () => {}
-  }, [account, library, active, blockHeight])
+  }, [library, active, blockHeight, account])
   return allowance
 }

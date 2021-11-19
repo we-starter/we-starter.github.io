@@ -1,15 +1,25 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import cs from 'classnames'
 import { FormattedMessage } from 'react-intl'
 import Timer from 'react-compound-timer'
-export default function ApplicationCountdown({ left_time, status }) {
 
+export default function ApplicationCountdown({ left_time, status, successStatus, title }) {
+  useEffect(() => {
+    console.log(successStatus, '**************')
+  }, [successStatus])
   return (
     <>
       {status !== 2 && (
         <p className='application_countdown'>
           <span className='countdown'>
-            {status === 0 ? <FormattedMessage id='farm8' /> : '进行中'}:{' '}
+            {title ? (
+              title
+            ) : status === 0 ? (
+              <FormattedMessage id='farm8' />
+            ) : (
+              '进行中'
+            )}
+            :{' '}
           </span>
           <Timer
             initialTime={left_time}
@@ -25,35 +35,35 @@ export default function ApplicationCountdown({ left_time, status }) {
           >
             <span>
               <span className={cs(`countdown_time`)}>
-                <Timer.Hours />
-                {/* <b>
-                <FormattedMessage id='HourM' />
-              </b> */}
+                {left_time > 0 && <Timer.Hours />}
+                {left_time <= 0 && '-'}
               </span>{' '}
               <i>:</i>{' '}
               <span className={cs(`countdown_time`)}>
                 {' '}
-                <Timer.Minutes />
-                {/* <b>
-                <FormattedMessage id='MinM' />
-              </b> */}
+                {left_time > 0 && <Timer.Minutes />}
+                {left_time <= 0 && '-'}
               </span>{' '}
               <i>:</i>{' '}
               <span className={cs(`countdown_time`)}>
                 {' '}
-                <Timer.Seconds />
-                {/* <b>
-                <FormattedMessage id='SecondM' />
-              </b> */}
+                {left_time > 0 && <Timer.Seconds />}
+                {left_time <= 0 && '-'}
               </span>
             </span>
           </Timer>
         </p>
       )}
-      {status === 2 && (
+      {status === 2 && successStatus && (
         <p className='success'>
           {/* <FormattedMessage id='applicationText10' /> */}
-          已结束
+          Success
+        </p>
+      )}
+      {status === 2 && !successStatus && (
+        <p className='success'>
+          {/* <FormattedMessage id='applicationText10' /> */}
+          Fail
         </p>
       )}
     </>

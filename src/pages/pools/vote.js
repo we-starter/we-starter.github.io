@@ -25,7 +25,7 @@ const Vote = (props) => {
   useEffect(() => {
     props.location.state.detailData &&
       setVoteDetail(props.location.state.detailData)
-  }, [props.location.state.detailData, active, blockHeight])
+  }, [props.location.state.detailData, active, blockHeight, account])
 
   const getUsers = () => {
     if (!active) {
@@ -37,6 +37,7 @@ const Vote = (props) => {
       .call()
       .then((res) => {
         setUsersData(res)
+        console.log(voteDetail, res, 'resusers')
       })
       .catch((err) => {
         console.log('error', err)
@@ -47,7 +48,7 @@ const Vote = (props) => {
     if (voteDetail && voteDetail.ProjectId) {
       getUsers()
     }
-  }, [voteDetail, blockHeight, active])
+  }, [voteDetail, blockHeight, active, account])
 
   const setDisableBtn = () => {
     if (voteDetail && voteDetail.status === 1) {
@@ -73,11 +74,14 @@ const Vote = (props) => {
             <div className='vote_box_card_title'>
               <i>ID:{voteDetail && voteDetail.id}</i>
               <p className='vote_countdown_ongoing'>
-                {voteDetail && voteDetail.status === 2
-                  ? '已结束'
-                  : voteDetail && voteDetail.status === 1
-                  ? '进行中'
-                  : '即将开始'}
+                {voteDetail &&
+                  (voteDetail.status === 2 && voteDetail.successStatus
+                    ? 'success'
+                    : voteDetail.status === 2 && !voteDetail.successStatus
+                    ? 'Fail'
+                    : voteDetail && voteDetail.status === 1
+                    ? '进行中'
+                    : '即将开始')}
                 {/* <FormattedMessage id='applicationText10' /> */}
               </p>
             </div>
@@ -106,7 +110,7 @@ const Vote = (props) => {
                 <li>
                   <a
                     title='title'
-                    href='https://github.com/we-starter'
+                    href={voteDetail && voteDetail.whitePaper}
                     target='_blank'
                     rel='noopener'
                   >
@@ -115,7 +119,18 @@ const Vote = (props) => {
                     </svg>
                   </a>
                 </li>
-
+                {/* <li>
+                  <a
+                    title='title'
+                    href='https://github.com/we-starter'
+                    target='_blank'
+                    rel='noopener'
+                  >
+                    <svg width='24' height='24' viewBox='0 0 28 28'>
+                      <path d='M11.23823,22 C10.2198086,22.0035115 9.39035095,21.1913055 9.38327418,20.1836134 L9.37592774,18.8836151 C5.73031802,19.6681552 4.9613148,17.3536168 4.9613148,17.3536168 C4.36503551,15.8554314 3.50599711,15.4572398 3.50599711,15.4572398 C2.31715301,14.6517906 3.59605293,14.6681462 3.59605293,14.6681462 C4.91077706,14.7590518 5.60352999,16.0045108 5.60352999,16.0045108 C6.77217138,17.9863415 8.66941055,17.413608 9.4163538,17.0826971 C9.53395878,16.2445161 9.87389679,15.6727015 10.248751,15.3481613 C7.33813628,15.0208851 4.27867355,13.9081498 4.27867355,8.94087246 C4.27867355,7.52542498 4.79042749,6.36905421 5.62924254,5.46087681 C5.49327146,5.13360052 5.04491153,3.81542932 5.75603057,2.02996851 C5.75603057,2.02996851 6.85669673,1.68178313 9.36030623,3.35904347 C10.4294195,3.07122821 11.5322908,2.92450592 12.6402654,2.9226887 C13.7528592,2.92724215 14.8746567,3.07086964 15.9220405,3.35904347 C18.4238134,1.68180355 19.522643,2.02996851 19.522643,2.02996851 C20.2355986,3.81632775 19.7872387,5.13451937 19.6512676,5.46087681 C20.4910113,6.36815577 21,7.52542498 21,8.94089288 C21,13.9208912 17.9340988,15.0172505 15.0170662,15.338156 C15.4865575,15.7408806 15.905511,16.5290554 15.905511,17.7390669 C15.905511,19.4745215 15.8990726,20.1826945 15.8990726,20.1826945 C15.8920104,21.1898283 15.0638146,22.0020132 14.0459533,22 L11.2382094,22 L11.23823,22 Z'></path>
+                    </svg>
+                  </a>
+                </li> */}
                 <li>
                   <a
                     title='title'
@@ -128,11 +143,10 @@ const Vote = (props) => {
                     </svg>
                   </a>
                 </li>
-
                 <li>
                   <a
                     title='title'
-                    href='https://medium.com/@westarter'
+                    href={voteDetail && voteDetail.medium}
                     target='_blank'
                     rel='noopener noreferrer'
                   >
@@ -155,19 +169,32 @@ const Vote = (props) => {
               <ApplicationCountdown
                 left_time={voteDetail && voteDetail.left_time}
                 status={voteDetail && voteDetail.status}
+                successStatus={voteDetail && voteDetail.successStatus}
               />
-              <p className='vote_box_progress_content_btn'>
-                <a
-                  onClick={() => setDisableBtn()}
-                  className={cs(
-                    voteDetail &&
-                      (voteDetail.status === 2 || voteDetail.status === 0) &&
-                      'disable_failed'
-                  )}
-                >
-                  <FormattedMessage id='applicationText8' />
-                </a>
-              </p>
+              {voteDetail && voteDetail.status === 2 && (
+                <ApplicationCountdown
+                  left_time={
+                    voteDetail && voteDetail.claim_time > 0
+                      ? voteDetail.claim_time
+                      : '0'
+                  }
+                  status={3}
+                  title={'claim'}
+                  successStatus={voteDetail && voteDetail.successStatus}
+                />
+              )}
+              {voteDetail && voteDetail.status !== 2 && (
+                <p className='vote_box_progress_content_btn'>
+                  <a
+                    onClick={() => setDisableBtn()}
+                    className={cs(
+                      voteDetail && voteDetail.status === 0 && 'disable_failed'
+                    )}
+                  >
+                    <FormattedMessage id='applicationText8' />
+                  </a>
+                </p>
+              )}
             </div>
             <div className='vote_box_progress_content'>
               <p className='vote_box_progress_content_title vote_box_progress_content_progress'>
@@ -192,7 +219,7 @@ const Vote = (props) => {
                 <span>
                   {(usersData &&
                     usersData.totalVote &&
-                    formatAmount(usersData.totalVote)) ||
+                    formatAmount(usersData.totalVote, 18, 6)) ||
                     '0'}{' '}
                   WAR
                 </span>
@@ -201,7 +228,7 @@ const Vote = (props) => {
                 <FormattedMessage id='applicationText17' />
                 <span>
                   {voteDetail && voteDetail.isClaim
-                    ? formatAmount(usersData.totalVote)
+                    ? formatAmount(usersData.totalVote, 18, 6)
                     : '0'}{' '}
                   WAR
                 </span>
@@ -210,10 +237,7 @@ const Vote = (props) => {
                 <a
                   className={cs(
                     'vote_btn',
-                    voteDetail &&
-                      voteDetail.status !== 2 &&
-                      !voteDetail.isClaim &&
-                      'disable_failed'
+                    voteDetail && !voteDetail.isClaim && 'disable_failed'
                   )}
                   onClick={() => setDisableClaimBtn()}
                 >
@@ -226,6 +250,7 @@ const Vote = (props) => {
             <ApplicationCountdown
               left_time={voteDetail && voteDetail.left_time}
               status={voteDetail && voteDetail.status}
+              successStatus={voteDetail && voteDetail.successStatus}
             />
             <div className='vote_box_progress_content'>
               <p className='vote_box_progress_content_title vote_box_progress_content_progress'>
@@ -258,7 +283,7 @@ const Vote = (props) => {
                   <span>
                     {(usersData &&
                       usersData.totalVote &&
-                      formatAmount(usersData.totalVote)) ||
+                      formatAmount(usersData.totalVote, 18, 6)) ||
                       '0'}{' '}
                     WAR
                   </span>
@@ -267,36 +292,47 @@ const Vote = (props) => {
                   <FormattedMessage id='applicationText17' />
                   <span>
                     {voteDetail && voteDetail.isClaim
-                      ? formatAmount(usersData.totalVote)
+                      ? formatAmount(usersData.totalVote, 18, 6)
                       : '0'}{' '}
                     WAR
                   </span>
                 </p>
               </div>
 
-              <p className={cs('vote_box_progress_content_btn')}>
+              <div className={cs('vote_box_progress_content_btn')}>
+                {voteDetail && voteDetail.status === 2 && (
+                  <ApplicationCountdown
+                    left_time={
+                      voteDetail && voteDetail.claim_time > 0
+                        ? voteDetail.claim_time
+                        : '0'
+                    }
+                    status={3}
+                    title={'claim'}
+                    successStatus={voteDetail && voteDetail.successStatus}
+                  />
+                )}
+                {voteDetail && voteDetail.status !== 2 && (
+                  <a
+                    className={cs(
+                      voteDetail &&
+                        (voteDetail.status === 2 || voteDetail.status === 0) &&
+                        'disable_failed'
+                    )}
+                    onClick={() => setDisableBtn()}
+                  >
+                    <FormattedMessage id='applicationText8' />
+                  </a>
+                )}
                 <a
                   className={cs(
-                    voteDetail &&
-                      (voteDetail.status === 2 || voteDetail.status === 0) &&
-                      'disable_failed'
-                  )}
-                  onClick={() => setDisableBtn()}
-                >
-                  <FormattedMessage id='applicationText8' />
-                </a>
-                <a
-                  className={cs(
-                    voteDetail &&
-                      voteDetail.status !== 2 &&
-                      !voteDetail.isClaim &&
-                      'disable_failed'
+                    voteDetail && !voteDetail.isClaim && 'disable_failed'
                   )}
                   onClick={() => setDisableClaimBtn()}
                 >
                   <FormattedMessage id='claim' />
                 </a>
-              </p>
+              </div>
             </div>
           </div>
           <div className='vote_box_information'>

@@ -34,9 +34,14 @@ const VotePopup = (props) => {
   useEffect(() => {
     if (allowance > 0) {
       setApprove(false)
+    } else {
+      setApprove(true)
     }
   }, [allowance])
 
+  useEffect(() => {
+    setAmount('')
+  }, [visible])
 
   const onMax = () => {
     let max = formatAmount(balance, 18, 6)

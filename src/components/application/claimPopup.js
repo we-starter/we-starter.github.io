@@ -58,7 +58,10 @@ const ApplicationClaimPopup = (props) => {
         <p className='form-app__inputbox-after-text farm_popup_avaliable'>
           <FormattedMessage id='farm6' values={{ coin: 'WAR' }} />
           <span>
-            {voteDate && voteDate.isClaim ? usersData.totalVote : '0'} WAR
+            {voteDate && voteDate.isClaim
+              ? formatAmount(usersData.totalVote, 18, 6)
+              : '0'}{' '}
+            WAR
           </span>
         </p>
 

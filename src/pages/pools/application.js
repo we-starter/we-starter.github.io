@@ -1,12 +1,17 @@
 import React, { useContext, useEffect, useState } from 'react'
 import cs from 'classnames'
-import { useActiveWeb3React } from '../../web3'
+import { getContract, useActiveWeb3React } from '../../web3'
 import { FormattedMessage, injectIntl } from 'react-intl'
 import axios from 'axios'
+import { formatAmount } from '../../utils/format'
 import { ApplicationBanner } from '../../components/application/applicationBanner'
 import { InProgressCard } from '../../components/application/inProgressCard'
 import Footer from '../../components/Footer'
-import { VoteSpanVal, VoteEndToClaimSpan } from './Hooks'
+import { Spin } from 'antd'
+import {
+  VoteSpanVal,
+  VoteEndToClaimSpan,
+} from './Hooks'
 import BigNumber from 'bignumber.js'
 import { useBlockHeight } from './Hooks'
 
@@ -15,6 +20,8 @@ const Application = (props) => {
   const { blockHeight } = useBlockHeight()
   const [statusFlag, setStatusFlag] = useState('InProgress')
   const [cardDataList, setCardDataList] = useState([])
+  const [progressData, setProgressData] = useState('')
+  const [loading, setLoading] = useState(false)
   const voteCycle = VoteSpanVal()
   const voteEndClaimCycle = VoteEndToClaimSpan()
 
@@ -22,6 +29,7 @@ const Application = (props) => {
     setStatusFlag(val)
   }
   const cardList = () => {
+    setLoading(true)
     axios({
       method: 'post',
       url:
@@ -44,6 +52,7 @@ const Application = (props) => {
       .then((res) => {
         if (res.data.data.projectVotes) {
           setCardDataList(res.data.data.projectVotes)
+          setLoading(false)
         }
       })
       .catch((e) => {
@@ -58,7 +67,7 @@ const Application = (props) => {
   let span_time = voteCycle * 1000
   let claim_time = voteEndClaimCycle * 1000
   let now_time = Date.now()
-  // 0 countdown  1 voting  2 end
+  // 0 countdown   1 voting   2 end   3 claim time
   useEffect(() => {
     if (cardDataList.length) {
       cardDataList.map((item) => {
@@ -77,14 +86,19 @@ const Application = (props) => {
           item.left_time = 0
           item.status = 2
         }
+        item.claim_time = new BigNumber(begin_time)
+          .plus(span_time)
+          .plus(claim_time)
+          .minus(now_time)
+          .toString()
         if (
           item.status === 2 &&
           now_time >= begin_time + span_time + claim_time
-        ) {
+        ) { 
           item.isClaim = true
         } else {
           item.isClaim = false
-        }
+        } 
       })
     }
   }, [props.location, cardDataList, voteCycle, voteEndClaimCycle])
@@ -115,29 +129,40 @@ const Application = (props) => {
             <FormattedMessage id='applicationText4' />
           </a>
         </div>
-        {statusFlag === 'InProgress' &&
-          cardDataList.map((item, index) => {
-            return (
-              item.status !== 2 && (
-                <InProgressCard listData={item} key={index} />
+        <Spin spinning={loading}>
+          {statusFlag === 'InProgress' &&
+            cardDataList.map((item, index) => {
+              return (
+                item.status !== 2 && (
+                  <InProgressCard listData={item} key={index} />
+                )
               )
-            )
-          })}
-        {statusFlag === 'over' &&
-          cardDataList.map((item, index) => {
-            return (
-              item.status === 2 && (
-                <InProgressCard listData={item} key={index} />
+            })}
+          {statusFlag === 'over' &&
+            cardDataList.map((item, index) => {
+              return (
+                item.status === 2 && (
+                  <InProgressCard listData={item} key={index} />
+                )
               )
-            )
-          })}
-        {/* <div className='no-data'>
-          <img src={require('../../assets/icon/noData@2x.png')} className='no-proposal' />
-          <p className='no-proposal-text'><FormattedMessage id='applicationText5' /></p>
-          <p className='initiate-proposal'>
-            <a><FormattedMessage id='applicationText2' /></a>
-          </p>
-        </div> */}
+            })}
+          {!cardDataList.length && (
+            <div className='no-data'>
+              <img
+                src={require('../../assets/icon/noData@2x.png')}
+                className='no-proposal'
+              />
+              <p className='no-proposal-text'>
+                <FormattedMessage id='applicationText5' />
+              </p>
+              <p className='initiate-proposal'>
+                <a>
+                  <FormattedMessage id='applicationText2' />
+                </a>
+              </p>
+            </div>
+          )}
+        </Spin>
       </div>
       <Footer />
     </div>

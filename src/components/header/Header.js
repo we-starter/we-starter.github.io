@@ -117,7 +117,7 @@ export const Header = () => {
                   </a> */}
                   <NavLink
                     to='/application'
-                    className='menumask_item-guide menumask_link'
+                    className='menumask_item-guide menu__link'
                     onClick={handleMenuItemClick}
                   >
                     <FormattedMessage id='projectApplication' />

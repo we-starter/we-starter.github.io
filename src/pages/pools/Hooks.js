@@ -1683,3 +1683,48 @@ export const VoteEndToClaimSpan = () => {
   }, [account, active, blockHeight, library])
   return claimSpanVal
 }
+
+export const SuccessPercent = () => {
+  const { account, active, library } = useActiveWeb3React()
+  const blockHeight = useBlockHeight()
+  const [successPercentVal, setSuccessPercentVal] = useState('')
+  useEffect(() => {
+    const multicallProvider = getOnlyMultiCallProvider(ChainId.HECO)
+    const pool_contract = new Contract(voteMain.address, voteMain.abi)
+    multicallProvider
+      .all([pool_contract.successPercent()])
+      .then((res) => {
+        let val = processResult(res)[0]
+        setSuccessPercentVal(val)
+      })
+      .catch((err) => {
+        console.log('error', err)
+      })
+  }, [account, active, blockHeight, library])
+  return successPercentVal
+}
+
+export const VotesData = (propId, voteMax) => {
+   const { account, active, library } = useActiveWeb3React()
+   const blockHeight = useBlockHeight()
+  const [progressData, setProgressData] = useState('')
+   useEffect(() => {
+     const multicallProvider = getOnlyMultiCallProvider(ChainId.HECO)
+     const pool_contract = new Contract(voteMain.address, voteMain.abi)
+     multicallProvider
+       .all([pool_contract.getVotes(propId)])
+       .then((res) => {
+         let resData = processResult(res)[0]
+         setProgressData(
+           new BigNumber(formatAmount(resData[1]))
+             .div(new BigNumber(formatAmount(voteMax)))
+             .toFixed(2, 1)
+             .toString()
+         )
+       })
+       .catch((err) => {
+         console.log('error', err)
+       })
+   }, [account, active, blockHeight, library])
+   return progressData
+ }
