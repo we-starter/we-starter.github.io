@@ -4,7 +4,7 @@ import BigNumber from 'bignumber.js'
 import { withRouter } from 'react-router'
 import { changeNetwork } from '../../connectors'
 import { ChainId } from '../../web3/address'
-import { message } from 'antd'
+import {message, Popover} from 'antd'
 import noDataPng from '../../assets/icon/noData@2x.png'
 import WARLBP from '../../assets/image/W@2x.png'
 import BLACKLBP from '../../assets/image/B@2x.png'
@@ -21,6 +21,20 @@ import { formatAmount } from '../../utils/format'
 import Timer from 'react-compound-timer'
 import { useActiveWeb3React } from '../../web3'
 import Banner from '../../components/banner/Banner'
+import BadgeStake from "../../components/Modals/BadgeStake";
+
+function NftCardTipContent({pool}){
+  return (
+    <div className="nft-card-tip-content">
+      <img src={pool.nft.icon} alt=""/>
+      <div>
+        <h2>Only for {pool.nft.name}</h2>
+        <p>Claim from <a href={pool.nft.claimUrl} target="_blank">{pool.nft.claimUrl.split('//')[1]}</a></p>
+        <p>NFT Offering by {pool.nft.claimUrlName}</p>
+      </div>
+    </div>
+  )
+}
 
 const PoolsIndex = (props) => {
   const [listData, setListData] = useState([])
@@ -220,7 +234,7 @@ const PoolsIndex = (props) => {
         left_time = (time - now) * 1000
       }
     }
-    
+
     return (
       <div
         className={cs(
@@ -446,6 +460,22 @@ const PoolsIndex = (props) => {
                         </i>
                       )}
                   </span>
+                </p>
+              )}
+              {(type === 3) && (
+                <p
+                  className='pools-type_card_ratio pools-type_card_access'
+                  style={{ textAlign: 'right' }}
+                >
+                  <div className="nft-badge">
+                    <img src={pool.nft.icon} alt=""/>
+                    {pool.nft.name}
+                  </div>
+
+                  <Popover content={() => <NftCardTipContent pool={pool}/> } title={null}>
+                    <span className='tips'/>
+                  </Popover>
+                  <BadgeStake visible={true} setVisible={()=>{}} pool={pool}/>
                 </p>
               )}
             </div>

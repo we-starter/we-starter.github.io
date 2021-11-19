@@ -2,8 +2,56 @@ import LBP from '../web3/abi/LBP.json'
 import LBPV2 from '../web3/abi/LBPV2.json'
 import PAUL from '../assets/icon/PAUL.png'
 import BLACK from '../assets/icon/BLACK.png'
+import WAR from '../assets/icon/WAR.png'
+import WARBadge from '../assets/icon/war-badge.png'
 
 export default [
+  {
+    name: 'WAR LBP',
+    address: '0x30DceF869fe03554E281933dA495F6Dab0A3Ce22', // 超募合约地址
+    abi: LBPV2,
+    start_at: '1637311266',
+    is_top: true,
+    is_coming: false,
+    currency: {
+      address: '0xa71EdC38d189767582C38A3145b5873052c3e47a', // 如果是0x0则是ht
+      decimal: 18,
+      symbol: 'USDT',
+    },
+    icon: WAR,
+    type: 3,
+    nft:{
+      icon: WARBadge,
+      name: 'WAR Badge',
+      claimUrl: 'https://www.metadusk.com',
+      claimUrlName: 'metadusk'
+    },
+    isPrivate: true,
+    ratio: '1TOKEN=0.3USDT', // 兑换比例需要确认
+    underlying: {
+      address: '0xfc01b8f883a89278235ba674bbe2bb48db96d9cf',
+      decimal: 18,
+      symbol: 'PAUL',
+      name: 'LBP',
+      total_supply: '10,000,000,000',
+      holders: '-',
+      transfers: '-',
+    },
+    amount: '100000',
+    pool_info: {
+      token_distribution: 'Jun 1th 2021, 8:00PM SGT',
+      min_allocation: '-',
+      max_allocation: '-',
+      min_swap_level: '190,000,000 PAUL',
+    },
+    totalPurchasedAmount: '190000000000000000000000000',
+    status: 0,
+    time: '1647311266',
+    farm_lpt: 'PAUL-USDT',
+    project_introduction:
+      'Paul Protocol is a double-mechanism risk resistant oracle with superior performance and timeliness.',
+    networkId: 128,
+  },
   {
     name: 'BLACK LBP',
     address: '0x7DA996Bcca3a947EB05a3477d5D4dCF59B042d99', // 超募合约地址
