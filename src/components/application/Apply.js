@@ -4,7 +4,7 @@ import LeftArrowBlackIcon from '../../assets/icon/application/left-arrow-black.s
 import TipsIcon from '../../assets/icon/application/tips.svg'
 import DateIcon from '../../assets/icon/application/date.svg'
 import cs from 'classnames'
-import {Button, DatePicker, Input, message, Spin} from "antd";
+import {Button, DatePicker, Input, message, Spin, Tooltip} from "antd";
 import moment from 'moment'
 import {useMDexPrice} from "../../pages/pools/Hooks";
 import {ChainId, GAS_FEE, USDT_ADDRESS, voteMain, voteNFT, WAR_ADDRESS, WHT_ADDRESS} from "../../web3/address";
@@ -52,11 +52,11 @@ export default function Apply() {
 
   const getNftCard = (_nftIndex) => {
     const nftIndex_ = _nftIndex || nftIndex
-    if (nftList[nftIndex_].ipfsData){
+    if (nftList[nftIndex_].ipfsData) {
       return
     }
-    if (nftList[nftIndex_]){
-      getIPFSJson(nftList[nftIndex_].tokenURI).then(async ({data: ipfsData})=>{
+    if (nftList[nftIndex_]) {
+      getIPFSJson(nftList[nftIndex_].tokenURI).then(async ({data: ipfsData}) => {
         const nftList_ = cloneDeep(nftList)
         nftList_[nftIndex_].ipfsData = ipfsData
         setNFTList(nftList_)
@@ -86,13 +86,13 @@ export default function Apply() {
     })
   }
   useMemo(() => {
-    if (nftList[nftIndex]){
+    if (nftList[nftIndex]) {
       getNftCard(nftIndex)
     }
   }, [nftIndex, nftList])
 
   useMemo(() => {
-    if (account){
+    if (account) {
       getNftCards()
     }
   }, [account])
@@ -117,7 +117,7 @@ export default function Apply() {
   }
 
   const onApproveNFT = () => {
-    if (!isApprove.token){
+    if (!isApprove.token) {
       return
     }
     const contract = getContract(library, voteNFT.abi, voteNFT.address)
@@ -158,23 +158,28 @@ export default function Apply() {
   }
 
   const onApply = () => {
-    if (!isApprove['nft_' + nftData.tokenId] || !isApprove.token){
+    if (!isApprove['nft_' + nftData.tokenId] || !isApprove.token) {
       return
     }
     if (!amount || amount < 0 || !startTime) {
       return message.warning('Please Enter information completely')
     }
-    if (!price){
+    // if (amount < 10000) {
+    //   return message.warning('The quantity cannot be less than 10000 WAR')
+    // }
+    if (amount < suggestedAmount() * 0.2) {
+      return message.warning(`At least 20%(About ${Math.ceil(suggestedAmount() * 0.2)} WAR)`)
+    }
+    if (!price) {
       return message.warning('Wait a minute, getting the price ...')
     }
     setSubmitLoading(true)
     const contract = getContract(library, voteMain.abi, voteMain.address)
     setSubmitLoading(true)
     const begin = ~~(new Date(startTime).getTime() / 1000)
-    // demo Description(En)  777 6 1000000000000000000 272531000000000000 4000000000000000000 1637164800
-    console.log('params', ipfsData.name, ipfsData.descEN, nftData.tokenId, numToWei(ipfsData.totalRaise, 18), numToWei(price_, 18), numToWei(amount, 18), begin)
+    console.log('params', ipfsData.name, ipfsData.descEN, nftData.tokenId, numToWei(ipfsData.totalRaise, 18), numToWei(price_, 18), numToWei(Number(amount).toFixed(18), 18), begin)
     contract.methods
-      .propose(ipfsData.name, ipfsData.descEN, nftData.tokenId, numToWei(ipfsData.totalRaise, 18), numToWei(price_, 18), numToWei(amount, 18), begin)
+      .propose(ipfsData.name, ipfsData.descEN, nftData.tokenId, numToWei(ipfsData.totalRaise, 18), numToWei(price_, 18), numToWei(Number(amount).toFixed(18), 18), begin)
       .send({
         from: account,
         ...GAS_FEE(chainId)
@@ -190,14 +195,14 @@ export default function Apply() {
   }
 
   const onPrev = (e) => {
-    if (nftIndex !== 0 && !approveNFTLoading && !approveWARLoading && !submitLoading){
+    if (nftIndex !== 0 && !approveNFTLoading && !approveWARLoading && !submitLoading) {
       setNFTIndex(nftIndex - 1)
     }
     e.stopPropagation()
     return false
   }
   const onNext = (e) => {
-    if (nftIndex < nftList.length && !approveNFTLoading && !approveWARLoading && !submitLoading){
+    if (nftIndex < nftList.length && !approveNFTLoading && !approveWARLoading && !submitLoading) {
       setNFTIndex(nftIndex + 1)
     }
     e.stopPropagation()
@@ -205,14 +210,15 @@ export default function Apply() {
   }
 
   const suggestedAmount = () => {
-    if (price && ipfsData?.totalRaise){
-      return (ipfsData.totalRaise / price).toFixed(2)*1
+    if (price && ipfsData?.totalRaise) {
+      return (ipfsData.totalRaise / price).toFixed(2) * 1
     }
     return '-'
   }
 
   if (showInfoPage) {
-    return <div className="apply-view"><ApplyInfoView setShowInfoPage={setShowInfoPage} ipfsData={ipfsData} getNftCards={getNftCards} nftData={nftData}/>
+    return <div className="apply-view"><ApplyInfoView setShowInfoPage={setShowInfoPage} ipfsData={ipfsData}
+                                                      getNftCards={getNftCards} nftData={nftData}/>
     </div>
   }
 
@@ -241,8 +247,13 @@ export default function Apply() {
           <div style={{cursor: 'pointer'}} onClick={() => {
             setNFTIndex(nftList.length)
             setShowInfoPage(true)
-          }}><FormattedMessage id="applicationText29"/> Project NFT Card</div>
-          <div><FormattedMessage id="applicationText30"/></div>
+          }}><FormattedMessage id="applicationText29"/> Project NFT Card
+          </div>
+          <div>
+            <Tooltip title={() => <FormattedMessage id="applicationText39"/>}>
+              <span><FormattedMessage id="applicationText30"/></span>
+            </Tooltip>
+          </div>
         </div>
         <Input suffix="WAR" className="apply-input" type="number" value={amount}
                onInput={e => setAmount(e.target.value)}/>
@@ -277,32 +288,35 @@ export default function Apply() {
         />
         <div className="info-tips">
           <img src={TipsIcon} alt="tips"/>
-          <div><FormattedMessage id="applicationText35" values={{day1: <strong>3</strong>, day2: <strong>5</strong>}}/></div>
+          <div><FormattedMessage id="applicationText35" values={{day1: <strong>3</strong>, day2: <strong>5</strong>}}/>
+          </div>
         </div>
 
         <div className={cs({"button-group": true, mr: isApprove.token})}>
           {
             !account || (chainId !== ChainId.HECO && chainId !== ChainId.LOCALHOST) ? (
                 <Button type="primary" size="large" className="apply-btn"
-                        onClick={()=>changeNetwork(ChainId.HECO)}>Switch To HECO</Button>
+                        onClick={() => changeNetwork(ChainId.HECO)}>Switch To HECO</Button>
               ) :
-            !nftData ? (
-              <Button type="primary" size="large" className="apply-btn"
-                      onClick={()=>setShowInfoPage(true)}>Create</Button>
-            ) : (
-              <React.Fragment>
-                {
-                  !isApprove.token && (<Button type="primary" size="large" className="apply-btn" loading={approveWARLoading}
-                                               onClick={onApproveToken}>Approve WAR</Button>)
-                }
-                {
-                  !isApprove['nft_' + nftData.tokenId] && (<Button type="primary" size="large" className="apply-btn" loading={approveNFTLoading}
-                                               onClick={onApproveNFT}>Approve NFT</Button>)
-                }
-                <Button type="primary" size="large" className="apply-btn" loading={submitLoading}
-                        onClick={onApply}>Confirm</Button>
-              </React.Fragment>
-            )
+              !nftData ? (
+                <Button type="primary" size="large" className="apply-btn"
+                        onClick={() => setShowInfoPage(true)}>Create</Button>
+              ) : (
+                <React.Fragment>
+                  {
+                    !isApprove.token && (
+                      <Button type="primary" size="large" className="apply-btn" loading={approveWARLoading}
+                              onClick={onApproveToken}>Approve WAR</Button>)
+                  }
+                  {
+                    !isApprove['nft_' + nftData.tokenId] && (
+                      <Button type="primary" size="large" className="apply-btn" loading={approveNFTLoading}
+                              onClick={onApproveNFT}>Approve NFT</Button>)
+                  }
+                  <Button type="primary" size="large" className="apply-btn" loading={submitLoading}
+                          onClick={onApply}>Confirm</Button>
+                </React.Fragment>
+              )
           }
 
 
