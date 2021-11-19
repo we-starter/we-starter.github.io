@@ -4,7 +4,7 @@ import LeftArrowBlackIcon from '../../assets/icon/application/left-arrow-black.s
 import TipsIcon from '../../assets/icon/application/tips.svg'
 import DateIcon from '../../assets/icon/application/date.svg'
 import cs from 'classnames'
-import {Button, DatePicker, Input, message, Spin} from "antd";
+import {Button, DatePicker, Input, message, Spin, Tooltip} from "antd";
 import moment from 'moment'
 import {useMDexPrice} from "../../pages/pools/Hooks";
 import {ChainId, GAS_FEE, USDT_ADDRESS, voteMain, voteNFT, WAR_ADDRESS, WHT_ADDRESS} from "../../web3/address";
@@ -249,7 +249,11 @@ export default function Apply() {
             setShowInfoPage(true)
           }}><FormattedMessage id="applicationText29"/> Project NFT Card
           </div>
-          <div><FormattedMessage id="applicationText30"/></div>
+          <div>
+            <Tooltip title={() => <FormattedMessage id="applicationText39"/>}>
+              <span><FormattedMessage id="applicationText30"/></span>
+            </Tooltip>
+          </div>
         </div>
         <Input suffix="WAR" className="apply-input" type="number" value={amount}
                onInput={e => setAmount(e.target.value)}/>

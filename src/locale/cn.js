@@ -433,6 +433,7 @@ const zh_CN = {
   applicationText36: '规则',
   applicationText37: '如果提案在周期内，等于或者超过项目 IWO 总额度的 50%，则为成功，投票方和项目发起人（提案人）可以在 5 天后 Claim 回来自己的 WAR',
   applicationText38: '如果提案在周期内，低于项目方 IWO 总额度的 50%，则为失败。提案抵押金额的 50% 将空投给投票方，余下 50% 抵押金额将燃烧。投票方可以在 5 天后 Claim 回来自己的 WAR。',
+  applicationText39: 'NFT Card 是由项目发起方提供的项目官方信息, WeStarter 将这些信息铸造成 NFT, 铸造完成后, 所有的信息不可更改.',
 
   adjustmentTips1: '亲爱的用户：',
   adjustmentTips2: 'WeStarter近期做出一系列运营调整，现将限制以下国家IP访问：',

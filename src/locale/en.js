@@ -433,6 +433,7 @@ const en_US = {
   applicationText36: 'Rule',
   applicationText37: 'If the proposal is within the cycle and equals or exceeds 50% of the total IWO of the project, it is a success, and the voter and the project sponsor (proposer) can claim back their WAR after 5 days',
   applicationText38: 'If the proposal is less than 50% of the total IWO quota of the project party within the period, it is a failure. 50% of the pledge amount of the proposal will be airdropped to the voting parties, and the remaining 50% of the pledge amount will be burned. Voting parties can claim back their WAR after 5 days.',
+  applicationText39: 'The NFT Card contains the official project info provided by the project team, then WeStarter casts the information into NFT. All the information cannot be changed if the card finished.',
 
   adjustmentTips1: 'Dear users,',
   adjustmentTips2: 'WeStarter recently made a series of operational changes that will now restrict IP access to the following countries:',
