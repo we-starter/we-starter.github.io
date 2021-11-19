@@ -4,9 +4,6 @@ import { FormattedMessage } from 'react-intl'
 import Timer from 'react-compound-timer'
 
 export default function ApplicationCountdown({ left_time, status, successStatus, title }) {
-  useEffect(() => {
-    console.log(successStatus, '**************')
-  }, [successStatus])
   return (
     <>
       {status !== 2 && (
@@ -35,7 +32,11 @@ export default function ApplicationCountdown({ left_time, status, successStatus,
           >
             <span>
               <span className={cs(`countdown_time`)}>
-                {left_time > 0 && <Timer.Hours />}
+                {left_time > 0 && (
+                  <Timer.Consumer>
+                    {({ h, d, formatValue }) => formatValue(d * 24 + h)}
+                  </Timer.Consumer>
+                )}
                 {left_time <= 0 && '-'}
               </span>{' '}
               <i>:</i>{' '}

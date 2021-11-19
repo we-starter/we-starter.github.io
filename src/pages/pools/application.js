@@ -3,17 +3,20 @@ import cs from 'classnames'
 import { getContract, useActiveWeb3React } from '../../web3'
 import { FormattedMessage, injectIntl } from 'react-intl'
 import axios from 'axios'
-import { formatAmount } from '../../utils/format'
 import { ApplicationBanner } from '../../components/application/applicationBanner'
 import { InProgressCard } from '../../components/application/inProgressCard'
 import Footer from '../../components/Footer'
+import { mainContext } from '../../reducer'
+import {
+  HANDLE_CHANGE_NETWORKS,
+} from '../../const'
 import { Spin } from 'antd'
 import {
+  useBlockHeight,
   VoteSpanVal,
   VoteEndToClaimSpan,
 } from './Hooks'
 import BigNumber from 'bignumber.js'
-import { useBlockHeight } from './Hooks'
 
 const Application = (props) => {
   const { account, active, library, chainId } = useActiveWeb3React()
@@ -22,8 +25,23 @@ const Application = (props) => {
   const [cardDataList, setCardDataList] = useState([])
   const [progressData, setProgressData] = useState('')
   const [loading, setLoading] = useState(false)
+   const { dispatch, state } = useContext(mainContext)
   const voteCycle = VoteSpanVal()
   const voteEndClaimCycle = VoteEndToClaimSpan()
+
+  useEffect(() => {
+    if (chainId !== 128) {
+      dispatch({
+        type: HANDLE_CHANGE_NETWORKS,
+        changeNetworkStatus: true,
+      })
+    } else {
+      dispatch({
+        type: HANDLE_CHANGE_NETWORKS,
+        changeNetworkStatus: false,
+      })
+    }
+  }, [chainId])
 
   const changeFlag = (val) => {
     setStatusFlag(val)
@@ -74,7 +92,10 @@ const Application = (props) => {
         let begin_time = item.begin * 1000
         if (begin_time - now_time > 0) {
           // start
-          item.left_time = begin_time - Date.now()
+          item.left_time = new BigNumber(begin_time)
+            .minus(now_time)
+            .toString()
+          item.status = 0
         } else if (now_time < begin_time + span_time) {
           // voteing
           item.left_time = new BigNumber(begin_time)

@@ -1717,7 +1717,7 @@ export const VotesData = (propId, voteMax) => {
          let resData = processResult(res)[0]
          setProgressData(
            new BigNumber(formatAmount(resData[1]))
-             .div(new BigNumber(formatAmount(voteMax)))
+             .div(new BigNumber(formatAmount(voteMax)).div(2))
              .toFixed(2, 1)
              .toString()
          )

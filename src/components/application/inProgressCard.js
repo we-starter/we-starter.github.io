@@ -62,6 +62,7 @@ export const InProgressCard = (props) => {
         </div>
       </div>
       <div className='application_card_content'>
+        {/* <p className='placeholder_map'></p> */}
         <img src={getIPFSFile(detailData && detailData.logo)} />
         <p className='application_card_content_title'>
           <FormattedMessage id='applicationText6' />

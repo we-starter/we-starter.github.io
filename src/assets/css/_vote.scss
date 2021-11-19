@@ -155,6 +155,12 @@
     &_box_progress_content_progress {
         width: 280px;
         a {
+          &:hover {
+            color: #22292f;
+            cursor: auto;
+          }
+        }
+        .vote_progress {
           position: relative;
           margin-top: 16px;
           width: 280px;
@@ -413,6 +419,12 @@
     &_box_progress_content_progress {
         width: 280px;
         a {
+          &:hover {
+            color: #22292f;
+            cursor: auto;
+          }
+        }
+        .vote_progress {
           position: relative;
           margin-top: 16px;
           width: 280px;
@@ -669,6 +681,12 @@
     &_box_progress_content_progress {
         width: 280px;
         a {
+          &:hover {
+            color: #22292f;
+            cursor: auto;
+          }
+        }
+        .vote_progress {
           position: relative;
           margin-top: 16px;
           width: 280px;
@@ -926,6 +944,12 @@
     &_box_progress_content_progress {
         width: 280px;
         a {
+          &:hover {
+            color: #22292f;
+            cursor: auto;
+          }
+        }
+        .vote_progress {
           position: relative;
           margin-top: 16px;
           width: 280px;
