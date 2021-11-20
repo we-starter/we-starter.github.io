@@ -618,18 +618,36 @@ const debounceFn = debounce((pools, account, callback) => {
     else if (pool.type === 1) {      // TODO 默认HT，后面需要根据通货来查询进度
       let currency_decimals = pool.currency.decimal
       // 白名单是offering合约
-      const promise_list = [
-        pool_contract.timeOffer(), // 结算时间点
-        pool_contract.timeClaim(), // 结算时间点
-        pool_contract.ratio(), // 比例
-        pool_contract.totalQuota(), //总申购的量
-        pool_contract.totalOffered(), //总申购的量
-        pool_contract.totalClaimed(), //总领取的量
-        pool_contract.quotaOf(account), // 最大申购额度
-        pool_contract.offeredOf(account), // 已经认购的量
-        pool_contract.claimedOf(account), // 已经领取的量
-        pool_contract.token(),
-      ]
+      let promise_list = []
+      if (pool.nft) {
+        const nft_contract = new Contract(pool.nft.address, pool.nft.abi)
+        promise_list = [
+          pool_contract.timeOffer(), // 结算时间点
+          pool_contract.timeClaim(), // 结算时间点
+          pool_contract.totalOffered(), //总申购的量
+          pool_contract.totalClaimed(), //总领取的量
+          pool_contract.offeredOf(account), // 已经认购的量
+          pool_contract.claimedOf(account), // 已经领取的量
+          pool_contract.token(),
+          pool_contract.currencyValue(),//最大申购额度
+          nft_contract.balanceOf(account),//nft个数
+        ]
+      } else {
+        promise_list = [
+          pool_contract.timeOffer(), // 结算时间点
+          pool_contract.timeClaim(), // 结算时间点
+          pool_contract.totalOffered(), //总申购的量
+          pool_contract.totalClaimed(), //总领取的量
+          pool_contract.offeredOf(account), // 已经认购的量
+          pool_contract.claimedOf(account), // 已经领取的量
+          pool_contract.token(),
+          pool_contract.ratio(), // 比例
+          pool_contract.totalQuota(), //总申购的量
+          pool_contract.quotaOf(account), // 最大申购额度
+        ]
+      }
+
+
       currency_token &&
         promise_list.push(currency_token.allowance(account, pool.address))
 
@@ -640,20 +658,31 @@ const debounceFn = debounce((pools, account, callback) => {
         .all(promise_list)
         .then((data) => {
           data = processResult(data)
+
           let [
             start_at,
             time,
-            ratio,
-            totalQuota,
             totalOffered,
             totalClaimed,
-            quotaOf,
             offeredOf,
             claimedOf,
             tokenAddress,
+          ] = data
+          let ratio,
+            totalQuota,
+            quotaOf,
             currency_allowance = 0,
             underlying_decimals = 18,
-          ] = data
+            nftBalanceOf = 0;
+          if (pool.nft){
+            quotaOf = data[7]
+            nftBalanceOf = data[8]
+          } else{
+            ratio = data[7]
+            quotaOf = data[8]
+            currency_allowance = data[9]||0
+            underlying_decimals = data[10]||18
+          }
           let status = pool.status || 0 // 即将上线
           if (start_at < now && status < 1) {
             // 募集中
@@ -718,6 +747,7 @@ const debounceFn = debounce((pools, account, callback) => {
                  : tokenAddress,
            })
           return Object.assign({}, pool, {
+            nftBalanceOf,
             ratio: `1${pool.underlying.symbol}=${
               __ratio.toFixed(5, 1).toString() * 1
             }${pool.currency.symbol}`,

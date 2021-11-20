@@ -24,6 +24,7 @@ import BigNumber from 'bignumber.js'
 import { formatAmount, fromWei } from '../../utils/format'
 import {getScanLink} from "../../connectors";
 import {GAS_FEE} from "../../web3/address";
+import BadgeStake from "../../components/Modals/BadgeStake";
 
 const PoolsDetail = (props) => {
   const { address } = props.match.params
@@ -40,7 +41,7 @@ const PoolsDetail = (props) => {
   const [left_time, setLeftTime] = useState(0)
 
   const { dispatch } = useContext(mainContext)
-
+  const [showBadgeStake, setShowBadgeStake] = useState(false)
   //  if (!pool || chainId !== pool.networkId) {
   //    window.location.href = '/'
   //  }
@@ -253,7 +254,9 @@ const PoolsDetail = (props) => {
               : 'pools_detail_btn_disable'
           }`}
           onClick={() => {
+            console.log('pool', pool)
             if (pool.status === 1) {
+
               if (pool.type === 1 && pool.purchasedCurrencyOf > 0) {
                 // 如果是 已经申购过的
                 // message.info('已申购过')
@@ -265,11 +268,15 @@ const PoolsDetail = (props) => {
                 if (pool.timeClose > 0 && pool.timeClose * 1 < now) {
                   message.info(intl.formatMessage({ id: 'undergoingOver' }))
                 } else {
-                  dispatch({
-                    type: HANDLE_WALLET_MODAL,
-                    walletModal: 'join',
-                    pool,
-                  })
+                  if (pool.nft){
+                    setShowBadgeStake(true)
+                  }else {
+                    dispatch({
+                      type: HANDLE_WALLET_MODAL,
+                      walletModal: 'join',
+                      pool,
+                    })
+                  }
                 }
               }
             } else {
@@ -1025,6 +1032,7 @@ const PoolsDetail = (props) => {
           )}
         </div>
       </div>
+      <BadgeStake visible={showBadgeStake} setVisible={()=>setShowBadgeStake(false)} pool={pool}/>
     </div>
   )
 }

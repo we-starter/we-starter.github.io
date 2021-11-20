@@ -21,7 +21,6 @@ import { formatAmount } from '../../utils/format'
 import Timer from 'react-compound-timer'
 import { useActiveWeb3React } from '../../web3'
 import Banner from '../../components/banner/Banner'
-import BadgeStake from "../../components/Modals/BadgeStake";
 
 function NftCardTipContent({pool}){
   return (
@@ -390,7 +389,7 @@ const PoolsIndex = (props) => {
               >
                 <FormattedMessage id='accessType' />
               </p>
-              {type === 1 && !(pool && pool.svipFlag) && (
+              {type === 1 && !(pool.svipFlag || pool.nft) && (
                 <p
                   className='pools-type_card_ratio pools-type_card_access'
                   style={{ textAlign: 'right' }}
@@ -462,8 +461,8 @@ const PoolsIndex = (props) => {
                   </span>
                 </p>
               )}
-              {(type === 3) && (
-                <p
+              {pool.nft && (
+                <div
                   className='pools-type_card_ratio pools-type_card_access'
                   style={{ textAlign: 'right' }}
                 >
@@ -475,8 +474,7 @@ const PoolsIndex = (props) => {
                   <Popover content={() => <NftCardTipContent pool={pool}/> } title={null}>
                     <span className='tips'/>
                   </Popover>
-                  <BadgeStake visible={true} setVisible={()=>{}} pool={pool}/>
-                </p>
+                </div>
               )}
             </div>
           )}

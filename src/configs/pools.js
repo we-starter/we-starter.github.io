@@ -3,6 +3,7 @@ import Starter from '../web3/abi/Starter.json'
 import StarterV2 from '../web3/abi/StarterV2.json'
 import StarterV3 from '../web3/abi/StarterV3.json'
 import OfferingV2 from '../web3/abi/OfferingV2.json'
+import OfferingV3 from '../web3/abi/OfferingV3.json'
 import FIX from '../assets/icon/FIX.png'
 import LEV from '../assets/icon/LEV.png'
 import O3 from '../assets/icon/O3.png'
@@ -22,8 +23,81 @@ import TOKEN from '../assets/icon/TOKEN.png'
 import BLACK from '../assets/icon/BLACK.png'
 import PHM from '../assets/icon/PHM.png'
 import HCT from '../assets/icon/HCT.png'
+import WARBadge from '../assets/icon/war-badge.png'
+import WNFTAbi from '../web3/abi/WNFT.json'
 
 export default [
+  {
+    name: 'USDT Pool',
+    address: '0x35de01d1Cc6487596Dcc4DcC9cb7bDc383700CAE',
+    icon: COOK,
+    abi: OfferingV3,
+    start_at: '1637387511',
+    is_top: true,
+    is_coming: false, // is_coming 为 true 则不请求合约
+    currency: {
+      address: '0xa71edc38d189767582c38a3145b5873052c3e47a',
+      decimal: 18,
+      symbol: 'USDT',
+    },
+    type: 1,
+    defaultRatio: '100000000000000000000',
+    nft:{
+      icon: WARBadge,
+      address: '0x09D3D9012F9Ccc60F3E947E635A531350c3116ea',
+      abi: WNFTAbi,
+      name: 'WAR Badge',
+      claimUrl: 'https://www.metadusk.com',
+      claimUrlName: 'metadusk'
+    },
+    isPrivate: true,
+    underlying: {
+      address: '0x910651F81a605a6Ef35d05527d24A72fecef8bF0',
+      decimal: 18,
+      symbol: 'WAR',
+      name: 'WAR',
+      total_supply: '100,000,000',
+      holders: '-',
+      transfers: '-',
+    },
+    amount: '2000000',
+    pool_info: {
+      token_distribution: 'March 31th 2021, 10:00PM SGT',
+      min_allocation: '0',
+      max_allocation: '200 USDT',
+      min_swap_level: '60000 USDT',
+    },
+    website: 'https://www.cook.finance',
+    white_paper: '-',
+    twitter: 'https://twitter.com/cook_finance',
+    Telegram_Channel: 'https://t.me/cook_english',
+    Github: 'https://github.com/CookFinance',
+    yuque: '-',
+    progress: 1,
+    status: 0,
+    ratio: '1 USDT = 4 WAR', // 兑换比例需要确认
+    time: '1647387511',
+    purchasedCurrencyOf: 0,
+    totalPurchasedAmount: '60000000000000000000000',
+    totalPurchasedUnderlying: '0',
+    totalPurchasedCurrency: '0',
+    is_flash: false,
+    link_url: 'https://www.cook.finance', // 跳转外链接
+    project_introduction:
+      'Cook Protocol is a completely decentralized asset management platform in the DeFi space built on top of the Ethereum blockchain.',
+    duration: '324', // 完成时间
+    totalApplicants: '30000', // 申请总人数
+    winningRate: '1.67', // 申请中签率
+    committed: '', // 超募比例
+    total: '', // 参与资金规模
+    poolType: 0, // 值为 1 代表 定向
+    networkId: 128,
+  },
+]
+
+export const a =  [
+
+
   {
     name: 'MATTER',
     address: '0x4F7d4aCF1A2d92C5b64a7365e3cD2185c91F9e40',
