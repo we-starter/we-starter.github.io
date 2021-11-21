@@ -64,7 +64,7 @@ export default [
       holders: '-',
       transfers: '-',
     },
-    amount: '5000',
+    amount: '0.06',
     pool_info: {
       token_distribution: 'March 31th 2021, 10:00PM SGT',
       min_allocation: '0',
