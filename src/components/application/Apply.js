@@ -53,7 +53,7 @@ export default function Apply() {
   useMemo(()=>{
     if (price && ipfsData?.totalRaise && isSetMin !== nftData.tokenId) {
       setIsSetMin(nftData.tokenId)
-      setAmount((ipfsData.totalRaise / price).toFixed(2) * 1)
+      setAmount(Math.ceil((ipfsData.totalRaise / price).toFixed(2) * 0.2))
     }
   }, [price_, ipfsData])
 
