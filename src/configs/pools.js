@@ -80,7 +80,7 @@ export default [
     progress: 0,
     status: 0,
     ratio: '1WAR=0.25USDT', // 兑换比例需要确认
-    time: '1637596800',
+    time: '1637499600',
     purchasedCurrencyOf: 0,
     totalPurchasedAmount: '60000000000000000000000',
     totalPurchasedUnderlying: '0',
