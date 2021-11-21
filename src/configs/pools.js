@@ -25,7 +25,11 @@ import PHM from '../assets/icon/PHM.png'
 import HCT from '../assets/icon/HCT.png'
 import WARBadge from '../assets/icon/war-badge.png'
 import WNFTAbi from '../web3/abi/WARBadge.json'
-
+import {ChainId} from "../web3/address";
+const testNetworkId = window.ethereum && (~~window.ethereum.chainId === ChainId.LOCALHOST) ? ChainId.LOCALHOST : null
+if (testNetworkId) {
+  console.log('testNetworkId=' + testNetworkId)
+}
 export default [
 
   {
@@ -92,7 +96,7 @@ export default [
     committed: '', // 超募比例
     total: '', // 参与资金规模
     poolType: 0, // 值为 1 代表 定向
-    networkId: 128,
+    networkId: testNetworkId || 128,
   },
   {
     name: 'MATTER',
