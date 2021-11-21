@@ -31,11 +31,10 @@ if (testNetworkId) {
   console.log('testNetworkId=' + testNetworkId)
 }
 export default [
-
   {
-    name: 'USDT Pool',
+    name: 'WAR Pool',
     address: '0x35de01d1Cc6487596Dcc4DcC9cb7bDc383700CAE',
-    icon: COOK,
+    icon: WAR,
     abi: OfferingV3,
     start_at: '1637337600',
     is_top: true,
@@ -65,22 +64,22 @@ export default [
       holders: '-',
       transfers: '-',
     },
-    amount: '50000',
+    amount: '5000',
     pool_info: {
       token_distribution: 'March 31th 2021, 10:00PM SGT',
       min_allocation: '0',
       max_allocation: '200 USDT',
       min_swap_level: '60000 USDT',
     },
-    website: 'https://www.cook.finance',
+    website: '-',
     white_paper: '-',
-    twitter: 'https://twitter.com/cook_finance',
-    Telegram_Channel: 'https://t.me/cook_english',
-    Github: 'https://github.com/CookFinance',
+    twitter: '-',
+    Telegram_Channel: '-',
+    Github: '-',
     yuque: '-',
     progress: 0,
     status: 0,
-    ratio: '1 USDT = 4 WAR', // 兑换比例需要确认
+    ratio: '1WAR=0.25USDT', // 兑换比例需要确认
     time: '1637596800',
     purchasedCurrencyOf: 0,
     totalPurchasedAmount: '60000000000000000000000',

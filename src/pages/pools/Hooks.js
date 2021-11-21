@@ -680,9 +680,8 @@ const debounceFn = debounce((pools, account, callback) => {
           if (pool.nft){
             quotaOf = data[7]
             tokenValue=data[8]
-            nftBalanceOf = data[9]
+            nftBalanceOf = data[9][0]
             nftRatio = new BigNumber(quotaOf).div(tokenValue).toFixed(2)*1
-            console.log('nftRatio', nftRatio, quotaOf, tokenValue)
           } else{
             ratio = data[7]
             quotaOf = data[8]
@@ -755,6 +754,7 @@ const debounceFn = debounce((pools, account, callback) => {
            })
           return Object.assign({}, pool, {
             nftBalanceOf,
+            nftRatio,
             ratio: `1${pool.underlying.symbol}=${nftRatio ? nftRatio :
               __ratio.toFixed(5, 1).toString() * 1
             }${pool.currency.symbol}`,

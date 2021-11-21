@@ -172,7 +172,7 @@ const PoolsDetail = (props) => {
           </div>
 
           <div className='pools_card_content_title pools_card_val'>
-            {pool && pool.amount} {pool && pool.underlying.symbol}
+            {pool && (pool.nft ? pool.nftRatio ? (pool.amount/pool.nftRatio) :'-' : pool.amount)} {pool && pool.underlying.symbol}
           </div>
 
           {pool && pool.status === 0 && (
@@ -269,7 +269,11 @@ const PoolsDetail = (props) => {
                   message.info(intl.formatMessage({ id: 'undergoingOver' }))
                 } else {
                   if (pool.nft){
-                    setShowBadgeStake(true)
+                    if (pool.nftBalanceOf > 0){
+                      setShowBadgeStake(true)
+                    } else {
+                      message.info(intl.formatMessage({ id: 'notInWhitelist' }))
+                    }
                   }else {
                     dispatch({
                       type: HANDLE_WALLET_MODAL,
