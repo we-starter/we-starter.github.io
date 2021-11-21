@@ -630,6 +630,7 @@ const debounceFn = debounce((pools, account, callback) => {
           pool_contract.claimedOf(account), // 已经领取的量
           pool_contract.token(),
           pool_contract.currencyValue(),//最大申购额度
+          pool_contract.tokenValue(),//固定能获得
           nft_contract.balanceOf(account),//nft个数
         ]
       } else {
@@ -673,10 +674,15 @@ const debounceFn = debounce((pools, account, callback) => {
             quotaOf,
             currency_allowance = 0,
             underlying_decimals = 18,
-            nftBalanceOf = 0;
+            nftBalanceOf = 0,
+            tokenValue = 0,
+            nftRatio = null;
           if (pool.nft){
             quotaOf = data[7]
-            nftBalanceOf = data[8]
+            tokenValue=data[8]
+            nftBalanceOf = data[9]
+            nftRatio = new BigNumber(quotaOf).div(tokenValue).toFixed(2)*1
+            console.log('nftRatio', nftRatio, quotaOf, tokenValue)
           } else{
             ratio = data[7]
             quotaOf = data[8]
@@ -704,7 +710,8 @@ const debounceFn = debounce((pools, account, callback) => {
           if (!(ratio - 0) && pool.defaultRatio) {
             ratio = pool.defaultRatio
           }
-          const _ratio = new BigNumber(ratio).dividedBy(
+          // nft的中签率是100%
+          const _ratio = nftRatio ? 1 : new BigNumber(ratio).dividedBy(
             new BigNumber(10).pow(
               parseInt(underlying_decimals) - parseInt(currency_decimals) + 18
             )
@@ -748,7 +755,7 @@ const debounceFn = debounce((pools, account, callback) => {
            })
           return Object.assign({}, pool, {
             nftBalanceOf,
-            ratio: `1${pool.underlying.symbol}=${
+            ratio: `1${pool.underlying.symbol}=${nftRatio ? nftRatio :
               __ratio.toFixed(5, 1).toString() * 1
             }${pool.currency.symbol}`,
             progress:
@@ -783,7 +790,7 @@ const debounceFn = debounce((pools, account, callback) => {
             },
             settleable: {
               amount: 0, // 未结算数量
-              volume: offeredOf, // 预计中签量
+              volume: pool.nft ? tokenValue : offeredOf, // 预计中签量,nft是全量
               claimedOf, // 获取募资币种数量
               rate: Web3.utils.toWei('1', 'ether'), // 预计中签率
             },

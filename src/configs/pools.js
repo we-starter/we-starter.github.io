@@ -24,15 +24,16 @@ import BLACK from '../assets/icon/BLACK.png'
 import PHM from '../assets/icon/PHM.png'
 import HCT from '../assets/icon/HCT.png'
 import WARBadge from '../assets/icon/war-badge.png'
-import WNFTAbi from '../web3/abi/WNFT.json'
+import WNFTAbi from '../web3/abi/WARBadge.json'
 
 export default [
+
   {
     name: 'USDT Pool',
     address: '0x35de01d1Cc6487596Dcc4DcC9cb7bDc383700CAE',
     icon: COOK,
     abi: OfferingV3,
-    start_at: '1637387511',
+    start_at: '1637337600',
     is_top: true,
     is_coming: false, // is_coming 为 true 则不请求合约
     currency: {
@@ -60,7 +61,7 @@ export default [
       holders: '-',
       transfers: '-',
     },
-    amount: '2000000',
+    amount: '50000',
     pool_info: {
       token_distribution: 'March 31th 2021, 10:00PM SGT',
       min_allocation: '0',
@@ -73,10 +74,10 @@ export default [
     Telegram_Channel: 'https://t.me/cook_english',
     Github: 'https://github.com/CookFinance',
     yuque: '-',
-    progress: 1,
+    progress: 0,
     status: 0,
     ratio: '1 USDT = 4 WAR', // 兑换比例需要确认
-    time: '1647387511',
+    time: '1637596800',
     purchasedCurrencyOf: 0,
     totalPurchasedAmount: '60000000000000000000000',
     totalPurchasedUnderlying: '0',
@@ -93,11 +94,6 @@ export default [
     poolType: 0, // 值为 1 代表 定向
     networkId: 128,
   },
-]
-
-export const a =  [
-
-
   {
     name: 'MATTER',
     address: '0x4F7d4aCF1A2d92C5b64a7365e3cD2185c91F9e40',

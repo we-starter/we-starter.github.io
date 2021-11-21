@@ -151,7 +151,7 @@ const PoolsDetail = (props) => {
         })
     }
   }
-
+  console.log('pool', pool)
   return (
     <div className='pools_detail_box'>
       <PoolsBanner address={address} pool={pool} />
