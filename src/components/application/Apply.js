@@ -47,8 +47,15 @@ export default function Apply() {
   const [approveNFTLoading, setApproveNFTLoading] = useState(false)
   const [approveWARLoading, setApproveWARLoading] = useState(false)
   const [loadLoading, setLoadLoading] = useState(false)
-
+  const [isSetMin, setIsSetMin] = useState(null)
   const [isApprove, setIsApprove] = useState({})
+
+  useMemo(()=>{
+    if (price && ipfsData?.totalRaise && isSetMin !== nftData.tokenId) {
+      setIsSetMin(nftData.tokenId)
+      setAmount((ipfsData.totalRaise / price).toFixed(2) * 1)
+    }
+  }, [price_, ipfsData])
 
   const getNftCard = (_nftIndex) => {
     const nftIndex_ = _nftIndex || nftIndex
