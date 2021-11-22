@@ -16,7 +16,7 @@ import {FormattedMessage} from "react-intl";
 import {getOnlyMultiCallProvider, processResult} from "../../utils/multicall";
 import {Contract} from "ethers-multicall-x";
 import {getContract, useActiveWeb3React} from "../../web3";
-import {numToWei} from "../../utils/format";
+import {fromWei, numToWei} from "../../utils/format";
 import ERC20 from "../../web3/abi/ERC20.json";
 import axios from "axios";
 import {cloneDeep} from "lodash";
@@ -47,8 +47,16 @@ export default function Apply() {
   const [approveNFTLoading, setApproveNFTLoading] = useState(false)
   const [approveWARLoading, setApproveWARLoading] = useState(false)
   const [loadLoading, setLoadLoading] = useState(false)
-
+  const [isSetMin, setIsSetMin] = useState(null)
   const [isApprove, setIsApprove] = useState({})
+  const [minAmountLimit, setMinAmountLimit] = useState(10000)
+
+  useMemo(()=>{
+    if (price && ipfsData?.totalRaise && isSetMin !== nftData.tokenId) {
+      setIsSetMin(nftData.tokenId)
+      setAmount(Math.ceil((ipfsData.totalRaise / price).toFixed(2) * 0.2))
+    }
+  }, [price_, ipfsData])
 
   const getNftCard = (_nftIndex) => {
     const nftIndex_ = _nftIndex || nftIndex
@@ -96,6 +104,19 @@ export default function Apply() {
       getNftCards()
     }
   }, [account])
+
+
+  const getAmountLimit = () => {
+    const multicallProvider = getOnlyMultiCallProvider(ChainId.HECO)
+    const contract = new Contract(voteMain.address, voteMain.abi)
+    multicallProvider.all([contract.thresholdPropose()]).then(data => {
+      data = processResult(data)
+      setMinAmountLimit(fromWei(data).toFixed(2)*1)
+    })
+  }
+  useMemo(() => {
+    getAmountLimit()
+  }, [])
   const getApproved = (nftList) => {
     const multicallProvider = getOnlyMultiCallProvider(ChainId.HECO)
     const contractNFT = new Contract(voteNFT.address, voteNFT.abi)
@@ -164,9 +185,9 @@ export default function Apply() {
     if (!amount || amount < 0 || !startTime) {
       return message.warning('Please Enter information completely')
     }
-    // if (amount < 10000) {
-    //   return message.warning('The quantity cannot be less than 10000 WAR')
-    // }
+    if (amount < minAmountLimit) {
+      return message.warning(`The quantity cannot be less than ${minAmountLimit} WAR`)
+    }
     if (amount < suggestedAmount() * 0.2) {
       return message.warning(`At least 20%(About ${Math.ceil(suggestedAmount() * 0.2)} WAR)`)
     }
