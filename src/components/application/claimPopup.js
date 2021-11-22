@@ -11,7 +11,15 @@ import { FormattedMessage } from 'react-intl'
 import { mainContext } from '../../reducer'
 
 const ApplicationClaimPopup = (props) => {
-  const { intl, onClose, voteDate, usersData, visible, getUser } = props
+  const {
+    intl,
+    onClose,
+    voteDate,
+    usersData,
+    canClaimVal,
+    visible,
+    getUser,
+  } = props
   const { account, active, library, chainId } = useActiveWeb3React()
   const { dispatch } = useContext(mainContext)
    const [loadFlag, setLoadFlag] = useState(false)
@@ -60,7 +68,7 @@ const ApplicationClaimPopup = (props) => {
           <FormattedMessage id='farm6' values={{ coin: 'WAR' }} />
           <span>
             {voteDate && voteDate.isClaim && !usersData.claimed
-              ? formatAmount(usersData.totalVote, 18, 6)
+              ? formatAmount(canClaimVal, 18, 6)
               : '0'}{' '}
             WAR
           </span>
