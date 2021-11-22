@@ -574,8 +574,6 @@ const debounceFn = debounce((pools, account, callback) => {
           Object.assign(pool.underlying, {
             address: underlyingAddress === '0x0000000000000000000000000000000000000000' ? '' : underlyingAddress,
           })
-
-
           return Object.assign({}, pool, {
             ratio: `1${pool.underlying.symbol}=${formatAmount(price, 18, 5)}${
               pool.currency.symbol
@@ -765,7 +763,7 @@ const debounceFn = debounce((pools, account, callback) => {
             }${pool.currency.symbol}`,
             progress:
               new BigNumber(Web3.utils.fromWei(totalOffered, 'ether'))
-                .dividedBy(new BigNumber(pool.amount))
+                .dividedBy(pool.nft ? new BigNumber(pool.amount).div(nftRatio): new BigNumber(pool.amount))
                 .toNumber()
                 .toFixed(2) * 1,
             status: status,

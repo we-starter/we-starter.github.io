@@ -233,7 +233,7 @@ const PoolsDetail = (props) => {
             {
               pool && (pool.nft ? (
                 <span>
-              {pool.nftRatio && (`${formatAmount(pool.totalPurchasedUnderlying, 18, 2) / pool.nftRatio} / ${pool.amount / pool.nftRatio}`)} {pool.underlying.symbol}
+              {pool.nftRatio && (`${formatAmount(pool.totalPurchasedUnderlying, 18, 2)} / ${pool.amount / pool.nftRatio}`)} {pool.underlying.symbol}
                 </span>
               ) : (
                 <span>
