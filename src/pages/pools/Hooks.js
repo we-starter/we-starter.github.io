@@ -632,6 +632,8 @@ const debounceFn = debounce((pools, account, callback) => {
           pool_contract.currencyValue(),//最大申购额度
           pool_contract.tokenValue(),//固定能获得
           nft_contract.balanceOf(account),//nft个数
+          pool_contract.curUser(),//参与人数
+          pool_contract.maxUser() // 最多参与
         ]
       } else {
         promise_list = [
@@ -676,12 +678,14 @@ const debounceFn = debounce((pools, account, callback) => {
             underlying_decimals = 18,
             nftBalanceOf = 0,
             tokenValue = 0,
-            nftRatio = null;
+            nftRatio = null,
+            userFull = false;
           if (pool.nft){
             quotaOf = data[7]
             tokenValue=data[8]
             nftBalanceOf = data[9][0]
             nftRatio = new BigNumber(quotaOf).div(tokenValue).toFixed(2)*1
+            userFull = data[10] >= data[11]
           } else{
             ratio = data[7]
             quotaOf = data[8]
@@ -753,6 +757,7 @@ const debounceFn = debounce((pools, account, callback) => {
                  : tokenAddress,
            })
           return Object.assign({}, pool, {
+            userFull,
             nftBalanceOf,
             nftRatio,
             ratio: `1${pool.underlying.symbol}=${nftRatio ? nftRatio :

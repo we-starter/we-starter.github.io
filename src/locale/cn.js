@@ -265,6 +265,7 @@ const zh_CN = {
   countdown: '距离募集开始还有',
   myQuota: '我的额度',
   alreadySubscribed: '已申购过',
+  ParticipantsAreFull: '参与人数已满',
   notInWhitelist: '无申购额度',
   undergoingOver: '申购结束，请等待结算',
   flashPool: '“24小时”池',

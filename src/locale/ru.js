@@ -266,6 +266,7 @@ const ru = {
   countdown: 'Отсчет мобилизации средств:',
   myQuota: 'Моя квота',
   alreadySubscribed: 'Уже подписано',
+  ParticipantsAreFull: 'Participants are full',
   notInWhitelist: 'Не находится в белом списке',
   undergoingOver: 'Подписка окончена, ожидайте расчета',
   flashPool: 'Быстрый пул',
