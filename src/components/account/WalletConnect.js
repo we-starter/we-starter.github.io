@@ -21,8 +21,15 @@ import Web3 from "web3";
 import { client, provider } from "@ont-dev/ontology-dapi";
 
 if (!window.ethereum && window.onto){
-  // window.ethereum = window.onto
-  // console.log(client.api.network.getNetwork())
+  window.ethereum = window.onto
+  window.ethereum.send = (method, params) => {
+    return new Promise((reslove, reject) => {
+      window.onto.request({
+        method,
+        params
+      }).then(reslove).catch(reject)
+    })
+  }
 }
 
 export const WalletConnect = ({ onClose, onCancel }) => {
@@ -39,25 +46,13 @@ export const WalletConnect = ({ onClose, onCancel }) => {
     const web3 = new Web3(window.onto);
 // Request connection
     web3.eth.requestAccounts().then((res) => {
-      console.log(res[0]);
-    });
-// Listen for accountsChanged and other events
-    window.onto.on("accountsChanged", (e) => {
-      console.log(e.accounts[0]);
-      window.ethereum = window.onto //new Promise((resolve)=>resolve(window.onto))
-      // window.ethereum = {
-      //   ...window.onto,
-      //   isMetaMask: true
-      // }
-      // console.log(provider.ExtensionType)
-      // client.registerClient({
-      //   extension: provider.ExtensionType.onto, // or 'onto'
-      // });
+      connectWallet(injected, netWorkFlag, 'onto').then(() => {
+        dispatch({
+          type: HANDLE_WALLET_MODAL,
+          walletModal: null,
+        })
+      })
 
-      console.log(chainId)
-    });
-    window.onto.on("networkChanged", (e) => {
-      console.log('11111111111111')
     });
   }
 
