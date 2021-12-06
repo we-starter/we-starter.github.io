@@ -173,6 +173,7 @@ export const useConnectWallet = () => {
             reslove(e)
           })
           .catch((error) => {
+            console.log(error)
             switch (true) {
               case error instanceof UnsupportedChainIdError:
                 console.log('链错了')

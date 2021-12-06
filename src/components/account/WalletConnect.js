@@ -9,6 +9,7 @@ import {
 } from '../../const'
 import metamask from '../../assets/icon/metamask.png'
 import Coin98 from '../../assets/icon/coin98@2x.png'
+import ONTO from '../../assets/icon/ONTO.png'
 import close from '../../assets/icon/close.png'
 import BSC from '../../assets/icon/BSC@2x.png'
 import HECO from '../../assets/icon/HECO@2x.png'
@@ -16,6 +17,13 @@ import MATIC from '../../assets/icon/MATIC@2x.png'
 import walletConnect from '../../assets/icon/walletConnect.png'
 import {changeNetwork, injected, useConnectWallet, walletConnector} from "../../connectors";
 import {ChainId} from "../../web3/address";
+import Web3 from "web3";
+import { client, provider } from "@ont-dev/ontology-dapi";
+
+if (!window.ethereum && window.onto){
+  // window.ethereum = window.onto
+  // console.log(client.api.network.getNetwork())
+}
 
 export const WalletConnect = ({ onClose, onCancel }) => {
   const { dispatch, state } = useContext(mainContext)
@@ -27,6 +35,31 @@ export const WalletConnect = ({ onClose, onCancel }) => {
   const initChainId = chainId || ChainId.HECO
   const [netWorkFlag, setNetWorkFlag] = useState(initChainId)
 
+  const connectONTOWallet = () => {
+    const web3 = new Web3(window.onto);
+// Request connection
+    web3.eth.requestAccounts().then((res) => {
+      console.log(res[0]);
+    });
+// Listen for accountsChanged and other events
+    window.onto.on("accountsChanged", (e) => {
+      console.log(e.accounts[0]);
+      window.ethereum = window.onto //new Promise((resolve)=>resolve(window.onto))
+      // window.ethereum = {
+      //   ...window.onto,
+      //   isMetaMask: true
+      // }
+      // console.log(provider.ExtensionType)
+      // client.registerClient({
+      //   extension: provider.ExtensionType.onto, // or 'onto'
+      // });
+
+      console.log(chainId)
+    });
+    window.onto.on("networkChanged", (e) => {
+      console.log('11111111111111')
+    });
+  }
 
   useEffect(() => {
     const localContent =
@@ -209,6 +242,12 @@ export const WalletConnect = ({ onClose, onCancel }) => {
                   className='form-app__inner__wallets__item'
                 >
                   <img src={Coin98} />
+                </div>
+                <div
+                  className='form-app__inner__wallets__item'
+                  onClick={connectONTOWallet}
+                >
+                  <img src={ONTO} />
                 </div>
               </div>
             </div>
