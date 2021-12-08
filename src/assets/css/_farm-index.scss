@@ -90,6 +90,10 @@
   margin-left: 4px;
   cursor: pointer;
 }
+.farm_index{
+  display: flex;
+  flex-wrap: wrap;
+}
 @media #{$desktop} {
   .farm_box {
     min-width: 1080px;
