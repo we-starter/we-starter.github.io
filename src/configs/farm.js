@@ -28,6 +28,7 @@ export default [
     settleToken: '0xa71EdC38d189767582C38A3145b5873052c3e47a', //usdt
     MLP: '0x910651F81a605a6Ef35d05527d24A72fecef8bF0', // WAR
     byModal: true,
+    buyName: 'WAR',
     abi: StakingPool3,
     start_at: '',
     time: '',
@@ -65,6 +66,7 @@ export default [
     mlpDecimal: 18,
     byLink:
       'http://ht.mdex.com/#/add/0xa71EdC38d189767582C38A3145b5873052c3e47a/0x910651F81a605a6Ef35d05527d24A72fecef8bF0',
+    buyName: 'WAR-USDT LPT',
     abi: StakingPool,
     start_at: '1626350400',
     time: '',
@@ -100,8 +102,8 @@ export default [
     ],
     settleToken: '0xa71EdC38d189767582C38A3145b5873052c3e47a', //usdt
     MLP: '0x910651F81a605a6Ef35d05527d24A72fecef8bF0', // WAR
-    byLink:
-      'https://ht.mdex.com/#/swap?outputCurrency=0x910651f81a605a6ef35d05527d24a72fecef8bf0',
+    byModal: true,
+    buyName: 'WAR',
     abi: StakingPool3,
     start_at: '',
     time: '',
@@ -137,6 +139,7 @@ export default [
     MLP: '0x910651F81a605a6Ef35d05527d24A72fecef8bF0', // WAR
     byLink:
       'https://pancakeswap.finance/swap?inputCurrency=0xe9e7cea3dedca5984780bafc599bd69add087d56&outputCurrency=0x910651f81a605a6ef35d05527d24a72fecef8bf0',
+    buyName: 'WAR',
     abi: StakingPool3,
     start_at: '1638892800',
     time: '1638892800',
@@ -176,6 +179,7 @@ export default [
     MLP: '0x888888d87d85Bc11549b17907E8f589214EB90c2', //stakingToken
     byLink:
       'https://pancakeswap.finance/swap#/swap?outputCurrency=0x888888d87d85Bc11549b17907E8f589214EB90c2',
+    buyName: 'PLUT',
     abi: AllowListStakePool,
     start_at: '1630324800',
     time: '',
@@ -212,6 +216,7 @@ export default [
     settleToken: '0xa71EdC38d189767582C38A3145b5873052c3e47a', //usdt
 
     MLP: '0xe5944b50df84001a36c7de0d5cb4da7ab21407d2', //stakingToken
+    buyName: 'xNFT',
     byLink:
       'https://ht.mdex.com/#/swap?outputCurrency=0xe5944b50df84001a36c7de0d5cb4da7ab21407d2',
     abi: AllowListStakePool,
@@ -253,6 +258,7 @@ export default [
     MLP: '0xe4e55c9203ac398a0f0b98bd096b70d9778eca6a',
     byLink:
       'https://ht.mdex.com/#/add/HT/0x910651F81a605a6Ef35d05527d24A72fecef8bF0',
+    buyName: 'WAR-HT LPT',
     abi: StakingPool,
     start_at: '',
     time: '',
@@ -288,6 +294,7 @@ export default [
     MLP: '0xD9baBF51f327829264f554B4Fa4e12Cec5BD0F50',
     byLink:
       'https://ht.mdex.com/#/add/0xa71EdC38d189767582C38A3145b5873052c3e47a/0xFC01b8f883a89278235ba674bbE2bb48db96d9Cf',
+    buyName: 'PAUL-USDT LPT',
     abi: StakingPool,
     start_at: '',
     time: '',
