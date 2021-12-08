@@ -27,8 +27,7 @@ export default [
     ],
     settleToken: '0xa71EdC38d189767582C38A3145b5873052c3e47a', //usdt
     MLP: '0x910651F81a605a6Ef35d05527d24A72fecef8bF0', // WAR
-    byLink:
-      'https://ht.mdex.com/#/swap?outputCurrency=0x910651f81a605a6ef35d05527d24a72fecef8bf0',
+    byModal: true,
     abi: StakingPool3,
     start_at: '',
     time: '',
@@ -121,6 +120,43 @@ export default [
   },
 
   // 临时池
+
+  {
+    name: 'WAR POOL (DAO)',
+    icon: 'PAUL-HT_small@2x.png',
+    rewards1: 'WAR',
+    rewards2: null,
+    address: '0x6B4a329855762554A25FdFdAa1DAAA88B630dEF8',
+    rewards1Address: '0x910651F81a605a6Ef35d05527d24A72fecef8bF0',
+    rewards2Address: null,
+    // apr
+    valueAprToken: '0x910651F81a605a6Ef35d05527d24A72fecef8bF0', // WAR
+    valueAprPath: [],
+    rewardsAprPath: [],
+    settleToken: '0xe9e7cea3dedca5984780bafc599bd69add087d56', //BUSD
+    MLP: '0x910651F81a605a6Ef35d05527d24A72fecef8bF0', // WAR
+    byLink:
+      'https://pancakeswap.finance/swap?inputCurrency=0xe9e7cea3dedca5984780bafc599bd69add087d56&outputCurrency=0x910651f81a605a6ef35d05527d24a72fecef8bf0',
+    abi: StakingPool3,
+    start_at: '1638892800',
+    time: '1638892800',
+    openDate: '1638892800',
+    dueDate: '1647532800',
+    earnName: 'APY',
+    status: 0,
+    rewards: 'WAR',
+    decimal: 18,
+    is_coming: false,
+    mdexReward: false,
+    networkId: ChainId.BSC,
+    mdexDaily: 0,
+    mdexPid: '',
+    svipFlag: true,
+    minAmountMortgage: '0.01',
+    poolType: 1, // 1单池，2LP，2sort
+  },
+
+
 
   {
     name: 'PLUT',

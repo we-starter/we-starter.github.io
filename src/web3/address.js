@@ -168,7 +168,8 @@ export function RPC_URLS (chainId) {
     return {
       [ChainId.HECO]: 'https://http-mainnet-node.huobichain.com',
       [ChainId.BSC]: 'https://bsc-dataseed.binance.org/',
-      [ChainId.MATIC]: 'https://rpc-mainnet.maticvigil.com'
+      [ChainId.MATIC]: 'https://rpc-mainnet.maticvigil.com',
+      [ChainId.LOCALHOST]: 'http://localhost:8545'
     }[chainId]
 }
 

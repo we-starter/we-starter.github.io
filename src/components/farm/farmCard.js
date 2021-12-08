@@ -241,7 +241,7 @@ const FarmCard = (props) => {
               : '--'}
         </span>
       </p>
-      {farmPools && farmPools.name !== 'WAR POOL (DAO)' && (
+      {farmPools && farmPools.byLink && (
         <a
           className={cs(
             `farm_index_card_getMLP ${
@@ -255,7 +255,7 @@ const FarmCard = (props) => {
           {farmPools && farmPools.lpToken && <span>({farmPools.lpToken})</span>}
         </a>
       )}
-      {farmPools && farmPools.name === 'WAR POOL (DAO)' && (
+      {farmPools && farmPools.byModal && farmPools.networkId === chainId && (
         <a
           className={cs(
             `farm_index_card_getMLP ${
