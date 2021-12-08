@@ -12,6 +12,38 @@
     border: 1px solid #0f8c20;
   }
 }
+
+.nft-card-tip-content{
+  display: flex;
+  img{
+    width: 100px;
+    height: 100px;
+  }
+  &>div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    h2{
+      font-size: 18px;
+      font-family: Montserrat-Bold, Montserrat;
+      font-weight: bold;
+      color: #121212;
+      line-height: 24px;
+    }
+    p{
+      font-size: 12px;
+      font-family: Montserrat-Regular, Montserrat;
+      font-weight: 400;
+      color: #121212;
+      line-height: 12px;
+    }
+    a{
+      color: #0F8C20;
+      text-decoration: underline;
+    }
+  }
+}
+
 @media #{$desktop} {
   .pools-type {
     position: relative;
@@ -302,6 +334,12 @@
         line-height: 24px;
         display: flex;
         align-items: center;
+        .nft-badge{
+          &>img{
+            width: 48px;
+            height: 48px;
+          }
+        }
       }
       .crown,
       .tips,

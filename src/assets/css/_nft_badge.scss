@@ -1,0 +1,90 @@
+.badge-stake-popup{
+  text-align: left;
+  color: #162040;
+  font-weight: 400;
+  .ant-btn-primary{
+    margin-top: 20px;
+    span{
+      color: #ffffff;
+      font-size: 14px;
+    }
+  }
+  .badge-stake-popup-title{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &>div{
+      height: 60px;
+      font-size: 16px;
+      flex: 1;
+      font-family: Montserrat-Bold, Montserrat;
+      font-weight: bold;
+      color: #162040;
+      line-height: 60px;
+    }
+  }
+  .badge-stake-popup-ratio{
+    font-size: 16px;
+    font-family: Montserrat-Bold, Montserrat;
+    font-weight: bold;
+    color: #0F8C20;
+    line-height: 12px;
+    margin-bottom: 17px;
+  }
+  .badge-stake-popup-avaliable{
+    display: flex;
+    margin: 10px 0 0 0;
+    padding: 0;
+    div{
+      flex: 1;
+      display: block;
+      text-indent: 0;
+      font-size: 14px;
+      font-family: Montserrat-Regular, Montserrat;
+      font-weight: 400;
+      color: #162040;
+      line-height: 16px;
+    }
+    strong{
+      font-size: 14px;
+      font-family: Montserrat-Bold, Montserrat;
+      font-weight: bold;
+      color: #162040;
+      line-height: 16px;
+    }
+  }
+  .badge-stake-popup-card{
+    display: flex;
+    border-radius: 5px;
+    border: 1px solid #0F8C20;
+    padding: 10px 0;
+    &>img{
+      width: 100px;
+      height: 100px;
+    }
+    &>div{
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: left;
+      padding-left: 28px;
+      h2{
+        font-size: 18px;
+        font-family: Montserrat-Bold, Montserrat;
+        font-weight: bold;
+        color: #121212;
+        line-height: 24px;
+        margin: 0;
+      }
+      p{
+        font-size: 12px;
+        font-family: Montserrat-Regular, Montserrat;
+        font-weight: 400;
+        color: #121212;
+        line-height: 12px;
+        margin: 10px 0 0 0;
+      }
+    }
+  }
+}

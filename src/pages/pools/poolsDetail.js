@@ -1,16 +1,16 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 import cs from 'classnames'
 import chromeLine from '../../assets/icon/chrome-line@2x.png'
 import bookMarkLine from '../../assets/icon/book-mark-line@2x.png'
 import PoolsBanner from '../../components/banner/PoolsBanner'
 import Web3 from 'web3'
 import Timer from 'react-compound-timer'
-import { GALLERY_SELECT_WEB3_CONTEXT, HANDLE_WALLET_MODAL } from '../../const'
+import {GALLERY_SELECT_WEB3_CONTEXT, HANDLE_WALLET_MODAL} from '../../const'
 import transitions from '@material-ui/core/styles/transitions'
 // import pools from '../../configs/pools'
-import { usePoolsInfo } from './Hooks'
-import { message } from 'antd'
-import { getContract, useActiveWeb3React } from '../../web3'
+import {usePoolsInfo} from './Hooks'
+import {message} from 'antd'
+import {getContract, useActiveWeb3React} from '../../web3'
 import {
   HANDLE_SHOW_FAILED_TRANSACTION_MODAL,
   HANDLE_SHOW_TRANSACTION_MODAL,
@@ -18,19 +18,20 @@ import {
   waitingForInit,
   waitingPending,
 } from '../../const'
-import { mainContext } from '../../reducer'
-import { FormattedMessage, injectIntl } from 'react-intl'
+import {mainContext} from '../../reducer'
+import {FormattedMessage, injectIntl} from 'react-intl'
 import BigNumber from 'bignumber.js'
-import { formatAmount, fromWei } from '../../utils/format'
+import {formatAmount, fromWei} from '../../utils/format'
 import {getScanLink} from "../../connectors";
 import {GAS_FEE} from "../../web3/address";
+import BadgeStake from "../../components/Modals/BadgeStake";
 
 const PoolsDetail = (props) => {
-  const { address } = props.match.params
+  const {address} = props.match.params
 
-  const { intl } = props
+  const {intl} = props
 
-  const { account, active, library, chainId } = useActiveWeb3React()
+  const {account, active, library, chainId} = useActiveWeb3React()
   const pools = usePoolsInfo(address)
 
   const [detailTab, setDetailTab] = useState('detail')
@@ -39,8 +40,8 @@ const PoolsDetail = (props) => {
   const [now, setNow] = useState(parseInt(Date.now() / 1000))
   const [left_time, setLeftTime] = useState(0)
 
-  const { dispatch } = useContext(mainContext)
-
+  const {dispatch} = useContext(mainContext)
+  const [showBadgeStake, setShowBadgeStake] = useState(false)
   //  if (!pool || chainId !== pool.networkId) {
   //    window.location.href = '/'
   //  }
@@ -57,7 +58,7 @@ const PoolsDetail = (props) => {
   useEffect(() => {
     setPool(pools[0])
     if (pools[0]) {
-      const { status, start_at, time, timeClose, type } = pools[0]
+      const {status, start_at, time, timeClose, type} = pools[0]
       if (status === 0) {
         setLeftTime(start_at * 1000 - Date.now())
       } else if (status === 1) {
@@ -88,7 +89,7 @@ const PoolsDetail = (props) => {
         .on('transactionHash', (hash) => {
           dispatch({
             type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
-            showWaitingWalletConfirmModal: { ...waitingPending, hash },
+            showWaitingWalletConfirmModal: {...waitingPending, hash},
           })
         })
         .on('receipt', (_, receipt) => {
@@ -123,7 +124,7 @@ const PoolsDetail = (props) => {
         .on('transactionHash', (hash) => {
           dispatch({
             type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
-            showWaitingWalletConfirmModal: { ...waitingPending, hash },
+            showWaitingWalletConfirmModal: {...waitingPending, hash},
           })
         })
         .on('receipt', (_, receipt) => {
@@ -150,20 +151,19 @@ const PoolsDetail = (props) => {
         })
     }
   }
-
   return (
     <div className='pools_detail_box'>
-      <PoolsBanner address={address} pool={pool} />
+      <PoolsBanner address={address} pool={pool}/>
       <div className='pools_card'>
         <div className='pools_card_content'>
           <div className='pools_card_content_title'>
             <span>
-              <FormattedMessage id='poolsDetailText1' />
+              <FormattedMessage id='poolsDetailText1'/>
             </span>
             {/* <span>{pool && pool.ratio}</span> */}
             {pool && pool.type === 1 && (
               <span>
-                <FormattedMessage id='myQuota' />{' '}
+                <FormattedMessage id='myQuota'/>{' '}
                 {pool && formatAmount(pool.quotaOf)}{' '}
                 {pool && pool.currency.symbol}
               </span>
@@ -171,43 +171,43 @@ const PoolsDetail = (props) => {
           </div>
 
           <div className='pools_card_content_title pools_card_val'>
-            {pool && pool.amount} {pool && pool.underlying.symbol}
+            {pool && (pool.nft ? pool.nftRatio ? (pool.amount / pool.nftRatio) : '-' : pool.amount)} {pool && pool.underlying.symbol}
           </div>
 
           {pool && pool.status === 0 && (
             <div className='pools_card_start'>
-              <FormattedMessage id='comingSoon1' />
+              <FormattedMessage id='comingSoon1'/>
               ...
             </div>
           )}
           {pool &&
-            pool.status === 1 &&
-            (pool.timeClose == 0 || pool.timeClose > now) && (
-              <div className='pools_card_start'>
-                <FormattedMessage id='recruit' />
-              </div>
-            )}
+          pool.status === 1 &&
+          (pool.timeClose == 0 || pool.timeClose > now) && (
+            <div className='pools_card_start'>
+              <FormattedMessage id='recruit'/>
+            </div>
+          )}
           {pool &&
-            pool.status === 1 &&
-            pool.timeClose > 0 &&
-            pool.timeClose < now && (
-              <div className='pools_card_start'>
-                <FormattedMessage id='recruitOver' />
-              </div>
-            )}
+          pool.status === 1 &&
+          pool.timeClose > 0 &&
+          pool.timeClose < now && (
+            <div className='pools_card_start'>
+              <FormattedMessage id='recruitOver'/>
+            </div>
+          )}
           {pool && pool.status === 2 && (
             <div className='pools_card_start'>
-              <FormattedMessage id='settlement' />
+              <FormattedMessage id='settlement'/>
             </div>
           )}
           {pool && pool.status === 3 && (
             <div className='pools_card_start'>
-              <FormattedMessage id='completed' />
+              <FormattedMessage id='completed'/>
             </div>
           )}
           <div className='pools_card_content_title'>
             <span>
-              <FormattedMessage id='poolsDetailText2' />
+              <FormattedMessage id='poolsDetailText2'/>
             </span>
           </div>
           <div className='pools_card_progress__bar'>
@@ -230,12 +230,21 @@ const PoolsDetail = (props) => {
           </div>
           <div className='pools_card_content_title pools_card_schedule'>
             <span>{pool && (pool.progress * 100).toFixed(2) * 1}%</span>
-            <span>
-              {pool && pool.progress == 1
-                ? Math.round(formatAmount(pool.totalPurchasedUnderlying, 18, 2))
-                : formatAmount(pool.totalPurchasedUnderlying, 18, 2)}
-              /{pool && pool.amount} {pool && pool.underlying.symbol}
-            </span>
+            {
+              pool && (pool.nft ? (
+                <span>
+              {pool.nftRatio && (`${formatAmount(pool.totalPurchasedUnderlying, 18, 2)} / ${pool.amount / pool.nftRatio}`)} {pool.underlying.symbol}
+                </span>
+              ) : (
+                <span>
+                  {pool && pool.progress == 1
+                    ? Math.round(formatAmount(pool.totalPurchasedUnderlying, 18, 2))
+                    : formatAmount(pool.totalPurchasedUnderlying, 18, 2)}
+                  /{pool && pool.amount} {pool && pool.underlying.symbol}
+                </span>
+              )
+                )
+            }
           </div>
         </div>
       </div>
@@ -254,7 +263,9 @@ const PoolsDetail = (props) => {
           }`}
           onClick={() => {
             if (pool.status === 1) {
-              if (pool.type === 1 && pool.purchasedCurrencyOf > 0) {
+              if (pool.userFull) {
+                message.info(intl.formatMessage({ id: 'ParticipantsAreFull' }))
+              } else if (pool.type === 1 && pool.purchasedCurrencyOf > 0) {
                 // 如果是 已经申购过的
                 // message.info('已申购过')
                 message.info(intl.formatMessage({ id: 'alreadySubscribed' }))
@@ -265,11 +276,19 @@ const PoolsDetail = (props) => {
                 if (pool.timeClose > 0 && pool.timeClose * 1 < now) {
                   message.info(intl.formatMessage({ id: 'undergoingOver' }))
                 } else {
-                  dispatch({
-                    type: HANDLE_WALLET_MODAL,
-                    walletModal: 'join',
-                    pool,
-                  })
+                  if (pool.nft){
+                    if (pool.nftBalanceOf > 0){
+                      setShowBadgeStake(true)
+                    } else {
+                      message.info(intl.formatMessage({ id: 'notInWhitelist' }))
+                    }
+                  }else {
+                    dispatch({
+                      type: HANDLE_WALLET_MODAL,
+                      walletModal: 'join',
+                      pool,
+                    })
+                  }
                 }
               }
             } else {
@@ -1025,6 +1044,7 @@ const PoolsDetail = (props) => {
           )}
         </div>
       </div>
+      <BadgeStake visible={showBadgeStake} setVisible={()=>setShowBadgeStake(false)} pool={pool}/>
     </div>
   )
 }

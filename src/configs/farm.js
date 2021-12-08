@@ -6,6 +6,10 @@ import AllowListStakePool from '../web3/abi/AllowListStakePool.json'
 import {ChainId} from "../web3/address";
 import {numToWei} from "../utils/format";
 
+const testNetworkId = window.ethereum && (~~window.ethereum.chainId === ChainId.LOCALHOST) ? ChainId.LOCALHOST : null
+if (testNetworkId) {
+  console.log('testNetworkId=' + testNetworkId)
+}
 export default [
   // 核心池
 
@@ -40,7 +44,7 @@ export default [
     decimal: 18,
     is_coming: false,
     mdexReward: false,
-    networkId: 128,
+    networkId: testNetworkId || 128,
     mdexDaily: 0,
     mdexPid: '',
     svipFlag: true,
@@ -78,7 +82,7 @@ export default [
     decimal: 18,
     is_coming: true,
     mdexReward: true,
-    networkId: 128,
+    networkId: testNetworkId || 128,
     lpToken: 'MDEX LP Token',
     mdexDaily: 762.97,
     mdexPid: '0x5a',
@@ -115,7 +119,7 @@ export default [
     decimal: 18,
     is_coming: false,
     mdexReward: false,
-    networkId: 128,
+    networkId: testNetworkId || 128,
     mdexDaily: 0,
     mdexPid: '',
     poolType: 1, // 1单池，2LP，2sort

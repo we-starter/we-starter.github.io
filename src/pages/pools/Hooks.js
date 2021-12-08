@@ -574,8 +574,6 @@ const debounceFn = debounce((pools, account, callback) => {
           Object.assign(pool.underlying, {
             address: underlyingAddress === '0x0000000000000000000000000000000000000000' ? '' : underlyingAddress,
           })
-
-
           return Object.assign({}, pool, {
             ratio: `1${pool.underlying.symbol}=${formatAmount(price, 18, 5)}${
               pool.currency.symbol
@@ -618,18 +616,39 @@ const debounceFn = debounce((pools, account, callback) => {
     else if (pool.type === 1) {      // TODO 默认HT，后面需要根据通货来查询进度
       let currency_decimals = pool.currency.decimal
       // 白名单是offering合约
-      const promise_list = [
-        pool_contract.timeOffer(), // 结算时间点
-        pool_contract.timeClaim(), // 结算时间点
-        pool_contract.ratio(), // 比例
-        pool_contract.totalQuota(), //总申购的量
-        pool_contract.totalOffered(), //总申购的量
-        pool_contract.totalClaimed(), //总领取的量
-        pool_contract.quotaOf(account), // 最大申购额度
-        pool_contract.offeredOf(account), // 已经认购的量
-        pool_contract.claimedOf(account), // 已经领取的量
-        pool_contract.token(),
-      ]
+      let promise_list = []
+      if (pool.nft) {
+        const nft_contract = new Contract(pool.nft.address, pool.nft.abi)
+        promise_list = [
+          pool_contract.timeOffer(), // 结算时间点
+          pool_contract.timeClaim(), // 结算时间点
+          pool_contract.totalOffered(), //总申购的量
+          pool_contract.totalClaimed(), //总领取的量
+          pool_contract.offeredOf(account), // 已经认购的量
+          pool_contract.claimedOf(account), // 已经领取的量
+          pool_contract.token(),
+          pool_contract.currencyValue(),//最大申购额度
+          pool_contract.tokenValue(),//固定能获得
+          nft_contract.balanceOf(account),//nft个数
+          pool_contract.curUser(),//参与人数
+          pool_contract.maxUser() // 最多参与
+        ]
+      } else {
+        promise_list = [
+          pool_contract.timeOffer(), // 结算时间点
+          pool_contract.timeClaim(), // 结算时间点
+          pool_contract.totalOffered(), //总申购的量
+          pool_contract.totalClaimed(), //总领取的量
+          pool_contract.offeredOf(account), // 已经认购的量
+          pool_contract.claimedOf(account), // 已经领取的量
+          pool_contract.token(),
+          pool_contract.ratio(), // 比例
+          pool_contract.totalQuota(), //总申购的量
+          pool_contract.quotaOf(account), // 最大申购额度
+        ]
+      }
+
+
       currency_token &&
         promise_list.push(currency_token.allowance(account, pool.address))
 
@@ -640,20 +659,37 @@ const debounceFn = debounce((pools, account, callback) => {
         .all(promise_list)
         .then((data) => {
           data = processResult(data)
+
           let [
             start_at,
             time,
-            ratio,
-            totalQuota,
             totalOffered,
             totalClaimed,
-            quotaOf,
             offeredOf,
             claimedOf,
             tokenAddress,
+          ] = data
+          let ratio,
+            totalQuota,
+            quotaOf,
             currency_allowance = 0,
             underlying_decimals = 18,
-          ] = data
+            nftBalanceOf = 0,
+            tokenValue = 0,
+            nftRatio = null,
+            userFull = false;
+          if (pool.nft){
+            quotaOf = data[7]
+            tokenValue=data[8]
+            nftBalanceOf = data[9][0]
+            nftRatio = new BigNumber(quotaOf).div(tokenValue).toFixed(2)*1
+            userFull = data[10] >= data[11]
+          } else{
+            ratio = data[7]
+            quotaOf = data[8]
+            currency_allowance = data[9]||0
+            underlying_decimals = data[10]||18
+          }
           let status = pool.status || 0 // 即将上线
           if (start_at < now && status < 1) {
             // 募集中
@@ -675,7 +711,8 @@ const debounceFn = debounce((pools, account, callback) => {
           if (!(ratio - 0) && pool.defaultRatio) {
             ratio = pool.defaultRatio
           }
-          const _ratio = new BigNumber(ratio).dividedBy(
+          // nft的中签率是100%
+          const _ratio = nftRatio ? 1 : new BigNumber(ratio).dividedBy(
             new BigNumber(10).pow(
               parseInt(underlying_decimals) - parseInt(currency_decimals) + 18
             )
@@ -718,12 +755,15 @@ const debounceFn = debounce((pools, account, callback) => {
                  : tokenAddress,
            })
           return Object.assign({}, pool, {
-            ratio: `1${pool.underlying.symbol}=${
+            userFull,
+            nftBalanceOf,
+            nftRatio,
+            ratio: `1${pool.underlying.symbol}=${nftRatio ? nftRatio :
               __ratio.toFixed(5, 1).toString() * 1
             }${pool.currency.symbol}`,
             progress:
               new BigNumber(Web3.utils.fromWei(totalOffered, 'ether'))
-                .dividedBy(new BigNumber(pool.amount))
+                .dividedBy(pool.nft ? new BigNumber(pool.amount).div(nftRatio): new BigNumber(pool.amount))
                 .toNumber()
                 .toFixed(2) * 1,
             status: status,
@@ -753,7 +793,7 @@ const debounceFn = debounce((pools, account, callback) => {
             },
             settleable: {
               amount: 0, // 未结算数量
-              volume: offeredOf, // 预计中签量
+              volume: pool.nft ? tokenValue : offeredOf, // 预计中签量,nft是全量
               claimedOf, // 获取募资币种数量
               rate: Web3.utils.toWei('1', 'ether'), // 预计中签率
             },
