@@ -22,14 +22,17 @@ import Timer from 'react-compound-timer'
 import { useActiveWeb3React } from '../../web3'
 import Banner from '../../components/banner/Banner'
 
-function NftCardTipContent({pool}){
+export function NftCardTipContent({nft}){
+  if (!nft){
+    return null
+  }
   return (
     <div className="nft-card-tip-content">
-      <img src={pool.nft.icon} alt=""/>
+      <img src={nft.icon} alt=""/>
       <div>
-        <h2>Only for {pool.nft.name}</h2>
-        <p>Claim from <a href={pool.nft.claimUrl} target="_blank">{pool.nft.claimUrl.split('//')[1]}</a></p>
-        <p>NFT Offering by {pool.nft.claimUrlName}</p>
+        <h2>Only for {nft.name}</h2>
+        <p>Claim from <a href={nft.claimUrl} target="_blank">{nft.claimUrl.split('//')[1]}</a></p>
+        <p>NFT Offering by {nft.claimUrlName}</p>
       </div>
     </div>
   )
@@ -471,7 +474,7 @@ const PoolsIndex = (props) => {
                     {pool.nft.name}
                   </div>
 
-                  <Popover content={() => <NftCardTipContent pool={pool}/> } title={null}>
+                  <Popover content={() => <NftCardTipContent nft={pool.nft}/> } title={null}>
                     <span className='tips'/>
                   </Popover>
                 </div>

@@ -1,38 +1,40 @@
-import React, { useContext, useEffect, useMemo, useState } from 'react'
+import React, {useContext, useEffect, useMemo, useState} from 'react'
 import cs from 'classnames'
-import { FormattedMessage, injectIntl } from 'react-intl'
+import {FormattedMessage, injectIntl} from 'react-intl'
 import BigNumber from 'bignumber.js'
-import { useActiveWeb3React } from '../../web3'
+import {useActiveWeb3React} from '../../web3'
 import {HANDLE_WALLET_MODAL, NOT_ACCESS_MODAL} from '../../const'
-import { mainContext } from '../../reducer'
-import { changeNetwork } from '../../connectors'
-import { Button, message } from 'antd'
-import { formatAmount, splitFormat } from '../../utils/format'
+import {mainContext} from '../../reducer'
+import {changeNetwork} from '../../connectors'
+import {Button, message, Popover} from 'antd'
+import {formatAmount, splitFormat} from '../../utils/format'
 import {useAllow, useAPR, useFarmInfo, useMdxARP} from '../../pages/pools/Hooks'
-import { useBalance } from '../../pages/Hooks'
+import {useBalance} from '../../pages/Hooks'
 import Timer from 'react-compound-timer'
 import Countdown from './countdown'
 // 处理格式 千位符
-import { formatNumber } from 'accounting'
-import { ChainId } from '../../web3/address'
+import {formatNumber} from 'accounting'
+import {ChainId} from '../../web3/address'
 import AllowPublicIcon from '../../assets/icon/home_N01_night@2x.png'
 import AllowPrivateIcon from '../../assets/icon/home_N02_night@2x.png'
 import Tips from '../../assets/icon/06 icon／minor／info@2x.png'
+import {NftCardTipContent} from "../../pages/pools/poolsIndex";
 
+import TipIcon from '../../assets/icon/06 icon／minor／info@2x.png'
 const FarmCard = (props) => {
-  let { pools: farmPools, dispatch } = props
+  let {pools: farmPools, dispatch} = props
   const [hoverFlag, setHoverFlag] = useState(false)
   farmPools = useFarmInfo(farmPools.address)
-  const { balance } = useBalance(
+  const {balance} = useBalance(
     farmPools && farmPools.MLP,
     props.pools.networkId
   )
-  const { chainId } = useActiveWeb3React()
+  const {chainId} = useActiveWeb3React()
   const [balanceProportion, setBalanceProportion] = useState(0)
   // const [now, setNow] = useState(parseInt(Date.now() / 1000))
   // 白名单 allow=0为不在白名单
   const allow = useAllow(farmPools)
-  const notAllow = farmPools.accessType ==='private' && !allow
+  const notAllow = farmPools.accessType === 'private' && !allow
 
 
   // const mdexApr = useMdxARP(
@@ -155,13 +157,13 @@ const FarmCard = (props) => {
         isFinish={isFinish}
       />
       <p className='farm_index_card_value'>
-        <FormattedMessage id='farm10' />
+        <FormattedMessage id='farm10'/>
         {farmPools && farmPools.icon && (
-          <img src={require('../../assets/icon/farm/' + farmPools.icon)} />
+          <img src={require('../../assets/icon/farm/' + farmPools.icon)}/>
         )}
       </p>
       <p className='farm_index_card_value'>
-        <FormattedMessage id='farm11' />
+        <FormattedMessage id='farm11'/>
         <span>
           {farmPools &&
           farmPools.totalSupply &&
@@ -191,7 +193,7 @@ const FarmCard = (props) => {
         </span>
       </p>
       <p className='farm_index_card_value'>
-        <FormattedMessage id='farm12' />
+        <FormattedMessage id='farm12'/>
         <span>
           {farmPools &&
           farmPools.balanceOf &&
@@ -219,7 +221,7 @@ const FarmCard = (props) => {
         </span>
       </p>
       <p className='farm_index_card_value'>
-        <FormattedMessage id='farm4' />
+        <FormattedMessage id='farm4'/>
         {/* 为了和 farmPools.balanceOf 展示同步 formatNumber */}
         <span>
           {farmPools &&
@@ -251,7 +253,7 @@ const FarmCard = (props) => {
           href={farmPools.byLink}
           target='_black'
         >
-          <FormattedMessage id='farm13' /> {farmPools && farmPools.buyName}
+          <FormattedMessage id='farm13'/> {farmPools && farmPools.buyName}
         </a>
       )}
       {farmPools && farmPools.byModal && farmPools.networkId === chainId && (
@@ -268,7 +270,7 @@ const FarmCard = (props) => {
             })
           }}
         >
-          <FormattedMessage id='farm17' /> {farmPools.rewards}
+          <FormattedMessage id='farm17'/> {farmPools.rewards}
         </a>
       )}
       {farmPools && farmPools.networkId == chainId && (
@@ -296,7 +298,7 @@ const FarmCard = (props) => {
               })
             }}
           >
-            <FormattedMessage id='farm3' />
+            <FormattedMessage id='farm3'/>
           </Button>
           {farmPools && (
             <Button
@@ -320,7 +322,7 @@ const FarmCard = (props) => {
                 })
               }}
             >
-              <FormattedMessage id='farm16' />
+              <FormattedMessage id='farm16'/>
             </Button>
           )}
         </div>
@@ -331,7 +333,7 @@ const FarmCard = (props) => {
             className={cs(
               `deposit_btn ${farmPools && 'deposit_btn_' + farmPools.networkId}`
             )}
-            style={{ width: '100%' }}
+            style={{width: '100%'}}
             onClick={() => {
               changeNetwork(farmPools.networkId).then(() => {
                 message.success('Switch success')
@@ -340,13 +342,13 @@ const FarmCard = (props) => {
             disabled={!window.ethereum}
           >
             {farmPools.networkId == ChainId.HECO && (
-              <FormattedMessage id='poolTextS128' />
+              <FormattedMessage id='poolTextS128'/>
             )}
             {farmPools.networkId == ChainId.BSC && (
-              <FormattedMessage id='poolTextS56' />
+              <FormattedMessage id='poolTextS56'/>
             )}
             {farmPools.networkId == ChainId.MATIC && (
-              <FormattedMessage id='poolTextS137' />
+              <FormattedMessage id='poolTextS137'/>
             )}
           </Button>
         </div>
@@ -360,10 +362,11 @@ const FarmCard = (props) => {
       >
         {
           // WAR-USDT LPT special
-          !(farmPools && farmPools.address === '0x777d69a99fE220471f23e2643007f9d086B7d714' && Number(farmPools.earned) === 0 || !farmPools.earned)  && <p className='form-app__inputbox-after-text farm_popup_avaliable'>
+          !(farmPools && farmPools.address === '0x777d69a99fE220471f23e2643007f9d086B7d714' && Number(farmPools.earned) === 0 || !farmPools.earned) &&
+          <p className='form-app__inputbox-after-text farm_popup_avaliable'>
             <FormattedMessage
               id='farm6'
-              values={{ coin: farmPools && farmPools.rewards1 }}
+              values={{coin: farmPools && farmPools.rewards1}}
             />
             <span>
             {farmPools &&
@@ -396,7 +399,7 @@ const FarmCard = (props) => {
           <p className='form-app__inputbox-after-text farm_popup_avaliable'>
             <FormattedMessage
               id='farm6'
-              values={{ coin: farmPools && farmPools.rewards2 }}
+              values={{coin: farmPools && farmPools.rewards2}}
             />
             <span>
               {farmPools && farmPools.earned2
@@ -409,6 +412,13 @@ const FarmCard = (props) => {
           </p>
         )}
       </div>
+
+      {farmPools && farmPools.svipFlag && (
+        <p className='vip_tip'>
+          <FormattedMessage id='farm24'/>
+        </p>
+      )}
+
       {farmPools &&
       farmPools.name === 'WAR POOL (DAO)' &&
       farmPools.networkId == chainId && (
@@ -416,7 +426,7 @@ const FarmCard = (props) => {
           className={cs(
             `deposit_btn ${farmPools && 'deposit_btn_' + farmPools.networkId}`
           )}
-          style={{ marginTop: '8px', width: '100%' }}
+          style={{marginTop: '8px', width: '100%'}}
           onClick={() => {
             dispatch({
               type: HANDLE_WALLET_MODAL,
@@ -425,57 +435,66 @@ const FarmCard = (props) => {
             })
           }}
         >
-          <FormattedMessage id='farm21' />
+          <FormattedMessage id='farm21'/>
         </a>
       )}
       {farmPools.accessType === 'private' && (
         <div className='farm_pools_card_access'>
           <div className='farm_pools_card_access_title'>
-            <FormattedMessage id='accessType' />
+            <FormattedMessage id='accessType'/>
           </div>
           <div className='farm_pools_card_access_content'>
             <span className='tips'>
-              <img src={Tips} alt='' />
+              <img src={Tips} alt=''/>
               <i className='tips_content'>
-                <FormattedMessage id='privateTips' />
+                <FormattedMessage id='privateTips'/>
               </i>
             </span>
             <span className='access-type-text'>
-              <FormattedMessage id='private' />
+              <FormattedMessage id='private'/>
             </span>
-            <img src={notAllow ? AllowPrivateIcon : AllowPublicIcon} alt='' />
+            <img src={notAllow ? AllowPrivateIcon : AllowPublicIcon} alt=''/>
           </div>
         </div>
       )}
       {farmPools.accessType === 'public' && (
         <div className='farm_pools_card_access'>
           <div className='farm_pools_card_access_title'>
-            <FormattedMessage id='accessType' />
+            <FormattedMessage id='accessType'/>
           </div>
           <div className='farm_pools_card_access_content'>
             <span className='tips'>
-              <img src={Tips} alt='' />
+              <img src={Tips} alt=''/>
               <i className='tips_content'>
-                <FormattedMessage id='publicTips' />
+                <FormattedMessage id='publicTips'/>
               </i>
             </span>
             <span className='access-type-text'>
-              <FormattedMessage id='public' />
+              <FormattedMessage id='public'/>
             </span>
-            <img src={AllowPublicIcon} alt='' />
+            <img src={AllowPublicIcon} alt=''/>
           </div>
         </div>
       )}
-      {farmPools && farmPools.svipFlag && (
-        <p className='vip_tip'>
-          <FormattedMessage id='farm24' />
-        </p>
-      )}
+      {
+        farmPools.awardNft && (
+          <div className="farm_pools_card_award-nft">
+            <div>
+              <img className="nft-img" src={farmPools.awardNft.icon} alt=""/>
+              {farmPools.awardNft.name}
+              <Popover content={() => <NftCardTipContent nft={farmPools.awardNft}/>} title={null}>
+                <img src={TipIcon} className="tips-icon" alt=""/>
+              </Popover>
+            </div>
+            <p className="desc">{farmPools.awardNft.desc}</p>
+          </div>
+        )
+      }
     </div>
   )
 }
 
 export default injectIntl((props) => {
-  const { dispatch, state } = useContext(mainContext)
-  return useMemo(() => <FarmCard {...props} dispatch={dispatch} />, [dispatch, props])
+  const {dispatch, state} = useContext(mainContext)
+  return useMemo(() => <FarmCard {...props} dispatch={dispatch}/>, [dispatch, props])
 })

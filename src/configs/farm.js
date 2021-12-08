@@ -5,10 +5,17 @@ import { getRemainTime } from '../utils/time'
 import AllowListStakePool from '../web3/abi/AllowListStakePool.json'
 import {ChainId} from "../web3/address";
 import {numToWei} from "../utils/format";
-
+import WARBadge from '../assets/icon/war-badge.png'
 const testNetworkId = window.ethereum && (~~window.ethereum.chainId === ChainId.LOCALHOST) ? ChainId.LOCALHOST : null
 if (testNetworkId) {
   console.log('testNetworkId=' + testNetworkId)
+}
+const awardNftWARBadge = {
+  icon: WARBadge,
+  name: 'WAR Badge',
+  claimUrl: 'https://www.metadusk.com',
+  claimUrlName: 'metadusk',
+  desc: 'If you keep staking WAR for a specific time period, you will get WAR Badge. This Badge enable u to get IWO whitelist seat. If you withdraw your WAR, you might miss it.'
 }
 export default [
   // 核心池
@@ -50,6 +57,44 @@ export default [
     svipFlag: true,
     minAmountMortgage: '50000',
     poolType: 1, // 1单池，2LP，2sort
+    awardNft: awardNftWARBadge,
+  },
+
+  {
+    name: 'WAR POOL (DAO)',
+    icon: 'PAUL-HT_small@2x.png',
+    rewards1: 'WAR',
+    rewards2: null,
+    address: '0x6B4a329855762554A25FdFdAa1DAAA88B630dEF8',
+    rewards1Address: '0x910651F81a605a6Ef35d05527d24A72fecef8bF0',
+    rewards2Address: null,
+    // apr
+    valueAprToken: '0x910651F81a605a6Ef35d05527d24A72fecef8bF0', // WAR
+    valueAprPath: [],
+    rewardsAprPath: [],
+    settleToken: '0xe9e7cea3dedca5984780bafc599bd69add087d56', //BUSD
+    MLP: '0x910651F81a605a6Ef35d05527d24A72fecef8bF0', // WAR
+    byLink:
+      'https://pancakeswap.finance/swap?inputCurrency=0xe9e7cea3dedca5984780bafc599bd69add087d56&outputCurrency=0x910651f81a605a6ef35d05527d24a72fecef8bf0',
+    buyName: 'WAR',
+    abi: StakingPool3,
+    start_at: '1638892800',
+    time: '1638892800',
+    openDate: '1638892800',
+    dueDate: '1647532800',
+    earnName: 'APY',
+    status: 0,
+    rewards: 'WAR',
+    decimal: 18,
+    is_coming: false,
+    mdexReward: false,
+    networkId: ChainId.BSC,
+    mdexDaily: 0,
+    mdexPid: '',
+    svipFlag: true,
+    minAmountMortgage: '0.01',
+    poolType: 1, // 1单池，2LP，2sort
+    awardNft: awardNftWARBadge,
   },
   {
     name: 'WAR-USDT LPT',
@@ -127,41 +172,6 @@ export default [
 
   // 临时池
 
-  {
-    name: 'WAR POOL (DAO)',
-    icon: 'PAUL-HT_small@2x.png',
-    rewards1: 'WAR',
-    rewards2: null,
-    address: '0x6B4a329855762554A25FdFdAa1DAAA88B630dEF8',
-    rewards1Address: '0x910651F81a605a6Ef35d05527d24A72fecef8bF0',
-    rewards2Address: null,
-    // apr
-    valueAprToken: '0x910651F81a605a6Ef35d05527d24A72fecef8bF0', // WAR
-    valueAprPath: [],
-    rewardsAprPath: [],
-    settleToken: '0xe9e7cea3dedca5984780bafc599bd69add087d56', //BUSD
-    MLP: '0x910651F81a605a6Ef35d05527d24A72fecef8bF0', // WAR
-    byLink:
-      'https://pancakeswap.finance/swap?inputCurrency=0xe9e7cea3dedca5984780bafc599bd69add087d56&outputCurrency=0x910651f81a605a6ef35d05527d24a72fecef8bf0',
-    buyName: 'WAR',
-    abi: StakingPool3,
-    start_at: '1638892800',
-    time: '1638892800',
-    openDate: '1638892800',
-    dueDate: '1647532800',
-    earnName: 'APY',
-    status: 0,
-    rewards: 'WAR',
-    decimal: 18,
-    is_coming: false,
-    mdexReward: false,
-    networkId: ChainId.BSC,
-    mdexDaily: 0,
-    mdexPid: '',
-    svipFlag: true,
-    minAmountMortgage: '0.01',
-    poolType: 1, // 1单池，2LP，2sort
-  },
 
 
 
