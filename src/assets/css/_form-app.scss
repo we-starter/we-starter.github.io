@@ -60,6 +60,9 @@
 
       &__item:hover {
         background-color: #ffffff;
+        @media #{$smWidth} {
+          background-color: transparent;
+        }
         p {
           color: rgba(15, 140, 32, 1);
         }

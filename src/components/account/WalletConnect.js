@@ -19,6 +19,8 @@ import {changeNetwork, injected, useConnectWallet, walletConnector} from "../../
 import {ChainId} from "../../web3/address";
 import Web3 from "web3";
 import { client, provider } from "@ont-dev/ontology-dapi";
+import {isMobile} from "../../utils";
+import {message} from "antd";
 
 if (!window.ethereum && window.onto){
   window.ethereum = window.onto
@@ -43,6 +45,22 @@ export const WalletConnect = ({ onClose, onCancel }) => {
   const [netWorkFlag, setNetWorkFlag] = useState(initChainId)
 
   const connectONTOWallet = () => {
+    if (isMobile()){
+      connectWallet(
+        injected,
+        walletConnector[netWorkFlag]
+      ).then(() => {
+        dispatch({
+          type: HANDLE_WALLET_MODAL,
+          walletModal: null,
+        })
+      })
+      return
+    }
+    if (!window.onto){
+      message.warning('Please Install ONTO Wallet From Chrome WebStore')
+      return;
+    }
     const web3 = new Web3(window.onto);
 // Request connection
     web3.eth.requestAccounts().then((res) => {
