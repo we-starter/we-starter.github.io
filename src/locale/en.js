@@ -262,6 +262,7 @@ const en_US = {
   countdown: 'Fundraising Countdown:',
   myQuota: 'My Quota',
   alreadySubscribed: 'Already Subscribed',
+  ParticipantsAreFull: 'Participants are full',
   notInWhitelist: 'Not in whitelist',
   undergoingOver: 'The subscription is over, please wait for settlement',
   flashPool: 'Flash Pool',

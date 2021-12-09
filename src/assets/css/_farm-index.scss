@@ -66,7 +66,34 @@
     }
   }
 }
-
+.farm_pools_card_award-nft{
+  &>div{
+    display: flex;
+    align-items: center;
+    padding: 8px 0;
+    .nft-img{
+      width: 48px;
+      height: 48px;
+    }
+  }
+  .desc{
+    font-size: 12px;
+    font-family: Montserrat-Regular, Montserrat;
+    font-weight: 400;
+    color: #162040;
+    line-height: 20px;
+  }
+}
+.tips-icon{
+  width: 22px;
+  height: 22px;
+  margin-left: 4px;
+  cursor: pointer;
+}
+.farm_index{
+  display: flex;
+  flex-wrap: wrap;
+}
 @media #{$desktop} {
   .farm_box {
     min-width: 1080px;
@@ -90,10 +117,10 @@
       position: relative;
       display: inline-block;
       margin-top: 30px;
-      padding: 42px 30px 0;
+      padding: 42px 30px 15px;
       margin-top: 30px;
-      width: 332px;
-      height: 476px;
+      width: 335px;
+      //height: 476px;
       background: #e0f8e3;
       border-radius: 20px;
       vertical-align: top;
@@ -509,10 +536,10 @@
       position: relative;
       display: inline-block;
       margin-top: 30px;
-      padding: 42px 30px 0;
+      padding: 42px 30px 15px;
       margin-top: 30px;
-      width: 332px;
-      height: 476px;
+      width: 335px;
+      //height: 476px;
       background: #e0f8e3;
       border-radius: 20px;
       vertical-align: top;
@@ -926,10 +953,10 @@
     width: 100%;
     &_card {
       position: relative;
-      padding: 42px 30px 0;
+      padding: 42px 30px 15px;
       margin-top: 44px;
-      width: 332px;
-      height: 476px;
+      width: 335px;
+      //height: 476px;
       background: #e0f8e3;
       border-radius: 20px;
       &:after {
@@ -1339,10 +1366,10 @@
     width: 100%;
     &_card {
       position: relative;
-      padding: 42px 30px 0;
+      padding: 42px 30px 15px;
       margin-top: 44px;
-      width: 332px;
-      height: 476px;
+      width: 335px;
+      //height: 476px;
       background: #e0f8e3;
       border-radius: 20px;
       &:after {

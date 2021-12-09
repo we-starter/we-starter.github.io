@@ -11,6 +11,7 @@ export function getMultiCallProvider(provider, chainId) {
   // HECO multical
   setMulticallAddress(128, MULTICALL_ADDRESS)
   setMulticallAddress(137, "0x11ce4B23bD875D7F5C6a31084f55fDe1e9A87507")
+  setMulticallAddress(ChainId.LOCALHOST, MULTICALL_ADDRESS)
   const multiCallProvider = new Provider(provider, chainId);
   return multiCallProvider
 }

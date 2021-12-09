@@ -276,7 +276,7 @@ const DepositPopup = (props) => {
           />
         </p>
       )}
-      {farmPools && farmPools.name !== 'WAR POOL (DAO)' && (
+      {farmPools && farmPools.byLink && (
         <a
           className={cs(
             `farm_index_card_getMLP ${
@@ -286,13 +286,10 @@ const DepositPopup = (props) => {
           href={farmPools && farmPools.byLink}
           target='_black'
         >
-          <FormattedMessage id='farm13' /> {farmPools && farmPools.name}
-          {farmPools && farmPools.lpToken && (
-            <span>({farmPools && farmPools.lpToken})</span>
-          )}
+          {farmPools && farmPools.buyName}
         </a>
       )}
-      {farmPools && farmPools.name === 'WAR POOL (DAO)' && (
+      {farmPools && farmPools.byModal && farmPools.networkId === chainId && (
         <a
           className={cs(
             `farm_index_card_getMLP ${
@@ -306,7 +303,7 @@ const DepositPopup = (props) => {
             })
           }}
         >
-          <FormattedMessage id='farm17' /> {farmPools.rewards}
+          {farmPools.buyName}
         </a>
       )}
       <div className='form-app__submit form-app__submit--row'>

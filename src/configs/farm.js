@@ -5,7 +5,18 @@ import { getRemainTime } from '../utils/time'
 import AllowListStakePool from '../web3/abi/AllowListStakePool.json'
 import {ChainId} from "../web3/address";
 import {numToWei} from "../utils/format";
-
+import WARBadge from '../assets/icon/war-badge.png'
+const testNetworkId = window.ethereum && (~~window.ethereum.chainId === ChainId.LOCALHOST) ? ChainId.LOCALHOST : null
+if (testNetworkId) {
+  console.log('testNetworkId=' + testNetworkId)
+}
+const awardNftWARBadge = {
+  icon: WARBadge,
+  name: 'WAR Badge',
+  claimUrl: 'https://www.metadusk.com',
+  claimUrlName: 'metadusk',
+  desc: 'If you keep staking WAR for a specific time period, you will get WAR Badge. This Badge enable u to get IWO whitelist seat. If you withdraw your WAR, you might miss it.'
+}
 export default [
   // 核心池
 
@@ -27,8 +38,8 @@ export default [
     ],
     settleToken: '0xa71EdC38d189767582C38A3145b5873052c3e47a', //usdt
     MLP: '0x910651F81a605a6Ef35d05527d24A72fecef8bF0', // WAR
-    byLink:
-      'https://ht.mdex.com/#/swap?outputCurrency=0x910651f81a605a6ef35d05527d24a72fecef8bf0',
+    byModal: true,
+    buyName: 'Buy WAR',
     abi: StakingPool3,
     start_at: '',
     time: '',
@@ -40,12 +51,49 @@ export default [
     decimal: 18,
     is_coming: false,
     mdexReward: false,
-    networkId: 128,
+    networkId: testNetworkId || 128,
     mdexDaily: 0,
     mdexPid: '',
     svipFlag: true,
     minAmountMortgage: '50000',
     poolType: 1, // 1单池，2LP，2sort
+    awardNft: awardNftWARBadge,
+  },
+
+  {
+    name: 'WAR POOL (DAO)',
+    icon: 'PAUL-HT_small@2x.png',
+    rewards1: 'WAR',
+    rewards2: null,
+    address: '0x6B4a329855762554A25FdFdAa1DAAA88B630dEF8',
+    rewards1Address: '0x910651F81a605a6Ef35d05527d24A72fecef8bF0',
+    rewards2Address: null,
+    // apr
+    valueAprToken: '0x910651F81a605a6Ef35d05527d24A72fecef8bF0', // WAR
+    valueAprPath: [],
+    rewardsAprPath: [],
+    settleToken: '0xe9e7cea3dedca5984780bafc599bd69add087d56', //BUSD
+    MLP: '0x910651F81a605a6Ef35d05527d24A72fecef8bF0', // WAR
+    byLink: 'https://exchange.chainswap.com/#/bridge',
+    buyName: 'Migrate WAR to BSC',
+    abi: StakingPool3,
+    start_at: '1639065600',
+    time: '1639065600',
+    openDate: '1639065600',
+    dueDate: null,//'1647532800',
+    earnName: 'APY',
+    status: 0,
+    rewards: 'WAR',
+    decimal: 18,
+    is_coming: false,
+    mdexReward: false,
+    networkId: ChainId.BSC,
+    mdexDaily: 0,
+    mdexPid: '',
+    svipFlag: true,
+    minAmountMortgage: '50000',
+    poolType: 1, // 1单池，2LP，2sort
+    awardNft: awardNftWARBadge,
   },
   {
     name: 'WAR-USDT LPT',
@@ -66,6 +114,7 @@ export default [
     mlpDecimal: 18,
     byLink:
       'http://ht.mdex.com/#/add/0xa71EdC38d189767582C38A3145b5873052c3e47a/0x910651F81a605a6Ef35d05527d24A72fecef8bF0',
+    buyName: 'Get WAR-USDT LPT',
     abi: StakingPool,
     start_at: '1626350400',
     time: '',
@@ -77,7 +126,7 @@ export default [
     decimal: 18,
     is_coming: true,
     mdexReward: true,
-    networkId: 128,
+    networkId: testNetworkId || 128,
     lpToken: 'MDEX LP Token',
     mdexDaily: 762.97,
     mdexPid: '0x5a',
@@ -101,8 +150,8 @@ export default [
     ],
     settleToken: '0xa71EdC38d189767582C38A3145b5873052c3e47a', //usdt
     MLP: '0x910651F81a605a6Ef35d05527d24A72fecef8bF0', // WAR
-    byLink:
-      'https://ht.mdex.com/#/swap?outputCurrency=0x910651f81a605a6ef35d05527d24a72fecef8bf0',
+    byModal: true,
+    buyName: 'Buy WAR',
     abi: StakingPool3,
     start_at: '',
     time: '',
@@ -114,13 +163,16 @@ export default [
     decimal: 18,
     is_coming: false,
     mdexReward: false,
-    networkId: 128,
+    networkId: testNetworkId || 128,
     mdexDaily: 0,
     mdexPid: '',
     poolType: 1, // 1单池，2LP，2sort
   },
 
   // 临时池
+
+
+
 
   {
     name: 'PLUT',
@@ -140,6 +192,7 @@ export default [
     MLP: '0x888888d87d85Bc11549b17907E8f589214EB90c2', //stakingToken
     byLink:
       'https://pancakeswap.finance/swap#/swap?outputCurrency=0x888888d87d85Bc11549b17907E8f589214EB90c2',
+    buyName: 'Get PLUT',
     abi: AllowListStakePool,
     start_at: '1630324800',
     time: '',
@@ -176,6 +229,7 @@ export default [
     settleToken: '0xa71EdC38d189767582C38A3145b5873052c3e47a', //usdt
 
     MLP: '0xe5944b50df84001a36c7de0d5cb4da7ab21407d2', //stakingToken
+    buyName: 'Get xNFT',
     byLink:
       'https://ht.mdex.com/#/swap?outputCurrency=0xe5944b50df84001a36c7de0d5cb4da7ab21407d2',
     abi: AllowListStakePool,
@@ -217,6 +271,7 @@ export default [
     MLP: '0xe4e55c9203ac398a0f0b98bd096b70d9778eca6a',
     byLink:
       'https://ht.mdex.com/#/add/HT/0x910651F81a605a6Ef35d05527d24A72fecef8bF0',
+    buyName: 'Get WAR-HT LPT',
     abi: StakingPool,
     start_at: '',
     time: '',
@@ -252,6 +307,7 @@ export default [
     MLP: '0xD9baBF51f327829264f554B4Fa4e12Cec5BD0F50',
     byLink:
       'https://ht.mdex.com/#/add/0xa71EdC38d189767582C38A3145b5873052c3e47a/0xFC01b8f883a89278235ba674bbE2bb48db96d9Cf',
+    buyName: 'Get PAUL-USDT LPT',
     abi: StakingPool,
     start_at: '',
     time: '',
