@@ -253,7 +253,7 @@ const FarmCard = (props) => {
           href={farmPools.byLink}
           target='_black'
         >
-          <FormattedMessage id='farm13'/> {farmPools && farmPools.buyName}
+          {farmPools && farmPools.buyName}
         </a>
       )}
       {farmPools && farmPools.byModal && farmPools.networkId === chainId && (
@@ -270,7 +270,7 @@ const FarmCard = (props) => {
             })
           }}
         >
-          <FormattedMessage id='farm17'/> {farmPools.rewards}
+          {farmPools.buyName}
         </a>
       )}
       {farmPools && farmPools.networkId == chainId && (
