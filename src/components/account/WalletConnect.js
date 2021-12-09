@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, {useContext, useEffect, useMemo, useState} from 'react'
 import { mainContext } from '../../reducer'
 import { useActiveWeb3React } from '../../web3'
 import { FormattedMessage } from 'react-intl'
@@ -36,7 +36,7 @@ if (!window.ethereum && window.onto){
 
 export const WalletConnect = ({ onClose, onCancel }) => {
   const { dispatch, state } = useContext(mainContext)
-  const { chainId } = useActiveWeb3React()
+  const { chainId, account } = useActiveWeb3React()
   const [connectedName, setConnectedName] = useState()
   const connectWallet = useConnectWallet()
 
