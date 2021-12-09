@@ -220,7 +220,7 @@ const PoolsIndex = (props) => {
         left_time = (time - now) * 1000
       }
     }
-    
+
     return (
       <div
         className={cs(
@@ -652,7 +652,11 @@ const PoolsIndex = (props) => {
               )}
               onClick={(e) => {
                 changeNetwork(pool.networkId).then(() => {
-                  message.success('Switch success')
+                  if (window.onto){
+                    message.warning('Please switch manually in the ONTO wallet')
+                  } else {
+                    message.success('Switch success')
+                  }
                 })
               }}
             >

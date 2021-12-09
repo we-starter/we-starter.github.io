@@ -335,7 +335,11 @@ const FarmCard = (props) => {
             style={{ width: '100%' }}
             onClick={() => {
               changeNetwork(farmPools.networkId).then(() => {
-                message.success('Switch success')
+                if (window.onto){
+                  message.warning('Please switch manually in the ONTO wallet')
+                } else {
+                  message.success('Switch success')
+                }
               })
             }}
             disabled={!window.ethereum}
