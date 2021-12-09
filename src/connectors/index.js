@@ -199,6 +199,11 @@ export const useConnectWallet = () => {
       // 切换网络后，尝试连接
       !active && connectWallet(injected)
     })
+    if (window.onto){
+      window.onto.on('accountsChanged', () => {
+        !active && connectWallet(injected)
+      })
+    }
   }, [])
   return connectWallet
 }
