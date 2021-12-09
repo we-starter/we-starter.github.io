@@ -74,14 +74,13 @@ export default [
     rewardsAprPath: [],
     settleToken: '0xe9e7cea3dedca5984780bafc599bd69add087d56', //BUSD
     MLP: '0x910651F81a605a6Ef35d05527d24A72fecef8bF0', // WAR
-    byLink:
-      'https://pancakeswap.finance/swap?inputCurrency=0xe9e7cea3dedca5984780bafc599bd69add087d56&outputCurrency=0x910651f81a605a6ef35d05527d24a72fecef8bf0',
+    // byLink: 'https://pancakeswap.finance/swap?inputCurrency=0xe9e7cea3dedca5984780bafc599bd69add087d56&outputCurrency=0x910651f81a605a6ef35d05527d24a72fecef8bf0',
     buyName: 'WAR',
     abi: StakingPool3,
     start_at: '1638892800',
     time: '1638892800',
     openDate: '1638892800',
-    dueDate: '1647532800',
+    dueDate: null,//'1647532800',
     earnName: 'APY',
     status: 0,
     rewards: 'WAR',
