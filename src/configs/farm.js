@@ -13,7 +13,7 @@ if (testNetworkId) {
 const awardNftWARBadge = {
   icon: WARBadge,
   name: 'WAR Badge',
-  claimUrl: 'https://www.metadusk.com',
+  claimUrl: 'https://metadusk.io/',
   claimUrlName: 'metadusk',
   desc: 'If you keep staking WAR for a specific time period, you will get WAR Badge. This Badge enable u to get IWO whitelist seat. If you withdraw your WAR, you might miss it.'
 }
