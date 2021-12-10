@@ -24,13 +24,13 @@ export const MDEX_ADDRESS = '0x25D2e80cB6B86881Fd7e07dd263Fb79f4AbE033c'
 export function CALC_ADDRESS(chainId){
   switch (chainId) {
     case ChainId.BSC:
-      return '0x47B714C7F255e8953615fDC6dD118c48b2be2b65'
+      return '0xE3FC5294Bc1360274eEd5eFD5eEb084b36BbaF0e'
     case ChainId.HECO:
-      return '0xd1ecd16C4e0D2bd7AD87C3620027F463E31F71dA'
+      return '0x2e482c5beaeD5aE5C30AeD9eF0ffc8541E82f322'
     case ChainId.LOCALHOST:
-      return '0xd1ecd16C4e0D2bd7AD87C3620027F463E31F71dA'
+      return '0x2e482c5beaeD5aE5C30AeD9eF0ffc8541E82f322'
     default:
-      return '0xd1ecd16C4e0D2bd7AD87C3620027F463E31F71dA'
+      return '0x2e482c5beaeD5aE5C30AeD9eF0ffc8541E82f322'
   }
 }
 
