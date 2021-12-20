@@ -486,7 +486,6 @@ const debounceFn = debounce((pools, account, callback) => {
         .all(promise_list)
         .then((data) => {
           data = processResult(data)
-          console.log(data)
           let [
             price,
             totalPurchasedCurrency,
