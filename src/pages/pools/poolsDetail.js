@@ -1040,6 +1040,25 @@ const PoolsDetail = (props) => {
                   </a>
                 </>
               )}
+              {pool && pool.underlying.symbol === 'BTCMT' && (
+                <>
+                  <a className='no_link'>
+                    Minto is a decentralized mining platform that creates a token secured by actively operating Bitcoin mining equipment. This equipment is tokenized by the BTCMT token, each of which equals a unit of actively operating Bitcoin mining power. Holding the token is effectively equivalent to owning Bitcoin mining power. The BTCMT token is based on the HECO blockchain and the Minto project is part of the Huobi chain ecosystem.
+                  </a>
+                  <a className='no_link'>
+                    Minto’s token is backed by a state-of-the-art data center located in Karelia, which
+                    houses the Project’s mining operation. The 86,000-square-meter data center is just 2 years old and has been fitted with the most powerful mining equipment available. Power for the mining equipment is supplied via a private hydroelectric plant with a current cap of 64.5 MW, which ensures that the facility always has more than enough available power.
+                  </a>
+                  <a className='no_link'>
+                    Currently, Minto is housed in one data center but others are being built to
+                    accommodate the future growth of the Project. Total mining power allocated to Minto, for now, is 50,000 TH/s and we have the ability to increase it in the future since it’s only part of the whole data center’s mining power.
+                  </a>
+                  <a className='no_link'>
+                    For the first batch, Minto team issued 5 000 000 tokens. Each token is backed by
+                    0,01 th/s of mining power. Thus, the total mining power currently allocated to Minto Project is 50 PHS.
+                  </a>
+                </>
+              )}
             </div>
           )}
         </div>
