@@ -72,7 +72,6 @@ export const InitPage = () => {
     notAccessModal
   } = state
 
-  console.log(state, 'state')
   useEffect(() => {
     Promise.all([
       toolApi.getTotalNumAddresses(1),

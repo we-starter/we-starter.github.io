@@ -23,6 +23,7 @@ import TOKEN from '../assets/icon/TOKEN.png'
 import BLACK from '../assets/icon/BLACK.png'
 import PHM from '../assets/icon/PHM.png'
 import HCT from '../assets/icon/HCT.png'
+import BTCMT from '../assets/icon/BTCMT.svg'
 import WARBadge from '../assets/icon/war-badge.png'
 import WNFTAbi from '../web3/abi/WARBadge.json'
 import {ChainId} from "../web3/address";
@@ -51,7 +52,7 @@ export default [
   //     address: '0x09D3D9012F9Ccc60F3E947E635A531350c3116ea',
   //     abi: WNFTAbi,
   //     name: 'WAR Badge',
-  //     claimUrl: 'https://www.metadusk.com',
+  //     claimUrl: 'https://metadusk.io',
   //     claimUrlName: 'metadusk'
   //   },
   //   isPrivate: true,
@@ -97,6 +98,179 @@ export default [
   //   poolType: 0, // 值为 1 代表 定向
   //   networkId: testNetworkId || 128,
   // },
+
+  {
+    name: 'BTCMT',
+    address: '0xbfb57B6f21271b7a9a7eD9412ad775790aE4C986',
+    icon: BTCMT,
+    abi: Offering,
+    start_at: '1640001600',
+    is_top: true,
+    is_coming: false,
+    currency: {
+      address: '0xa71edc38d189767582c38a3145b5873052c3e47a', // 如果是0x0则是ht
+      symbol: 'USDT',
+      decimal: 18,
+    },
+    type: 1, // 非1 则为公有池，为1 则为私有池
+    isPrivate: true,
+    underlying: {
+      address: '0x410a56541bD912F9B60943fcB344f1E3D6F09567',
+      decimal: 18,
+      symbol: 'BTCMT',
+      name: 'BTCMT ',
+      total_supply: '5,714.28',
+      holders: '-',
+      transfers: '-',
+    },
+    amount: '5714.28',
+    pool_info: {
+      token_distribution: 'Dec 20th at 2:00PM UTC',
+      min_allocation: '0',
+      max_allocation: '250 USDT',
+      min_swap_level: '10,000 USDT',
+    },
+    website: 'https://minto.finance/',
+    white_paper: 'https://minto.finance/resources/MintoWhitepaper.pdf',
+    twitter: 'https://www.twitter.com/btcmtofficial',
+    Telegram_Channel: ' https://www.t.me/btcmtofficial',
+    Github: '-',
+    yuque: '-',
+    progress: 0,
+    status: 0, // 状态
+    ratio: '1BTCMT=1.75USDT', // 比例
+    time: '1640008800', // 结算时间点
+    purchasedCurrencyOf: 0, // 已购买币种
+    totalPurchasedAmount: '10000000000000000000000', // 总购买数量
+    totalPurchasedUnderlying: '0', // 总购买金额
+    totalPurchasedCurrency: '0', // 总购买币种
+    is_flash: false,
+    link_url: '',
+    project_introduction: '',
+    duration: '308', // 完成时间
+    totalApplicants: '33000', // 申请总人数
+    winningRate: '0.68', // 申请中签率
+    committed: '', // 超募比例
+    total: '', // 参与资金规模
+    poolType: 0, // 值为 1 代表 定向
+    networkId: testNetworkId||128,
+  },
+  {
+    name: 'BTCMT',
+    address: '0x74809DD327125BDa97DF977B573Bfe9c000Cb7b9',
+    icon: BTCMT,
+    abi: Offering,
+    start_at: '1640001600',
+    is_top: true,
+    is_coming: false,
+    currency: {
+      address: '0xa71edc38d189767582c38a3145b5873052c3e47a', // 如果是0x0则是ht
+      symbol: 'USDT',
+      decimal: 18,
+    },
+    type: 1, // 非1 则为公有池，为1 则为私有池
+    isPrivate: true,
+    underlying: {
+      address: '0x410a56541bD912F9B60943fcB344f1E3D6F09567',
+      decimal: 18,
+      symbol: 'BTCMT',
+      name: 'BTCMT ',
+      total_supply: '17,142.85',
+      holders: '-',
+      transfers: '-',
+    },
+    amount: '17142.85',
+    pool_info: {
+      token_distribution: 'Dec 20th at 2:00PM UTC',
+      min_allocation: '0',
+      max_allocation: '100 USDT',
+      min_swap_level: '30,000 USDT',
+    },
+    website: 'https://minto.finance/',
+    white_paper: 'https://minto.finance/resources/MintoWhitepaper.pdf',
+    twitter: 'https://www.twitter.com/btcmtofficial',
+    Telegram_Channel: ' https://www.t.me/btcmtofficial',
+    Github: '-',
+    yuque: '-',
+    progress: 0,
+    status: 0, // 状态
+    ratio: '1BTCMT=1.75USDT', // 比例
+    time: '1640008800', // 结算时间点
+    purchasedCurrencyOf: 0, // 已购买币种
+    totalPurchasedAmount: '30000000000000000000000', // 总购买数量
+    totalPurchasedUnderlying: '0', // 总购买金额
+    totalPurchasedCurrency: '0', // 总购买币种
+    is_flash: false,
+    link_url: '',
+    project_introduction: '',
+    duration: '308', // 完成时间
+    totalApplicants: '33000', // 申请总人数
+    winningRate: '0.68', // 申请中签率
+    committed: '', // 超募比例
+    total: '', // 参与资金规模
+    poolType: 0, // 值为 1 代表 定向
+    networkId: testNetworkId||128,
+  },
+  {
+    name: 'BTCMT',
+    address: '0x530F1E879A092cEC126204bC85CC0b08bDAB72D2',
+    icon: BTCMT,
+    abi: Starter,
+    start_at: '1640001600',
+    is_top: true,
+    is_coming: false,
+    currency: {
+      address: '0xa71edc38d189767582c38a3145b5873052c3e47a', // 如果是0x0则是ht
+      symbol: 'USDT',
+      decimal: 18,
+    },
+    type: 0, // 非1 则为公有池，为1 则为私有池
+    isPrivate: false,
+    underlying: {
+      address: '0x410a56541bD912F9B60943fcB344f1E3D6F09567',
+      decimal: 18,
+      symbol: 'BTCMT',
+      name: 'BTCMT ',
+      total_supply: '5,714.28',
+      holders: '-',
+      transfers: '-',
+    },
+    amount: '5714.28',
+    pool_info: {
+      token_distribution: 'Dec 20th at 2:00PM UTC',
+      min_allocation: '0',
+      max_allocation: '10,000 USDT',
+      min_swap_level: '10,000 USDT',
+    },
+    website: 'https://minto.finance/',
+    white_paper: 'https://minto.finance/resources/MintoWhitepaper.pdf',
+    twitter: 'https://www.twitter.com/btcmtofficial',
+    Telegram_Channel: ' https://www.t.me/btcmtofficial',
+    Github: '-',
+    yuque: '-',
+    progress: 0,
+    status: 0, // 状态
+    ratio: '1BTCMT=1.75USDT', // 比例
+    time: '1640008800', // 结算时间点
+    purchasedCurrencyOf: 0, // 已购买币种
+    totalPurchasedAmount: '10000000000000000000000', // 总购买数量
+    totalPurchasedUnderlying: '0', // 总购买金额
+    totalPurchasedCurrency: '0', // 总购买币种
+    is_flash: false,
+    link_url: '',
+    project_introduction: '',
+    duration: '308', // 完成时间
+    totalApplicants: '33000', // 申请总人数
+    winningRate: '0.68', // 申请中签率
+    committed: '', // 超募比例
+    total: '', // 参与资金规模
+    poolType: 0, // 值为 1 代表 定向
+    networkId: testNetworkId||128,
+  },
+
+
+
+
   {
     name: 'MATTER',
     address: '0x4F7d4aCF1A2d92C5b64a7365e3cD2185c91F9e40',

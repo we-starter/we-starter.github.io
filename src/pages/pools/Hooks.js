@@ -659,7 +659,6 @@ const debounceFn = debounce((pools, account, callback) => {
         .all(promise_list)
         .then((data) => {
           data = processResult(data)
-
           let [
             start_at,
             time,
@@ -686,9 +685,10 @@ const debounceFn = debounce((pools, account, callback) => {
             userFull = data[10] >= data[11]
           } else{
             ratio = data[7]
-            quotaOf = data[8]
-            currency_allowance = data[9]||0
-            underlying_decimals = data[10]||18
+            totalQuota = data[8]
+            quotaOf = data[9]
+            currency_allowance = data[10]||0
+            underlying_decimals = data[11]||18
           }
           let status = pool.status || 0 // 即将上线
           if (start_at < now && status < 1) {
