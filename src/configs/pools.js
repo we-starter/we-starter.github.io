@@ -106,7 +106,7 @@ export default [
     abi: Offering,
     start_at: '1640001600',
     is_top: true,
-    is_coming: false,
+    is_coming: true,
     currency: {
       address: '0xa71edc38d189767582c38a3145b5873052c3e47a', // 如果是0x0则是ht
       symbol: 'USDT',
@@ -145,7 +145,7 @@ export default [
     totalPurchasedUnderlying: '0', // 总购买金额
     totalPurchasedCurrency: '0', // 总购买币种
     is_flash: false,
-    link_url: '',
+    link_url: 'https://minto.finance/',
     project_introduction: '',
     duration: '308', // 完成时间
     totalApplicants: '33000', // 申请总人数
@@ -162,7 +162,7 @@ export default [
     abi: Offering,
     start_at: '1640001600',
     is_top: true,
-    is_coming: false,
+    is_coming: true,
     currency: {
       address: '0xa71edc38d189767582c38a3145b5873052c3e47a', // 如果是0x0则是ht
       symbol: 'USDT',
@@ -201,7 +201,7 @@ export default [
     totalPurchasedUnderlying: '0', // 总购买金额
     totalPurchasedCurrency: '0', // 总购买币种
     is_flash: false,
-    link_url: '',
+    link_url: 'https://minto.finance/',
     project_introduction: '',
     duration: '308', // 完成时间
     totalApplicants: '33000', // 申请总人数
@@ -218,7 +218,7 @@ export default [
     abi: Starter,
     start_at: '1640001600',
     is_top: true,
-    is_coming: false,
+    is_coming: true,
     currency: {
       address: '0xa71edc38d189767582c38a3145b5873052c3e47a', // 如果是0x0则是ht
       symbol: 'USDT',
@@ -257,7 +257,7 @@ export default [
     totalPurchasedUnderlying: '0', // 总购买金额
     totalPurchasedCurrency: '0', // 总购买币种
     is_flash: false,
-    link_url: '',
+    link_url: 'https://minto.finance/',
     project_introduction: '',
     duration: '308', // 完成时间
     totalApplicants: '33000', // 申请总人数

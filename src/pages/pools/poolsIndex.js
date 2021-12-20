@@ -145,7 +145,9 @@ const PoolsIndex = (props) => {
     if (!flag) {
       return
     }
-    window.open(url)
+    if (url){
+      window.open(url)
+    }
   }
 
   useEffect(() => {

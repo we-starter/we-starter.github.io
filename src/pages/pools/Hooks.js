@@ -486,6 +486,7 @@ const debounceFn = debounce((pools, account, callback) => {
         .all(promise_list)
         .then((data) => {
           data = processResult(data)
+          console.log(data)
           let [
             price,
             totalPurchasedCurrency,
@@ -517,7 +518,7 @@ const debounceFn = debounce((pools, account, callback) => {
           const [completed_, amount, volume, rate] = settleable
           let status = pool.status || 0 // 即将上线
           const timeClose = time
-          if (timeSettle) {
+          if (timeSettle > 0) {
             // time 如果没有的话，使用timeSettle填充
             time = timeSettle
           }
