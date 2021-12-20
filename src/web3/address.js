@@ -192,10 +192,10 @@ export function GAS_FEE(chainId) {
 
   return {
     [ChainId.HECO]: {
-      // maxFeePerGas:  Web3.utils.toWei('8', 'gwei'),
+      maxFeePerGas:  Web3.utils.toWei('8', 'gwei'),
       // gasPrice: Web3.utils.toWei('5', 'gwei'),
-      // maxPriorityFeePerGas: Web3.utils.toWei('5', 'gwei'),
-      // type: '0x2',
+      maxPriorityFeePerGas: Web3.utils.toWei('5', 'gwei'),
+      type: '0x2',
     }
   }[chainId]
 }
