@@ -1,7 +1,7 @@
 import Offering from '../web3/abi/Offering.json'
 import Starter from '../web3/abi/Starter.json'
 import StarterV2 from '../web3/abi/StarterV2.json'
-import StarterV3 from '../web3/abi/StarterV3.json'
+import StarterV3 from '../web3/abi/StarterV3.json'//nft
 import OfferingV2 from '../web3/abi/OfferingV2.json'
 import OfferingV3 from '../web3/abi/OfferingV3.json'
 import FIX from '../assets/icon/FIX.png'
@@ -103,7 +103,7 @@ export default [
     name: 'BTCMT',
     address: '0xbfb57B6f21271b7a9a7eD9412ad775790aE4C986',
     icon: BTCMT,
-    abi: Offering,
+    abi: OfferingV2,
     start_at: '1640001600',
     is_top: true,
     is_coming: false,
@@ -159,7 +159,7 @@ export default [
     name: 'BTCMT',
     address: '0x74809DD327125BDa97DF977B573Bfe9c000Cb7b9',
     icon: BTCMT,
-    abi: Offering,
+    abi: OfferingV2,
     start_at: '1640001600',
     is_top: true,
     is_coming: false,
@@ -215,7 +215,7 @@ export default [
     name: 'BTCMT',
     address: '0x530F1E879A092cEC126204bC85CC0b08bDAB72D2',
     icon: BTCMT,
-    abi: Starter,
+    abi: StarterV3,
     start_at: '1640001600',
     is_top: true,
     is_coming: false,
