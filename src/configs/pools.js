@@ -106,7 +106,7 @@ export default [
     abi: Offering,
     start_at: '1640001600',
     is_top: true,
-    is_coming: true,
+    is_coming: false,
     currency: {
       address: '0xa71edc38d189767582c38a3145b5873052c3e47a', // 如果是0x0则是ht
       symbol: 'USDT',
@@ -162,7 +162,7 @@ export default [
     abi: Offering,
     start_at: '1640001600',
     is_top: true,
-    is_coming: true,
+    is_coming: false,
     currency: {
       address: '0xa71edc38d189767582c38a3145b5873052c3e47a', // 如果是0x0则是ht
       symbol: 'USDT',
@@ -218,7 +218,7 @@ export default [
     abi: Starter,
     start_at: '1640001600',
     is_top: true,
-    is_coming: true,
+    is_coming: false,
     currency: {
       address: '0xa71edc38d189767582c38a3145b5873052c3e47a', // 如果是0x0则是ht
       symbol: 'USDT',
