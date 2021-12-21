@@ -102,7 +102,7 @@ export default [
 
   {
     name: 'MATE',
-    address: '',
+    address: '0xb0028933C377268377a7483e2ae218507783A1cd',
     icon: MATE,
     abi: OfferingV2,
     start_at: '1640088000',
@@ -143,6 +143,118 @@ export default [
     time: '1640264400', // 结算时间点
     purchasedCurrencyOf: 0, // 已购买币种
     totalPurchasedAmount: '5000000000000000000000', // 总购买数量
+    totalPurchasedUnderlying: '0', // 总购买金额
+    totalPurchasedCurrency: '0', // 总购买币种
+    is_flash: false,
+    link_url: 'https://www.vmates.io/',
+    project_introduction: '',
+    duration: '-', // 完成时间
+    totalApplicants: '-', // 申请总人数
+    winningRate: '-', // 申请中签率
+    committed: '', // 超募比例
+    total: '', // 参与资金规模
+    poolType: 0, // 值为 1 代表 定向
+    networkId: testNetworkId || ChainId.BSC,
+  },
+  {
+    name: 'MATE',
+    address: '0x22222',
+    icon: MATE,
+    abi: OfferingV2,
+    start_at: '1640088000',
+    is_top: true,
+    is_coming: true,
+    currency: {
+      address: '0x55d398326f99059ff775485246999027b3197955', // 如果是0x0则是ht
+      symbol: 'USDT',
+      decimal: 18,
+    },
+    type: 1, // 非1 则为公有池，为1 则为私有池
+    isPrivate: true,
+    underlying: {
+      address: '0x696c2d3c711d5727c3686672f411583faedaa29f',
+      decimal: 18,
+      symbol: 'MATE',
+      name: 'MATE ',
+      total_supply: '20,000,000.00',
+      holders: '-',
+      transfers: '-',
+    },
+    amount: '7500',//underlying的量
+    pool_info: {
+      token_distribution: 'Dec 21th at 2:00PM UTC',
+      min_allocation: '0',
+      max_allocation: '100 USDT',
+      min_swap_level: '15000 USDT',
+    },
+    website: 'https://www.vmates.io/',
+    white_paper: 'https://docs.vmates.io/',
+    twitter: 'http://Twitter.com/Vmates_official',
+    Telegram_Channel: 'https://t.me/vmatescommunity',
+    Github: 'https://github.com/VmatesOfficial',
+    yuque: '-',
+    progress: 0,
+    status: 0, // 状态
+    ratio: '1BTCMT=2USDT', // 比例
+    time: '1640264400', // 结算时间点
+    purchasedCurrencyOf: 0, // 已购买币种
+    totalPurchasedAmount: '15000000000000000000000', // 总购买数量
+    totalPurchasedUnderlying: '0', // 总购买金额
+    totalPurchasedCurrency: '0', // 总购买币种
+    is_flash: false,
+    link_url: 'https://www.vmates.io/',
+    project_introduction: '',
+    duration: '-', // 完成时间
+    totalApplicants: '-', // 申请总人数
+    winningRate: '-', // 申请中签率
+    committed: '', // 超募比例
+    total: '', // 参与资金规模
+    poolType: 0, // 值为 1 代表 定向
+    networkId: testNetworkId || ChainId.BSC,
+  },
+  {
+    name: 'MATE',
+    address: '0x33333',
+    icon: MATE,
+    abi: StarterV3,
+    start_at: '1640088000',
+    is_top: true,
+    is_coming: true,
+    currency: {
+      address: '0x55d398326f99059ff775485246999027b3197955', // 如果是0x0则是ht
+      symbol: 'USDT',
+      decimal: 18,
+    },
+    type: 0, // 非1 则为公有池，为1 则为私有池
+    isPrivate: false,
+    underlying: {
+      address: '0x696c2d3c711d5727c3686672f411583faedaa29f',
+      decimal: 18,
+      symbol: 'MATE',
+      name: 'MATE ',
+      total_supply: '20,000,000.00',
+      holders: '-',
+      transfers: '-',
+    },
+    amount: '5000',//underlying的量
+    pool_info: {
+      token_distribution: 'Dec 21th at 2:00PM UTC',
+      min_allocation: '0',
+      max_allocation: '10,000 USDT',
+      min_swap_level: '10,000 USDT',
+    },
+    website: 'https://www.vmates.io/',
+    white_paper: 'https://docs.vmates.io/',
+    twitter: 'http://Twitter.com/Vmates_official',
+    Telegram_Channel: 'https://t.me/vmatescommunity',
+    Github: 'https://github.com/VmatesOfficial',
+    yuque: '-',
+    progress: 0,
+    status: 0, // 状态
+    ratio: '1BTCMT=2USDT', // 比例
+    time: '1640264400', // 结算时间点
+    purchasedCurrencyOf: 0, // 已购买币种
+    totalPurchasedAmount: '10000000000000000000000', // 总购买数量
     totalPurchasedUnderlying: '0', // 总购买金额
     totalPurchasedCurrency: '0', // 总购买币种
     is_flash: false,

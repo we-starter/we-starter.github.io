@@ -691,6 +691,8 @@ const PoolsIndex = (props) => {
                     message.success('Switch success')
                   }
                 })
+                e.stopPropagation()
+                return false
               }}
             >
               {pool.networkId == ChainId.HECO && (
