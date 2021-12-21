@@ -328,7 +328,7 @@ export default [
     committed: '', // 超募比例
     total: '', // 参与资金规模
     poolType: 0, // 值为 1 代表 定向
-    networkId: testNetworkId||128,
+    networkId: 128,
   },
   {
     name: 'BTCMT',
@@ -384,7 +384,7 @@ export default [
     committed: '', // 超募比例
     total: '', // 参与资金规模
     poolType: 0, // 值为 1 代表 定向
-    networkId: testNetworkId||128,
+    networkId: 128,
   },
   {
     name: 'BTCMT',
@@ -440,7 +440,7 @@ export default [
     committed: '', // 超募比例
     total: '', // 参与资金规模
     poolType: 0, // 值为 1 代表 定向
-    networkId: testNetworkId||128,
+    networkId: 128,
   },
   {
     name: 'MATTER',
