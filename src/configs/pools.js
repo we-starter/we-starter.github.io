@@ -24,6 +24,7 @@ import BLACK from '../assets/icon/BLACK.png'
 import PHM from '../assets/icon/PHM.png'
 import HCT from '../assets/icon/HCT.png'
 import BTCMT from '../assets/icon/BTCMT.svg'
+import MATE from '../assets/icon/MATE.png'
 import WARBadge from '../assets/icon/war-badge.png'
 import WNFTAbi from '../web3/abi/WARBadge.json'
 import {ChainId} from "../web3/address";
@@ -98,6 +99,63 @@ export default [
   //   poolType: 0, // 值为 1 代表 定向
   //   networkId: testNetworkId || 128,
   // },
+
+  {
+    name: 'MATE',
+    address: '',
+    icon: MATE,
+    abi: OfferingV2,
+    start_at: '1640088000',
+    is_top: true,
+    is_coming: true,
+    currency: {
+      address: '0x55d398326f99059ff775485246999027b3197955', // 如果是0x0则是ht
+      symbol: 'USDT',
+      decimal: 18,
+    },
+    type: 1, // 非1 则为公有池，为1 则为私有池
+    isPrivate: true,
+    underlying: {
+      address: '0x696c2d3c711d5727c3686672f411583faedaa29f',
+      decimal: 18,
+      symbol: 'MATE',
+      name: 'MATE ',
+      total_supply: '20,000,000.00',
+      holders: '-',
+      transfers: '-',
+    },
+    amount: '2500',
+    pool_info: {
+      token_distribution: 'Dec 21th at 2:00PM UTC',
+      min_allocation: '0',
+      max_allocation: '125 USDT',
+      min_swap_level: '5000 USDT',
+    },
+    website: 'https://www.vmates.io/',
+    white_paper: 'https://docs.vmates.io/',
+    twitter: 'http://Twitter.com/Vmates_official',
+    Telegram_Channel: 'https://t.me/vmatescommunity',
+    Github: 'https://github.com/VmatesOfficial',
+    yuque: '-',
+    progress: 0,
+    status: 0, // 状态
+    ratio: '1BTCMT=2USDT', // 比例
+    time: '1640264400', // 结算时间点
+    purchasedCurrencyOf: 0, // 已购买币种
+    totalPurchasedAmount: '5000000000000000000000', // 总购买数量
+    totalPurchasedUnderlying: '0', // 总购买金额
+    totalPurchasedCurrency: '0', // 总购买币种
+    is_flash: false,
+    link_url: 'https://www.vmates.io/',
+    project_introduction: '',
+    duration: '308', // 完成时间
+    totalApplicants: '33000', // 申请总人数
+    winningRate: '0.68', // 申请中签率
+    committed: '', // 超募比例
+    total: '', // 参与资金规模
+    poolType: 0, // 值为 1 代表 定向
+    networkId: testNetworkId || ChainId.BSC,
+  },
 
   {
     name: 'BTCMT',
@@ -267,10 +325,6 @@ export default [
     poolType: 0, // 值为 1 代表 定向
     networkId: testNetworkId||128,
   },
-
-
-
-
   {
     name: 'MATTER',
     address: '0x4F7d4aCF1A2d92C5b64a7365e3cD2185c91F9e40',
