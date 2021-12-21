@@ -499,7 +499,6 @@ const debounceFn = debounce((pools, account, callback) => {
             claimOf
           ] = data
           let time = 0,timeSettle = 0,currency_allowance = 0
-          console.log(data)
           if (pool.currency.is_ht) {
             time = data[8]
             timeSettle = data[9]
@@ -520,7 +519,7 @@ const debounceFn = debounce((pools, account, callback) => {
           const [completed_, amount, volume, rate, unlockVolume, unlockRate] = settleable
           let status = pool.status || 0 // 即将上线
           const timeClose = time
-          if (timeSettle > 0) {
+          if (timeSettle < 0) {
             // time 如果没有的话，使用timeSettle填充
             time = timeSettle
           }
@@ -578,7 +577,7 @@ const debounceFn = debounce((pools, account, callback) => {
             address: underlyingAddress === '0x0000000000000000000000000000000000000000' ? '' : underlyingAddress,
           })
           const rate_ = rate < 10 ? new BigNumber(new_rate).multipliedBy(new BigNumber(10).pow(18)).toString() : rate
-          console.log('xxxx',fromWei(amount, 18).toNumber(), (fromWei(price, 18)).toNumber(), fromWei(claimOf, 18).toNumber())
+          console.log('xxxx',fromWei(amount, 18).toNumber() , (1/fromWei(price, 18).toNumber()) , fromWei(claimOf, 18).toNumber())
           return Object.assign({}, pool, {
             ratio: `1${pool.underlying.symbol}=${formatAmount(price, 18, 5)}${
               pool.currency.symbol
