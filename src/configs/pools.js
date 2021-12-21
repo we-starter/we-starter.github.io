@@ -5,6 +5,7 @@ import StarterV3 from '../web3/abi/StarterV3.json'
 import OfferingV2 from '../web3/abi/OfferingV2.json'
 import OfferingV3 from '../web3/abi/OfferingV3.json'//nft
 import OfferingLock from '../web3/abi/OfferingLock.json'
+import StarterLock from '../web3/abi/StarterLock.json'
 import FIX from '../assets/icon/FIX.png'
 import LEV from '../assets/icon/LEV.png'
 import O3 from '../assets/icon/O3.png'
@@ -105,19 +106,19 @@ export default [
     name: 'MATE',
     address: '0xb0028933C377268377a7483e2ae218507783A1cd',
     icon: MATE,
-    abi: OfferingV2,
-    start_at: '1640088000',
+    abi: OfferingLock,
+    start_at: '1640061790',
     is_top: true,
-    is_coming: true,
+    is_coming: false,
     currency: {
-      address: '0x55d398326f99059ff775485246999027b3197955', // 如果是0x0则是ht
-      symbol: 'USDT',
+      address: '0x4993fD2E9D175488712CdbE64Be71d4dcD184123', // 如果是0x0则是ht
+      symbol: 'WT1',
       decimal: 18,
     },
     type: 1, // 非1 则为公有池，为1 则为私有池
     isPrivate: true,
     underlying: {
-      address: '0x696c2d3c711d5727c3686672f411583faedaa29f',
+      address: '0x26A0CB10B78bF2D7E13236Fa3AcddB80B2a5F8c4',
       decimal: 18,
       symbol: 'MATE',
       name: 'MATE ',
@@ -140,7 +141,7 @@ export default [
     yuque: '-',
     progress: 0,
     status: 0, // 状态
-    ratio: '1BTCMT=2USDT', // 比例
+    ratio: '1MATE=2USDT', // 比例
     time: '1640264400', // 结算时间点
     purchasedCurrencyOf: 0, // 已购买币种
     totalPurchasedAmount: '5000000000000000000000', // 总购买数量
@@ -156,12 +157,13 @@ export default [
     total: '', // 参与资金规模
     poolType: 0, // 值为 1 代表 定向
     networkId: testNetworkId || ChainId.BSC,
+    lock: true,//锁仓
   },
   {
     name: 'MATE',
     address: '0x22222',
     icon: MATE,
-    abi: OfferingV2,
+    abi: OfferingLock,
     start_at: '1640088000',
     is_top: true,
     is_coming: true,
@@ -215,9 +217,9 @@ export default [
   },
   {
     name: 'MATE',
-    address: '0x33333',
+    address: '0x1c11769EFCEb39Bc10C428e3cBaB5AAF9D6D0eF5',
     icon: MATE,
-    abi: StarterV3,
+    abi: StarterLock,
     start_at: '1640088000',
     is_top: true,
     is_coming: true,

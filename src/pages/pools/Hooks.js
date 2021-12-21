@@ -649,16 +649,19 @@ const debounceFn = debounce((pools, account, callback) => {
       }
 
 
-      currency_token &&
-        promise_list.push(currency_token.allowance(account, pool.address))
+      // currency_token &&
+      //   promise_list.push(currency_token.allowance(account, pool.address))
 
-      underlying_token &&
-        promise_list.push(underlying_token.decimals())
-
+      // underlying_token &&
+      //   promise_list.push(underlying_token.decimals())
+      // if (pool.address === '0x1c11769EFCEb39Bc10C428e3cBaB5AAF9D6D0eF5'){
+      //   debugger
+      // }
       return multicallProvider
         .all(promise_list)
         .then((data) => {
           data = processResult(data)
+
           let [
             start_at,
             time,
@@ -677,6 +680,7 @@ const debounceFn = debounce((pools, account, callback) => {
             tokenValue = 0,
             nftRatio = null,
             userFull = false;
+
           if (pool.nft){
             quotaOf = data[7]
             tokenValue=data[8]
@@ -689,6 +693,9 @@ const debounceFn = debounce((pools, account, callback) => {
             quotaOf = data[9]
             currency_allowance = data[10]||0
             underlying_decimals = data[11]||18
+          }
+          if (pool.lock){
+            quotaOf = numToWei(quotaOf, pool.currency.decimal)
           }
           let status = pool.status || 0 // 即将上线
           if (start_at < now && status < 1) {
