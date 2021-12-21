@@ -1,9 +1,9 @@
 import Offering from '../web3/abi/Offering.json'
 import Starter from '../web3/abi/Starter.json'
 import StarterV2 from '../web3/abi/StarterV2.json'
-import StarterV3 from '../web3/abi/StarterV3.json'//nft
+import StarterV3 from '../web3/abi/StarterV3.json'
 import OfferingV2 from '../web3/abi/OfferingV2.json'
-import OfferingV3 from '../web3/abi/OfferingV3.json'
+import OfferingV3 from '../web3/abi/OfferingV3.json'//nft
 import FIX from '../assets/icon/FIX.png'
 import LEV from '../assets/icon/LEV.png'
 import O3 from '../assets/icon/O3.png'
@@ -148,9 +148,9 @@ export default [
     is_flash: false,
     link_url: 'https://www.vmates.io/',
     project_introduction: '',
-    duration: '308', // 完成时间
-    totalApplicants: '33000', // 申请总人数
-    winningRate: '0.68', // 申请中签率
+    duration: '-', // 完成时间
+    totalApplicants: '-', // 申请总人数
+    winningRate: '-', // 申请中签率
     committed: '', // 超募比例
     total: '', // 参与资金规模
     poolType: 0, // 值为 1 代表 定向
