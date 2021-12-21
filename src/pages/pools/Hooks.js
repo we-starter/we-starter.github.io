@@ -499,16 +499,16 @@ const debounceFn = debounce((pools, account, callback) => {
             claimOf
           ] = data
           let time = 0,timeSettle = 0,currency_allowance = 0
-
+          console.log(data)
           if (pool.currency.is_ht) {
-            time = data[7]
-            timeSettle = data[8]
-            currency_allowance = data[9]
-          } else {
-            balanceOf = data[7]
             time = data[8]
             timeSettle = data[9]
             currency_allowance = data[10]
+          } else {
+            balanceOf = data[8]
+            time = data[9]
+            timeSettle = data[10]
+            currency_allowance = data[11]
           }
 
           const [
