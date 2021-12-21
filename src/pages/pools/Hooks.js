@@ -577,7 +577,7 @@ const debounceFn = debounce((pools, account, callback) => {
             address: underlyingAddress === '0x0000000000000000000000000000000000000000' ? '' : underlyingAddress,
           })
           const rate_ = rate < 10 ? new BigNumber(new_rate).multipliedBy(new BigNumber(10).pow(18)).toString() : rate
-          console.log('xxxx',fromWei(amount, 18).toNumber() , (1/fromWei(price, 18).toNumber()) , fromWei(claimOf, 18).toNumber())
+          console.log('xxxx',purchasedCurrencyOf,fromWei(purchasedCurrencyOf, 18).toNumber() , (1/fromWei(price, 18).toNumber()) , fromWei(claimOf, 18).toNumber())
           return Object.assign({}, pool, {
             ratio: `1${pool.underlying.symbol}=${formatAmount(price, 18, 5)}${
               pool.currency.symbol
@@ -609,7 +609,7 @@ const debounceFn = debounce((pools, account, callback) => {
               volume,
               rate: rate_,
               // rate: rate < 10 ? Web3.utils.toWei(`${new_rate}`, 'ether') : rate,
-              unlockVolume: fromWei(amount, 18).toNumber() * (1/fromWei(price, 18).toNumber()) - fromWei(claimOf, 18).toNumber(),
+              unlockVolume: fromWei(purchasedCurrencyOf, 18).toNumber() * (1/fromWei(price, 18).toNumber()) * unlockRate/100 - fromWei(claimOf, 18).toNumber(),
               unlockRate
             },
           })
