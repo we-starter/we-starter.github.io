@@ -496,14 +496,14 @@ const PoolsDetail = (props) => {
                         )}
                     </td>
                     <td>
-                      {pool && formatAmount(pool.settleable.volume)}&nbsp;
+                      {pool && pool.lock ? pool.settleable.unlockVolume : formatAmount(pool.settleable.volume)}&nbsp;
                       {pool && pool.underlying.symbol}
                     </td>
                     <td>
                       {/*  && !pool.settleable.completed_ */}
                       {pool &&
                         pool.type === 0 &&
-                        pool.settleable.volume > 0 &&
+                      (pool.settleable.volume > 0 || pool.lock && pool.settleable.unlockVolume > 0) &&
                         pool.status >= 2 &&
                         now > pool.timeClose &&
                         now >= pool.time && (

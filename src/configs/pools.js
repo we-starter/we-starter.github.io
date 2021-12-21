@@ -214,6 +214,7 @@ export default [
     total: '', // 参与资金规模
     poolType: 0, // 值为 1 代表 定向
     networkId: testNetworkId || ChainId.BSC,
+    lock: true,//锁仓
   },
   {
     name: 'MATE',
@@ -270,6 +271,7 @@ export default [
     total: '', // 参与资金规模
     poolType: 0, // 值为 1 代表 定向
     networkId: testNetworkId || ChainId.BSC,
+    lock: true,//锁仓
   },
 
   {

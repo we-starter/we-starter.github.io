@@ -574,6 +574,7 @@ const debounceFn = debounce((pools, account, callback) => {
           Object.assign(pool.underlying, {
             address: underlyingAddress === '0x0000000000000000000000000000000000000000' ? '' : underlyingAddress,
           })
+          const rate_ = rate < 10 ? new BigNumber(new_rate).multipliedBy(new BigNumber(10).pow(18)).toString() : rate
           return Object.assign({}, pool, {
             ratio: `1${pool.underlying.symbol}=${formatAmount(price, 18, 5)}${
               pool.currency.symbol
@@ -603,9 +604,9 @@ const debounceFn = debounce((pools, account, callback) => {
               completed_,
               amount,
               volume,
-              rate: rate < 10 ? new BigNumber(new_rate).multipliedBy(new BigNumber(10).pow(18)).toString() : rate,
+              rate: rate_,
               // rate: rate < 10 ? Web3.utils.toWei(`${new_rate}`, 'ether') : rate,
-              unlockVolume,
+              unlockVolume: new BigNumber(fromWei(amount, 18)).multipliedBy(unlockRate/100).div(fromWei(price, 18)).toString(),
               unlockRate
             },
           })
@@ -692,9 +693,6 @@ const debounceFn = debounce((pools, account, callback) => {
             quotaOf = data[9]
             currency_allowance = data[10]||0
             underlying_decimals = data[11]||18
-          }
-          if (pool.lock){
-            quotaOf = numToWei(quotaOf, pool.currency.decimal)
           }
           let status = pool.status || 0 // 即将上线
           if (start_at < now && status < 1) {
