@@ -198,7 +198,7 @@ export default [
     yuque: '-',
     progress: 0,
     status: 0, // 状态
-    ratio: '1BTCMT=2USDT', // 比例
+    ratio: '1MATE=2USDT', // 比例
     time: '1640264400', // 结算时间点
     purchasedCurrencyOf: 0, // 已购买币种
     totalPurchasedAmount: '15000000000000000000000', // 总购买数量
@@ -254,7 +254,7 @@ export default [
     yuque: '-',
     progress: 0,
     status: 0, // 状态
-    ratio: '1BTCMT=2USDT', // 比例
+    ratio: '1MATE=2USDT', // 比例
     time: '1640264400', // 结算时间点
     purchasedCurrencyOf: 0, // 已购买币种
     totalPurchasedAmount: '10000000000000000000000', // 总购买数量
