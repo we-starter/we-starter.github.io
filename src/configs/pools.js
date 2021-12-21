@@ -147,9 +147,9 @@ export default [
     is_flash: false,
     link_url: 'https://minto.finance/',
     project_introduction: '',
-    duration: '308', // 完成时间
-    totalApplicants: '33000', // 申请总人数
-    winningRate: '0.68', // 申请中签率
+    duration: '-', // 完成时间
+    totalApplicants: '-', // 申请总人数
+    winningRate: '-', // 申请中签率
     committed: '', // 超募比例
     total: '', // 参与资金规模
     poolType: 0, // 值为 1 代表 定向
