@@ -4,6 +4,7 @@ import StarterV2 from '../web3/abi/StarterV2.json'
 import StarterV3 from '../web3/abi/StarterV3.json'
 import OfferingV2 from '../web3/abi/OfferingV2.json'
 import OfferingV3 from '../web3/abi/OfferingV3.json'//nft
+import OfferingLock from '../web3/abi/OfferingLock.json'
 import FIX from '../assets/icon/FIX.png'
 import LEV from '../assets/icon/LEV.png'
 import O3 from '../assets/icon/O3.png'
