@@ -514,7 +514,7 @@ const debounceFn = debounce((pools, account, callback) => {
             total_volume,
             total_rate,
           ] = totalSettleable
-          const [completed_, amount, volume, rate] = settleable
+          const [completed_, amount, volume, rate, unlockVolume, unlockRate] = settleable
           let status = pool.status || 0 // 即将上线
           const timeClose = time
           if (timeSettle > 0) {
@@ -605,6 +605,8 @@ const debounceFn = debounce((pools, account, callback) => {
               volume,
               rate: rate < 10 ? new BigNumber(new_rate).multipliedBy(new BigNumber(10).pow(18)).toString() : rate,
               // rate: rate < 10 ? Web3.utils.toWei(`${new_rate}`, 'ether') : rate,
+              unlockVolume,
+              unlockRate
             },
           })
         })
@@ -649,14 +651,11 @@ const debounceFn = debounce((pools, account, callback) => {
       }
 
 
-      // currency_token &&
-      //   promise_list.push(currency_token.allowance(account, pool.address))
+      currency_token &&
+        promise_list.push(currency_token.allowance(account, pool.address))
 
-      // underlying_token &&
-      //   promise_list.push(underlying_token.decimals())
-      // if (pool.address === '0x1c11769EFCEb39Bc10C428e3cBaB5AAF9D6D0eF5'){
-      //   debugger
-      // }
+      underlying_token &&
+        promise_list.push(underlying_token.decimals())
       return multicallProvider
         .all(promise_list)
         .then((data) => {

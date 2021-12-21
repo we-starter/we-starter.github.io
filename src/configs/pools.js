@@ -112,7 +112,7 @@ export default [
     is_coming: false,
     currency: {
       address: '0x4993fD2E9D175488712CdbE64Be71d4dcD184123', // 如果是0x0则是ht
-      symbol: 'WT1',
+      symbol: 'USDT',
       decimal: 18,
     },
     type: 1, // 非1 则为公有池，为1 则为私有池
@@ -142,7 +142,7 @@ export default [
     progress: 0,
     status: 0, // 状态
     ratio: '1MATE=2USDT', // 比例
-    time: '1640264400', // 结算时间点
+    time: '1640070000', // 结算时间点
     purchasedCurrencyOf: 0, // 已购买币种
     totalPurchasedAmount: '5000000000000000000000', // 总购买数量
     totalPurchasedUnderlying: '0', // 总购买金额
@@ -220,18 +220,18 @@ export default [
     address: '0x1c11769EFCEb39Bc10C428e3cBaB5AAF9D6D0eF5',
     icon: MATE,
     abi: StarterLock,
-    start_at: '1640088000',
+    start_at: '1640061790',
     is_top: true,
-    is_coming: true,
+    is_coming: false,
     currency: {
-      address: '0x55d398326f99059ff775485246999027b3197955', // 如果是0x0则是ht
+      address: '0x4993fD2E9D175488712CdbE64Be71d4dcD184123', // 如果是0x0则是ht
       symbol: 'USDT',
       decimal: 18,
     },
     type: 0, // 非1 则为公有池，为1 则为私有池
     isPrivate: false,
     underlying: {
-      address: '0x696c2d3c711d5727c3686672f411583faedaa29f',
+      address: '0x26A0CB10B78bF2D7E13236Fa3AcddB80B2a5F8c4',
       decimal: 18,
       symbol: 'MATE',
       name: 'MATE ',
@@ -255,7 +255,7 @@ export default [
     progress: 0,
     status: 0, // 状态
     ratio: '1MATE=2USDT', // 比例
-    time: '1640264400', // 结算时间点
+    time: '1640070000', // 结算时间点
     purchasedCurrencyOf: 0, // 已购买币种
     totalPurchasedAmount: '10000000000000000000000', // 总购买数量
     totalPurchasedUnderlying: '0', // 总购买金额

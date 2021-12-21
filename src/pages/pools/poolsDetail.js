@@ -1060,6 +1060,13 @@ const PoolsDetail = (props) => {
                   </a>
                 </>
               )}
+              {pool && pool.underlying.symbol === 'MATE' && (
+              <>
+                <a className='no_link'>
+                  Vmates is a social game for developing NFT virtual pets based on blockchain technology. In Vmates, players can participate in the cultivation of NFT virtual pets, interactions, and a series of games with social attributes, and build their own homes and commercial facilities in the PLAZA social square.
+                </a>
+              </>
+            )}
             </div>
           )}
         </div>
