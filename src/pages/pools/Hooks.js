@@ -464,7 +464,8 @@ const debounceFn = debounce((pools, account, callback) => {
         pool_contract.totalSettleable(),
         pool_contract.settleable(account),
         pool_contract.totalSettledUnderlying(),
-        pool_contract.underlying()
+        pool_contract.underlying(),
+        pool_contract.settledUnderlyingOf(account), // claimOf
       ]
       let balanceOf = 0
       // 获取链上的原生资产,
@@ -475,6 +476,7 @@ const debounceFn = debounce((pools, account, callback) => {
         // 或者合约的余额
         promise_list.push(currency_contract.balanceOf(pool.address))
       }
+
 
       // 追加可能存在的
       pool_contract.time && promise_list.push(pool_contract.time())
@@ -494,6 +496,7 @@ const debounceFn = debounce((pools, account, callback) => {
             settleable,
             totalSettledUnderlying,
             underlyingAddress,
+            claimOf
           ] = data
           let time = 0,timeSettle = 0,currency_allowance = 0
 
@@ -575,6 +578,7 @@ const debounceFn = debounce((pools, account, callback) => {
             address: underlyingAddress === '0x0000000000000000000000000000000000000000' ? '' : underlyingAddress,
           })
           const rate_ = rate < 10 ? new BigNumber(new_rate).multipliedBy(new BigNumber(10).pow(18)).toString() : rate
+          console.log('xxxx',fromWei(amount, 18).toNumber(), (fromWei(price, 18)).toNumber(), fromWei(claimOf, 18).toNumber())
           return Object.assign({}, pool, {
             ratio: `1${pool.underlying.symbol}=${formatAmount(price, 18, 5)}${
               pool.currency.symbol
@@ -606,7 +610,7 @@ const debounceFn = debounce((pools, account, callback) => {
               volume,
               rate: rate_,
               // rate: rate < 10 ? Web3.utils.toWei(`${new_rate}`, 'ether') : rate,
-              unlockVolume: new BigNumber(fromWei(amount, 18)).multipliedBy(unlockRate/100).div(fromWei(price, 18)).toString(),
+              unlockVolume: fromWei(amount, 18).toNumber() * (1/fromWei(price, 18).toNumber()) - fromWei(claimOf, 18).toNumber(),
               unlockRate
             },
           })
@@ -650,8 +654,9 @@ const debounceFn = debounce((pools, account, callback) => {
           pool_contract.quotaOf(account), // 最大申购额度
         ]
       }
-
-
+      if (pool.lock){
+        promise_list.push(pool_contract.getUnlockRate())
+      }
       currency_token &&
         promise_list.push(currency_token.allowance(account, pool.address))
 
@@ -679,7 +684,8 @@ const debounceFn = debounce((pools, account, callback) => {
             nftBalanceOf = 0,
             tokenValue = 0,
             nftRatio = null,
-            userFull = false;
+            userFull = false,
+            unlockRate;
 
           if (pool.nft){
             quotaOf = data[7]
@@ -691,8 +697,14 @@ const debounceFn = debounce((pools, account, callback) => {
             ratio = data[7]
             totalQuota = data[8]
             quotaOf = data[9]
-            currency_allowance = data[10]||0
-            underlying_decimals = data[11]||18
+            if (pool.lock) {
+              unlockRate = data[10]
+              currency_allowance = data[11]||0
+              underlying_decimals = data[12]||18
+            } else {
+              currency_allowance = data[10]||0
+              underlying_decimals = data[11]||18
+            }
           }
           let status = pool.status || 0 // 即将上线
           if (start_at < now && status < 1) {
@@ -800,6 +812,7 @@ const debounceFn = debounce((pools, account, callback) => {
               volume: pool.nft ? tokenValue : offeredOf, // 预计中签量,nft是全量
               claimedOf, // 获取募资币种数量
               rate: Web3.utils.toWei('1', 'ether'), // 预计中签率
+              unlockVolume: fromWei(offeredOf, 18).toNumber() * (unlockRate/100) - fromWei(claimedOf).toNumber()
             },
           })
         })
