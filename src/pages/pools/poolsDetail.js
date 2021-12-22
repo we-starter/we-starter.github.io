@@ -478,8 +478,10 @@ const PoolsDetail = (props) => {
                       {pool &&
                         pool.settleable.amount > 0 &&
                         pool.status == 1 &&
-                        now >= pool.timeClose &&
-                        now < pool.time && (
+                        now >= pool.timeClose // &&
+                      // !((pool.lock && pool.settleable.unlockVolume > 0 || !pool.lock && pool.settleable.volume > 0) && now > pool.timeClose && now >= pool.time)
+                        &&
+                         (
                           <a
                             style={{ marginLeft: '4px' }}
                             className={cs(
@@ -503,7 +505,7 @@ const PoolsDetail = (props) => {
                       {/*  && !pool.settleable.completed_ */}
                       {pool &&
                         pool.type === 0 &&
-                        pool.status >= 2 &&
+                        pool.status >= 2 && (pool.lock && pool.settleable.unlockVolume > 0 || !pool.lock && pool.settleable.volume > 0) &&
                         now > pool.timeClose &&
                         now >= pool.time && (
                           <a
@@ -521,7 +523,7 @@ const PoolsDetail = (props) => {
                         )}
                       {pool &&
                         pool.type === 1 &&
-                      (pool.settleable.volume > 0 || pool.lock && pool.settleable.unlockVolume > 0) &&
+                      (pool.lock && pool.settleable.unlockVolume > 0 || !pool.lock && pool.settleable.volume > 0) &&
                         pool.settleable.claimedOf == 0 &&
                         pool.status >= 2 &&
                         now > pool.timeClose &&

@@ -519,7 +519,7 @@ const debounceFn = debounce((pools, account, callback) => {
           const [completed_, amount, volume, rate, unlockVolume, unlockRate] = settleable
           let status = pool.status || 0 // 即将上线
           const timeClose = time
-          if (timeSettle < 0) {
+          if (timeSettle > 0) {
             // time 如果没有的话，使用timeSettle填充
             time = timeSettle
           }
@@ -527,6 +527,7 @@ const debounceFn = debounce((pools, account, callback) => {
             // 募集中
             status = 1
           }
+
           if (time < now && status < 2) {
             // 结算中
             status = 2
@@ -577,7 +578,7 @@ const debounceFn = debounce((pools, account, callback) => {
             address: underlyingAddress === '0x0000000000000000000000000000000000000000' ? '' : underlyingAddress,
           })
           const rate_ = rate < 10 ? new BigNumber(new_rate).multipliedBy(new BigNumber(10).pow(18)).toString() : rate
-          console.log('xxxx',purchasedCurrencyOf,fromWei(purchasedCurrencyOf, 18).toNumber() , (1/fromWei(price, 18).toNumber()) , fromWei(claimOf, 18).toNumber())
+          console.log('xxxx',purchasedCurrencyOf,fromWei(purchasedCurrencyOf, 18).toNumber() , (1/fromWei(price, 18).toNumber()) , fromWei(claimOf, 18).toNumber(), unlockRate, unlockVolume)
           return Object.assign({}, pool, {
             ratio: `1${pool.underlying.symbol}=${formatAmount(price, 18, 5)}${
               pool.currency.symbol
@@ -609,7 +610,7 @@ const debounceFn = debounce((pools, account, callback) => {
               volume,
               rate: rate_,
               // rate: rate < 10 ? Web3.utils.toWei(`${new_rate}`, 'ether') : rate,
-              unlockVolume: fromWei(purchasedCurrencyOf, 18).toNumber() * (1/fromWei(price, 18).toNumber()) * unlockRate/100 - fromWei(claimOf, 18).toNumber(),
+              unlockVolume: formatAmount(unlockVolume, pool.underlying.decimal),
               unlockRate
             },
           })
