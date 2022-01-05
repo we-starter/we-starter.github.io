@@ -173,6 +173,7 @@ export const useConnectWallet = () => {
             reslove(e)
           })
           .catch((error) => {
+            console.log(error)
             switch (true) {
               case error instanceof UnsupportedChainIdError:
                 console.log('链错了')
@@ -198,6 +199,11 @@ export const useConnectWallet = () => {
       // 切换网络后，尝试连接
       !active && connectWallet(injected)
     })
+    if (window.onto){
+      window.onto.on('accountsChanged', () => {
+        !active && connectWallet(injected)
+      })
+    }
   }, [])
   return connectWallet
 }

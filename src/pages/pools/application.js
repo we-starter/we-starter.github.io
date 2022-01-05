@@ -115,11 +115,11 @@ const Application = (props) => {
         if (
           item.status === 2 &&
           now_time >= begin_time + span_time + claim_time
-        ) { 
+        ) {
           item.isClaim = true
         } else {
           item.isClaim = false
-        } 
+        }
       })
     }
   }, [props.location, cardDataList, voteCycle, voteEndClaimCycle])
@@ -158,7 +158,7 @@ const Application = (props) => {
           {!cardDataList.filter((item) => item.status === statusFlag).length ? (
             <div className='no-data'>
               <img
-                src={require('../../assets/icon/noData@2x.png')}
+                src={require('../../assets/icon/noData@2x.png').default}
                 className='no-proposal'
               />
               <p className='no-proposal-text'>

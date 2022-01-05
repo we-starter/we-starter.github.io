@@ -1,8 +1,11 @@
 import MDexFactory from './abi/MDexFactory.json'
 import MDexRouter from '../web3/abi/MDexRouter.json'
+
 import VoteMainAbi from '../web3/abi/VoteMain.json'
 import VoteNFTAbi from '../web3/abi/VoteNFT.json'
-import Web3 from "web3";
+
+import Web3, {utils} from "web3";
+
 export const ChainId = {
   BSC: 56,
   HECO: 128,
@@ -25,11 +28,13 @@ export const MDEX_ADDRESS = '0x25D2e80cB6B86881Fd7e07dd263Fb79f4AbE033c'
 export function CALC_ADDRESS(chainId){
   switch (chainId) {
     case ChainId.BSC:
-      return '0x47B714C7F255e8953615fDC6dD118c48b2be2b65'
+      return '0xE3FC5294Bc1360274eEd5eFD5eEb084b36BbaF0e'
     case ChainId.HECO:
-      return '0xd1ecd16C4e0D2bd7AD87C3620027F463E31F71dA'
+      return '0x2e482c5beaeD5aE5C30AeD9eF0ffc8541E82f322'
+    case ChainId.LOCALHOST:
+      return '0x2e482c5beaeD5aE5C30AeD9eF0ffc8541E82f322'
     default:
-      return ''
+      return '0x2e482c5beaeD5aE5C30AeD9eF0ffc8541E82f322'
   }
 }
 
@@ -169,7 +174,8 @@ export function RPC_URLS (chainId) {
     return {
       [ChainId.HECO]: 'https://http-mainnet-node.huobichain.com',
       [ChainId.BSC]: 'https://bsc-dataseed.binance.org/',
-      [ChainId.MATIC]: 'https://rpc-mainnet.maticvigil.com'
+      [ChainId.MATIC]: 'https://rpc-mainnet.maticvigil.com',
+      [ChainId.LOCALHOST]: 'http://localhost:8545'
     }[chainId]
 }
 
@@ -182,9 +188,15 @@ export const CHAIN_SWAP_NODE_REQ_URL = [
 ]
 
 export function GAS_FEE(chainId) {
+  if(window.onto) {
+    return  {
+      gas: utils.numberToHex(2000000)
+    }
+  }
+
   return {
     [ChainId.HECO]: {
-      maxFeePerGas: Web3.utils.toWei('8', 'gwei'),
+      maxFeePerGas:  Web3.utils.toWei('8', 'gwei'),
       // gasPrice: Web3.utils.toWei('5', 'gwei'),
       maxPriorityFeePerGas: Web3.utils.toWei('5', 'gwei'),
       type: '0x2',

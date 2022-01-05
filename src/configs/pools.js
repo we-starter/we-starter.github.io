@@ -3,6 +3,9 @@ import Starter from '../web3/abi/Starter.json'
 import StarterV2 from '../web3/abi/StarterV2.json'
 import StarterV3 from '../web3/abi/StarterV3.json'
 import OfferingV2 from '../web3/abi/OfferingV2.json'
+import OfferingV3 from '../web3/abi/OfferingV3.json'//nft
+import OfferingLock from '../web3/abi/OfferingLock.json'
+import StarterLock from '../web3/abi/StarterLock.json'
 import FIX from '../assets/icon/FIX.png'
 import LEV from '../assets/icon/LEV.png'
 import O3 from '../assets/icon/O3.png'
@@ -22,8 +25,423 @@ import TOKEN from '../assets/icon/TOKEN.png'
 import BLACK from '../assets/icon/BLACK.png'
 import PHM from '../assets/icon/PHM.png'
 import HCT from '../assets/icon/HCT.png'
-
+import BTCMT from '../assets/icon/BTCMT.svg'
+import MATE from '../assets/icon/MATE.png'
+import WARBadge from '../assets/icon/war-badge.png'
+import WNFTAbi from '../web3/abi/WARBadge.json'
+import {ChainId} from "../web3/address";
+const testNetworkId = window.ethereum && (~~window.ethereum.chainId === ChainId.LOCALHOST) ? ChainId.LOCALHOST : null
+if (testNetworkId) {
+  console.log('testNetworkId=' + testNetworkId)
+}
 export default [
+  // {
+  //   name: 'WAR Pool',
+  //   address: '0x35de01d1Cc6487596Dcc4DcC9cb7bDc383700CAE',
+  //   icon: WAR,
+  //   abi: OfferingV3,
+  //   start_at: '1637337600',
+  //   is_top: true,
+  //   is_coming: false, // is_coming 为 true 则不请求合约
+  //   currency: {
+  //     address: '0xa71edc38d189767582c38a3145b5873052c3e47a',
+  //     decimal: 18,
+  //     symbol: 'USDT',
+  //   },
+  //   type: 1,
+  //   defaultRatio: '100000000000000000000',
+  //   nft:{
+  //     icon: WARBadge,
+  //     address: '0x09D3D9012F9Ccc60F3E947E635A531350c3116ea',
+  //     abi: WNFTAbi,
+  //     name: 'WAR Badge',
+  //     claimUrl: 'https://metadusk.io',
+  //     claimUrlName: 'metadusk'
+  //   },
+  //   isPrivate: true,
+  //   underlying: {
+  //     address: '0x910651F81a605a6Ef35d05527d24A72fecef8bF0',
+  //     decimal: 18,
+  //     symbol: 'WAR',
+  //     name: 'WAR',
+  //     total_supply: '100,000,000',
+  //     holders: '-',
+  //     transfers: '-',
+  //   },
+  //   amount: '0.03',
+  //   pool_info: {
+  //     token_distribution: 'March 31th 2021, 10:00PM SGT',
+  //     min_allocation: '0',
+  //     max_allocation: '200 USDT',
+  //     min_swap_level: '60000 USDT',
+  //   },
+  //   website: '-',
+  //   white_paper: '-',
+  //   twitter: '-',
+  //   Telegram_Channel: '-',
+  //   Github: '-',
+  //   yuque: '-',
+  //   progress: 0,
+  //   status: 0,
+  //   ratio: '1WAR=0.25USDT', // 兑换比例需要确认
+  //   time: '1637596800',
+  //   purchasedCurrencyOf: 0,
+  //   totalPurchasedAmount: '60000000000000000',
+  //   totalPurchasedUnderlying: '0',
+  //   totalPurchasedCurrency: '0',
+  //   is_flash: false,
+  //   link_url: 'https://www.cook.finance', // 跳转外链接
+  //   project_introduction:
+  //     'Cook Protocol is a completely decentralized asset management platform in the DeFi space built on top of the Ethereum blockchain.',
+  //   duration: '324', // 完成时间
+  //   totalApplicants: '30000', // 申请总人数
+  //   winningRate: '1.67', // 申请中签率
+  //   committed: '', // 超募比例
+  //   total: '', // 参与资金规模
+  //   poolType: 0, // 值为 1 代表 定向
+  //   networkId: testNetworkId || 128,
+  // },
+
+  {
+    name: 'MATE',
+    address: '0x16CDF5029cE4eEe2a5bf03b72A52f9a145FA33a0',
+    icon: MATE,
+    abi: OfferingLock,
+    start_at: '1640088000',
+    is_top: true,
+    is_coming: false,
+    currency: {
+      address: '0x55d398326f99059ff775485246999027b3197955', // 如果是0x0则是ht
+      symbol: 'USDT',
+      decimal: 18,
+    },
+    type: 1, // 非1 则为公有池，为1 则为私有池
+    isPrivate: true,
+    underlying: {
+      address: '0x696c2d3c711d5727c3686672f411583faedaa29f',
+      decimal: 18,
+      symbol: 'MATE',
+      name: 'MATE ',
+      total_supply: '20,000,000.00',
+      holders: '-',
+      transfers: '-',
+    },
+    amount: '2500',
+    pool_info: {
+      token_distribution: 'Dec 21th at 2:00PM UTC',
+      min_allocation: '0',
+      max_allocation: '125 USDT',
+      min_swap_level: '5000 USDT',
+    },
+    website: 'https://www.vmates.io/',
+    white_paper: 'https://docs.vmates.io/',
+    twitter: 'http://Twitter.com/Vmates_official',
+    Telegram_Channel: 'https://t.me/vmatescommunity',
+    Github: 'https://github.com/VmatesOfficial',
+    yuque: '-',
+    progress: 0,
+    status: 0, // 状态
+    ratio: '1MATE=2USDT', // 比例
+    time: '1640178000', // 结算时间点
+    purchasedCurrencyOf: 0, // 已购买币种
+    totalPurchasedAmount: '5000000000000000000000', // 总购买数量
+    totalPurchasedUnderlying: '0', // 总购买金额
+    totalPurchasedCurrency: '0', // 总购买币种
+    is_flash: false,
+    link_url: 'https://www.vmates.io/',
+    project_introduction: '',
+    duration: '-', // 完成时间
+    totalApplicants: '-', // 申请总人数
+    winningRate: '-', // 申请中签率
+    committed: '', // 超募比例
+    total: '', // 参与资金规模
+    poolType: 0, // 值为 1 代表 定向
+    networkId: testNetworkId || ChainId.BSC,
+    lock: true,//锁仓
+  },
+  {
+    name: 'MATE',
+    address: '0x88294D995f22b455Ef4eA1fDE35eE96Abc97aC24',
+    icon: MATE,
+    abi: OfferingLock,
+    start_at: '1640088000',
+    is_top: true,
+    is_coming: false,
+    currency: {
+      address: '0x55d398326f99059ff775485246999027b3197955', // 如果是0x0则是ht
+      symbol: 'USDT',
+      decimal: 18,
+    },
+    type: 1, // 非1 则为公有池，为1 则为私有池
+    isPrivate: true,
+    underlying: {
+      address: '0x696c2d3c711d5727c3686672f411583faedaa29f',
+      decimal: 18,
+      symbol: 'MATE',
+      name: 'MATE ',
+      total_supply: '20,000,000.00',
+      holders: '-',
+      transfers: '-',
+    },
+    amount: '7500',//underlying的量
+    pool_info: {
+      token_distribution: 'Dec 21th at 2:00PM UTC',
+      min_allocation: '0',
+      max_allocation: '100 USDT',
+      min_swap_level: '15000 USDT',
+    },
+    website: 'https://www.vmates.io/',
+    white_paper: 'https://docs.vmates.io/',
+    twitter: 'http://Twitter.com/Vmates_official',
+    Telegram_Channel: 'https://t.me/vmatescommunity',
+    Github: 'https://github.com/VmatesOfficial',
+    yuque: '-',
+    progress: 0,
+    status: 0, // 状态
+    ratio: '1MATE=2USDT', // 比例
+    time: '1640178000', // 结算时间点
+    purchasedCurrencyOf: 0, // 已购买币种
+    totalPurchasedAmount: '15000000000000000000000', // 总购买数量
+    totalPurchasedUnderlying: '0', // 总购买金额
+    totalPurchasedCurrency: '0', // 总购买币种
+    is_flash: false,
+    link_url: 'https://www.vmates.io/',
+    project_introduction: '',
+    duration: '-', // 完成时间
+    totalApplicants: '-', // 申请总人数
+    winningRate: '-', // 申请中签率
+    committed: '', // 超募比例
+    total: '', // 参与资金规模
+    poolType: 0, // 值为 1 代表 定向
+    networkId: testNetworkId || ChainId.BSC,
+    lock: true,//锁仓
+  },
+  {
+    name: 'MATE',
+    address: '0x12045d7ff5807fAed96893a605D7CCcB2d927e4E',
+    icon: MATE,
+    abi: StarterLock,
+    start_at: '1640088000',
+    is_top: true,
+    is_coming: false,
+    currency: {
+      address: '0x55d398326f99059ff775485246999027b3197955', // 如果是0x0则是ht
+      symbol: 'USDT',
+      decimal: 18,
+    },
+    type: 0, // 非1 则为公有池，为1 则为私有池
+    isPrivate: false,
+    underlying: {
+      address: '0x696c2d3c711d5727c3686672f411583faedaa29f',
+      decimal: 18,
+      symbol: 'MATE',
+      name: 'MATE ',
+      total_supply: '20,000,000.00',
+      holders: '-',
+      transfers: '-',
+    },
+    amount: '5000',//underlying的量
+    pool_info: {
+      token_distribution: 'Dec 21th at 2:00PM UTC',
+      min_allocation: '0',
+      max_allocation: '10,000 USDT',
+      min_swap_level: '10,000 USDT',
+    },
+    website: 'https://www.vmates.io/',
+    white_paper: 'https://docs.vmates.io/',
+    twitter: 'http://Twitter.com/Vmates_official',
+    Telegram_Channel: 'https://t.me/vmatescommunity',
+    Github: 'https://github.com/VmatesOfficial',
+    yuque: '-',
+    progress: 0,
+    status: 0, // 状态
+    ratio: '1MATE=2USDT', // 比例
+    time: '1640178000', // 结算时间点
+    purchasedCurrencyOf: 0, // 已购买币种
+    totalPurchasedAmount: '10000000000000000000000', // 总购买数量
+    totalPurchasedUnderlying: '0', // 总购买金额
+    totalPurchasedCurrency: '0', // 总购买币种
+    is_flash: false,
+    link_url: 'https://www.vmates.io/',
+    project_introduction: '',
+    duration: '-', // 完成时间
+    totalApplicants: '-', // 申请总人数
+    winningRate: '-', // 申请中签率
+    committed: '', // 超募比例
+    total: '', // 参与资金规模
+    poolType: 0, // 值为 1 代表 定向
+    networkId: testNetworkId || ChainId.BSC,
+    lock: true,//锁仓
+  },
+
+  {
+    name: 'BTCMT',
+    address: '0xbfb57B6f21271b7a9a7eD9412ad775790aE4C986',
+    icon: BTCMT,
+    abi: OfferingV2,
+    start_at: '1640001600',
+    is_top: true,
+    is_coming: false,
+    currency: {
+      address: '0xa71edc38d189767582c38a3145b5873052c3e47a', // 如果是0x0则是ht
+      symbol: 'USDT',
+      decimal: 18,
+    },
+    type: 1, // 非1 则为公有池，为1 则为私有池
+    isPrivate: true,
+    underlying: {
+      address: '0x410a56541bD912F9B60943fcB344f1E3D6F09567',
+      decimal: 18,
+      symbol: 'BTCMT',
+      name: 'BTCMT ',
+      total_supply: '5,000,000.00',
+      holders: '-',
+      transfers: '-',
+    },
+    amount: '5714.28',
+    pool_info: {
+      token_distribution: 'Dec 20th at 2:00PM UTC',
+      min_allocation: '0',
+      max_allocation: '250 USDT',
+      min_swap_level: '10,000 USDT',
+    },
+    website: 'https://minto.finance/',
+    white_paper: 'https://minto.finance/resources/MintoWhitepaper.pdf',
+    twitter: 'https://www.twitter.com/btcmtofficial',
+    Telegram_Channel: ' https://www.t.me/btcmtofficial',
+    Github: '-',
+    yuque: '-',
+    progress: 0,
+    status: 0, // 状态
+    ratio: '1BTCMT=1.75USDT', // 比例
+    time: '1640008800', // 结算时间点
+    purchasedCurrencyOf: 0, // 已购买币种
+    totalPurchasedAmount: '10000000000000000000000', // 总购买数量
+    totalPurchasedUnderlying: '0', // 总购买金额
+    totalPurchasedCurrency: '0', // 总购买币种
+    is_flash: false,
+    link_url: 'https://minto.finance/',
+    project_introduction: '',
+    duration: '13800', // 完成时间
+    totalApplicants: '12', // 申请总人数
+    winningRate: '-', // 申请中签率
+    committed: '', // 超募比例
+    total: '', // 参与资金规模
+    poolType: 0, // 值为 1 代表 定向
+    networkId: 128,
+  },
+  {
+    name: 'BTCMT',
+    address: '0x74809DD327125BDa97DF977B573Bfe9c000Cb7b9',
+    icon: BTCMT,
+    abi: OfferingV2,
+    start_at: '1640001600',
+    is_top: true,
+    is_coming: false,
+    currency: {
+      address: '0xa71edc38d189767582c38a3145b5873052c3e47a', // 如果是0x0则是ht
+      symbol: 'USDT',
+      decimal: 18,
+    },
+    type: 1, // 非1 则为公有池，为1 则为私有池
+    isPrivate: true,
+    underlying: {
+      address: '0x410a56541bD912F9B60943fcB344f1E3D6F09567',
+      decimal: 18,
+      symbol: 'BTCMT',
+      name: 'BTCMT ',
+      total_supply: '5,000,000.00',
+      holders: '-',
+      transfers: '-',
+    },
+    amount: '17142.85',
+    pool_info: {
+      token_distribution: 'Dec 20th at 2:00PM UTC',
+      min_allocation: '0',
+      max_allocation: '100 USDT',
+      min_swap_level: '30,000 USDT',
+    },
+    website: 'https://minto.finance/',
+    white_paper: 'https://minto.finance/resources/MintoWhitepaper.pdf',
+    twitter: 'https://www.twitter.com/btcmtofficial',
+    Telegram_Channel: ' https://www.t.me/btcmtofficial',
+    Github: '-',
+    yuque: '-',
+    progress: 0,
+    status: 0, // 状态
+    ratio: '1BTCMT=1.75USDT', // 比例
+    time: '1640008800', // 结算时间点
+    purchasedCurrencyOf: 0, // 已购买币种
+    totalPurchasedAmount: '30000000000000000000000', // 总购买数量
+    totalPurchasedUnderlying: '0', // 总购买金额
+    totalPurchasedCurrency: '0', // 总购买币种
+    is_flash: false,
+    link_url: 'https://minto.finance/',
+    project_introduction: '',
+    duration: '-', // 完成时间
+    totalApplicants: '-', // 申请总人数
+    winningRate: '-', // 申请中签率
+    committed: '', // 超募比例
+    total: '', // 参与资金规模
+    poolType: 0, // 值为 1 代表 定向
+    networkId: 128,
+  },
+  {
+    name: 'BTCMT',
+    address: '0x530F1E879A092cEC126204bC85CC0b08bDAB72D2',
+    icon: BTCMT,
+    abi: StarterV3,
+    start_at: '1640001600',
+    is_top: true,
+    is_coming: false,
+    currency: {
+      address: '0xa71edc38d189767582c38a3145b5873052c3e47a', // 如果是0x0则是ht
+      symbol: 'USDT',
+      decimal: 18,
+    },
+    type: 0, // 非1 则为公有池，为1 则为私有池
+    isPrivate: false,
+    underlying: {
+      address: '0x410a56541bD912F9B60943fcB344f1E3D6F09567',
+      decimal: 18,
+      symbol: 'BTCMT',
+      name: 'BTCMT ',
+      total_supply: '5,000,000.00',
+      holders: '-',
+      transfers: '-',
+    },
+    amount: '5714.28',
+    pool_info: {
+      token_distribution: 'Dec 20th at 2:00PM UTC',
+      min_allocation: '0',
+      max_allocation: '10,000 USDT',
+      min_swap_level: '10,000 USDT',
+    },
+    website: 'https://minto.finance/',
+    white_paper: 'https://minto.finance/resources/MintoWhitepaper.pdf',
+    twitter: 'https://www.twitter.com/btcmtofficial',
+    Telegram_Channel: ' https://www.t.me/btcmtofficial',
+    Github: '-',
+    yuque: '-',
+    progress: 0,
+    status: 0, // 状态
+    ratio: '1BTCMT=1.75USDT', // 比例
+    time: '1640008800', // 结算时间点
+    purchasedCurrencyOf: 0, // 已购买币种
+    totalPurchasedAmount: '10000000000000000000000', // 总购买数量
+    totalPurchasedUnderlying: '0', // 总购买金额
+    totalPurchasedCurrency: '0', // 总购买币种
+    is_flash: false,
+    link_url: 'https://minto.finance/',
+    project_introduction: '',
+    duration: '-', // 完成时间
+    totalApplicants: '-', // 申请总人数
+    winningRate: '-', // 申请中签率
+    committed: '', // 超募比例
+    total: '', // 参与资金规模
+    poolType: 0, // 值为 1 代表 定向
+    networkId: 128,
+  },
   {
     name: 'MATTER',
     address: '0x4F7d4aCF1A2d92C5b64a7365e3cD2185c91F9e40',
@@ -723,7 +1141,7 @@ export default [
     type: 0,
     isPrivate: false,
     underlying: {
-      address: ' 0xd714d91A169127e11D8FAb3665d72E8b7ef9Dbe2', // 地址有问题
+      address: '0xd714d91A169127e11D8FAb3665d72E8b7ef9Dbe2', // 地址有问题
       decimal: 18,
       symbol: 'BLACK',
       name: 'BLACK',
@@ -780,7 +1198,7 @@ export default [
     type: 0,
     isPrivate: false,
     underlying: {
-      address: ' 0xbc194e6f748a222754C3E8b9946922c09E7d4e91', // 地址有问题
+      address: '0xbc194e6f748a222754C3E8b9946922c09E7d4e91', // 地址有问题
       decimal: 18,
       symbol: 'LEV',
       name: 'LEV',

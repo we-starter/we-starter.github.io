@@ -13,8 +13,8 @@ import {getIPFSJson} from "../../utils/ipfs";
 import ApplyInfoView from './ApplyInfo'
 import {NavLink} from "react-router-dom";
 import {FormattedMessage} from "react-intl";
-import {getOnlyMultiCallProvider, processResult} from "../../utils/multicall";
-import {Contract} from "ethers-multicall-x";
+import {multicallClient, ClientContract} from "../../utils/multicall";
+
 import {getContract, useActiveWeb3React} from "../../web3";
 import {fromWei, numToWei} from "../../utils/format";
 import ERC20 from "../../web3/abi/ERC20.json";
@@ -107,10 +107,8 @@ export default function Apply() {
 
 
   const getAmountLimit = () => {
-    const multicallProvider = getOnlyMultiCallProvider(ChainId.HECO)
-    const contract = new Contract(voteMain.address, voteMain.abi)
-    multicallProvider.all([contract.thresholdPropose()]).then(data => {
-      data = processResult(data)
+    const contract = new ClientContract(voteMain.abi, voteMain.address, ChainId.HECO)
+    multicallClient([contract.thresholdPropose()]).then(data => {
       setMinAmountLimit(fromWei(data).toFixed(2)*1)
     })
   }
@@ -118,15 +116,13 @@ export default function Apply() {
     getAmountLimit()
   }, [])
   const getApproved = (nftList) => {
-    const multicallProvider = getOnlyMultiCallProvider(ChainId.HECO)
-    const contractNFT = new Contract(voteNFT.address, voteNFT.abi)
-    const contractToken = new Contract(WAR_ADDRESS(chainId), ERC20.abi)
+    const contractNFT = new ClientContract(voteNFT.abi, voteNFT.address, ChainId.HECO)
+    const contractToken = new ClientContract(ERC20.abi, WAR_ADDRESS(chainId), ChainId.HECO)
     const calls = [contractToken.allowance(account, voteMain.address)]
     for (let i = 0; i < nftList.length; i++) {
       calls.push(contractNFT.getApproved(nftList[i].tokenId))
     }
-    return multicallProvider.all(calls).then(data => {
-      data = processResult(data)
+    return multicallClient(calls).then(data => {
       const isApprove_ = {}
       isApprove_.token = data.shift(0) > 0
       for (let i = 0; i < data.length; i++) {

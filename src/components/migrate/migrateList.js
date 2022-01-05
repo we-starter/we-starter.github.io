@@ -11,8 +11,7 @@ import { formatAmount, formatAddress } from '../../utils/format'
 import Right from '../../assets/icon/right@2x.png'
 import Web3 from "web3";
 import {BURN_SWAP_ADDRESS, BURN_SWAP_S_ADDRESS, ChainId, RPC_URLS} from "../../web3/address";
-import { getOnlyMultiCallProvider, processResult } from '../../utils/multicall'
-import {Contract} from "ethers-multicall-x";
+import { multicallClient, ClientContract} from '../../utils/multicall'
 import BSC from '../../assets/icon/BSC@2x.png'
 import HECO from '../../assets/icon/HECO@2x.png'
 import MATIC from '../../assets/icon/MATIC@2x.png'
@@ -60,10 +59,7 @@ const MigrateList = ({onExtractItem, getList}) => {
     //   pledgeAmount: "0.00001",
     //   toChainId: 56
     // }
-  const createContract = (fromChainId, toChainId) => {
-    const config = bridgeCardConfig(fromChainId, toChainId)
-    return new Contract(config.chainswapContract.address, config.chainswapContract.abi)
-  }
+
   /**
    * 获取跨链数据
    */
@@ -71,18 +67,18 @@ const MigrateList = ({onExtractItem, getList}) => {
     // 查询 源链 ChainSwap合约中 sentCount(toChainId, to) ，得到 maxNonce
     // 查询所有质押的数据，遍历 源链
     const getPledgeData = (fromChainId, toChainId, maxNonce) => {
-      const fromMulticallProvider = getOnlyMultiCallProvider(fromChainId)
-      const toMulticallProvider = getOnlyMultiCallProvider(toChainId)
-      const pledgeAmountConcat = createContract(fromChainId, toChainId)
       const extractAmountAll = []
       let pledgeAmountAll = []
+      const config = bridgeCardConfig(fromChainId, toChainId)
+      const pledgeAmountContract = new ClientContract(config.chainswapContract.abi, config.chainswapContract.address, fromChainId)
+      const extractAmountContract = new ClientContract(config.chainswapContract.abi, config.chainswapContract.address, toChainId)
       for (let nonce = 0; nonce < maxNonce; nonce++) {
-        pledgeAmountAll.push(pledgeAmountConcat.sent(toChainId, account, nonce))
-        extractAmountAll.push(pledgeAmountConcat.received(fromChainId, account, nonce))
+        pledgeAmountAll.push(pledgeAmountContract.sent(toChainId, account, nonce))
+        extractAmountAll.push(extractAmountContract.received(fromChainId, account, nonce))
       }
-      return Promise.all([fromMulticallProvider.all(pledgeAmountAll),toMulticallProvider.all(extractAmountAll)]).then(res => {
-        let pledgeAmountData = processResult(res[0])
-        let extractAmountData = processResult(res[1])
+      return Promise.all([multicallClient(pledgeAmountAll),multicallClient(extractAmountAll)]).then(res => {
+        let pledgeAmountData = res[0]
+        let extractAmountData = res[1]
         return pledgeAmountData.reduce((l, item, index)=>{
           l.push({
             nonce: index,

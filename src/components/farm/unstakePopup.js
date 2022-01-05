@@ -31,7 +31,7 @@ const UnstakePopup = (props) => {
   const [amount, setAmount] = useState('')
   const [fee, setFee] = useState(0)
 
-  const { balance = 0 } = useBalance(farmPools && farmPools.address)
+  // const { balance = 0 } = useBalance(farmPools && farmPools.address)
 
   useEffect(() => {
     const gas_limit = new BigNumber('1006182')
@@ -44,8 +44,8 @@ const UnstakePopup = (props) => {
 
   const onMax = () => {
     return
-    let max = balance
-    setAmount(formatAmount(max, farmPools && farmPools.decimal, 6))
+    // let max = balance
+    // setAmount(formatAmount(max, farmPools && farmPools.decimal, 6))
   }
 
   const onChange = (e) => {

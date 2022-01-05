@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect, useMemo } from 'react'
-import {getContract, getHttpWeb3, getLogs, useActiveWeb3React} from '../../web3'
+import {getHttpWeb3, getLogs, useActiveWeb3React} from '../../web3'
 import {
   ADDRESS_0,
   ChainId,
@@ -39,24 +39,15 @@ import { ReactComponent as X4 } from '../../assets/logo/4X.svg'
 import { ReactComponent as X5 } from '../../assets/logo/5x.svg'
 import { ReactComponent as X10 } from '../../assets/logo/10X.svg'
 import BigNumber from 'bignumber.js'
-import BN from 'bn.js'
 import { formatAmount, fromWei, numToWei } from '../../utils/format'
 import PoolsLBP from '../../configs/poolsLBP'
-import { useAllowance, useTokenAllowance } from '../Hooks'
-import {
-  getMultiCallProvider,
-  processResult,
-  getOnlyMultiCallProvider,
-} from '../../utils/multicall'
-import { Contract } from 'ethers-multicall-x'
+import {ClientContract, multicallClient,} from '../../utils/multicall'
+
 import warnAboutDeprecatedESMImport from 'react-router-dom/es/warnAboutDeprecatedESMImport'
 import { mainContext } from '../../reducer'
-import { JsonRpcProvider } from '@ethersproject/providers'
 import { debounce } from 'lodash'
-import { BLOCK_HEIGHT } from '../../const'
 import { CALC_ADDRESS } from '../../web3/address'
 import CalcAbi from '../../web3/abi/Calc.json'
-import { toWei } from 'web3-utils'
 
 const sameAddress = (address1, address2) => {
   if (address1.toLowerCase() === address2.toLowerCase()) {
@@ -446,17 +437,16 @@ const debounceFn = debounce((pools, account, callback) => {
     // 链不匹配 不调用合约
     // if (chainId !== pool.networkId) return pool
     // 如果还未开始，则不调用合约
+
     if (pool.is_coming) return pool
 
     const currency_token = pool.currency.is_ht
       ? null
-      : new Contract(pool.currency.address, ERC20)
-    const multicallProvider = getOnlyMultiCallProvider(pool.networkId)
+      : new ClientContract(pool.currency.symbol === 'LPT' ? LPT : ERC20, pool.currency.address, pool.networkId)
 
-    const pool_contract = new Contract(pool.address, pool.abi)
-    const underlying_token = pool.underlying.address ? new Contract(pool.underlying.address, ERC20) : null
+    const pool_contract = new ClientContract(pool.abi, pool.address, pool.networkId)
+    let underlying_token = pool.underlying.address ? new ClientContract(ERC20, pool.underlying.address, pool.networkId) : null
 
-    const currency_contract = new Contract(pool.currency.address, ERC20)
     if (pool.type === 0) {
       const promise_list = [
         pool_contract.price(), // 结算时间点
@@ -465,7 +455,8 @@ const debounceFn = debounce((pools, account, callback) => {
         pool_contract.totalSettleable(),
         pool_contract.settleable(account),
         pool_contract.totalSettledUnderlying(),
-        pool_contract.underlying()
+        pool_contract.underlying(),
+        pool_contract.settledUnderlyingOf(account), // claimOf
       ]
       let balanceOf = 0
       // 获取链上的原生资产,
@@ -474,19 +465,21 @@ const debounceFn = debounce((pools, account, callback) => {
         balanceOf = await web3.eth.getBalance(pool.address)
       } else {
         // 或者合约的余额
+        const currency_contract = new ClientContract(pool.currency.symbol === 'LPT' ? LPT : ERC20, pool.currency.address, pool.networkId)
         promise_list.push(currency_contract.balanceOf(pool.address))
       }
 
+
       // 追加可能存在的
       pool_contract.time && promise_list.push(pool_contract.time())
-      pool_contract.timeSettle && promise_list.push(pool_contract.timeSettle())
+      if (pool.abi.find(item => item.name === 'timeSettle' && item.type === 'function')) {
+        promise_list.push(pool_contract.timeSettle())
+      }
       currency_token &&
         promise_list.push(currency_token.allowance(account, pool.address))
 
-      return multicallProvider
-        .all(promise_list)
+      return multicallClient(promise_list)
         .then((data) => {
-          data = processResult(data)
           let [
             price,
             totalPurchasedCurrency,
@@ -495,18 +488,18 @@ const debounceFn = debounce((pools, account, callback) => {
             settleable,
             totalSettledUnderlying,
             underlyingAddress,
+            claimOf
           ] = data
           let time = 0,timeSettle = 0,currency_allowance = 0
-
           if (pool.currency.is_ht) {
-            time = data[7]
-            timeSettle = data[8]
-            currency_allowance = data[9]
-          } else {
-            balanceOf = data[7]
             time = data[8]
             timeSettle = data[9]
             currency_allowance = data[10]
+          } else {
+            balanceOf = data[8]
+            time = data[9]
+            timeSettle = data[10]
+            currency_allowance = data[11]
           }
 
           const [
@@ -515,10 +508,10 @@ const debounceFn = debounce((pools, account, callback) => {
             total_volume,
             total_rate,
           ] = totalSettleable
-          const [completed_, amount, volume, rate] = settleable
+          const [completed_, amount, volume, rate, unlockVolume, unlockRate] = settleable
           let status = pool.status || 0 // 即将上线
           const timeClose = time
-          if (timeSettle) {
+          if (timeSettle > 0) {
             // time 如果没有的话，使用timeSettle填充
             time = timeSettle
           }
@@ -526,6 +519,7 @@ const debounceFn = debounce((pools, account, callback) => {
             // 募集中
             status = 1
           }
+
           if (time < now && status < 2) {
             // 结算中
             status = 2
@@ -575,8 +569,7 @@ const debounceFn = debounce((pools, account, callback) => {
           Object.assign(pool.underlying, {
             address: underlyingAddress === '0x0000000000000000000000000000000000000000' ? '' : underlyingAddress,
           })
-
-
+          const rate_ = rate < 10 ? new BigNumber(new_rate).multipliedBy(new BigNumber(10).pow(18)).toString() : rate
           return Object.assign({}, pool, {
             ratio: `1${pool.underlying.symbol}=${formatAmount(price, 18, 5)}${
               pool.currency.symbol
@@ -606,8 +599,10 @@ const debounceFn = debounce((pools, account, callback) => {
               completed_,
               amount,
               volume,
-              rate: rate < 10 ? new BigNumber(new_rate).multipliedBy(new BigNumber(10).pow(18)).toString() : rate,
+              rate: rate_,
               // rate: rate < 10 ? Web3.utils.toWei(`${new_rate}`, 'ether') : rate,
+              unlockVolume: formatAmount(unlockVolume, pool.underlying.decimal),
+              unlockRate
             },
           })
         })
@@ -619,42 +614,87 @@ const debounceFn = debounce((pools, account, callback) => {
     else if (pool.type === 1) {      // TODO 默认HT，后面需要根据通货来查询进度
       let currency_decimals = pool.currency.decimal
       // 白名单是offering合约
-      const promise_list = [
-        pool_contract.timeOffer(), // 结算时间点
-        pool_contract.timeClaim(), // 结算时间点
-        pool_contract.ratio(), // 比例
-        pool_contract.totalQuota(), //总申购的量
-        pool_contract.totalOffered(), //总申购的量
-        pool_contract.totalClaimed(), //总领取的量
-        pool_contract.quotaOf(account), // 最大申购额度
-        pool_contract.offeredOf(account), // 已经认购的量
-        pool_contract.claimedOf(account), // 已经领取的量
-        pool_contract.token(),
-      ]
+      let promise_list = []
+      if (pool.nft) {
+        const nft_contract = new ClientContract(pool.nft.abi, pool.nft.address, pool.networkId)
+        promise_list = [
+          pool_contract.timeOffer(), // 结算时间点
+          pool_contract.timeClaim(), // 结算时间点
+          pool_contract.totalOffered(), //总申购的量
+          pool_contract.totalClaimed(), //总领取的量
+          pool_contract.offeredOf(account), // 已经认购的量
+          pool_contract.claimedOf(account), // 已经领取的量
+          pool_contract.token(),
+          pool_contract.currencyValue(),//最大申购额度
+          pool_contract.tokenValue(),//固定能获得
+          nft_contract.balanceOf(account),//nft个数
+          pool_contract.curUser(),//参与人数
+          pool_contract.maxUser() // 最多参与
+        ]
+      } else {
+        promise_list = [
+          pool_contract.timeOffer(), // 结算时间点
+          pool_contract.timeClaim(), // 结算时间点
+          pool_contract.totalOffered(), //总申购的量
+          pool_contract.totalClaimed(), //总领取的量
+          pool_contract.offeredOf(account), // 已经认购的量
+          pool_contract.claimedOf(account), // 已经领取的量
+          pool_contract.token(),
+          pool_contract.ratio(), // 比例
+          pool_contract.totalQuota(), //总申购的量
+          pool_contract.quotaOf(account), // 最大申购额度
+        ]
+      }
+      if (pool.lock){
+        promise_list.push(pool_contract.getUnlockRate())
+      }
       currency_token &&
         promise_list.push(currency_token.allowance(account, pool.address))
 
       underlying_token &&
         promise_list.push(underlying_token.decimals())
-
-      return multicallProvider
-        .all(promise_list)
+      return multicallClient(promise_list)
         .then((data) => {
-          data = processResult(data)
+
           let [
             start_at,
             time,
-            ratio,
-            totalQuota,
             totalOffered,
             totalClaimed,
-            quotaOf,
             offeredOf,
             claimedOf,
             tokenAddress,
+          ] = data
+          let ratio,
+            totalQuota,
+            quotaOf,
             currency_allowance = 0,
             underlying_decimals = 18,
-          ] = data
+            nftBalanceOf = 0,
+            tokenValue = 0,
+            nftRatio = null,
+            userFull = false,
+            unlockRate;
+
+          if (pool.nft){
+            quotaOf = data[7]
+            tokenValue=data[8]
+            nftBalanceOf = data[9][0]
+            nftRatio = new BigNumber(quotaOf).div(tokenValue).toFixed(2)*1
+            userFull = data[10] >= data[11]
+          } else{
+            ratio = data[7]
+            totalQuota = data[8]
+            quotaOf = data[9]
+            if (pool.lock) {
+              unlockRate = data[10]
+              currency_allowance = data[11]||0
+              underlying_decimals = data[12]||18
+            } else {
+              currency_allowance = data[10]||0
+              underlying_decimals = data[11]||18
+            }
+          }
           let status = pool.status || 0 // 即将上线
           if (start_at < now && status < 1) {
             // 募集中
@@ -676,7 +716,8 @@ const debounceFn = debounce((pools, account, callback) => {
           if (!(ratio - 0) && pool.defaultRatio) {
             ratio = pool.defaultRatio
           }
-          const _ratio = new BigNumber(ratio).dividedBy(
+          // nft的中签率是100%
+          const _ratio = nftRatio ? 1 : new BigNumber(ratio).dividedBy(
             new BigNumber(10).pow(
               parseInt(underlying_decimals) - parseInt(currency_decimals) + 18
             )
@@ -719,12 +760,15 @@ const debounceFn = debounce((pools, account, callback) => {
                  : tokenAddress,
            })
           return Object.assign({}, pool, {
-            ratio: `1${pool.underlying.symbol}=${
+            userFull,
+            nftBalanceOf,
+            nftRatio,
+            ratio: `1${pool.underlying.symbol}=${nftRatio ? nftRatio :
               __ratio.toFixed(5, 1).toString() * 1
             }${pool.currency.symbol}`,
             progress:
               new BigNumber(Web3.utils.fromWei(totalOffered, 'ether'))
-                .dividedBy(new BigNumber(pool.amount))
+                .dividedBy(pool.nft ? new BigNumber(pool.amount).div(nftRatio): new BigNumber(pool.amount))
                 .toNumber()
                 .toFixed(2) * 1,
             status: status,
@@ -754,9 +798,10 @@ const debounceFn = debounce((pools, account, callback) => {
             },
             settleable: {
               amount: 0, // 未结算数量
-              volume: offeredOf, // 预计中签量
+              volume: pool.nft ? tokenValue : offeredOf, // 预计中签量,nft是全量
               claimedOf, // 获取募资币种数量
               rate: Web3.utils.toWei('1', 'ether'), // 预计中签率
+              unlockVolume: fromWei(offeredOf, 18).toNumber() * (unlockRate/100) - fromWei(claimedOf).toNumber()
             },
           })
         })
@@ -856,7 +901,6 @@ export const usePoolsLBPInfo = (address = '') => {
   })
 
   useMemo(() => {
-    const multicallProvider = getOnlyMultiCallProvider(ChainId.HECO)
     Promise.all(
       poolsLBP.map((pool) => {
         // 如果还未开始，则不调用合约
@@ -865,17 +909,15 @@ export const usePoolsLBPInfo = (address = '') => {
         // 如果是已完成状态，则不调用合约
         if (pool.status == 3) return pool
 
-        const pool_contract = new Contract(pool.address, pool.abi)
+        const pool_contract = new ClientContract(pool.abi, pool.address, pool.networkId)
 
         const promise_list = [
           pool_contract.begin(), // 开始时间
           pool_contract.span(), // lbp持续时间
           pool_contract.priceLBP(), // 价格
         ]
-        return multicallProvider
-          .all(promise_list)
+        return multicallClient(promise_list)
           .then((data) => {
-            data = processResult(data)
             let [begin, span, priceLBP] = data
             const start_at = begin // 开始时间
             const time = parseInt(begin) + parseInt(span) // 结束时间
@@ -959,220 +1001,22 @@ export const useSpan = (address, abi, _chainId) => {
   return span
 }
 
-export const useAPR = (
-  pool_address,
-  pool_abi,
-  lpt_address,
-  reward1_address,
-  valueAprToken,
-  valueAprPath,
-  rewardsAprPath,
-  settleToken,
-  mode = 1,
-  _chainId,
-  farmPools
-) => {
-  const blockHeight = useBlockHeight()
-  // const [yearReward, setYearReward] = useState(0)
-  const [apr, setApr] = useState(0)
-
-  const [reward1Vol, setReward1Vol] = useState('0')
-  const [rewardsTotalValue, setRewardsTotalValue] = useState('0')
-  const [lptTotalValue, setLptTotalValue] = useState('0')
-
-  // console.log('555555555')
-  // 获取奖励1在矿山的总量
-  const allowance = useAllowance(
-    reward1_address,
-    pool_address,
-    MINE_MOUNTAIN_ADDRESS(_chainId),
-    _chainId
-  )
-  // console.log('allowance', allowance)
-  // 获取奖励1未发放的量
-  const unClaimReward = useTotalRewards(pool_address, pool_abi, _chainId)
-
-  // console.log('allowance unClaimReward', unClaimReward)
-  const span = useSpan(pool_address, pool_abi, _chainId)
-  // console.log('span', span)
-  // 奖励1的价值
-  // const reward1 = useRewardsValue(reward1_address, WAR_ADDRESS(chainId), yearReward)
-
-  // 矿池总的LPT的价值
-  const lptValue = useLTPValue(
-    lpt_address,
-    valueAprToken,
-    pool_address,
-    pool_abi,
-    _chainId
-  )
-
-  // 通过转换后的lpt价格
-  const [lptTotalPrice] = useMDexPrice(
-    valueAprToken,
-    settleToken,
-    1,
-    valueAprPath,
-    _chainId,
-    farmPools,
-    true,
-    false
-  )
-  // 奖励转换后的价格
-  const [rewardsTotalPrice] = useMDexPrice(
-    reward1_address,
-    settleToken,
-    1,
-    rewardsAprPath,
-    _chainId,
-    farmPools
-  )
-  // console.log('lptTotalPrice', lptTotalPrice.toString(), rewardsTotalPrice.toString(), lptValue.toString())
-  // console.log('allowance', {
-  //   allowance,
-  //   lptValue: lptValue.toString(),
-  //   lptTotalPrice: lptTotalPrice,
-  //   rewardsTotalPrice: rewardsTotalPrice
-  // })
-  useMemo(() => {
-    setLptTotalValue(
-      new BigNumber(lptTotalPrice)
-        .multipliedBy(new BigNumber(lptValue))
-        .toString()
-    )
-  }, [lptTotalPrice, lptValue])
-
-  useMemo(() => {
-    // console.log('rewardsTotalPrice', rewardsTotalPrice, reward1Vol)
-    setRewardsTotalValue(
-      new BigNumber(rewardsTotalPrice)
-        .multipliedBy(new BigNumber(reward1Vol))
-        .toString()
-    )
-  }, [rewardsTotalPrice, reward1Vol])
-
-  // 计算奖励的量
-  useMemo(() => {
-    if (allowance && pool_address) {
-      // console.log('allowance', allowance, unClaimReward)
-      const reward1_vol = new BigNumber(allowance).minus(
-        new BigNumber(unClaimReward)
-      )
-      // console.log('reward1_vol', reward1_vol.toString())
-      setReward1Vol(reward1_vol.toString())
-    }
-  }, [allowance, unClaimReward, _chainId])
-
-  // console.log('xxxxx', lptTotalValue , rewardsTotalValue , span)
-
-  useMemo(() => {
-    // console.log('rewardsTotalValue', rewardsTotalValue)
-    if (lptTotalValue && rewardsTotalValue && span > 0) {
-      const startAt = farmPools.start_at
-      const now = parseInt(new Date().getTime() / 1000)
-      const dayRate = new BigNumber(1).div(
-        new BigNumber(Number(startAt) + Number(span) - now).div(
-          new BigNumber(86400)
-        )
-      )
-
-      if (mode === 1) {
-        // 奖励的war
-        const yearReward = dayRate
-          .multipliedBy(new BigNumber(rewardsTotalValue))
-          .multipliedBy(new BigNumber(365))
-          .toFixed(0, 1)
-        // setYearReward(yearReward)
-        // console.log('yearReward', yearReward, lptTotalValue)
-        if (yearReward > 0) {
-          const _arp = new BigNumber(yearReward)
-            .div(new BigNumber(lptTotalValue))
-            .toString()
-          setApr(_arp)
-        }
-      } else if (mode === 2) {
-        const _arp = dayRate
-          .multipliedBy(new BigNumber(rewardsTotalValue))
-          .dividedBy(new BigNumber(lptTotalValue))
-          .plus(new BigNumber(1))
-          .exponentiatedBy(new BigNumber(365))
-        if (_arp > 0) {
-          setApr(_arp)
-        }
-      }
-    }
-    return () => {}
-  }, [span, lptTotalValue, rewardsTotalValue, blockHeight])
-  return apr
-}
-
-export const useMdxARP = (
-  pool_address,
-  pool_abi,
-  lpt_address,
-  _chainId,
-  daily,
-  pid,
-  farmPools
-) => {
-  // mdx 年释放总量 * 价值 /
-  const multicallProvider = getOnlyMultiCallProvider(_chainId)
-  const [apr, setApr] = useState(0)
-  const blockHeight = useBlockHeight()
-
-  const lptValue = useLTPValue(
-    lpt_address,
-    WAR_ADDRESS(ChainId.HECO),
-    pool_address,
-    pool_abi,
-    _chainId
-  )
-  const [mdex2warPrice, mdex2warPriceFee] = useMDexPrice(
-    MDEX_ADDRESS,
-    WAR_ADDRESS(ChainId.HECO),
-    daily,
-    [USDT_ADDRESS(ChainId.HECO)],
-    _chainId, // 取价格的chainId只有在HECO上有
-    farmPools,
-    pool_address
-  )
-  useMemo(() => {
-    if (pool_address && lptValue > 0 && mdex2warPrice > 0) {
-      const contract = new Contract(MDEX_POOL_ADDRESS, MDexPool)
-      const pool_contract = new Contract(pool_address, pool_abi)
-      const promiseList = [contract.poolInfo(pid), pool_contract.totalSupply()]
-      // console.log('request___2')
-      multicallProvider.all(promiseList).then((data) => {
-        data = processResult(data)
-        const [poolInfo, totalSupply] = data
-        const totalAmount = poolInfo[5]
-        const radio = new BigNumber(totalSupply).div(new BigNumber(totalAmount))
-        const totalRewardValue = radio
-          .multipliedBy(new BigNumber(numToWei(mdex2warPrice)))
-          .multipliedBy(new BigNumber(365))
-        const apr = totalRewardValue.div(lptValue).toString()
-        setApr(apr)
-      })
-    }
-  }, [lptValue, mdex2warPrice, blockHeight])
-  return apr
-}
-
 const FEE_RADIO = '0.003'
 const getPairPrice = (address1, address2, amount, _chainId) => {
-  const multicallProvider = getOnlyMultiCallProvider(_chainId)
   const factoryConfig = MDEX_FACTORY_ADDRESS(_chainId)
-  const factory = new Contract(factoryConfig.address, factoryConfig.abi)
+  const factory = new ClientContract(factoryConfig.abi, factoryConfig.address, _chainId)
   const promise_list = [factory.getPair(address1, address2)]
 
   // console.log('request___3')
-  return multicallProvider.all(promise_list).then((data) => {
-    let [pair_address] = processResult(data)
-    const pair_contract = new Contract(pair_address, LPT)
+  return multicallClient(promise_list).then((data) => {
+    let [pair_address] = data
+    const pair_contract = new ClientContract(LPT, pair_address, _chainId)
     const routerConfig = MDEX_ROUTER_ADDRESS(_chainId)
-    const mdex_router_contract = new Contract(
+
+    const mdex_router_contract = new ClientContract(
+      routerConfig.abi,
       routerConfig.address,
-      routerConfig.abi
+      _chainId
     )
     const promiseList = [
       pair_contract.token0(),
@@ -1180,10 +1024,9 @@ const getPairPrice = (address1, address2, amount, _chainId) => {
       pair_contract.getReserves(),
     ]
 
-    // console.log('request___4')
-    return multicallProvider.all(promiseList).then((promiseListData) => {
+    return multicallClient(promiseList).then((promiseListData) => {
       const [token0, token1, getReserves] = promiseListData
-      const { _reserve0, _reserve1 } = getReserves
+      const [ _reserve0, _reserve1 ] = getReserves
       const mdexRouterList1 = [
         mdex_router_contract.getAmountOut(
           numToWei(amount),
@@ -1198,19 +1041,20 @@ const getPairPrice = (address1, address2, amount, _chainId) => {
           _reserve1
         ),
       ]
-
       // console.log('request___5')
       if (token0.toLowerCase() == address2.toLowerCase()) {
-        return multicallProvider.all(mdexRouterList1).then((amountOutData) => {
-          let [amountOut] = processResult(amountOutData)
+        return multicallClient(mdexRouterList1).then((amountOutData) => {
+          let [amountOut] = amountOutData
           return Web3.utils.fromWei(amountOut, 'ether')
         })
       } else if (token1.toLowerCase() == address2.toLowerCase()) {
-        return multicallProvider.all(mdexRouterList2).then((amountOutData) => {
-          let [amountOut] = processResult(amountOutData)
+        return multicallClient(mdexRouterList2).then((amountOutData) => {
+          let [amountOut] = amountOutData
           return Web3.utils.fromWei(amountOut, 'ether')
         })
       }
+    }).catch((e)=>{
+      console.log(e)
     })
   })
 }
@@ -1285,86 +1129,6 @@ export const useMDexPrice = (
   return [price, fee]
 }
 
-/**
- * 获取ltp的价值
- * @param address
- */
-export const useLTPValue = (
-  address,
-  token_address,
-  pool_address,
-  pool_abi,
-  _chainId
-) => {
-  const [value, setValue] = useState(0)
-  const blockHeight = useBlockHeight()
-  useMemo(() => {
-    if (pool_address) {
-      const multicallProvider = getOnlyMultiCallProvider(_chainId)
-
-      const pool_contract = new Contract(pool_address, pool_abi)
-
-      const contract = new Contract(address, LPT)
-
-      const promise_list = [
-        contract.token0(),
-        contract.token1(),
-        contract.getReserves(),
-        contract.totalSupply(),
-        pool_contract.totalSupply(),
-      ]
-      // console.log('request___6')
-      multicallProvider
-        .all(promise_list)
-        .then((data) => {
-          // console.log(data)
-          // console.log('#############')
-          data = processResult(data)
-          const [
-            token0_address,
-            token1_address,
-            [_reserve0, _reserve1],
-            totalSupply,
-            poolTotalSupply,
-          ] = data
-          // console.log('_reserve0', _reserve0)
-          // console.log('_reserve1', _reserve1)
-          // console.log('token0_address', token0_address)
-          // console.log('token1_address', token1_address)
-          // console.log('token_address', token_address)
-          // console.log('totalSupply', totalSupply)
-          // console.log('poolTotalSupply', poolTotalSupply)
-          if (token_address == token0_address) {
-            setValue(
-              new BigNumber(_reserve0)
-                .multipliedBy(new BigNumber(2))
-                .multipliedBy(
-                  new BigNumber(poolTotalSupply).div(new BigNumber(totalSupply))
-                )
-            )
-          } else if (token_address == token1_address) {
-            setValue(
-              new BigNumber(_reserve1)
-                .multipliedBy(new BigNumber(2))
-                .multipliedBy(
-                  new BigNumber(poolTotalSupply).div(new BigNumber(totalSupply))
-                )
-            )
-          }
-        })
-        .catch((e) => {
-          // 报错默认是token
-          multicallProvider.all([pool_contract.totalSupply()]).then((data) => {
-            data = processResult(data)
-            const [poolTotalSupply] = data
-            setValue(new BigNumber(poolTotalSupply))
-          })
-        })
-    }
-    return () => {}
-  }, [blockHeight])
-  return value
-}
 
 /**
  * 获取奖励的价值
@@ -1390,10 +1154,9 @@ export const useAllow = (pool) => {
   useMemo(() => {
     if (account) {
       if (pool.accessType === 'private') {
-        const multicallProvider = getOnlyMultiCallProvider(pool.networkId)
-        const contract = new Contract(pool.address, pool.abi)
-        multicallProvider.all([contract.allowList(account)]).then((data) => {
-          const [allow_] = processResult(data)
+        const contract = new ClientContract(pool.abi, pool.address, pool.networkId)
+        multicallClient([contract.allowList(account)]).then((data) => {
+          const [allow_] = data
           setArrow(
             {
               false: false,
@@ -1409,9 +1172,8 @@ export const useAllow = (pool) => {
 
 // 临时的获取apr （配置价格固定生效）
 const getApr = (pool) => {
-  const multicallProvider = getOnlyMultiCallProvider(pool.networkId)
-  const pool_contract = new Contract(pool.address, pool.abi)
-  const rewards_contract = new Contract(pool.rewards1Address, ERC20)
+  const pool_contract = new ClientContract(pool.abi, pool.address, pool.networkId)
+  const rewards_contract = new ClientContract(ERC20, pool.rewards1Address, pool.networkId)
   // console.log('xxxx', pool.MLP, pool.settleToken)
   const promiseAll = [
     rewards_contract.allowance(
@@ -1421,8 +1183,7 @@ const getApr = (pool) => {
     pool_contract.rewardsDuration(), // span
     pool_contract.rewards(ADDRESS_0), // 获取奖励1未发放的量
   ]
-  return multicallProvider.all(promiseAll).then(async (data) => {
-    data = processResult(data)
+  return multicallClient(promiseAll).then(async (data) => {
     const [allowance, span, rewards] = data
     // 剩余
     const dRewards = new BigNumber(allowance).minus(new BigNumber(rewards))
@@ -1467,18 +1228,15 @@ export const useFarmInfo = (address = '') => {
   const [farmPoolsInfo, setFarmPoolsInfo] = useState(pool)
   const [reward2Radio, setReward2Radio] = useState(0)
 
-  const multicallProvider = getOnlyMultiCallProvider(pool.networkId)
-
   const hasApr = pool.dueDate > now || !pool.dueDate
 
   useMemo(() => {
     if(hasApr && pool.poolType === 2 && pool.rewards2) {
-      const contract = new Contract(MDEX_POOL_ADDRESS, MDexPool)
-      const pool_contract = new Contract(pool.address, pool.abi)
+      const contract = new ClientContract(MDexPool, MDEX_POOL_ADDRESS , pool.networkId)
+      const pool_contract = new ClientContract(pool.abi, pool.address, pool.networkId)
       const promiseList = [contract.poolInfo(pool.mdexPid), pool_contract.totalSupply()]
       // // console.log('request___2')
-      multicallProvider.all(promiseList).then((data) => {
-        data = processResult(data)
+      multicallClient(promiseList).then((data) => {
         const [poolInfo, totalSupply] = data
         const totalAmount = poolInfo[5]
         const radio = new BigNumber(totalSupply).div(new BigNumber(totalAmount)).toFixed(4)
@@ -1488,8 +1246,8 @@ export const useFarmInfo = (address = '') => {
   }, [blockHeight])
 
   useMemo(() => {
-    const pool_contract = new Contract(pool.address, pool.abi)
-    const currency_token = new Contract(pool.MLP, ERC20)
+    const pool_contract = new ClientContract(pool.abi, pool.address, pool.networkId)
+    const currency_token = new ClientContract(ERC20, pool.MLP, pool.networkId)
     const promise_list = [
       pool_contract.begin(), // 开始时间
       pool_contract.totalSupply(), // 总抵押
@@ -1498,7 +1256,7 @@ export const useFarmInfo = (address = '') => {
 
     // 还没结束，算apr
     if (hasApr) {
-      const calc_contract = new Contract(CALC_ADDRESS(pool.networkId), CalcAbi)
+      const calc_contract = new ClientContract(CalcAbi, CALC_ADDRESS(pool.networkId), pool.networkId)
       if (pool.poolType === 1) {
         if (pool.rewards_price) {
         } else {
@@ -1546,8 +1304,7 @@ export const useFarmInfo = (address = '') => {
       }
     }
     // console.log('request___1')
-    multicallProvider.all(promise_list).then(async (data) => {
-      data = processResult(data)
+    multicallClient(promise_list).then(async (data) => {
       const begin = data[0],
         totalSupply = data[1]
 
@@ -1623,13 +1380,13 @@ export const useAmountsOut = (path, amount, _chainId) => {
   useMemo(() => {
     if (amount > 0) {
       const routerConfig = MDEX_ROUTER_ADDRESS(_chainId)
-      const mdex_router_contract = new Contract(
+      const mdex_router_contract = new ClientContract(
+        routerConfig.abi,
         routerConfig.address,
-        routerConfig.abi
+        _chainId
       )
-      const multicallProvider = getOnlyMultiCallProvider(_chainId)
-      multicallProvider.all([mdex_router_contract.getAmountsOut(numToWei(amount, 18), path)]).then(data_ => {
-        const data = processResult(data_)[0]
+      multicallClient([mdex_router_contract.getAmountsOut(numToWei(amount, 18), path)]).then(data_ => {
+        const data = data_[0]
         const outAmountTotal_ = fromWei(data[data.length - 1], 18).toFixed(6)*1
         // setOutAmountTotal(outAmountTotal_)
         // 1 - (1-0.003)^len
@@ -1653,15 +1410,14 @@ export const VoteSpanVal = () => {
   const blockHeight = useBlockHeight()
   const [val, setVal] = useState('')
   useEffect(() => {
-    const multicallProvider = getOnlyMultiCallProvider(ChainId.HECO)
-    const pool_contract = new Contract(voteMain.address, voteMain.abi)
-    multicallProvider.all([pool_contract.voteSpan()]).then((res) => {
+    const pool_contract = new ClientContract(voteMain.abi, voteMain.address, ChainId.HECO)
+    multicallClient([pool_contract.voteSpan()]).then((res) => {
       setVal(res)
     })
     .catch((err) => {
       console.log('error', err)
     })
-  }, [library, account, active, blockHeight])  
+  }, [library, account, active, blockHeight])
   return val
 }
 
@@ -1670,10 +1426,8 @@ export const VoteEndToClaimSpan = () => {
   const blockHeight = useBlockHeight()
   const [claimSpanVal, setClaimSpanVal] = useState('')
   useEffect(() => {
-    const multicallProvider = getOnlyMultiCallProvider(ChainId.HECO)
-    const pool_contract = new Contract(voteMain.address, voteMain.abi)
-    multicallProvider
-      .all([pool_contract.voteEndToClaimSpan()])
+    const pool_contract = new ClientContract(voteMain.abi, voteMain.address, ChainId.HECO)
+    multicallClient([pool_contract.voteEndToClaimSpan()])
       .then((res) => {
         setClaimSpanVal(res)
       })
@@ -1689,12 +1443,10 @@ export const SuccessPercent = () => {
   const blockHeight = useBlockHeight()
   const [successPercentVal, setSuccessPercentVal] = useState('')
   useEffect(() => {
-    const multicallProvider = getOnlyMultiCallProvider(ChainId.HECO)
-    const pool_contract = new Contract(voteMain.address, voteMain.abi)
-    multicallProvider
-      .all([pool_contract.successPercent()])
+    const pool_contract = new ClientContract(voteMain.abi, voteMain.address, ChainId.HECO)
+    multicallClient([pool_contract.successPercent()])
       .then((res) => {
-        let val = processResult(res)[0]
+        let val = res[0]
         setSuccessPercentVal(val)
       })
       .catch((err) => {
@@ -1709,12 +1461,10 @@ export const VotesData = (propId, voteMax) => {
    const blockHeight = useBlockHeight()
   const [progressData, setProgressData] = useState('')
    useEffect(() => {
-     const multicallProvider = getOnlyMultiCallProvider(ChainId.HECO)
-     const pool_contract = new Contract(voteMain.address, voteMain.abi)
-     multicallProvider
-       .all([pool_contract.getVotes(propId)])
+     const pool_contract = new ClientContract(voteMain.abi, voteMain.address, ChainId.HECO)
+     multicallClient([pool_contract.getVotes(propId)])
        .then((res) => {
-         let resData = processResult(res)[0]
+         let resData = res[0]
          setProgressData(
            new BigNumber(formatAmount(resData[1]))
              .div(new BigNumber(formatAmount(voteMax)).div(2))
