@@ -1141,7 +1141,7 @@ export default [
     type: 0,
     isPrivate: false,
     underlying: {
-      address: ' 0xd714d91A169127e11D8FAb3665d72E8b7ef9Dbe2', // 地址有问题
+      address: '0xd714d91A169127e11D8FAb3665d72E8b7ef9Dbe2', // 地址有问题
       decimal: 18,
       symbol: 'BLACK',
       name: 'BLACK',
@@ -1198,7 +1198,7 @@ export default [
     type: 0,
     isPrivate: false,
     underlying: {
-      address: ' 0xbc194e6f748a222754C3E8b9946922c09E7d4e91', // 地址有问题
+      address: '0xbc194e6f748a222754C3E8b9946922c09E7d4e91', // 地址有问题
       decimal: 18,
       symbol: 'LEV',
       name: 'LEV',

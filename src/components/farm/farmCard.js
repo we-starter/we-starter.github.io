@@ -8,7 +8,7 @@ import {mainContext} from '../../reducer'
 import {changeNetwork} from '../../connectors'
 import {Button, message, Popover} from 'antd'
 import {formatAmount, splitFormat} from '../../utils/format'
-import {useAllow, useAPR, useFarmInfo, useMdxARP} from '../../pages/pools/Hooks'
+import {useAllow, useFarmInfo} from '../../pages/pools/Hooks'
 import {useBalance} from '../../pages/Hooks'
 import Timer from 'react-compound-timer'
 import Countdown from './countdown'
@@ -36,16 +36,6 @@ const FarmCard = (props) => {
   const allow = useAllow(farmPools)
   const notAllow = farmPools.accessType === 'private' && !allow
 
-
-  // const mdexApr = useMdxARP(
-  //   farmPools.mdexReward ? farmPools.address : null,
-  //   farmPools.abi,
-  //   farmPools.MLP,
-  //   farmPools.networkId,
-  //   farmPools.mdexDaily,
-  //   farmPools.mdexPid,
-  //   farmPools
-  // )
   const [now, setNow] = useState(parseInt(Date.now() / 1000))
   const isFinish =
     farmPools &&
@@ -98,19 +88,6 @@ const FarmCard = (props) => {
   //   left_time = (farmPools.dueDate - now) * 1000
   // }
 
-  // const apr = useAPR(
-  //   farmPools.address,
-  //   farmPools.abi,
-  //   farmPools.MLP,
-  //   farmPools.rewards1Address,
-  //   farmPools.valueAprToken,
-  //   farmPools.valueAprPath,
-  //   farmPools.rewardsAprPath,
-  //   farmPools.settleToken,
-  //   farmPools.earnName === 'APY' ? 2 : 1,
-  //   farmPools.networkId,
-  //   farmPools
-  // )
 
   useMemo(() => {
     if (farmPools && farmPools.balanceOf * 1 && farmPools.totalSupply) {

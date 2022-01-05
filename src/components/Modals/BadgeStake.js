@@ -1,12 +1,10 @@
 import React, {useMemo, useState} from 'react';
 
-import Web3 from 'web3';
-import cs from "classnames";
+
 import {FormattedMessage, injectIntl} from "react-intl";
 import {Button, message, Spin} from "antd";
 import {getContract, useActiveWeb3React} from "../../web3";
-import {getOnlyMultiCallProvider, processResult} from "../../utils/multicall";
-import {Contract} from "ethers-multicall-x";
+import {multicallClient, ClientContract} from "../../utils/multicall";
 import ERC20 from '../../web3/abi/ERC20.json'
 import {formatAmount, fromWei} from "../../utils/format";
 import {GAS_FEE} from "../../web3/address";
@@ -29,11 +27,9 @@ function BadgeStake({pool, visible, setVisible, intl}) {
   })
   const getData = () => {
     setLoadLoading(true)
-    const multicall = getOnlyMultiCallProvider(pool.networkId)
-    const nft_contract = new Contract(pool.nft.address, pool.nft.abi)
-    const currency_contract = new Contract(pool.currency.address, ERC20.abi)
-    multicall.all([nft_contract.tokenOfOwnerByIndex(account, 0), currency_contract.balanceOf(account)]).then(data => {
-      data = processResult(data)
+    const nft_contract = new ClientContract(pool.nft.abi, pool.nft.address, pool.networkId)
+    const currency_contract = new ClientContract(ERC20.abi, pool.currency.address, pool.networkId)
+    multicallClient([nft_contract.tokenOfOwnerByIndex(account, 0), currency_contract.balanceOf(account)]).then(data => {
       setPopupData({
         tokenId: data[0],
         currencyBalanceOf: formatAmount(data[1], pool.currency.decimal, 6)
@@ -43,15 +39,13 @@ function BadgeStake({pool, visible, setVisible, intl}) {
   }
   const getApproval = async () => {
     setLoadLoading(true)
-    const multicall = getOnlyMultiCallProvider(pool.networkId)
-    const nft_contract = new Contract(pool.nft.address, pool.nft.abi)
-    const currency_contract = new Contract(pool.currency.address, ERC20.abi)
+    const nft_contract = new ClientContract(pool.nft.abi, pool.nft.address, pool.networkId)
+    const currency_contract = new ClientContract(ERC20.abi, pool.currency.address, pool.networkId)
     const calls = [
       nft_contract.getApproved(popupData.tokenId),
       currency_contract.allowance(account, pool.address)
     ]
-    multicall.all(calls).then(data => {
-      data = processResult(data)
+    multicallClient(calls).then(data => {
       setIsApprovalNFT(data[0] === pool.address)
       setIsApprovalToken(data[1] > 0)
       setLoading(false)
