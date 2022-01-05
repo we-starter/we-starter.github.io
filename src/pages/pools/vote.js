@@ -23,6 +23,7 @@ const Vote = (props) => {
   const [isCannotVoteModalVisible, setIsCannotVoteModalVisible] = useState(false)
   const [usersData, setUsersData] = useState({})
   const [voteLogoUrl, setVoteLogoUrl] = useState('')
+  const [canClaimVal, SetCanClaimVal] = useState('')
   const { dispatch, state } = useContext(mainContext)
 
   useEffect(() => {
@@ -47,9 +48,27 @@ const Vote = (props) => {
       })
   }
 
+   const getCanClaimValue = () => {
+     if (!active) {
+       return false
+     }
+     const pool_contract = getContract(library, voteMain.abi, voteMain.address)
+     pool_contract.methods
+       .canClaimValue(voteDetail.ProjectId, account)
+       .call()
+       .then((res) => {
+         SetCanClaimVal(res)
+         console.log(res, 'ressssssssss')
+       })
+       .catch((err) => {
+         console.log('error', err)
+       })
+   }
+
   useEffect(() => {
     if (voteDetail && voteDetail.ProjectId) {
       getUsers()
+      getCanClaimValue()
     }
   }, [voteDetail, blockHeight, active, account])
 
@@ -248,7 +267,7 @@ const Vote = (props) => {
                 <FormattedMessage id='applicationText17' />
                 <span>
                   {voteDetail && voteDetail.isClaim && !usersData.claimed
-                    ? formatAmount(usersData.totalVote, 18, 6)
+                    ? formatAmount(canClaimVal, 18, 6)
                     : '0'}{' '}
                   WAR
                 </span>
@@ -404,6 +423,7 @@ const Vote = (props) => {
           visible={isModalVisible}
           voteDate={voteDetail}
           usersData={usersData}
+          canClaimVal={canClaimVal}
           onClose={() => setIsModalVisible(false)}
           getUser={getUsers}
         />

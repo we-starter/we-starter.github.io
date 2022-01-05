@@ -7,6 +7,9 @@ import { ApplicationBanner } from '../../components/application/applicationBanne
 import { InProgressCard } from '../../components/application/inProgressCard'
 import Footer from '../../components/Footer'
 import { mainContext } from '../../reducer'
+import { changeNetwork } from '../../connectors'
+import { ChainId } from '../../web3/address'
+import NoData from '../../assets/icon/noData@2x.png'
 import {
   HANDLE_CHANGE_NETWORKS,
 } from '../../const'
@@ -30,17 +33,25 @@ const Application = (props) => {
   const voteEndClaimCycle = VoteEndToClaimSpan()
 
   useEffect(() => {
-    if (chainId !== 128) {
-      dispatch({
-        type: HANDLE_CHANGE_NETWORKS,
-        changeNetworkStatus: true,
-      })
+    if (chainId && chainId !== ChainId.HECO) {
+
+      changeNetwork(ChainId.HECO)
+        .then(() => {
+          // TODO 关闭窗口
+          if (chainId !== ChainId.HECO) {
+            dispatch({
+              type: HANDLE_CHANGE_NETWORKS,
+              changeNetworkStatus: true,
+            })
+          }
+        })
     } else {
       dispatch({
         type: HANDLE_CHANGE_NETWORKS,
         changeNetworkStatus: false,
       })
     }
+
   }, [chainId])
 
   const changeFlag = (val) => {
@@ -157,10 +168,8 @@ const Application = (props) => {
         <Spin spinning={loading}>
           {!cardDataList.filter((item) => item.status === statusFlag).length ? (
             <div className='no-data'>
-              <img
-                src={require('../../assets/icon/noData@2x.png').default}
-                className='no-proposal'
-              />
+              <img src={NoData} className='no-proposal' />
+
               <p className='no-proposal-text'>
                 <FormattedMessage id='applicationText5' />
               </p>
