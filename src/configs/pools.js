@@ -220,7 +220,7 @@ export default [
     address: '0x875102414eF487E489676532b511D532F10D0C4a',
     icon: CP,
     abi: StarterV3,
-    start_at: '1641733200',
+    start_at: '1641729600',
     is_top: true,
     is_coming: false,
     currency: {
@@ -241,7 +241,7 @@ export default [
     },
     amount: '300000',//underlying的量
     pool_info: {
-      token_distribution: 'Jan 9th at 3:00PM UTC',
+      token_distribution: 'Jan 9th at 2:00PM UTC',
       min_allocation: '0',
       max_allocation: '10,000 USDT',
       min_swap_level: '10,000 USDT',
@@ -255,7 +255,7 @@ export default [
     progress: 0,
     status: 0, // 状态
     ratio: '1CP=0.1USDT', // 比例
-    time: '1641737400', // 结算时间点
+    time: '1641733200', // 结算时间点
     purchasedCurrencyOf: 0, // 已购买币种
     totalPurchasedAmount: '30000000000000000000000', // 总购买数量u
     totalPurchasedUnderlying: '0', // 总购买金额
