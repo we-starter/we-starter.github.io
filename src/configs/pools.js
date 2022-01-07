@@ -105,12 +105,12 @@ export default [
 
   {
     name: 'CP',
-    address: '0x123',
+    address: '0xf76884E3842756cBd577926E3127115659177249',
     icon: CP,
-    abi: OfferingLock,
+    abi: Offering,
     start_at: '1641729600',
     is_top: true,
-    is_coming: true,
+    is_coming: false,
     currency: {
       address: '0x55d398326f99059ff775485246999027b3197955', // 如果是0x0则是ht
       symbol: 'USDT',
@@ -129,16 +129,16 @@ export default [
     },
     amount: '50000',
     pool_info: {
-      token_distribution: 'Dec 21th at 2:00PM UTC',
+      token_distribution: 'Jan 9th at 2:00PM UTC',
       min_allocation: '0',
       max_allocation: '125 USDT',
       min_swap_level: '5000 USDT',
     },
-    website: 'https://www.vmates.io/',
-    white_paper: 'https://docs.vmates.io/',
-    twitter: 'http://Twitter.com/Vmates_official',
-    Telegram_Channel: 'https://t.me/vmatescommunity',
-    Github: 'https://github.com/VmatesOfficial',
+    website: 'https://www.thelostthrone.net/',
+    white_paper: 'https://www.thelostthrone.net/whitepaper.pdf',
+    twitter: 'https://twitter.com/The_Lost_Throne',
+    Telegram_Channel: 'https://t.me/TheLostThrone',
+    Github: '-',
     yuque: '-',
     progress: 0,
     status: 0, // 状态
@@ -158,16 +158,15 @@ export default [
     total: '', // 参与资金规模
     poolType: 0, // 值为 1 代表 定向
     networkId: testNetworkId || ChainId.BSC,
-    lock: true,//锁仓
   },
   {
     name: 'CP',
-    address: '0x456',
+    address: '0xEEd73918CA7e9F67759d6960750bAe8D75ceeFa3',
     icon: CP,
-    abi: OfferingLock,
+    abi: Offering,
     start_at: '1641729600',
     is_top: true,
-    is_coming: true,
+    is_coming: false,
     currency: {
       address: '0x55d398326f99059ff775485246999027b3197955', // 如果是0x0则是ht
       symbol: 'USDT',
@@ -186,16 +185,16 @@ export default [
     },
     amount: '150000',//underlying的量
     pool_info: {
-      token_distribution: 'Dec 21th at 2:00PM UTC',
+      token_distribution: 'Jan 9th at 2:00PM UTC',
       min_allocation: '0',
       max_allocation: '100 USDT',
       min_swap_level: '15000 USDT',
     },
-    website: 'https://www.vmates.io/',
-    white_paper: 'https://docs.vmates.io/',
-    twitter: 'http://Twitter.com/Vmates_official',
-    Telegram_Channel: 'https://t.me/vmatescommunity',
-    Github: 'https://github.com/VmatesOfficial',
+    website: 'https://www.thelostthrone.net/',
+    white_paper: 'https://www.thelostthrone.net/whitepaper.pdf',
+    twitter: 'https://twitter.com/The_Lost_Throne',
+    Telegram_Channel: 'https://t.me/TheLostThrone',
+    Github: '-',
     yuque: '-',
     progress: 0,
     status: 0, // 状态
@@ -215,16 +214,15 @@ export default [
     total: '', // 参与资金规模
     poolType: 0, // 值为 1 代表 定向
     networkId: testNetworkId || ChainId.BSC,
-    lock: true,//锁仓
   },
   {
     name: 'CP',
-    address: '0x789',
+    address: '0x875102414eF487E489676532b511D532F10D0C4a',
     icon: CP,
-    abi: StarterLock,
-    start_at: '1641729600',
+    abi: StarterV3,
+    start_at: '1641733200',
     is_top: true,
-    is_coming: true,
+    is_coming: false,
     currency: {
       address: '0x55d398326f99059ff775485246999027b3197955', // 如果是0x0则是ht
       symbol: 'USDT',
@@ -243,7 +241,7 @@ export default [
     },
     amount: '300000',//underlying的量
     pool_info: {
-      token_distribution: 'Dec 21th at 2:00PM UTC',
+      token_distribution: 'Jan 9th at 3:00PM UTC',
       min_allocation: '0',
       max_allocation: '10,000 USDT',
       min_swap_level: '10,000 USDT',
