@@ -1068,6 +1068,16 @@ const PoolsDetail = (props) => {
                 </a>
               </>
             )}
+              {pool && pool.underlying.symbol === 'LOST' && (
+                <>
+                  <a className='no_link'>
+                    The Lost Throne is the first chain game project released by Liberty Land. A new round of financing led by Blue Mountains Venture Capital and VCs such as Spiral Capital has been completed. The TLT system is supported by realizable crypto assets including equity token — CP, economic token — DD, and NFT cards, etc. CP is the equity and governance token of TLT ecosystem, also the only proof of ownership of the game.
+                  </a>
+                  <a className='no_link'>
+                    The Lost Throne is a two-player trading card game that focuses on the concept of Metaverse NFT and TCG featuring token economy + NFT + war chess + RPG into the ecology of Play to Earn and Play for Fun. Players can earn valuable assets through card skills and contributions to the ecosystem by collecting, building, fighting, and trading in this mysterious fantasy world of swords and magic.
+                  </a>
+                </>
+              )}
             </div>
           )}
         </div>

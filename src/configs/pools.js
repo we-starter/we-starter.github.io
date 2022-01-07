@@ -27,6 +27,7 @@ import PHM from '../assets/icon/PHM.png'
 import HCT from '../assets/icon/HCT.png'
 import BTCMT from '../assets/icon/BTCMT.svg'
 import MATE from '../assets/icon/MATE.png'
+import CP from '../assets/icon/CP.jpg'
 import WARBadge from '../assets/icon/war-badge.png'
 import WNFTAbi from '../web3/abi/WARBadge.json'
 import {ChainId} from "../web3/address";
@@ -101,6 +102,177 @@ export default [
   //   poolType: 0, // 值为 1 代表 定向
   //   networkId: testNetworkId || 128,
   // },
+
+  {
+    name: 'CP',
+    address: '0x123',
+    icon: CP,
+    abi: OfferingLock,
+    start_at: '1641729600',
+    is_top: true,
+    is_coming: true,
+    currency: {
+      address: '0x55d398326f99059ff775485246999027b3197955', // 如果是0x0则是ht
+      symbol: 'USDT',
+      decimal: 18,
+    },
+    type: 1, // 非1 则为公有池，为1 则为私有池
+    isPrivate: true,
+    underlying: {
+      address: '0xe9C133D3D94263C7aC7B848168138D7cF2cEbA14',
+      decimal: 18,
+      symbol: 'CP',
+      name: 'CP ',
+      total_supply: '250,000,000.00',
+      holders: '-',
+      transfers: '-',
+    },
+    amount: '50000',
+    pool_info: {
+      token_distribution: 'Dec 21th at 2:00PM UTC',
+      min_allocation: '0',
+      max_allocation: '125 USDT',
+      min_swap_level: '5000 USDT',
+    },
+    website: 'https://www.vmates.io/',
+    white_paper: 'https://docs.vmates.io/',
+    twitter: 'http://Twitter.com/Vmates_official',
+    Telegram_Channel: 'https://t.me/vmatescommunity',
+    Github: 'https://github.com/VmatesOfficial',
+    yuque: '-',
+    progress: 0,
+    status: 0, // 状态
+    ratio: '1CP=0.1USDT', // 比例
+    time: '1641737400', // 结算时间点
+    purchasedCurrencyOf: 0, // 已购买币种
+    totalPurchasedAmount: '5000000000000000000000', // 总购买数量
+    totalPurchasedUnderlying: '0', // 总购买金额
+    totalPurchasedCurrency: '0', // 总购买币种
+    is_flash: false,
+    link_url: 'https://www.thelostthrone.net/',
+    project_introduction: '',
+    duration: '-', // 完成时间
+    totalApplicants: '-', // 申请总人数
+    winningRate: '-', // 申请中签率
+    committed: '', // 超募比例
+    total: '', // 参与资金规模
+    poolType: 0, // 值为 1 代表 定向
+    networkId: testNetworkId || ChainId.BSC,
+    lock: true,//锁仓
+  },
+  {
+    name: 'CP',
+    address: '0x456',
+    icon: CP,
+    abi: OfferingLock,
+    start_at: '1641729600',
+    is_top: true,
+    is_coming: true,
+    currency: {
+      address: '0x55d398326f99059ff775485246999027b3197955', // 如果是0x0则是ht
+      symbol: 'USDT',
+      decimal: 18,
+    },
+    type: 1, // 非1 则为公有池，为1 则为私有池
+    isPrivate: true,
+    underlying: {
+      address: '0xe9C133D3D94263C7aC7B848168138D7cF2cEbA14',
+      decimal: 18,
+      symbol: 'CP',
+      name: 'CP ',
+      total_supply: '250,000,000.00',
+      holders: '-',
+      transfers: '-',
+    },
+    amount: '150000',//underlying的量
+    pool_info: {
+      token_distribution: 'Dec 21th at 2:00PM UTC',
+      min_allocation: '0',
+      max_allocation: '100 USDT',
+      min_swap_level: '15000 USDT',
+    },
+    website: 'https://www.vmates.io/',
+    white_paper: 'https://docs.vmates.io/',
+    twitter: 'http://Twitter.com/Vmates_official',
+    Telegram_Channel: 'https://t.me/vmatescommunity',
+    Github: 'https://github.com/VmatesOfficial',
+    yuque: '-',
+    progress: 0,
+    status: 0, // 状态
+    ratio: '1CP=0.1USDT', // 比例
+    time: '1641737400', // 结算时间点
+    purchasedCurrencyOf: 0, // 已购买币种
+    totalPurchasedAmount: '15000000000000000000000', // 总购买数量
+    totalPurchasedUnderlying: '0', // 总购买金额
+    totalPurchasedCurrency: '0', // 总购买币种
+    is_flash: false,
+    link_url: 'https://www.thelostthrone.net/',
+    project_introduction: '',
+    duration: '-', // 完成时间
+    totalApplicants: '-', // 申请总人数
+    winningRate: '-', // 申请中签率
+    committed: '', // 超募比例
+    total: '', // 参与资金规模
+    poolType: 0, // 值为 1 代表 定向
+    networkId: testNetworkId || ChainId.BSC,
+    lock: true,//锁仓
+  },
+  {
+    name: 'CP',
+    address: '0x789',
+    icon: CP,
+    abi: StarterLock,
+    start_at: '1641729600',
+    is_top: true,
+    is_coming: true,
+    currency: {
+      address: '0x55d398326f99059ff775485246999027b3197955', // 如果是0x0则是ht
+      symbol: 'USDT',
+      decimal: 18,
+    },
+    type: 0, // 非1 则为公有池，为1 则为私有池
+    isPrivate: false,
+    underlying: {
+      address: '0xe9C133D3D94263C7aC7B848168138D7cF2cEbA14',
+      decimal: 18,
+      symbol: 'CP',
+      name: 'CP',
+      total_supply: '250,000,000.00',
+      holders: '-',
+      transfers: '-',
+    },
+    amount: '300000',//underlying的量
+    pool_info: {
+      token_distribution: 'Dec 21th at 2:00PM UTC',
+      min_allocation: '0',
+      max_allocation: '10,000 USDT',
+      min_swap_level: '10,000 USDT',
+    },
+    website: 'https://www.thelostthrone.net/',
+    white_paper: 'https://www.thelostthrone.net/whitepaper.pdf',
+    twitter: 'https://twitter.com/The_Lost_Throne',
+    Telegram_Channel: 'https://t.me/TheLostThrone',
+    Github: '-',
+    yuque: '-',
+    progress: 0,
+    status: 0, // 状态
+    ratio: '1CP=0.1USDT', // 比例
+    time: '1641737400', // 结算时间点
+    purchasedCurrencyOf: 0, // 已购买币种
+    totalPurchasedAmount: '30000000000000000000000', // 总购买数量u
+    totalPurchasedUnderlying: '0', // 总购买金额
+    totalPurchasedCurrency: '0', // 总购买币种
+    is_flash: false,
+    link_url: 'https://www.thelostthrone.net/',
+    project_introduction: '',
+    duration: '-', // 完成时间
+    totalApplicants: '-', // 申请总人数
+    winningRate: '-', // 申请中签率
+    committed: '', // 超募比例
+    total: '', // 参与资金规模
+    poolType: 0, // 值为 1 代表 定向
+    networkId: testNetworkId || ChainId.BSC,
+  },
 
   {
     name: 'MATE',
