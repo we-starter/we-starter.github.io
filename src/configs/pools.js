@@ -129,7 +129,7 @@ export default [
     },
     amount: '50000',
     pool_info: {
-      token_distribution: 'Jan 9th at 2:00PM UTC',
+      token_distribution: 'Jan 9th at 2:10PM UTC',
       min_allocation: '0',
       max_allocation: '125 USDT',
       min_swap_level: '5000 USDT',
@@ -185,7 +185,7 @@ export default [
     },
     amount: '150000',//underlying的量
     pool_info: {
-      token_distribution: 'Jan 9th at 2:00PM UTC',
+      token_distribution: 'Jan 9th at 2:10PM UTC',
       min_allocation: '0',
       max_allocation: '100 USDT',
       min_swap_level: '15000 USDT',
@@ -241,7 +241,7 @@ export default [
     },
     amount: '300000',//underlying的量
     pool_info: {
-      token_distribution: 'Jan 9th at 2:00PM UTC',
+      token_distribution: 'Jan 9th at 2:10PM UTC',
       min_allocation: '0',
       max_allocation: '10,000 USDT',
       min_swap_level: '10,000 USDT',
