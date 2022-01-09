@@ -73,6 +73,7 @@ const ru = {
   poolsDetailText2: 'Ход обмена',
   poolsDetailText3: 'Присоединиться к пулу',
   poolsDetailText4: 'Просмотреть HECO',
+  poolsDetailText400: 'Просмотреть BSC',
   poolsDetailText5: 'Требовать получения',
   poolsDetailText6: 'Подробные сведения о пуле',
   poolsDetailText7: 'О проекте',

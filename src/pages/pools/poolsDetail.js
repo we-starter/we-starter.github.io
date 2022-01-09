@@ -23,7 +23,7 @@ import {FormattedMessage, injectIntl} from 'react-intl'
 import BigNumber from 'bignumber.js'
 import {formatAmount, fromWei} from '../../utils/format'
 import {getScanLink} from "../../connectors";
-import {GAS_FEE} from "../../web3/address";
+import {ChainId, GAS_FEE} from "../../web3/address";
 import BadgeStake from "../../components/Modals/BadgeStake";
 
 const PoolsDetail = (props) => {
@@ -308,7 +308,7 @@ const PoolsDetail = (props) => {
           href={getScanLink(chainId, address, 'address')}
           target='_blank'
         >
-          <FormattedMessage id='poolsDetailText4' />
+          <FormattedMessage id={pool.networkId === ChainId.BSC ? 'poolsDetailText400' : 'poolsDetailText4'} />
         </a>
       </div>
       {pool && pool.underlying.symbol === 'HCT' && (
