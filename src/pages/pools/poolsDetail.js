@@ -1078,6 +1078,31 @@ const PoolsDetail = (props) => {
                   </a>
                 </>
               )}
+              {pool && pool.underlying.symbol === 'HRS' && (
+                <>
+                  <a className='no_link'>
+                    Heres" is a free mobile game that builds a cross entry between the game world and the Metaverse through the Blockchain-based NFT ecological architecture and open game community. Based on the core game, realize the implantation of diversified businesses, and over time, through the power of the HRS main creative team and the community, gradually develop and finally form the Metaverse ecology:
+                  </a>
+                  <a className='no_link'>
+                  ● NFT trading market;
+                  </a>
+                  <a className='no_link'>
+                  ● Digital asset trading platform;
+                  </a>
+                  <a className='no_link'>
+                  ● Regular game and activity rules;
+                  </a>
+                  <a className='no_link'>
+                  ● Social Center: Provide a meeting place for like-minded players;
+                  </a>
+                  <a className='no_link'>
+                  ● Metaverse: expand to third-party developed games and more applications
+                  </a>
+                  <a className='no_link'>
+                  ● Intelligent hardware: the development and maturity of VR and AR will serve as the hardware foundation of the HRS Metaverse.
+                  </a>
+                </>
+              )}
             </div>
           )}
         </div>
