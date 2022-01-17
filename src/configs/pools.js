@@ -143,7 +143,7 @@ export default [
     yuque: '-',
     progress: 0,
     status: 0, // 状态
-    ratio: '1CP=0.0004USDT', // 比例
+    ratio: '1HRS=0.0004USDT', // 比例
     time: '1644062400', // 结算时间点
     purchasedCurrencyOf: 0, // 已购买币种
     totalPurchasedAmount: '5000000000000000000000', // 总购买数量
@@ -199,7 +199,7 @@ export default [
     yuque: '-',
     progress: 0,
     status: 0, // 状态
-    ratio: '1CP=0.0004USDT', // 比例
+    ratio: '1HRS=0.0004USDT', // 比例
     time: '1644062400', // 结算时间点
     purchasedCurrencyOf: 0, // 已购买币种
     totalPurchasedAmount: '20000000000000000000000', // 总购买数量
@@ -255,7 +255,7 @@ export default [
     yuque: '-',
     progress: 0,
     status: 0, // 状态
-    ratio: '1CP=0.0004USDT', // 比例
+    ratio: '1HRS=0.0004USDT', // 比例
     time: '1644062400', // 结算时间点
     purchasedCurrencyOf: 0, // 已购买币种
     totalPurchasedAmount: '25000000000000000000000', // 总购买数量u
