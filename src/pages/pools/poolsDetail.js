@@ -23,7 +23,7 @@ import {FormattedMessage, injectIntl} from 'react-intl'
 import BigNumber from 'bignumber.js'
 import {formatAmount, fromWei} from '../../utils/format'
 import {getScanLink} from "../../connectors";
-import {GAS_FEE} from "../../web3/address";
+import {ChainId, GAS_FEE} from "../../web3/address";
 import BadgeStake from "../../components/Modals/BadgeStake";
 
 const PoolsDetail = (props) => {
@@ -308,7 +308,7 @@ const PoolsDetail = (props) => {
           href={getScanLink(chainId, address, 'address')}
           target='_blank'
         >
-          <FormattedMessage id='poolsDetailText4' />
+          <FormattedMessage id={pool.networkId === ChainId.BSC ? 'poolsDetailText400' : 'poolsDetailText4'} />
         </a>
       </div>
       {pool && pool.underlying.symbol === 'HCT' && (
@@ -1068,6 +1068,41 @@ const PoolsDetail = (props) => {
                 </a>
               </>
             )}
+              {pool && pool.underlying.symbol === 'LOST' && (
+                <>
+                  <a className='no_link'>
+                    The Lost Throne is the first chain game project released by Liberty Land. A new round of financing led by Blue Mountains Venture Capital and VCs such as Spiral Capital has been completed. The TLT system is supported by realizable crypto assets including equity token — CP, economic token — DD, and NFT cards, etc. CP is the equity and governance token of TLT ecosystem, also the only proof of ownership of the game.
+                  </a>
+                  <a className='no_link'>
+                    The Lost Throne is a two-player trading card game that focuses on the concept of Metaverse NFT and TCG featuring token economy + NFT + war chess + RPG into the ecology of Play to Earn and Play for Fun. Players can earn valuable assets through card skills and contributions to the ecosystem by collecting, building, fighting, and trading in this mysterious fantasy world of swords and magic.
+                  </a>
+                </>
+              )}
+              {pool && pool.underlying.symbol === 'HRS' && (
+                <>
+                  <a className='no_link'>
+                    Heres" is a free mobile game that builds a cross entry between the game world and the Metaverse through the Blockchain-based NFT ecological architecture and open game community. Based on the core game, realize the implantation of diversified businesses, and over time, through the power of the HRS main creative team and the community, gradually develop and finally form the Metaverse ecology:
+                  </a>
+                  <a className='no_link'>
+                  ● NFT trading market;
+                  </a>
+                  <a className='no_link'>
+                  ● Digital asset trading platform;
+                  </a>
+                  <a className='no_link'>
+                  ● Regular game and activity rules;
+                  </a>
+                  <a className='no_link'>
+                  ● Social Center: Provide a meeting place for like-minded players;
+                  </a>
+                  <a className='no_link'>
+                  ● Metaverse: expand to third-party developed games and more applications
+                  </a>
+                  <a className='no_link'>
+                  ● Intelligent hardware: the development and maturity of VR and AR will serve as the hardware foundation of the HRS Metaverse.
+                  </a>
+                </>
+              )}
             </div>
           )}
         </div>

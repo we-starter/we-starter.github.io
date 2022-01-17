@@ -72,6 +72,7 @@ const en_US = {
   poolsDetailText2: 'Swap Progress',
   poolsDetailText3: 'Join Pool',
   poolsDetailText4: 'View HECO',
+  poolsDetailText400: 'View BSC',
   poolsDetailText5: 'Claim',
   poolsDetailText6: 'Pool Details',
   poolsDetailText7: 'About the Project',

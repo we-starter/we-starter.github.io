@@ -75,6 +75,7 @@ const zh_CN = {
   poolsDetailText2: '兑换进度',
   poolsDetailText3: '进入兑换池',
   poolsDetailText4: '在HECO上查看',
+  poolsDetailText400: '在BSC上查看',
   poolsDetailText5: '领取Token',
   poolsDetailText6: '兑换池详情',
   poolsDetailText7: '项目简介',

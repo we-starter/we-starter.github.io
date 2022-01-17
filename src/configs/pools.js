@@ -27,6 +27,8 @@ import PHM from '../assets/icon/PHM.png'
 import HCT from '../assets/icon/HCT.png'
 import BTCMT from '../assets/icon/BTCMT.svg'
 import MATE from '../assets/icon/MATE.png'
+import CP from '../assets/icon/CP.jpg'
+import HRS from '../assets/icon/HRS.png'
 import WARBadge from '../assets/icon/war-badge.png'
 import WNFTAbi from '../web3/abi/WARBadge.json'
 import {ChainId} from "../web3/address";
@@ -101,6 +103,345 @@ export default [
   //   poolType: 0, // 值为 1 代表 定向
   //   networkId: testNetworkId || 128,
   // },
+
+  {
+    name: 'HRS',
+    address: '0xfb79B97057fA51FaB4Cb7cCC8a1837bEF48c0238',
+    icon: HRS,
+    abi: Offering,
+    start_at: '1642248000',
+    is_top: true,
+    is_coming: false,
+    currency: {
+      address: '0x55d398326f99059ff775485246999027b3197955', // 如果是0x0则是ht
+      symbol: 'USDT',
+      decimal: 18,
+    },
+    type: 1, // 非1 则为公有池，为1 则为私有池
+    isPrivate: true,
+    underlying: {
+      address: '0xB4e4E2bA82420B07847654B163C35E2D7774af38',
+      decimal: 18,
+      symbol: 'HRS',
+      name: 'HRS ',
+      total_supply: '100,000,000,000.00',
+      holders: '-',
+      transfers: '-',
+    },
+    amount: '12500000',
+    pool_info: {
+      token_distribution: 'Feb 5th at 12:00 UTC',
+      min_allocation: '0',
+      max_allocation: '125 USDT',
+      min_swap_level: '5,000 USDT',
+    },
+    website: 'https://heres.is',
+    white_paper: 'https://drive.google.com/file/d/1fcCByMyru9Vc_sXjTliTSPAYXVyDet7Q/view?usp=sharing',
+    twitter: 'https://twitter.com/HeresOfficial',
+    Telegram_Channel: 'https://t.me/heresglobalcommunity',
+    Github: '-',
+    yuque: '-',
+    progress: 0,
+    status: 0, // 状态
+    ratio: '1HRS=0.0004USDT', // 比例
+    time: '1644062400', // 结算时间点
+    purchasedCurrencyOf: 0, // 已购买币种
+    totalPurchasedAmount: '5000000000000000000000', // 总购买数量
+    totalPurchasedUnderlying: '0', // 总购买金额
+    totalPurchasedCurrency: '0', // 总购买币种
+    is_flash: false,
+    link_url: 'https://heres.is',
+    project_introduction: '',
+    duration: '-', // 完成时间
+    totalApplicants: '-', // 申请总人数
+    winningRate: '-', // 申请中签率
+    committed: '', // 超募比例
+    total: '', // 参与资金规模
+    poolType: 0, // 值为 1 代表 定向
+    networkId: testNetworkId || ChainId.BSC,
+  },
+  {
+    name: 'HRS',
+    address: '0xA74a5236679F693dDc96141a31f77354922b69ff',
+    icon: HRS,
+    abi: Offering,
+    start_at: '1642248000',
+    is_top: true,
+    is_coming: false,
+    currency: {
+      address: '0x55d398326f99059ff775485246999027b3197955', // 如果是0x0则是ht
+      symbol: 'USDT',
+      decimal: 18,
+    },
+    type: 1, // 非1 则为公有池，为1 则为私有池
+    isPrivate: true,
+    underlying: {
+      address: '0xB4e4E2bA82420B07847654B163C35E2D7774af38',
+      decimal: 18,
+      symbol: 'HRS',
+      name: 'HRS ',
+      total_supply: '100,000,000,000.00',
+      holders: '-',
+      transfers: '-',
+    },
+    amount: '50000000',//underlying的量
+    pool_info: {
+      token_distribution: 'Feb 5th at 12:00 UTC',
+      min_allocation: '0',
+      max_allocation: '100 USDT',
+      min_swap_level: '20,000 USDT',
+    },
+    website: 'https://heres.is',
+    white_paper: 'https://drive.google.com/file/d/1fcCByMyru9Vc_sXjTliTSPAYXVyDet7Q/view?usp=sharing',
+    twitter: 'https://twitter.com/HeresOfficial',
+    Telegram_Channel: 'https://t.me/heresglobalcommunity',
+    Github: '-',
+    yuque: '-',
+    progress: 0,
+    status: 0, // 状态
+    ratio: '1HRS=0.0004USDT', // 比例
+    time: '1644062400', // 结算时间点
+    purchasedCurrencyOf: 0, // 已购买币种
+    totalPurchasedAmount: '20000000000000000000000', // 总购买数量
+    totalPurchasedUnderlying: '0', // 总购买金额
+    totalPurchasedCurrency: '0', // 总购买币种
+    is_flash: false,
+    link_url: 'https://heres.is',
+    project_introduction: '',
+    duration: '-', // 完成时间
+    totalApplicants: '-', // 申请总人数
+    winningRate: '-', // 申请中签率
+    committed: '', // 超募比例
+    total: '', // 参与资金规模
+    poolType: 0, // 值为 1 代表 定向
+    networkId: testNetworkId || ChainId.BSC,
+  },
+  {
+    name: 'HRS',
+    address: '0xA720faF024e8e7863808f1b63ed943a1ac72aaC9',
+    icon: HRS,
+    abi: StarterV3,
+    start_at: '1642248000',
+    is_top: true,
+    is_coming: false,
+    currency: {
+      address: '0x55d398326f99059ff775485246999027b3197955', // 如果是0x0则是ht
+      symbol: 'USDT',
+      decimal: 18,
+    },
+    type: 0, // 非1 则为公有池，为1 则为私有池
+    isPrivate: false,
+    underlying: {
+      address: '0xB4e4E2bA82420B07847654B163C35E2D7774af38',
+      decimal: 18,
+      symbol: 'HRS',
+      name: 'HRS',
+      total_supply: '100,000,000,000.00',
+      holders: '-',
+      transfers: '-',
+    },
+    amount: '62500000',//underlying的量
+    pool_info: {
+      token_distribution: 'Feb 5th at 12:00 UTC',
+      min_allocation: '0',
+      max_allocation: '25,000 USDT',
+      min_swap_level: '25,000 USDT',
+    },
+    website: 'https://heres.is',
+    white_paper: 'https://drive.google.com/file/d/1fcCByMyru9Vc_sXjTliTSPAYXVyDet7Q/view?usp=sharing',
+    twitter: 'https://twitter.com/HeresOfficial',
+    Telegram_Channel: 'https://t.me/heresglobalcommunity',
+    Github: '-',
+    yuque: '-',
+    progress: 0,
+    status: 0, // 状态
+    ratio: '1HRS=0.0004USDT', // 比例
+    time: '1644062400', // 结算时间点
+    purchasedCurrencyOf: 0, // 已购买币种
+    totalPurchasedAmount: '25000000000000000000000', // 总购买数量u
+    totalPurchasedUnderlying: '0', // 总购买金额
+    totalPurchasedCurrency: '0', // 总购买币种
+    is_flash: false,
+    link_url: 'https://heres.is',
+    project_introduction: '',
+    duration: '-', // 完成时间
+    totalApplicants: '-', // 申请总人数
+    winningRate: '-', // 申请中签率
+    committed: '', // 超募比例
+    total: '', // 参与资金规模
+    poolType: 0, // 值为 1 代表 定向
+    networkId: testNetworkId || ChainId.BSC,
+  },
+
+
+  {
+    name: 'CP',
+    address: '0xf76884E3842756cBd577926E3127115659177249',
+    icon: CP,
+    abi: Offering,
+    start_at: '1641729600',
+    is_top: true,
+    is_coming: false,
+    currency: {
+      address: '0x55d398326f99059ff775485246999027b3197955', // 如果是0x0则是ht
+      symbol: 'USDT',
+      decimal: 18,
+    },
+    type: 1, // 非1 则为公有池，为1 则为私有池
+    isPrivate: true,
+    underlying: {
+      address: '0xe9C133D3D94263C7aC7B848168138D7cF2cEbA14',
+      decimal: 18,
+      symbol: 'CP',
+      name: 'CP ',
+      total_supply: '250,000,000.00',
+      holders: '-',
+      transfers: '-',
+    },
+    amount: '50000',
+    pool_info: {
+      token_distribution: 'Jan 9th at 2:10PM UTC',
+      min_allocation: '0',
+      max_allocation: '125 USDT',
+      min_swap_level: '5000 USDT',
+    },
+    website: 'https://www.thelostthrone.net/',
+    white_paper: 'https://www.thelostthrone.net/whitepaper.pdf',
+    twitter: 'https://twitter.com/The_Lost_Throne',
+    Telegram_Channel: 'https://t.me/TheLostThrone',
+    Github: '-',
+    yuque: '-',
+    progress: 0,
+    status: 0, // 状态
+    ratio: '1CP=0.1USDT', // 比例
+    time: '1641737400', // 结算时间点
+    purchasedCurrencyOf: 0, // 已购买币种
+    totalPurchasedAmount: '5000000000000000000000', // 总购买数量
+    totalPurchasedUnderlying: '0', // 总购买金额
+    totalPurchasedCurrency: '0', // 总购买币种
+    is_flash: false,
+    link_url: 'https://www.thelostthrone.net/',
+    project_introduction: '',
+    duration: '-', // 完成时间
+    totalApplicants: '-', // 申请总人数
+    winningRate: '-', // 申请中签率
+    committed: '', // 超募比例
+    total: '', // 参与资金规模
+    poolType: 0, // 值为 1 代表 定向
+    networkId: testNetworkId || ChainId.BSC,
+  },
+  {
+    name: 'CP',
+    address: '0xEEd73918CA7e9F67759d6960750bAe8D75ceeFa3',
+    icon: CP,
+    abi: Offering,
+    start_at: '1641729600',
+    is_top: true,
+    is_coming: false,
+    currency: {
+      address: '0x55d398326f99059ff775485246999027b3197955', // 如果是0x0则是ht
+      symbol: 'USDT',
+      decimal: 18,
+    },
+    type: 1, // 非1 则为公有池，为1 则为私有池
+    isPrivate: true,
+    underlying: {
+      address: '0xe9C133D3D94263C7aC7B848168138D7cF2cEbA14',
+      decimal: 18,
+      symbol: 'CP',
+      name: 'CP ',
+      total_supply: '250,000,000.00',
+      holders: '-',
+      transfers: '-',
+    },
+    amount: '150000',//underlying的量
+    pool_info: {
+      token_distribution: 'Jan 9th at 2:10PM UTC',
+      min_allocation: '0',
+      max_allocation: '100 USDT',
+      min_swap_level: '15000 USDT',
+    },
+    website: 'https://www.thelostthrone.net/',
+    white_paper: 'https://www.thelostthrone.net/whitepaper.pdf',
+    twitter: 'https://twitter.com/The_Lost_Throne',
+    Telegram_Channel: 'https://t.me/TheLostThrone',
+    Github: '-',
+    yuque: '-',
+    progress: 0,
+    status: 0, // 状态
+    ratio: '1CP=0.1USDT', // 比例
+    time: '1641737400', // 结算时间点
+    purchasedCurrencyOf: 0, // 已购买币种
+    totalPurchasedAmount: '15000000000000000000000', // 总购买数量
+    totalPurchasedUnderlying: '0', // 总购买金额
+    totalPurchasedCurrency: '0', // 总购买币种
+    is_flash: false,
+    link_url: 'https://www.thelostthrone.net/',
+    project_introduction: '',
+    duration: '-', // 完成时间
+    totalApplicants: '-', // 申请总人数
+    winningRate: '-', // 申请中签率
+    committed: '', // 超募比例
+    total: '', // 参与资金规模
+    poolType: 0, // 值为 1 代表 定向
+    networkId: testNetworkId || ChainId.BSC,
+  },
+  {
+    name: 'CP',
+    address: '0x875102414eF487E489676532b511D532F10D0C4a',
+    icon: CP,
+    abi: StarterV3,
+    start_at: '1641729600',
+    is_top: true,
+    is_coming: false,
+    currency: {
+      address: '0x55d398326f99059ff775485246999027b3197955', // 如果是0x0则是ht
+      symbol: 'USDT',
+      decimal: 18,
+    },
+    type: 0, // 非1 则为公有池，为1 则为私有池
+    isPrivate: false,
+    underlying: {
+      address: '0xe9C133D3D94263C7aC7B848168138D7cF2cEbA14',
+      decimal: 18,
+      symbol: 'CP',
+      name: 'CP',
+      total_supply: '250,000,000.00',
+      holders: '-',
+      transfers: '-',
+    },
+    amount: '300000',//underlying的量
+    pool_info: {
+      token_distribution: 'Jan 9th at 2:10PM UTC',
+      min_allocation: '0',
+      max_allocation: '10,000 USDT',
+      min_swap_level: '10,000 USDT',
+    },
+    website: 'https://www.thelostthrone.net/',
+    white_paper: 'https://www.thelostthrone.net/whitepaper.pdf',
+    twitter: 'https://twitter.com/The_Lost_Throne',
+    Telegram_Channel: 'https://t.me/TheLostThrone',
+    Github: '-',
+    yuque: '-',
+    progress: 0,
+    status: 0, // 状态
+    ratio: '1CP=0.1USDT', // 比例
+    time: '1641733200', // 结算时间点
+    purchasedCurrencyOf: 0, // 已购买币种
+    totalPurchasedAmount: '30000000000000000000000', // 总购买数量u
+    totalPurchasedUnderlying: '0', // 总购买金额
+    totalPurchasedCurrency: '0', // 总购买币种
+    is_flash: false,
+    link_url: 'https://www.thelostthrone.net/',
+    project_introduction: '',
+    duration: '-', // 完成时间
+    totalApplicants: '-', // 申请总人数
+    winningRate: '-', // 申请中签率
+    committed: '', // 超募比例
+    total: '', // 参与资金规模
+    poolType: 0, // 值为 1 代表 定向
+    networkId: testNetworkId || ChainId.BSC,
+  },
 
   {
     name: 'MATE',
