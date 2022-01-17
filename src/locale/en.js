@@ -403,10 +403,57 @@ const en_US = {
   withdraw: 'Withdraw',
   add: 'add',
   to: 'to',
+  applicationText1: 'IWO without permission',
+  applicationText2: 'Initiate a proposal',
+  applicationText3: 'Ongoing',
+  applicationText4: 'Finished',
+  applicationText5: 'No Data',
+  applicationText6: 'Project',
+  applicationText7: 'Total Raise',
+  applicationText8: 'Vote',
+  applicationText9: 'Closed',
+  applicationText10: 'Success',
+  applicationText11: 'Failed',
+  applicationText12: 'Project Information',
+  applicationText13:
+    'To learn more about APENFT, the chefs advise you to visit their official communication channels:',
+  applicationText14:
+    'The Syrup Pool: Stake CAKE tokens to earn APENFT’s $NFT tokens!',
+  applicationText15: 'Proposals',
+  applicationText16: 'My Support',
+  applicationText17: 'Claimable',
+  applicationText18: 'Soon',
+  applicationText19: 'Claimable',
+
+  applicationText26:
+    'It is recommended to upload pictures in SVG format, and the recommended resolution for other formats such as PNG is 400 * 400',
+  applicationText27:
+    'When initiating a voting proposal, {percentage} of this amount must be pledged',
+  applicationText28:
+    'Please check the entered information carefully, HECO-721 NFT Token will be minted after successful creation, and the information cannot be changed. If you need to change, you need to create a new Project NFT Card',
+  applicationText29: 'Create a new',
+  applicationText30: 'what is NFT Card?',
+  applicationText31: 'current price',
+  applicationText32: 'Fundraising',
+  applicationText33: 'Recommended',
+  applicationText34:
+    'The value of the pledged WAR cannot be less than the total amount of funds raised, otherwise it will affect the subsequent fundraising plan',
+  applicationText35:
+    'The time starts from the voting, the period is {day1} days, and the funds will be released {day2} days after the end of the voting',
+  applicationText36: 'Rule',
+  applicationText37:
+    'If the proposal is within the cycle and equals or exceeds 50% of the total IWO of the project, it is a success, and the voter and the project sponsor (proposer) can claim back their WAR after 5 days',
+  applicationText38:
+    'If the proposal is less than 50% of the total IWO quota of the project party within the period, it is a failure. 50% of the pledge amount of the proposal will be airdropped to the voting parties. Voters and project sponsors (proposers) can claim back their WAR after 5 days.',
+  applicationText39:
+    'The NFT Card contains the official project info provided by the project team, then WeStarter casts the information into NFT. All the information cannot be changed if the card finished.',
+
   adjustmentTips1: 'Dear users,',
-  adjustmentTips2: 'WeStarter recently made a series of operational changes that will now restrict IP access to the following countries:',
-  adjustmentTips3: 'Japan, Cuba, Iran, Mainland China, Hong Kong China, Macao China, The Democratic People\'s Republic of Korea, Sudan, Syria, United States of America and its Overseas Territories (American Samoa, Guam, Northern Mariana Islands, Puerto Rico and THE United States Virgin Islands), Canada and Singapore.',
+  adjustmentTips2:
+    'WeStarter recently made a series of operational changes that will now restrict IP access to the following countries:',
+  adjustmentTips3:
+    "Japan, Cuba, Iran, Mainland China, Hong Kong China, Macao China, The Democratic People's Republic of Korea, Sudan, Syria, United States of America and its Overseas Territories (American Samoa, Guam, Northern Mariana Islands, Puerto Rico and THE United States Virgin Islands), Canada and Singapore.",
   adjustmentTips4: 'Thank you for supporting WeStarter!',
-  adjustmentTips5: 'I\'m not from these regions.',
+  adjustmentTips5: "I'm not from these regions.",
 }
 export default en_US

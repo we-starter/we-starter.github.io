@@ -1,0 +1,333 @@
+@media #{$desktop} {
+  .application_content {
+    padding-bottom: 230px;
+    margin: 40px auto 0;
+    width: 1080px;
+    min-height: 800px;
+    &_tab {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding-bottom: 10px;
+      a {
+        display: inline-block;
+        padding: 0 32px;
+        height: 32px;
+        line-height: 30px;
+        font-size: 14px;
+        font-family: Montserrat-Bold, Montserrat;
+        font-weight: bold;
+        color: #4F4F4F;
+        border-radius: 8px;
+        border: 2px solid transparent;
+        &:nth-child(2) {
+          margin:0  24px;
+        }
+        &:hover {
+          color: #03A678;
+          border: 2px solid #00C57B;
+        }
+      }
+      .application_content_tab_active {
+        color: #03A678;
+        border: 2px solid #00C57B;
+      }
+    }
+    .no-data {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      margin-top: 40px;
+      width: 1080px;
+      .no-proposal {
+        width: 370px;
+        height: 200px;
+      }
+      .no-proposal-text {
+        margin-bottom: 0;
+        font-size: 12px;
+        font-family: PingFangSC-Regular, PingFang SC;
+        font-weight: 400;
+        color: #7A7F82;
+        line-height: 18px;
+      }
+      .initiate-proposal {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 0;
+        margin-top: 80px;
+        width: 1080px;
+        height: 280px;
+        background: url('../icon/application/proposal_pc.png') no-repeat;
+        background-size: 100% 100%;
+        a {
+          display: inline-block;
+          margin: 190px auto 0;
+          padding: 0 28px;
+          height: 48px;
+          line-height: 48px;
+          font-size: 16px;
+          font-family: PingFangSC-Semibold, PingFang SC;
+          font-weight: 600;
+          color: #FFF;
+          background: #00C57B;
+          border-radius: 23px;
+          &:hover {
+            box-shadow: 3px 3px 0px 0px #03A678;
+          }
+        }
+      }
+    }
+  }
+}
+@media #{$mdWidth} {
+  .application_content {
+    padding-bottom: 230px;
+    margin: 40px auto 0;
+    width: 1080px;
+    min-height: 800px;
+    &_tab {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding-bottom: 10px;
+      a {
+        display: inline-block;
+        padding: 0 32px;
+        height: 32px;
+        line-height: 30px;
+        font-size: 14px;
+        font-family: Montserrat-Bold, Montserrat;
+        font-weight: bold;
+        color: #4F4F4F;
+        border-radius: 8px;
+        border: 2px solid transparent;
+        &:nth-child(2) {
+          margin:0  24px;
+        }
+        &:hover {
+          color: #03A678;
+          border: 2px solid #00C57B;
+        }
+      }
+      .application_content_tab_active {
+        color: #03A678;
+        border: 2px solid #00C57B;
+      }
+
+    }
+    .no-data {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      margin-top: 10px;
+      width: 1080px;
+      .no-proposal {
+        width: 370px;
+        height: 200px;
+      }
+      .no-proposal-text {
+        margin-bottom: 0;
+        font-size: 12px;
+        font-family: PingFangSC-Regular, PingFang SC;
+        font-weight: 400;
+        color: #7A7F82;
+        line-height: 18px;
+      }
+      .initiate-proposal {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 0;
+        margin-top: 80px;
+        width: 1080px;
+        height: 280px;
+        background: url('../icon/application/proposal_pc.png') no-repeat;
+        background-size: 100% 100%;
+        a {
+          display: inline-block;
+          margin: 190px auto 0;
+          padding: 0 16px;
+          height: 36px;
+          line-height: 36px;
+          font-size: 14px;
+          font-family: PingFangSC-Semibold, PingFang SC;
+          font-weight: 600;
+          color: #FFF;
+          background: #00C57B;
+          border-radius: 23px;
+          &:hover {
+            box-shadow: 3px 3px 0px 0px #03A678;
+          }
+        }
+      }
+    }
+  }
+}
+@media #{$smWidth} {
+  .application_content {
+    padding-bottom: 20px;
+    margin: 30px auto 0;
+    width: 100%;
+    min-height: 800px;
+    &_tab {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding-bottom: 10px;
+      a {
+        display: inline-block;
+        padding: 0 24px;
+        height: 32px;
+        line-height: 30px;
+        font-size: 14px;
+        font-family: Montserrat-Bold, Montserrat;
+        font-weight: bold;
+        color: #4F4F4F;
+        border-radius: 8px;
+        border: 2px solid transparent;
+        &:nth-child(2) {
+          margin:0  20px;
+        }
+        &:hover {
+          color: #03A678;
+          border: 2px solid #00C57B;
+        }
+      }
+      .application_content_tab_active {
+        color: #03A678;
+        border: 2px solid #00C57B;
+      }
+    }
+     .no-data {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      margin-top: 40px;
+      width: 100%;
+      .no-proposal {
+        width: 222px;
+        height: 120px;
+      }
+      .no-proposal-text {
+        margin-bottom: 0;
+        font-size: 12px;
+        font-family: PingFangSC-Regular, PingFang SC;
+        font-weight: 400;
+        color: #7A7F82;
+        line-height: 18px;
+      }
+      .initiate-proposal {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 0;
+        margin-top: 80px;
+        width: 355px;
+        height: 168px;
+        background: url('../icon/application/proposal_h5.png') no-repeat;
+        background-size: 100% 100%;
+        a {
+          display: inline-block;
+          margin: 100px auto 0;
+          padding: 0 16px;
+          height: 36px;
+          line-height: 36px;
+          font-size: 14px;
+          font-family: PingFangSC-Semibold, PingFang SC;
+          font-weight: 600;
+          color: #FFF;
+          background: #00C57B;
+          border-radius: 23px;
+          &:hover {
+            box-shadow: 3px 3px 0px 0px #03A678;
+          }
+        }
+      }
+    }
+  }
+}
+@media #{$xsWidth} {
+  .application_content {
+    padding-bottom: 10px;
+    margin: 30px auto 0;
+    width: 350px;
+    min-height: 800px;
+    &_tab {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding-bottom: 10px;
+      a {
+        display: inline-block;
+        padding: 0 24px;
+        height: 32px;
+        line-height: 30px;
+        font-size: 14px;
+        font-family: Montserrat-Bold, Montserrat;
+        font-weight: bold;
+        color: #4F4F4F;
+        border-radius: 8px;
+        border: 2px solid transparent;
+        &:nth-child(2) {
+          margin:0  20px;
+        }
+        &:hover {
+          color: #03A678;
+          border: 2px solid #00C57B;
+        }
+      }
+      .application_content_tab_active {
+        color: #03A678;
+        border: 2px solid #00C57B;
+      }
+    }
+    .no-data {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      margin-top: 10px;
+      width: 100%;
+      .no-proposal {
+        width: 222px;
+        height: 120px;
+      }
+      .no-proposal-text {
+        margin-bottom: 0;
+        font-size: 12px;
+        font-family: PingFangSC-Regular, PingFang SC;
+        font-weight: 400;
+        color: #7A7F82;
+        line-height: 18px;
+      }
+      .initiate-proposal {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 0;
+        margin-top: 80px;
+        width: 355px;
+        height: 168px;
+        background: url('../icon/application/proposal_h5.png') no-repeat;
+        background-size: 100% 100%;
+        a {
+          display: inline-block;
+          margin: 100px auto 0;
+          padding: 0 28px;
+          height: 48px;
+          line-height: 48px;
+          font-size: 16px;
+          font-family: PingFangSC-Semibold, PingFang SC;
+          font-weight: 600;
+          color: #FFF;
+          background: #00C57B;
+          border-radius: 23px;
+          &:hover {
+            box-shadow: 3px 3px 0px 0px #03A678;
+          }
+        }
+      }
+    }
+  }
+}

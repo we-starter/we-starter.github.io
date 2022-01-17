@@ -1,0 +1,72 @@
+@media #{$desktop} {
+  .bread_crumbs {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    img {
+      width: 24px;
+      height: 24px;
+    }
+    span {
+      font-size: 14px;
+      font-family: Montserrat-Bold, Montserrat;
+      font-weight: bold;
+      color: #03A678;
+      line-height: 18px;
+    }
+  }
+}
+@media #{$mdWidth} {
+   .bread_crumbs {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    img {
+      width: 24px;
+      height: 24px;
+    }
+    span {
+      font-size: 14px;
+      font-family: Montserrat-Bold, Montserrat;
+      font-weight: bold;
+      color: #03A678;
+      line-height: 18px;
+    }
+  }
+}
+@media #{$smWidth} {
+   .bread_crumbs {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    img {
+      width: 24px;
+      height: 24px;
+    }
+    span {
+      font-size: 14px;
+      font-family: Montserrat-Bold, Montserrat;
+      font-weight: bold;
+      color: #03A678;
+      line-height: 18px;
+    }
+  }
+}
+@media #{$xsWidth} {
+   .bread_crumbs {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    img {
+      width: 24px;
+      height: 24px;
+    }
+    span {
+      font-size: 14px;
+      font-family: Montserrat-Bold, Montserrat;
+      font-weight: bold;
+      color: #03A678;
+      line-height: 18px;
+    }
+  }
+}

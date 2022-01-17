@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="34px" height="34px" viewBox="0 0 34 34" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>切片</title>
+    <defs>
+        <filter id="filter-1">
+            <feColorMatrix in="SourceGraphic" type="matrix" values="0 0 0 0 0.584314 0 0 0 0 0.584314 0 0 0 0 0.584314 0 0 0 1.000000 0"></feColorMatrix>
+        </filter>
+        <filter id="filter-2">
+            <feColorMatrix in="SourceGraphic" type="matrix" values="0 0 0 0 0.309804 0 0 0 0 0.309804 0 0 0 0 0.309804 0 0 0 1.000000 0"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="left-arrow-" transform="translate(-1222.000000, -329.000000)" filter="url(#filter-1)">
+            <g transform="translate(1222.000000, 329.000000)" id="编组">
+                <g filter="url(#filter-2)" id="chevron_right">
+                    <g transform="translate(13.000000, 10.000000)">
+                        <polygon id="路径" fill="#000000" fill-rule="nonzero" points="7.7131 7 1.70209 0.99001 0.28809 2.40401 4.8881 7.004 0.28809 11.597 1.70209 13.011"></polygon>
+                    </g>
+                </g>
+                <rect id="矩形" stroke="#4F4F4F" stroke-width="2" x="0" y="0" width="34" height="34" rx="4"></rect>
+            </g>
+        </g>
+    </g>
+</svg>

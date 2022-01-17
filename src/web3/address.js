@@ -1,5 +1,9 @@
 import MDexFactory from './abi/MDexFactory.json'
 import MDexRouter from '../web3/abi/MDexRouter.json'
+
+import VoteMainAbi from '../web3/abi/VoteMain.json'
+import VoteNFTAbi from '../web3/abi/VoteNFT.json'
+
 import Web3, {utils} from "web3";
 
 export const ChainId = {
@@ -198,4 +202,13 @@ export function GAS_FEE(chainId) {
       type: '0x2',
     }
   }[chainId]
+}
+// vote
+export const voteNFT = {
+  address: '0x203B4392ef59657c23fddE4CD37798f321220373',
+  abi: VoteNFTAbi
+}
+export const voteMain = {
+  address: '0x2fd64263220D8ce3497f95bD3aa5564Aa14b228a',
+  abi: VoteMainAbi
 }

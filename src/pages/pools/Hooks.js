@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect, useMemo } from 'react'
-import {getContract, getHttpWeb3, getLogs, useActiveWeb3React} from '../../web3'
+import {getHttpWeb3, getLogs, useActiveWeb3React} from '../../web3'
 import {
   ADDRESS_0,
   ChainId,
@@ -22,6 +22,7 @@ import MDexPool from '../../web3/abi/MDexPool.json'
 import Pools from '../../configs/pools'
 import Farm from '../../configs/farm'
 import Web3 from 'web3'
+import { voteMain } from '../../web3/address'
 import { ReactComponent as HUSD } from '../../assets/logo/HUSD.svg'
 import { ReactComponent as HT } from '../../assets/logo/HT.svg'
 import { ReactComponent as MDX } from '../../assets/logo/MDX.svg'
@@ -1403,3 +1404,77 @@ export const useAmountsOut = (path, amount, _chainId) => {
   }
   return [outAmount, fee]
 }
+
+export const VoteSpanVal = () => {
+  const { account, active, library } = useActiveWeb3React()
+  const blockHeight = useBlockHeight()
+  const [val, setVal] = useState('')
+  useEffect(() => {
+    const pool_contract = new ClientContract(voteMain.abi, voteMain.address, ChainId.HECO)
+    multicallClient([pool_contract.voteSpan()]).then((res) => {
+      setVal(res)
+    })
+    .catch((err) => {
+      console.log('error', err)
+    })
+  }, [library, account, active, blockHeight])
+  return val
+}
+
+export const VoteEndToClaimSpan = () => {
+  const { account, active, library } = useActiveWeb3React()
+  const blockHeight = useBlockHeight()
+  const [claimSpanVal, setClaimSpanVal] = useState('')
+  useEffect(() => {
+    const pool_contract = new ClientContract(voteMain.abi, voteMain.address, ChainId.HECO)
+    multicallClient([pool_contract.voteEndToClaimSpan()])
+      .then((res) => {
+        setClaimSpanVal(res)
+      })
+      .catch((err) => {
+        console.log('error', err)
+      })
+  }, [account, active, blockHeight, library])
+  return claimSpanVal
+}
+
+export const SuccessPercent = () => {
+  const { account, active, library } = useActiveWeb3React()
+  const blockHeight = useBlockHeight()
+  const [successPercentVal, setSuccessPercentVal] = useState('')
+  useEffect(() => {
+    const pool_contract = new ClientContract(voteMain.abi, voteMain.address, ChainId.HECO)
+    multicallClient([pool_contract.successPercent()])
+      .then((res) => {
+        let val = res[0]
+        setSuccessPercentVal(val)
+      })
+      .catch((err) => {
+        console.log('error', err)
+      })
+  }, [account, active, blockHeight, library])
+  return successPercentVal
+}
+
+export const VotesData = (propId, voteMax) => {
+   const { account, active, library } = useActiveWeb3React()
+   const blockHeight = useBlockHeight()
+  const [progressData, setProgressData] = useState('')
+   useEffect(() => {
+     const pool_contract = new ClientContract(voteMain.abi, voteMain.address, ChainId.HECO)
+     multicallClient([pool_contract.getVotes(propId)])
+       .then((res) => {
+         let resData = res[0]
+         setProgressData(
+           new BigNumber(formatAmount(resData[1]))
+             .div(new BigNumber(formatAmount(voteMax)).div(2))
+             .toFixed(2, 1)
+             .toString()
+         )
+       })
+       .catch((err) => {
+         console.log('error', err)
+       })
+   }, [account, active, blockHeight, library])
+   return progressData
+ }
