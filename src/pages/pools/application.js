@@ -20,6 +20,7 @@ import {
   VoteEndToClaimSpan,
 } from './Hooks'
 import BigNumber from 'bignumber.js'
+import {NavLink} from "react-router-dom";
 
 const Application = (props) => {
   const { account, active, library, chainId } = useActiveWeb3React()
@@ -174,9 +175,9 @@ const Application = (props) => {
                 <FormattedMessage id='applicationText5' />
               </p>
               <p className='initiate-proposal'>
-                <a>
+                <NavLink to='/application/apply'>
                   <FormattedMessage id='applicationText2' />
-                </a>
+                </NavLink>
               </p>
             </div>
           ) : (
