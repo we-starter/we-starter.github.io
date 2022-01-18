@@ -40,7 +40,7 @@ export default function Apply() {
   const [nftIndex, setNFTIndex] = useState(-1)
   const nftData = nftList[nftIndex]
   const ipfsData = nftData ? nftData.ipfsData : null
-  const [amount, setAmount] = useState('')
+  const [amount, setAmount] = useState(null)
   const [startTime, setStartTime] = useState('')
   const [submitLoading, setSubmitLoading] = useState(false)
 
@@ -54,7 +54,8 @@ export default function Apply() {
   useMemo(()=>{
     if (price && ipfsData?.totalRaise && isSetMin !== nftData.tokenId) {
       setIsSetMin(nftData.tokenId)
-      setAmount(Math.ceil((ipfsData.totalRaise / price).toFixed(2) * 0.2))
+      const amount_ = Math.ceil((ipfsData.totalRaise / price).toFixed(2) * 0.2)
+      setAmount(amount_ > 10000 ? amount_ : 10000)
     }
   }, [price_, ipfsData])
 
