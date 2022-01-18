@@ -1228,7 +1228,7 @@ export const useFarmInfo = (address = '') => {
   const [farmPoolsInfo, setFarmPoolsInfo] = useState(pool)
   const [reward2Radio, setReward2Radio] = useState(0)
 
-  const hasApr = pool.dueDate > now || !pool.dueDate
+  const hasApr = (pool.dueDate > now || !pool.dueDate) && !pool.isEnd
 
   useMemo(() => {
     if(hasApr && pool.poolType === 2 && pool.rewards2) {
