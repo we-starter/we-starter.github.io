@@ -58,6 +58,7 @@ export default [
     minAmountMortgage: '50000',
     poolType: 1, // 1单池，2LP，2sort
     awardNft: awardNftWARBadge,
+    isEnd: true
   },
 
   {
@@ -131,6 +132,7 @@ export default [
     mdexDaily: 762.97,
     mdexPid: '0x5a',
     poolType: 2, // 1单池，2LP，2sort
+    isEnd: true
   },
   {
     name: 'WAR POOL (DAO)',
