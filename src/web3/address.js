@@ -205,10 +205,10 @@ export function GAS_FEE(chainId) {
 }
 // vote
 export const voteNFT = {
-  address: '0xFeF7eF9FF582D154aFe329d906C13284Dd48b839',
+  address: '0x203B4392ef59657c23fddE4CD37798f321220373',//'0xFeF7eF9FF582D154aFe329d906C13284Dd48b839'
   abi: VoteNFTAbi
 }
 export const voteMain = {
-  address: '0x58Bc3bF42abf2694F9C4f0Cae23E690d8adA0168',
+  address: '0x2fd64263220D8ce3497f95bD3aa5564Aa14b228a',//'0x58Bc3bF42abf2694F9C4f0Cae23E690d8adA0168',
   abi: VoteMainAbi
 }
