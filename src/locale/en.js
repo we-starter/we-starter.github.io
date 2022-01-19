@@ -5,7 +5,7 @@ const en_US = {
   mortgage: 'collateral mining',
   liquidityPool: 'liquidity mining',
   crowdfund: 'Crowdfunding Pool',
-  projectApplication: 'Application',
+  projectApplication: 'IWO(DAO)',
   linkWallet: 'Connect wallet',
   coinCollar: 'Cumulative coin-days',
   transactionSuccess: 'transaction completed',

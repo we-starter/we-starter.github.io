@@ -5,7 +5,7 @@ const ru = {
   mortgage: 'попутный майнинг',
   liquidityPool: 'майнинг ликвидности',
   crowdfund: 'Пул краудфандинга',
-  projectApplication: 'Приложение',
+  projectApplication: 'IWO(DAO)',
   linkWallet: 'Подключить кошелек',
   coinCollar: 'Кумулятивные дни монет',
   transactionSuccess: 'транзакция завершена',
