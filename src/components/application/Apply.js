@@ -55,7 +55,8 @@ export default function Apply() {
     if (price && ipfsData?.totalRaise && isSetMin !== nftData.tokenId) {
       setIsSetMin(nftData.tokenId)
       const amount_ = Math.ceil((ipfsData.totalRaise / price).toFixed(2) * 0.2)
-      setAmount(amount_ > 10000 ? amount_ : 10000)
+      // setAmount(amount_ > 10000 ? amount_ : 10000)
+      setAmount(amount_ > 1 ? amount_ : 1)
     }
   }, [price_, ipfsData])
 
