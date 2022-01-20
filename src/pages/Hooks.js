@@ -40,12 +40,6 @@ export const useBalance = (address, networkId=ChainId.HECO) => {
             .then((res) => {
               setBalance(res)
             })
-          contract.methods
-            .balanceOf(account)
-            .call()
-            .then((res) => {
-              setBalance(res)
-            })
         }
       } catch (e) {
         console.log('load token balance error:', e)
