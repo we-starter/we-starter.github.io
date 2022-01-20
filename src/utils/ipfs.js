@@ -1,8 +1,8 @@
 import axios from 'axios'
 
 const config = {
-  APIKey: '875b76d3dbf166531331',
-  APISecret: 'eb66538a1ecaf754cdc1b1150c96b6693841640489dc3d9e2060b92ce2484da5',
+  APIKey: 'f0c20802fa676e56a4b0',
+  APISecret: '127bf8077607837dcdfdbfd1552dab4aca299b967fc5ceb837887261b9c07181',
   JWT: ''
 }
 
