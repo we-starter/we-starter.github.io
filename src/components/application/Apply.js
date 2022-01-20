@@ -55,8 +55,7 @@ export default function Apply() {
     if (price && ipfsData?.totalRaise && isSetMin !== nftData.tokenId) {
       setIsSetMin(nftData.tokenId)
       const amount_ = Math.ceil((ipfsData.totalRaise / price).toFixed(2) * 0.2)
-      // setAmount(amount_ > 10000 ? amount_ : 10000)
-      setAmount(amount_ > 1 ? amount_ : 1)
+      setAmount(amount_ > 10000 ? amount_ : 10000)
     }
   }, [price_, ipfsData])
 
@@ -180,7 +179,10 @@ export default function Apply() {
     if (!isApprove['nft_' + nftData.tokenId] || !isApprove.token) {
       return
     }
-    if (!amount || amount < 0 || !startTime) {
+    if (!amount || amount < 10000){
+      return message.warning('Min 10000 WAR')
+    }
+    if (!startTime) {
       return message.warning('Please Enter information completely')
     }
     if (amount < minAmountLimit) {
