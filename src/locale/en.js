@@ -6,6 +6,7 @@ const en_US = {
   liquidityPool: 'liquidity mining',
   crowdfund: 'Crowdfunding Pool',
   projectApplication: 'IWO(DAO)',
+  projectApplicationLink: 'Application',
   linkWallet: 'Connect wallet',
   coinCollar: 'Cumulative coin-days',
   transactionSuccess: 'transaction completed',

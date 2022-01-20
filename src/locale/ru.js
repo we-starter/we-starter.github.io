@@ -6,6 +6,7 @@ const ru = {
   liquidityPool: 'майнинг ликвидности',
   crowdfund: 'Пул краудфандинга',
   projectApplication: 'IWO(DAO)',
+  projectApplicationLink: 'Application',
   linkWallet: 'Подключить кошелек',
   coinCollar: 'Кумулятивные дни монет',
   transactionSuccess: 'транзакция завершена',

@@ -8,6 +8,7 @@ const zh_CN = {
   liquidityPool: '流动性挖矿',
   crowdfund: '众筹池',
   projectApplication: '项目申请',
+  projectApplicationLink: 'Application',
   linkWallet: '链接钱包',
   coinCollar: '累计币龄',
   transactionSuccess: '交易成功',
