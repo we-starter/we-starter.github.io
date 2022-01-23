@@ -524,7 +524,6 @@ const PoolsDetail = (props) => {
                       {pool &&
                         pool.type === 1 &&
                       (pool.lock && pool.settleable.unlockVolume > 0 || !pool.lock && pool.settleable.volume > 0) &&
-                        pool.settleable.claimedOf > 0 &&
                         pool.status >= 2 &&
                         now > pool.timeClose &&
                         now >= pool.time && (
