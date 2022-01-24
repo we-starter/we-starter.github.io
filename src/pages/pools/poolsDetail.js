@@ -658,7 +658,7 @@ const PoolsDetail = (props) => {
             </p>
             {(pool && pool.purchasedCurrencyOf.toString()) > 0 ? (
               <p className='pools_detail_record_title_data'>
-                {pool && formatAmount(pool.settleable.volume)}&nbsp;
+                {pool && pool.lock ? pool.settleable.unlockVolume : formatAmount(pool.settleable.volume)}&nbsp;
                 {pool && pool.underlying.symbol}
               </p>
             ) : (
@@ -667,44 +667,42 @@ const PoolsDetail = (props) => {
             {(pool && pool.purchasedCurrencyOf.toString()) > 0 ? (
               <p className='pools_detail_record_title_data'>
                 {pool &&
-                  pool.type === 0 &&
-                  pool.settleable.volume > 0 &&
-                  pool.status >= 2 &&
-                  now > pool.timeClose &&
-                  now >= pool.time && (
-                    <a
-                      className={cs(
-                        `pools_detail_record_btn ${
-                          pool
-                            ? 'pools_detail_record_btn_' + pool.networkId
-                            : ''
-                        }`
-                      )}
-                      onClick={() => onClaim()}
-                    >
-                      <FormattedMessage id='poolsDetailText5' />
-                    </a>
-                  )}
+                pool.type === 0 &&
+                pool.status >= 2 && (pool.lock && pool.settleable.unlockVolume > 0 || !pool.lock && pool.settleable.volume > 0) &&
+                now > pool.timeClose &&
+                now >= pool.time && (
+                  <a
+                    className={cs(
+                      `pools_detail_record_btn ${
+                        pool
+                          ? 'pools_detail_record_btn_' + pool.networkId
+                          : ''
+                      }`
+                    )}
+                    onClick={() => onClaim()}
+                  >
+                    <FormattedMessage id='poolsDetailText5' />
+                  </a>
+                )}
                 {pool &&
-                  pool.type === 1 &&
-                  pool.settleable.volume > 0 &&
-                  pool.settleable.claimedOf == 0 &&
-                  pool.status >= 2 &&
-                  now > pool.timeClose &&
-                  now >= pool.time && (
-                    <a
-                      className={cs(
-                        `pools_detail_record_btn ${
-                          pool
-                            ? 'pools_detail_record_btn_' + pool.networkId
-                            : ''
-                        }`
-                      )}
-                      onClick={() => onClaim()}
-                    >
-                      <FormattedMessage id='poolsDetailText5' />
-                    </a>
-                  )}
+                pool.type === 1 &&
+                (pool.lock && pool.settleable.unlockVolume > 0 || !pool.lock && pool.settleable.volume > 0) &&
+                pool.status >= 2 &&
+                now > pool.timeClose &&
+                now >= pool.time && (
+                  <a
+                    className={cs(
+                      `pools_detail_record_btn ${
+                        pool
+                          ? 'pools_detail_record_btn_' + pool.networkId
+                          : ''
+                      }`
+                    )}
+                    onClick={() => onClaim()}
+                  >
+                    <FormattedMessage id='poolsDetailText5' />
+                  </a>
+                )}
               </p>
             ) : (
               <p className='pools_detail_record_title_data'></p>
