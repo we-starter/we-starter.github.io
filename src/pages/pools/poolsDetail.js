@@ -498,14 +498,14 @@ const PoolsDetail = (props) => {
                         )}
                     </td>
                     <td>
-                      {pool && pool.lock ? pool.settleable.unlockVolume : formatAmount(pool.settleable.volume)}&nbsp;
+                      {pool && pool.settleable.unlockVolume }&nbsp;
                       {pool && pool.underlying.symbol}
                     </td>
                     <td>
                       {/*  && !pool.settleable.completed_ */}
                       {pool &&
                         pool.type === 0 &&
-                        pool.status >= 2 && (pool.lock && pool.settleable.unlockVolume > 0 || !pool.lock && pool.settleable.volume > 0) &&
+                        pool.status >= 2 && (pool.settleable.unlockVolume > 0) &&
                         now > pool.timeClose &&
                         now >= pool.time && (
                           <a
@@ -523,7 +523,7 @@ const PoolsDetail = (props) => {
                         )}
                       {pool &&
                         pool.type === 1 &&
-                      (pool.lock && pool.settleable.unlockVolume > 0 || !pool.lock && pool.settleable.volume > 0) &&
+                      (pool.settleable.unlockVolume > 0) &&
                         pool.status >= 2 &&
                         now > pool.timeClose &&
                         now >= pool.time && (
@@ -658,7 +658,7 @@ const PoolsDetail = (props) => {
             </p>
             {(pool && pool.purchasedCurrencyOf.toString()) > 0 ? (
               <p className='pools_detail_record_title_data'>
-                {pool && pool.lock ? pool.settleable.unlockVolume : formatAmount(pool.settleable.volume)}&nbsp;
+                {pool && pool.settleable.unlockVolume}&nbsp;
                 {pool && pool.underlying.symbol}
               </p>
             ) : (
@@ -668,7 +668,7 @@ const PoolsDetail = (props) => {
               <p className='pools_detail_record_title_data'>
                 {pool &&
                 pool.type === 0 &&
-                pool.status >= 2 && (pool.lock && pool.settleable.unlockVolume > 0 || !pool.lock && pool.settleable.volume > 0) &&
+                pool.status >= 2 && (pool.settleable.unlockVolume > 0) &&
                 now > pool.timeClose &&
                 now >= pool.time && (
                   <a
@@ -686,7 +686,7 @@ const PoolsDetail = (props) => {
                 )}
                 {pool &&
                 pool.type === 1 &&
-                (pool.lock && pool.settleable.unlockVolume > 0 || !pool.lock && pool.settleable.volume > 0) &&
+                (pool.settleable.unlockVolume > 0) &&
                 pool.status >= 2 &&
                 now > pool.timeClose &&
                 now >= pool.time && (

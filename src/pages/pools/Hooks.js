@@ -601,7 +601,7 @@ const debounceFn = debounce((pools, account, callback) => {
               volume,
               rate: rate_,
               // rate: rate < 10 ? Web3.utils.toWei(`${new_rate}`, 'ether') : rate,
-              unlockVolume: formatAmount(unlockVolume, pool.underlying.decimal),
+              unlockVolume: pool.lock ? formatAmount(unlockVolume, pool.underlying.decimal) : formatAmount(volume, pool.underlying.decimal),
               unlockRate
             },
           })
@@ -801,7 +801,9 @@ const debounceFn = debounce((pools, account, callback) => {
               volume: pool.nft ? tokenValue : offeredOf, // 预计中签量,nft是全量
               claimedOf, // 获取募资币种数量
               rate: Web3.utils.toWei('1', 'ether'), // 预计中签率
-              unlockVolume: fromWei(offeredOf, 18).toNumber() * (unlockRate/100) - fromWei(claimedOf).toNumber()
+              unlockVolume: pool.lock ? (fromWei(offeredOf, 18).toNumber() * (unlockRate/100) - fromWei(claimedOf).toNumber()) : (
+                fromWei(offeredOf, 18).toNumber() - fromWei(claimedOf, 18).toNumber()
+              )
             },
           })
         })
