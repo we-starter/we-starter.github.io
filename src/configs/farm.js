@@ -130,7 +130,7 @@ export default [
     mdexReward: true,
     networkId: testNetworkId || 128,
     lpToken: 'MDEX LP Token',
-    mdexDaily: 762.97,
+    mdexDaily: 382.06,
     mdexPid: '0x5a',
     poolType: 2, // 1单池，2LP，2sort
   },
