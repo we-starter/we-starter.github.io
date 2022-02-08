@@ -1348,6 +1348,22 @@ export const useFarmInfo = (address = '') => {
         currency_allowance = data[4]
         earned2 = data[5]
       }
+
+      if (pool.networkId === ChainId.HECO) {
+        // 处理mdx奖励减半问题
+        const blockNumber = await multicallClient.getBlockInfo(ChainId.HECO).then(res => res.number)
+        const mdexPoolContract = new ClientContract(MDexPool, '0xfb03e11d93632d97a8981158a632dd5986f5e909', pool.networkId)
+         await multicallClient([
+           mdexPoolContract.startBlock(),
+           mdexPoolContract.halvingPeriod()
+        ]).then(res => {
+          const [startBlock, halvingPeriod] = res
+          const n = Math.floor((blockNumber - startBlock) / halvingPeriod) - 3
+           for (let i = 0; i < n; i++) {
+             APR2 =  new BigNumber(APR2).div(2)
+           }
+         })
+      }
       let APR_ = fromWei(
         new BigNumber(APR).plus(new BigNumber(APR2)).toString(),
         18
