@@ -26,7 +26,7 @@ export const MenuMask = () => {
   const [showMenu, setShowMenu] = useState(false)
   const { dispatch, state } = useContext(mainContext)
   const location = useLocation()
-  const { balance } = useBalance(WAR_ADDRESS(chainId))
+  const { balance } = useBalance(WAR_ADDRESS(chainId), chainId)
   const [language, setLanguage] = useState(
     (state.locale === 'en' && 'English') ||
       (state.locale === 'zh' && '中文简体') ||

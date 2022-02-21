@@ -245,7 +245,7 @@ const PoolsIndex = (props) => {
           'pools-type_card_box',
           ((pool && pool.underlying.symbol === 'FIX') || type === 1) &&
             'pools-type_private',
-          pool && pool.is_coming && 'pools-type_hover_style',
+          pool && pool.is_coming && ('pools-type_hover_style_' + pool.networkId),
           tabFlag === 3 && 'pools-type_flashPool'
         )}
         onClick={(e) =>
@@ -633,6 +633,7 @@ const PoolsIndex = (props) => {
                 'pools-type_enter',
                 pool.networkId == ChainId.MATIC && 'pools-type_matic_enter',
                 pool.networkId == ChainId.BSC && 'pools-type_bsc_enter',
+                pool.networkId == ChainId.AVALANCHE && 'pools-type_avalanche_enter',
                 pool &&
                   pool.underlying.name === 'LBP' &&
                   'pools-type_lbp_enter',
@@ -681,7 +682,8 @@ const PoolsIndex = (props) => {
               className={cs(
                 'pools-type_enter',
                 pool.networkId == ChainId.MATIC && 'pools-type_matic_enter',
-                pool.networkId == ChainId.BSC && 'pools-type_bsc_enter'
+                pool.networkId == ChainId.BSC && 'pools-type_bsc_enter',
+                pool.networkId == ChainId.AVALANCHE && 'pools-type_avalanche_enter',
               )}
               onClick={(e) => {
                 changeNetwork(pool.networkId).then(() => {
@@ -703,6 +705,9 @@ const PoolsIndex = (props) => {
               )}
               {pool.networkId == ChainId.BSC && (
                 <FormattedMessage id='poolTextS56' />
+              )}
+              {pool.networkId == ChainId.AVALANCHE && (
+                <FormattedMessage id='poolTextS43114' />
               )}
             </a>
           )}

@@ -221,6 +221,7 @@ const en_US = {
   poolTextS128: 'Switch to HECO',
   poolTextS137: 'Switch to Matic',
   poolTextS56: 'Switch to BSC',
+  poolTextS43114: 'Switch to Avalanche',
   poolText27: 'Switch success',
   workShopText1: 'Time in',
   workShopText2: 'Status',

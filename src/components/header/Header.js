@@ -25,6 +25,7 @@ export const Header = () => {
   const { active, account, chainId } = useActiveWeb3React()
   const { dispatch, state } = useContext(mainContext)
   const { balance } = useBalance(WAR_ADDRESS(chainId), chainId)
+  console.log('balance', balance)
   const [language, setLanguage] = useState(
     (state.locale === 'en' && 'English') ||
       (state.locale === 'zh' && '中文简体') ||

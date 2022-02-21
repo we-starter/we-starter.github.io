@@ -1,15 +1,16 @@
 import React, { useContext, useCallback, useEffect } from 'react'
 import {InjectedConnector, NoEthereumProviderError, UserRejectedRequestError} from '@web3-react/injected-connector'
 import { WalletConnectConnector } from '@web3-react/walletconnect-connector'
-import {ChainId, SCAN_ADDRESS} from '../web3/address'
+import {ChainId, RPC_URLS, SCAN_ADDRESS} from '../web3/address'
 import { message } from 'antd'
 import { mainContext } from '../reducer'
 import {UnsupportedChainIdError, useWeb3React} from "@web3-react/core";
+import Web3 from "web3";
 
 export const POLLING_INTERVAL = 12000
 
 export const injected = new InjectedConnector({
-  supportedChainIds: [ChainId.HECO, ChainId.BSC, ChainId.MATIC, ChainId.LOCALHOST],
+  supportedChainIds: [ChainId.HECO, ChainId.BSC, ChainId.MATIC, ChainId.LOCALHOST, ChainId.AVALANCHE],
 })
 
 
@@ -21,14 +22,21 @@ const bscWalletConnector = new WalletConnectConnector({
 })
 
 const hecoWalletConnector = new WalletConnectConnector({
-  rpc: { 128: 'https://http-mainnet-node.huobichain.com\n' },
+  rpc: { 128: 'https://http-mainnet-node.huobichain.com' },
   bridge: 'https://bridge.walletconnect.org',
   qrcode: true,
   pollingInterval: POLLING_INTERVAL,
 })
 
 const maticWalletConnector = new WalletConnectConnector({
-  rpc: { 137: 'https://rpc-mainnet.maticvigil.com\n' },
+  rpc: { 137: 'https://rpc-mainnet.maticvigil.com' },
+  bridge: 'https://bridge.walletconnect.org',
+  qrcode: true,
+  pollingInterval: POLLING_INTERVAL,
+})
+
+const avalancheWalletConnector = new WalletConnectConnector({
+  rpc: { [ChainId.AVALANCHE]: RPC_URLS(ChainId.AVALANCHE) },
   bridge: 'https://bridge.walletconnect.org',
   qrcode: true,
   pollingInterval: POLLING_INTERVAL,
@@ -38,6 +46,7 @@ export const walletConnector = {
   [ChainId.HECO]: hecoWalletConnector,
   [ChainId.BSC]: bscWalletConnector,
   [ChainId.MATIC]: maticWalletConnector,
+  [ChainId.AVALANCHE]: avalancheWalletConnector,
 }
 
 const bscNetwork =  {
@@ -50,6 +59,18 @@ const bscNetwork =  {
   },
   rpcUrls: ['https://bsc-dataseed.binance.org/'],
   blockExplorerUrls: [SCAN_ADDRESS[ChainId.BSC]],
+}
+
+const avalancheNetwork =  {
+  chainId: '0xa86a',
+  chainName: 'Avalanche Mainnet',
+  nativeCurrency: {
+    name: 'AVAX',
+    symbol: 'AVAX',
+    decimals: 18,
+  },
+  rpcUrls: [RPC_URLS(ChainId.AVALANCHE)],
+  blockExplorerUrls: [SCAN_ADDRESS[ChainId.AVALANCHE]],
 }
 
 const hecoNetwork = {
@@ -81,6 +102,7 @@ const maticNetwork = {
 const networkConf = {
   [ChainId.HECO]: hecoNetwork,
   [ChainId.BSC]: bscNetwork,
+  [ChainId.AVALANCHE]: avalancheNetwork,
   [ChainId.MATIC]: maticNetwork
 }
 

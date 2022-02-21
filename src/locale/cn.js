@@ -225,6 +225,7 @@ const zh_CN = {
   poolTextS128: '切换到 HECO',
   poolTextS137: '切换到 Matic',
   poolTextS56: '切换到 BSC',
+  poolTextS43114: '切换到 Avalanche',
   poolText27: '切换成功',
   workShopText1: 'Time in',
   workShopText2: 'Status',
