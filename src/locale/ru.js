@@ -75,6 +75,7 @@ const ru = {
   poolsDetailText3: 'Присоединиться к пулу',
   poolsDetailText4: 'Просмотреть HECO',
   poolsDetailText400: 'Просмотреть BSC',
+  poolsDetailText4000: 'Просмотреть Avalanche',
   poolsDetailText5: 'Требовать получения',
   poolsDetailText6: 'Подробные сведения о пуле',
   poolsDetailText7: 'О проекте',

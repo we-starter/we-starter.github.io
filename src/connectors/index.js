@@ -63,7 +63,7 @@ const bscNetwork =  {
 
 const avalancheNetwork =  {
   chainId: '0xa86a',
-  chainName: 'Avalanche Mainnet',
+  chainName: 'Avalanche C-Chain',
   nativeCurrency: {
     name: 'AVAX',
     symbol: 'AVAX',

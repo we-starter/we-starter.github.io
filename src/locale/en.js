@@ -74,6 +74,7 @@ const en_US = {
   poolsDetailText3: 'Join Pool',
   poolsDetailText4: 'View HECO',
   poolsDetailText400: 'View BSC',
+  poolsDetailText4000: 'View Avalanche',
   poolsDetailText5: 'Claim',
   poolsDetailText6: 'Pool Details',
   poolsDetailText7: 'About the Project',

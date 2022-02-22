@@ -11,7 +11,7 @@ config({
     },
     [ChainId.AVALANCHE]: {
       url: 'https://api.avax.network/ext/bc/C/rpc',
-      address: '',
+      address: '0xC379170D60aa65c2892C547DC59dCb9B5bd7a7c6',
     },
   }
 })

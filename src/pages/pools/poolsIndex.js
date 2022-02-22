@@ -331,7 +331,7 @@ const PoolsIndex = (props) => {
                 <FormattedMessage id='LBPSupply' />
                 <i>
                   {formatNumber(
-                    formatAmount(totalPurchasedAmount, pool.currency.decimal, 2)
+                    formatAmount(totalPurchasedAmount, 0, 2)
                   )}{' '}
                   {pool.underlying.symbol}
                 </i>
@@ -345,7 +345,7 @@ const PoolsIndex = (props) => {
                 <FormattedMessage id='totalRaised' />
                 <i>
                   {formatNumber(
-                    formatAmount(totalPurchasedAmount, pool.currency.decimal, 2)
+                    formatAmount(totalPurchasedAmount, 0, 2)
                   )}{' '}
                   {currency.symbol}
                 </i>

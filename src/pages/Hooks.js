@@ -22,7 +22,7 @@ export const useBalance = (address, networkId=ChainId.HECO) => {
   // const pools = useFarmInfo()
 
   useEffect(() => {
-    if (library && active && networkId !== ChainId.AVALANCHE) {
+    if (library && active && !(networkId === ChainId.AVALANCHE && address === WAR_ADDRESS())) {
       try {
         // console.log('request___6')
         if (address === '0x0') {

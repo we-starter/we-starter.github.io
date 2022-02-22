@@ -29,6 +29,7 @@ import BTCMT from '../assets/icon/BTCMT.svg'
 import MATE from '../assets/icon/MATE.png'
 import CP from '../assets/icon/CP.jpg'
 import HRS from '../assets/icon/HRS.png'
+import CryptoSteam from '../assets/icon/CryptoSteam.png'
 import WARBadge from '../assets/icon/war-badge.png'
 import WNFTAbi from '../web3/abi/WARBadge.json'
 import {ChainId} from "../web3/address";
@@ -51,7 +52,7 @@ export default [
   //     symbol: 'USDT',
   //   },
   //   type: 1,
-  //   defaultRatio: '100000000000000000000',
+  //   defaultRatio: '100',
   //   nft:{
   //     icon: WARBadge,
   //     address: '0x09D3D9012F9Ccc60F3E947E635A531350c3116ea',
@@ -105,164 +106,164 @@ export default [
   // },
 
   {
-    name: 'Player',
-    address: 'ox1111111',
-    icon: HRS,
+    name: 'PLAYER-test',
+    address: '0xda7Bdeb4E43b31744311C7dd59173bcabfa2b010',
+    icon: CryptoSteam,
     abi: Offering,
-    start_at: '1642248000',
-    is_top: true,
-    is_coming: true,
-    currency: {
-      address: '0x55d398326f99059ff775485246999027b3197955', // 如果是0x0则是ht
-      symbol: 'USDT',
-      decimal: 18,
-    },
-    type: 1, // 非1 则为公有池，为1 则为私有池
-    isPrivate: true,
-    underlying: {
-      address: '0xB4e4E2bA82420B07847654B163C35E2D7774af38',
-      decimal: 18,
-      symbol: 'HRS',
-      name: 'HRS ',
-      total_supply: '100,000,000,000.00',
-      holders: '-',
-      transfers: '-',
-    },
-    amount: '12500000',
-    pool_info: {
-      token_distribution: 'Feb 5th at 12:00 UTC',
-      min_allocation: '0',
-      max_allocation: '125 USDT',
-      min_swap_level: '5,000 USDT',
-    },
-    website: 'https://heres.is',
-    white_paper: 'https://drive.google.com/file/d/1fcCByMyru9Vc_sXjTliTSPAYXVyDet7Q/view?usp=sharing',
-    twitter: 'https://twitter.com/HeresOfficial',
-    Telegram_Channel: 'https://t.me/heresglobalcommunity',
-    Github: '-',
-    yuque: '-',
-    progress: 0,
-    status: 0, // 状态
-    ratio: '1HRS=0.0004USDT', // 比例
-    time: '1644062400', // 结算时间点
-    purchasedCurrencyOf: 0, // 已购买币种
-    totalPurchasedAmount: '5000000000000000000000', // 总购买数量
-    totalPurchasedUnderlying: '0', // 总购买金额
-    totalPurchasedCurrency: '0', // 总购买币种
-    is_flash: false,
-    link_url: 'https://heres.is',
-    project_introduction: '',
-    duration: '-', // 完成时间
-    totalApplicants: '-', // 申请总人数
-    winningRate: '-', // 申请中签率
-    committed: '', // 超募比例
-    total: '', // 参与资金规模
-    poolType: 0, // 值为 1 代表 定向
-    networkId: testNetworkId || ChainId.AVALANCHE,
-  },
-  {
-    name: 'Player',
-    address: '0x222222',
-    icon: HRS,
-    abi: Offering,
-    start_at: '1642248000',
-    is_top: true,
-    is_coming: true,
-    currency: {
-      address: '0x55d398326f99059ff775485246999027b3197955', // 如果是0x0则是ht
-      symbol: 'USDT',
-      decimal: 18,
-    },
-    type: 1, // 非1 则为公有池，为1 则为私有池
-    isPrivate: true,
-    underlying: {
-      address: '0xB4e4E2bA82420B07847654B163C35E2D7774af38',
-      decimal: 18,
-      symbol: 'HRS',
-      name: 'HRS ',
-      total_supply: '100,000,000,000.00',
-      holders: '-',
-      transfers: '-',
-    },
-    amount: '50000000',//underlying的量
-    pool_info: {
-      token_distribution: 'Feb 5th at 12:00 UTC',
-      min_allocation: '0',
-      max_allocation: '100 USDT',
-      min_swap_level: '20,000 USDT',
-    },
-    website: 'https://heres.is',
-    white_paper: 'https://drive.google.com/file/d/1fcCByMyru9Vc_sXjTliTSPAYXVyDet7Q/view?usp=sharing',
-    twitter: 'https://twitter.com/HeresOfficial',
-    Telegram_Channel: 'https://t.me/heresglobalcommunity',
-    Github: '-',
-    yuque: '-',
-    progress: 0,
-    status: 0, // 状态
-    ratio: '1HRS=0.0004USDT', // 比例
-    time: '1644062400', // 结算时间点
-    purchasedCurrencyOf: 0, // 已购买币种
-    totalPurchasedAmount: '20000000000000000000000', // 总购买数量
-    totalPurchasedUnderlying: '0', // 总购买金额
-    totalPurchasedCurrency: '0', // 总购买币种
-    is_flash: false,
-    link_url: 'https://heres.is',
-    project_introduction: '',
-    duration: '-', // 完成时间
-    totalApplicants: '-', // 申请总人数
-    winningRate: '-', // 申请中签率
-    committed: '', // 超募比例
-    total: '', // 参与资金规模
-    poolType: 0, // 值为 1 代表 定向
-    networkId: testNetworkId || ChainId.AVALANCHE,
-  },
-  {
-    name: 'Player',
-    address: '0x333333',
-    icon: HRS,
-    abi: StarterV3,
-    start_at: '1642248000',
+    start_at: '1645459200',
     is_top: true,
     is_coming: false,
     currency: {
-      address: '0x55d398326f99059ff775485246999027b3197955', // 如果是0x0则是ht
+      address: '0x279B4be7b1A751EaD807d4949DeF4A1834e1E755', // 如果是0x0则是ht
+      symbol: 'WUSDT6',
+      decimal: 6,
+    },
+    type: 1, // 非1 则为公有池，为1 则为私有池
+    isPrivate: true,
+    underlying: {
+      address: '0x2863138A02fb80599630B6e97F297E6154EDDc64',
+      decimal: 9,
+      symbol: 'WT9',
+      name: 'WT9 ',
+      total_supply: '1,000,000,000.00',
+      holders: '-',
+      transfers: '-',
+    },
+    amount: '30000',//
+    pool_info: {
+      token_distribution: 'Feb 25th at 14:00 UTC',
+      min_allocation: '0',
+      max_allocation: '100 USDT',
+      min_swap_level: '5,000 USDT',
+    },
+    website: 'https://www.cryptosteam.com/',
+    white_paper: 'https://www.certik.com/projects/cryptosteam',
+    twitter: 'https://twitter.com/DedragonWorld',
+    Telegram_Channel: 'https://t.me/dedragon_cryptosteam',
+    Github: 'https://github.com/TheCryptoSteam/contracts',
+    yuque: '-',
+    progress: 0,
+    status: 0, // 状态
+    ratio: '1WT9=0.05WUSDT6', // 比例
+    time: '1645533000', // 结算时间点
+    purchasedCurrencyOf: 0, // 已购买币种
+    totalPurchasedAmount: '1500', // 总购买数量 min_swap_level, amount/price
+    totalPurchasedUnderlying: '0', // 总购买金额
+    totalPurchasedCurrency: '0', // 总购买币种
+    is_flash: false,
+    link_url: 'https://www.cryptosteam.com/',
+    project_introduction: '',
+    duration: '-', // 完成时间
+    totalApplicants: '-', // 申请总人数
+    winningRate: '-', // 申请中签率
+    committed: '', // 超募比例
+    total: '', // 参与资金规模
+    poolType: 0, // 值为 1 代表 定向
+    networkId: testNetworkId || ChainId.AVALANCHE,
+  },
+  {
+    name: 'PLAYER-test',
+    address: '0x2222233',
+    icon: CryptoSteam,
+    abi: Offering,
+    start_at: '1645459200',
+    is_top: true,
+    is_coming: true,
+    currency: {
+      address: '0xc7198437980c041c805A1EDcbA50c1Ce5db95118', // 如果是0x0则是ht
       symbol: 'USDT',
-      decimal: 18,
+      decimal: 6,
+    },
+    type: 1, // 非1 则为公有池，为1 则为私有池
+    isPrivate: true,
+    underlying: {
+      address: '0xbb648df4E3d69CF5203e3D161f5CD2Cc9cfD4350',
+      decimal: 9,
+      symbol: 'PLAYER',
+      name: 'PLAYER ',
+      total_supply: '1,000,000,000.00',
+      holders: '-',
+      transfers: '-',
+    },
+    amount: '2500',
+    pool_info: {
+      token_distribution: 'Feb 25th at 14:00 UTC',
+      min_allocation: '0',
+      max_allocation: '100 USDT',
+      min_swap_level: '5,000 USDT',
+    },
+    website: 'https://www.cryptosteam.com/',
+    white_paper: 'https://www.certik.com/projects/cryptosteam',
+    twitter: 'https://twitter.com/DedragonWorld',
+    Telegram_Channel: 'https://t.me/dedragon_cryptosteam',
+    Github: 'https://github.com/TheCryptoSteam/contracts',
+    yuque: '-',
+    progress: 0,
+    status: 0, // 状态
+    ratio: '1Play=0.05USDT', // 比例
+    time: '1645533000', // 结算时间点
+    purchasedCurrencyOf: 0, // 已购买币种
+    totalPurchasedAmount: '50000000000', // 总购买数量 min_swap_level
+    totalPurchasedUnderlying: '0', // 总购买金额
+    totalPurchasedCurrency: '0', // 总购买币种
+    is_flash: false,
+    link_url: 'https://www.cryptosteam.com/',
+    project_introduction: '',
+    duration: '-', // 完成时间
+    totalApplicants: '-', // 申请总人数
+    winningRate: '-', // 申请中签率
+    committed: '', // 超募比例
+    total: '', // 参与资金规模
+    poolType: 0, // 值为 1 代表 定向
+    networkId: testNetworkId || ChainId.AVALANCHE,
+  },
+  {
+    name: 'PLAYER-test',
+    address: '0x533D6643c9D55530F046832451C19d2c8649DCC2',
+    icon: CryptoSteam,
+    abi: StarterV3,
+    start_at: '1645459200',
+    is_top: true,
+    is_coming: false,
+    currency: {
+      address: '0x279B4be7b1A751EaD807d4949DeF4A1834e1E755', // 如果是0x0则是ht
+      symbol: 'WUSDT6',
+      decimal: 6,
     },
     type: 0, // 非1 则为公有池，为1 则为私有池
     isPrivate: false,
     underlying: {
-      address: '0xB4e4E2bA82420B07847654B163C35E2D7774af38',
-      decimal: 18,
-      symbol: 'HRS',
-      name: 'HRS',
-      total_supply: '100,000,000,000.00',
+      address: '0x2863138A02fb80599630B6e97F297E6154EDDc64',
+      decimal: 9,
+      symbol: 'WT9',
+      name: 'WT9 ',
+      total_supply: '1,000,000,000.00',
       holders: '-',
       transfers: '-',
     },
-    amount: '62500000',//underlying的量
+    amount: '20000',//underlying 的量,totalPurchasedAmount/price
     pool_info: {
-      token_distribution: 'Feb 5th at 12:00 UTC',
+      token_distribution: 'Feb 25th at 14:00 UTC',
       min_allocation: '0',
-      max_allocation: '25,000 USDT',
-      min_swap_level: '25,000 USDT',
+      max_allocation: '100 USDT',
+      min_swap_level: '5,000 USDT',
     },
-    website: 'https://heres.is',
-    white_paper: 'https://drive.google.com/file/d/1fcCByMyru9Vc_sXjTliTSPAYXVyDet7Q/view?usp=sharing',
-    twitter: 'https://twitter.com/HeresOfficial',
-    Telegram_Channel: 'https://t.me/heresglobalcommunity',
-    Github: '-',
+    website: 'https://www.cryptosteam.com/',
+    white_paper: 'https://www.certik.com/projects/cryptosteam',
+    twitter: 'https://twitter.com/DedragonWorld',
+    Telegram_Channel: 'https://t.me/dedragon_cryptosteam',
+    Github: 'https://github.com/TheCryptoSteam/contracts',
     yuque: '-',
     progress: 0,
     status: 0, // 状态
-    ratio: '1HRS=0.0004USDT', // 比例
-    time: '1644062400', // 结算时间点
+    ratio: '1Play=0.05USDT', // 比例
+    time: '1645533000', // 结算时间点
     purchasedCurrencyOf: 0, // 已购买币种
-    totalPurchasedAmount: '25000000000000000000000', // 总购买数量u
+    totalPurchasedAmount: '1000', // 总购买数量 min_swap_level,amount/price
     totalPurchasedUnderlying: '0', // 总购买金额
     totalPurchasedCurrency: '0', // 总购买币种
     is_flash: false,
-    link_url: 'https://heres.is',
+    link_url: 'https://www.cryptosteam.com/',
     project_introduction: '',
     duration: '-', // 完成时间
     totalApplicants: '-', // 申请总人数
@@ -273,6 +274,175 @@ export default [
     networkId: testNetworkId || ChainId.AVALANCHE,
   },
 
+
+  {
+    name: 'PLAYER',
+    address: '0x1111111',
+    icon: CryptoSteam,
+    abi: Offering,
+    start_at: '1645797600',
+    is_top: true,
+    is_coming: true,
+    currency: {
+      address: '0xc7198437980c041c805A1EDcbA50c1Ce5db95118', // 如果是0x0则是ht
+      symbol: 'USDT',
+      decimal: 6,
+    },
+    type: 1, // 非1 则为公有池，为1 则为私有池
+    isPrivate: true,
+    underlying: {
+      address: '0xbb648df4E3d69CF5203e3D161f5CD2Cc9cfD4350',
+      decimal: 9,
+      symbol: 'PLAYER',
+      name: 'PLAYER ',
+      total_supply: '1,000,000,000.00',
+      holders: '-',
+      transfers: '-',
+    },
+    amount: '12500000',
+    pool_info: {
+      token_distribution: 'Feb 25th at 14:00 UTC',
+      min_allocation: '0',
+      max_allocation: '100 USDT',
+      min_swap_level: '5,000 USDT',
+    },
+    website: 'https://www.cryptosteam.com/',
+    white_paper: 'https://www.certik.com/projects/cryptosteam',
+    twitter: 'https://twitter.com/DedragonWorld',
+    Telegram_Channel: 'https://t.me/dedragon_cryptosteam',
+    Github: 'https://github.com/TheCryptoSteam/contracts',
+    yuque: '-',
+    progress: 0,
+    status: 0, // 状态
+    ratio: '1Play=0.05USDT', // 比例
+    time: '1646380800', // 结算时间点
+    purchasedCurrencyOf: 0, // 已购买币种
+    totalPurchasedAmount: '5000000000', // 总购买数量 min_swap_level
+    totalPurchasedUnderlying: '0', // 总购买金额
+    totalPurchasedCurrency: '0', // 总购买币种
+    is_flash: false,
+    link_url: 'https://www.cryptosteam.com/',
+    project_introduction: '',
+    duration: '-', // 完成时间
+    totalApplicants: '-', // 申请总人数
+    winningRate: '-', // 申请中签率
+    committed: '', // 超募比例
+    total: '', // 参与资金规模
+    poolType: 0, // 值为 1 代表 定向
+    networkId: testNetworkId || ChainId.AVALANCHE,
+  },
+  {
+    name: 'PLAYER',
+    address: '0x22222',
+    icon: CryptoSteam,
+    abi: Offering,
+    start_at: '1645797600',
+    is_top: true,
+    is_coming: true,
+    currency: {
+      address: '0xc7198437980c041c805A1EDcbA50c1Ce5db95118', // 如果是0x0则是ht
+      symbol: 'USDT',
+      decimal: 6,
+    },
+    type: 1, // 非1 则为公有池，为1 则为私有池
+    isPrivate: true,
+    underlying: {
+      address: '0xbb648df4E3d69CF5203e3D161f5CD2Cc9cfD4350',
+      decimal: 9,
+      symbol: 'PLAYER',
+      name: 'PLAYER ',
+      total_supply: '1,000,000,000.00',
+      holders: '-',
+      transfers: '-',
+    },
+    amount: '12500000',
+    pool_info: {
+      token_distribution: 'Feb 25th at 14:00 UTC',
+      min_allocation: '0',
+      max_allocation: '100 USDT',
+      min_swap_level: '5,000 USDT',
+    },
+    website: 'https://www.cryptosteam.com/',
+    white_paper: 'https://www.certik.com/projects/cryptosteam',
+    twitter: 'https://twitter.com/DedragonWorld',
+    Telegram_Channel: 'https://t.me/dedragon_cryptosteam',
+    Github: 'https://github.com/TheCryptoSteam/contracts',
+    yuque: '-',
+    progress: 0,
+    status: 0, // 状态
+    ratio: '1Play=0.05USDT', // 比例
+    time: '1646380800', // 结算时间点
+    purchasedCurrencyOf: 0, // 已购买币种
+    totalPurchasedAmount: '5000000000', // 总购买数量 min_swap_level
+    totalPurchasedUnderlying: '0', // 总购买金额
+    totalPurchasedCurrency: '0', // 总购买币种
+    is_flash: false,
+    link_url: 'https://www.cryptosteam.com/',
+    project_introduction: '',
+    duration: '-', // 完成时间
+    totalApplicants: '-', // 申请总人数
+    winningRate: '-', // 申请中签率
+    committed: '', // 超募比例
+    total: '', // 参与资金规模
+    poolType: 0, // 值为 1 代表 定向
+    networkId: testNetworkId || ChainId.AVALANCHE,
+  },
+  {
+    name: 'PLAYER',
+    address: '0x333333',
+    icon: CryptoSteam,
+    abi: StarterV3,
+    start_at: '1645797600',
+    is_top: true,
+    is_coming: true,
+    currency: {
+      address: '0xc7198437980c041c805A1EDcbA50c1Ce5db95118', // 如果是0x0则是ht
+      symbol: 'USDT',
+      decimal: 6,
+    },
+    type: 0, // 非1 则为公有池，为1 则为私有池
+    isPrivate: false,
+    underlying: {
+      address: '0xbb648df4E3d69CF5203e3D161f5CD2Cc9cfD4350',
+      decimal: 9,
+      symbol: 'PLAYER',
+      name: 'PLAYER ',
+      total_supply: '1,000,000,000.00',
+      holders: '-',
+      transfers: '-',
+    },
+    amount: '12500000',
+    pool_info: {
+      token_distribution: 'Feb 25th at 14:00 UTC',
+      min_allocation: '0',
+      max_allocation: '100 USDT',
+      min_swap_level: '5,000 USDT',
+    },
+    website: 'https://www.cryptosteam.com/',
+    white_paper: 'https://www.certik.com/projects/cryptosteam',
+    twitter: 'https://twitter.com/DedragonWorld',
+    Telegram_Channel: 'https://t.me/dedragon_cryptosteam',
+    Github: 'https://github.com/TheCryptoSteam/contracts',
+    yuque: '-',
+    progress: 0,
+    status: 0, // 状态
+    ratio: '1Play=0.05USDT', // 比例
+    time: '1646380800', // 结算时间点
+    purchasedCurrencyOf: 0, // 已购买币种
+    totalPurchasedAmount: '5000000000', // 总购买数量 min_swap_level
+    totalPurchasedUnderlying: '0', // 总购买金额
+    totalPurchasedCurrency: '0', // 总购买币种
+    is_flash: false,
+    link_url: 'https://www.cryptosteam.com/',
+    project_introduction: '',
+    duration: '-', // 完成时间
+    totalApplicants: '-', // 申请总人数
+    winningRate: '-', // 申请中签率
+    committed: '', // 超募比例
+    total: '', // 参与资金规模
+    poolType: 0, // 值为 1 代表 定向
+    networkId: testNetworkId || ChainId.AVALANCHE,
+  },
 
 
   {
@@ -317,7 +487,7 @@ export default [
     ratio: '1HRS=0.0004USDT', // 比例
     time: '1644062400', // 结算时间点
     purchasedCurrencyOf: 0, // 已购买币种
-    totalPurchasedAmount: '5000000000000000000000', // 总购买数量
+    totalPurchasedAmount: '5000', // 总购买数量
     totalPurchasedUnderlying: '0', // 总购买金额
     totalPurchasedCurrency: '0', // 总购买币种
     is_flash: false,
@@ -373,7 +543,7 @@ export default [
     ratio: '1HRS=0.0004USDT', // 比例
     time: '1644062400', // 结算时间点
     purchasedCurrencyOf: 0, // 已购买币种
-    totalPurchasedAmount: '20000000000000000000000', // 总购买数量
+    totalPurchasedAmount: '20000', // 总购买数量
     totalPurchasedUnderlying: '0', // 总购买金额
     totalPurchasedCurrency: '0', // 总购买币种
     is_flash: false,
@@ -429,7 +599,7 @@ export default [
     ratio: '1HRS=0.0004USDT', // 比例
     time: '1644062400', // 结算时间点
     purchasedCurrencyOf: 0, // 已购买币种
-    totalPurchasedAmount: '25000000000000000000000', // 总购买数量u
+    totalPurchasedAmount: '25000', // 总购买数量u
     totalPurchasedUnderlying: '0', // 总购买金额
     totalPurchasedCurrency: '0', // 总购买币种
     is_flash: false,
@@ -485,7 +655,7 @@ export default [
     ratio: '1CP=0.1USDT', // 比例
     time: '1641737400', // 结算时间点
     purchasedCurrencyOf: 0, // 已购买币种
-    totalPurchasedAmount: '5000000000000000000000', // 总购买数量
+    totalPurchasedAmount: '5000', // 总购买数量
     totalPurchasedUnderlying: '0', // 总购买金额
     totalPurchasedCurrency: '0', // 总购买币种
     is_flash: false,
@@ -541,7 +711,7 @@ export default [
     ratio: '1CP=0.1USDT', // 比例
     time: '1641737400', // 结算时间点
     purchasedCurrencyOf: 0, // 已购买币种
-    totalPurchasedAmount: '15000000000000000000000', // 总购买数量
+    totalPurchasedAmount: '15000', // 总购买数量
     totalPurchasedUnderlying: '0', // 总购买金额
     totalPurchasedCurrency: '0', // 总购买币种
     is_flash: false,
@@ -597,7 +767,7 @@ export default [
     ratio: '1CP=0.1USDT', // 比例
     time: '1641733200', // 结算时间点
     purchasedCurrencyOf: 0, // 已购买币种
-    totalPurchasedAmount: '30000000000000000000000', // 总购买数量u
+    totalPurchasedAmount: '30000', // 总购买数量u
     totalPurchasedUnderlying: '0', // 总购买金额
     totalPurchasedCurrency: '0', // 总购买币种
     is_flash: false,
@@ -654,7 +824,7 @@ export default [
     ratio: '1MATE=2USDT', // 比例
     time: '1640178000', // 结算时间点
     purchasedCurrencyOf: 0, // 已购买币种
-    totalPurchasedAmount: '5000000000000000000000', // 总购买数量
+    totalPurchasedAmount: '5000', // 总购买数量
     totalPurchasedUnderlying: '0', // 总购买金额
     totalPurchasedCurrency: '0', // 总购买币种
     is_flash: false,
@@ -711,7 +881,7 @@ export default [
     ratio: '1MATE=2USDT', // 比例
     time: '1640178000', // 结算时间点
     purchasedCurrencyOf: 0, // 已购买币种
-    totalPurchasedAmount: '15000000000000000000000', // 总购买数量
+    totalPurchasedAmount: '15000', // 总购买数量
     totalPurchasedUnderlying: '0', // 总购买金额
     totalPurchasedCurrency: '0', // 总购买币种
     is_flash: false,
@@ -768,7 +938,7 @@ export default [
     ratio: '1MATE=2USDT', // 比例
     time: '1640178000', // 结算时间点
     purchasedCurrencyOf: 0, // 已购买币种
-    totalPurchasedAmount: '10000000000000000000000', // 总购买数量
+    totalPurchasedAmount: '10000', // 总购买数量
     totalPurchasedUnderlying: '0', // 总购买金额
     totalPurchasedCurrency: '0', // 总购买币种
     is_flash: false,
@@ -826,7 +996,7 @@ export default [
     ratio: '1BTCMT=1.75USDT', // 比例
     time: '1640008800', // 结算时间点
     purchasedCurrencyOf: 0, // 已购买币种
-    totalPurchasedAmount: '10000000000000000000000', // 总购买数量
+    totalPurchasedAmount: '10000', // 总购买数量
     totalPurchasedUnderlying: '0', // 总购买金额
     totalPurchasedCurrency: '0', // 总购买币种
     is_flash: false,
@@ -882,7 +1052,7 @@ export default [
     ratio: '1BTCMT=1.75USDT', // 比例
     time: '1640008800', // 结算时间点
     purchasedCurrencyOf: 0, // 已购买币种
-    totalPurchasedAmount: '30000000000000000000000', // 总购买数量
+    totalPurchasedAmount: '30000', // 总购买数量
     totalPurchasedUnderlying: '0', // 总购买金额
     totalPurchasedCurrency: '0', // 总购买币种
     is_flash: false,
@@ -938,7 +1108,7 @@ export default [
     ratio: '1BTCMT=1.75USDT', // 比例
     time: '1640008800', // 结算时间点
     purchasedCurrencyOf: 0, // 已购买币种
-    totalPurchasedAmount: '10000000000000000000000', // 总购买数量
+    totalPurchasedAmount: '10000', // 总购买数量
     totalPurchasedUnderlying: '0', // 总购买金额
     totalPurchasedCurrency: '0', // 总购买币种
     is_flash: false,
@@ -1050,7 +1220,7 @@ export default [
     ratio: '1DFT=0.3USDT',
     time: '1614693600',
     purchasedCurrencyOf: 0,
-    totalPurchasedAmount: '50000000000000000000000',
+    totalPurchasedAmount: '50000',
     totalPurchasedUnderlying: '0',
     totalPurchasedCurrency: '0',
     is_flash: false,
@@ -1164,7 +1334,7 @@ export default [
     ratio: '1FIX=0.618HT',
     time: '1615384800',
     purchasedCurrencyOf: 0,
-    totalPurchasedAmount: '2472000000000000000000',
+    totalPurchasedAmount: '2472',
     totalPurchasedUnderlying: '0',
     totalPurchasedCurrency: '0',
     is_flash: false,
@@ -1278,7 +1448,7 @@ export default [
     ratio: '1COOK=0.03USDT', // 兑换比例需要确认
     time: '1617208320',
     purchasedCurrencyOf: 0,
-    totalPurchasedAmount: '60000000000000000000000',
+    totalPurchasedAmount: '60000',
     totalPurchasedUnderlying: '0',
     totalPurchasedCurrency: '0',
     is_flash: false,
@@ -1335,7 +1505,7 @@ export default [
     ratio: '1COOK=0.03USDT',
     time: '1617208320',
     purchasedCurrencyOf: 0,
-    totalPurchasedAmount: '40000000000000000000000',
+    totalPurchasedAmount: '40000',
     totalPurchasedUnderlying: '0',
     totalPurchasedCurrency: '0',
     is_flash: false,
@@ -1393,7 +1563,7 @@ export default [
     time: '1619182800',
     timeClose: '1619095500',
     purchasedCurrencyOf: 0,
-    totalPurchasedAmount: '30000000000000000000000',
+    totalPurchasedAmount: '30000',
     totalPurchasedUnderlying: '0',
     totalPurchasedCurrency: '0',
     is_flash: false,
@@ -1449,7 +1619,7 @@ export default [
     ratio: '1WAR=0.0133HT',
     time: '1619701200',
     purchasedCurrencyOf: 0,
-    totalPurchasedAmount: '1600000000000000000000',
+    totalPurchasedAmount: '1600',
     totalPurchasedUnderlying: '0',
     totalPurchasedCurrency: '0',
     is_flash: false,
@@ -1506,7 +1676,7 @@ export default [
     ratio: '1WAR=0.0133HT', // 兑换比例需要确认
     time: '1619701200',
     purchasedCurrencyOf: 0,
-    totalPurchasedAmount: '1600000000000000000000',
+    totalPurchasedAmount: '1600',
     totalPurchasedUnderlying: '0',
     totalPurchasedCurrency: '0',
     is_flash: false,
@@ -1563,7 +1733,7 @@ export default [
     ratio: '1WAR=0.0133HT',
     time: '1619701200',
     purchasedCurrencyOf: 0,
-    totalPurchasedAmount: '1600000000000000000000',
+    totalPurchasedAmount: '1600',
     totalPurchasedUnderlying: '0',
     totalPurchasedCurrency: '0',
     is_flash: false,
@@ -1620,7 +1790,7 @@ export default [
     ratio: '1BLACK=0.0026HT', // 兑换比例需要确认
     time: '1619701200',
     purchasedCurrencyOf: 0,
-    totalPurchasedAmount: '1600000000000000000000',
+    totalPurchasedAmount: '1600',
     totalPurchasedUnderlying: '0',
     totalPurchasedCurrency: '0',
     is_flash: false,
@@ -1677,7 +1847,7 @@ export default [
     ratio: '1BLACK=0.0027HT',
     time: '1619701200',
     purchasedCurrencyOf: 0,
-    totalPurchasedAmount: '540000000000000000000',
+    totalPurchasedAmount: '540',
     totalPurchasedUnderlying: '0',
     totalPurchasedCurrency: '0',
     is_flash: false,
@@ -1734,8 +1904,8 @@ export default [
     ratio: '1LEV=0.5USDT',
     time: '1620486000',
     purchasedCurrencyOf: 0,
-    totalPurchasedAmount: '30000000000000000000000',
-    totalPurchasedUnderlying: '366874480000000000000000000',
+    totalPurchasedAmount: '30000',
+    totalPurchasedUnderlying: '366874480',
     totalPurchasedCurrency: '183437240275702999999549440',
     is_flash: false,
     link_url: 'https://www.lever.network', // 跳转外链接
@@ -1792,7 +1962,7 @@ export default [
     defaultRatio: '31250000000000000000',
     time: '1620554400',
     purchasedCurrencyOf: 0,
-    totalPurchasedAmount: '2000000000000000000000',
+    totalPurchasedAmount: '2000',
     totalPurchasedUnderlying: '62498920687500000000000',
     totalPurchasedCurrency: '1999965462000000000000',
     is_flash: false,
@@ -1849,8 +2019,8 @@ export default [
     time: '1620554400',
     defaultRatio: '31250000000000000000',
     purchasedCurrencyOf: 0,
-    totalPurchasedAmount: '2000000000000000000000',
-    totalPurchasedUnderlying: '172777089000000000000000000',
+    totalPurchasedAmount: '2000',
+    totalPurchasedUnderlying: '172777089',
     totalPurchasedCurrency: '5528866854336999999909888',
     is_flash: false,
     link_url: 'https://www.yfx.com/', // 跳转外链接
@@ -1905,7 +2075,7 @@ export default [
     ratio: '1O3=1USDT',
     time: '1621001700',
     purchasedCurrencyOf: 0,
-    totalPurchasedAmount: '20000000000000000000000',
+    totalPurchasedAmount: '20000',
     totalPurchasedUnderlying: '0',
     totalPurchasedCurrency: '0',
     is_flash: false,
@@ -1962,7 +2132,7 @@ export default [
     ratio: '1O3=1USDT',
     time: '1621001700',
     purchasedCurrencyOf: 0,
-    totalPurchasedAmount: '30000000000000000000000',
+    totalPurchasedAmount: '30000',
     totalPurchasedUnderlying: '0',
     totalPurchasedCurrency: '0',
     is_flash: false,
@@ -2019,7 +2189,7 @@ export default [
     ratio: '1CORA=12.5USDT', // 兑换比例需要确认
     time: '1621306800',
     purchasedCurrencyOf: 0,
-    totalPurchasedAmount: '30000000000000000000000',
+    totalPurchasedAmount: '30000',
     totalPurchasedUnderlying: '0',
     totalPurchasedCurrency: '0',
     is_flash: false,
@@ -2076,7 +2246,7 @@ export default [
     ratio: '1COW=0.03HT',
     time: '1621951200',
     purchasedCurrencyOf: 0,
-    totalPurchasedAmount: '2040000000000000000000',
+    totalPurchasedAmount: '2040',
     totalPurchasedUnderlying: '0',
     totalPurchasedCurrency: '0',
     is_flash: false,
@@ -2132,7 +2302,7 @@ export default [
     ratio: '1COW=0.03HT',
     time: '1621951200',
     purchasedCurrencyOf: 0,
-    totalPurchasedAmount: '1200000000000000000000',
+    totalPurchasedAmount: '1200',
     totalPurchasedUnderlying: '0',
     totalPurchasedCurrency: '0',
     is_flash: false,
@@ -2188,7 +2358,7 @@ export default [
     ratio: '1COW=0.03HT',
     time: '1621951200',
     purchasedCurrencyOf: 0,
-    totalPurchasedAmount: '960000000000000000000',
+    totalPurchasedAmount: '960',
     totalPurchasedUnderlying: '0',
     totalPurchasedCurrency: '0',
     is_flash: false,
@@ -2244,7 +2414,7 @@ export default [
     ratio: '1PAUL=0.002USDT',
     time: '1622638800',
     purchasedCurrencyOf: 0,
-    totalPurchasedAmount: '70000000000000000000000',
+    totalPurchasedAmount: '70000',
     totalPurchasedUnderlying: '0',
     totalPurchasedCurrency: '0',
     is_flash: false,
@@ -2301,7 +2471,7 @@ export default [
     ratio: '1PAUL=?LPT',
     time: '1622638800',
     purchasedCurrencyOf: 0,
-    totalPurchasedAmount: '50000000000000000000000',
+    totalPurchasedAmount: '50000',
     totalPurchasedUnderlying: '0',
     totalPurchasedCurrency: '0',
     is_flash: false,
@@ -2360,7 +2530,7 @@ export default [
     ratio: '1MOMAT=0.36USDT',
     time: '1625576400',
     purchasedCurrencyOf: 0,
-    totalPurchasedAmount: '50000000000000000000000',
+    totalPurchasedAmount: '50000',
     totalPurchasedUnderlying: '0',
     totalPurchasedCurrency: '0',
     is_flash: false,
@@ -2417,7 +2587,7 @@ export default [
     ratio: '1XNFT=0.8USDT',
     time: '1627639200',
     purchasedCurrencyOf: 0,
-    totalPurchasedAmount: '20000000000000000000000',
+    totalPurchasedAmount: '20000',
     totalPurchasedUnderlying: '0',
     totalPurchasedCurrency: '0',
     is_flash: false,
@@ -2474,7 +2644,7 @@ export default [
     ratio: '1XNFT=5.328WAR',
     time: '1627639200',
     purchasedCurrencyOf: 0,
-    totalPurchasedAmount: '66600000000000000000000',
+    totalPurchasedAmount: '66600',
     totalPurchasedUnderlying: '0',
     totalPurchasedCurrency: '0',
     is_flash: false,
@@ -2531,7 +2701,7 @@ export default [
     ratio: '1PLUL=0.08USDT',
     time: '1629455400',
     purchasedCurrencyOf: 0,
-    totalPurchasedAmount: '14000000000000000000000',
+    totalPurchasedAmount: '14000',
     totalPurchasedUnderlying: '0',
     totalPurchasedCurrency: '0',
     is_flash: false,
@@ -2589,7 +2759,7 @@ export default [
     ratio: '1PLUL=0.08USDT',
     time: '1629455400',
     purchasedCurrencyOf: 0,
-    totalPurchasedAmount: '26000000000000000000000',
+    totalPurchasedAmount: '26000',
     totalPurchasedUnderlying: '0',
     totalPurchasedCurrency: '0',
     is_flash: false,
@@ -2646,7 +2816,7 @@ export default [
     ratio: '1PLUL=0.08USDT',
     time: '1629455400',
     purchasedCurrencyOf: 0,
-    totalPurchasedAmount: '10000000000000000000000',
+    totalPurchasedAmount: '10000',
     totalPurchasedUnderlying: '0',
     totalPurchasedCurrency: '0',
     is_flash: false,
@@ -2705,7 +2875,7 @@ export default [
     ratio: '1PHM=0.005USDT',
     time: '1631102400',
     purchasedCurrencyOf: 0,
-    totalPurchasedAmount: '5000000000000000000000',
+    totalPurchasedAmount: '5000',
     totalPurchasedUnderlying: '0',
     totalPurchasedCurrency: '0',
     is_flash: false,
@@ -2764,7 +2934,7 @@ export default [
     ratio: '1PHM=0.005USDT',
     time: '1631102400',
     purchasedCurrencyOf: 0,
-    totalPurchasedAmount: '25000000000000000000000',
+    totalPurchasedAmount: '25000',
     totalPurchasedUnderlying: '0',
     totalPurchasedCurrency: '0',
     is_flash: false,
@@ -2822,7 +2992,7 @@ export default [
     ratio: '1PHM=0.005USDT',
     time: '1631102400',
     purchasedCurrencyOf: 0,
-    totalPurchasedAmount: '20000000000000000000000',
+    totalPurchasedAmount: '20000',
     totalPurchasedUnderlying: '0',
     totalPurchasedCurrency: '0',
     is_flash: false,
@@ -2879,7 +3049,7 @@ export default [
     ratio: '1HCT=0.03USDT',
     time: '1633874400',
     purchasedCurrencyOf: 0,
-    totalPurchasedAmount: '5000000000000000000000',
+    totalPurchasedAmount: '5000',
     totalPurchasedUnderlying: '0',
     totalPurchasedCurrency: '0',
     is_flash: false,
@@ -2937,7 +3107,7 @@ export default [
     ratio: '1HCT=0.03USDT',
     time: '1633874400',
     purchasedCurrencyOf: 0,
-    totalPurchasedAmount: '25000000000000000000000',
+    totalPurchasedAmount: '25000',
     totalPurchasedUnderlying: '0',
     totalPurchasedCurrency: '0',
     is_flash: false,
@@ -2994,7 +3164,7 @@ export default [
     ratio: '1HCT=0.03USDT',
     time: '1633874400',
     purchasedCurrencyOf: 0,
-    totalPurchasedAmount: '20000000000000000000000',
+    totalPurchasedAmount: '20000',
     totalPurchasedUnderlying: '0',
     totalPurchasedCurrency: '0',
     is_flash: false,
@@ -3052,7 +3222,7 @@ export default [
   //   ratio: '1WT1=0.03USDT',
   //   time: '1632733200',
   //   purchasedCurrencyOf: 0,
-  //   totalPurchasedAmount: '20000000000000000000000',
+  //   totalPurchasedAmount: '20000',
   //   totalPurchasedUnderlying: '0',
   //   totalPurchasedCurrency: '0',
   //   is_flash: false,
@@ -3109,7 +3279,7 @@ export default [
   //   ratio: '1WT1=0.03USDT',
   //   time: '1632733200',
   //   purchasedCurrencyOf: 0,
-  //   totalPurchasedAmount: '10000000000000000000000',
+  //   totalPurchasedAmount: '10000',
   //   totalPurchasedUnderlying: '0',
   //   totalPurchasedCurrency: '0',
   //   is_flash: false,
