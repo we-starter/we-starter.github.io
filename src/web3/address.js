@@ -7,6 +7,7 @@ import VoteNFTAbi from '../web3/abi/VoteNFT.json'
 import Web3, {utils} from "web3";
 
 export const ChainId = {
+  AVALANCHE: 43114,
   BSC: 56,
   HECO: 128,
   MATIC: 137,
@@ -17,6 +18,7 @@ export const SCAN_ADDRESS = {
   [ChainId.BSC]: 'https://bscscan.com',
   [ChainId.HECO]: 'https://hecoinfo.com',
   [ChainId.MATIC]: 'https://polygonscan.com/',
+  [ChainId.AVALANCHE]: 'https://snowtrace.io/',
 }
 
 export const ADDRESS_0 = '0x0000000000000000000000000000000000000000'
@@ -175,7 +177,8 @@ export function RPC_URLS (chainId) {
       [ChainId.HECO]: 'https://http-mainnet-node.huobichain.com',
       [ChainId.BSC]: 'https://bsc-dataseed.binance.org/',
       [ChainId.MATIC]: 'https://rpc-mainnet.maticvigil.com',
-      [ChainId.LOCALHOST]: 'http://localhost:8545'
+      [ChainId.LOCALHOST]: 'http://localhost:8545',
+      [ChainId.AVALANCHE]: 'https://api.avax.network/ext/bc/C/rpc'
     }[chainId]
 }
 

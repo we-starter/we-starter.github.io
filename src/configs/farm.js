@@ -42,9 +42,9 @@ export default [
     buyName: 'Buy WAR',
     abi: StakingPool3,
     start_at: '',
-    time: '',
+    time: '1644298442',
     openDate: '1629273600',
-    dueDate: null,
+    dueDate: '1644298442',
     earnName: 'APY',
     status: 0,
     rewards: 'WAR',
@@ -79,9 +79,9 @@ export default [
     buyName: 'Migrate WAR to BSC',
     abi: StakingPool3,
     start_at: '1639065600',
-    time: '1639065600',
+    time: '1644298442',
     openDate: '1639065600',
-    dueDate: null,//'1647532800',
+    dueDate: '1644298442',
     earnName: 'APY',
     status: 0,
     rewards: 'WAR',
@@ -95,6 +95,7 @@ export default [
     minAmountMortgage: '50000',
     poolType: 1, // 1单池，2LP，2sort
     awardNft: awardNftWARBadge,
+    isEnd: true
   },
   {
     name: 'WAR-USDT LPT',
@@ -129,10 +130,9 @@ export default [
     mdexReward: true,
     networkId: testNetworkId || 128,
     lpToken: 'MDEX LP Token',
-    mdexDaily: 762.97,
+    mdexDaily: 382.06,
     mdexPid: '0x5a',
     poolType: 2, // 1单池，2LP，2sort
-    isEnd: true
   },
   {
     name: 'WAR POOL (DAO)',
@@ -156,9 +156,9 @@ export default [
     buyName: 'Buy WAR',
     abi: StakingPool3,
     start_at: '',
-    time: '',
+    time: '1644298442',
     openDate: '1623153600',
-    dueDate: null,
+    dueDate: '1644298442',
     earnName: 'APY',
     status: 0,
     rewards: 'WAR',
@@ -169,6 +169,7 @@ export default [
     mdexDaily: 0,
     mdexPid: '',
     poolType: 1, // 1单池，2LP，2sort
+    isEnd: true
   },
 
   // 临时池

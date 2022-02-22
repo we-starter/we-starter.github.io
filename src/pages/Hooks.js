@@ -15,13 +15,14 @@ const createContractERC20 = (chainId, address) => {
 }
 
 export const useBalance = (address, networkId=ChainId.HECO) => {
+  console.log('networkId', networkId)
   const { account, active, library } = useActiveWeb3React()
   const [balance, setBalance] = useState(0)
   const blockHeight = useBlockHeight()
   // const pools = useFarmInfo()
 
   useEffect(() => {
-    if (library && active) {
+    if (library && active && !(networkId === ChainId.AVALANCHE && address === WAR_ADDRESS())) {
       try {
         // console.log('request___6')
         if (address === '0x0') {
@@ -34,12 +35,6 @@ export const useBalance = (address, networkId=ChainId.HECO) => {
         } else {
           const contract = createContractERC20(networkId, address)
           // const contract = getContract(library, ERC20.abi, address)
-          contract.methods
-            .balanceOf(account)
-            .call()
-            .then((res) => {
-              setBalance(res)
-            })
           contract.methods
             .balanceOf(account)
             .call()

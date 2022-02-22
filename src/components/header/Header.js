@@ -25,6 +25,7 @@ export const Header = () => {
   const { active, account, chainId } = useActiveWeb3React()
   const { dispatch, state } = useContext(mainContext)
   const { balance } = useBalance(WAR_ADDRESS(chainId), chainId)
+  console.log('balance', balance)
   const [language, setLanguage] = useState(
     (state.locale === 'en' && 'English') ||
       (state.locale === 'zh' && '中文简体') ||
@@ -107,14 +108,7 @@ export const Header = () => {
                 {/*  </li>*/}
                 {/*)}*/}
                 <li className='menu__item'>
-                  {/* <a
-                    href='https://docs.google.com/forms/d/e/1FAIpQLSe28QjmQyzrO98dsIKpmyGXq3J-_hHvNQx4l1LEvsnkv0fapQ/viewform?usp=sf_link'
-                    target='_blank'
-                    className='menu__link'
-                    onClick={handleMenuItemClick}
-                  >
-                    <FormattedMessage id='projectApplication' />
-                  </a> */}
+
                   <NavLink
                     to='/application'
                     className='menumask_item-guide menu__link'
@@ -122,6 +116,16 @@ export const Header = () => {
                   >
                     <FormattedMessage id='projectApplication' />
                   </NavLink>
+                </li>
+                <li className='menu__item'>
+                  <a
+                    href='https://docs.google.com/forms/d/e/1FAIpQLSe28QjmQyzrO98dsIKpmyGXq3J-_hHvNQx4l1LEvsnkv0fapQ/viewform?usp=sf_link'
+                    target='_blank'
+                    className='menu__link'
+                    onClick={handleMenuItemClick}
+                  >
+                    <FormattedMessage id='projectApplicationLink' />
+                  </a>
                 </li>
                 <li className='menu__item'>
                   <a

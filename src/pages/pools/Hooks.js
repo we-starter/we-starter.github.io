@@ -532,11 +532,18 @@ const debounceFn = debounce((pools, account, callback) => {
             status = 3
           }
 
-          const totalPurchasedAmount = new BigNumber(
-            Web3.utils.toWei(pool.amount, 'ether')
+          price = new BigNumber(
+            numToWei(1, pool.underlying.decimal)
           )
             .multipliedBy(new BigNumber(price))
-            .div(new BigNumber(Web3.utils.toWei('1', 'ether')))
+            .div(new BigNumber(10).pow(pool.currency.decimal))
+            .div(new BigNumber(Web3.utils.toWei('1', 'ether'))).toString()
+
+          console.log('price', price.toString())
+
+          balanceOf = fromWei(balanceOf, pool.currency.decimal)
+
+          const totalPurchasedAmount = new BigNumber(pool.amount).multipliedBy(new BigNumber(price))
 
           // 手动计算rate，合约取的将弃用
           // 1. 取合约地址的usdt/ht/bnb的余额
@@ -551,12 +558,12 @@ const debounceFn = debounce((pools, account, callback) => {
 
           // console.log('rate', rate)
 
-          const totalPurchasedUnderlying = Web3.utils.toWei(
+          totalPurchasedCurrency = fromWei(totalPurchasedCurrency, pool.currency.decimal)
+          const totalPurchasedUnderlying =
             new BigNumber(totalPurchasedCurrency)
               .dividedBy(new BigNumber(price))
-              .toFixed(0, 1),
-            'ether'
-          )
+              .toFixed(0, 1)
+
 
           let is_join = false
           if (purchasedCurrencyOf > 0) {
@@ -570,19 +577,19 @@ const debounceFn = debounce((pools, account, callback) => {
             address: underlyingAddress === '0x0000000000000000000000000000000000000000' ? '' : underlyingAddress,
           })
           const rate_ = rate < 10 ? new BigNumber(new_rate).multipliedBy(new BigNumber(10).pow(18)).toString() : rate
+          const progress = new BigNumber(totalPurchasedCurrency)
+            .dividedBy(totalPurchasedAmount)
+            .toFixed(10, 1)
+            .toString() * 1
           return Object.assign({}, pool, {
-            ratio: `1${pool.underlying.symbol}=${formatAmount(price, 18, 5)}${
+            ratio: `1${pool.underlying.symbol}=${price}${
               pool.currency.symbol
             }`,
-            progress:
-              new BigNumber(totalPurchasedCurrency)
-                .dividedBy(totalPurchasedAmount)
-                .toFixed(2, 1)
-                .toString() * 1,
+            progress,
             status: status,
             time: time,
             timeClose,
-            price: Web3.utils.fromWei(price, 'ether'),
+            price,
             is_join,
             totalPurchasedCurrency,
             totalPurchasedAmount: totalPurchasedAmount.toString(),
@@ -601,7 +608,7 @@ const debounceFn = debounce((pools, account, callback) => {
               volume,
               rate: rate_,
               // rate: rate < 10 ? Web3.utils.toWei(`${new_rate}`, 'ether') : rate,
-              unlockVolume: formatAmount(unlockVolume, pool.underlying.decimal),
+              unlockVolume: pool.lock ? formatAmount(unlockVolume, pool.underlying.decimal) : formatAmount(volume, pool.underlying.decimal),
               unlockRate
             },
           })
@@ -729,19 +736,20 @@ const debounceFn = debounce((pools, account, callback) => {
               )
             )
           )
-          const totalPurchasedAmount = Web3.utils.toWei(
+          console.log('__ratio', __ratio.toString())
+
+          const totalPurchasedAmount =
             new BigNumber(pool.amount)
+              .multipliedBy(new BigNumber(__ratio))
+              .toFixed(6, 1)
+              .toString()
+          totalOffered = fromWei(totalOffered, pool.underlying.decimal)//当前已购买underlying的量
+          const totalPurchasedCurrency = fromWei(
+            new BigNumber(totalOffered)
               .dividedBy(new BigNumber(_ratio))
               .toFixed(6, 1)
               .toString(),
-            'ether'
-          )
-          const totalPurchasedCurrency = Web3.utils.toWei(
-            new BigNumber(Web3.utils.fromWei(totalOffered, 'ether'))
-              .dividedBy(new BigNumber(_ratio))
-              .toFixed(6, 1)
-              .toString(),
-            'ether'
+            pool.currency.decimal
           )
 
           let is_join = false
@@ -759,6 +767,12 @@ const debounceFn = debounce((pools, account, callback) => {
                  ? ''
                  : tokenAddress,
            })
+
+          let purchasedCurrencyOf = new BigNumber(fromWei(offeredOf, pool.underlying.decimal))
+            .multipliedBy(new BigNumber(__ratio))
+            .toFixed(6, 1)
+            .toString()
+          purchasedCurrencyOf = numToWei(purchasedCurrencyOf, pool.currency.decimal)
           return Object.assign({}, pool, {
             userFull,
             nftBalanceOf,
@@ -767,7 +781,7 @@ const debounceFn = debounce((pools, account, callback) => {
               __ratio.toFixed(5, 1).toString() * 1
             }${pool.currency.symbol}`,
             progress:
-              new BigNumber(Web3.utils.fromWei(totalOffered, 'ether'))
+              new BigNumber(totalOffered)
                 .dividedBy(pool.nft ? new BigNumber(pool.amount).div(nftRatio): new BigNumber(pool.amount))
                 .toNumber()
                 .toFixed(2) * 1,
@@ -775,21 +789,12 @@ const debounceFn = debounce((pools, account, callback) => {
             start_at,
             time: time,
             timeClose: 0,
-            price:
-              new BigNumber(Web3.utils.toWei('1', 'ether'))
-                .dividedBy(new BigNumber(ratio))
-                .toFixed(6, 1) * 1,
+            price: __ratio,
             is_join,
             totalPurchasedCurrency,
             totalPurchasedAmount,
             totalPurchasedUnderlying: totalOffered,
-            purchasedCurrencyOf: Web3.utils.toWei(
-              new BigNumber(Web3.utils.fromWei(offeredOf, 'ether'))
-                .dividedBy(new BigNumber(_ratio))
-                .toFixed(6, 1)
-                .toString(),
-              'ether'
-            ),
+            purchasedCurrencyOf,
             quotaOf, //最大可申购额度 大于0则在白名单里面
             totalSettleable: {
               amount: 0,
@@ -801,7 +806,9 @@ const debounceFn = debounce((pools, account, callback) => {
               volume: pool.nft ? tokenValue : offeredOf, // 预计中签量,nft是全量
               claimedOf, // 获取募资币种数量
               rate: Web3.utils.toWei('1', 'ether'), // 预计中签率
-              unlockVolume: fromWei(offeredOf, 18).toNumber() * (unlockRate/100) - fromWei(claimedOf).toNumber()
+              unlockVolume: pool.lock ? (fromWei(offeredOf, pool.underlying.decimal).toNumber() * (unlockRate/100) - fromWei(claimedOf).toNumber()) : (
+                fromWei(offeredOf, pool.underlying.decimal).toNumber() - fromWei(claimedOf, pool.underlying.decimal).toNumber()
+              )
             },
           })
         })
@@ -1345,6 +1352,22 @@ export const useFarmInfo = (address = '') => {
         balanceOf = data[3]
         currency_allowance = data[4]
         earned2 = data[5]
+      }
+
+      if (pool.networkId === ChainId.HECO) {
+        // 处理mdx奖励减半问题
+        const blockNumber = await multicallClient.getBlockInfo(ChainId.HECO).then(res => res.number)
+        const mdexPoolContract = new ClientContract(MDexPool, '0xfb03e11d93632d97a8981158a632dd5986f5e909', pool.networkId)
+         await multicallClient([
+           mdexPoolContract.startBlock(),
+           mdexPoolContract.halvingPeriod()
+        ]).then(res => {
+          const [startBlock, halvingPeriod] = res
+          const n = Math.floor((blockNumber - startBlock) / halvingPeriod) - 3
+           for (let i = 0; i < n; i++) {
+             APR2 =  new BigNumber(APR2).div(2)
+           }
+         })
       }
       let APR_ = fromWei(
         new BigNumber(APR).plus(new BigNumber(APR2)).toString(),

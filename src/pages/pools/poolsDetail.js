@@ -234,13 +234,13 @@ const PoolsDetail = (props) => {
             {
               pool && (pool.nft ? (
                 <span>
-              {pool.nftRatio && (`${formatAmount(pool.totalPurchasedUnderlying, 18, 2)} / ${pool.amount / pool.nftRatio}`)} {pool.underlying.symbol}
+              {pool.nftRatio && (`${formatAmount(pool.totalPurchasedUnderlying, 0, 2)} / ${pool.amount / pool.nftRatio}`)} {pool.underlying.symbol}
                 </span>
               ) : (
                 <span>
                   {pool && pool.progress == 1
-                    ? Math.round(formatAmount(pool.totalPurchasedUnderlying, 18, 2))
-                    : formatAmount(pool.totalPurchasedUnderlying, 18, 2)}
+                    ? Math.round(formatAmount(pool.totalPurchasedUnderlying, 0, 2))
+                    : formatAmount(pool.totalPurchasedUnderlying, 0, 2)}
                   /{pool && pool.amount} {pool && pool.underlying.symbol}
                 </span>
               )
@@ -308,7 +308,7 @@ const PoolsDetail = (props) => {
           href={getScanLink(chainId, address, 'address')}
           target='_blank'
         >
-          <FormattedMessage id={pool.networkId === ChainId.BSC ? 'poolsDetailText400' : 'poolsDetailText4'} />
+          <FormattedMessage id={pool.networkId === ChainId.BSC ? 'poolsDetailText400' : pool.networkId === ChainId.AVALANCHE ? 'poolsDetailText4000': 'poolsDetailText4'} />
         </a>
       </div>
       {pool && pool.underlying.symbol === 'HCT' && (
@@ -403,7 +403,7 @@ const PoolsDetail = (props) => {
                 {(pool && pool.purchasedCurrencyOf.toString()) > 0 ? (
                   <tr>
                     <td>
-                      {fromWei(pool.purchasedCurrencyOf).toFixed(6, 1) * 1}
+                      {fromWei(pool.purchasedCurrencyOf, pool.currency.decimal).toFixed(6, 1) * 1}
                       &nbsp;
                       {pool && pool.currency.symbol}
                     </td>
@@ -425,7 +425,7 @@ const PoolsDetail = (props) => {
                       {pool &&
                         pool.type === 0 &&
                         new BigNumber(
-                          Web3.utils.fromWei(pool.purchasedCurrencyOf, 'ether')
+                          fromWei(pool.purchasedCurrencyOf, pool.currency.decimal)
                         )
                           .multipliedBy(
                             new BigNumber(
@@ -437,7 +437,7 @@ const PoolsDetail = (props) => {
                           .toString() * 1}
                       {pool &&
                         pool.type === 1 &&
-                        formatAmount(pool.settleable.volume)}
+                        formatAmount(pool.settleable.volume, pool.underlying.decimal)}
                       &nbsp;
                       {pool && pool.underlying.symbol}
                     </td>
@@ -498,14 +498,14 @@ const PoolsDetail = (props) => {
                         )}
                     </td>
                     <td>
-                      {pool && pool.lock ? pool.settleable.unlockVolume : formatAmount(pool.settleable.volume)}&nbsp;
+                      {pool && pool.settleable.unlockVolume }&nbsp;
                       {pool && pool.underlying.symbol}
                     </td>
                     <td>
                       {/*  && !pool.settleable.completed_ */}
                       {pool &&
                         pool.type === 0 &&
-                        pool.status >= 2 && (pool.lock && pool.settleable.unlockVolume > 0 || !pool.lock && pool.settleable.volume > 0) &&
+                        pool.status >= 2 && (pool.settleable.unlockVolume > 0) &&
                         now > pool.timeClose &&
                         now >= pool.time && (
                           <a
@@ -523,8 +523,7 @@ const PoolsDetail = (props) => {
                         )}
                       {pool &&
                         pool.type === 1 &&
-                      (pool.lock && pool.settleable.unlockVolume > 0 || !pool.lock && pool.settleable.volume > 0) &&
-                        pool.settleable.claimedOf == 0 &&
+                      (pool.settleable.unlockVolume > 0) &&
                         pool.status >= 2 &&
                         now > pool.timeClose &&
                         now >= pool.time && (
@@ -562,7 +561,7 @@ const PoolsDetail = (props) => {
             </p>
             {(pool && pool.purchasedCurrencyOf.toString()) > 0 ? (
               <p className='pools_detail_record_title_data'>
-                {fromWei(pool.purchasedCurrencyOf).toFixed(6, 1) * 1}
+                {fromWei(pool.purchasedCurrencyOf, pool.currency.decimal).toFixed(6, 1) * 1}
                 &nbsp;
                 {pool && pool.currency.symbol}
               </p>
@@ -598,7 +597,7 @@ const PoolsDetail = (props) => {
                 {pool &&
                   pool.type === 0 &&
                   new BigNumber(
-                    Web3.utils.fromWei(pool.purchasedCurrencyOf, 'ether')
+                    fromWei(pool.purchasedCurrencyOf, pool.currency.decimal)
                   )
                     .multipliedBy(
                       new BigNumber(
@@ -610,7 +609,7 @@ const PoolsDetail = (props) => {
                     .toString() * 1}
                 {pool &&
                   pool.type === 1 &&
-                  formatAmount(pool.settleable.volume)}
+                  formatAmount(pool.settleable.volume, pool.underlying.decimal)}
                 &nbsp;
                 {pool && pool.underlying.symbol}
               </p>
@@ -659,7 +658,7 @@ const PoolsDetail = (props) => {
             </p>
             {(pool && pool.purchasedCurrencyOf.toString()) > 0 ? (
               <p className='pools_detail_record_title_data'>
-                {pool && formatAmount(pool.settleable.volume)}&nbsp;
+                {pool && pool.settleable.unlockVolume}&nbsp;
                 {pool && pool.underlying.symbol}
               </p>
             ) : (
@@ -668,44 +667,42 @@ const PoolsDetail = (props) => {
             {(pool && pool.purchasedCurrencyOf.toString()) > 0 ? (
               <p className='pools_detail_record_title_data'>
                 {pool &&
-                  pool.type === 0 &&
-                  pool.settleable.volume > 0 &&
-                  pool.status >= 2 &&
-                  now > pool.timeClose &&
-                  now >= pool.time && (
-                    <a
-                      className={cs(
-                        `pools_detail_record_btn ${
-                          pool
-                            ? 'pools_detail_record_btn_' + pool.networkId
-                            : ''
-                        }`
-                      )}
-                      onClick={() => onClaim()}
-                    >
-                      <FormattedMessage id='poolsDetailText5' />
-                    </a>
-                  )}
+                pool.type === 0 &&
+                pool.status >= 2 && (pool.settleable.unlockVolume > 0) &&
+                now > pool.timeClose &&
+                now >= pool.time && (
+                  <a
+                    className={cs(
+                      `pools_detail_record_btn ${
+                        pool
+                          ? 'pools_detail_record_btn_' + pool.networkId
+                          : ''
+                      }`
+                    )}
+                    onClick={() => onClaim()}
+                  >
+                    <FormattedMessage id='poolsDetailText5' />
+                  </a>
+                )}
                 {pool &&
-                  pool.type === 1 &&
-                  pool.settleable.volume > 0 &&
-                  pool.settleable.claimedOf == 0 &&
-                  pool.status >= 2 &&
-                  now > pool.timeClose &&
-                  now >= pool.time && (
-                    <a
-                      className={cs(
-                        `pools_detail_record_btn ${
-                          pool
-                            ? 'pools_detail_record_btn_' + pool.networkId
-                            : ''
-                        }`
-                      )}
-                      onClick={() => onClaim()}
-                    >
-                      <FormattedMessage id='poolsDetailText5' />
-                    </a>
-                  )}
+                pool.type === 1 &&
+                (pool.settleable.unlockVolume > 0) &&
+                pool.status >= 2 &&
+                now > pool.timeClose &&
+                now >= pool.time && (
+                  <a
+                    className={cs(
+                      `pools_detail_record_btn ${
+                        pool
+                          ? 'pools_detail_record_btn_' + pool.networkId
+                          : ''
+                      }`
+                    )}
+                    onClick={() => onClaim()}
+                  >
+                    <FormattedMessage id='poolsDetailText5' />
+                  </a>
+                )}
               </p>
             ) : (
               <p className='pools_detail_record_title_data'></p>
@@ -1101,6 +1098,12 @@ const PoolsDetail = (props) => {
                   <a className='no_link'>
                   ● Intelligent hardware: the development and maturity of VR and AR will serve as the hardware foundation of the HRS Metaverse.
                   </a>
+                </>
+              )}
+              {pool && pool.underlying.symbol === 'PLAYER' && (
+                <>
+                  <a className="no_link">CryptoSteam disrupts the traditional Steam-like publishing platform model by directing all platform revenue and revenue from games, like DeDragon, into the DAO treasury, which is controlled by protocols to buy back governance tokens when they fall below a set price, while the liquidity of governance tokens is bought back from the market through the mechanism of bonds. Cryptosteam combines this model with “Play To Earn” to create the new GameFi 2.0.</a>
+                  <a className="no_link">CryptoSteam also uses Tokens and NFTs to connect the economic model of all games. Allowing game developers to become the managers of CryptoSteam through the DAO. All of the profits will be used to maintain the stability of the platform’s GameFi 2.0 economic model.</a>
                 </>
               )}
             </div>

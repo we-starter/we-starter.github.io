@@ -26,7 +26,7 @@ export const MenuMask = () => {
   const [showMenu, setShowMenu] = useState(false)
   const { dispatch, state } = useContext(mainContext)
   const location = useLocation()
-  const { balance } = useBalance(WAR_ADDRESS(chainId))
+  const { balance } = useBalance(WAR_ADDRESS(chainId), chainId)
   const [language, setLanguage] = useState(
     (state.locale === 'en' && 'English') ||
       (state.locale === 'zh' && '中文简体') ||
@@ -175,14 +175,6 @@ export const MenuMask = () => {
             {/*)}*/}
 
             <li className='menumask_item'>
-              {/* <a
-                href='https://docs.google.com/forms/d/e/1FAIpQLSe28QjmQyzrO98dsIKpmyGXq3J-_hHvNQx4l1LEvsnkv0fapQ/viewform?usp=sf_link'
-                target='_blank'
-                className='menumask_item-guide menumask_link'
-                onClick={handleMenuItemClick}
-              >
-                <FormattedMessage id='projectApplication' />
-              </a> */}
               <NavLink
                 to='/application'
                 className='menumask_item-guide menumask_link'
@@ -190,6 +182,16 @@ export const MenuMask = () => {
               >
                 <FormattedMessage id='projectApplication' />
               </NavLink>
+            </li>
+            <li className='menumask_item'>
+               <a
+                href='https://docs.google.com/forms/d/e/1FAIpQLSe28QjmQyzrO98dsIKpmyGXq3J-_hHvNQx4l1LEvsnkv0fapQ/viewform?usp=sf_link'
+                target='_blank'
+                className='menumask_item-guide menumask_link'
+                onClick={handleMenuItemClick}
+              >
+                <FormattedMessage id='projectApplicationLink' />
+              </a>
             </li>
             {/* <li className='menumask_item'>
               <a

@@ -55,7 +55,7 @@ const PoolsJoin = (props) => {
       setApprove(false)
     }
   }, [pool])
-
+  console.log('balance', balance)
   const onMax = () => {
     let max = balance
     const maxB = new BigNumber(max)
@@ -314,7 +314,7 @@ const PoolsJoin = (props) => {
               <FormattedMessage id='poolText17' />
               <a className='farm_popup_close_btn' onClick={onClose}></a>
             </h1>
-            
+
             <p className={cs(`form-app__tip ${pool && 'form-app__tip_' + pool.networkId }`)}>{pool && pool.ratio}</p>
             {/*<Select*/}
             {/*  defaultValue='lucy'*/}
@@ -341,7 +341,7 @@ const PoolsJoin = (props) => {
               <FormattedMessage id='poolText18' />
               {balance &&
                 pool &&
-                `${formatAmount(balance)} ${pool.currency.symbol}`}
+                `${formatAmount(balance, pool.currency.decimal)} ${pool.currency.symbol}`}
               <br />
             </p>
             {pool && pool.type === 1 && (
@@ -358,7 +358,7 @@ const PoolsJoin = (props) => {
                 {pool &&
                   pool.type === 1 &&
                   pool.quotaOf > 0 &&
-                  `${formatAmount(pool.quotaOf)} ${pool.currency.symbol}`}
+                  `${formatAmount(pool.quotaOf, pool.currency.decimal)} ${pool.currency.symbol}`}
                 <br />
               </p>
             )}
