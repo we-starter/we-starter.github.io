@@ -129,12 +129,12 @@ export default [
       holders: '-',
       transfers: '-',
     },
-    amount: '30000',//
+    amount: '600000',//
     pool_info: {
       token_distribution: 'Feb 25th at 14:00 UTC',
       min_allocation: '0',
       max_allocation: '100 USDT',
-      min_swap_level: '5,000 USDT',
+      min_swap_level: '30,000 USDT',
     },
     website: 'https://www.cryptosteam.com/',
     white_paper: 'https://www.certik.com/projects/cryptosteam',
@@ -147,63 +147,7 @@ export default [
     ratio: '1WT9=0.05WUSDT6', // 比例
     time: '1647237600', // 结算时间点
     purchasedCurrencyOf: 0, // 已购买币种
-    totalPurchasedAmount: '1500', // 总购买数量 min_swap_level, amount/price
-    totalPurchasedUnderlying: '0', // 总购买金额
-    totalPurchasedCurrency: '0', // 总购买币种
-    is_flash: false,
-    link_url: 'https://www.cryptosteam.com/',
-    project_introduction: '',
-    duration: '-', // 完成时间
-    totalApplicants: '-', // 申请总人数
-    winningRate: '-', // 申请中签率
-    committed: '', // 超募比例
-    total: '', // 参与资金规模
-    poolType: 0, // 值为 1 代表 定向
-    networkId: testNetworkId || ChainId.AVALANCHE,
-  },
-  {
-    name: 'PLAYER-test',
-    address: '0x2222233',
-    icon: CryptoSteam,
-    abi: Offering,
-    start_at: '1645459200',
-    is_top: true,
-    is_coming: true,
-    currency: {
-      address: '0xc7198437980c041c805A1EDcbA50c1Ce5db95118', // 如果是0x0则是ht
-      symbol: 'USDT',
-      decimal: 6,
-    },
-    type: 1, // 非1 则为公有池，为1 则为私有池
-    isPrivate: true,
-    underlying: {
-      address: '0xbb648df4E3d69CF5203e3D161f5CD2Cc9cfD4350',
-      decimal: 9,
-      symbol: 'PLAYER',
-      name: 'PLAYER ',
-      total_supply: '1,000,000,000.00',
-      holders: '-',
-      transfers: '-',
-    },
-    amount: '2500',
-    pool_info: {
-      token_distribution: 'Feb 25th at 14:00 UTC',
-      min_allocation: '0',
-      max_allocation: '100 USDT',
-      min_swap_level: '5,000 USDT',
-    },
-    website: 'https://www.cryptosteam.com/',
-    white_paper: 'https://www.certik.com/projects/cryptosteam',
-    twitter: 'https://twitter.com/DedragonWorld',
-    Telegram_Channel: 'https://t.me/dedragon_cryptosteam',
-    Github: 'https://github.com/TheCryptoSteam/contracts',
-    yuque: '-',
-    progress: 0,
-    status: 0, // 状态
-    ratio: '1Play=0.05USDT', // 比例
-    time: '1645533000', // 结算时间点
-    purchasedCurrencyOf: 0, // 已购买币种
-    totalPurchasedAmount: '50000000000', // 总购买数量 min_swap_level
+    totalPurchasedAmount: '30000', // 总购买数量 min_swap_level, amount/price
     totalPurchasedUnderlying: '0', // 总购买金额
     totalPurchasedCurrency: '0', // 总购买币种
     is_flash: false,
@@ -241,12 +185,12 @@ export default [
       holders: '-',
       transfers: '-',
     },
-    amount: '20000',//underlying 的量,totalPurchasedAmount/price
+    amount: '1400000',//underlying 的量,totalPurchasedAmount/price
     pool_info: {
       token_distribution: 'Feb 25th at 14:00 UTC',
       min_allocation: '0',
       max_allocation: '100 USDT',
-      min_swap_level: '5,000 USDT',
+      min_swap_level: '70,000 USDT',
     },
     website: 'https://www.cryptosteam.com/',
     white_paper: 'https://www.certik.com/projects/cryptosteam',
@@ -256,10 +200,10 @@ export default [
     yuque: '-',
     progress: 0,
     status: 0, // 状态
-    ratio: '1Play=0.05USDT', // 比例
+    ratio: '1Player=0.05USDT', // 比例
     time: '1647237600', // 结算时间点
     purchasedCurrencyOf: 0, // 已购买币种
-    totalPurchasedAmount: '1000', // 总购买数量 min_swap_level,amount/price
+    totalPurchasedAmount: '70000', // 总购买数量 min_swap_level,amount/price
     totalPurchasedUnderlying: '0', // 总购买金额
     totalPurchasedCurrency: '0', // 总购买币种
     is_flash: false,
@@ -280,7 +224,7 @@ export default [
     address: '0x1111111',
     icon: CryptoSteam,
     abi: Offering,
-    start_at: '1645797600',
+    start_at: '1647352800',
     is_top: true,
     is_coming: true,
     currency: {
@@ -299,12 +243,12 @@ export default [
       holders: '-',
       transfers: '-',
     },
-    amount: '12500000',
+    amount: '600000',
     pool_info: {
       token_distribution: 'Feb 25th at 14:00 UTC',
       min_allocation: '0',
       max_allocation: '100 USDT',
-      min_swap_level: '5,000 USDT',
+      min_swap_level: '30,000 USDT',
     },
     website: 'https://www.cryptosteam.com/',
     white_paper: 'https://www.certik.com/projects/cryptosteam',
@@ -314,66 +258,10 @@ export default [
     yuque: '-',
     progress: 0,
     status: 0, // 状态
-    ratio: '1Play=0.05USDT', // 比例
-    time: '1646380800', // 结算时间点
+    ratio: '1Player=0.05USDT', // 比例
+    time: '1648454400', // 结算时间点
     purchasedCurrencyOf: 0, // 已购买币种
-    totalPurchasedAmount: '5000000000', // 总购买数量 min_swap_level
-    totalPurchasedUnderlying: '0', // 总购买金额
-    totalPurchasedCurrency: '0', // 总购买币种
-    is_flash: false,
-    link_url: 'https://www.cryptosteam.com/',
-    project_introduction: '',
-    duration: '-', // 完成时间
-    totalApplicants: '-', // 申请总人数
-    winningRate: '-', // 申请中签率
-    committed: '', // 超募比例
-    total: '', // 参与资金规模
-    poolType: 0, // 值为 1 代表 定向
-    networkId: testNetworkId || ChainId.AVALANCHE,
-  },
-  {
-    name: 'PLAYER',
-    address: '0x22222',
-    icon: CryptoSteam,
-    abi: Offering,
-    start_at: '1645797600',
-    is_top: true,
-    is_coming: true,
-    currency: {
-      address: '0xc7198437980c041c805A1EDcbA50c1Ce5db95118', // 如果是0x0则是ht
-      symbol: 'USDT',
-      decimal: 6,
-    },
-    type: 1, // 非1 则为公有池，为1 则为私有池
-    isPrivate: true,
-    underlying: {
-      address: '0xbb648df4E3d69CF5203e3D161f5CD2Cc9cfD4350',
-      decimal: 9,
-      symbol: 'PLAYER',
-      name: 'PLAYER ',
-      total_supply: '1,000,000,000.00',
-      holders: '-',
-      transfers: '-',
-    },
-    amount: '12500000',
-    pool_info: {
-      token_distribution: 'Feb 25th at 14:00 UTC',
-      min_allocation: '0',
-      max_allocation: '100 USDT',
-      min_swap_level: '5,000 USDT',
-    },
-    website: 'https://www.cryptosteam.com/',
-    white_paper: 'https://www.certik.com/projects/cryptosteam',
-    twitter: 'https://twitter.com/DedragonWorld',
-    Telegram_Channel: 'https://t.me/dedragon_cryptosteam',
-    Github: 'https://github.com/TheCryptoSteam/contracts',
-    yuque: '-',
-    progress: 0,
-    status: 0, // 状态
-    ratio: '1Play=0.05USDT', // 比例
-    time: '1646380800', // 结算时间点
-    purchasedCurrencyOf: 0, // 已购买币种
-    totalPurchasedAmount: '5000000000', // 总购买数量 min_swap_level
+    totalPurchasedAmount: '30000', // 总购买数量 min_swap_level
     totalPurchasedUnderlying: '0', // 总购买金额
     totalPurchasedCurrency: '0', // 总购买币种
     is_flash: false,
@@ -392,7 +280,7 @@ export default [
     address: '0x333333',
     icon: CryptoSteam,
     abi: StarterV3,
-    start_at: '1645797600',
+    start_at: '1647352800',
     is_top: true,
     is_coming: true,
     currency: {
@@ -411,12 +299,12 @@ export default [
       holders: '-',
       transfers: '-',
     },
-    amount: '12500000',
+    amount: '1400000',
     pool_info: {
       token_distribution: 'Feb 25th at 14:00 UTC',
       min_allocation: '0',
       max_allocation: '100 USDT',
-      min_swap_level: '5,000 USDT',
+      min_swap_level: '70,000 USDT',
     },
     website: 'https://www.cryptosteam.com/',
     white_paper: 'https://www.certik.com/projects/cryptosteam',
@@ -426,10 +314,10 @@ export default [
     yuque: '-',
     progress: 0,
     status: 0, // 状态
-    ratio: '1Play=0.05USDT', // 比例
-    time: '1646380800', // 结算时间点
+    ratio: '1Player=0.05USDT', // 比例
+    time: '1648454400', // 结算时间点
     purchasedCurrencyOf: 0, // 已购买币种
-    totalPurchasedAmount: '5000000000', // 总购买数量 min_swap_level
+    totalPurchasedAmount: '70000', // 总购买数量 min_swap_level
     totalPurchasedUnderlying: '0', // 总购买金额
     totalPurchasedCurrency: '0', // 总购买币种
     is_flash: false,
@@ -443,7 +331,6 @@ export default [
     poolType: 0, // 值为 1 代表 定向
     networkId: testNetworkId || ChainId.AVALANCHE,
   },
-
 
   {
     name: 'HRS',

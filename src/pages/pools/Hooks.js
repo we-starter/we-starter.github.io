@@ -542,14 +542,11 @@ const debounceFn = debounce((pools, account, callback) => {
           console.log('price', price.toString())
 
           balanceOf = fromWei(balanceOf, pool.currency.decimal)
-
           const totalPurchasedAmount = new BigNumber(pool.amount).multipliedBy(new BigNumber(price))
-
           // 手动计算rate，合约取的将弃用
           // 1. 取合约地址的usdt/ht/bnb的余额
           // 2. 中签率： totalPurchasedAmount / 余额  > 1 ? 1 : rate
           const new_rate = Math.min(totalPurchasedAmount.div(new BigNumber(balanceOf)).toNumber(), 1).toString()
-
           // console.log('new_rate', new_rate, totalPurchasedAmount.toString(), balanceOf.toString())
           // 3. 当前用户购买的数量(USDT) * rate * ratio = 预计能获得的token
           // const obtain_amount = new BigNumber(purchasedCurrencyOf).multipliedBy(rate).div(price)
@@ -577,6 +574,9 @@ const debounceFn = debounce((pools, account, callback) => {
             address: underlyingAddress === '0x0000000000000000000000000000000000000000' ? '' : underlyingAddress,
           })
           const rate_ = rate < 10 ? new BigNumber(new_rate).multipliedBy(new BigNumber(10).pow(18)).toString() : rate
+
+          // console.log('rate_', rate_, new BigNumber(new_rate).multipliedBy(new BigNumber(10).pow(18)).toString())
+
           const progress = new BigNumber(totalPurchasedCurrency)
             .dividedBy(totalPurchasedAmount)
             .toFixed(10, 1)
