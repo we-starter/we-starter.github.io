@@ -105,118 +105,118 @@ export default [
   //   networkId: testNetworkId || 128,
   // },
 
-  {
-    name: 'PLAYER-test',
-    address: '0xda7Bdeb4E43b31744311C7dd59173bcabfa2b010',
-    icon: CryptoSteam,
-    abi: Offering,
-    start_at: '1645459200',
-    is_top: true,
-    is_coming: false,
-    currency: {
-      address: '0x279B4be7b1A751EaD807d4949DeF4A1834e1E755', // 如果是0x0则是ht
-      symbol: 'WUSDT6',
-      decimal: 6,
-    },
-    type: 1, // 非1 则为公有池，为1 则为私有池
-    isPrivate: true,
-    underlying: {
-      address: '0x2863138A02fb80599630B6e97F297E6154EDDc64',
-      decimal: 9,
-      symbol: 'WT9',
-      name: 'WT9 ',
-      total_supply: '1,000,000,000.00',
-      holders: '-',
-      transfers: '-',
-    },
-    amount: '600000',//
-    pool_info: {
-      token_distribution: 'Feb 25th at 14:00 UTC',
-      min_allocation: '0',
-      max_allocation: '100 USDT',
-      min_swap_level: '30,000 USDT',
-    },
-    website: 'https://www.cryptosteam.com/',
-    white_paper: 'https://www.certik.com/projects/cryptosteam',
-    twitter: 'https://twitter.com/DedragonWorld',
-    Telegram_Channel: 'https://t.me/dedragon_cryptosteam',
-    Github: 'https://github.com/TheCryptoSteam/contracts',
-    yuque: '-',
-    progress: 0,
-    status: 0, // 状态
-    ratio: '1WT9=0.05WUSDT6', // 比例
-    time: '1647237600', // 结算时间点
-    purchasedCurrencyOf: 0, // 已购买币种
-    totalPurchasedAmount: '30000', // 总购买数量 min_swap_level, amount/price
-    totalPurchasedUnderlying: '0', // 总购买金额
-    totalPurchasedCurrency: '0', // 总购买币种
-    is_flash: false,
-    link_url: 'https://www.cryptosteam.com/',
-    project_introduction: '',
-    duration: '-', // 完成时间
-    totalApplicants: '-', // 申请总人数
-    winningRate: '-', // 申请中签率
-    committed: '', // 超募比例
-    total: '', // 参与资金规模
-    poolType: 0, // 值为 1 代表 定向
-    networkId: testNetworkId || ChainId.AVALANCHE,
-  },
-  {
-    name: 'PLAYER-test',
-    address: '0x533D6643c9D55530F046832451C19d2c8649DCC2',
-    icon: CryptoSteam,
-    abi: StarterV3,
-    start_at: '1645459200',
-    is_top: true,
-    is_coming: false,
-    currency: {
-      address: '0x279B4be7b1A751EaD807d4949DeF4A1834e1E755', // 如果是0x0则是ht
-      symbol: 'WUSDT6',
-      decimal: 6,
-    },
-    type: 0, // 非1 则为公有池，为1 则为私有池
-    isPrivate: false,
-    underlying: {
-      address: '0x2863138A02fb80599630B6e97F297E6154EDDc64',
-      decimal: 9,
-      symbol: 'WT9',
-      name: 'WT9 ',
-      total_supply: '1,000,000,000.00',
-      holders: '-',
-      transfers: '-',
-    },
-    amount: '1400000',//underlying 的量,totalPurchasedAmount/price
-    pool_info: {
-      token_distribution: 'Feb 25th at 14:00 UTC',
-      min_allocation: '0',
-      max_allocation: '100 USDT',
-      min_swap_level: '70,000 USDT',
-    },
-    website: 'https://www.cryptosteam.com/',
-    white_paper: 'https://www.certik.com/projects/cryptosteam',
-    twitter: 'https://twitter.com/DedragonWorld',
-    Telegram_Channel: 'https://t.me/dedragon_cryptosteam',
-    Github: 'https://github.com/TheCryptoSteam/contracts',
-    yuque: '-',
-    progress: 0,
-    status: 0, // 状态
-    ratio: '1Player=0.05USDT', // 比例
-    time: '1647237600', // 结算时间点
-    purchasedCurrencyOf: 0, // 已购买币种
-    totalPurchasedAmount: '70000', // 总购买数量 min_swap_level,amount/price
-    totalPurchasedUnderlying: '0', // 总购买金额
-    totalPurchasedCurrency: '0', // 总购买币种
-    is_flash: false,
-    link_url: 'https://www.cryptosteam.com/',
-    project_introduction: '',
-    duration: '-', // 完成时间
-    totalApplicants: '-', // 申请总人数
-    winningRate: '-', // 申请中签率
-    committed: '', // 超募比例
-    total: '', // 参与资金规模
-    poolType: 0, // 值为 1 代表 定向
-    networkId: testNetworkId || ChainId.AVALANCHE,
-  },
+  // {
+  //   name: 'PLAYER-test',
+  //   address: '0xda7Bdeb4E43b31744311C7dd59173bcabfa2b010',
+  //   icon: CryptoSteam,
+  //   abi: Offering,
+  //   start_at: '1645459200',
+  //   is_top: true,
+  //   is_coming: false,
+  //   currency: {
+  //     address: '0x279B4be7b1A751EaD807d4949DeF4A1834e1E755', // 如果是0x0则是ht
+  //     symbol: 'WUSDT6',
+  //     decimal: 6,
+  //   },
+  //   type: 1, // 非1 则为公有池，为1 则为私有池
+  //   isPrivate: true,
+  //   underlying: {
+  //     address: '0x2863138A02fb80599630B6e97F297E6154EDDc64',
+  //     decimal: 9,
+  //     symbol: 'WT9',
+  //     name: 'WT9 ',
+  //     total_supply: '1,000,000,000.00',
+  //     holders: '-',
+  //     transfers: '-',
+  //   },
+  //   amount: '600000',//
+  //   pool_info: {
+  //     token_distribution: 'Feb 25th at 14:00 UTC',
+  //     min_allocation: '0',
+  //     max_allocation: '100 USDT',
+  //     min_swap_level: '30,000 USDT',
+  //   },
+  //   website: 'https://www.cryptosteam.com/',
+  //   white_paper: 'https://www.certik.com/projects/cryptosteam',
+  //   twitter: 'https://twitter.com/DedragonWorld',
+  //   Telegram_Channel: 'https://t.me/dedragon_cryptosteam',
+  //   Github: 'https://github.com/TheCryptoSteam/contracts',
+  //   yuque: '-',
+  //   progress: 0,
+  //   status: 0, // 状态
+  //   ratio: '1WT9=0.05WUSDT6', // 比例
+  //   time: '1647237600', // 结算时间点
+  //   purchasedCurrencyOf: 0, // 已购买币种
+  //   totalPurchasedAmount: '30000', // 总购买数量 min_swap_level, amount/price
+  //   totalPurchasedUnderlying: '0', // 总购买金额
+  //   totalPurchasedCurrency: '0', // 总购买币种
+  //   is_flash: false,
+  //   link_url: 'https://www.cryptosteam.com/',
+  //   project_introduction: '',
+  //   duration: '-', // 完成时间
+  //   totalApplicants: '-', // 申请总人数
+  //   winningRate: '-', // 申请中签率
+  //   committed: '', // 超募比例
+  //   total: '', // 参与资金规模
+  //   poolType: 0, // 值为 1 代表 定向
+  //   networkId: testNetworkId || ChainId.AVALANCHE,
+  // },
+  // {
+  //   name: 'PLAYER-test',
+  //   address: '0x533D6643c9D55530F046832451C19d2c8649DCC2',
+  //   icon: CryptoSteam,
+  //   abi: StarterV3,
+  //   start_at: '1645459200',
+  //   is_top: true,
+  //   is_coming: false,
+  //   currency: {
+  //     address: '0x279B4be7b1A751EaD807d4949DeF4A1834e1E755', // 如果是0x0则是ht
+  //     symbol: 'WUSDT6',
+  //     decimal: 6,
+  //   },
+  //   type: 0, // 非1 则为公有池，为1 则为私有池
+  //   isPrivate: false,
+  //   underlying: {
+  //     address: '0x2863138A02fb80599630B6e97F297E6154EDDc64',
+  //     decimal: 9,
+  //     symbol: 'WT9',
+  //     name: 'WT9 ',
+  //     total_supply: '1,000,000,000.00',
+  //     holders: '-',
+  //     transfers: '-',
+  //   },
+  //   amount: '1400000',//underlying 的量,totalPurchasedAmount/price
+  //   pool_info: {
+  //     token_distribution: 'Feb 25th at 14:00 UTC',
+  //     min_allocation: '0',
+  //     max_allocation: '100 USDT',
+  //     min_swap_level: '70,000 USDT',
+  //   },
+  //   website: 'https://www.cryptosteam.com/',
+  //   white_paper: 'https://www.certik.com/projects/cryptosteam',
+  //   twitter: 'https://twitter.com/DedragonWorld',
+  //   Telegram_Channel: 'https://t.me/dedragon_cryptosteam',
+  //   Github: 'https://github.com/TheCryptoSteam/contracts',
+  //   yuque: '-',
+  //   progress: 0,
+  //   status: 0, // 状态
+  //   ratio: '1Player=0.05USDT', // 比例
+  //   time: '1647237600', // 结算时间点
+  //   purchasedCurrencyOf: 0, // 已购买币种
+  //   totalPurchasedAmount: '70000', // 总购买数量 min_swap_level,amount/price
+  //   totalPurchasedUnderlying: '0', // 总购买金额
+  //   totalPurchasedCurrency: '0', // 总购买币种
+  //   is_flash: false,
+  //   link_url: 'https://www.cryptosteam.com/',
+  //   project_introduction: '',
+  //   duration: '-', // 完成时间
+  //   totalApplicants: '-', // 申请总人数
+  //   winningRate: '-', // 申请中签率
+  //   committed: '', // 超募比例
+  //   total: '', // 参与资金规模
+  //   poolType: 0, // 值为 1 代表 定向
+  //   networkId: testNetworkId || ChainId.AVALANCHE,
+  // },
 
 
   {
