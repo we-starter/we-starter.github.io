@@ -472,7 +472,7 @@ const PoolsDetail = (props) => {
                 {(pool && pool.purchasedCurrencyOf.toString()) > 0 ? (
                   <tr>
                     <td>
-                      {pool && formatAmount(pool.settleable.amount)}&nbsp;
+                      {pool && formatAmount(pool.settleable.amount, pool.currency.decimal)}&nbsp;
                       {pool && pool.currency.symbol}
                       {/* 当 当前时间大于募资结束时间 && 小于结算开始时间则可以领回 */}
                       {pool &&
@@ -625,7 +625,7 @@ const PoolsDetail = (props) => {
             </p>
             {(pool && pool.purchasedCurrencyOf.toString()) > 0 ? (
               <p className='pools_detail_record_title_data'>
-                {pool && formatAmount(pool.settleable.amount)}&nbsp;
+                {pool && formatAmount(pool.settleable.amount, pool.currency.decimal)}&nbsp;
                 {pool && pool.currency.symbol}
                 {/* 当 当前时间大于募资结束时间 && 小于结算开始时间则可以领回 */}
                 {pool &&
