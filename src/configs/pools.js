@@ -145,7 +145,7 @@ export default [
     progress: 0,
     status: 0, // 状态
     ratio: '1WT9=0.05WUSDT6', // 比例
-    time: '1645533000', // 结算时间点
+    time: '1647237600', // 结算时间点
     purchasedCurrencyOf: 0, // 已购买币种
     totalPurchasedAmount: '1500', // 总购买数量 min_swap_level, amount/price
     totalPurchasedUnderlying: '0', // 总购买金额
@@ -257,7 +257,7 @@ export default [
     progress: 0,
     status: 0, // 状态
     ratio: '1Play=0.05USDT', // 比例
-    time: '1645533000', // 结算时间点
+    time: '1647237600', // 结算时间点
     purchasedCurrencyOf: 0, // 已购买币种
     totalPurchasedAmount: '1000', // 总购买数量 min_swap_level,amount/price
     totalPurchasedUnderlying: '0', // 总购买金额
