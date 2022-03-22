@@ -1106,6 +1106,16 @@ const PoolsDetail = (props) => {
                   <a className="no_link">CryptoSteam also uses Tokens and NFTs to connect the economic model of all games. Allowing game developers to become the managers of CryptoSteam through the DAO. All of the profits will be used to maintain the stability of the platform’s GameFi 2.0 economic model.</a>
                 </>
               )}
+              {pool && pool.underlying.symbol === 'GRVS' && (
+                <>
+                  <a className="no_link">Unique ecosystem that unites DeFi with Gmart NFT marketplace for in-game assets and the highly anticipated online game – Evervoid. At Gravis Finance, we provide all the necessary instruments for managing your crypto assets on any chain.</a>
+                  <a className="no_link">Gravis Finance ecosystem consists of 3 main parts:</a>
+                  <a className="no_link">🎮 Evervoid (http://evervo.id/) -a revolutionary game that comes out on mobile devices 2022 with well-balanced economy, advanced graphics, and unique features from the ecosystem..</a>
+                  <a className="no_link">🛍 Gmart (http://gmart.io/) - the first NFT marketplace for gaming assets, "STEAM" on blockchain. Buy and sell your favorite NFT assets from any game on any blockchain. Coming out on mobile devices in 2022.</a>
+                  <a className="no_link">💸 Gswap (http://gswap.exchange/) - multi-chain AMM DEX which combines high functionality with a simple interface and advanced DeFi functions: liquidity migration from other exchanges, staking, Yield farming, Auto-farming, etc. By using a multi-chain bridge you can quickly move assets from one blockchain network to another. We use our own blockchain nodes to quickly process transactions and orders. Now on BNB, Polygon, and Heco, coming soon on Solana, Polkadot, Avalanche and Near.</a>
+                  <a className="no_link">With balanced tokenomics, two tokens woven seamlessly into the project and a clearly calculated economic model, Gravis Finance strives to provide any user with maximum comfort and profitability. Our mission is to give our users a tool to generate basic income in crypto.</a>
+                </>
+              )}
             </div>
           )}
         </div>
