@@ -251,7 +251,7 @@ const PoolsIndex = (props) => {
         onClick={(e) =>
           goFinance(e, pool && pool.is_coming, pool && pool.link_url)
         }
-        key={pool.address}
+        key={pool.address + '' + index}
       >
         <div className='type_private_box_t'>
           <div className='pools-type_title'>
