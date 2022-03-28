@@ -147,7 +147,7 @@ export default [
     progress: 0,
     status: 0, // 状态
     ratio: '1GRVS=0.4USDT', // 比例
-    time: '1650027600', // 结算时间点
+    time: '1648562400', // 结算时间点
     purchasedCurrencyOf: 0, // 已购买币种
     totalPurchasedAmount: '30000', // 总购买数量 min_swap_level
     totalPurchasedUnderlying: '0', // 总购买金额
@@ -204,7 +204,7 @@ export default [
     progress: 0,
     status: 0, // 状态
     ratio: '1GRVS=0.4USDT', // 比例
-    time: '1650027600', // 结算时间点
+    time: '1648562400', // 结算时间点
     purchasedCurrencyOf: 0, // 已购买币种
     totalPurchasedAmount: '15000', // 总购买数量 min_swap_level
     totalPurchasedUnderlying: '0', // 总购买金额
