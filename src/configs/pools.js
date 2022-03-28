@@ -135,8 +135,8 @@ export default [
     pool_info: {
       token_distribution: 'April 15, 1:00PM UTC',
       min_allocation: '0',
-      max_allocation: '100 USDT',
-      min_swap_level: '15,000 USDT',
+      max_allocation: '100 BUSD',
+      min_swap_level: '15,000 BUSD',
     },
     website: 'https://gravis.finance/',
     white_paper: 'https://docs.gravis.finance/?network=null&gravisLanguage=language',
@@ -146,7 +146,7 @@ export default [
     yuque: '-',
     progress: 0,
     status: 0, // 状态
-    ratio: '1GRVS=0.4USDT', // 比例
+    ratio: '1GRVS=0.4BUSD', // 比例
     time: '1648562400', // 结算时间点
     purchasedCurrencyOf: 0, // 已购买币种
     totalPurchasedAmount: '15000', // 总购买数量 min_swap_level
@@ -192,8 +192,8 @@ export default [
     pool_info: {
       token_distribution: 'April 15, 1:00PM UTC',
       min_allocation: '0',
-      max_allocation: '15,000 USDT',
-      min_swap_level: '15,000 USDT',
+      max_allocation: '15,000 BUSD',
+      min_swap_level: '15,000 BUSD',
     },
     website: 'https://gravis.finance/',
     white_paper: 'https://docs.gravis.finance/?network=null&gravisLanguage=language',
@@ -203,7 +203,7 @@ export default [
     yuque: '-',
     progress: 0,
     status: 0, // 状态
-    ratio: '1GRVS=0.4USDT', // 比例
+    ratio: '1GRVS=0.4BUSD', // 比例
     time: '1648562400', // 结算时间点
     purchasedCurrencyOf: 0, // 已购买币种
     totalPurchasedAmount: '15000', // 总购买数量 min_swap_level
