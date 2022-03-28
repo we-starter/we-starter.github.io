@@ -116,8 +116,8 @@ export default [
     is_top: true,
     is_coming: false,
     currency: {
-      address: '0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56', // 如果是0x0则是ht
-      symbol: 'BUSD',
+      address: '0x55d398326f99059fF775485246999027B3197955', // 如果是0x0则是ht
+      symbol: 'USDT',
       decimal: 18,
     },
     type: 1, // 非1 则为公有池，为1 则为私有池
@@ -135,8 +135,8 @@ export default [
     pool_info: {
       token_distribution: 'April 15, 1:00PM UTC',
       min_allocation: '0',
-      max_allocation: '100 BUSD',
-      min_swap_level: '15,000 BUSD',
+      max_allocation: '100 USDT',
+      min_swap_level: '15,000 USDT',
     },
     website: 'https://gravis.finance/',
     white_paper: 'https://docs.gravis.finance/?network=null&gravisLanguage=language',
@@ -146,7 +146,7 @@ export default [
     yuque: '-',
     progress: 0,
     status: 0, // 状态
-    ratio: '1GRVS=0.4BUSD', // 比例
+    ratio: '1GRVS=0.4USDT', // 比例
     time: '1648562400', // 结算时间点
     purchasedCurrencyOf: 0, // 已购买币种
     totalPurchasedAmount: '15000', // 总购买数量 min_swap_level
@@ -173,8 +173,8 @@ export default [
     is_top: true,
     is_coming: false,
     currency: {
-      address: '0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56', // 如果是0x0则是ht
-      symbol: 'BUSD',
+      address: '0x55d398326f99059fF775485246999027B3197955', // 如果是0x0则是ht
+      symbol: 'USDT',
       decimal: 18,
     },
     type: 0, // 非1 则为公有池，为1 则为私有池
@@ -192,8 +192,8 @@ export default [
     pool_info: {
       token_distribution: 'April 15, 1:00PM UTC',
       min_allocation: '0',
-      max_allocation: '15,000 BUSD',
-      min_swap_level: '15,000 BUSD',
+      max_allocation: '15,000 USDT',
+      min_swap_level: '15,000 USDT',
     },
     website: 'https://gravis.finance/',
     white_paper: 'https://docs.gravis.finance/?network=null&gravisLanguage=language',
@@ -203,7 +203,7 @@ export default [
     yuque: '-',
     progress: 0,
     status: 0, // 状态
-    ratio: '1GRVS=0.4BUSD', // 比例
+    ratio: '1GRVS=0.4USDT', // 比例
     time: '1648562400', // 结算时间点
     purchasedCurrencyOf: 0, // 已购买币种
     totalPurchasedAmount: '15000', // 总购买数量 min_swap_level
