@@ -123,7 +123,7 @@ export default [
     type: 1, // 非1 则为公有池，为1 则为私有池
     isPrivate: true,
     underlying: {
-      address: '0xa743F9eEda14b93c0037A8f4c0D57EB2eb1e34FB',
+      address: '0x190CEC0657a02E9eAB1C1DF5d59f9139131cf539',
       decimal: 18,
       symbol: 'GRVS',
       name: 'GRVS ',
@@ -180,7 +180,7 @@ export default [
     type: 0, // 非1 则为公有池，为1 则为私有池
     isPrivate: false,
     underlying: {
-      address: '0xa743F9eEda14b93c0037A8f4c0D57EB2eb1e34FB',
+      address: '0x190CEC0657a02E9eAB1C1DF5d59f9139131cf539',
       decimal: 18,
       symbol: 'GRVS',
       name: 'GRVS ',
@@ -204,7 +204,7 @@ export default [
     progress: 0,
     status: 0, // 状态
     ratio: '1GRVS=0.4USDT', // 比例
-    time: '1648562400', // 结算时间点
+    time: '1648598170', // 结算时间点
     purchasedCurrencyOf: 0, // 已购买币种
     totalPurchasedAmount: '15000', // 总购买数量 min_swap_level
     totalPurchasedUnderlying: '0', // 总购买金额
