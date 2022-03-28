@@ -131,12 +131,12 @@ export default [
       holders: '-',
       transfers: '-',
     },
-    amount: '75000',
+    amount: '37500',
     pool_info: {
       token_distribution: 'April 15, 1:00PM UTC',
       min_allocation: '0',
       max_allocation: '100 USDT',
-      min_swap_level: '30,000 USDT',
+      min_swap_level: '15,000 USDT',
     },
     website: 'https://gravis.finance/',
     white_paper: 'https://docs.gravis.finance/?network=null&gravisLanguage=language',
@@ -149,7 +149,7 @@ export default [
     ratio: '1GRVS=0.4USDT', // 比例
     time: '1648562400', // 结算时间点
     purchasedCurrencyOf: 0, // 已购买币种
-    totalPurchasedAmount: '30000', // 总购买数量 min_swap_level
+    totalPurchasedAmount: '15000', // 总购买数量 min_swap_level
     totalPurchasedUnderlying: '0', // 总购买金额
     totalPurchasedCurrency: '0', // 总购买币种
     is_flash: false,
