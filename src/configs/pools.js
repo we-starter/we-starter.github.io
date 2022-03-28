@@ -30,7 +30,7 @@ import MATE from '../assets/icon/MATE.png'
 import CP from '../assets/icon/CP.jpg'
 import HRS from '../assets/icon/HRS.png'
 import CryptoSteam from '../assets/icon/CryptoSteam.png'
-import GRVS from '../assets/icon/GRVS.png'
+import GRVS from '../assets/icon/GRVS.jpg'
 import WARBadge from '../assets/icon/war-badge.png'
 import WNFTAbi from '../web3/abi/WARBadge.json'
 import {ChainId} from "../web3/address";
@@ -109,15 +109,15 @@ export default [
 
   {
     name: 'GRVS',
-    address: '0x111222',
+    address: '0xF60BF18e79966cC81d8CEcbd865b18B1eBD39CF1',
     icon: GRVS,
-    abi: Offering,
+    abi: OfferingLock,
     start_at: '1648476000',
     is_top: true,
-    is_coming: true,
+    is_coming: false,
     currency: {
-      address: '0x55d398326f99059fF775485246999027B3197955', // 如果是0x0则是ht
-      symbol: 'USDT',
+      address: '0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56', // 如果是0x0则是ht
+      symbol: 'BUSD',
       decimal: 18,
     },
     type: 1, // 非1 则为公有池，为1 则为私有池
@@ -127,7 +127,7 @@ export default [
       decimal: 18,
       symbol: 'GRVS',
       name: 'GRVS ',
-      total_supply: '1,000,000,000.00',
+      total_supply: '1,500,000,000,000,000',
       holders: '-',
       transfers: '-',
     },
@@ -162,74 +162,19 @@ export default [
     total: '', // 参与资金规模
     poolType: 0, // 值为 1 代表 定向
     networkId: testNetworkId || ChainId.BSC,
+    lock: true,//锁仓
   },
   {
     name: 'GRVS',
-    address: '0x111222123',
+    address: '0x3d61cB81EC67350488641Ac697901cd1e3c41351',
     icon: GRVS,
-    abi: Offering,
+    abi: StarterLock,
     start_at: '1648476000',
     is_top: true,
-    is_coming: true,
+    is_coming: false,
     currency: {
-      address: '0x55d398326f99059fF775485246999027B3197955', // 如果是0x0则是ht
-      symbol: 'USDT',
-      decimal: 18,
-    },
-    type: 1, // 非1 则为公有池，为1 则为私有池
-    isPrivate: true,
-    underlying: {
-      address: '0xa743F9eEda14b93c0037A8f4c0D57EB2eb1e34FB',
-      decimal: 18,
-      symbol: 'GRVS',
-      name: 'GRVS ',
-      total_supply: '1,000,000,000.00',
-      holders: '-',
-      transfers: '-',
-    },
-    amount: '37500',
-    pool_info: {
-      token_distribution: 'April 15, 1:00PM UTC',
-      min_allocation: '0',
-      max_allocation: '100 USDT',
-      min_swap_level: '15,000 USDT',
-    },
-    website: 'https://gravis.finance/',
-    white_paper: 'https://docs.gravis.finance/?network=null&gravisLanguage=language',
-    twitter: 'https://twitter.com/gammarosigma',
-    Telegram_Channel: 'https://t.me/Gravis_Finance_en',
-    Github: 'https://github.com/gravis-finance',
-    yuque: '-',
-    progress: 0,
-    status: 0, // 状态
-    ratio: '1GRVS=0.4USDT', // 比例
-    time: '1650027600', // 结算时间点
-    purchasedCurrencyOf: 0, // 已购买币种
-    totalPurchasedAmount: '15000', // 总购买数量 min_swap_level
-    totalPurchasedUnderlying: '0', // 总购买金额
-    totalPurchasedCurrency: '0', // 总购买币种
-    is_flash: false,
-    link_url: 'https://gravis.finance/',
-    project_introduction: '',
-    duration: '-', // 完成时间
-    totalApplicants: '-', // 申请总人数
-    winningRate: '-', // 申请中签率
-    committed: '', // 超募比例
-    total: '', // 参与资金规模
-    poolType: 0, // 值为 1 代表 定向
-    networkId: testNetworkId || ChainId.BSC,
-  },
-  {
-    name: 'GRVS',
-    address: '0x333444',
-    icon: GRVS,
-    abi: StarterV3,
-    start_at: '1648476000',
-    is_top: true,
-    is_coming: true,
-    currency: {
-      address: '0x55d398326f99059fF775485246999027B3197955', // 如果是0x0则是ht
-      symbol: 'USDT',
+      address: '0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56', // 如果是0x0则是ht
+      symbol: 'BUSD',
       decimal: 18,
     },
     type: 0, // 非1 则为公有池，为1 则为私有池
@@ -239,7 +184,7 @@ export default [
       decimal: 18,
       symbol: 'GRVS',
       name: 'GRVS ',
-      total_supply: '1,000,000,000.00',
+      total_supply: '1,500,000,000,000,000',
       holders: '-',
       transfers: '-',
     },
@@ -274,6 +219,7 @@ export default [
     total: '', // 参与资金规模
     poolType: 0, // 值为 1 代表 定向
     networkId: testNetworkId || ChainId.BSC,
+    lock: true,//锁仓
   },
 
 
