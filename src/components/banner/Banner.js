@@ -3,7 +3,7 @@ import { Link, NavLink, useLocation } from 'react-router-dom'
 import { FormattedMessage } from 'react-intl'
 import { withRouter } from 'react-router'
 import { useActiveWeb3React } from '../../web3'
-import {ChainId, USDT_ADDRESS, WAR_ADDRESS, WHT_ADDRESS} from '../../web3/address'
+import { ChainId, USDT_ADDRESS, WAR_ADDRESS, WHT_ADDRESS } from '../../web3/address'
 import { useMDexPrice } from '../../pages/pools/Hooks'
 import { splitFormat } from '../../utils/format'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
@@ -13,7 +13,9 @@ import Icon1 from '../../assets/icon/icon1@2x.png'
 import Icon2 from '../../assets/icon/icon2@2x.png'
 import Icon3 from '../../assets/icon/icon3@2x.png'
 import Icon4 from '../../assets/icon/icon4@2x.png'
-import FileCopyLine from '../../assets/image/file-copy-line@2x.png'
+import BlackRight from '../../assets/icon/black-right.svg'
+import CopyIcon from '../../assets/icon/file-copy-line.svg'
+import AddressIMG from '../../assets/icon/address_img.png'
 import BigNumber from 'bignumber.js'
 import { HANDLE_WALLET_MODAL } from '../../const'
 import {
@@ -123,16 +125,22 @@ const Banner = (props) => {
           </p>
           {/* <div className='banner_big_img'>缺少banner图</div> */}
         </div>
-
         <div className='banner_link'>
+          <a href={WeStarterPDF} target='_blank' className='certik'>
+            <span className='pdf-icon'></span>
+            <span className='pdf-text'>
+              <FormattedMessage id='certik' />
+            </span>
+          </a>
           {/* <span>
             <FormattedMessage id='bannerText1' /> :{' '}
           </span>{' '} */}
-          <a href='' className='huobi_logo'></a>
-          <a href='' className='huobi_logo binance_logo'></a>
-          <a href='' className='huobi_logo polygon_logo'></a>
+          <a href='#' className='huobi_logo'></a>
+          <a href='#' className='huobi_logo binance_logo'></a>
+          <a href='#' className='huobi_logo avalanche_logo'></a>
+          <a href='#' className='huobi_logo polygon_logo'></a>
         </div>
-        <ul className='banner_svg__links'>
+        {/* <ul className='banner_svg__links'>
           <li>
             <a
               title='title'
@@ -182,7 +190,7 @@ const Banner = (props) => {
               </svg>
             </a>
           </li>
-          {/* <li>
+           <li>
             <a
               title='title'
               href='https://www.yuque.com/westarter'
@@ -193,7 +201,7 @@ const Banner = (props) => {
                 <path d='M8.46424943,5.10249711 L8.47461061,5.109 L9.83620065,2.74070849 C9.93811703,1.90940768 9.58503922,1.02787459 8.77638646,0.0961091845 C8.76330143,0.081043992 8.75886764,0.0603157452 8.76464474,0.0412159218 C8.77042185,0.0221160985 8.78560064,0.0073200529 8.80484175,0.00203252033 L8.82023085,6.75015599e-14 L14.2087326,6.75015599e-14 L14.2093133,0.00464576982 C16.4357941,0.110046462 18.2093133,1.97125435 18.2093133,4.25203252 C18.2093133,5.4898374 17.6872459,6.6039489 16.8539126,7.38095239 C18.5287093,8.64982581 19.6088487,10.6489547 19.6088487,12.8980836 C19.6088487,16.6954123 16.5295804,19.7810685 12.7078615,19.8423345 L0.0136106136,19.8432056 L8.46424943,5.10249711 Z'></path>
               </svg>
             </a>
-          </li> */}
+          </li> *
           <li>
             <a
               title='title'
@@ -218,22 +226,35 @@ const Banner = (props) => {
               </svg>
             </a>
           </li>
-        </ul>
-        <div className='banner_pdf'>
-          <a href={WeStarterPDF} target='_blank'>
-            <span className='pdf-icon'></span>
-            <span className='pdf-text'>
-              <FormattedMessage id='certik' />
-            </span>
-          </a>
-          {/* <a
-          className='down-load'
-          download='application/pptx'
-          href={WeStarterPDF}
-          target='_blank'
-        ></a> */}
+        </ul> */}
+        <div className='banner_address_box'>
+          <div className='banner_address'>
+            <div className='banner_address_token'>
+              <img src={BlackRight} />
+              <span>WAR</span>
+            </div>
+            <div className='banner_address_desc'>
+              <span>
+                <FormattedMessage id='farm19' />
+              </span>
+              <div>
+                {WarTokenAddress}
+                <CopyToClipboard
+                  text={WarTokenAddress}
+                  onCopy={() => {
+                    message.success('copy success')
+                  }}
+                >
+                  <img src={CopyIcon} />
+                </CopyToClipboard>
+                <a className='banner_address_metaMask' onClick={addToken}>
+                  Add WAR to MetaMask<span className='metaMask_logo'></span>
+                </a>
+              </div>
+            </div>
+          </div>
+          <img src={AddressIMG} />
         </div>
-
         <div className='banner_related'>
           <div className='banner_related_data'>
             <img src={Icon4} />
@@ -299,38 +320,9 @@ const Banner = (props) => {
             </p>
           </div>
         </div>
-        <div className='banner_address_box'>
-          <a className='banner_address'>
-            <FormattedMessage id='farm19' /> {WarTokenAddress}
-            <CopyToClipboard
-              text={WarTokenAddress}
-              onCopy={() => {
-                message.success('copy success')
-              }}
-            >
-              <svg
-                t='1620653809614'
-                className='icon'
-                viewBox='0 0 1024 1024'
-                version='1.1'
-                xmlns='http://www.w3.org/2000/svg'
-                p-id='1660'
-                width='20'
-                height='20'
-              >
-                <path
-                  d='M394.666667 106.666667h448a74.666667 74.666667 0 0 1 74.666666 74.666666v448a74.666667 74.666667 0 0 1-74.666666 74.666667H394.666667a74.666667 74.666667 0 0 1-74.666667-74.666667V181.333333a74.666667 74.666667 0 0 1 74.666667-74.666666z m0 64a10.666667 10.666667 0 0 0-10.666667 10.666666v448a10.666667 10.666667 0 0 0 10.666667 10.666667h448a10.666667 10.666667 0 0 0 10.666666-10.666667V181.333333a10.666667 10.666667 0 0 0-10.666666-10.666666H394.666667z m245.333333 597.333333a32 32 0 0 1 64 0v74.666667a74.666667 74.666667 0 0 1-74.666667 74.666666H181.333333a74.666667 74.666667 0 0 1-74.666666-74.666666V394.666667a74.666667 74.666667 0 0 1 74.666666-74.666667h74.666667a32 32 0 0 1 0 64h-74.666667a10.666667 10.666667 0 0 0-10.666666 10.666667v448a10.666667 10.666667 0 0 0 10.666666 10.666666h448a10.666667 10.666667 0 0 0 10.666667-10.666666v-74.666667z'
-                  p-id='1661'
-                ></path>
-              </svg>
-            </CopyToClipboard>
-          </a>
-          <a className='banner_address_metaMask' onClick={addToken}>
-            Add WAR to MetaMask<span className='metaMask_logo'></span>
-          </a>
-        </div>
-      </div>
-    </div>
+
+      </div >
+    </div >
   )
 }
 

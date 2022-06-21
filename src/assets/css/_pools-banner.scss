@@ -9,7 +9,7 @@
     width: 100%;
     min-width: 1080px;
     background: #fff;
-    background-image: url('../image/pools-banner@2x.png');
+    background-image: url("../image/pools-banner@2x.png");
     background-repeat: no-repeat;
     background-size: 100% 100%;
     background-position: top;
@@ -97,13 +97,13 @@
   }
 }
 @media #{$mdWidth} {
-   .pools_banner_box {
+  .pools_banner_box {
     position: relative;
     padding: 180px 0 58px;
     width: 100%;
     min-width: 1080px;
     background: #fff;
-    background-image: url('../image/pools-banner@2x.png');
+    background-image: url("../image/pools-banner@2x.png");
     background-repeat: no-repeat;
     background-size: 100% 100%;
     background-position: top;
@@ -118,7 +118,7 @@
       margin: 0 auto;
       width: 98%;
       height: 378px;
-      background-image: url('../image/pools-banner@2x.png');
+      background-image: url("../image/pools-banner@2x.png");
       background-repeat: no-repeat;
       background-size: 100% 100%;
     }
@@ -128,7 +128,7 @@
       font-weight: 600;
       color: #22292f;
       line-height: 78px;
-       p {
+      p {
         margin-bottom: 0;
       }
     }
@@ -205,7 +205,7 @@
     padding-top: 78px;
     width: 100%;
     background: #fff;
-    background-image: url('../image/pools-banner-h5@2x.png');
+    background-image: url("../image/pools-banner-h5@2x.png");
     background-repeat: no-repeat;
     background-size: 100% 100%;
     background-position: top;
@@ -224,7 +224,7 @@
       margin: 0 auto;
       width: 98%;
       height: 270px;
-      background-image: url('../image/pools-banner@2x_h5.png');
+      background-image: url("../image/pools-banner@2x_h5.png");
       background-repeat: no-repeat;
       background-size: 100% 100%;
     }
@@ -235,7 +235,7 @@
       font-weight: 600;
       color: #22292f;
       line-height: 42px;
-       p {
+      p {
         margin-bottom: 0;
       }
     }
@@ -313,7 +313,7 @@
     padding-top: 78px;
     width: 100%;
     background: #fff;
-    background-image: url('../image/pools-banner-h5@2x.png');
+    background-image: url("../image/pools-banner-h5@2x.png");
     background-repeat: no-repeat;
     background-size: 100% 100%;
     background-position: top;
@@ -332,7 +332,7 @@
       margin: 0 auto;
       width: 99%;
       height: 270px;
-      background-image: url('../image/pools-banner@2x_h5.png');
+      background-image: url("../image/pools-banner@2x_h5.png");
       background-repeat: no-repeat;
       background-size: 100% 100%;
     }

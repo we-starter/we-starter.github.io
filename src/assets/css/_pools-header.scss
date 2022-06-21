@@ -6,7 +6,7 @@
     display: inline-block;
     width: 24px;
     height: 24px;
-    background: url('../icon/file-shield-fill@2x.png') no-repeat;
+    background: url("../icon/file-shield-fill@2x.png") no-repeat;
     background-size: 100% 100%;
     @media #{$mdWidth} {
       display: none;
@@ -25,7 +25,7 @@
       // left: 20px;
     }
   }
-    .header-network {
+  .header-network {
     margin-right: 14px;
     width: 24px;
     height: 24px;
@@ -80,7 +80,7 @@
       height: 22px;
       //background: url('../icon/WAR_logo@2x.png') no-repeat;
       //background-size: 100% 100%;
-      img{
+      img {
         width: 100%;
         height: 100%;
       }
@@ -110,7 +110,7 @@
     }
   }
   @media #{$desktop} {
-    background-image: url('../image/pools-banner@2x.png');
+    background-image: url("../image/pools-banner@2x.png");
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
@@ -118,21 +118,21 @@
   }
   @media #{$mdWidth} {
     background: #fff;
-    background-image: url('../image/pools-banner@2x.png');
+    background-image: url("../image/pools-banner@2x.png");
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
     height: 378px;
   }
   @media #{$smWidth} {
-    background-image: url('../image/pools-banner-h5@2x.png');
+    background-image: url("../image/pools-banner-h5@2x.png");
     background-repeat: no-repeat;
     background-size: 100% 100%;
     background-position: top;
     height: 214px;
   }
   @media #{$xsWidth} {
-    background-image: url('../image/pools-banner-h5@2x.png');
+    background-image: url("../image/pools-banner-h5@2x.png");
     background-repeat: no-repeat;
     background-size: 100% 100%;
     background-position: top;
@@ -351,11 +351,11 @@
     position: relative;
 
     svg {
-      width: 155px;
+      width: 129px;
       stroke: var(--color);
 
       @media #{$mdWidth} {
-        width: 155px;
+        width: 129px;
       }
     }
 
@@ -367,13 +367,13 @@
       display: none;
       @media #{$desktop} {
         svg {
-          width: 155px;
+          width: 129px;
           height: 24px;
         }
       }
       @media #{$mdWidth} {
         svg {
-          width: 155px;
+          width: 129px;
           height: 24px;
         }
       }
@@ -545,7 +545,7 @@
         right: 16px;
         bottom: 0;
         margin: auto;
-        content: '';
+        content: "";
         border-radius: 50%;
         background-color: var(--yellow);
       }
@@ -573,7 +573,7 @@
       height: 2px;
       transition: var(--transitionDefault);
       background-color: var(--color);
-      content: '';
+      content: "";
     }
 
     &::before {

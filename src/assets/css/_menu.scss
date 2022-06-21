@@ -21,14 +21,14 @@
 
   &__link {
     position: relative;
-    font-size: 15px;
-    font-weight: 500;
-    color: inherit;
+    font-size: 16px;
+    font-weight: 600;
+    color: #4f4f4f;
     display: block;
     transform: var(--transitionDefault);
 
     &.is-current {
-      color: rgba(15, 140, 32, 1);
+      color: #00c57b;
       pointer-events: none;
     }
 
@@ -40,7 +40,7 @@
 
     @media #{$desktop} {
       &:hover {
-        color: color(var(--color) a(50%));
+        color: #00c57b;
       }
     }
 
@@ -55,7 +55,7 @@
     right: -34px;
     width: 46px;
     height: 26px;
-    background: url('../icon/HOT@2x.png') no-repeat;
+    background: url("../icon/HOT@2x.png") no-repeat;
     background-size: 100% 100%;
   }
 }

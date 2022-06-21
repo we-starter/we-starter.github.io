@@ -1,6 +1,6 @@
 .header {
-    position: relative;
-    background-color: transparent;
+  position: relative;
+  background-color: transparent;
   .exchange {
     display: inline-block;
     margin-right: 10px;
@@ -30,7 +30,7 @@
       height: 22px;
       //background: url('../icon/WAR_logo@2x.png') no-repeat;
       //background-size: 100% 100%;
-      img{
+      img {
         width: 100%;
         height: 100%;
       }
@@ -118,12 +118,12 @@
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     @media #{$desktop} {
       width: 100%;
-      height: 100px;
+      height: 80px;
       padding: 0 120px;
     }
     @media screen and (min-width: 1200px) and (max-width: 1336px) {
-       width: 1080px;
-       padding: 0;
+      width: 1080px;
+      padding: 0;
     }
     @media #{$mdWidth} {
       width: 1080px;
@@ -291,7 +291,7 @@
   &__box {
     display: flex;
     align-items: center;
-    height: 100px;
+    height: 100%;
     min-height: 64px;
 
     @media #{$mdWidth} {
@@ -334,11 +334,11 @@
     position: relative;
 
     svg {
-      width: 155px;
+      width: 129px;
       stroke: var(--color);
 
       @media #{$mdWidth} {
-        width: 155px;
+        width: 129px;
       }
     }
 
@@ -348,15 +348,15 @@
 
     &--small {
       display: none;
-        @media #{$desktop} {
+      @media #{$desktop} {
         svg {
-          width: 155px;
+          width: 129px;
           height: 24px;
         }
       }
       @media #{$mdWidth} {
         svg {
-          width: 155px;
+          width: 129px;
           height: 24px;
         }
       }
@@ -388,7 +388,7 @@
   &__menu {
     display: flex;
     align-items: center;
-    margin-left: 50px;
+    margin-left: 32px;
 
     @media #{$mdWidth} {
       display: none;
@@ -467,19 +467,18 @@
     .connect-btn {
       min-width: 106px;
       height: 38px;
-      background: #d4e9e2;
-      border-radius: 5px;
+      background: #000000;
+      border-radius: 14px;
       outline: none;
       border: none;
-      font-size: 14px;
-      font-family: PingFangSC-Semibold, PingFang SC;
-      font-weight: 600;
-      color: #0f8c20;
       cursor: pointer;
       display: flex;
       align-items: center;
       padding: 0 16px;
-
+      font-size: 14px;
+      font-family: Montserrat-Medium, Montserrat;
+      font-weight: 500;
+      color: #ffffff;
       img {
         width: 16px;
         height: 16px;
@@ -528,7 +527,7 @@
         right: 16px;
         bottom: 0;
         margin: auto;
-        content: '';
+        content: "";
         border-radius: 50%;
         background-color: var(--yellow);
       }
@@ -556,7 +555,7 @@
       height: 2px;
       transition: var(--transitionDefault);
       background-color: var(--color);
-      content: '';
+      content: "";
     }
 
     &::before {

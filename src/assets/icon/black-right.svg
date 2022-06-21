@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="56px" height="56px" viewBox="0 0 56 56" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>切片</title>
+    <g id="westar" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g transform="translate(-370.000000, -1101.000000)" fill="#000000" id="type">
+            <g transform="translate(370.000000, 1101.000000)">
+                <path d="M19.2405063,0 L34.2387386,14.4495165 C37.9201165,17.9962098 40,22.8880946 40,28 C40,33.1119054 37.9201165,38.0037902 34.2387386,41.5504835 L19.2405063,56 L0,56 L0,0 L19.2405063,0 Z M19,18 C13.4771525,18 9,22.4771525 9,28 C9,33.5228475 13.4771525,38 19,38 C24.5228475,38 29,33.5228475 29,28 C29,22.4771525 24.5228475,18 19,18 Z" id="形状结合"></path>
+            </g>
+        </g>
+    </g>
+</svg>
