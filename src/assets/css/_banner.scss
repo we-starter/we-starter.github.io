@@ -33,7 +33,7 @@
     // }
   }
   .banner {
-    width: 1080px;
+    width: 1180px;
     margin: 0 auto;
 
     &_text {
@@ -185,17 +185,61 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 0 50px;
-      margin: 0 auto 0;
-      width: 1080px;
-      height: 140px;
-      background: url("../../assets/icon/related_bg@2x.png") no-repeat;
-      background-size: 100% 100%;
+      margin: 50px auto 0;
+      width: 1180px;
     }
     &_related_data {
       display: flex;
       justify-content: center;
       align-items: center;
+      width: 280px;
+      height: 128px;
+      border-radius: 14px;
+
+      &:nth-of-type(1) {
+        background: #00c57b;
+        p {
+          .banner_related_data_title {
+            color: #fff;
+          }
+          .banner_related_data_val {
+            color: #ffffff;
+          }
+        }
+      }
+      &:nth-of-type(2) {
+        background: #f0f0f0;
+        p {
+          .banner_related_data_title {
+            color: #4f4f4f;
+          }
+          .banner_related_data_val {
+            color: #000000;
+          }
+        }
+      }
+      &:nth-of-type(3) {
+        background: #000000;
+        p {
+          .banner_related_data_title {
+            color: #fff;
+          }
+          .banner_related_data_val {
+            color: #ffffff;
+          }
+        }
+      }
+      &:nth-of-type(4) {
+        background: #f0f0f0;
+        p {
+          .banner_related_data_title {
+            color: #000;
+          }
+          .banner_related_data_val {
+            color: #000000;
+          }
+        }
+      }
       img {
         display: inline-block;
         margin-right: 10px;
@@ -206,32 +250,37 @@
         display: flex;
         flex-direction: column;
         margin-bottom: 0;
+        width: 100%;
+        height: 100%;
+        padding: 25px;
       }
       .banner_related_data_title {
         display: inline-block;
-        font-size: 12px;
-        font-weight: 400;
-        color: rgba(255, 255, 255, 0.8);
-        line-height: 18px;
+        font-size: 16px;
+        font-family: Montserrat-Medium, Montserrat;
+        font-weight: 500;
+        color: #4f4f4f;
+        line-height: 19px;
       }
       .banner_related_data_val {
-        display: inline-block;
-        margin-top: 2px;
-        font-size: 20px;
-        font-weight: 500;
-        color: #ffffff;
-        line-height: 20px;
+        display: flex;
+        align-items: center;
+        margin-top: 12px;
+        font-weight: 600;
+        font-family: Montserrat-SemiBold, Montserrat;
+        line-height: 28px;
+        font-size: 28px;
       }
       .banner_related_data_buy {
         display: inline-block;
         padding: 0 6px;
-        margin: 18px 0 0 8px;
         height: 20px;
         font-size: 12px;
         line-height: 20px;
-        color: #0f8c20;
-        background: #d4e9e2;
+        color: #00c57b;
+        background: #e7f4ef;
         border-radius: 5px;
+        margin-left: 10px;
       }
     }
     &_address_box {

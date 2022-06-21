@@ -62,7 +62,6 @@ const Banner = (props) => {
     [WHT_ADDRESS(ChainId.HECO)],
     128
   )
-
   useEffect(() => {
     if (price * 1 > 0) {
       setRealTimePrice(splitFormat(price, 3))
@@ -257,7 +256,7 @@ const Banner = (props) => {
         </div>
         <div className='banner_related'>
           <div className='banner_related_data'>
-            <img src={Icon4} />
+            {/* <img src={Icon4} /> */}
             <p>
               <span className='banner_related_data_title'>
                 <FormattedMessage id='farm18' />
@@ -267,27 +266,28 @@ const Banner = (props) => {
                 {/*  ? realTimePrice*/}
                 {/*  : bscPrice * 1 > 0 ? splitFormat(bscPrice, 3) : '-'}*/}
                 {realTimePrice || '-'}
+                {chainId == 128 && (
+                  <a
+                    className='banner_related_data_buy'
+                    onClick={() => {
+                      dispatch({
+                        type: HANDLE_WALLET_MODAL,
+                        walletModal: 'buyCoin',
+                      })
+                    }}
+                  >
+                    <FormattedMessage id='farm17' />
+                  </a>
+                )}
               </span>
             </p>
             {/* href='https://ht.mdex.com/#/swap?outputCurrency=0x910651f81a605a6ef35d05527d24a72fecef8bf0'
           target='_blank' */}
 
-            {chainId == 128 && (
-              <a
-                className='banner_related_data_buy'
-                onClick={() => {
-                  dispatch({
-                    type: HANDLE_WALLET_MODAL,
-                    walletModal: 'buyCoin',
-                  })
-                }}
-              >
-                <FormattedMessage id='farm17' />
-              </a>
-            )}
+
           </div>
           <div className='banner_related_data'>
-            <img src={Icon1} />
+            {/* <img src={Icon1} /> */}
             <p>
               <span className='banner_related_data_title'>
                 <FormattedMessage id='related_title1' />
@@ -298,7 +298,7 @@ const Banner = (props) => {
             </p>
           </div>
           <div className='banner_related_data'>
-            <img src={Icon2} />
+            {/* <img src={Icon2} /> */}
             <p>
               <span className='banner_related_data_title'>
                 <FormattedMessage id='related_title2' />
@@ -309,7 +309,7 @@ const Banner = (props) => {
             </p>
           </div>
           <div className='banner_related_data'>
-            <img src={Icon3} />
+            {/* <img src={Icon3} /> */}
             <p>
               <span className='banner_related_data_title'>
                 <FormattedMessage id='related_title3' />
