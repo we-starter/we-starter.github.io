@@ -76,8 +76,8 @@ function App() {
               <Route exact path='/application/vote' component={Vote}></Route>
               <Route exact path='/application/apply' component={VoteApply}></Route>
             </Switch>
+            <Footer />
             <InitPage />
-            {/* <Footer /> */}
           </Router>
         </Intl>
       </Web3ReactProvider>

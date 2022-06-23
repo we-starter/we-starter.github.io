@@ -1,0 +1,23 @@
+.farm-banner {
+  min-width: 1180px;
+  height: 600px;
+  background-image: url(../../assets/image/farmbanner.png);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  > img {
+    width: 800px;
+    height: 288px;
+  }
+  > div {
+    font-size: 24px;
+    font-family: Montserrat-Bold, Montserrat;
+    font-weight: bold;
+    color: #ffffff;
+    line-height: 40px;
+    margin-top: 21px;
+  }
+}

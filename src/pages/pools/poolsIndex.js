@@ -4,7 +4,7 @@ import BigNumber from 'bignumber.js'
 import { withRouter } from 'react-router'
 import { changeNetwork } from '../../connectors'
 import { ChainId } from '../../web3/address'
-import {message, Popover} from 'antd'
+import { message, Popover } from 'antd'
 import noDataPng from '../../assets/icon/noData@2x.png'
 import WARLBP from '../../assets/image/W@2x.png'
 import BLACKLBP from '../../assets/image/B@2x.png'
@@ -21,14 +21,13 @@ import { formatAmount } from '../../utils/format'
 import Timer from 'react-compound-timer'
 import { useActiveWeb3React } from '../../web3'
 import Banner from '../../components/banner/Banner'
-
-export function NftCardTipContent({nft}){
-  if (!nft){
+export function NftCardTipContent({ nft }) {
+  if (!nft) {
     return null
   }
   return (
     <div className="nft-card-tip-content">
-      <img src={nft.icon} alt=""/>
+      <img src={nft.icon} alt="" />
       <div>
         <h2>Only for {nft.name}</h2>
         <p>Claim from <a href={nft.claimUrl} target="_blank">{nft.claimUrl.split('//')[1]}</a></p>
@@ -145,7 +144,7 @@ const PoolsIndex = (props) => {
     if (!flag) {
       return
     }
-    if (url){
+    if (url) {
       window.open(url)
     }
   }
@@ -244,7 +243,7 @@ const PoolsIndex = (props) => {
         className={cs(
           'pools-type_card_box',
           ((pool && pool.underlying.symbol === 'FIX') || type === 1) &&
-            'pools-type_private',
+          'pools-type_private',
           pool && pool.is_coming && ('pools-type_hover_style_' + pool.networkId),
           tabFlag === 3 && 'pools-type_flashPool'
         )}
@@ -366,14 +365,12 @@ const PoolsIndex = (props) => {
                 <a>
                   <i
                     className={cs(
-                      `pools-type_progress_bar ${
-                        'pools-type_progress_bar_' + pool.networkId
+                      `pools-type_progress_bar ${'pools-type_progress_bar_' + pool.networkId
                       }`
                     )}
                     style={{
-                      width: `${
-                        pool.progress > 1 ? 100 : pool.progress * 100
-                      }%`,
+                      width: `${pool.progress > 1 ? 100 : pool.progress * 100
+                        }%`,
                     }}
                   ></i>
                 </a>
@@ -385,104 +382,104 @@ const PoolsIndex = (props) => {
         <div className='type_private_box_b'>
           {((pool && pool.status !== 3) ||
             (pool && pool.underlying.name === 'LBP')) && (
-            <div className='pools-type_title'>
-              <p
-                className='pools-type_card_ratio pools-type_card_access'
-                style={{
-                  color: '#7A7F82',
-                }}
-              >
-                <FormattedMessage id='accessType' />
-              </p>
-              {type === 1 && !(pool.svipFlag || pool.nft) && (
+              <div className='pools-type_title'>
                 <p
                   className='pools-type_card_ratio pools-type_card_access'
-                  style={{ textAlign: 'right' }}
+                  style={{
+                    color: '#7A7F82',
+                  }}
                 >
-                  <span
-                    className={cs('crown', quotaOf > 0 && 'crown-highlight')}
-                  ></span>
-                  <FormattedMessage id='private' />
-                  <span
-                    className='tips'
-                    onMouseOver={() => setHoverFlag(index)}
-                    onMouseOut={() => setHoverFlag(null)}
-                  >
-                    {hoverFlag === index && (
-                      <i className='tips_content'>
-                        <FormattedMessage id='privateTips' />
-                      </i>
-                    )}
-                  </span>
+                  <FormattedMessage id='accessType' />
                 </p>
-              )}
-              {type === 1 && pool && pool.svipFlag && (
-                <p
-                  className='pools-type_card_ratio pools-type_card_access'
-                  style={{ textAlign: 'right' }}
-                >
-                  <span
-                    className={cs('crown', quotaOf > 0 && 'crown-highlight')}
-                  ></span>
-                  <FormattedMessage id='svip' />
-                  <span
-                    className='tips'
-                    onMouseOver={() => setHoverFlag(index)}
-                    onMouseOut={() => setHoverFlag(null)}
+                {type === 1 && !(pool.svipFlag || pool.nft) && (
+                  <p
+                    className='pools-type_card_ratio pools-type_card_access'
+                    style={{ textAlign: 'right' }}
                   >
-                    {hoverFlag === index && (
-                      <i className='tips_content'>
-                        <FormattedMessage id='svipTips' />
-                      </i>
-                    )}
-                  </span>
-                </p>
-              )}
-              {(type === 0 || type === 2) && (
-                <p
-                  className='pools-type_card_ratio pools-type_card_access'
-                  style={{ textAlign: 'right' }}
-                >
-                  <FormattedMessage id='public' />
-                  <span
-                    className='tips'
-                    onMouseOver={() => setHoverFlag(index)}
-                    onMouseOut={() => setHoverFlag(null)}
-                  >
-                    {hoverFlag === index &&
-                      pool &&
-                      pool.underlying.name !== 'LBP' && (
+                    <span
+                      className={cs('crown', quotaOf > 0 && 'crown-highlight')}
+                    ></span>
+                    <FormattedMessage id='private' />
+                    <span
+                      className='tips'
+                      onMouseOver={() => setHoverFlag(index)}
+                      onMouseOut={() => setHoverFlag(null)}
+                    >
+                      {hoverFlag === index && (
                         <i className='tips_content'>
-                          <FormattedMessage id='publicTips' />
+                          <FormattedMessage id='privateTips' />
                         </i>
                       )}
-                    {hoverFlag === index &&
-                      pool &&
-                      pool.underlying.name === 'LBP' && (
+                    </span>
+                  </p>
+                )}
+                {type === 1 && pool && pool.svipFlag && (
+                  <p
+                    className='pools-type_card_ratio pools-type_card_access'
+                    style={{ textAlign: 'right' }}
+                  >
+                    <span
+                      className={cs('crown', quotaOf > 0 && 'crown-highlight')}
+                    ></span>
+                    <FormattedMessage id='svip' />
+                    <span
+                      className='tips'
+                      onMouseOver={() => setHoverFlag(index)}
+                      onMouseOut={() => setHoverFlag(null)}
+                    >
+                      {hoverFlag === index && (
                         <i className='tips_content'>
-                          <FormattedMessage id='publicTips1' />
+                          <FormattedMessage id='svipTips' />
                         </i>
                       )}
-                  </span>
-                </p>
-              )}
-              {pool.nft && (
-                <div
-                  className='pools-type_card_ratio pools-type_card_access'
-                  style={{ textAlign: 'right' }}
-                >
-                  <div className="nft-badge">
-                    <img src={pool.nft.icon} alt=""/>
-                    {pool.nft.name}
-                  </div>
+                    </span>
+                  </p>
+                )}
+                {(type === 0 || type === 2) && (
+                  <p
+                    className='pools-type_card_ratio pools-type_card_access'
+                    style={{ textAlign: 'right' }}
+                  >
+                    <FormattedMessage id='public' />
+                    <span
+                      className='tips'
+                      onMouseOver={() => setHoverFlag(index)}
+                      onMouseOut={() => setHoverFlag(null)}
+                    >
+                      {hoverFlag === index &&
+                        pool &&
+                        pool.underlying.name !== 'LBP' && (
+                          <i className='tips_content'>
+                            <FormattedMessage id='publicTips' />
+                          </i>
+                        )}
+                      {hoverFlag === index &&
+                        pool &&
+                        pool.underlying.name === 'LBP' && (
+                          <i className='tips_content'>
+                            <FormattedMessage id='publicTips1' />
+                          </i>
+                        )}
+                    </span>
+                  </p>
+                )}
+                {pool.nft && (
+                  <div
+                    className='pools-type_card_ratio pools-type_card_access'
+                    style={{ textAlign: 'right' }}
+                  >
+                    <div className="nft-badge">
+                      <img src={pool.nft.icon} alt="" />
+                      {pool.nft.name}
+                    </div>
 
-                  <Popover content={() => <NftCardTipContent nft={pool.nft}/> } title={null}>
-                    <span className='tips'/>
-                  </Popover>
-                </div>
-              )}
-            </div>
-          )}
+                    <Popover content={() => <NftCardTipContent nft={pool.nft} />} title={null}>
+                      <span className='tips' />
+                    </Popover>
+                  </div>
+                )}
+              </div>
+            )}
           {/* 已完成 */}
           {/* 白名单 */}
           {pool &&
@@ -635,9 +632,28 @@ const PoolsIndex = (props) => {
                 pool.networkId == ChainId.BSC && 'pools-type_bsc_enter',
                 pool.networkId == ChainId.AVALANCHE && 'pools-type_avalanche_enter',
                 pool &&
-                  pool.underlying.name === 'LBP' &&
-                  'pools-type_lbp_enter',
+                pool.underlying.name === 'LBP' &&
+                'pools-type_lbp_enter',
                 pool &&
+                (pool.is_coming ||
+                  (status === 3 &&
+                    ((pool.type === 0 &&
+                      pool.settleable &&
+                      pool.settleable.amount == 0 &&
+                      pool.settleable.volume == 0) ||
+                      (pool.settleable &&
+                        pool.type === 1 &&
+                        (pool.settleable.claimedOf * 1 !== 0 ||
+                          pool.settleable.volume == 0)))) ||
+                  (!active && status === 3) ||
+                  (status === 3 && pool.underlying.name === 'LBP')) &&
+                'pools-type_disable_enter'
+              )}
+              onClick={(e) => {
+                console.log(pool)
+                goDetail(
+                  e,
+                  pool &&
                   (pool.is_coming ||
                     (status === 3 &&
                       ((pool.type === 0 &&
@@ -646,29 +662,10 @@ const PoolsIndex = (props) => {
                         pool.settleable.volume == 0) ||
                         (pool.settleable &&
                           pool.type === 1 &&
-                          (pool.settleable.claimedOf * 1 !== 0 ||
-                            pool.settleable.volume == 0)))) ||
+                          pool.settleable.claimedOf * 1 !== 0) ||
+                        (pool.settleable && pool.settleable.volume == 0))) ||
                     (!active && status === 3) ||
-                    (status === 3 && pool.underlying.name === 'LBP')) &&
-                  'pools-type_disable_enter'
-              )}
-              onClick={(e) => {
-                console.log(pool)
-                goDetail(
-                  e,
-                  pool &&
-                    (pool.is_coming ||
-                      (status === 3 &&
-                        ((pool.type === 0 &&
-                          pool.settleable &&
-                          pool.settleable.amount == 0 &&
-                          pool.settleable.volume == 0) ||
-                          (pool.settleable &&
-                            pool.type === 1 &&
-                            pool.settleable.claimedOf * 1 !== 0) ||
-                          (pool.settleable && pool.settleable.volume == 0))) ||
-                      (!active && status === 3) ||
-                      (status === 3 && pool.underlying.name === 'LBP')),
+                    (status === 3 && pool.underlying.name === 'LBP')),
                   address,
                   pool && pool.underlying.name
                 )
@@ -687,7 +684,7 @@ const PoolsIndex = (props) => {
               )}
               onClick={(e) => {
                 changeNetwork(pool.networkId).then(() => {
-                  if (window.onto){
+                  if (window.onto) {
                     message.warning('Please switch manually in the ONTO wallet')
                   } else {
                     message.success('Switch success')

@@ -1,5 +1,5 @@
 .footer {
-  position: absolute;
+  // position: absolute;
   bottom: 0;
   flex-shrink: 0;
   background-color: rgba(255, 255, 255, 1);
@@ -13,19 +13,24 @@
     margin-bottom: 0;
     li {
       margin: 12px;
+      width: 40px;
+      height: 40px;
+      background: #efefef;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     a {
       display: block;
       width: 24px;
-      svg {
+      path {
         fill: #22292f;
       }
-      img {
-        width: 18px;
-        height: 24px;
+      svg {
         &:hover {
-          svg {
+          path {
             fill: #0f8c20;
           }
         }

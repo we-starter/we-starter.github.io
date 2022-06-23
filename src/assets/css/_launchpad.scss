@@ -1,0 +1,18 @@
+@media #{$desktop} {
+  .launchpad {
+    height: 556px;
+    background: #ffffff;
+    &_wrap {
+      width: 1180px;
+      margin: 0 auto;
+      > h3 {
+        font-size: 40px;
+        font-family: Montserrat-Bold, Montserrat;
+        font-weight: bold;
+        color: #172e45;
+        line-height: 49px;
+        margin-top: 79px;
+      }
+    }
+  }
+}

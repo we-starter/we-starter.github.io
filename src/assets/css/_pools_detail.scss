@@ -2,8 +2,8 @@
   width: 100%;
   background: #fff;
 }
-.pools_detail_btn_43114{
-  width: 158px!important;
+.pools_detail_btn_43114 {
+  width: 158px !important;
 }
 
 @media #{$desktop} {
@@ -11,7 +11,7 @@
     min-width: 1080px;
     // height: 100%;
     min-height: 100%;
-    background-color: #fff;
+    background-color: #f7fcf9;
   }
   .pools_detail {
     margin-top: 60px;
@@ -63,7 +63,7 @@
       &:last-child {
         margin-left: 24px;
         &:hover {
-          color: #F0B90B;
+          color: #f0b90b;
         }
       }
     }
@@ -71,7 +71,7 @@
       &:last-child {
         margin-left: 24px;
         &:hover {
-          color: #8247E5;
+          color: #8247e5;
         }
       }
     }
@@ -86,20 +86,20 @@
     }
     &_btn_active_56 {
       color: #fff;
-      background: #F0B90B;
+      background: #f0b90b;
       box-shadow: 0px 4px 20px 0px rgba(15, 140, 32, 0.3);
       &:hover {
         color: #fff;
-        background: #F3C73B;
+        background: #f3c73b;
       }
     }
     &_btn_active_137 {
       color: #fff;
-      background: #8247E5;
+      background: #8247e5;
       box-shadow: 0px 4px 20px 0px rgba(15, 140, 32, 0.3);
       &:hover {
         color: #fff;
-        background: #9B6BEA;
+        background: #9b6bea;
       }
     }
 
@@ -152,7 +152,7 @@
           color: #0f8c20;
           &:after {
             position: absolute;
-            content: '';
+            content: "";
             bottom: 0;
             left: 0;
             width: 100%;
@@ -165,7 +165,7 @@
         color: #0f8c20;
         &:after {
           position: absolute;
-          content: '';
+          content: "";
           bottom: 0;
           left: 0;
           width: 100%;
@@ -214,17 +214,17 @@
             text-align: right;
           }
           .pools_detail_record_btn_56 {
-            background: #F0B90B;
+            background: #f0b90b;
             text-align: right;
             &:hover {
-              background-color: #F3C73B;
+              background-color: #f3c73b;
             }
           }
           .pools_detail_record_btn_137 {
-            background: #8247E5;
+            background: #8247e5;
             text-align: right;
             &:hover {
-              background-color: #9B6BEA;
+              background-color: #9b6bea;
             }
           }
         }
@@ -253,7 +253,7 @@
         &.active {
           color: #22292f;
           &:after {
-            content: '';
+            content: "";
             position: absolute;
             left: 0;
             bottom: 0;
@@ -436,7 +436,7 @@
       padding-bottom: 16px;
       text-align: center;
     }
-     &_tips_box {
+    &_tips_box {
       margin: 0 auto;
       width: 640px;
       text-align: center;
@@ -472,11 +472,11 @@
         }
       }
     }
-     &_btn_56 {
+    &_btn_56 {
       &:last-child {
         margin-left: 24px;
         &:hover {
-          color: #F0B90B;
+          color: #f0b90b;
         }
       }
     }
@@ -484,7 +484,7 @@
       &:last-child {
         margin-left: 24px;
         &:hover {
-          color: #8247E5;
+          color: #8247e5;
         }
       }
     }
@@ -497,22 +497,22 @@
         background: #00b900;
       }
     }
-     &_btn_active_56 {
+    &_btn_active_56 {
       color: #fff;
-      background: #F0B90B;
+      background: #f0b90b;
       box-shadow: 0px 4px 20px 0px rgba(15, 140, 32, 0.3);
       &:hover {
         color: #fff;
-        background: #F3C73B;
+        background: #f3c73b;
       }
     }
     &_btn_active_137 {
       color: #fff;
-      background: #8247E5;
+      background: #8247e5;
       box-shadow: 0px 4px 20px 0px rgba(15, 140, 32, 0.3);
       &:hover {
         color: #fff;
-        background: #9B6BEA;
+        background: #9b6bea;
       }
     }
 
@@ -550,7 +550,7 @@
       }
     }
     &_record_tab {
-       display: flex;
+      display: flex;
       a {
         position: relative;
         margin: 0 36px 22px 0;
@@ -565,7 +565,7 @@
           color: #0f8c20;
           &:after {
             position: absolute;
-            content: '';
+            content: "";
             bottom: 0;
             left: 0;
             width: 100%;
@@ -578,7 +578,7 @@
         color: #0f8c20;
         &:after {
           position: absolute;
-          content: '';
+          content: "";
           bottom: 0;
           left: 0;
           width: 100%;
@@ -627,17 +627,17 @@
             text-align: right;
           }
           .pools_detail_record_btn_56 {
-            background: #F0B90B;
+            background: #f0b90b;
             text-align: right;
             &:hover {
-              background-color: #F3C73B;
+              background-color: #f3c73b;
             }
           }
           .pools_detail_record_btn_137 {
-            background: #8247E5;
+            background: #8247e5;
             text-align: right;
             &:hover {
-              background-color: #9B6BEA;
+              background-color: #9b6bea;
             }
           }
         }
@@ -666,7 +666,7 @@
         &.active {
           color: #22292f;
           &:after {
-            content: '';
+            content: "";
             position: absolute;
             left: 0;
             bottom: 0;
@@ -879,11 +879,11 @@
         }
       }
     }
-     &_btn_56 {
+    &_btn_56 {
       &:last-child {
         margin-left: 24px;
         &:hover {
-          color: #F0B90B;
+          color: #f0b90b;
         }
       }
     }
@@ -891,7 +891,7 @@
       &:last-child {
         margin-left: 24px;
         &:hover {
-          color: #8247E5;
+          color: #8247e5;
         }
       }
     }
@@ -904,22 +904,22 @@
         background: #00b900;
       }
     }
-     &_btn_active_56 {
+    &_btn_active_56 {
       color: #fff;
-      background: #F0B90B;
+      background: #f0b90b;
       box-shadow: 0px 4px 20px 0px rgba(15, 140, 32, 0.3);
       &:hover {
         color: #fff;
-        background: #F3C73B;
+        background: #f3c73b;
       }
     }
     &_btn_active_137 {
       color: #fff;
-      background: #8247E5;
+      background: #8247e5;
       box-shadow: 0px 4px 20px 0px rgba(15, 140, 32, 0.3);
       &:hover {
         color: #fff;
-        background: #9B6BEA;
+        background: #9b6bea;
       }
     }
 
@@ -958,7 +958,7 @@
       }
     }
     &_record_tab {
-       display: flex;
+      display: flex;
       a {
         position: relative;
         margin: 0 36px 18px 0;
@@ -973,7 +973,7 @@
           color: #0f8c20;
           &:after {
             position: absolute;
-            content: '';
+            content: "";
             bottom: 0;
             left: 0;
             width: 100%;
@@ -986,7 +986,7 @@
         color: #0f8c20;
         &:after {
           position: absolute;
-          content: '';
+          content: "";
           bottom: 0;
           left: 0;
           width: 100%;
@@ -1022,17 +1022,17 @@
         text-align: right;
       }
       .pools_detail_record_btn_56 {
-        background: #F0B90B;
+        background: #f0b90b;
         text-align: right;
         &:hover {
-          background-color: #F3C73B;
+          background-color: #f3c73b;
         }
       }
       .pools_detail_record_btn_137 {
-        background: #8247E5;
+        background: #8247e5;
         text-align: right;
         &:hover {
-          background-color: #9B6BEA;
+          background-color: #9b6bea;
         }
       }
     }
@@ -1074,17 +1074,17 @@
             text-align: right;
           }
           .pools_detail_record_btn_56 {
-            background: #F0B90B;
+            background: #f0b90b;
             text-align: right;
             &:hover {
-              background-color: #F3C73B;
+              background-color: #f3c73b;
             }
           }
           .pools_detail_record_btn_137 {
-            background: #8247E5;
+            background: #8247e5;
             text-align: right;
             &:hover {
-              background-color: #9B6BEA;
+              background-color: #9b6bea;
             }
           }
         }
@@ -1113,7 +1113,7 @@
         &.active {
           color: #22292f;
           &:after {
-            content: '';
+            content: "";
             position: absolute;
             left: 0;
             bottom: 0;
@@ -1316,11 +1316,11 @@
         }
       }
     }
-     &_btn_56 {
+    &_btn_56 {
       &:last-child {
         margin-left: 24px;
         &:hover {
-          color: #F0B90B;
+          color: #f0b90b;
         }
       }
     }
@@ -1328,7 +1328,7 @@
       &:last-child {
         margin-left: 24px;
         &:hover {
-          color: #8247E5;
+          color: #8247e5;
         }
       }
     }
@@ -1341,22 +1341,22 @@
         background: #00b900;
       }
     }
-     &_btn_active_56 {
+    &_btn_active_56 {
       color: #fff;
-      background: #F0B90B;
+      background: #f0b90b;
       box-shadow: 0px 4px 20px 0px rgba(15, 140, 32, 0.3);
       &:hover {
         color: #fff;
-        background: #F3C73B;
+        background: #f3c73b;
       }
     }
     &_btn_active_137 {
       color: #fff;
-      background: #8247E5;
+      background: #8247e5;
       box-shadow: 0px 4px 20px 0px rgba(15, 140, 32, 0.3);
       &:hover {
         color: #fff;
-        background: #9B6BEA;
+        background: #9b6bea;
       }
     }
 
@@ -1395,7 +1395,7 @@
       }
     }
     &_record_tab {
-       display: flex;
+      display: flex;
       a {
         position: relative;
         margin: 0 36px 18px 0;
@@ -1410,7 +1410,7 @@
           color: #0f8c20;
           &:after {
             position: absolute;
-            content: '';
+            content: "";
             bottom: 0;
             left: 0;
             width: 100%;
@@ -1423,7 +1423,7 @@
         color: #0f8c20;
         &:after {
           position: absolute;
-          content: '';
+          content: "";
           bottom: 0;
           left: 0;
           width: 100%;
@@ -1459,17 +1459,17 @@
         text-align: right;
       }
       .pools_detail_record_btn_56 {
-        background: #F0B90B;
+        background: #f0b90b;
         text-align: right;
         &:hover {
-          background-color: #F3C73B;
+          background-color: #f3c73b;
         }
       }
       .pools_detail_record_btn_137 {
-        background: #8247E5;
+        background: #8247e5;
         text-align: right;
         &:hover {
-          background-color: #9B6BEA;
+          background-color: #9b6bea;
         }
       }
     }
@@ -1511,17 +1511,17 @@
             text-align: right;
           }
           .pools_detail_record_btn_56 {
-            background: #F0B90B;
+            background: #f0b90b;
             text-align: right;
             &:hover {
-              background-color: #F3C73B;
+              background-color: #f3c73b;
             }
           }
           .pools_detail_record_btn_137 {
-            background: #8247E5;
+            background: #8247e5;
             text-align: right;
             &:hover {
-              background-color: #9B6BEA;
+              background-color: #9b6bea;
             }
           }
         }
@@ -1550,7 +1550,7 @@
         &.active {
           color: #22292f;
           &:after {
-            content: '';
+            content: "";
             position: absolute;
             left: 0;
             bottom: 0;
