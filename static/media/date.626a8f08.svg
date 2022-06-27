@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>切片</title>
+    <defs>
+        <filter id="filter-1">
+            <feColorMatrix in="SourceGraphic" type="matrix" values="0 0 0 0 0.584314 0 0 0 0 0.584314 0 0 0 0 0.584314 0 0 0 1.000000 0"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="IWO_apply" transform="translate(-1150.000000, -668.000000)">
+            <g id="编组-6" transform="translate(1150.000000, 668.000000)">
+                <rect id="矩形" x="0" y="0" width="24" height="24"></rect>
+                <g filter="url(#filter-1)" id="calendar">
+                    <g transform="translate(3.000000, 2.000000)">
+                        <path d="M16,20 L2,20 C0.89543,20 0,19.1046 0,18 L0,4 C0,2.89543 0.89543,2 2,2 L4,2 L4,0 L6,0 L6,2 L12,2 L12,0 L14,0 L14,2 L16,2 C17.1046,2 18,2.89543 18,4 L18,18 C18,19.1046 17.1046,20 16,20 Z M2,8 L2,18 L16,18 L16,8 L2,8 Z M2,4 L2,6 L16,6 L16,4 L2,4 Z M14,16 L12,16 L12,14 L14,14 L14,16 Z M10,16 L8,16 L8,14 L10,14 L10,16 Z M6,16 L4,16 L4,14 L6,14 L6,16 Z M14,12 L12,12 L12,10 L14,10 L14,12 Z M10,12 L8,12 L8,10 L10,10 L10,12 Z M6,12 L4,12 L4,10 L6,10 L6,12 Z" id="形状" fill="#2E3A59" fill-rule="nonzero"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

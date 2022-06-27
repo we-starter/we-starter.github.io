@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>book-mark-line</title>
+    <g id="book-mark-line" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g>
+            <polygon id="路径" points="0 0 24 0 24 24 0 24"></polygon>
+            <path d="M3,18.5 L3,5 C3,3.34314575 4.34314575,2 6,2 L20,2 C20.5522847,2 21,2.44771525 21,3 L21,21 C21,21.5522847 20.5522847,22 20,22 L6.5,22 C4.56700338,22 3,20.4329966 3,18.5 Z M19,20 L19,17 L6.5,17 C5.67157288,17 5,17.6715729 5,18.5 C5,19.3284271 5.67157288,20 6.5,20 L19,20 Z M10,4 L6,4 C5.44771525,4 5,4.44771525 5,5 L5,15.337 C5.46869034,15.114438 5.98115126,14.9993051 6.5,15 L19,15 L19,4 L17,4 L17,12 L13.5,10 L10,12 L10,4 Z" id="形状" fill="#00C57B" fill-rule="nonzero"></path>
+        </g>
+    </g>
+</svg>
