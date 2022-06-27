@@ -25,7 +25,7 @@ import { formatAmount, fromWei } from '../../utils/format'
 import { getScanLink } from "../../connectors";
 import { ChainId, GAS_FEE } from "../../web3/address";
 import BadgeStake from "../../components/Modals/BadgeStake";
-
+import DefaultBanner from '../../assets/image/default-pool.png'
 const PoolsDetail = (props) => {
   const { address } = props.match.params
 
@@ -154,26 +154,95 @@ const PoolsDetail = (props) => {
   console.log(pool)
   return (
     <div className='pools_detail_box'>
-      <PoolsBanner address={address} pool={pool} />
+      {/* <PoolsBanner address={address} pool={pool} /> */}
+      <div className='pool_back'>
+        <svg width="24px" height="24px" viewBox="0 0 24 24">
+          <g id="westar" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <g id="enterpool" transform="translate(-370.000000, -110.000000)">
+              <g transform="translate(370.000000, 110.000000)">
+                <g transform="translate(12.000000, 12.000000) scale(-1, 1) translate(-12.000000, -12.000000) translate(8.000000, 5.000000)" fill="#03A678" fill-rule="nonzero">
+                  <polygon points="7.7131 7 1.70209 0.99001 0.28809 2.40401 4.8881 7.004 0.28809 11.597 1.70209 13.011"></polygon>
+                </g>
+                <rect x="0" y="0" width="24" height="24"></rect>
+              </g>
+            </g>
+          </g>
+        </svg>
+        <span>Pool</span>
+      </div>
+      <div className='pool_info'>
+        <img src={pool && pool.icon} />
+        <div>
+          <div>HT Private
+            <span>
+              {pool && pool.status === 0 && (
+                <FormattedMessage id='comingSoon1' />
+                + '...'
+              )}
+              {pool &&
+                pool.status === 1 &&
+                (pool.timeClose == 0 || pool.timeClose > now) && (
+                  <FormattedMessage id='recruit' />
+                )}
+              {pool &&
+                pool.status === 1 &&
+                pool.timeClose > 0 &&
+                pool.timeClose < now && (
+                  <FormattedMessage id='recruitOver' />
+                )}
+              {pool && pool.status === 2 && (
+                <FormattedMessage id='settlement' />
+              )}
+              {pool && pool.status === 3 && (
+                <FormattedMessage id='completed' />
+              )}</span>
+          </div>
+          <p>
+            0xdBa054fDb2A542E9128c91Ae62fE832177bf3536
+            <svg width="24px" height="24px" viewBox="0 0 24 24" >
+              <g id="westar" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                <g transform="translate(-1086.000000, -249.000000)">
+                  <g transform="translate(462.000000, 243.000000)">
+                    <g transform="translate(624.000000, 6.000000)">
+                      <polygon points="0 0 24 0 24 24 0 24"></polygon>
+                      <path d="M10,3 L10,5 L5,5 L5,19 L19,19 L19,14 L21,14 L21,20 C21,20.5522847 20.5522847,21 20,21 L4,21 C3.44771525,21 3,20.5522847 3,20 L3,4 C3,3.44771525 3.44771525,3 4,3 L10,3 Z M17.586,5 L13,5 L13,3 L21,3 L21,11 L19,11 L19,6.414 L12,13.414 L10.586,12 L17.586,5 Z" id="形状" fill="#00C57B" fill-rule="nonzero"></path>
+                    </g>
+                  </g>
+                </g>
+              </g>
+            </svg>
+          </p>
+        </div></div>
       <div className='pools_card'>
+        <div className='pools_card_banner'>
+          <img src={DefaultBanner} />
+        </div>
         <div className='pools_card_content'>
           <div className='pools_card_content_title'>
             <span>
               <FormattedMessage id='poolsDetailText1' />
             </span>
-            {/* <span>{pool && pool.ratio}</span> */}
-            {pool && pool.type === 1 && (
+            <span>{pool && (pool.nft ? pool.nftRatio ? (pool.amount / pool.nftRatio) : '-' : pool.amount)} {pool && pool.underlying.symbol}</span>
+          </div>
+          <div className='pools_card_text'>
+            <span>
+              <FormattedMessage id='poolsIndexText1' />{' '}
+            </span>
+            <span>
+              {pool && pool.ratio}
+            </span>
+          </div>
+          {pool && pool.type === 1 && (
+            <div className='pools_card_text'>
               <span>
                 <FormattedMessage id='myQuota' />{' '}
+              </span>
+              <span>
                 {pool && formatAmount(pool.quotaOf)}{' '}
                 {pool && pool.currency.symbol}
               </span>
-            )}
-          </div>
-
-          <div className='pools_card_content_title pools_card_val'>
-            {pool && (pool.nft ? pool.nftRatio ? (pool.amount / pool.nftRatio) : '-' : pool.amount)} {pool && pool.underlying.symbol}
-          </div>
+            </div>
+          )}
 
           {pool && pool.status === 0 && (
             <div className='pools_card_start'>
@@ -206,19 +275,31 @@ const PoolsDetail = (props) => {
               <FormattedMessage id='completed' />
             </div>
           )}
-          <div className='pools_card_content_title'>
+          <div className='pools_card_progress_title'>
             <span>
               <FormattedMessage id='poolsDetailText2' />
             </span>
           </div>
-          <div className='pools_card_progress__bar'>
-            <span
-              style={{
-                left: pool
-                  ? `${pool.progress > 1 ? 94 : pool.progress * 100}%`
-                  : '0%',
-              }}
-            ></span>
+          <div className='pools_card_progress_bar'>
+            <div>
+              <p>
+                <span>Progress</span>
+                <span>{pool && (pool.progress * 100).toFixed(2) * 1}%</span>
+              </p>
+              {pool && (pool.nft ? (
+                <span>
+                  {pool.nftRatio && (`${formatAmount(pool.totalPurchasedUnderlying, 0, 2)} / ${pool.amount / pool.nftRatio}`)} {pool.underlying.symbol}
+                </span>
+              ) : (
+                <span>
+                  {pool && pool.progress == 1
+                    ? Math.round(formatAmount(pool.totalPurchasedUnderlying, 0, 2))
+                    : formatAmount(pool.totalPurchasedUnderlying, 0, 2)}
+                  /{pool && pool.amount}
+                </span>
+              )
+              )}
+            </div>
             <p>
               <a
                 style={{
@@ -229,84 +310,66 @@ const PoolsDetail = (props) => {
               ></a>
             </p>
           </div>
-          <div className='pools_card_content_title pools_card_schedule'>
-            <span>{pool && (pool.progress * 100).toFixed(2) * 1}%</span>
-            {
-              pool && (pool.nft ? (
-                <span>
-                  {pool.nftRatio && (`${formatAmount(pool.totalPurchasedUnderlying, 0, 2)} / ${pool.amount / pool.nftRatio}`)} {pool.underlying.symbol}
-                </span>
-              ) : (
-                <span>
-                  {pool && pool.progress == 1
-                    ? Math.round(formatAmount(pool.totalPurchasedUnderlying, 0, 2))
-                    : formatAmount(pool.totalPurchasedUnderlying, 0, 2)}
-                  /{pool && pool.amount} {pool && pool.underlying.symbol}
-                </span>
-              )
-              )
-            }
+          <div className='pools_detail_btn_box'>
+            {/* pool.timeClose * 1 > now  timeClose 是超募的claim余额的结束时间 */}
+            <a
+              className={`pools_detail_btn ${pool ? 'pools_detail_btn_' + pool.networkId : ''
+                } ${pool &&
+                  pool.status === 1 &&
+                  (pool.timeClose - 0 === 0 || pool.timeClose * 1 > now)
+                  ? 'pools_detail_btn_active ' +
+                  ('pools_detail_btn_active_' + pool.networkId)
+                  : 'pools_detail_btn_disable'
+                }`}
+              onClick={() => {
+                if (pool.status === 1) {
+                  if (pool.userFull) {
+                    message.info(intl.formatMessage({ id: 'ParticipantsAreFull' }))
+                  } else if (pool.type === 1 && pool.purchasedCurrencyOf > 0) {
+                    // 如果是 已经申购过的
+                    // message.info('已申购过')
+                    message.info(intl.formatMessage({ id: 'alreadySubscribed' }))
+                  } else if (pool.type === 1 && pool.quotaOf == 0) {
+                    //不在白名单里面
+                    message.info(intl.formatMessage({ id: 'notInWhitelist' }))
+                  } else {
+                    if (pool.timeClose > 0 && pool.timeClose * 1 < now) {
+                      message.info(intl.formatMessage({ id: 'undergoingOver' }))
+                    } else {
+                      if (pool.nft) {
+                        if (pool.nftBalanceOf > 0) {
+                          setShowBadgeStake(true)
+                        } else {
+                          message.info(intl.formatMessage({ id: 'notInWhitelist' }))
+                        }
+                      } else {
+                        dispatch({
+                          type: HANDLE_WALLET_MODAL,
+                          walletModal: 'join',
+                          pool,
+                        })
+                      }
+                    }
+                  }
+                } else {
+                  message.info(intl.formatMessage({ id: 'cannotSubscribe' }))
+                }
+              }}
+            >
+              <FormattedMessage id='poolsDetailText3' />
+            </a>
+            <a
+              className={cs(
+                `pools_detail_btn ${pool ? 'pools_detail_btn_' + pool.networkId : ''
+                }`
+              )}
+              href={getScanLink(chainId, address, 'address')}
+              target='_blank'
+            >
+              <FormattedMessage id={pool.networkId === ChainId.BSC ? 'poolsDetailText400' : pool.networkId === ChainId.AVALANCHE ? 'poolsDetailText4000' : 'poolsDetailText4'} />
+            </a>
           </div>
         </div>
-      </div>
-      <div className='pools_detail_btn_box'>
-        {/* pool.timeClose * 1 > now  timeClose 是超募的claim余额的结束时间 */}
-        <a
-          className={`pools_detail_btn ${pool ? 'pools_detail_btn_' + pool.networkId : ''
-            } ${pool &&
-              pool.status === 1 &&
-              (pool.timeClose - 0 === 0 || pool.timeClose * 1 > now)
-              ? 'pools_detail_btn_active ' +
-              ('pools_detail_btn_active_' + pool.networkId)
-              : 'pools_detail_btn_disable'
-            }`}
-          onClick={() => {
-            if (pool.status === 1) {
-              if (pool.userFull) {
-                message.info(intl.formatMessage({ id: 'ParticipantsAreFull' }))
-              } else if (pool.type === 1 && pool.purchasedCurrencyOf > 0) {
-                // 如果是 已经申购过的
-                // message.info('已申购过')
-                message.info(intl.formatMessage({ id: 'alreadySubscribed' }))
-              } else if (pool.type === 1 && pool.quotaOf == 0) {
-                //不在白名单里面
-                message.info(intl.formatMessage({ id: 'notInWhitelist' }))
-              } else {
-                if (pool.timeClose > 0 && pool.timeClose * 1 < now) {
-                  message.info(intl.formatMessage({ id: 'undergoingOver' }))
-                } else {
-                  if (pool.nft) {
-                    if (pool.nftBalanceOf > 0) {
-                      setShowBadgeStake(true)
-                    } else {
-                      message.info(intl.formatMessage({ id: 'notInWhitelist' }))
-                    }
-                  } else {
-                    dispatch({
-                      type: HANDLE_WALLET_MODAL,
-                      walletModal: 'join',
-                      pool,
-                    })
-                  }
-                }
-              }
-            } else {
-              message.info(intl.formatMessage({ id: 'cannotSubscribe' }))
-            }
-          }}
-        >
-          <FormattedMessage id='poolsDetailText3' />
-        </a>
-        <a
-          className={cs(
-            `pools_detail_btn ${pool ? 'pools_detail_btn_' + pool.networkId : ''
-            }`
-          )}
-          href={getScanLink(chainId, address, 'address')}
-          target='_blank'
-        >
-          <FormattedMessage id={pool.networkId === ChainId.BSC ? 'poolsDetailText400' : pool.networkId === ChainId.AVALANCHE ? 'poolsDetailText4000' : 'poolsDetailText4'} />
-        </a>
       </div>
       {pool && pool.underlying.symbol === 'HCT' && (
         <div className='pools_detail_tips_box'>
@@ -316,390 +379,393 @@ const PoolsDetail = (props) => {
         </div>
       )}
       <div className='pools_detail_record'>
-        {pool &&
-          pool.type === 1 &&
-          pool.quotaOf == 0 &&
-          left_time > 0 &&
-          pool.status == 0 && (
-            <div className='mask_layer'>
-              <p style={{ lineHeight: '30px', marginBottom: '0' }}>
-                <FormattedMessage id='countdown' />
-                &nbsp;
-                <span className='pools-type_time'>
-                  <Timer
-                    key={left_time}
-                    initialTime={left_time}
-                    direction='backward'
-                    formatValue={(number) => {
-                      if (number === 0) return '00'
-                      if (number < 10) {
-                        return `0${number}`
-                      }
-                      return number
-                    }}
-                  >
-                    <span>
-                      <Timer.Consumer>
-                        {({ h, d, formatValue }) => formatValue(d * 24 + h)}
-                      </Timer.Consumer>
-                    </span>
-                    &nbsp;:&nbsp;
-                    <span>
-                      <Timer.Minutes />
-                    </span>
-                    &nbsp;:&nbsp;
-                    <span>
-                      <Timer.Seconds />
-                    </span>
-                  </Timer>
-                </span>
-              </p>
-            </div>
-          )}
-        {pool && pool.type === 1 && pool.quotaOf == 0 && pool.status > 0 && (
+        <div className='pools_detail_record_wrap'>
+
+          {pool &&
+            pool.type === 1 &&
+            pool.quotaOf == 0 &&
+            left_time > 0 &&
+            pool.status == 0 && (
+              <div className='mask_layer'>
+                <p style={{ lineHeight: '30px', marginBottom: '0' }}>
+                  <FormattedMessage id='countdown' />
+                  &nbsp;
+                  <span className='pools-type_time'>
+                    <Timer
+                      key={left_time}
+                      initialTime={left_time}
+                      direction='backward'
+                      formatValue={(number) => {
+                        if (number === 0) return '00'
+                        if (number < 10) {
+                          return `0${number}`
+                        }
+                        return number
+                      }}
+                    >
+                      <span>
+                        <Timer.Consumer>
+                          {({ h, d, formatValue }) => formatValue(d * 24 + h)}
+                        </Timer.Consumer>
+                      </span>
+                      &nbsp;:&nbsp;
+                      <span>
+                        <Timer.Minutes />
+                      </span>
+                      &nbsp;:&nbsp;
+                      <span>
+                        <Timer.Seconds />
+                      </span>
+                    </Timer>
+                  </span>
+                </p>
+              </div>
+            )}
+          {/* {pool && pool.type === 1 && pool.quotaOf == 0 && pool.status > 0 && (
           <div className='mask_layer'>
             <p style={{ lineHeight: '30px', marginBottom: '0' }}>
               <FormattedMessage id='cannotProject' />
             </p>
           </div>
-        )}
-        <div className='pools_detail_record_tab'>
-          <a
-            onClick={() => setRecordTab(1)}
-            className={cs(recordTab === 1 && 'active')}
-          >
-            <FormattedMessage id='FundraisingRecord' />
-          </a>
-          {pool && pool.status >= 1 && (
+        )} */}
+          <div className='pools_detail_record_tab'>
             <a
-              onClick={() => setRecordTab(2)}
-              className={cs(recordTab === 2 && 'active')}
+              onClick={() => setRecordTab(1)}
+              className={cs(recordTab === 1 && 'active')}
             >
-              <FormattedMessage id='poolsDetailText5' />
+              <FormattedMessage id='FundraisingRecord' />
             </a>
-          )}
-        </div>
-        {recordTab === 1 && (
-          <div className='pools_detail_record_box'>
-            <table className='pools_detail_record_title'>
-              <thead>
-                <tr>
-                  <td>
-                    <FormattedMessage id='invest' />
-                    <FormattedMessage id='num' />
-                  </td>
-                  <td>
-                    <FormattedMessage id='winningRate' />
-                  </td>
-                  <td>
-                    <FormattedMessage id='winningAmount' />
-                  </td>
-                </tr>
-              </thead>
-              <tbody>
-                {(pool && pool.purchasedCurrencyOf.toString()) > 0 ? (
-                  <tr>
-                    <td>
-                      {fromWei(pool.purchasedCurrencyOf, pool.currency.decimal).toFixed(6, 1) * 1}
-                      &nbsp;
-                      {pool && pool.currency.symbol}
-                    </td>
-                    <td>
-                      {pool && pool.type === 1 && pool.quotaOf > 0 && (
-                        <FormattedMessage id='whiteList' />
-                      )}
-                      {pool &&
-                        pool.type === 0 &&
-                        fromWei(pool.settleable.rate)
-                          .multipliedBy(new BigNumber(100))
-                          .toFixed(2, 1)
-                          .toString() *
-                        1 +
-                        '%'}
-                    </td>
-                    {/*<td>{Web3.utils.fromWei(pool.settleable.volume, 'ether')}</td>*/}
-                    <td>
-                      {pool &&
-                        pool.type === 0 &&
-                        new BigNumber(
-                          fromWei(pool.purchasedCurrencyOf, pool.currency.decimal)
-                        )
-                          .multipliedBy(
-                            new BigNumber(
-                              Web3.utils.fromWei(pool.settleable.rate, 'ether')
-                            )
-                          )
-                          .dividedBy(new BigNumber(pool.price))
-                          .toFixed(6, 1)
-                          .toString() * 1}
-                      {pool &&
-                        pool.type === 1 &&
-                        formatAmount(pool.settleable.volume, pool.underlying.decimal)}
-                      &nbsp;
-                      {pool && pool.underlying.symbol}
-                    </td>
-                  </tr>
-                ) : (
-                  <tr>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                  </tr>
-                )}
-              </tbody>
-            </table>
+            {pool && pool.status >= 1 && (
+              <a
+                onClick={() => setRecordTab(2)}
+                className={cs(recordTab === 2 && 'active')}
+              >
+                <FormattedMessage id='poolsDetailText5' />
+              </a>
+            )}
           </div>
-        )}
-        {recordTab === 2 && (
-          <div className='pools_detail_record_box'>
-            <table className='pools_detail_record_title'>
-              <thead>
-                <tr>
-                  <td>
-                    <FormattedMessage id='unsettlement' />
-                  </td>
-                  <td>
-                    <FormattedMessage id='obtain' />
-                    <FormattedMessage id='num' />
-                  </td>
-                  <td></td>
-                </tr>
-              </thead>
-              <tbody>
-                {(pool && pool.purchasedCurrencyOf.toString()) > 0 ? (
+          {recordTab === 1 && (
+            <div className='pools_detail_record_box'>
+              <table className='pools_detail_record_title'>
+                <thead>
                   <tr>
                     <td>
-                      {pool && formatAmount(pool.settleable.amount, pool.currency.decimal)}&nbsp;
-                      {pool && pool.currency.symbol}
-                      {/* 当 当前时间大于募资结束时间 && 小于结算开始时间则可以领回 */}
-                      {pool &&
-                        pool.settleable.amount > 0 &&
-                        pool.status == 1 &&
-                        now >= pool.timeClose // &&
-                        // !((pool.lock && pool.settleable.unlockVolume > 0 || !pool.lock && pool.settleable.volume > 0) && now > pool.timeClose && now >= pool.time)
-                        &&
-                        (
-                          <a
-                            style={{ marginLeft: '4px' }}
-                            className={cs(
-                              `pools_detail_record_btn ${pool
-                                ? 'pools_detail_record_btn_' + pool.networkId
-                                : ''
-                              }`
-                            )}
-                            onClick={() => onClaim()}
-                          >
-                            <FormattedMessage id='poolsDetailText5' />
-                          </a>
-                        )}
+                      <FormattedMessage id='invest' />
+                      <FormattedMessage id='num' />
                     </td>
                     <td>
-                      {pool && pool.settleable.unlockVolume}&nbsp;
-                      {pool && pool.underlying.symbol}
+                      <FormattedMessage id='winningRate' />
                     </td>
                     <td>
-                      {/*  && !pool.settleable.completed_ */}
-                      {pool &&
-                        pool.type === 0 &&
-                        pool.status >= 2 && (pool.settleable.unlockVolume > 0) &&
-                        now > pool.timeClose &&
-                        now >= pool.time && (
-                          <a
-                            className={cs(
-                              `pools_detail_record_btn ${pool
-                                ? 'pools_detail_record_btn_' + pool.networkId
-                                : ''
-                              }`
-                            )}
-                            onClick={() => onClaim()}
-                          >
-                            <FormattedMessage id='poolsDetailText5' />
-                          </a>
-                        )}
-                      {pool &&
-                        pool.type === 1 &&
-                        (pool.settleable.unlockVolume > 0) &&
-                        pool.status >= 2 &&
-                        now > pool.timeClose &&
-                        now >= pool.time && (
-                          <a
-                            className={cs(
-                              `pools_detail_record_btn ${pool
-                                ? 'pools_detail_record_btn_' + pool.networkId
-                                : ''
-                              }`
-                            )}
-                            onClick={() => onClaim()}
-                          >
-                            <FormattedMessage id='poolsDetailText5' />
-                          </a>
-                        )}
+                      <FormattedMessage id='winningAmount' />
                     </td>
                   </tr>
-                ) : (
+                </thead>
+                <tbody>
+                  {(pool && pool.purchasedCurrencyOf.toString()) > 0 ? (
+                    <tr>
+                      <td>
+                        {fromWei(pool.purchasedCurrencyOf, pool.currency.decimal).toFixed(6, 1) * 1}
+                        &nbsp;
+                        {pool && pool.currency.symbol}
+                      </td>
+                      <td>
+                        {pool && pool.type === 1 && pool.quotaOf > 0 && (
+                          <FormattedMessage id='whiteList' />
+                        )}
+                        {pool &&
+                          pool.type === 0 &&
+                          fromWei(pool.settleable.rate)
+                            .multipliedBy(new BigNumber(100))
+                            .toFixed(2, 1)
+                            .toString() *
+                          1 +
+                          '%'}
+                      </td>
+                      {/*<td>{Web3.utils.fromWei(pool.settleable.volume, 'ether')}</td>*/}
+                      <td>
+                        {pool &&
+                          pool.type === 0 &&
+                          new BigNumber(
+                            fromWei(pool.purchasedCurrencyOf, pool.currency.decimal)
+                          )
+                            .multipliedBy(
+                              new BigNumber(
+                                Web3.utils.fromWei(pool.settleable.rate, 'ether')
+                              )
+                            )
+                            .dividedBy(new BigNumber(pool.price))
+                            .toFixed(6, 1)
+                            .toString() * 1}
+                        {pool &&
+                          pool.type === 1 &&
+                          formatAmount(pool.settleable.volume, pool.underlying.decimal)}
+                        &nbsp;
+                        {pool && pool.underlying.symbol}
+                      </td>
+                    </tr>
+                  ) : (
+                    <tr>
+                      <td>-</td>
+                      <td>-</td>
+                      <td>-</td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+            </div>
+          )}
+          {recordTab === 2 && (
+            <div className='pools_detail_record_box'>
+              <table className='pools_detail_record_title'>
+                <thead>
                   <tr>
-                    <td>-</td>
-                    <td>-</td>
+                    <td>
+                      <FormattedMessage id='unsettlement' />
+                    </td>
+                    <td>
+                      <FormattedMessage id='obtain' />
+                      <FormattedMessage id='num' />
+                    </td>
                     <td></td>
                   </tr>
-                )}
-              </tbody>
-            </table>
-          </div>
-        )}
-        {recordTab === 1 && (
-          <div className='pools_detail_record_title_h5'>
-            <p className='pools_detail_record_title_val'>
-              <FormattedMessage id='invest' />
-              <FormattedMessage id='num' />
-            </p>
-            {(pool && pool.purchasedCurrencyOf.toString()) > 0 ? (
-              <p className='pools_detail_record_title_data'>
-                {fromWei(pool.purchasedCurrencyOf, pool.currency.decimal).toFixed(6, 1) * 1}
-                &nbsp;
-                {pool && pool.currency.symbol}
+                </thead>
+                <tbody>
+                  {(pool && pool.purchasedCurrencyOf.toString()) > 0 ? (
+                    <tr>
+                      <td>
+                        {pool && formatAmount(pool.settleable.amount, pool.currency.decimal)}&nbsp;
+                        {pool && pool.currency.symbol}
+                        {/* 当 当前时间大于募资结束时间 && 小于结算开始时间则可以领回 */}
+                        {pool &&
+                          pool.settleable.amount > 0 &&
+                          pool.status == 1 &&
+                          now >= pool.timeClose // &&
+                          // !((pool.lock && pool.settleable.unlockVolume > 0 || !pool.lock && pool.settleable.volume > 0) && now > pool.timeClose && now >= pool.time)
+                          &&
+                          (
+                            <a
+                              style={{ marginLeft: '4px' }}
+                              className={cs(
+                                `pools_detail_record_btn ${pool
+                                  ? 'pools_detail_record_btn_' + pool.networkId
+                                  : ''
+                                }`
+                              )}
+                              onClick={() => onClaim()}
+                            >
+                              <FormattedMessage id='poolsDetailText5' />
+                            </a>
+                          )}
+                      </td>
+                      <td>
+                        {pool && pool.settleable.unlockVolume}&nbsp;
+                        {pool && pool.underlying.symbol}
+                      </td>
+                      <td>
+                        {/*  && !pool.settleable.completed_ */}
+                        {pool &&
+                          pool.type === 0 &&
+                          pool.status >= 2 && (pool.settleable.unlockVolume > 0) &&
+                          now > pool.timeClose &&
+                          now >= pool.time && (
+                            <a
+                              className={cs(
+                                `pools_detail_record_btn ${pool
+                                  ? 'pools_detail_record_btn_' + pool.networkId
+                                  : ''
+                                }`
+                              )}
+                              onClick={() => onClaim()}
+                            >
+                              <FormattedMessage id='poolsDetailText5' />
+                            </a>
+                          )}
+                        {pool &&
+                          pool.type === 1 &&
+                          (pool.settleable.unlockVolume > 0) &&
+                          pool.status >= 2 &&
+                          now > pool.timeClose &&
+                          now >= pool.time && (
+                            <a
+                              className={cs(
+                                `pools_detail_record_btn ${pool
+                                  ? 'pools_detail_record_btn_' + pool.networkId
+                                  : ''
+                                }`
+                              )}
+                              onClick={() => onClaim()}
+                            >
+                              <FormattedMessage id='poolsDetailText5' />
+                            </a>
+                          )}
+                      </td>
+                    </tr>
+                  ) : (
+                    <tr>
+                      <td>-</td>
+                      <td>-</td>
+                      <td></td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+            </div>
+          )}
+          {recordTab === 1 && (
+            <div className='pools_detail_record_title_h5'>
+              <p className='pools_detail_record_title_val'>
+                <FormattedMessage id='invest' />
+                <FormattedMessage id='num' />
               </p>
-            ) : (
-              <p className='pools_detail_record_title_data'>-</p>
-            )}
+              {(pool && pool.purchasedCurrencyOf.toString()) > 0 ? (
+                <p className='pools_detail_record_title_data'>
+                  {fromWei(pool.purchasedCurrencyOf, pool.currency.decimal).toFixed(6, 1) * 1}
+                  &nbsp;
+                  {pool && pool.currency.symbol}
+                </p>
+              ) : (
+                <p className='pools_detail_record_title_data'>-</p>
+              )}
 
-            <p className='pools_detail_record_title_val'>
-              <FormattedMessage id='winningRate' />
-            </p>
-            {(pool && pool.purchasedCurrencyOf.toString()) > 0 ? (
-              <p className='pools_detail_record_title_data'>
-                {pool && pool.type === 1 && pool.quotaOf > 0 && (
-                  <FormattedMessage id='whiteList' />
-                )}
-                {pool &&
-                  pool.type === 0 &&
-                  fromWei(pool.settleable.rate)
-                    .multipliedBy(new BigNumber(100))
-                    .toFixed(2, 1)
-                    .toString() *
-                  1 +
-                  '%'}
+              <p className='pools_detail_record_title_val'>
+                <FormattedMessage id='winningRate' />
               </p>
-            ) : (
-              <p className='pools_detail_record_title_data'>-</p>
-            )}
-            <p className='pools_detail_record_title_val'>
-              <FormattedMessage id='winningAmount' />
-            </p>
-            {(pool && pool.purchasedCurrencyOf.toString()) > 0 ? (
-              <p className='pools_detail_record_title_data'>
-                {pool &&
-                  pool.type === 0 &&
-                  new BigNumber(
-                    fromWei(pool.purchasedCurrencyOf, pool.currency.decimal)
-                  )
-                    .multipliedBy(
-                      new BigNumber(
-                        Web3.utils.fromWei(pool.settleable.rate, 'ether')
-                      )
+              {(pool && pool.purchasedCurrencyOf.toString()) > 0 ? (
+                <p className='pools_detail_record_title_data'>
+                  {pool && pool.type === 1 && pool.quotaOf > 0 && (
+                    <FormattedMessage id='whiteList' />
+                  )}
+                  {pool &&
+                    pool.type === 0 &&
+                    fromWei(pool.settleable.rate)
+                      .multipliedBy(new BigNumber(100))
+                      .toFixed(2, 1)
+                      .toString() *
+                    1 +
+                    '%'}
+                </p>
+              ) : (
+                <p className='pools_detail_record_title_data'>-</p>
+              )}
+              <p className='pools_detail_record_title_val'>
+                <FormattedMessage id='winningAmount' />
+              </p>
+              {(pool && pool.purchasedCurrencyOf.toString()) > 0 ? (
+                <p className='pools_detail_record_title_data'>
+                  {pool &&
+                    pool.type === 0 &&
+                    new BigNumber(
+                      fromWei(pool.purchasedCurrencyOf, pool.currency.decimal)
                     )
-                    .dividedBy(new BigNumber(pool.price))
-                    .toFixed(6, 1)
-                    .toString() * 1}
-                {pool &&
-                  pool.type === 1 &&
-                  formatAmount(pool.settleable.volume, pool.underlying.decimal)}
-                &nbsp;
-                {pool && pool.underlying.symbol}
+                      .multipliedBy(
+                        new BigNumber(
+                          Web3.utils.fromWei(pool.settleable.rate, 'ether')
+                        )
+                      )
+                      .dividedBy(new BigNumber(pool.price))
+                      .toFixed(6, 1)
+                      .toString() * 1}
+                  {pool &&
+                    pool.type === 1 &&
+                    formatAmount(pool.settleable.volume, pool.underlying.decimal)}
+                  &nbsp;
+                  {pool && pool.underlying.symbol}
+                </p>
+              ) : (
+                <p className='pools_detail_record_title_data'>-</p>
+              )}
+            </div>
+          )}
+          {recordTab === 2 && (
+            <div className='pools_detail_record_title_h5'>
+              <p className='pools_detail_record_title_val'>
+                <FormattedMessage id='unsettlement' />
               </p>
-            ) : (
-              <p className='pools_detail_record_title_data'>-</p>
-            )}
-          </div>
-        )}
-        {recordTab === 2 && (
-          <div className='pools_detail_record_title_h5'>
-            <p className='pools_detail_record_title_val'>
-              <FormattedMessage id='unsettlement' />
-            </p>
-            {(pool && pool.purchasedCurrencyOf.toString()) > 0 ? (
-              <p className='pools_detail_record_title_data'>
-                {pool && formatAmount(pool.settleable.amount, pool.currency.decimal)}&nbsp;
-                {pool && pool.currency.symbol}
-                {/* 当 当前时间大于募资结束时间 && 小于结算开始时间则可以领回 */}
-                {pool &&
-                  pool.settleable.amount > 0 &&
-                  pool.status == 1 &&
-                  now >= pool.timeClose &&
-                  now < pool.time && (
-                    <a
-                      style={{ marginLeft: '4px' }}
-                      className={cs(
-                        `pools_detail_record_btn ${pool
-                          ? 'pools_detail_record_btn_' + pool.networkId
-                          : ''
-                        }`
-                      )}
-                      onClick={() => onClaim()}
-                    >
-                      <FormattedMessage id='poolsDetailText5' />
-                    </a>
-                  )}
-              </p>
-            ) : (
-              <p className='pools_detail_record_title_data'>-</p>
-            )}
+              {(pool && pool.purchasedCurrencyOf.toString()) > 0 ? (
+                <p className='pools_detail_record_title_data'>
+                  {pool && formatAmount(pool.settleable.amount, pool.currency.decimal)}&nbsp;
+                  {pool && pool.currency.symbol}
+                  {/* 当 当前时间大于募资结束时间 && 小于结算开始时间则可以领回 */}
+                  {pool &&
+                    pool.settleable.amount > 0 &&
+                    pool.status == 1 &&
+                    now >= pool.timeClose &&
+                    now < pool.time && (
+                      <a
+                        style={{ marginLeft: '4px' }}
+                        className={cs(
+                          `pools_detail_record_btn ${pool
+                            ? 'pools_detail_record_btn_' + pool.networkId
+                            : ''
+                          }`
+                        )}
+                        onClick={() => onClaim()}
+                      >
+                        <FormattedMessage id='poolsDetailText5' />
+                      </a>
+                    )}
+                </p>
+              ) : (
+                <p className='pools_detail_record_title_data'>-</p>
+              )}
 
-            <p className='pools_detail_record_title_val'>
-              <FormattedMessage id='obtain' />
-              <FormattedMessage id='num' />
-            </p>
-            {(pool && pool.purchasedCurrencyOf.toString()) > 0 ? (
-              <p className='pools_detail_record_title_data'>
-                {pool && pool.settleable.unlockVolume}&nbsp;
-                {pool && pool.underlying.symbol}
+              <p className='pools_detail_record_title_val'>
+                <FormattedMessage id='obtain' />
+                <FormattedMessage id='num' />
               </p>
-            ) : (
-              <p className='pools_detail_record_title_data'>-</p>
-            )}
-            {(pool && pool.purchasedCurrencyOf.toString()) > 0 ? (
-              <p className='pools_detail_record_title_data'>
-                {pool &&
-                  pool.type === 0 &&
-                  pool.status >= 2 && (pool.settleable.unlockVolume > 0) &&
-                  now > pool.timeClose &&
-                  now >= pool.time && (
-                    <a
-                      className={cs(
-                        `pools_detail_record_btn ${pool
-                          ? 'pools_detail_record_btn_' + pool.networkId
-                          : ''
-                        }`
-                      )}
-                      onClick={() => onClaim()}
-                    >
-                      <FormattedMessage id='poolsDetailText5' />
-                    </a>
-                  )}
-                {pool &&
-                  pool.type === 1 &&
-                  (pool.settleable.unlockVolume > 0) &&
-                  pool.status >= 2 &&
-                  now > pool.timeClose &&
-                  now >= pool.time && (
-                    <a
-                      className={cs(
-                        `pools_detail_record_btn ${pool
-                          ? 'pools_detail_record_btn_' + pool.networkId
-                          : ''
-                        }`
-                      )}
-                      onClick={() => onClaim()}
-                    >
-                      <FormattedMessage id='poolsDetailText5' />
-                    </a>
-                  )}
-              </p>
-            ) : (
-              <p className='pools_detail_record_title_data'></p>
-            )}
-          </div>
-        )}
+              {(pool && pool.purchasedCurrencyOf.toString()) > 0 ? (
+                <p className='pools_detail_record_title_data'>
+                  {pool && pool.settleable.unlockVolume}&nbsp;
+                  {pool && pool.underlying.symbol}
+                </p>
+              ) : (
+                <p className='pools_detail_record_title_data'>-</p>
+              )}
+              {(pool && pool.purchasedCurrencyOf.toString()) > 0 ? (
+                <p className='pools_detail_record_title_data'>
+                  {pool &&
+                    pool.type === 0 &&
+                    pool.status >= 2 && (pool.settleable.unlockVolume > 0) &&
+                    now > pool.timeClose &&
+                    now >= pool.time && (
+                      <a
+                        className={cs(
+                          `pools_detail_record_btn ${pool
+                            ? 'pools_detail_record_btn_' + pool.networkId
+                            : ''
+                          }`
+                        )}
+                        onClick={() => onClaim()}
+                      >
+                        <FormattedMessage id='poolsDetailText5' />
+                      </a>
+                    )}
+                  {pool &&
+                    pool.type === 1 &&
+                    (pool.settleable.unlockVolume > 0) &&
+                    pool.status >= 2 &&
+                    now > pool.timeClose &&
+                    now >= pool.time && (
+                      <a
+                        className={cs(
+                          `pools_detail_record_btn ${pool
+                            ? 'pools_detail_record_btn_' + pool.networkId
+                            : ''
+                          }`
+                        )}
+                        onClick={() => onClaim()}
+                      >
+                        <FormattedMessage id='poolsDetailText5' />
+                      </a>
+                    )}
+                </p>
+              ) : (
+                <p className='pools_detail_record_title_data'></p>
+              )}
+            </div>
+          )}
+        </div>
       </div>
       <div className='pools_detail'>
         <div className='pools_detail_content'>
