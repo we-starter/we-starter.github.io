@@ -1,10 +1,10 @@
 import React, { useContext, useCallback, useEffect } from 'react'
-import {InjectedConnector, NoEthereumProviderError, UserRejectedRequestError} from '@web3-react/injected-connector'
+import { InjectedConnector, NoEthereumProviderError, UserRejectedRequestError } from '@web3-react/injected-connector'
 import { WalletConnectConnector } from '@web3-react/walletconnect-connector'
-import {ChainId, RPC_URLS, SCAN_ADDRESS} from '../web3/address'
+import { ChainId, RPC_URLS, SCAN_ADDRESS } from '../web3/address'
 import { message } from 'antd'
 import { mainContext } from '../reducer'
-import {UnsupportedChainIdError, useWeb3React} from "@web3-react/core";
+import { UnsupportedChainIdError, useWeb3React } from "@web3-react/core";
 import Web3 from "web3";
 
 export const POLLING_INTERVAL = 12000
@@ -22,7 +22,7 @@ const bscWalletConnector = new WalletConnectConnector({
 })
 
 const hecoWalletConnector = new WalletConnectConnector({
-  rpc: { 128: 'https://http-mainnet-node.huobichain.com' },
+  rpc: { 128: 'https://http-mainnet.hecochain.com/' },
   bridge: 'https://bridge.walletconnect.org',
   qrcode: true,
   pollingInterval: POLLING_INTERVAL,
@@ -49,7 +49,7 @@ export const walletConnector = {
   [ChainId.AVALANCHE]: avalancheWalletConnector,
 }
 
-const bscNetwork =  {
+const bscNetwork = {
   chainId: '0x38',
   chainName: 'BSC',
   nativeCurrency: {
@@ -61,7 +61,7 @@ const bscNetwork =  {
   blockExplorerUrls: [SCAN_ADDRESS[ChainId.BSC]],
 }
 
-const avalancheNetwork =  {
+const avalancheNetwork = {
   chainId: '0xa86a',
   chainName: 'Avalanche C-Chain',
   nativeCurrency: {
@@ -82,7 +82,7 @@ const hecoNetwork = {
     decimals: 18,
   },
   rpcUrls: [
-    'https://http-mainnet-node.huobichain.com',
+    'https://http-mainnet.hecochain.com/',
   ],
   blockExplorerUrls: [SCAN_ADDRESS[ChainId.HECO]],
 }
@@ -148,7 +148,7 @@ export function getScanLink(chainId, data, type) {
 }
 
 export const useConnectWallet = () => {
-  const {activate, deactivate, active} = useWeb3React()
+  const { activate, deactivate, active } = useWeb3React()
   const { dispatch, state } = useContext(mainContext)
   const connectWallet = useCallback((connector, chainId, walletFlag = '') => {
     return changeNetwork(chainId).then(() => {
@@ -221,7 +221,7 @@ export const useConnectWallet = () => {
       // 切换网络后，尝试连接
       !active && connectWallet(injected)
     })
-    if (window.onto){
+    if (window.onto) {
       window.onto.on('accountsChanged', () => {
         !active && connectWallet(injected)
       })

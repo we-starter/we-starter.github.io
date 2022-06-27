@@ -4,7 +4,7 @@ import MDexRouter from '../web3/abi/MDexRouter.json'
 import VoteMainAbi from '../web3/abi/VoteMain.json'
 import VoteNFTAbi from '../web3/abi/VoteNFT.json'
 
-import Web3, {utils} from "web3";
+import Web3, { utils } from "web3";
 
 export const ChainId = {
   AVALANCHE: 43114,
@@ -27,7 +27,7 @@ export const MDEX_POOL_ADDRESS = '0xFB03e11D93632D97a8981158A632Dd5986F5E909'
 export const MDEX_ADDRESS = '0x25D2e80cB6B86881Fd7e07dd263Fb79f4AbE033c'
 
 // 计算apr的合约
-export function CALC_ADDRESS(chainId){
+export function CALC_ADDRESS(chainId) {
   switch (chainId) {
     case ChainId.BSC:
       return '0xE3FC5294Bc1360274eEd5eFD5eEb084b36BbaF0e'
@@ -163,7 +163,7 @@ export function BUSD_ADDRESS(chainId) {
   }
 }
 
-export function CHAIN_SWAP_ADDRESS (chainId) {
+export function CHAIN_SWAP_ADDRESS(chainId) {
   return {
     [ChainId.HECO]: '0x910651F81a605a6Ef35d05527d24A72fecef8bF0',
     [ChainId.BSC]: '0x910651F81a605a6Ef35d05527d24A72fecef8bF0'
@@ -172,14 +172,14 @@ export function CHAIN_SWAP_ADDRESS (chainId) {
 export const BURN_SWAP_ADDRESS = '0x6Bab2711Ca22fE7395811022F92bB037cd4af7bc'
 export const BURN_SWAP_S_ADDRESS = '0x81d82a35253B982E755c4D7d6AADB6463305B188'
 
-export function RPC_URLS (chainId) {
-    return {
-      [ChainId.HECO]: 'https://http-mainnet-node.huobichain.com',
-      [ChainId.BSC]: 'https://bsc-dataseed.binance.org/',
-      [ChainId.MATIC]: 'https://rpc-mainnet.maticvigil.com',
-      [ChainId.LOCALHOST]: 'http://localhost:8545',
-      [ChainId.AVALANCHE]: 'https://api.avax.network/ext/bc/C/rpc'
-    }[chainId]
+export function RPC_URLS(chainId) {
+  return {
+    [ChainId.HECO]: 'https://http-mainnet.hecochain.com/',
+    [ChainId.BSC]: 'https://bsc-dataseed.binance.org/',
+    [ChainId.MATIC]: 'https://rpc-mainnet.maticvigil.com',
+    [ChainId.LOCALHOST]: 'http://localhost:8545',
+    [ChainId.AVALANCHE]: 'https://api.avax.network/ext/bc/C/rpc'
+  }[chainId]
 }
 
 export const CHAIN_SWAP_NODE_REQ_URL = [
@@ -191,15 +191,15 @@ export const CHAIN_SWAP_NODE_REQ_URL = [
 ]
 
 export function GAS_FEE(chainId) {
-  if(window.onto) {
-    return  {
+  if (window.onto) {
+    return {
       gas: utils.numberToHex(2000000)
     }
   }
 
   return {
     [ChainId.HECO]: {
-      maxFeePerGas:  Web3.utils.toWei('8', 'gwei'),
+      maxFeePerGas: Web3.utils.toWei('8', 'gwei'),
       // gasPrice: Web3.utils.toWei('5', 'gwei'),
       maxPriorityFeePerGas: Web3.utils.toWei('5', 'gwei'),
       type: '0x2',

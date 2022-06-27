@@ -61,15 +61,15 @@ const Farm = (props) => {
 
   return (
     <div className='farm_box' style={{ minHeight: '100%', background: '#fff' }}>
-        <div className='farm_box_main'>
-            <FarmBanner />
-            <div className='farm_index'>
-                { farms.map((item, index) => {
-                    return <FarmCard pools={item} key={index} />
-                })}
-                {/*{pools.length < 3 && [1, 2].map(() => isComing(Math.random()))}*/}
-            </div>
+      <div className='farm_box_main'>
+        <FarmBanner />
+        <div className='farm_index'>
+          {farms.map((item, index) => {
+            return <FarmCard pools={item} key={index} />
+          })}
+          {/*{pools.length < 3 && [1, 2].map(() => isComing(Math.random()))}*/}
         </div>
+      </div>
       <Footer />
     </div>
   )

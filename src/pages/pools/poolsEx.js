@@ -23,6 +23,7 @@ import { useActiveWeb3React } from '../../web3'
 import Banner from '../../components/banner/Banner'
 import LaunchPad from './launchpad'
 import FarmBanner from '../../components/banner/FarmBanner'
+import Footer from '../../components/Footer'
 
 export function NftCardTipContent({ nft }) {
   if (!nft) {
@@ -470,6 +471,7 @@ const PoolsIndex = (props) => {
       </div>
       {/* <LaunchPad /> */}
       <FarmBanner />
+      <Footer />
 
     </div>
   )
