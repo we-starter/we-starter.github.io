@@ -1,8 +1,9 @@
 .form-app__submit--row .btn {
   max-width: 100%;
   width: 100%;
+  border-radius: 14px !important;
 }
-.margin-b-20{
+.margin-b-20 {
   margin-bottom: 20px;
 }
 .ant-btn-primary {
@@ -14,36 +15,39 @@
   font-weight: 500;
   line-height: 40px;
   border-radius: 100px;
-  background: #0f8c20 !important;
+  background: #00c57b !important;
   color: #ffffff;
-  border-color: #0f8c20 !important;
+  border-color: #00c57b !important;
   box-shadow: none;
   text-shadow: none;
+  border-radius: 14px !important;
   &:hover {
     background: #00b900 !important;
     border-color: #0f8c20 !important;
   }
 }
 .ant-btn-primary_56 {
-  background: #F0B90B !important;
+  background: #f0b90b !important;
   color: #ffffff;
-  border-color: #F0B90B !important;
+  border-color: #f0b90b !important;
   box-shadow: none;
   text-shadow: none;
+  border-radius: 14px !important;
   &:hover {
-    background: #F3C73B !important;
-    border-color: #F3C73B !important;
+    background: #f3c73b !important;
+    border-color: #f3c73b !important;
   }
 }
 .ant-btn-primary_137 {
-  background: #8247E5 !important;
+  background: #8247e5 !important;
   color: #ffffff;
-  border-color: #8247E5 !important;
+  border-color: #8247e5 !important;
   box-shadow: none;
   text-shadow: none;
+  border-radius: 14px !important;
   &:hover {
-    background: #9B6BEA !important;
-    border-color: #9B6BEA !important;
+    background: #9b6bea !important;
+    border-color: #9b6bea !important;
   }
 }
 .ant-btn > .ant-btn-loading-icon {
@@ -55,15 +59,15 @@
     top: 4px;
   }
 }
-.check-footer{
+.check-footer {
   display: flex;
-  &>div:nth-child(1){
+  & > div:nth-child(1) {
     flex: 1;
     display: flex;
     align-items: center;
   }
-  &>div:nth-child(2){
-    button{
+  & > div:nth-child(2) {
+    button {
       color: #ffffff;
       background: #0f8c20;
       padding: 0 20px;
@@ -90,14 +94,14 @@
       display: inline-block;
       width: 20px;
       height: 20px;
-      background: url('../icon/close.png') no-repeat;
+      background: url("../icon/close.png") no-repeat;
       background-size: 100% 100%;
     }
     .compound_claim {
-      background: #22292f;
-      border-radius: 19px;
+      background: #00c57b;
+      border-radius: 14px;
       &:hover {
-        background: #22292f;
+        background: #00b900;
       }
     }
     svg {
@@ -121,20 +125,20 @@
         align-items: center;
         height: 60px;
         font-size: 16px;
-        font-family: PingFangSC-Medium, PingFang SC;
+        font-family: Montserrat-Medium, Montserrat;
         font-weight: 500;
-        color: #7a7f82;
+        color: #4f4f4f;
         // line-height: 60px;
         &:hover {
-          color: #22292f;
+          color: #121212;
           &:after {
-            content: '';
+            content: "";
             position: absolute;
             left: 0;
             bottom: -2px;
             width: 100%;
             height: 4px;
-            background-color: #0f8c20;
+            background-color: #00c57b;
           }
         }
         &:nth-child(2) {
@@ -145,13 +149,13 @@
         &:hover {
           color: #22292f;
           &:after {
-            content: '';
+            content: "";
             position: absolute;
             left: 0;
             bottom: -2px;
             width: 100%;
             height: 4px;
-            background-color: #F0B90B;
+            background-color: #f0b90b;
           }
         }
       }
@@ -159,50 +163,50 @@
         &:hover {
           color: #22292f;
           &:after {
-            content: '';
+            content: "";
             position: absolute;
             left: 0;
             bottom: -2px;
             width: 100%;
             height: 4px;
-            background-color: #8247E5;
+            background-color: #8247e5;
           }
         }
       }
       .farm_popup_tab_active {
         color: #22292f;
         &:after {
-          content: '';
+          content: "";
           position: absolute;
           left: 0;
           bottom: -2px;
           width: 100%;
           height: 4px;
-          background-color: #0f8c20;
+          background-color: #00c57b;
         }
       }
       .farm_popup_tab_active_56 {
         color: #22292f;
         &:after {
-          content: '';
+          content: "";
           position: absolute;
           left: 0;
           bottom: -2px;
           width: 100%;
           height: 4px;
-          background-color: #F0B90B;
+          background-color: #f0b90b;
         }
       }
       .farm_popup_tab_active_137 {
-         color: #22292f;
+        color: #22292f;
         &:after {
-          content: '';
+          content: "";
           position: absolute;
           left: 0;
           bottom: -2px;
           width: 100%;
           height: 4px;
-          background-color: #8247E5;
+          background-color: #8247e5;
         }
       }
     }
@@ -210,12 +214,12 @@
       margin: 0;
       font-size: 12px;
       font-family: HelveticaNeue;
-      color: #7A7F82;
+      color: #7a7f82;
     }
   }
   .farm_popup_box {
     padding-top: 0 !important;
-    background: #f2f0eb;
+    background: #fff;
     .disable_btn {
       border: 1px solid #b6b9bc !important;
       background: #b6b9bc !important;
@@ -250,7 +254,7 @@
       display: inline-block;
       width: 20px;
       height: 20px;
-      background: url('../icon/close.png') no-repeat;
+      background: url("../icon/close.png") no-repeat;
       background-size: 100% 100%;
     }
     .compound_claim {
@@ -284,7 +288,7 @@
         &:hover {
           color: #22292f;
           &:after {
-            content: '';
+            content: "";
             position: absolute;
             left: 0;
             bottom: -2px;
@@ -297,17 +301,17 @@
           margin: 0 20px;
         }
       }
-       .farm_popup_tab_56 {
+      .farm_popup_tab_56 {
         &:hover {
           color: #22292f;
           &:after {
-            content: '';
+            content: "";
             position: absolute;
             left: 0;
             bottom: -2px;
             width: 100%;
             height: 4px;
-            background-color: #F0B90B;
+            background-color: #f0b90b;
           }
         }
       }
@@ -315,20 +319,20 @@
         &:hover {
           color: #22292f;
           &:after {
-            content: '';
+            content: "";
             position: absolute;
             left: 0;
             bottom: -2px;
             width: 100%;
             height: 4px;
-            background-color: #8247E5;
+            background-color: #8247e5;
           }
         }
       }
       .farm_popup_tab_active {
         color: #22292f;
         &:after {
-          content: '';
+          content: "";
           position: absolute;
           left: 0;
           bottom: -2px;
@@ -337,28 +341,28 @@
           background-color: #0f8c20;
         }
       }
-        .farm_popup_tab_active_56 {
+      .farm_popup_tab_active_56 {
         color: #22292f;
         &:after {
-          content: '';
+          content: "";
           position: absolute;
           left: 0;
           bottom: -2px;
           width: 100%;
           height: 4px;
-          background-color: #F0B90B;
+          background-color: #f0b90b;
         }
       }
       .farm_popup_tab_active_137 {
-         color: #22292f;
+        color: #22292f;
         &:after {
-          content: '';
+          content: "";
           position: absolute;
           left: 0;
           bottom: -2px;
           width: 100%;
           height: 4px;
-          background-color: #8247E5;
+          background-color: #8247e5;
         }
       }
     }
@@ -366,13 +370,13 @@
       margin: 0;
       font-size: 12px;
       font-family: HelveticaNeue;
-      color: #7A7F82;
+      color: #7a7f82;
     }
   }
   .farm_popup_box {
     padding-top: 0 !important;
-    background: #f2f0eb;
-     .disable_btn {
+    background: #fff;
+    .disable_btn {
       border: 1px solid #b6b9bc !important;
       background: #b6b9bc !important;
       box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.1) !important;
@@ -406,7 +410,7 @@
       display: inline-block;
       width: 20px;
       height: 20px;
-      background: url('../icon/close.png') no-repeat;
+      background: url("../icon/close.png") no-repeat;
       background-size: 100% 100%;
     }
     .compound_claim {
@@ -440,7 +444,7 @@
         &:hover {
           color: #22292f;
           &:after {
-            content: '';
+            content: "";
             position: absolute;
             left: 0;
             bottom: -2px;
@@ -453,17 +457,17 @@
           margin: 0 20px;
         }
       }
-       .farm_popup_tab_56 {
+      .farm_popup_tab_56 {
         &:hover {
           color: #22292f;
           &:after {
-            content: '';
+            content: "";
             position: absolute;
             left: 0;
             bottom: -2px;
             width: 100%;
             height: 4px;
-            background-color: #F0B90B;
+            background-color: #f0b90b;
           }
         }
       }
@@ -471,20 +475,20 @@
         &:hover {
           color: #22292f;
           &:after {
-            content: '';
+            content: "";
             position: absolute;
             left: 0;
             bottom: -2px;
             width: 100%;
             height: 4px;
-            background-color: #8247E5;
+            background-color: #8247e5;
           }
         }
       }
       .farm_popup_tab_active {
         color: #22292f;
         &:after {
-          content: '';
+          content: "";
           position: absolute;
           left: 0;
           bottom: -2px;
@@ -493,28 +497,28 @@
           background-color: #0f8c20;
         }
       }
-        .farm_popup_tab_active_56 {
+      .farm_popup_tab_active_56 {
         color: #22292f;
         &:after {
-          content: '';
+          content: "";
           position: absolute;
           left: 0;
           bottom: -2px;
           width: 100%;
           height: 4px;
-          background-color: #F0B90B;
+          background-color: #f0b90b;
         }
       }
       .farm_popup_tab_active_137 {
-         color: #22292f;
+        color: #22292f;
         &:after {
-          content: '';
+          content: "";
           position: absolute;
           left: 0;
           bottom: -2px;
           width: 100%;
           height: 4px;
-          background-color: #8247E5;
+          background-color: #8247e5;
         }
       }
     }
@@ -522,13 +526,13 @@
       margin: 0;
       font-size: 12px;
       font-family: HelveticaNeue;
-      color: #7A7F82;
+      color: #7a7f82;
     }
   }
   .farm_popup_box {
     padding-top: 0 !important;
-    background: #f2f0eb;
-     .disable_btn {
+    background: #fff;
+    .disable_btn {
       border: 1px solid #b6b9bc !important;
       background: #b6b9bc !important;
       box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.1) !important;
@@ -562,7 +566,7 @@
       display: inline-block;
       width: 20px;
       height: 20px;
-      background: url('../icon/close.png') no-repeat;
+      background: url("../icon/close.png") no-repeat;
       background-size: 100% 100%;
     }
     .compound_claim {
@@ -596,7 +600,7 @@
         &:hover {
           color: #22292f;
           &:after {
-            content: '';
+            content: "";
             position: absolute;
             left: 0;
             bottom: -2px;
@@ -609,17 +613,17 @@
           margin: 0 20px;
         }
       }
-       .farm_popup_tab_56 {
+      .farm_popup_tab_56 {
         &:hover {
           color: #22292f;
           &:after {
-            content: '';
+            content: "";
             position: absolute;
             left: 0;
             bottom: -2px;
             width: 100%;
             height: 4px;
-            background-color: #F0B90B;
+            background-color: #f0b90b;
           }
         }
       }
@@ -627,20 +631,20 @@
         &:hover {
           color: #22292f;
           &:after {
-            content: '';
+            content: "";
             position: absolute;
             left: 0;
             bottom: -2px;
             width: 100%;
             height: 4px;
-            background-color: #8247E5;
+            background-color: #8247e5;
           }
         }
       }
       .farm_popup_tab_active {
         color: #22292f;
         &:after {
-          content: '';
+          content: "";
           position: absolute;
           left: 0;
           bottom: -2px;
@@ -649,28 +653,28 @@
           background-color: #0f8c20;
         }
       }
-        .farm_popup_tab_active_56 {
+      .farm_popup_tab_active_56 {
         color: #22292f;
         &:after {
-          content: '';
+          content: "";
           position: absolute;
           left: 0;
           bottom: -2px;
           width: 100%;
           height: 4px;
-          background-color: #F0B90B;
+          background-color: #f0b90b;
         }
       }
       .farm_popup_tab_active_137 {
-         color: #22292f;
+        color: #22292f;
         &:after {
-          content: '';
+          content: "";
           position: absolute;
           left: 0;
           bottom: -2px;
           width: 100%;
           height: 4px;
-          background-color: #8247E5;
+          background-color: #8247e5;
         }
       }
     }
@@ -678,13 +682,13 @@
       margin: 0;
       font-size: 12px;
       font-family: HelveticaNeue;
-      color: #7A7F82;
+      color: #7a7f82;
     }
   }
   .farm_popup_box {
     padding-top: 0 !important;
-    background: #f2f0eb;
-     .disable_btn {
+    background: #fff;
+    .disable_btn {
       border: 1px solid #b6b9bc !important;
       background: #b6b9bc !important;
       box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.1) !important;

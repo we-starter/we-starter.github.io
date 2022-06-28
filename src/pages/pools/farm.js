@@ -8,7 +8,7 @@ import FarmCard from '../../components/farm/farmCard'
 import farms from '../../configs/farm'
 import { useFarmInfo } from './Hooks'
 import Coming_Small from '../../assets/icon/farm/coming_small@2x.png'
-
+import FarmTextIMG from '../../assets/image/farm-text.png'
 const Farm = (props) => {
   const isComing = (index) => {
     return (
@@ -60,9 +60,11 @@ const Farm = (props) => {
   }
 
   return (
-    <div className='farm_box' style={{ minHeight: '100%', background: '#fff' }}>
+    <div className='farm_box' >
+      <img src={FarmTextIMG} />
+      <p>You could farm different policy with the notice of mining campaign.</p>
       <div className='farm_box_main'>
-        <FarmBanner />
+        {/* <FarmBanner /> */}
         <div className='farm_index'>
           {farms.map((item, index) => {
             return <FarmCard pools={item} key={index} />

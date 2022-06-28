@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useMemo, useState} from 'react'
+import React, { useContext, useEffect, useMemo, useState } from 'react'
 import { mainContext } from '../../reducer'
 import { useActiveWeb3React } from '../../web3'
 import { FormattedMessage } from 'react-intl'
@@ -7,23 +7,24 @@ import {
   HANDLE_CHANGE_NETWORKS,
   HANDLE_WALLET_MODAL,
 } from '../../const'
-import metamask from '../../assets/icon/metamask.png'
-import Coin98 from '../../assets/icon/coin98@2x.png'
-import ONTO from '../../assets/icon/ONTO.png'
+import metamask from '../../assets/icon/wallet-metamask@2x.png'
+import Coin98 from '../../assets/icon/wallet-coin98@2x.png'
+import ONTO from '../../assets/icon/wallet-onto@2x.png'
+import walletConnect from '../../assets/icon/wallet-connect@2x.png'
+
 import close from '../../assets/icon/close.png'
 import BSC from '../../assets/icon/BSC@2x.png'
 import HECO from '../../assets/icon/HECO@2x.png'
 import AVALANCHE from '../../assets/icon/Avalanche@2x.png'
 import MATIC from '../../assets/icon/MATIC@2x.png'
-import walletConnect from '../../assets/icon/walletConnect.png'
-import {changeNetwork, injected, useConnectWallet, walletConnector} from "../../connectors";
-import {ChainId} from "../../web3/address";
+import { changeNetwork, injected, useConnectWallet, walletConnector } from "../../connectors";
+import { ChainId } from "../../web3/address";
 import Web3 from "web3";
 import { client, provider } from "@ont-dev/ontology-dapi";
-import {isMobile} from "../../utils";
-import {message} from "antd";
+import { isMobile } from "../../utils";
+import { message } from "antd";
 
-if (!window.ethereum && window.onto){
+if (!window.ethereum && window.onto) {
   window.ethereum = window.onto
   window.ethereum.send = (method, params) => {
     return new Promise((reslove, reject) => {
@@ -45,7 +46,7 @@ export const WalletConnect = ({ onClose, onCancel }) => {
   const initChainId = chainId || ChainId.HECO
   const [netWorkFlag, setNetWorkFlag] = useState(initChainId)
   const connectONTOWallet = () => {
-    if (isMobile()){
+    if (isMobile()) {
       connectWallet(
         injected,
         walletConnector[netWorkFlag]
@@ -57,12 +58,12 @@ export const WalletConnect = ({ onClose, onCancel }) => {
       })
       return
     }
-    if (!window.onto){
+    if (!window.onto) {
       message.warning('Please Install ONTO Wallet From Chrome WebStore')
       return;
     }
     const web3 = new Web3(window.onto);
-// Request connection
+    // Request connection
     web3.eth.requestAccounts().then((res) => {
       connectWallet(injected, netWorkFlag, 'onto').then(() => {
         dispatch({
@@ -94,10 +95,10 @@ export const WalletConnect = ({ onClose, onCancel }) => {
           <div className='form-app__inner transction-submitted link-wallet'>
             <div className='form-app__inner__header'>
               <FormattedMessage id='linkWallet' />
-            </div>{' '}
+            </div>
             <div className='choose-network-box'>
               <p className='choose-network-title'>
-                <FormattedMessage id='netWork1' />
+                1、{' '}<FormattedMessage id='netWork1' />
               </p>
 
               <div className={`choose-network`}>
@@ -203,8 +204,7 @@ export const WalletConnect = ({ onClose, onCancel }) => {
             </div>
             <div className='form-app__inner wallet-connect'>
               <p className='choose-network-title'>
-                {' '}
-                <FormattedMessage id='netWork2' />
+                2、{' '}<FormattedMessage id='netWork2' />
               </p>
               <div className='form-app__inner__wallets'>
                 <div
@@ -219,6 +219,7 @@ export const WalletConnect = ({ onClose, onCancel }) => {
                   className='form-app__inner__wallets__item'
                 >
                   <img src={metamask} />
+                  <span>MetaMask</span>
                   {/* <p>
                     <FormattedMessage id='accountText8' />
                   </p> */}
@@ -260,13 +261,14 @@ export const WalletConnect = ({ onClose, onCancel }) => {
                   className='form-app__inner__wallets__item'
                 >
                   <img src={walletConnect} />
+                  <span>WalletConnect</span>
                   {/* <p>
                     <FormattedMessage id='accountText9' />
                   </p> */}
                 </div>
               </div>
 
-              <div className='form-app__inner__wallets' style={{marginTop: '10px'}}>
+              <div className='form-app__inner__wallets' >
                 <div
                   onClick={() => {
                     connectWallet(injected, netWorkFlag, 'coin98').then(() => {
@@ -279,12 +281,14 @@ export const WalletConnect = ({ onClose, onCancel }) => {
                   className='form-app__inner__wallets__item'
                 >
                   <img src={Coin98} />
+                  <span>Coin98</span>
                 </div>
                 <div
                   className='form-app__inner__wallets__item'
                   onClick={connectONTOWallet}
                 >
                   <img src={ONTO} />
+                  <span>ONTOWallet</span>
                 </div>
               </div>
             </div>
@@ -297,7 +301,7 @@ export const WalletConnect = ({ onClose, onCancel }) => {
             />
           </div>
         </form>
-      </div>
-    </div>
+      </div >
+    </div >
   )
 }

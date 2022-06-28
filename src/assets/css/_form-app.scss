@@ -23,43 +23,45 @@
         flex-direction: column;
       }
       &__item {
-        width: 160px;
+        width: 50%;
         height: 160px;
         &:first-child {
           border-right: 1px rgba(235, 233, 227, 1) solid;
         }
         @media #{$smWidth} {
           height: 160px;
-           &:first-child {
-          border-right: none;
-        }
+          &:first-child {
+            border-right: none;
+          }
         }
         @media #{$xsWidth} {
           height: 160px;
           &:first-child {
-          border-right: none;
-        }
+            border-right: none;
+          }
         }
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        gap: 30px;
-        background: #f2f0eb;
+        // gap: 30px;
+        background: transparent;
         cursor: pointer;
         img {
           width: 40px;
         }
-        p {
-          color: rgba(34, 41, 47, 1);
+        span {
+          margin-top: 15px;
           font-size: 14px;
-          font-family: HelveticaNeue;
-          color: #22292f;
+          font-family: Montserrat-Bold, Montserrat;
+          font-weight: bold;
+          color: #000000;
+          line-height: 18px;
         }
       }
 
       &__item:hover {
-        background-color: #ffffff;
+        background-color: #00c57b;
         @media #{$smWidth} {
           background-color: transparent;
         }
@@ -182,10 +184,10 @@
     line-height: 16px;
   }
   &__tip_56 {
-    color: #F0B90B;
+    color: #f0b90b;
   }
   &__tip_137 {
-    color: #8247E5;
+    color: #8247e5;
   }
 
   &__btn-back {
@@ -217,7 +219,7 @@
       padding-top: 1px;
 
       &::before {
-        content: '+';
+        content: "+";
         font-size: 20px;
         position: absolute;
         top: -15px;
@@ -272,23 +274,23 @@
       }
 
       &-pref_56 {
-        color: #F0B90B;
-         background-color: rgba(240, 185, 11, 0.1);
+        color: #f0b90b;
+        background-color: rgba(240, 185, 11, 0.1);
       }
 
       &-pref_56:hover {
         color: #ffffff;
-        background: #F0B90B;
+        background: #f0b90b;
       }
 
-       &-pref_137 {
-        color: #8247E5;
+      &-pref_137 {
+        color: #8247e5;
         background-color: rgba(130, 71, 229, 0.1);
       }
 
       &-pref_137:hover {
         color: #ffffff;
-        background: #8247E5;
+        background: #8247e5;
       }
 
       &-logo {
@@ -622,7 +624,7 @@
   padding: 16px 0 0;
   border-radius: 5px;
   overflow: hidden;
-      background-color: transparent;
+  background-color: transparent;
 }
 @media #{$desktop} {
   .wallet-connect {
@@ -647,10 +649,17 @@
 }
 
 .link-wallet {
-  background: #F2F0EB;
+  width: 720px !important;
+  background: #d6ebe0;
+  border-radius: 14px;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
   .form-app__inner__header {
     max-width: 100%;
     font-size: 18px;
+    font-family: Montserrat-Medium, Montserrat;
+    font-weight: 600;
+    color: #121212;
   }
   .choose-network-title {
     margin-top: 16px;
@@ -660,28 +669,24 @@
     font-weight: 500;
     color: #121212;
     line-height: 40px;
-    text-align: left;
   }
   .choose-network {
-    display: flex;
-    justify-content: start;
-    align-items: center;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(2, 360px);
+    place-content: space-evenly;
     p {
-      margin-top: 10px;
+      width: 100%;
+      height: 80px;
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
       position: relative;
       margin-bottom: 0;
       margin-right: 22px;
-      width: 120px;
-      height: 42px;
-      border-radius: 5px;
-      border: 2px solid #EBE9E3;
       cursor: pointer;
       &:hover {
-        border: 2px solid #0F8C20;
+        background: #00c57b;
       }
       &:last-child {
         margin-right: 0;
@@ -694,29 +699,30 @@
         border: 1px solid 1px;
       }
       span {
-          font-size: 14px;
-          font-family: HelveticaNeue-Medium, HelveticaNeue;
-          font-weight: 500;
-          color: #22292F;
-          line-height: 18px;
+        font-size: 14px;
+        font-family: Montserrat-Bold, Montserrat;
+        font-weight: bold;
+        color: #000000;
+        line-height: 18px;
+        margin-top: 5px;
       }
       svg {
         display: none;
       }
     }
     .active {
-      border: 2px solid #0F8C20;
+      background-color: #00c57b;
       svg {
         display: inline-block;
         position: absolute;
         right: -1px;
         bottom: -1px;
-        fill: #0F8C20;
+        fill: #00c57b;
+        display: none;
       }
-     }
+    }
   }
   .change-network {
     margin-top: 38px;
-    justify-content: center;
   }
 }

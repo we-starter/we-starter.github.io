@@ -3,8 +3,8 @@ import StakingPool3 from '../web3/abi/StakingPool3.json'
 import { getRemainTime } from '../utils/time'
 
 import AllowListStakePool from '../web3/abi/AllowListStakePool.json'
-import {ChainId} from "../web3/address";
-import {numToWei} from "../utils/format";
+import { ChainId } from "../web3/address";
+import { numToWei } from "../utils/format";
 import WARBadge from '../assets/icon/war-badge.png'
 const testNetworkId = window.ethereum && (~~window.ethereum.chainId === ChainId.LOCALHOST) ? ChainId.LOCALHOST : null
 if (testNetworkId) {

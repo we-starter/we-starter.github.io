@@ -173,7 +173,7 @@ const PoolsDetail = (props) => {
       <div className='pool_info'>
         <img src={pool && pool.icon} />
         <div>
-          <div>HT Private
+          <div>{pool && pool.name}  {pool && pool.isPrivate ? 'Private' : 'Public'}
             <span>
               {pool && pool.status === 0 && (
                 <FormattedMessage id='comingSoon1' />
@@ -198,7 +198,7 @@ const PoolsDetail = (props) => {
               )}</span>
           </div>
           <p>
-            0xdBa054fDb2A542E9128c91Ae62fE832177bf3536
+            {pool && pool.address}
             <svg width="24px" height="24px" viewBox="0 0 24 24" >
               <g id="westar" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                 <g transform="translate(-1086.000000, -249.000000)">

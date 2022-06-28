@@ -28,8 +28,8 @@ export const Header = () => {
   console.log('balance', balance)
   const [language, setLanguage] = useState(
     (state.locale === 'en' && 'English') ||
-      (state.locale === 'zh' && '中文简体') ||
-      (state.locale === 'ru' && 'Русский язык')
+    (state.locale === 'zh' && '中文简体') ||
+    (state.locale === 'ru' && 'Русский язык')
   )
 
   const [showMenu, setShowMenu] = useState(false)
@@ -163,7 +163,7 @@ export const Header = () => {
             <div
               className='language'
               style={{ marginRight: '16px' }}
-              // onClick={() => tabLanguage(language)}
+            // onClick={() => tabLanguage(language)}
             >
               <img src={globe} alt='' />
               {language}
@@ -194,52 +194,53 @@ export const Header = () => {
             </div>
             {/* {active && <img className='exchange' src={Exchange} />} */}
 
-            {chainId == ChainId.BSC && (
-              <img
-                onClick={() => {
-                  dispatch({
-                    type: HANDLE_CHANGE_NETWORKS,
-                    changeNetworkStatus: true,
-                  })
-                }}
-                className='header-network'
-                src={BSC}
-              />
-            )}
-            {chainId == ChainId.HECO && (
-              <img
-                onClick={() => {
-                  dispatch({
-                    type: HANDLE_CHANGE_NETWORKS,
-                    changeNetworkStatus: true,
-                  })
-                }}
-                className='header-network'
-                src={HECO}
-              />
-            )}
-            {chainId == ChainId.MATIC && (
-              <img
-                onClick={() => {
-                  dispatch({
-                    type: HANDLE_CHANGE_NETWORKS,
-                    changeNetworkStatus: true,
-                  })
-                }}
-                className='header-network'
-                src={MATIC}
-              />
-            )}
+
 
             {active && (
               <div className='ht-balance'>
-                <span>
+                {chainId == ChainId.BSC && (
+                  <img
+                    onClick={() => {
+                      dispatch({
+                        type: HANDLE_CHANGE_NETWORKS,
+                        changeNetworkStatus: true,
+                      })
+                    }}
+                    className='header-network'
+                    src={BSC}
+                  />
+                )}
+                {chainId == ChainId.HECO && (
+                  <img
+                    onClick={() => {
+                      dispatch({
+                        type: HANDLE_CHANGE_NETWORKS,
+                        changeNetworkStatus: true,
+                      })
+                    }}
+                    className='header-network'
+                    src={HECO}
+                  />
+                )}
+                {chainId == ChainId.MATIC && (
+                  <img
+                    onClick={() => {
+                      dispatch({
+                        type: HANDLE_CHANGE_NETWORKS,
+                        changeNetworkStatus: true,
+                      })
+                    }}
+                    className='header-network'
+                    src={MATIC}
+                  />
+                )}
+                {/* <span>
                   <img
                     src={chainId === ChainId.MATIC ? RAW_ICON : WAR_ICON}
                     alt=''
                   />
-                </span>
-                <p>{formatAmount(balance)}</p>
+                </span> */}
+                <p>{formatAmount(balance)} WAR</p>
               </div>
             )}
             {active && (
@@ -254,7 +255,7 @@ export const Header = () => {
                   }}
                 >
                   {formatAddress(account)}
-                  <img src={doubleLine} />
+                  {/* <img src={doubleLine} /> */}
                 </div>
               </div>
             )}
