@@ -21,7 +21,7 @@ body {
   min-width: 320px;
   font-size: 16px;
   line-height: 1.5;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   -webkit-font-smoothing: antialiased;
   -webkit-text-size-adjust: none;
   -webkit-overflow-scrolling: touch;
@@ -43,6 +43,22 @@ body {
   height: 100%;
   background-color: #fff;
   overflow-y: auto;
+  &::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+
+  &::-webkit-scrollbar {
+    width: 6px !important;
+    height: 6px !important;
+    position: fixed;
+    bottom: 0;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    height: 40px;
+    background: #6f6f6f;
+    border-radius: 3px;
+  }
 }
 
 a {
@@ -189,7 +205,7 @@ nav {
   overflow: hidden !important;
 }
 
-a[href^='tel'],
+a[href^="tel"],
 .white-space-nowrap {
   white-space: nowrap;
 }
@@ -249,50 +265,49 @@ a[href^='tel'],
     margin-right: 8px;
   }
 
-@media #{$desktop} {
-  .language-items {
-    display: none;
-    flex-direction: column;
-    background: #f2f0eb;
-    box-shadow: 0px 0px 6px 0px rgba(122, 127, 130, 0.2);
-    border-radius: 5px 5px 0px 0px;
-    padding: 12px 10px;
-    min-height: 80px;
-    right: 50%;
-    position: absolute;
-    bottom: 80%;
-    transform: translate(50%);
-    &::after {
-      content: '';
-      display: inline-block;
+  @media #{$desktop} {
+    .language-items {
+      display: none;
+      flex-direction: column;
+      background: #f2f0eb;
+      box-shadow: 0px 0px 6px 0px rgba(122, 127, 130, 0.2);
+      border-radius: 5px 5px 0px 0px;
+      padding: 12px 10px;
+      min-height: 80px;
+      right: 50%;
       position: absolute;
-      top: -7px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 0;
-      height: 0;
-      border-bottom: 7px solid #f2f0eb;
-      border-left: 7px solid transparent;
-      border-right: 7px solid transparent;
-    }
-    p {
-      color: #22292f;
-      width: 100px;
-      height: 30px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      line-height: 14px;
-      padding: 5px 0;
-      text-align: center;
-      &:hover {
-        background-color: rgba(212, 233, 226, 1);
-        border-radius: 5px;
+      bottom: 80%;
+      transform: translate(50%);
+      &::after {
+        content: "";
+        display: inline-block;
+        position: absolute;
+        top: -7px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 0;
+        height: 0;
+        border-bottom: 7px solid #f2f0eb;
+        border-left: 7px solid transparent;
+        border-right: 7px solid transparent;
+      }
+      p {
+        color: #22292f;
+        width: 100px;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        line-height: 14px;
+        padding: 5px 0;
+        text-align: center;
+        &:hover {
+          background-color: rgba(212, 233, 226, 1);
+          border-radius: 5px;
+        }
       }
     }
   }
-}
-  
 
   &:hover {
     display: flex;
@@ -323,7 +338,7 @@ a[href^='tel'],
     bottom: 40px;
     transform: translate(50%);
     &::after {
-      content: '';
+      content: "";
       display: inline-block;
       position: absolute;
       bottom: -7px;
@@ -391,35 +406,35 @@ a[href^='tel'],
       position: absolute;
       bottom: 40px;
       transform: translate(50%);
-    &::after {
-      content: '';
-      display: inline-block;
-      position: absolute;
-      bottom: -7px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 0;
-      height: 0;
-      border-top: 7px solid #f2f0eb;
-      border-left: 7px solid transparent;
-      border-right: 7px solid transparent;
-    }
-    p {
-      color: #22292f;
-      width: 100px;
-      height: 30px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      line-height: 14px;
-      padding: 5px 0;
-      text-align: center;
-      &:hover {
-        background-color: rgba(212, 233, 226, 1);
-        border-radius: 5px;
+      &::after {
+        content: "";
+        display: inline-block;
+        position: absolute;
+        bottom: -7px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 0;
+        height: 0;
+        border-top: 7px solid #f2f0eb;
+        border-left: 7px solid transparent;
+        border-right: 7px solid transparent;
+      }
+      p {
+        color: #22292f;
+        width: 100px;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        line-height: 14px;
+        padding: 5px 0;
+        text-align: center;
+        &:hover {
+          background-color: rgba(212, 233, 226, 1);
+          border-radius: 5px;
+        }
       }
     }
-  }
 
     &:hover {
       display: flex;
@@ -432,20 +447,20 @@ a[href^='tel'],
 }
 
 @media #{$xsWidth} {
-     .language-items {
-      display: none;
-      flex-direction: column;
-      background: #f2f0eb;
-      box-shadow: 0px 0px 6px 0px rgba(122, 127, 130, 0.2);
-      border-radius: 5px 5px 0px 0px;
-      padding: 12px 10px;
-      min-height: 80px;
-      right: 50%;
-      position: absolute;
-      bottom: 40px;
-      transform: translate(50%);
+  .language-items {
+    display: none;
+    flex-direction: column;
+    background: #f2f0eb;
+    box-shadow: 0px 0px 6px 0px rgba(122, 127, 130, 0.2);
+    border-radius: 5px 5px 0px 0px;
+    padding: 12px 10px;
+    min-height: 80px;
+    right: 50%;
+    position: absolute;
+    bottom: 40px;
+    transform: translate(50%);
     &::after {
-      content: '';
+      content: "";
       display: inline-block;
       position: absolute;
       bottom: -7px;

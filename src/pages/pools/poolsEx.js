@@ -458,7 +458,7 @@ const PoolsIndex = (props) => {
       <div className='pools-example' id='position'>
         <div className='pools-example_title'>
           <h3>Project</h3>
-          <a href='/pool'>View All</a>
+          <a href='/pools'>View All</a>
         </div>
         <div className='pools-example_card'>
           {listData &&

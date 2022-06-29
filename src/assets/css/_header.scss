@@ -231,6 +231,7 @@
 
     @media #{$mdWidth} {
       width: 153px;
+      border-radius: 14px;
       // position: absolute;
       // top: 21px;
       // right: 65px;
@@ -238,11 +239,13 @@
 
     @media (max-width: 470px) {
       right: unset;
+      border-radius: 14px;
       // left: 20px;
     }
 
     @media (max-width: 370px) {
       width: 143px;
+      border-radius: 14px;
     }
 
     .balance {

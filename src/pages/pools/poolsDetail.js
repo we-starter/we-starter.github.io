@@ -26,6 +26,7 @@ import { getScanLink } from "../../connectors";
 import { ChainId, GAS_FEE } from "../../web3/address";
 import BadgeStake from "../../components/Modals/BadgeStake";
 import DefaultBanner from '../../assets/image/default-pool.png'
+import { Link } from 'react-router-dom'
 const PoolsDetail = (props) => {
   const { address } = props.match.params
 
@@ -168,7 +169,7 @@ const PoolsDetail = (props) => {
             </g>
           </g>
         </svg>
-        <span>Pool</span>
+        <Link to='/pools/'>Pool</Link>
       </div>
       <div className='pool_info'>
         <img src={pool && pool.icon} />

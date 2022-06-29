@@ -25,15 +25,15 @@ import TOKEN from '../assets/icon/TOKEN.png'
 import BLACK from '../assets/icon/BLACK.png'
 import PHM from '../assets/icon/PHM.png'
 import HCT from '../assets/icon/HCT.png'
-import BTCMT from '../assets/icon/BTCMT.svg'
+import BTCMT from '../assets/icon/BTCMT.png'
 import MATE from '../assets/icon/MATE.png'
-import CP from '../assets/icon/CP.jpg'
+import CP from '../assets/icon/CP.png'
 import HRS from '../assets/icon/HRS.png'
 import CryptoSteam from '../assets/icon/CryptoSteam.png'
-import GRVS from '../assets/icon/GRVS.jpg'
+import GRVS from '../assets/icon/GRVS.png'
 import WARBadge from '../assets/icon/war-badge.png'
 import WNFTAbi from '../web3/abi/WARBadge.json'
-import {ChainId} from "../web3/address";
+import { ChainId } from "../web3/address";
 const testNetworkId = window.ethereum && (~~window.ethereum.chainId === ChainId.LOCALHOST) ? ChainId.LOCALHOST : null
 if (testNetworkId) {
   console.log('testNetworkId=' + testNetworkId)

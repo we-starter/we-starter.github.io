@@ -253,21 +253,14 @@ const PoolsIndex = (props) => {
         key={pool.address + '' + index}
       >
         <div className='type_private_box_t'>
-          <div className='pools-type_title'>
-            <a
-              className={cs(
-                pool
-                  ? 'pools-type_chaind_box_' + pool.networkId
-                  : 'pools-type_chaind_box_128'
-              )}
-            >
-              <span className={cs('pools-type_chaind')}></span>
-            </a>
-            <p className='pools-type_card_title'>
+
+        </div>
+        <div className='type_private_box_b'>
+          <div className='type_private_box_b_logo'>
+            <p className='type_private_box_b_logo_l'>
               {pool && pool.icon && <img src={pool.icon} />}
-              {pool && pool.name}
-              {pool && pool.svipFlag && <span className='svip'></span>}
-              {pool && pool.underlying.name === 'LBP' && (
+              {/* {pool && pool.svipFlag && <span className='svip'></span>} */}
+              {/* {pool && pool.underlying.name === 'LBP' && (
                 <a className='pools-type_card_warning'>
                   <span
                     className='warning_tips'
@@ -281,9 +274,9 @@ const PoolsIndex = (props) => {
                     )}
                   </span>
                 </a>
-              )}
+              )} */}
             </p>
-            <p className='pools-type_card_title_right'>
+            <p className='type_private_box_b_logo_g'>
               {renderStatus(pool)}
               {status < 3 && left_time > 0 && (
                 <span className='pools-type_time'>
@@ -317,308 +310,50 @@ const PoolsIndex = (props) => {
               )}
             </p>
           </div>
-          <div className='pools-type_title'>
-            <p className='pools-type_card_ratio'>
+          <div className='type_private_box_b_name'> <h3>{pool && pool.name} POOL</h3> <img src='' /></div>
+          <div className='type_private_box_b_text'>
+            <span>
               <FormattedMessage id='poolsIndexText1' />
-              <i>{ratio}</i>
-            </p>
+            </span>
+            <span>{ratio}</span>
+
+          </div>
+          <div className='type_private_box_b_text'>
             {pool && pool.underlying.name === 'LBP' && (
-              <p
-                className='pools-type_card_ratio'
-                style={{ textAlign: 'right' }}
-              >
-                <FormattedMessage id='LBPSupply' />
-                <i>
+              <>
+                <span>
+                  <FormattedMessage id='LBPSupply' />
+                </span>
+                <span>
                   {formatNumber(
                     formatAmount(totalPurchasedAmount, 0, 2)
                   )}{' '}
                   {pool.underlying.symbol}
-                </i>
-              </p>
+                </span>
+              </>
+
             )}
             {pool && pool.underlying.name !== 'LBP' && (
-              <p
-                className='pools-type_card_ratio'
-                style={{ textAlign: 'right' }}
-              >
-                <FormattedMessage id='totalRaised' />
-                <i>
+              <>
+                <span>
+                  <FormattedMessage id='totalRaised' />
+                </span>
+                <span>
                   {formatNumber(
                     formatAmount(totalPurchasedAmount, 0, 2)
                   )}{' '}
                   {currency.symbol}
-                </i>
-              </p>
+                </span>
+              </>
             )}
           </div>
-          {pool && pool.underlying.name !== 'LBP' && pool.status !== 3 && (
-            <>
-              <div className='pools-type_title'>
-                <p
-                  className='pools-type_card_ratio'
-                  style={{ marginTop: '24px' }}
-                >
-                  <FormattedMessage id='poolsIndexText2' />
-                </p>
-              </div>
-              <div className='pools-type_percentage'>
-                <a>
-                  <i
-                    className={cs(
-                      `pools-type_progress_bar ${'pools-type_progress_bar_' + pool.networkId
-                      }`
-                    )}
-                    style={{
-                      width: `${pool.progress > 1 ? 100 : pool.progress * 100
-                        }%`,
-                    }}
-                  ></i>
-                </a>
-                <p>{(progress * 100).toFixed(0)}%</p>
-              </div>
-            </>
-          )}
-        </div>
-        <div className='type_private_box_b'>
-          {((pool && pool.status !== 3) ||
-            (pool && pool.underlying.name === 'LBP')) && (
-              <div className='pools-type_title'>
-                <p
-                  className='pools-type_card_ratio pools-type_card_access'
-                  style={{
-                    color: '#7A7F82',
-                  }}
-                >
-                  <FormattedMessage id='accessType' />
-                </p>
-                {type === 1 && !(pool.svipFlag || pool.nft) && (
-                  <p
-                    className='pools-type_card_ratio pools-type_card_access'
-                    style={{ textAlign: 'right' }}
-                  >
-                    <span
-                      className={cs('crown', quotaOf > 0 && 'crown-highlight')}
-                    ></span>
-                    <FormattedMessage id='private' />
-                    <span
-                      className='tips'
-                      onMouseOver={() => setHoverFlag(index)}
-                      onMouseOut={() => setHoverFlag(null)}
-                    >
-                      {hoverFlag === index && (
-                        <i className='tips_content'>
-                          <FormattedMessage id='privateTips' />
-                        </i>
-                      )}
-                    </span>
-                  </p>
-                )}
-                {type === 1 && pool && pool.svipFlag && (
-                  <p
-                    className='pools-type_card_ratio pools-type_card_access'
-                    style={{ textAlign: 'right' }}
-                  >
-                    <span
-                      className={cs('crown', quotaOf > 0 && 'crown-highlight')}
-                    ></span>
-                    <FormattedMessage id='svip' />
-                    <span
-                      className='tips'
-                      onMouseOver={() => setHoverFlag(index)}
-                      onMouseOut={() => setHoverFlag(null)}
-                    >
-                      {hoverFlag === index && (
-                        <i className='tips_content'>
-                          <FormattedMessage id='svipTips' />
-                        </i>
-                      )}
-                    </span>
-                  </p>
-                )}
-                {(type === 0 || type === 2) && (
-                  <p
-                    className='pools-type_card_ratio pools-type_card_access'
-                    style={{ textAlign: 'right' }}
-                  >
-                    <FormattedMessage id='public' />
-                    <span
-                      className='tips'
-                      onMouseOver={() => setHoverFlag(index)}
-                      onMouseOut={() => setHoverFlag(null)}
-                    >
-                      {hoverFlag === index &&
-                        pool &&
-                        pool.underlying.name !== 'LBP' && (
-                          <i className='tips_content'>
-                            <FormattedMessage id='publicTips' />
-                          </i>
-                        )}
-                      {hoverFlag === index &&
-                        pool &&
-                        pool.underlying.name === 'LBP' && (
-                          <i className='tips_content'>
-                            <FormattedMessage id='publicTips1' />
-                          </i>
-                        )}
-                    </span>
-                  </p>
-                )}
-                {pool.nft && (
-                  <div
-                    className='pools-type_card_ratio pools-type_card_access'
-                    style={{ textAlign: 'right' }}
-                  >
-                    <div className="nft-badge">
-                      <img src={pool.nft.icon} alt="" />
-                      {pool.nft.name}
-                    </div>
+          <div className='type_private_box_b_text'>
+            <span>
+              <FormattedMessage id='poolsIndexText2' />
+            </span>
+            <span>{(progress * 100).toFixed(0)}%</span>
 
-                    <Popover content={() => <NftCardTipContent nft={pool.nft} />} title={null}>
-                      <span className='tips' />
-                    </Popover>
-                  </div>
-                )}
-              </div>
-            )}
-          {/* 已完成 */}
-          {/* 白名单 */}
-          {pool &&
-            pool.status == 3 &&
-            pool &&
-            pool.type === 1 &&
-            pool &&
-            pool.underlying.name !== 'LBP' && (
-              <div className='finished_status'>
-                <div className='pools-type_title'>
-                  <p
-                    className='pools-type_card_ratio pools-type_card_access'
-                    style={{
-                      marginTop: '4px',
-                      color: '#7A7F82',
-                    }}
-                  >
-                    <FormattedMessage id='poolsDetailText16' />
-                  </p>
-                  <p
-                    className='pools-type_card_ratio pools-type_card_access'
-                    style={{ marginTop: '4px', textAlign: 'right' }}
-                  >
-                    {pool && pool.duration}
-                    <FormattedMessage id='SecondM' />
-                  </p>
-                </div>
-                <div className='pools-type_title'>
-                  <p
-                    className='pools-type_card_ratio pools-type_card_access'
-                    style={{
-                      marginTop: '4px',
-                      color: '#7A7F82',
-                    }}
-                  >
-                    <FormattedMessage id='poolsDetailText17' />
-                  </p>
-                  <p
-                    className='pools-type_card_ratio pools-type_card_access'
-                    style={{ marginTop: '4px', textAlign: 'right' }}
-                  >
-                    {pool && pool.poolType === 1 ? (
-                      <FormattedMessage id='poolsDetailText21' />
-                    ) : (
-                      pool && pool.totalApplicants
-                    )}
-                  </p>
-                </div>
-                <div className='pools-type_title'>
-                  <p
-                    className='pools-type_card_ratio pools-type_card_access'
-                    style={{
-                      marginTop: '4px',
-                      color: '#7A7F82',
-                    }}
-                  >
-                    <FormattedMessage id='poolsDetailText18' />
-                  </p>
-                  <p
-                    className='pools-type_card_ratio pools-type_card_access'
-                    style={{ marginTop: '4px', textAlign: 'right' }}
-                  >
-                    {pool && pool.winningRate + '%'}
-                  </p>
-                </div>
-              </div>
-            )}
-          {/* 超募池 */}
-          {pool &&
-            pool.status == 3 &&
-            pool &&
-            pool.type !== 1 &&
-            pool &&
-            pool.underlying.name !== 'LBP' && (
-              <div className='finished_status'>
-                <div className='pools-type_title'>
-                  <p
-                    className='pools-type_card_ratio pools-type_card_access'
-                    style={{
-                      marginTop: '4px',
-                      color: '#7A7F82',
-                    }}
-                  >
-                    <FormattedMessage id='poolsDetailText16' />
-                  </p>
-                  <p
-                    className='pools-type_card_ratio pools-type_card_access'
-                    style={{ marginTop: '4px', textAlign: 'right' }}
-                  >
-                    {pool && pool.duration}
-                    <FormattedMessage id='SecondM' />
-                  </p>
-                </div>
-                <div className='pools-type_title'>
-                  <p
-                    className='pools-type_card_ratio pools-type_card_access'
-                    style={{
-                      marginTop: '4px',
-                      color: '#7A7F82',
-                    }}
-                  >
-                    <FormattedMessage id='poolsDetailText19' />
-                  </p>
-                  <p
-                    className='pools-type_card_ratio pools-type_card_access'
-                    style={{ marginTop: '4px', textAlign: 'right' }}
-                  >
-                    {pool && (pool.progress * 100).toFixed(2) * 1}%
-                  </p>
-                </div>
-                <div className='pools-type_title'>
-                  <p
-                    className='pools-type_card_ratio pools-type_card_access'
-                    style={{
-                      marginTop: '4px',
-                      color: '#7A7F82',
-                    }}
-                  >
-                    <FormattedMessage id='poolsDetailText20' />
-                  </p>
-                  <p
-                    className='pools-type_card_ratio pools-type_card_access'
-                    style={{ marginTop: '4px', textAlign: 'right' }}
-                  >
-                    {pool.total}
-                  </p>
-                </div>
-              </div>
-            )}
-          {pool && pool.name === 'WAR LBP' && (
-            <img className='w_bg' src={WARLBP} />
-          )}
-          {pool && pool.name === 'BLACK LBP' && (
-            <img className='w_bg' src={BLACKLBP} />
-          )}
-          {pool && pool.name === 'PAUL LBP' && (
-            <img className='w_bg' src={PAULLBP} />
-          )}
-
+          </div>
           {/*
               pool.settleable.volume > 0 获取数量大于0
               pool.settleable.amount > 0 未结算数量大于0
@@ -708,79 +443,6 @@ const PoolsIndex = (props) => {
               )}
             </a>
           )}
-          {pool && pool.status == 3 && pool && pool.underlying.name !== 'LBP' && (
-            <div className='pools-type_title'>
-              <p
-                className='pools-type_card_ratio pools-type_card_access'
-                style={{
-                  marginTop: '4px',
-                  color: '#7A7F82',
-                }}
-              >
-                <FormattedMessage id='accessType' />
-              </p>
-              {type === 1 && (
-                <p
-                  className='pools-type_card_ratio pools-type_card_access'
-                  style={{ marginTop: '4px', textAlign: 'right' }}
-                >
-                  <span
-                    className={cs('crown', quotaOf > 0 && 'crown-highlight')}
-                  ></span>
-                  <FormattedMessage id='private' />
-                  <span
-                    className='tips'
-                    onMouseOver={() => setHoverFlag(index)}
-                    onMouseOut={() => setHoverFlag(null)}
-                  >
-                    {hoverFlag === index && (
-                      <i className='tips_content'>
-                        <FormattedMessage id='privateTips' />
-                      </i>
-                    )}
-                  </span>
-                </p>
-              )}
-              {(type === 0 || type === 2) && (
-                <p
-                  className='pools-type_card_ratio pools-type_card_access'
-                  style={{ marginTop: '4px', textAlign: 'right' }}
-                >
-                  <FormattedMessage id='public' />
-                  <span
-                    className='tips'
-                    onMouseOver={() => setHoverFlag(index)}
-                    onMouseOut={() => setHoverFlag(null)}
-                  >
-                    {hoverFlag === index &&
-                      pool &&
-                      pool.underlying.name !== 'LBP' && (
-                        <i className='tips_content'>
-                          <FormattedMessage id='publicTips' />
-                        </i>
-                      )}
-                    {hoverFlag === index &&
-                      pool &&
-                      pool.underlying.name === 'LBP' && (
-                        <i className='tips_content'>
-                          <FormattedMessage id='publicTips1' />
-                        </i>
-                      )}
-                  </span>
-                </p>
-              )}
-            </div>
-          )}
-          {pool && pool.LPTLink && (
-            <a
-              className='lpt_link'
-              href={pool.LPTLink}
-              onClick={(event) => event.stopPropagation()}
-              target='_black'
-            >
-              <FormattedMessage id='farm13' /> WAR-HT LPT(MDEX LP Token)
-            </a>
-          )}
         </div>
       </div>
     )
@@ -857,7 +519,7 @@ const PoolsIndex = (props) => {
   return (
     <div>
       {/* banner图 */}
-      <Banner />
+      {/* <Banner /> */}
       <div className='pools-type' id='position'>
         <div className='pools-type-top'>
           <div className='pools-type_content'>
@@ -867,16 +529,8 @@ const PoolsIndex = (props) => {
                 className={cs('new_flag', tabFlag === 1 ? 'tab_active' : '')}
               >
                 <FormattedMessage id='poolsIndexText4' />
-                {poolSum > 0 && <span className='pools_sum'>{poolSum}</span>}
+                {/* {poolSum > 0 && <span className='pools_sum'>{poolSum}</span>} */}
               </h2>
-
-              {/*<h2*/}
-              {/*  onClick={() => changeTab(3)}*/}
-              {/*  className={cs(tabFlag === 3 ? 'tab_active' : '')}*/}
-              {/*>*/}
-              {/*  <img className='flashPool_png' src={timePng} />*/}
-              {/*  <FormattedMessage id='flashPool' />*/}
-              {/*</h2>*/}
               <h2
                 onClick={() => changeTab(2)}
                 className={tabFlag === 2 ? 'tab_active' : ''}
@@ -885,20 +539,6 @@ const PoolsIndex = (props) => {
               </h2>
             </div>
             <div className='pools-type_card'>
-              {/* {isLogin ? (
-              <>
-                {listData &&
-                  listData.map((pool, index) => {
-                    return renderCard(pool, index)
-                  })}
-                {tabFlag === 1 && [1, 2].map(noLogin)}
-                {tabFlag === 2 && !listData.length && noData()}
-              </>
-            ) : (
-              <>
-                {!isLogin && tabFlag === 1 ? [1, 2, 3].map(noLogin) : noData()}
-              </>
-            )} */}
               {listData &&
                 listData.map((pool, index) => {
                   return renderCard(pool, index)
@@ -908,29 +548,6 @@ const PoolsIndex = (props) => {
             </div>
           </div>
         </div>
-        {/* <div className='pools-type-bottom'>
-        <h2>
-          <FormattedMessage id='supportWallet' />
-        </h2>
-        <div className='pools-type-bottom_content'>
-          <div className='pools-type-bottom_content_box'>
-            <img src={HyperPay} />
-            <img src={Metamask} />
-            <img src={AoLink} />
-          </div>
-          <div className='pools-type-bottom_content_box'>
-            <img src={HUOBI} />
-            <img src={TokenPocket} />
-            <img src={BitKeep} />
-          </div>
-          <div
-            className='pools-type-bottom_content_box'
-            style={{ justifyContent: 'center' }}
-          >
-            <img src={Bingoo} />
-          </div>
-        </div>
-      </div> */}
       </div>
     </div>
   )

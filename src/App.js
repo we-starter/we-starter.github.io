@@ -59,7 +59,7 @@ function App() {
             {/* <ExtractComponents /> */}
             <Switch>
               <Route exact path={['/']} component={PoolsEx}></Route>
-              <Route exact path='/pool' component={PoolsIndex}></Route>
+              <Route exact path='/pools' component={PoolsIndex}></Route>
               <Route exact path='/farm' component={Farm}></Route>
               {/*<Route exact path='/migrate' component={Migrate}></Route>*/}
               <Route
