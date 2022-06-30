@@ -601,7 +601,6 @@
       width: 335px;
       //height: 476px;
       background: #e0f8e3;
-      border-radius: 20px;
       vertical-align: top;
       background: linear-gradient(
         180deg,
@@ -1022,8 +1021,32 @@
 }
 @media #{$smWidth} {
   .farm_box {
-    min-width: 350px;
-    background: #fff;
+    width: 100%;
+    background-color: #4ed3ff;
+    background-image: url(../../assets/image/cloud_bg.png);
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    padding-top: 104px;
+    margin-top: 65px;
+    > img {
+      width: 335px;
+      height: 121px;
+      margin: 0 auto;
+    }
+    > p {
+      font-size: 16px;
+      font-family: Montserrat-Bold, Montserrat;
+      font-weight: bold;
+      color: #ffffff;
+      line-height: 30px;
+      text-align: center;
+    }
+    .farm_box_main {
+      min-height: calc(100% - 80px);
+    }
+    .footer {
+      position: relative;
+    }
   }
   .farm_index {
     display: flex;
@@ -1035,12 +1058,31 @@
     width: 100%;
     &_card {
       position: relative;
-      padding: 42px 30px 15px;
+      padding: 42px 30px 40px;
       margin-top: 44px;
       width: 335px;
       //height: 476px;
       background: #e0f8e3;
-      border-radius: 20px;
+      background: linear-gradient(
+        180deg,
+        #ffffff 0%,
+        rgba(255, 255, 255, 0.5) 100%
+      );
+      box-shadow: inset -3px 3px 30px 0px #00c57b;
+      border: 1px solid #00c57b;
+      border-radius: 5em/5em;
+      &::before {
+        width: 140px;
+        height: 140px;
+        position: absolute;
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        right: 15px;
+        top: 220px;
+        content: "";
+        display: block;
+        background-image: url(../../assets/image/heco_bg@2x.png);
+      }
       &:after {
         content: "";
         position: absolute;
@@ -1083,7 +1125,8 @@
       }
     }
     &_card_56 {
-      background: #fff8e0;
+      box-shadow: inset -3px 3px 30px 0px #efb90b;
+      border: 1px solid #efb90b;
       .farm_index_card_chainId_box {
         border-top: 62px solid #ffeeb9;
         border-bottom: 62px solid transparent;
@@ -1092,6 +1135,9 @@
           background: url("../../assets/icon/BSC@2x.png") no-repeat;
           background-size: 100% 100%;
         }
+      }
+      &::before {
+        background-image: url(../../assets/image/BSC_bg@2x.png);
       }
     }
     &_card_137 {
@@ -1105,19 +1151,20 @@
           background-size: 100% 100%;
         }
       }
+      &::before {
+        background-image: url(../../assets/image/polygon_bg@2x.png);
+      }
     }
     .PAUL-USDT:after {
       background: url("../icon/farm/PAUL-HT@2x.png") no-repeat;
       background-size: 100% 100%;
     }
     .WAR:after {
-      width: 50px;
-      background: url("../icon/WAR@2x.png") no-repeat;
+      background: url("../icon/farm/WAR@2x.png") no-repeat;
       background-size: 100% 100%;
     }
     .PLUT:after {
-      width: 50px;
-      background: url("../icon/PLUT.png") no-repeat;
+      background: url("../icon/farm/PLUT.png") no-repeat;
       background-size: 100% 100%;
     }
     .WAR-BUSD:after {
@@ -1130,7 +1177,7 @@
     }
     .xNFT:after {
       background: url("../icon/farm/X_NFT.png") no-repeat;
-      background-size: 50px 50px;
+      background-size: 100% 100%;
     }
     &_coming {
       background: #f2f0eb;
@@ -1365,7 +1412,7 @@
       color: #ffffff;
       background: #0f8c20;
       box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.1);
-      border-radius: 24px;
+      border-radius: 14px;
       text-align: center;
       border: 0;
       &:hover {
@@ -1396,7 +1443,7 @@
     .claim_btn {
       background: #121212;
       box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.1);
-      border-radius: 24px;
+      border-radius: 14px;
       &:hover {
         background-color: #22292f;
       }
@@ -1435,8 +1482,32 @@
 }
 @media #{$xsWidth} {
   .farm_box {
-    min-width: 350px;
-    background: #fff;
+    width: 100%;
+    background-color: #4ed3ff;
+    background-image: url(../../assets/image/cloud_bg.png);
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    padding-top: 104px;
+    margin-top: 65px;
+    > img {
+      width: 335px;
+      height: 121px;
+      margin: 0 auto;
+    }
+    > p {
+      font-size: 16px;
+      font-family: Montserrat-Bold, Montserrat;
+      font-weight: bold;
+      color: #ffffff;
+      line-height: 30px;
+      text-align: center;
+    }
+    .farm_box_main {
+      min-height: calc(100% - 80px);
+    }
+    .footer {
+      position: relative;
+    }
   }
   .farm_index {
     display: flex;
@@ -1448,12 +1519,31 @@
     width: 100%;
     &_card {
       position: relative;
-      padding: 42px 30px 15px;
+      padding: 42px 30px 40px;
       margin-top: 44px;
       width: 335px;
       //height: 476px;
       background: #e0f8e3;
-      border-radius: 20px;
+      background: linear-gradient(
+        180deg,
+        #ffffff 0%,
+        rgba(255, 255, 255, 0.5) 100%
+      );
+      box-shadow: inset -3px 3px 30px 0px #00c57b;
+      border: 1px solid #00c57b;
+      border-radius: 5em/5em;
+      &::before {
+        width: 140px;
+        height: 140px;
+        position: absolute;
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        right: 15px;
+        top: 220px;
+        content: "";
+        display: block;
+        background-image: url(../../assets/image/heco_bg@2x.png);
+      }
       &:after {
         content: "";
         position: absolute;
@@ -1496,7 +1586,8 @@
       }
     }
     &_card_56 {
-      background: #fff8e0;
+      box-shadow: inset -3px 3px 30px 0px #efb90b;
+      border: 1px solid #efb90b;
       .farm_index_card_chainId_box {
         border-top: 62px solid #ffeeb9;
         border-bottom: 62px solid transparent;
@@ -1505,6 +1596,9 @@
           background: url("../../assets/icon/BSC@2x.png") no-repeat;
           background-size: 100% 100%;
         }
+      }
+      &::before {
+        background-image: url(../../assets/image/BSC_bg@2x.png);
       }
     }
     &_card_137 {
@@ -1518,19 +1612,20 @@
           background-size: 100% 100%;
         }
       }
+      &::before {
+        background-image: url(../../assets/image/polygon_bg@2x.png);
+      }
     }
     .PAUL-USDT:after {
       background: url("../icon/farm/PAUL-HT@2x.png") no-repeat;
       background-size: 100% 100%;
     }
     .WAR:after {
-      width: 50px;
-      background: url("../icon/WAR@2x.png") no-repeat;
+      background: url("../icon/farm/WAR@2x.png") no-repeat;
       background-size: 100% 100%;
     }
     .PLUT:after {
-      width: 50px;
-      background: url("../icon/PLUT.png") no-repeat;
+      background: url("../icon/farm/PLUT.png") no-repeat;
       background-size: 100% 100%;
     }
     .WAR-BUSD:after {
@@ -1543,7 +1638,7 @@
     }
     .xNFT:after {
       background: url("../icon/farm/X_NFT.png") no-repeat;
-      background-size: 50px 50px;
+      background-size: 100% 100%;
     }
     &_coming {
       background: #f2f0eb;
@@ -1778,7 +1873,7 @@
       color: #ffffff;
       background: #0f8c20;
       box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.1);
-      border-radius: 24px;
+      border-radius: 14px;
       text-align: center;
       border: 0;
       &:hover {
@@ -1809,7 +1904,7 @@
     .claim_btn {
       background: #121212;
       box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.1);
-      border-radius: 24px;
+      border-radius: 14px;
       &:hover {
         background-color: #22292f;
       }

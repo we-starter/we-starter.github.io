@@ -99,9 +99,6 @@ const Banner = (props) => {
         </h3>
         <div className='banner_text-title'>
           <div>
-            {/* <span>
-              <FormattedMessage id='bannerText1' /> :{' '}
-            </span>{' '} */}
             <a href='' className='huobi_logo'></a>
             <a href='' className='huobi_logo binance_logo'></a>
             <a href='' className='huobi_logo polygon_logo'></a>
@@ -131,13 +128,15 @@ const Banner = (props) => {
               <FormattedMessage id='certik' />
             </span>
           </a>
-          {/* <span>
-            <FormattedMessage id='bannerText1' /> :{' '}
-          </span>{' '} */}
-          <a href='#' className='huobi_logo'></a>
-          <a href='#' className='huobi_logo binance_logo'></a>
-          <a href='#' className='huobi_logo avalanche_logo'></a>
-          <a href='#' className='huobi_logo polygon_logo'></a>
+          <div>
+            <a href='#' className='huobi_logo'></a>
+            <a href='#' className='huobi_logo binance_logo'></a>
+          </div>
+          <div>
+            <a href='#' className='huobi_logo avalanche_logo'></a>
+            <a href='#' className='huobi_logo polygon_logo'></a>
+          </div>
+
         </div>
         {/* <ul className='banner_svg__links'>
           <li>

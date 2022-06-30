@@ -320,7 +320,6 @@
       height: 60px;
       line-height: 60px;
       border-bottom: 4px solid #e7f4ef;
-
       a {
         font-family: Montserrat-Medium, Montserrat;
         font-weight: 500;
@@ -1002,6 +1001,67 @@
     // height: 100%;
     min-height: 100%;
     background-color: #fff;
+    padding-top: 80px;
+  }
+  .pool_back {
+    width: 100%;
+    padding-left: 20px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    > a {
+      font-size: 14px;
+      font-family: Montserrat-Bold, Montserrat;
+      font-weight: bold;
+      color: #03a678;
+      line-height: 18px;
+    }
+  }
+  .pool_info {
+    width: 100%;
+    padding: 0 0 0 20px;
+    margin: 20px auto 0;
+    display: flex;
+    flex-direction: column;
+    > img {
+      width: 82px;
+      height: 82px;
+    }
+    > div {
+      > div {
+        font-size: 24px;
+        font-family: Montserrat-SemiBold, Montserrat;
+        font-weight: 600;
+        color: #000000;
+        line-height: 58px;
+        > span {
+          min-width: 81px;
+          padding: 0 10px;
+          height: 35px;
+          background: rgba(0, 197, 123, 0.2);
+          border-radius: 14px;
+          font-size: 20px;
+          font-family: Montserrat-Regular, Montserrat;
+          color: #00c57b;
+          line-height: 24px;
+          font-weight: 400;
+          margin-left: 10px;
+        }
+      }
+      > p {
+        word-break: break-word;
+        font-size: 20px;
+        font-family: Montserrat-Bold, Montserrat;
+        font-weight: bold;
+        color: #00c57b;
+        line-height: 24px;
+        > svg {
+          margin-left: 4px;
+          display: inline-block;
+          transform: translateY(5px);
+        }
+      }
+    }
   }
   .pools_detail {
     padding-bottom: 40px;
@@ -1040,6 +1100,15 @@
       background: #f2f0eb;
       &:hover {
         color: #fff;
+      }
+      &:nth-of-type(1) {
+        background: #00c57b;
+      }
+      &:nth-of-type(2) {
+        background: #ffffff;
+        border-radius: 23px;
+        border: 3px solid #00c57b;
+        color: #00c57b;
       }
       &:last-child {
         margin-left: 24px;
@@ -1100,11 +1169,18 @@
     &_record {
       position: relative;
       margin: 30px auto 20px;
-      padding: 0 18px 12px;
-      width: 320px;
+      min-width: 320px;
       min-height: 164px;
-      background: #f2f0eb;
       border-radius: 10px;
+      padding: 0 20px;
+      &_wrap {
+        width: 100%;
+        min-height: 171px;
+        background: #ffffff;
+        box-shadow: 6px 6px 0px 0px #e7f4ef;
+        border: 4px solid #e7f4ef;
+        border-radius: 14px;
+      }
       .mask_layer {
         display: flex;
         justify-content: center;
@@ -1128,10 +1204,13 @@
     }
     &_record_tab {
       display: flex;
+      padding-left: 30px;
+      border-bottom: 4px solid #e7f4ef;
+      box-sizing: content-box;
       a {
         position: relative;
-        margin: 0 36px 18px 0;
-        height: 60px;
+        margin: 0 36px 0 0;
+        height: 48px;
         display: flex;
         align-items: center;
         font-size: 14px;
@@ -1139,33 +1218,34 @@
         color: #7a7f82;
         line-height: 20px;
         &:hover {
-          color: #0f8c20;
+          color: #00c57b;
           &:after {
             position: absolute;
             content: "";
-            bottom: 0;
+            bottom: -4px;
             left: 0;
             width: 100%;
             height: 4px;
-            background: #0f8c20;
+            background: #00c57b;
           }
         }
       }
       a.active {
-        color: #0f8c20;
+        color: #00c57b;
         &:after {
           position: absolute;
           content: "";
-          bottom: 0;
+          bottom: -4px;
           left: 0;
           width: 100%;
           height: 4px;
-          background: #0f8c20;
+          background: #00c57b;
         }
       }
     }
     &_record_title_h5 {
       width: 100%;
+      padding-left: 30px;
       .pools_detail_record_title_val {
         margin-bottom: 0;
         font-size: 12px;
@@ -1260,27 +1340,30 @@
       }
     }
     &_content {
-      width: 320px;
+      min-width: 320px;
       margin: 0 auto;
+      padding: 0 20px;
     }
     &_content_tab {
       height: 60px;
       line-height: 60px;
-      border-bottom: 2px solid #ebe9e3;
+      border-bottom: 4px solid #e7f4ef;
       a {
+        font-family: Montserrat-Medium, Montserrat;
+        font-weight: 500;
+        color: #4f4f4f;
+        line-height: 60px;
         position: relative;
         display: inline-block;
-        font-size: 14px;
-        font-weight: 500;
-        color: #7a7f82;
+        font-size: 16px;
         &:last-child {
           margin-left: 40px;
         }
         &:hover {
-          color: #7a7f82;
+          color: #00c57b;
         }
         &.active {
-          color: #22292f;
+          color: #00c57b;
           &:after {
             content: "";
             position: absolute;
@@ -1288,7 +1371,7 @@
             bottom: 0;
             width: 100%;
             height: 4px;
-            background-color: #0f8c20;
+            background-color: #00c57b;
           }
         }
       }
@@ -1299,7 +1382,7 @@
     &_table {
       width: 100%;
       border-radius: 5px;
-      border: 1px solid #ebe9e3;
+      border: 1px solid #e7f4ef;
       table-layout: fixed;
       word-break: break-all;
       thead {
@@ -1315,19 +1398,19 @@
         }
       }
       tr {
-        border-bottom: 1px solid #ebe9e3;
+        border-bottom: 1px solid #e7f4ef;
         th {
           padding: 0 16px 0 10px;
           font-size: 14px;
           font-weight: bold;
-          color: #22292f;
+          color: #000000;
           line-height: 18px;
           text-align: left;
         }
         td {
           padding: 0 16px 0 10px;
           font-size: 14px;
-          color: #7a7f82;
+          color: #4f4f4f;
           line-height: 18px;
           p {
             display: flex;
@@ -1439,6 +1522,67 @@
     // height: 100%;
     min-height: 100%;
     background-color: #fff;
+    padding-top: 80px;
+  }
+  .pool_back {
+    width: 100%;
+    padding-left: 20px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    > a {
+      font-size: 14px;
+      font-family: Montserrat-Bold, Montserrat;
+      font-weight: bold;
+      color: #03a678;
+      line-height: 18px;
+    }
+  }
+  .pool_info {
+    width: 100%;
+    padding: 0 0 0 20px;
+    margin: 20px auto 0;
+    display: flex;
+    flex-direction: column;
+    > img {
+      width: 82px;
+      height: 82px;
+    }
+    > div {
+      > div {
+        font-size: 24px;
+        font-family: Montserrat-SemiBold, Montserrat;
+        font-weight: 600;
+        color: #000000;
+        line-height: 58px;
+        > span {
+          min-width: 81px;
+          padding: 0 10px;
+          height: 35px;
+          background: rgba(0, 197, 123, 0.2);
+          border-radius: 14px;
+          font-size: 20px;
+          font-family: Montserrat-Regular, Montserrat;
+          color: #00c57b;
+          line-height: 24px;
+          font-weight: 400;
+          margin-left: 10px;
+        }
+      }
+      > p {
+        word-break: break-word;
+        font-size: 20px;
+        font-family: Montserrat-Bold, Montserrat;
+        font-weight: bold;
+        color: #00c57b;
+        line-height: 24px;
+        > svg {
+          margin-left: 4px;
+          display: inline-block;
+          transform: translateY(5px);
+        }
+      }
+    }
   }
   .pools_detail {
     padding-bottom: 40px;
@@ -1477,6 +1621,15 @@
       background: #f2f0eb;
       &:hover {
         color: #fff;
+      }
+      &:nth-of-type(1) {
+        background: #00c57b;
+      }
+      &:nth-of-type(2) {
+        background: #ffffff;
+        border-radius: 23px;
+        border: 3px solid #00c57b;
+        color: #00c57b;
       }
       &:last-child {
         margin-left: 24px;
@@ -1537,11 +1690,18 @@
     &_record {
       position: relative;
       margin: 30px auto 20px;
-      padding: 0 18px 12px;
-      width: 320px;
+      min-width: 320px;
       min-height: 164px;
-      background: #f2f0eb;
       border-radius: 10px;
+      padding: 0 20px;
+      &_wrap {
+        width: 100%;
+        min-height: 171px;
+        background: #ffffff;
+        box-shadow: 6px 6px 0px 0px #e7f4ef;
+        border: 4px solid #e7f4ef;
+        border-radius: 14px;
+      }
       .mask_layer {
         display: flex;
         justify-content: center;
@@ -1565,10 +1725,13 @@
     }
     &_record_tab {
       display: flex;
+      padding-left: 30px;
+      border-bottom: 4px solid #e7f4ef;
+      box-sizing: content-box;
       a {
         position: relative;
-        margin: 0 36px 18px 0;
-        height: 60px;
+        margin: 0 36px 0 0;
+        height: 48px;
         display: flex;
         align-items: center;
         font-size: 14px;
@@ -1576,33 +1739,34 @@
         color: #7a7f82;
         line-height: 20px;
         &:hover {
-          color: #0f8c20;
+          color: #00c57b;
           &:after {
             position: absolute;
             content: "";
-            bottom: 0;
+            bottom: -4px;
             left: 0;
             width: 100%;
             height: 4px;
-            background: #0f8c20;
+            background: #00c57b;
           }
         }
       }
       a.active {
-        color: #0f8c20;
+        color: #00c57b;
         &:after {
           position: absolute;
           content: "";
-          bottom: 0;
+          bottom: -4px;
           left: 0;
           width: 100%;
           height: 4px;
-          background: #0f8c20;
+          background: #00c57b;
         }
       }
     }
     &_record_title_h5 {
       width: 100%;
+      padding-left: 30px;
       .pools_detail_record_title_val {
         margin-bottom: 0;
         font-size: 12px;
@@ -1697,27 +1861,30 @@
       }
     }
     &_content {
-      width: 320px;
+      min-width: 320px;
       margin: 0 auto;
+      padding: 0 20px;
     }
     &_content_tab {
       height: 60px;
       line-height: 60px;
-      border-bottom: 2px solid #ebe9e3;
+      border-bottom: 4px solid #e7f4ef;
       a {
+        font-family: Montserrat-Medium, Montserrat;
+        font-weight: 500;
+        color: #4f4f4f;
+        line-height: 60px;
         position: relative;
         display: inline-block;
-        font-size: 14px;
-        font-weight: 500;
-        color: #7a7f82;
+        font-size: 16px;
         &:last-child {
           margin-left: 40px;
         }
         &:hover {
-          color: #7a7f82;
+          color: #00c57b;
         }
         &.active {
-          color: #22292f;
+          color: #00c57b;
           &:after {
             content: "";
             position: absolute;
@@ -1725,7 +1892,7 @@
             bottom: 0;
             width: 100%;
             height: 4px;
-            background-color: #0f8c20;
+            background-color: #00c57b;
           }
         }
       }
@@ -1736,7 +1903,7 @@
     &_table {
       width: 100%;
       border-radius: 5px;
-      border: 1px solid #ebe9e3;
+      border: 1px solid #e7f4ef;
       table-layout: fixed;
       word-break: break-all;
       thead {
@@ -1752,19 +1919,19 @@
         }
       }
       tr {
-        border-bottom: 1px solid #ebe9e3;
+        border-bottom: 1px solid #e7f4ef;
         th {
           padding: 0 16px 0 10px;
           font-size: 14px;
           font-weight: bold;
-          color: #22292f;
+          color: #000000;
           line-height: 18px;
           text-align: left;
         }
         td {
           padding: 0 16px 0 10px;
           font-size: 14px;
-          color: #7a7f82;
+          color: #4f4f4f;
           line-height: 18px;
           p {
             display: flex;
@@ -1831,8 +1998,8 @@
           color: #0f8c20;
         }
         img {
-          display: inline-block;
           margin-right: 8px;
+          display: inline-block;
           width: 24px;
           height: 24px;
         }

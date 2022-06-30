@@ -24,6 +24,7 @@ import Banner from '../../components/banner/Banner'
 import LaunchPad from './launchpad'
 import FarmBanner from '../../components/banner/FarmBanner'
 import Footer from '../../components/Footer'
+import { Link } from 'react-router-dom'
 
 export function NftCardTipContent({ nft }) {
   if (!nft) {
@@ -458,7 +459,7 @@ const PoolsIndex = (props) => {
       <div className='pools-example' id='position'>
         <div className='pools-example_title'>
           <h3>Project</h3>
-          <a href='/pools'>View All</a>
+          <Link to='/pools'>View All</Link>
         </div>
         <div className='pools-example_card'>
           {listData &&

@@ -236,7 +236,18 @@
       // top: 21px;
       // right: 65px;
     }
-
+    @media #{$smWidth} {
+      border-radius: 14px;
+      // position: absolute;
+      // top: 21px;
+      // right: 65px;
+    }
+    @media #{$xsWidth} {
+      border-radius: 14px;
+      // position: absolute;
+      // top: 21px;
+      // right: 65px;
+    }
     @media (max-width: 470px) {
       right: unset;
       border-radius: 14px;

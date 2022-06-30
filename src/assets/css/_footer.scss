@@ -57,7 +57,7 @@
 }
 @media #{$mdWidth} {
   .footer {
-    display: none;
+    // display: none;
   }
   .footer_wrap {
     width: 100%;
@@ -92,7 +92,7 @@
     justify-content: space-between;
     bottom: 0;
     width: 100%;
-    display: none;
+    // display: none;
 
     &__links {
       display: flex;
@@ -125,7 +125,7 @@
     justify-content: space-between;
     bottom: 0;
     width: 100%;
-    display: none;
+    // display: none;
 
     &__links {
       display: flex;
