@@ -16,6 +16,7 @@ import Icon4 from '../../assets/icon/icon4@2x.png'
 import BlackRight from '../../assets/icon/black-right.svg'
 import CopyIcon from '../../assets/icon/file-copy-line.svg'
 import AddressIMG from '../../assets/icon/address_img.png'
+import BannerIMG from '../../assets/image/banner-img.png'
 import BigNumber from 'bignumber.js'
 import { HANDLE_WALLET_MODAL } from '../../const'
 import {
@@ -94,9 +95,21 @@ const Banner = (props) => {
   return (
     <div className='banner-box'>
       <div className='banner'>
-        <h3 className='banner_text'>
-          <FormattedMessage id='bannerTitle1' />
-        </h3>
+        <div className='banner_text'>
+          <div>
+            <h3>
+              <FormattedMessage id='bannerTitle1' />
+            </h3>
+            <p className='banner_dec'>
+              <FormattedMessage id='bannerContent1' />
+              <br />
+              {state.locale == 'zh' && <FormattedMessage id='bannerContent2' />}
+            </p>
+          </div>
+
+          <img src={BannerIMG} />
+
+        </div>
         <div className='banner_text-title'>
           <div>
             <a href='' className='huobi_logo'></a>
@@ -111,15 +124,6 @@ const Banner = (props) => {
               </span>
             </a>
           </div>
-        </div>
-        {/* <div className='banner_small_img'>缺少banner图</div> */}
-        <div className='banner_text_img'>
-          <p className='banner_dec'>
-            <FormattedMessage id='bannerContent1' />
-            <br />
-            {state.locale == 'zh' && <FormattedMessage id='bannerContent2' />}
-          </p>
-          {/* <div className='banner_big_img'>缺少banner图</div> */}
         </div>
         <div className='banner_link'>
           <a href={WeStarterPDF} target='_blank' className='certik'>
