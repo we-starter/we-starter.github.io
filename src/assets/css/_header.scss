@@ -41,20 +41,20 @@
       font-weight: 600;
       color: #22292f;
     }
-    @media #{$mdWidth} {
-      display: none;
-      position: absolute;
-      top: 22px;
-      right: 218px;
-    }
+    // @media #{$mdWidth} {
+    //   display: none;
+    //   position: absolute;
+    //   top: 22px;
+    //   right: 218px;
+    // }
 
     @media (max-width: 470px) {
       right: unset;
       // left: 20px;
     }
-    @media #{$smWidth} {
-      display: none;
-    }
+    // @media #{$smWidth} {
+    //   display: none;
+    // }
     @media #{$xsWidth} {
       display: none;
     }
@@ -85,7 +85,7 @@
     // height: auto;
     // min-width: 1080px;
     .header-network {
-      display: none;
+      // display: none;
     }
   }
   @media #{$smWidth} {
@@ -94,7 +94,7 @@
     background: transparent;
     height: auto;
     .header-network {
-      display: none;
+      // display: none;
     }
   }
   @media #{$xsWidth} {
@@ -226,18 +226,14 @@
     line-height: 18px;
     border-radius: 0px 14px 14px 0px;
     @media #{$desktop} {
-      border-radius: 0px 14px 14px 0px;
     }
 
     @media #{$mdWidth} {
-      width: 153px;
-      border-radius: 14px;
       // position: absolute;
       // top: 21px;
       // right: 65px;
     }
     @media #{$smWidth} {
-      border-radius: 14px;
       // position: absolute;
       // top: 21px;
       // right: 65px;
@@ -255,7 +251,6 @@
     }
 
     @media (max-width: 370px) {
-      width: 143px;
       border-radius: 14px;
     }
 
@@ -310,7 +305,9 @@
     align-items: center;
     height: 100%;
     min-height: 64px;
-
+    @media screen and (max-width: 450px) {
+      justify-content: space-between;
+    }
     @media #{$mdWidth} {
       display: flex;
       min-width: 1080px;
@@ -434,12 +431,15 @@
       margin-left: auto;
       margin-right: 0;
       @media #{$mdWidth} {
-        display: block;
+        display: flex;
+        align-items: center;
         .language {
           display: none !important;
         }
       }
       @media #{$smWidth} {
+        display: flex;
+        align-items: center;
         .language {
           display: none !important;
         }
@@ -449,7 +449,13 @@
           display: none !important;
         }
       }
-
+      @media screen and (max-width: 450px) {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-left: auto;
+        display: none;
+      }
       a {
         margin-right: 30px;
         font-size: 14px;

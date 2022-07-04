@@ -3,7 +3,7 @@
   width: 100%;
   height: 100vh;
   position: fixed;
-  background: rgba(34, 41, 47, 0.6);
+  backdrop-filter: blur(10px);
   left: 0;
   top: 0;
   touch-action: none;
@@ -12,24 +12,31 @@
     display: flex;
     align-items: center;
   }
-  &_left {
-    width: 20%;
-    height: 100%;
-  }
   &_right {
     top: 0;
-    width: 80%;
+    width: 100%;
     height: 100%;
-    background: #f2f0eb;
     position: absolute;
     animation: mask_right 1s;
     right: 0;
+    background: rgba(255, 255, 255, 0.8);
+  }
+  &_title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    > svg {
+      width: 129px;
+    }
+    > img {
+      width: 30px;
+    }
   }
   &_download-pdf {
     display: inline-block;
     width: 24px;
     height: 24px;
-    background: url('../icon/file-shield-fill@2x.png') no-repeat;
+    background: url("../icon/file-shield-fill@2x.png") no-repeat;
     background-size: 100% 100%;
   }
   &_guide {
@@ -62,7 +69,7 @@
       height: 22px;
       //background: url('../icon/WAR_logo@2x.png') no-repeat;
       //background-size: 100% 100%;
-      img{
+      img {
         width: 100%;
         height: 100%;
       }
@@ -75,9 +82,9 @@
     }
   }
   &_language {
-    position: absolute;
-    bottom: 18px;
-    left: 28px;
+    // position: absolute;
+    // bottom: 18px;
+    // left: 28px;
   }
   &_header-account {
     display: flex;
@@ -133,17 +140,19 @@
     }
   }
   &_nav {
-    padding: 60px 40px 40px;
+    padding: 34px 20px 0 35px;
     width: 100%;
     height: 100%;
   }
   &_list {
-    padding-bottom: 25px;
+    // padding-bottom: 25px;
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: baseline;
-    border-bottom: 1px solid #ebe9e3;
+    // border-bottom: 1px solid #ebe9e3;
+    margin-bottom: 0;
+    padding-left: 15px;
   }
   &_item {
     margin: 15px 0;
@@ -163,7 +172,7 @@
     right: -34px;
     width: 46px;
     height: 26px;
-    background: url('../icon/HOT@2x.png') no-repeat;
+    background: url("../icon/HOT@2x.png") no-repeat;
     background-size: 100% 100%;
   }
   .active {

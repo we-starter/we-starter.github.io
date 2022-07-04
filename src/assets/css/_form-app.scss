@@ -649,11 +649,16 @@
 }
 
 .link-wallet {
-  width: 720px !important;
   background: #d6ebe0;
   border-radius: 14px;
   padding-left: 0 !important;
   padding-right: 0 !important;
+  @media screen and(min-width:450px) {
+    width: 720px !important;
+  }
+  @media screen and (max-width: 450px) {
+    width: 100% !important;
+  }
   .form-app__inner__header {
     max-width: 100%;
     font-size: 18px;
@@ -671,9 +676,16 @@
     line-height: 40px;
   }
   .choose-network {
-    display: grid;
-    grid-template-columns: repeat(2, 360px);
-    place-content: space-evenly;
+    @media screen and(min-width:450px) {
+      display: grid;
+      grid-template-columns: repeat(2, 360px);
+      place-content: space-evenly;
+    }
+    @media screen and (max-width: 450px) {
+      display: grid;
+      grid-template-columns: repeat(2, 160px);
+      place-content: space-evenly;
+    }
     p {
       width: 100%;
       height: 80px;

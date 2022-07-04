@@ -28,7 +28,7 @@ import VoteApply from './pages/pools/VoteApply'
 import Migrate from './pages/pools/migrate'
 import ScrollToTop from './components/ScrollTop'
 import Intl from './locale/intl'
-
+import Connect from './components/connect'
 function getLibrary(provider) {
   const library = new Web3Provider(provider)
   library.pollingInterval = 8000
@@ -76,6 +76,7 @@ function App() {
               <Route exact path='/application/vote' component={Vote}></Route>
               <Route exact path='/application/apply' component={VoteApply}></Route>
             </Switch>
+            <Connect />
             <InitPage />
           </Router>
         </Intl>
