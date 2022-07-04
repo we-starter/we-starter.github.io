@@ -79,7 +79,7 @@ export const Header = () => {
                 <li className='menu__item'>
                   <NavLink
                     exact
-                    to='/'
+                    to='/pools'
                     className='menu__link'
                     onClick={handleMenuItemClick}
                   >
