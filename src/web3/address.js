@@ -174,7 +174,7 @@ export const BURN_SWAP_S_ADDRESS = '0x81d82a35253B982E755c4D7d6AADB6463305B188'
 
 export function RPC_URLS (chainId) {
     return {
-      [ChainId.HECO]: 'https://http-mainnet-node.huobichain.com',
+      [ChainId.HECO]: 'https://http-mainnet.hecochain.com/',
       [ChainId.BSC]: 'https://bsc-dataseed.binance.org/',
       [ChainId.MATIC]: 'https://rpc-mainnet.maticvigil.com',
       [ChainId.LOCALHOST]: 'http://localhost:8545',
