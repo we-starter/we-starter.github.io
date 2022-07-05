@@ -288,6 +288,23 @@
       margin-top: 18px;
       > img {
         width: 165px;
+        animation-timing-function: ease-in-out;
+        animation-iteration-count: infinite;
+        animation-name: floatAni;
+        animation-duration: 6s;
+        transform: translate(-20px, 20px);
+        @keyframes floatAni {
+          0% {
+            transform: translate(-20px, 20px);
+          }
+
+          50% {
+            transform: translate(-0px);
+          }
+          100% {
+            transform: translate(-20px, 20px);
+          }
+        }
       }
     }
     &_address {
