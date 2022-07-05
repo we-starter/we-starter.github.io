@@ -1,11 +1,11 @@
-import React, {useState} from "react";
-import {FormattedMessage} from "react-intl";
+import React, { useState } from "react";
+import { FormattedMessage } from "react-intl";
 import cs from "classnames";
-import {Checkbox} from "antd";
+import { Checkbox } from "antd";
 
 export default function AdjustmentTipsPopup() {
 
-  const [showTips, setShowTips] = useState(()=>{
+  const [showTips, setShowTips] = useState(() => {
     const isConfirm = localStorage.getItem('adjustment_tips')
     return !isConfirm
   })
@@ -14,7 +14,7 @@ export default function AdjustmentTipsPopup() {
     return null
   }
   const onConfirm = () => {
-    if (check){
+    if (check) {
       localStorage.setItem('adjustment_tips', '1')
       setShowTips(false)
     }
@@ -25,8 +25,8 @@ export default function AdjustmentTipsPopup() {
         <div className='modal'>
           <div className='modal__box'>
             <div className='farm_popup' action='/'>
-              <div className='form-app__inner deposit farm_popup_box'>
-                <div style={{padding: '20px 10px'}}>
+              <div className='form-app__inner deposit farm_popup_box' style={{ 'backgroundColor': '#d6ebe0' }}>
+                <div style={{ padding: '20px 10px' }}>
                   <p><FormattedMessage id='adjustmentTips1' /></p>
                   <p><FormattedMessage id='adjustmentTips2' /></p>
                   <p><FormattedMessage id='adjustmentTips3' /></p>

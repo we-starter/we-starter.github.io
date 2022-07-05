@@ -209,12 +209,31 @@
         font-size: 12px;
         font-weight: 400;
         color: #7a7f82;
+        font-family: Montserrat-SemiBold, Montserrat;
       }
+    }
+    .flexStyle {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
     }
     &_card {
       display: grid;
       grid-template-columns: repeat(3, 380px);
       place-content: space-between;
+      .border_56 {
+        border: 1px solid #f7ecc9;
+      }
+      .border_128 {
+        border: 1px solid #ccf3e5;
+      }
+      .border_137 {
+        border: 1px solid #e1d5f5;
+      }
+      .border_43114 {
+        border: 1px solid #f5d4d4;
+      }
       .pools-type_card_box {
         margin-top: 30px;
         box-sizing: border-box;
@@ -225,7 +244,6 @@
         height: 420px;
         background: #f9f9f9;
         border-radius: 14px;
-        border: 1px solid #f7ecc9;
         overflow: hidden;
         .type_private_box_t {
           width: 100%;
@@ -245,7 +263,10 @@
             padding: 0 0 0 20px;
             position: absolute;
             top: -52px;
+
             &_l {
+              background: #fff;
+              border-radius: 12px;
               > img {
                 width: 80px;
                 height: 80px;
@@ -618,6 +639,7 @@
       font-family: Montserrat-ExtraBold, Montserrat;
       &:hover {
         background: rgba(0, 197, 123, 0.5);
+        color: #03a678 !important;
       }
     }
     &_bsc_enter {
@@ -646,7 +668,7 @@
       color: #fff;
       background: #b6b9bc;
       &:hover {
-        color: #fff;
+        color: #fff !important;
         background: #b6b9bc;
       }
     }
@@ -855,6 +877,18 @@
       display: grid;
       grid-template-columns: repeat(3, 340px);
       place-content: space-between;
+      .border_56 {
+        border: 1px solid #f7ecc9;
+      }
+      .border_128 {
+        border: 1px solid #ccf3e5;
+      }
+      .border_137 {
+        border: 1px solid #e1d5f5;
+      }
+      .border_43114 {
+        border: 1px solid #f5d4d4;
+      }
       .pools-type_card_box {
         margin-top: 30px;
         box-sizing: border-box;
@@ -1258,6 +1292,7 @@
       font-family: Montserrat-ExtraBold, Montserrat;
       &:hover {
         background: rgba(0, 197, 123, 0.5);
+        color: #03a678 !important;
       }
     }
     &_bsc_enter {
@@ -1286,7 +1321,7 @@
       color: #fff;
       background: #b6b9bc;
       &:hover {
-        color: #fff;
+        color: #fff !important;
         background: #b6b9bc;
       }
     }
@@ -1494,6 +1529,18 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      .border_56 {
+        border: 1px solid #f7ecc9;
+      }
+      .border_128 {
+        border: 1px solid #ccf3e5;
+      }
+      .border_137 {
+        border: 1px solid #e1d5f5;
+      }
+      .border_43114 {
+        border: 1px solid #f5d4d4;
+      }
       .pools-type_card_box {
         margin-top: 30px;
         box-sizing: border-box;
@@ -1898,6 +1945,7 @@
       font-family: Montserrat-ExtraBold, Montserrat;
       &:hover {
         background: rgba(0, 197, 123, 0.5);
+        color: #03a678 !important;
       }
     }
     &_bsc_enter {
@@ -1926,7 +1974,7 @@
       color: #fff;
       background: #b6b9bc;
       &:hover {
-        color: #fff;
+        color: #fff !important;
         background: #b6b9bc;
       }
     }
@@ -2135,6 +2183,18 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      .border_56 {
+        border: 1px solid #f7ecc9;
+      }
+      .border_128 {
+        border: 1px solid #ccf3e5;
+      }
+      .border_137 {
+        border: 1px solid #e1d5f5;
+      }
+      .border_43114 {
+        border: 1px solid #f5d4d4;
+      }
       .pools-type_card_box {
         margin-top: 30px;
         box-sizing: border-box;
@@ -2538,6 +2598,7 @@
       font-family: Montserrat-ExtraBold, Montserrat;
       &:hover {
         background: rgba(0, 197, 123, 0.5);
+        color: #03a678 !important;
       }
     }
     &_bsc_enter {
@@ -2566,7 +2627,7 @@
       color: #fff;
       background: #b6b9bc;
       &:hover {
-        color: #fff;
+        color: #fff !important;
         background: #b6b9bc;
       }
     }

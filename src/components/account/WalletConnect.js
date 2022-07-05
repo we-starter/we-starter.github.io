@@ -13,10 +13,10 @@ import ONTO from '../../assets/icon/wallet-onto@2x.png'
 import walletConnect from '../../assets/icon/wallet-connect@2x.png'
 
 import close from '../../assets/icon/close.png'
-import BSC from '../../assets/icon/BSC@2x.png'
-import HECO from '../../assets/icon/HECO@2x.png'
-import AVALANCHE from '../../assets/icon/Avalanche@2x.png'
-import MATIC from '../../assets/icon/MATIC@2x.png'
+import BSC from '../../assets/icon/BSC_CIRCLE@2x.png'
+import HECO from '../../assets/icon/HECO_CIRCLE@2x.png'
+import MATIC from '../../assets/icon/MATIC_CIRCLE@2x.png'
+import AVALANCHE from '../../assets/icon/AVALANCHE_CIRCLE@2x.png'
 import { changeNetwork, injected, useConnectWallet, walletConnector } from "../../connectors";
 import { ChainId } from "../../web3/address";
 import Web3 from "web3";

@@ -245,7 +245,8 @@ const PoolsIndex = (props) => {
           ((pool && pool.underlying.symbol === 'FIX') || type === 1) &&
           'pools-type_private',
           pool && pool.is_coming && ('pools-type_hover_style_' + pool.networkId),
-          tabFlag === 3 && 'pools-type_flashPool'
+          tabFlag === 3 && 'pools-type_flashPool',
+          'border_' + pool.networkId
         )}
         onClick={(e) =>
           goFinance(e, pool && pool.is_coming, pool && pool.link_url)
@@ -544,8 +545,8 @@ const PoolsIndex = (props) => {
                   return renderCard(pool, index)
                 })}
               {tabFlag === 1 && listData.length < 3 && [1, 2, 3].map(noLogin)}
-              {[2].includes(tabFlag) && !listData.length && noData()}
             </div>
+            {[2].includes(tabFlag) && !listData.length && noData()}
           </div>
         </div>
       </div>

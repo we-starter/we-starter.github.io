@@ -273,7 +273,7 @@ a[href^="tel"],
 .language {
   border-radius: 5px;
   font-size: 14px;
-  font-family: HelveticaNeue;
+  font-family: Montserrat-SemiBold, Montserrat;
   color: #22292f;
   padding: 8px;
   cursor: pointer;
@@ -292,11 +292,10 @@ a[href^="tel"],
     .language-items {
       display: none;
       flex-direction: column;
-      background: #f2f0eb;
+      background: #fff;
       box-shadow: 0px 0px 6px 0px rgba(122, 127, 130, 0.2);
       border-radius: 5px 5px 0px 0px;
       padding: 12px 10px;
-      min-height: 80px;
       right: 50%;
       position: absolute;
       bottom: 80%;
@@ -315,9 +314,10 @@ a[href^="tel"],
         border-right: 7px solid transparent;
       }
       p {
+        font-family: HelveticaNeue;
         color: #22292f;
         width: 100px;
-        height: 30px;
+        height: 24px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -325,8 +325,8 @@ a[href^="tel"],
         padding: 5px 0;
         text-align: center;
         &:hover {
-          background-color: rgba(212, 233, 226, 1);
-          border-radius: 5px;
+          background: #e7f4ef;
+          border-radius: 12px;
         }
       }
     }
@@ -334,7 +334,8 @@ a[href^="tel"],
 
   &:hover {
     display: flex;
-    background: #f2f0eb;
+    background: #e7f4ef;
+    border-radius: 14px;
     .language-items {
       display: flex;
     }

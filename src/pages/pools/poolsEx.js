@@ -25,6 +25,10 @@ import LaunchPad from './launchpad'
 import FarmBanner from '../../components/banner/FarmBanner'
 import Footer from '../../components/Footer'
 import { Link } from 'react-router-dom'
+import BSC from '../../assets/chain/binance.png'
+import HECO from '../../assets/chain/heco.png'
+import MATIC from '../../assets/chain/matic.png'
+import AVALANCHE from '../../assets/chain/avalanche.png'
 
 export function NftCardTipContent({ nft }) {
   if (!nft) {
@@ -250,7 +254,8 @@ const PoolsIndex = (props) => {
           ((pool && pool.underlying.symbol === 'FIX') || type === 1) &&
           'pools-example_private',
           pool && pool.is_coming && ('pools-type_hover_style_' + pool.networkId),
-          tabFlag === 3 && 'pools-type_flashPool'
+          tabFlag === 3 && 'pools-type_flashPool',
+          'border_' + pool.networkId
         )}
         onClick={(e) =>
           goFinance(e, pool && pool.is_coming, pool && pool.link_url)
@@ -282,8 +287,8 @@ const PoolsIndex = (props) => {
 
         </div>
         <div className='pools-example_card_box_b'>
-          {pool && pool.icon && <div className='pools-example_card_box_b_logo'><img src={pool.icon} /></div>}
-          {pool && <h3 className='pools-example_card_box_b_name'>{pool.name} POOL</h3>}
+          {pool && pool.icon && <div className='pools-example_card_box_b_logo'><div><img src={pool.icon} /></div></div>}
+          {pool && <div className={'pools-example_card_box_b_name'}><h3 >{pool.name} POOL</h3> <span className={'chain_' + pool.networkId} /></div>}
           <p className='pools-example_card_box_b_time'>
             {renderStatus(pool)}
             {(
@@ -375,7 +380,11 @@ const PoolsIndex = (props) => {
                 pool && pool.underlying.name
               )
             }}
-            className='pools-example_card_box_b_enter'
+            className={cs(
+              'pools-example_card_box_b_enter',
+              pool.networkId == ChainId.MATIC && 'pools-example_card_box_b_matic_enter',
+              pool.networkId == ChainId.BSC && 'pools-example_card_box_b_bsc_enter',
+              pool.networkId == ChainId.AVALANCHE && 'pools-example_card_box_b_avalanche_enter')}
           >
             Enter Pool
           </a>

@@ -42,6 +42,18 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      .border_56 {
+        border: 1px solid #f7ecc9;
+      }
+      .border_128 {
+        border: 1px solid #ccf3e5;
+      }
+      .border_137 {
+        border: 1px solid #e1d5f5;
+      }
+      .border_43114 {
+        border: 1px solid #f5d4d4;
+      }
       &_box {
         position: relative;
         overflow: hidden;
@@ -49,7 +61,6 @@
         height: 420px;
         background: #f9f9f9;
         border-radius: 14px;
-        border: 1px solid #ccf3e5;
         &_t {
           width: 100%;
           height: 210px;
@@ -72,24 +83,57 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            > img {
+            background: #fff;
+            > div {
+              border-radius: 6px;
+              overflow: hidden;
               width: 68px;
               height: 68px;
+              > img {
+                width: 100%;
+                height: 100%;
+              }
             }
           }
           &_name {
-            font-size: 20px;
-            font-family: Montserrat-Bold, Montserrat;
-            font-weight: bold;
-            color: #000000;
-            line-height: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            > h3 {
+              font-size: 20px;
+              font-family: Montserrat-Bold, Montserrat;
+              font-weight: bold;
+              color: #000000;
+              line-height: 24px;
+              margin-bottom: 0;
+            }
+            > span {
+              display: block;
+              width: 25px;
+              height: 25px;
+              background-repeat: no-repeat;
+              background-size: 100% 100%;
+            }
+            .chain_43114 {
+              background-image: url(../../assets/chain/avalanche.png);
+            }
+            .chain_56 {
+              background-image: url(../../assets/chain/binance.png);
+            }
+            .chain_128 {
+              background-image: url(../../assets/chain/heco.png);
+            }
+            .chain_137 {
+              background-image: url(../../assets/chain/matic.png);
+            }
           }
           &_time {
             position: absolute;
             top: 50%;
             transform: translateY(-23px);
             right: 0;
-            width: calc(380px - 100px);
+            width: calc(100% - 100px);
             height: 24px;
             background: rgba(255, 255, 255, 0.7);
             display: flex;
@@ -155,7 +199,41 @@
             color: #00c57b;
             line-height: 19px;
             &:hover {
-              color: #0f8c20;
+              background: rgba(0, 197, 123, 0.5);
+              color: #03a678 !important;
+            }
+          }
+          &_bsc_enter {
+            background: rgba(240, 185, 11, 0.2);
+            color: #f0b90b;
+            &:hover {
+              background: rgba(240, 185, 11, 0.5);
+              color: #cf9f06 !important;
+            }
+          }
+          &_matic_enter {
+            background: rgba(130, 71, 229, 0.2);
+            color: #8247e5;
+            &:hover {
+              color: #7835e9 !important;
+              background: rgba(130, 71, 229, 0.5);
+            }
+          }
+
+          &_avalanche_enter {
+            background: rgba(232, 65, 66, 0.2);
+            color: #e84142;
+            &:hover {
+              background: rgba(232, 65, 66, 0.5);
+              color: #ec292b !important;
+            }
+          }
+          &_disable_enter {
+            color: #fff;
+            background: #b6b9bc;
+            &:hover {
+              color: #fff !important;
+              background: #b6b9bc;
             }
           }
         }
@@ -199,6 +277,18 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      .border_56 {
+        border: 1px solid #f7ecc9;
+      }
+      .border_128 {
+        border: 1px solid #ccf3e5;
+      }
+      .border_137 {
+        border: 1px solid #e1d5f5;
+      }
+      .border_43114 {
+        border: 1px solid #f5d4d4;
+      }
       &_box {
         position: relative;
         overflow: hidden;
@@ -206,7 +296,6 @@
         height: 420px;
         background: #f9f9f9;
         border-radius: 14px;
-        border: 1px solid #ccf3e5;
         &_t {
           width: 100%;
           height: 210px;
@@ -229,24 +318,56 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            > img {
+            > div {
+              border-radius: 6px;
+              overflow: hidden;
               width: 68px;
               height: 68px;
+              > img {
+                width: 100%;
+                height: 100%;
+              }
             }
           }
           &_name {
-            font-size: 20px;
-            font-family: Montserrat-Bold, Montserrat;
-            font-weight: bold;
-            color: #000000;
-            line-height: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            > h3 {
+              font-size: 20px;
+              font-family: Montserrat-Bold, Montserrat;
+              font-weight: bold;
+              color: #000000;
+              line-height: 24px;
+              margin-bottom: 0;
+            }
+            > span {
+              display: block;
+              width: 25px;
+              height: 25px;
+              background-repeat: no-repeat;
+              background-size: 100% 100%;
+            }
+            .chain_43114 {
+              background-image: url(../../assets/chain/avalanche.png);
+            }
+            .chain_56 {
+              background-image: url(../../assets/chain/binance.png);
+            }
+            .chain_128 {
+              background-image: url(../../assets/chain/heco.png);
+            }
+            .chain_137 {
+              background-image: url(../../assets/chain/matic.png);
+            }
           }
           &_time {
             position: absolute;
             top: 50%;
             transform: translateY(-23px);
             right: 0;
-            width: calc(380px - 100px);
+            width: calc(100% - 100px);
             height: 24px;
             background: rgba(255, 255, 255, 0.7);
             display: flex;
@@ -312,7 +433,41 @@
             color: #00c57b;
             line-height: 19px;
             &:hover {
-              color: #0f8c20;
+              background: rgba(0, 197, 123, 0.5);
+              color: #03a678 !important;
+            }
+          }
+          &_bsc_enter {
+            background: rgba(240, 185, 11, 0.2);
+            color: #f0b90b;
+            &:hover {
+              background: rgba(240, 185, 11, 0.5);
+              color: #cf9f06 !important;
+            }
+          }
+          &_matic_enter {
+            background: rgba(130, 71, 229, 0.2);
+            color: #8247e5;
+            &:hover {
+              color: #7835e9 !important;
+              background: rgba(130, 71, 229, 0.5);
+            }
+          }
+
+          &_avalanche_enter {
+            background: rgba(232, 65, 66, 0.2);
+            color: #e84142;
+            &:hover {
+              background: rgba(232, 65, 66, 0.5);
+              color: #ec292b !important;
+            }
+          }
+          &_disable_enter {
+            color: #fff;
+            background: #b6b9bc;
+            &:hover {
+              color: #fff !important;
+              background: #b6b9bc;
             }
           }
         }
@@ -356,6 +511,18 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      .border_56 {
+        border: 1px solid #f7ecc9;
+      }
+      .border_128 {
+        border: 1px solid #ccf3e5;
+      }
+      .border_137 {
+        border: 1px solid #e1d5f5;
+      }
+      .border_43114 {
+        border: 1px solid #f5d4d4;
+      }
       &_box {
         position: relative;
         overflow: hidden;
@@ -363,7 +530,6 @@
         height: 420px;
         background: #f9f9f9;
         border-radius: 14px;
-        border: 1px solid #ccf3e5;
         margin-top: 20px;
         &_t {
           width: 100%;
@@ -387,24 +553,56 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            > img {
+            > div {
+              border-radius: 6px;
+              overflow: hidden;
               width: 68px;
               height: 68px;
+              > img {
+                width: 100%;
+                height: 100%;
+              }
             }
           }
           &_name {
-            font-size: 20px;
-            font-family: Montserrat-Bold, Montserrat;
-            font-weight: bold;
-            color: #000000;
-            line-height: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            > h3 {
+              font-size: 20px;
+              font-family: Montserrat-Bold, Montserrat;
+              font-weight: bold;
+              color: #000000;
+              line-height: 24px;
+              margin-bottom: 0;
+            }
+            > span {
+              display: block;
+              width: 25px;
+              height: 25px;
+              background-repeat: no-repeat;
+              background-size: 100% 100%;
+            }
+            .chain_43114 {
+              background-image: url(../../assets/chain/avalanche.png);
+            }
+            .chain_56 {
+              background-image: url(../../assets/chain/binance.png);
+            }
+            .chain_128 {
+              background-image: url(../../assets/chain/heco.png);
+            }
+            .chain_137 {
+              background-image: url(../../assets/chain/matic.png);
+            }
           }
           &_time {
             position: absolute;
             top: 50%;
             transform: translateY(-23px);
             right: 0;
-            width: calc(380px - 100px);
+            width: calc(100% - 100px);
             height: 24px;
             background: rgba(255, 255, 255, 0.7);
             display: flex;
@@ -470,7 +668,41 @@
             color: #00c57b;
             line-height: 19px;
             &:hover {
-              color: #0f8c20;
+              background: rgba(0, 197, 123, 0.5);
+              color: #03a678 !important;
+            }
+          }
+          &_bsc_enter {
+            background: rgba(240, 185, 11, 0.2);
+            color: #f0b90b;
+            &:hover {
+              background: rgba(240, 185, 11, 0.5);
+              color: #cf9f06 !important;
+            }
+          }
+          &_matic_enter {
+            background: rgba(130, 71, 229, 0.2);
+            color: #8247e5;
+            &:hover {
+              color: #7835e9 !important;
+              background: rgba(130, 71, 229, 0.5);
+            }
+          }
+
+          &_avalanche_enter {
+            background: rgba(232, 65, 66, 0.2);
+            color: #e84142;
+            &:hover {
+              background: rgba(232, 65, 66, 0.5);
+              color: #ec292b !important;
+            }
+          }
+          &_disable_enter {
+            color: #fff;
+            background: #b6b9bc;
+            &:hover {
+              color: #fff !important;
+              background: #b6b9bc;
             }
           }
         }
