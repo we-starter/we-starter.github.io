@@ -446,13 +446,12 @@ const debounceFn = debounce((pools, account, callback) => {
 
     const pool_contract = new ClientContract(pool.abi, pool.address, pool.networkId)
     let underlying_token = pool.underlying.address ? new ClientContract(ERC20, pool.underlying.address, pool.networkId) : null
-
     if (pool.type === 0) {
       const promise_list = [
         pool_contract.price(), // 结算时间点
         pool_contract.totalPurchasedCurrency(), //总申购的量
         pool_contract.purchasedCurrencyOf(account),
-        pool_contract.totalSettleable(),
+        pool.totalSettleableError ? pool_contract.price() : pool_contract.totalSettleable(),
         pool_contract.settleable(account),
         pool_contract.totalSettledUnderlying(),
         pool_contract.underlying(),
@@ -507,7 +506,7 @@ const debounceFn = debounce((pools, account, callback) => {
             total_amount,
             total_volume,
             total_rate,
-          ] = totalSettleable
+          ] = (pool.totalSettleableError ? totalSettleable : [true,"","0","0","0","100"])
           const [completed_, amount, volume, rate, unlockVolume, unlockRate] = settleable
           let status = pool.status || 0 // 即将上线
           const timeClose = time
@@ -539,7 +538,6 @@ const debounceFn = debounce((pools, account, callback) => {
             .div(new BigNumber(10).pow(pool.currency.decimal))
             .div(new BigNumber(Web3.utils.toWei('1', 'ether'))).toString()
 
-          console.log('price', price.toString())
 
           balanceOf = fromWei(balanceOf, pool.currency.decimal)
           const totalPurchasedAmount = new BigNumber(pool.amount).multipliedBy(new BigNumber(price))
