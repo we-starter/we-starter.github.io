@@ -734,7 +734,6 @@ const debounceFn = debounce((pools, account, callback) => {
               )
             )
           )
-          console.log('__ratio', __ratio.toString())
 
           const totalPurchasedAmount =
             new BigNumber(pool.amount)
