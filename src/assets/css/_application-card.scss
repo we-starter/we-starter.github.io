@@ -3,10 +3,10 @@
     margin-top: 32px;
     width: 100%;
     height: 150px;
-    background: #FFFFFF;
-    box-shadow: 6px 6px 0px 0px #E7F4EF;
+    background: #ffffff;
+    box-shadow: 6px 6px 0px 0px #e7f4ef;
     border-radius: 16px;
-    border: 4px solid #E7F4EF;
+    border: 4px solid #e7f4ef;
     &_title {
       display: flex;
       justify-content: space-between;
@@ -18,9 +18,9 @@
       i {
         font-style: normal;
         font-size: 18px;
-        font-family: Montserrat-Regular, Montserrat;
+        font-family: Montserrat-Regular, Montserrat !important;
         font-weight: 400;
-        color: #03A678;
+        color: #03a678;
       }
     }
     .application_countdown_box {
@@ -29,17 +29,17 @@
       padding: 0 12px;
       margin-right: -4px;
       height: 100%;
-      background: #E7F4EF;
+      background: #e7f4ef;
       border-radius: 16px 16px 0px 0px;
       .success {
         margin-bottom: 0;
         font-size: 14px;
-        font-family: Montserrat-Bold, Montserrat;
+        font-family: Montserrat-Bold, Montserrat !important;
         font-weight: bold;
-        color: #4F4F4F;
+        color: #4f4f4f;
       }
     }
-    
+
     &_content_h5 {
       display: none;
     }
@@ -66,7 +66,7 @@
         margin-left: 52px;
         width: 128px;
         font-size: 14px;
-        font-family: Montserrat-Regular, Montserrat;
+        font-family: Montserrat-Regular, Montserrat !important;
         font-weight: 400;
         color: #959595;
         line-height: 18px;
@@ -74,9 +74,9 @@
           display: inline-block;
           margin-top: 10px;
           font-size: 18px;
-          font-family: Montserrat-Bold, Montserrat;
+          font-family: Montserrat-Bold, Montserrat !important;
           font-weight: bold;
-          color: #4F4F4F;
+          color: #4f4f4f;
           line-height: 20px;
         }
       }
@@ -87,7 +87,7 @@
           margin-top: 16px;
           width: 240px;
           height: 10px;
-          background: #E7F4EF;
+          background: #e7f4ef;
           border-radius: 5px;
         }
         span {
@@ -97,7 +97,7 @@
           margin: 0;
           width: 0;
           height: 10px;
-          background: #03A678;
+          background: #03a678;
           border-radius: 5px;
         }
       }
@@ -114,25 +114,25 @@
           font-size: 18px;
           font-family: TestFoundersGrotesk-Semibold, TestFoundersGrotesk;
           font-weight: 600;
-          color: #00C57B;
-          background: #FFF;
+          color: #00c57b;
+          background: #fff;
           border-radius: 22px;
-          border: 3px solid #00C57B;
+          border: 3px solid #00c57b;
           &:hover {
-            box-shadow: 3px 3px 0px 0px #03A678;
+            box-shadow: 3px 3px 0px 0px #03a678;
           }
           &:last-child {
             margin-left: 10px;
             font-size: 16px;
             font-family: TestFoundersGrotesk-Semibold, TestFoundersGrotesk;
             font-weight: 600;
-            color: #FFFFFF;
-            background: #00C57B;
+            color: #ffffff;
+            background: #00c57b;
           }
         }
         .disable_failed {
-          color: #D8D8D8;
-          border: 3px solid #D8D8D8;
+          color: #d8d8d8;
+          border: 3px solid #d8d8d8;
           &:hover {
             box-shadow: none;
           }
@@ -141,45 +141,45 @@
     }
   }
   .application_countdown {
-      margin: 0;
-      .countdown {
-        font-size: 14px;
-        font-family: Montserrat-Bold, Montserrat;
-        font-weight: bold;
-        color: #4F4F4F;
-        line-height: 18px;
-      }
-      .countdown_time {
-        display: inline-block;
-        width: 22px;
-        height: 22px;
-        font-size: 14px;
-        font-family: Montserrat-SemiBold, Montserrat;
-        font-weight: 600;
-        color: #4F4F4F;
-        line-height: 22px;
-        border-radius: 4px;
-        text-align: center;
-        border: 1px solid #C9D7D1;
-      }
-      i {
-        font-size: 14px;
-        font-family: Montserrat-SemiBold, Montserrat;
-        font-weight: 600;
-        color: #959595;
-        line-height: 16px;
-      }
+    margin: 0;
+    .countdown {
+      font-size: 14px;
+      font-family: Montserrat-Bold, Montserrat !important;
+      font-weight: bold;
+      color: #4f4f4f;
+      line-height: 18px;
     }
+    .countdown_time {
+      display: inline-block;
+      width: 22px;
+      height: 22px;
+      font-size: 14px;
+      font-family: Montserrat-SemiBold, Montserrat !important;
+      font-weight: 600;
+      color: #4f4f4f;
+      line-height: 22px;
+      border-radius: 4px;
+      text-align: center;
+      border: 1px solid #c9d7d1;
+    }
+    i {
+      font-size: 14px;
+      font-family: Montserrat-SemiBold, Montserrat !important;
+      font-weight: 600;
+      color: #959595;
+      line-height: 16px;
+    }
+  }
 }
 @media #{$mdWidth} {
   .application_card {
     margin-top: 32px;
     width: 100%;
     height: 150px;
-    background: #FFFFFF;
-    box-shadow: 6px 6px 0px 0px #E7F4EF;
+    background: #ffffff;
+    box-shadow: 6px 6px 0px 0px #e7f4ef;
     border-radius: 16px;
-    border: 4px solid #E7F4EF;
+    border: 4px solid #e7f4ef;
     &_title {
       display: flex;
       justify-content: space-between;
@@ -191,9 +191,9 @@
       i {
         font-style: normal;
         font-size: 18px;
-        font-family: Montserrat-Regular, Montserrat;
+        font-family: Montserrat-Regular, Montserrat !important;
         font-weight: 400;
-        color: #03A678;
+        color: #03a678;
       }
     }
     .application_countdown_box {
@@ -202,17 +202,17 @@
       padding: 0 12px;
       margin-right: -4px;
       height: 100%;
-      background: #E7F4EF;
+      background: #e7f4ef;
       border-radius: 16px 16px 0px 0px;
       .success {
         margin-bottom: 0;
         font-size: 14px;
-        font-family: Montserrat-Bold, Montserrat;
+        font-family: Montserrat-Bold, Montserrat !important;
         font-weight: bold;
-        color: #4F4F4F;
+        color: #4f4f4f;
       }
     }
-   
+
     &_content_h5 {
       display: none;
     }
@@ -239,7 +239,7 @@
         margin-left: 52px;
         width: 128px;
         font-size: 14px;
-        font-family: Montserrat-Regular, Montserrat;
+        font-family: Montserrat-Regular, Montserrat !important;
         font-weight: 400;
         color: #959595;
         line-height: 18px;
@@ -247,9 +247,9 @@
           display: inline-block;
           margin-top: 10px;
           font-size: 18px;
-          font-family: Montserrat-Bold, Montserrat;
+          font-family: Montserrat-Bold, Montserrat !important;
           font-weight: bold;
-          color: #4F4F4F;
+          color: #4f4f4f;
           line-height: 20px;
         }
       }
@@ -260,7 +260,7 @@
           margin-top: 16px;
           width: 240px;
           height: 10px;
-          background: #E7F4EF;
+          background: #e7f4ef;
           border-radius: 5px;
         }
         span {
@@ -270,7 +270,7 @@
           margin: 0;
           width: 0;
           height: 10px;
-          background: #03A678;
+          background: #03a678;
           border-radius: 5px;
         }
       }
@@ -287,25 +287,25 @@
           font-size: 18px;
           font-family: TestFoundersGrotesk-Semibold, TestFoundersGrotesk;
           font-weight: 600;
-          color: #00C57B;
-          background: #FFF;
+          color: #00c57b;
+          background: #fff;
           border-radius: 22px;
-          border: 3px solid #00C57B;
+          border: 3px solid #00c57b;
           &:hover {
-            box-shadow: 3px 3px 0px 0px #03A678;
+            box-shadow: 3px 3px 0px 0px #03a678;
           }
           &:last-child {
             margin-left: 10px;
             font-size: 16px;
             font-family: TestFoundersGrotesk-Semibold, TestFoundersGrotesk;
             font-weight: 600;
-            color: #FFFFFF;
-            background: #00C57B;
+            color: #ffffff;
+            background: #00c57b;
           }
         }
         .disable_failed {
-          color: #D8D8D8;
-          border: 3px solid #D8D8D8;
+          color: #d8d8d8;
+          border: 3px solid #d8d8d8;
           &:hover {
             box-shadow: none;
           }
@@ -313,46 +313,46 @@
       }
     }
   }
-   .application_countdown {
-      margin: 0;
-      .countdown {
-        font-size: 14px;
-        font-family: Montserrat-Bold, Montserrat;
-        font-weight: bold;
-        color: #4F4F4F;
-        line-height: 18px;
-      }
-      .countdown_time {
-        display: inline-block;
-        width: 22px;
-        height: 22px;
-        font-size: 14px;
-        font-family: Montserrat-SemiBold, Montserrat;
-        font-weight: 600;
-        color: #4F4F4F;
-        line-height: 22px;
-        border-radius: 4px;
-        text-align: center;
-        border: 1px solid #C9D7D1;
-      }
-      i {
-        font-size: 14px;
-        font-family: Montserrat-SemiBold, Montserrat;
-        font-weight: 600;
-        color: #959595;
-        line-height: 16px;
-      }
+  .application_countdown {
+    margin: 0;
+    .countdown {
+      font-size: 14px;
+      font-family: Montserrat-Bold, Montserrat !important;
+      font-weight: bold;
+      color: #4f4f4f;
+      line-height: 18px;
     }
+    .countdown_time {
+      display: inline-block;
+      width: 22px;
+      height: 22px;
+      font-size: 14px;
+      font-family: Montserrat-SemiBold, Montserrat !important;
+      font-weight: 600;
+      color: #4f4f4f;
+      line-height: 22px;
+      border-radius: 4px;
+      text-align: center;
+      border: 1px solid #c9d7d1;
+    }
+    i {
+      font-size: 14px;
+      font-family: Montserrat-SemiBold, Montserrat !important;
+      font-weight: 600;
+      color: #959595;
+      line-height: 16px;
+    }
+  }
 }
 @media #{$smWidth} {
   .application_card {
     margin: 20px auto 0;
     width: 352px;
     height: 310px;
-    background: #FFFFFF;
-    box-shadow: 6px 6px 0px 0px #E7F4EF;
+    background: #ffffff;
+    box-shadow: 6px 6px 0px 0px #e7f4ef;
     border-radius: 16px;
-    border: 4px solid #E7F4EF;
+    border: 4px solid #e7f4ef;
     &_title {
       display: flex;
       justify-content: space-between;
@@ -364,9 +364,9 @@
       i {
         font-style: normal;
         font-size: 18px;
-        font-family: Montserrat-Regular, Montserrat;
+        font-family: Montserrat-Regular, Montserrat !important;
         font-weight: 400;
-        color: #03A678;
+        color: #03a678;
       }
     }
     .application_countdown_box {
@@ -375,17 +375,17 @@
       padding: 0 12px;
       margin-right: -4px;
       height: 100%;
-      background: #E7F4EF;
+      background: #e7f4ef;
       border-radius: 16px 16px 0px 0px;
       .success {
         margin-bottom: 0;
         font-size: 14px;
-        font-family: Montserrat-Bold, Montserrat;
+        font-family: Montserrat-Bold, Montserrat !important;
         font-weight: bold;
-        color: #4F4F4F;
+        color: #4f4f4f;
       }
     }
-  
+
     &_content {
       display: none;
     }
@@ -408,7 +408,7 @@
         margin-left: 16px;
         margin-bottom: 0;
         font-size: 14px;
-        font-family: Montserrat-Regular, Montserrat;
+        font-family: Montserrat-Regular, Montserrat !important;
         font-weight: 400;
         color: #959595;
         line-height: 18px;
@@ -417,9 +417,9 @@
           margin-top: 10px;
           margin-left: 12px;
           font-size: 16px;
-          font-family: Montserrat-Bold, Montserrat;
+          font-family: Montserrat-Bold, Montserrat !important;
           font-weight: bold;
-          color: #4F4F4F;
+          color: #4f4f4f;
           line-height: 20px;
         }
       }
@@ -435,7 +435,7 @@
         margin-bottom: 0;
         width: 128px;
         font-size: 14px;
-        font-family: Montserrat-Regular, Montserrat;
+        font-family: Montserrat-Regular, Montserrat !important;
         font-weight: 400;
         color: #959595;
         line-height: 18px;
@@ -443,9 +443,9 @@
           display: inline-block;
           margin-top: 10px;
           font-size: 16px;
-          font-family: Montserrat-Bold, Montserrat;
+          font-family: Montserrat-Bold, Montserrat !important;
           font-weight: bold;
-          color: #4F4F4F;
+          color: #4f4f4f;
           line-height: 20px;
         }
       }
@@ -456,7 +456,7 @@
           margin-top: 16px;
           width: 190px;
           height: 10px;
-          background: #E7F4EF;
+          background: #e7f4ef;
           border-radius: 5px;
         }
         span {
@@ -466,7 +466,7 @@
           margin: 0;
           width: 0;
           height: 10px;
-          background: #03A678;
+          background: #03a678;
           border-radius: 5px;
         }
       }
@@ -484,25 +484,25 @@
           font-size: 18px;
           font-family: TestFoundersGrotesk-Semibold, TestFoundersGrotesk;
           font-weight: 600;
-          color: #00C57B;
-          background: #FFF;
+          color: #00c57b;
+          background: #fff;
           border-radius: 22px;
-          border: 3px solid #00C57B;
+          border: 3px solid #00c57b;
           &:hover {
-            box-shadow: 3px 3px 0px 0px #03A678;
+            box-shadow: 3px 3px 0px 0px #03a678;
           }
           &:last-child {
             margin-left: 10px;
             font-size: 16px;
             font-family: TestFoundersGrotesk-Semibold, TestFoundersGrotesk;
             font-weight: 600;
-            color: #FFFFFF;
-            background: #00C57B;
+            color: #ffffff;
+            background: #00c57b;
           }
         }
         .disable_failed {
-          color: #D8D8D8;
-          border: 3px solid #D8D8D8;
+          color: #d8d8d8;
+          border: 3px solid #d8d8d8;
           &:hover {
             box-shadow: none;
           }
@@ -510,46 +510,46 @@
       }
     }
   }
-    .application_countdown {
-      margin: 0;
-      .countdown {
-        font-size: 14px;
-        font-family: Montserrat-Bold, Montserrat;
-        font-weight: bold;
-        color: #4F4F4F;
-        line-height: 18px;
-      }
-      .countdown_time {
-        display: inline-block;
-        width: 22px;
-        height: 22px;
-        font-size: 14px;
-        font-family: Montserrat-SemiBold, Montserrat;
-        font-weight: 600;
-        color: #4F4F4F;
-        line-height: 22px;
-        border-radius: 4px;
-        text-align: center;
-        border: 1px solid #C9D7D1;
-      }
-      i {
-        font-size: 14px;
-        font-family: Montserrat-SemiBold, Montserrat;
-        font-weight: 600;
-        color: #959595;
-        line-height: 16px;
-      }
+  .application_countdown {
+    margin: 0;
+    .countdown {
+      font-size: 14px;
+      font-family: Montserrat-Bold, Montserrat !important;
+      font-weight: bold;
+      color: #4f4f4f;
+      line-height: 18px;
     }
+    .countdown_time {
+      display: inline-block;
+      width: 22px;
+      height: 22px;
+      font-size: 14px;
+      font-family: Montserrat-SemiBold, Montserrat !important;
+      font-weight: 600;
+      color: #4f4f4f;
+      line-height: 22px;
+      border-radius: 4px;
+      text-align: center;
+      border: 1px solid #c9d7d1;
+    }
+    i {
+      font-size: 14px;
+      font-family: Montserrat-SemiBold, Montserrat !important;
+      font-weight: 600;
+      color: #959595;
+      line-height: 16px;
+    }
+  }
 }
 @media #{$xsWidth} {
   .application_card {
     margin: 20px auto 0;
     width: 352px;
     height: 310px;
-    background: #FFFFFF;
-    box-shadow: 6px 6px 0px 0px #E7F4EF;
+    background: #ffffff;
+    box-shadow: 6px 6px 0px 0px #e7f4ef;
     border-radius: 16px;
-    border: 4px solid #E7F4EF;
+    border: 4px solid #e7f4ef;
     &_title {
       display: flex;
       justify-content: space-between;
@@ -561,9 +561,9 @@
       i {
         font-style: normal;
         font-size: 18px;
-        font-family: Montserrat-Regular, Montserrat;
+        font-family: Montserrat-Regular, Montserrat !important;
         font-weight: 400;
-        color: #03A678;
+        color: #03a678;
       }
     }
     .application_countdown_box {
@@ -572,17 +572,17 @@
       padding: 0 12px;
       margin-right: -4px;
       height: 100%;
-      background: #E7F4EF;
+      background: #e7f4ef;
       border-radius: 16px 16px 0px 0px;
       .success {
         margin-bottom: 0;
         font-size: 14px;
-        font-family: Montserrat-Bold, Montserrat;
+        font-family: Montserrat-Bold, Montserrat !important;
         font-weight: bold;
-        color: #4F4F4F;
+        color: #4f4f4f;
       }
     }
-  
+
     &_content {
       display: none;
     }
@@ -605,7 +605,7 @@
         margin-left: 16px;
         margin-bottom: 0;
         font-size: 14px;
-        font-family: Montserrat-Regular, Montserrat;
+        font-family: Montserrat-Regular, Montserrat !important;
         font-weight: 400;
         color: #959595;
         line-height: 18px;
@@ -614,9 +614,9 @@
           margin-top: 10px;
           margin-left: 12px;
           font-size: 16px;
-          font-family: Montserrat-Bold, Montserrat;
+          font-family: Montserrat-Bold, Montserrat !important;
           font-weight: bold;
-          color: #4F4F4F;
+          color: #4f4f4f;
           line-height: 20px;
         }
       }
@@ -632,7 +632,7 @@
         margin-bottom: 0;
         width: 128px;
         font-size: 14px;
-        font-family: Montserrat-Regular, Montserrat;
+        font-family: Montserrat-Regular, Montserrat !important;
         font-weight: 400;
         color: #959595;
         line-height: 18px;
@@ -640,9 +640,9 @@
           display: inline-block;
           margin-top: 10px;
           font-size: 16px;
-          font-family: Montserrat-Bold, Montserrat;
+          font-family: Montserrat-Bold, Montserrat !important;
           font-weight: bold;
-          color: #4F4F4F;
+          color: #4f4f4f;
           line-height: 20px;
         }
       }
@@ -653,7 +653,7 @@
           margin-top: 16px;
           width: 190px;
           height: 10px;
-          background: #E7F4EF;
+          background: #e7f4ef;
           border-radius: 5px;
         }
         span {
@@ -663,7 +663,7 @@
           margin: 0;
           width: 0;
           height: 10px;
-          background: #03A678;
+          background: #03a678;
           border-radius: 5px;
         }
       }
@@ -681,25 +681,25 @@
           font-size: 18px;
           font-family: TestFoundersGrotesk-Semibold, TestFoundersGrotesk;
           font-weight: 600;
-          color: #00C57B;
-          background: #FFF;
+          color: #00c57b;
+          background: #fff;
           border-radius: 22px;
-          border: 3px solid #00C57B;
+          border: 3px solid #00c57b;
           &:hover {
-            box-shadow: 3px 3px 0px 0px #03A678;
+            box-shadow: 3px 3px 0px 0px #03a678;
           }
           &:last-child {
             margin-left: 10px;
             font-size: 16px;
             font-family: TestFoundersGrotesk-Semibold, TestFoundersGrotesk;
             font-weight: 600;
-            color: #FFFFFF;
-            background: #00C57B;
+            color: #ffffff;
+            background: #00c57b;
           }
         }
         .disable_failed {
-          color: #D8D8D8;
-          border: 3px solid #D8D8D8;
+          color: #d8d8d8;
+          border: 3px solid #d8d8d8;
           &:hover {
             box-shadow: none;
           }
@@ -707,34 +707,34 @@
       }
     }
   }
-   .application_countdown {
-      margin: 0;
-      .countdown {
-        font-size: 14px;
-        font-family: Montserrat-Bold, Montserrat;
-        font-weight: bold;
-        color: #4F4F4F;
-        line-height: 18px;
-      }
-      .countdown_time {
-        display: inline-block;
-        width: 22px;
-        height: 22px;
-        font-size: 14px;
-        font-family: Montserrat-SemiBold, Montserrat;
-        font-weight: 600;
-        color: #4F4F4F;
-        line-height: 22px;
-        border-radius: 4px;
-        text-align: center;
-        border: 1px solid #C9D7D1;
-      }
-      i {
-        font-size: 14px;
-        font-family: Montserrat-SemiBold, Montserrat;
-        font-weight: 600;
-        color: #959595;
-        line-height: 16px;
-      }
+  .application_countdown {
+    margin: 0;
+    .countdown {
+      font-size: 14px;
+      font-family: Montserrat-Bold, Montserrat !important;
+      font-weight: bold;
+      color: #4f4f4f;
+      line-height: 18px;
     }
+    .countdown_time {
+      display: inline-block;
+      width: 22px;
+      height: 22px;
+      font-size: 14px;
+      font-family: Montserrat-SemiBold, Montserrat !important;
+      font-weight: 600;
+      color: #4f4f4f;
+      line-height: 22px;
+      border-radius: 4px;
+      text-align: center;
+      border: 1px solid #c9d7d1;
+    }
+    i {
+      font-size: 14px;
+      font-family: Montserrat-SemiBold, Montserrat !important;
+      font-weight: 600;
+      color: #959595;
+      line-height: 16px;
+    }
+  }
 }

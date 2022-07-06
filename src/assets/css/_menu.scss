@@ -26,7 +26,7 @@
     color: #4f4f4f;
     display: block;
     transform: var(--transitionDefault);
-    font-family: Montserrat-SemiBold, Montserrat;
+    font-family: Montserrat-SemiBold, Montserrat !important;
     &.is-current {
       color: #00c57b;
       pointer-events: none;

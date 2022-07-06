@@ -15,22 +15,22 @@
         height: 32px;
         line-height: 30px;
         font-size: 14px;
-        font-family: Montserrat-Bold, Montserrat;
+        font-family: Montserrat-Bold, Montserrat !important;
         font-weight: bold;
-        color: #4F4F4F;
+        color: #4f4f4f;
         border-radius: 8px;
         border: 2px solid transparent;
         &:nth-child(2) {
-          margin:0  24px;
+          margin: 0 24px;
         }
         &:hover {
-          color: #03A678;
-          border: 2px solid #00C57B;
+          color: #03a678;
+          border: 2px solid #00c57b;
         }
       }
       .application_content_tab_active {
-        color: #03A678;
-        border: 2px solid #00C57B;
+        color: #03a678;
+        border: 2px solid #00c57b;
       }
     }
     .no-data {
@@ -49,7 +49,7 @@
         font-size: 12px;
         font-family: PingFangSC-Regular, PingFang SC;
         font-weight: 400;
-        color: #7A7F82;
+        color: #7a7f82;
         line-height: 18px;
       }
       .initiate-proposal {
@@ -59,7 +59,7 @@
         margin-top: 80px;
         width: 1080px;
         height: 280px;
-        background: url('../icon/application/proposal_pc.png') no-repeat;
+        background: url("../icon/application/proposal_pc.png") no-repeat;
         background-size: 100% 100%;
         a {
           display: inline-block;
@@ -70,11 +70,11 @@
           font-size: 16px;
           font-family: PingFangSC-Semibold, PingFang SC;
           font-weight: 600;
-          color: #FFF;
-          background: #00C57B;
+          color: #fff;
+          background: #00c57b;
           border-radius: 23px;
           &:hover {
-            box-shadow: 3px 3px 0px 0px #03A678;
+            box-shadow: 3px 3px 0px 0px #03a678;
           }
         }
       }
@@ -98,24 +98,23 @@
         height: 32px;
         line-height: 30px;
         font-size: 14px;
-        font-family: Montserrat-Bold, Montserrat;
+        font-family: Montserrat-Bold, Montserrat !important;
         font-weight: bold;
-        color: #4F4F4F;
+        color: #4f4f4f;
         border-radius: 8px;
         border: 2px solid transparent;
         &:nth-child(2) {
-          margin:0  24px;
+          margin: 0 24px;
         }
         &:hover {
-          color: #03A678;
-          border: 2px solid #00C57B;
+          color: #03a678;
+          border: 2px solid #00c57b;
         }
       }
       .application_content_tab_active {
-        color: #03A678;
-        border: 2px solid #00C57B;
+        color: #03a678;
+        border: 2px solid #00c57b;
       }
-
     }
     .no-data {
       display: flex;
@@ -133,7 +132,7 @@
         font-size: 12px;
         font-family: PingFangSC-Regular, PingFang SC;
         font-weight: 400;
-        color: #7A7F82;
+        color: #7a7f82;
         line-height: 18px;
       }
       .initiate-proposal {
@@ -143,7 +142,7 @@
         margin-top: 80px;
         width: 1080px;
         height: 280px;
-        background: url('../icon/application/proposal_pc.png') no-repeat;
+        background: url("../icon/application/proposal_pc.png") no-repeat;
         background-size: 100% 100%;
         a {
           display: inline-block;
@@ -154,11 +153,11 @@
           font-size: 14px;
           font-family: PingFangSC-Semibold, PingFang SC;
           font-weight: 600;
-          color: #FFF;
-          background: #00C57B;
+          color: #fff;
+          background: #00c57b;
           border-radius: 23px;
           &:hover {
-            box-shadow: 3px 3px 0px 0px #03A678;
+            box-shadow: 3px 3px 0px 0px #03a678;
           }
         }
       }
@@ -182,25 +181,25 @@
         height: 32px;
         line-height: 30px;
         font-size: 14px;
-        font-family: Montserrat-Bold, Montserrat;
+        font-family: Montserrat-Bold, Montserrat !important;
         font-weight: bold;
-        color: #4F4F4F;
+        color: #4f4f4f;
         border-radius: 8px;
         border: 2px solid transparent;
         &:nth-child(2) {
-          margin:0  20px;
+          margin: 0 20px;
         }
         &:hover {
-          color: #03A678;
-          border: 2px solid #00C57B;
+          color: #03a678;
+          border: 2px solid #00c57b;
         }
       }
       .application_content_tab_active {
-        color: #03A678;
-        border: 2px solid #00C57B;
+        color: #03a678;
+        border: 2px solid #00c57b;
       }
     }
-     .no-data {
+    .no-data {
       display: flex;
       align-items: center;
       justify-content: center;
@@ -216,7 +215,7 @@
         font-size: 12px;
         font-family: PingFangSC-Regular, PingFang SC;
         font-weight: 400;
-        color: #7A7F82;
+        color: #7a7f82;
         line-height: 18px;
       }
       .initiate-proposal {
@@ -226,7 +225,7 @@
         margin-top: 80px;
         width: 355px;
         height: 168px;
-        background: url('../icon/application/proposal_h5.png') no-repeat;
+        background: url("../icon/application/proposal_h5.png") no-repeat;
         background-size: 100% 100%;
         a {
           display: inline-block;
@@ -237,11 +236,11 @@
           font-size: 14px;
           font-family: PingFangSC-Semibold, PingFang SC;
           font-weight: 600;
-          color: #FFF;
-          background: #00C57B;
+          color: #fff;
+          background: #00c57b;
           border-radius: 23px;
           &:hover {
-            box-shadow: 3px 3px 0px 0px #03A678;
+            box-shadow: 3px 3px 0px 0px #03a678;
           }
         }
       }
@@ -265,22 +264,22 @@
         height: 32px;
         line-height: 30px;
         font-size: 14px;
-        font-family: Montserrat-Bold, Montserrat;
+        font-family: Montserrat-Bold, Montserrat !important;
         font-weight: bold;
-        color: #4F4F4F;
+        color: #4f4f4f;
         border-radius: 8px;
         border: 2px solid transparent;
         &:nth-child(2) {
-          margin:0  20px;
+          margin: 0 20px;
         }
         &:hover {
-          color: #03A678;
-          border: 2px solid #00C57B;
+          color: #03a678;
+          border: 2px solid #00c57b;
         }
       }
       .application_content_tab_active {
-        color: #03A678;
-        border: 2px solid #00C57B;
+        color: #03a678;
+        border: 2px solid #00c57b;
       }
     }
     .no-data {
@@ -299,7 +298,7 @@
         font-size: 12px;
         font-family: PingFangSC-Regular, PingFang SC;
         font-weight: 400;
-        color: #7A7F82;
+        color: #7a7f82;
         line-height: 18px;
       }
       .initiate-proposal {
@@ -309,7 +308,7 @@
         margin-top: 80px;
         width: 355px;
         height: 168px;
-        background: url('../icon/application/proposal_h5.png') no-repeat;
+        background: url("../icon/application/proposal_h5.png") no-repeat;
         background-size: 100% 100%;
         a {
           display: inline-block;
@@ -320,11 +319,11 @@
           font-size: 16px;
           font-family: PingFangSC-Semibold, PingFang SC;
           font-weight: 600;
-          color: #FFF;
-          background: #00C57B;
+          color: #fff;
+          background: #00c57b;
           border-radius: 23px;
           &:hover {
-            box-shadow: 3px 3px 0px 0px #03A678;
+            box-shadow: 3px 3px 0px 0px #03a678;
           }
         }
       }

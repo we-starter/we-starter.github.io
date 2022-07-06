@@ -1,21 +1,22 @@
-
-
 .apply-input {
   height: 48px;
-  border: 3px solid #E8F4EF;
+  border: 3px solid #e8f4ef;
   border-radius: 8px;
 
   .ant-input-suffix {
     font-size: 16px;
-    font-family: Montserrat-Bold, Montserrat;
+    font-family: Montserrat-Bold, Montserrat !important;
     font-weight: bold;
-    color: #4F4F4F;
+    color: #4f4f4f;
   }
 
-  &.ant-input-affix-wrapper:not(.ant-input-affix-wrapper-disabled):hover, &:hover,&:focus, &.ant-input-focused {
+  &.ant-input-affix-wrapper:not(.ant-input-affix-wrapper-disabled):hover,
+  &:hover,
+  &:focus,
+  &.ant-input-focused {
     border-width: 2px !important;
     border-right-width: 2px !important;
-    border-color: #00C57B !important;
+    border-color: #00c57b !important;
   }
 
   input {
@@ -30,38 +31,40 @@
   width: 100%;
 }
 
-.ant-picker-cell-in-view.ant-picker-cell-selected .ant-picker-cell-inner, .ant-picker-cell-in-view.ant-picker-cell-range-start .ant-picker-cell-inner, .ant-picker-cell-in-view.ant-picker-cell-range-end .ant-picker-cell-inner {
+.ant-picker-cell-in-view.ant-picker-cell-selected .ant-picker-cell-inner,
+.ant-picker-cell-in-view.ant-picker-cell-range-start .ant-picker-cell-inner,
+.ant-picker-cell-in-view.ant-picker-cell-range-end .ant-picker-cell-inner {
   color: #fff;
-  background: #0F8C20;
+  background: #0f8c20;
 }
 
 .ant-picker-cell-in-view.ant-picker-cell-today .ant-picker-cell-inner::before {
-  border-color: #0F8C20;
+  border-color: #0f8c20;
 }
 
 .ant-picker-now-btn:hover {
-  color: #0F8C20;
+  color: #0f8c20;
 }
 /////
-
 
 .nft-card {
   position: relative;
   width: 100%;
   min-height: 220px;
-  background: #FFFFFF;
+  background: #ffffff;
   border-radius: 16px;
-  border: 4px solid #E7F4EF;
+  border: 4px solid #e7f4ef;
   margin-top: 40px;
   transition: all 200ms;
   display: flex;
   flex-direction: column;
   cursor: pointer;
   &:hover {
-    box-shadow: 6px 6px 0px 0px #E7F4EF;
+    box-shadow: 6px 6px 0px 0px #e7f4ef;
   }
 
-  .arrow-l, .arrow-r {
+  .arrow-l,
+  .arrow-r {
     position: absolute;
     left: -66px;
     top: 50%;
@@ -88,11 +91,11 @@
 
   .nft-card-title {
     font-size: 18px;
-    font-family: Montserrat-Bold, Montserrat;
+    font-family: Montserrat-Bold, Montserrat !important;
     font-weight: bold;
-    color: #4F4F4F;
+    color: #4f4f4f;
     line-height: 22px;
-    border-bottom: 4px solid #E7F4EF;
+    border-bottom: 4px solid #e7f4ef;
     padding: 16px 20px;
     margin: 0;
   }
@@ -101,7 +104,7 @@
     flex: 1;
     display: flex;
     flex-direction: column;
-    .nft-spin{
+    .nft-spin {
       flex: 1;
       width: 100%;
       height: 100%;
@@ -127,25 +130,25 @@
         h2 {
           flex: 1;
           font-size: 18px;
-          font-family: Montserrat-Bold, Montserrat;
+          font-family: Montserrat-Bold, Montserrat !important;
           font-weight: bold;
-          color: #4F4F4F;
+          color: #4f4f4f;
           line-height: 20px;
           margin-bottom: 0;
-          word-wrap:break-word;
-          word-break:break-all;
+          word-wrap: break-word;
+          word-break: break-all;
         }
 
         p {
           flex: 1;
           font-size: 16px;
-          font-family: Montserrat-Bold, Montserrat;
+          font-family: Montserrat-Bold, Montserrat !important;
           font-weight: bold;
           color: #959595;
           line-height: 19px;
           margin-bottom: 0;
-          word-wrap:break-word;
-          word-break:break-all;
+          word-wrap: break-word;
+          word-break: break-all;
         }
       }
     }
@@ -157,7 +160,7 @@
         display: inline-block;
         width: 40px;
         height: 40px;
-        background: #E7F4EF;
+        background: #e7f4ef;
         border-radius: 8px;
         margin-left: 16px;
         padding: 8px;
@@ -204,7 +207,7 @@
   }
 
   .apply-view-back {
-    color: #03A678;
+    color: #03a678;
     font-size: 14px;
     font-weight: bold;
     display: flex;
@@ -215,16 +218,17 @@
       height: 24px;
     }
 
-    img, span {
+    img,
+    span {
       cursor: pointer;
     }
   }
 
   .apply-view-title {
     font-size: 28px;
-    font-family: Montserrat-Bold, Montserrat;
+    font-family: Montserrat-Bold, Montserrat !important;
     font-weight: bold;
-    color: #4F4F4F;
+    color: #4f4f4f;
     line-height: 34px;
     margin-top: 12px;
   }
@@ -237,39 +241,39 @@
   margin: 100px auto 0;
   padding-bottom: 50px;
 
-  .button-group{
-  display: flex;
-  &.mr {
+  .button-group {
+    display: flex;
+    &.mr {
+      button {
+        flex: 1;
+        margin-right: 32px;
+      }
+    }
     button {
       flex: 1;
-      margin-right: 32px;
+      margin-right: 6px;
+      &:nth-last-child(1) {
+        margin-right: 0;
+      }
+      &:nth-child(1) {
+        background: #00c57b !important;
+        color: #ffffff !important;
+        border: 0 !important;
+        cursor: pointer !important;
+      }
+      cursor: default !important;
+      background: #ffffff !important;
+      color: #d8d8d8 !important;
+      border: 3px solid #d8d8d8 !important;
     }
   }
-  button{
-    flex: 1;
-    margin-right: 6px;
-    &:nth-last-child(1){
-      margin-right: 0;
-    }
-    &:nth-child(1){
-      background: #00C57B!important;
-      color: #ffffff!important;
-      border: 0!important;
-      cursor: pointer!important;
-    }
-    cursor: default!important;
-    background: #ffffff!important;
-    color: #D8D8D8!important;
-    border: 3px solid #D8D8D8!important;
-  }
-}
   .tip-txt {
     width: 100%;
     min-height: 22px;
     font-size: 16px;
-    font-family: Montserrat-Regular, Montserrat;
+    font-family: Montserrat-Regular, Montserrat !important;
     font-weight: 400;
-    color: #03A678;
+    color: #03a678;
     line-height: 19px;
     display: flex;
     padding-bottom: 2px;
@@ -282,7 +286,7 @@
 
     div:nth-child(2):hover {
       cursor: pointer;
-      border-bottom: 1px solid #03A678;
+      border-bottom: 1px solid #03a678;
     }
   }
 
@@ -292,7 +296,7 @@
     grid-template-columns: 1fr 1fr 1fr;
 
     .tab-info-item {
-      font-family: Montserrat-Bold, Montserrat;
+      font-family: Montserrat-Bold, Montserrat !important;
       line-height: 19px;
 
       p {
@@ -306,7 +310,7 @@
       h2 {
         font-size: 16px;
         font-weight: bold;
-        color: #4F4F4F;
+        color: #4f4f4f;
         margin-bottom: 0;
       }
 
@@ -332,7 +336,7 @@
     div {
       flex: 1;
       font-size: 16px;
-      font-family: Montserrat-Regular, Montserrat;
+      font-family: Montserrat-Regular, Montserrat !important;
       font-weight: 400;
       color: #959595;
       line-height: 19px;
@@ -345,63 +349,63 @@
 
   .apply-btn {
     height: 48px;
-    background: #00C57B !important;
-    border-color: #00C57B !important;
+    background: #00c57b !important;
+    border-color: #00c57b !important;
     box-shadow: 0px 4px 8px 0px rgba(5, 11, 36, 0.02);
     border-radius: 24px;
     margin: 16px 0;
     font-size: 16px;
-    font-family: Montserrat-Bold, Montserrat;
+    font-family: Montserrat-Bold, Montserrat !important;
     font-weight: bold;
-    color: #FFFFFF;
+    color: #ffffff;
   }
 
   .role-title {
     font-size: 16px;
-    font-family: Montserrat-Bold, Montserrat;
+    font-family: Montserrat-Bold, Montserrat !important;
     font-weight: bold;
-    color: #4F4F4F;
+    color: #4f4f4f;
     line-height: 19px;
     margin-bottom: 16px;
   }
-  .nft-create-view{
+  .nft-create-view {
     width: 480px;
     min-height: 414px;
     max-width: 100vw;
-    background: #F2F0EB;
+    background: #f2f0eb;
     border-radius: 8px;
     padding: 22px 28px;
-    .nft-create-view-title{
+    .nft-create-view-title {
       text-align: center;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      img{
+      img {
         width: 48px;
         height: 48px;
         margin-bottom: 8px;
       }
-      p{
+      p {
         margin-bottom: 18px;
       }
     }
-    .nft-card{
+    .nft-card {
       margin-top: 0;
     }
-    .nft-create-view-footer{
+    .nft-create-view-footer {
       display: flex;
       align-items: center;
       justify-content: center;
-      &>span{
+      & > span {
         font-size: 14px;
         font-family: HelveticaNeue;
-        color: #03A678;
+        color: #03a678;
         line-height: 16px;
         margin-right: 20px;
         cursor: pointer;
       }
-      .apply-btn{
+      .apply-btn {
         height: 40px;
         width: auto;
       }
@@ -426,28 +430,28 @@
 }
 /////
 
-.apply-info-view{
-  .apply-view-title{
+.apply-info-view {
+  .apply-view-title {
     margin-bottom: 40px;
   }
-  .form-item{
+  .form-item {
     padding: 9px 0;
-    .form-item-title{
+    .form-item-title {
       position: relative;
       display: flex;
       font-size: 16px;
-      font-family: Montserrat-Bold, Montserrat;
+      font-family: Montserrat-Bold, Montserrat !important;
       font-weight: bold;
-      color: #4F4F4F;
+      color: #4f4f4f;
       line-height: 19px;
       margin-bottom: 10px;
-      .title{
+      .title {
         display: flex;
         align-items: center;
         flex: 1;
         white-space: nowrap;
       }
-      .desc{
+      .desc {
         display: flex;
         align-items: center;
         font-size: 14px;
@@ -456,38 +460,38 @@
         color: #959595;
         line-height: 18px;
         padding-right: 2px;
-        strong{
+        strong {
           font-weight: bold;
-          color: #4F4F4F;
+          color: #4f4f4f;
         }
       }
-      .required{
+      .required {
         display: flex;
         align-items: center;
         font-size: 18px;
         line-height: 18px;
-        color: #FFCA20;
+        color: #ffca20;
       }
     }
-    .upload-img{
+    .upload-img {
       position: relative;
       width: 100%;
       height: 120px;
-      background: #FFFFFF;
+      background: #ffffff;
       border-radius: 4px;
-      border: 3px solid #E8F4EF;
+      border: 3px solid #e8f4ef;
       overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: center;
-      span{
+      span {
         font-size: 14px;
         font-family: Montserrat-Light, Montserrat;
         font-weight: 300;
         color: #959595;
         line-height: 18px;
       }
-      input{
+      input {
         position: absolute;
         left: 0;
         top: 0;
@@ -497,12 +501,12 @@
         height: 100%;
         cursor: pointer;
       }
-      img{
+      img {
         width: 100px;
         height: 100px;
       }
     }
-    .tip-txt{
+    .tip-txt {
       font-size: 14px;
       font-family: Montserrat-Light, Montserrat;
       font-weight: 300;
@@ -512,31 +516,30 @@
       margin-bottom: 0;
     }
   }
-  .create-btn{
+  .create-btn {
     margin: 50px auto;
     width: 120px;
     height: 48px;
-    background: #00C57B!important;
-    border-color: #00C57B!important;
+    background: #00c57b !important;
+    border-color: #00c57b !important;
     border-radius: 24px;
     font-size: 16px;
-    font-family: Montserrat-Medium, Montserrat;
+    font-family: Montserrat-Medium, Montserrat !important;
     font-weight: 500;
-    color: #FFFFFF;
+    color: #ffffff;
     line-height: 19px;
     display: flex;
     align-items: center;
     justify-content: center;
-    svg{
-      margin-right: 0!important;
-      width: 20px!important;
-      height: 20px!important;
+    svg {
+      margin-right: 0 !important;
+      width: 20px !important;
+      height: 20px !important;
     }
-    &:hover{
-      background: #00C57B!important;
-      border-color: #00C57B!important;
+    &:hover {
+      background: #00c57b !important;
+      border-color: #00c57b !important;
       opacity: 0.9;
     }
   }
 }
-

@@ -38,7 +38,7 @@
       font-size: 14px;
       font-weight: 600;
       color: #22292f;
-      font-family: Montserrat-SemiBold, Montserrat;
+      font-family: Montserrat-SemiBold, Montserrat !important;
     }
 
     @media (max-width: 470px) {
@@ -183,7 +183,7 @@
     padding: 0 16px;
     background: #000000;
     font-size: 14px;
-    font-family: Montserrat-SemiBold, Montserrat;
+    font-family: Montserrat-SemiBold, Montserrat !important;
     font-weight: 600;
     color: #ffffff;
     line-height: 18px;
@@ -452,7 +452,7 @@
       align-items: center;
       padding: 0 16px;
       font-size: 14px;
-      font-family: Montserrat-Medium, Montserrat;
+      font-family: Montserrat-Medium, Montserrat !important;
       font-weight: 500;
       color: #ffffff;
       img {

@@ -36,7 +36,7 @@
       span {
         &:nth-of-type(1) {
           font-size: 16px;
-          font-family: Montserrat-Regular, Montserrat;
+          font-family: Montserrat-Regular, Montserrat !important;
           font-weight: 400;
           color: #000000;
           line-height: 16px;
@@ -44,7 +44,7 @@
         &:nth-child(2) {
           margin-top: 10px;
           font-size: 24px;
-          font-family: Montserrat-Bold, Montserrat;
+          font-family: Montserrat-Bold, Montserrat !important;
           font-weight: bold;
           color: #000000;
           line-height: 24px;
@@ -59,14 +59,14 @@
         &:nth-of-type(1) {
           height: 14px;
           font-size: 14px;
-          font-family: Montserrat-Bold, Montserrat;
+          font-family: Montserrat-Bold, Montserrat !important;
           font-weight: bold;
           color: #959595;
           line-height: 14px;
         }
         &:nth-of-type(2) {
           font-size: 14px;
-          font-family: Montserrat-Medium, Montserrat;
+          font-family: Montserrat-Medium, Montserrat !important;
           font-weight: 500;
           color: #000000;
           line-height: 14px;
@@ -90,7 +90,7 @@
     &_progress_title {
       margin-top: 15px;
       font-size: 16px;
-      font-family: Montserrat-Bold, Montserrat;
+      font-family: Montserrat-Bold, Montserrat !important;
       font-weight: bold;
       color: #000000;
       line-height: 16px;
@@ -108,14 +108,14 @@
           span {
             &:nth-of-type(1) {
               font-size: 14px;
-              font-family: Montserrat-Regular, Montserrat;
+              font-family: Montserrat-Regular, Montserrat !important;
               font-weight: 400;
               color: #959595;
               line-height: 20px;
             }
             &:nth-of-type(2) {
               font-size: 14px;
-              font-family: Montserrat-Bold, Montserrat;
+              font-family: Montserrat-Bold, Montserrat !important;
               font-weight: bold;
               color: #03a678;
               line-height: 20px;
@@ -125,7 +125,7 @@
         }
         > span {
           font-size: 14px;
-          font-family: Montserrat-Medium, Montserrat;
+          font-family: Montserrat-Medium, Montserrat !important;
           font-weight: 500;
           color: #000000;
           line-height: 16px;
@@ -183,7 +183,7 @@
       span {
         &:nth-of-type(1) {
           font-size: 16px;
-          font-family: Montserrat-Regular, Montserrat;
+          font-family: Montserrat-Regular, Montserrat !important;
           font-weight: 400;
           color: #000000;
           line-height: 16px;
@@ -191,7 +191,7 @@
         &:nth-child(2) {
           margin-top: 10px;
           font-size: 24px;
-          font-family: Montserrat-Bold, Montserrat;
+          font-family: Montserrat-Bold, Montserrat !important;
           font-weight: bold;
           color: #000000;
           line-height: 24px;
@@ -206,14 +206,14 @@
         &:nth-of-type(1) {
           height: 14px;
           font-size: 14px;
-          font-family: Montserrat-Bold, Montserrat;
+          font-family: Montserrat-Bold, Montserrat !important;
           font-weight: bold;
           color: #959595;
           line-height: 14px;
         }
         &:nth-of-type(2) {
           font-size: 14px;
-          font-family: Montserrat-Medium, Montserrat;
+          font-family: Montserrat-Medium, Montserrat !important;
           font-weight: 500;
           color: #000000;
           line-height: 14px;
@@ -237,7 +237,7 @@
     &_progress_title {
       margin-top: 15px;
       font-size: 16px;
-      font-family: Montserrat-Bold, Montserrat;
+      font-family: Montserrat-Bold, Montserrat !important;
       font-weight: bold;
       color: #000000;
       line-height: 16px;
@@ -255,14 +255,14 @@
           span {
             &:nth-of-type(1) {
               font-size: 14px;
-              font-family: Montserrat-Regular, Montserrat;
+              font-family: Montserrat-Regular, Montserrat !important;
               font-weight: 400;
               color: #959595;
               line-height: 20px;
             }
             &:nth-of-type(2) {
               font-size: 14px;
-              font-family: Montserrat-Bold, Montserrat;
+              font-family: Montserrat-Bold, Montserrat !important;
               font-weight: bold;
               color: #03a678;
               line-height: 20px;
@@ -272,7 +272,7 @@
         }
         > span {
           font-size: 14px;
-          font-family: Montserrat-Medium, Montserrat;
+          font-family: Montserrat-Medium, Montserrat !important;
           font-weight: 500;
           color: #000000;
           line-height: 16px;
@@ -325,7 +325,7 @@
       span {
         &:nth-of-type(1) {
           font-size: 16px;
-          font-family: Montserrat-Regular, Montserrat;
+          font-family: Montserrat-Regular, Montserrat !important;
           font-weight: 400;
           color: #000000;
           line-height: 16px;
@@ -333,7 +333,7 @@
         &:nth-child(2) {
           margin-top: 10px;
           font-size: 24px;
-          font-family: Montserrat-Bold, Montserrat;
+          font-family: Montserrat-Bold, Montserrat !important;
           font-weight: bold;
           color: #000000;
           line-height: 24px;
@@ -348,14 +348,14 @@
         &:nth-of-type(1) {
           height: 14px;
           font-size: 14px;
-          font-family: Montserrat-Bold, Montserrat;
+          font-family: Montserrat-Bold, Montserrat !important;
           font-weight: bold;
           color: #959595;
           line-height: 14px;
         }
         &:nth-of-type(2) {
           font-size: 14px;
-          font-family: Montserrat-Medium, Montserrat;
+          font-family: Montserrat-Medium, Montserrat !important;
           font-weight: 500;
           color: #000000;
           line-height: 14px;
@@ -379,7 +379,7 @@
     &_progress_title {
       margin-top: 15px;
       font-size: 16px;
-      font-family: Montserrat-Bold, Montserrat;
+      font-family: Montserrat-Bold, Montserrat !important;
       font-weight: bold;
       color: #000000;
       line-height: 16px;
@@ -397,14 +397,14 @@
           span {
             &:nth-of-type(1) {
               font-size: 14px;
-              font-family: Montserrat-Regular, Montserrat;
+              font-family: Montserrat-Regular, Montserrat !important;
               font-weight: 400;
               color: #959595;
               line-height: 20px;
             }
             &:nth-of-type(2) {
               font-size: 14px;
-              font-family: Montserrat-Bold, Montserrat;
+              font-family: Montserrat-Bold, Montserrat !important;
               font-weight: bold;
               color: #03a678;
               line-height: 20px;
@@ -414,7 +414,7 @@
         }
         > span {
           font-size: 14px;
-          font-family: Montserrat-Medium, Montserrat;
+          font-family: Montserrat-Medium, Montserrat !important;
           font-weight: 500;
           color: #000000;
           line-height: 16px;
@@ -467,7 +467,7 @@
       span {
         &:nth-of-type(1) {
           font-size: 16px;
-          font-family: Montserrat-Regular, Montserrat;
+          font-family: Montserrat-Regular, Montserrat !important;
           font-weight: 400;
           color: #000000;
           line-height: 16px;
@@ -475,7 +475,7 @@
         &:nth-child(2) {
           margin-top: 10px;
           font-size: 24px;
-          font-family: Montserrat-Bold, Montserrat;
+          font-family: Montserrat-Bold, Montserrat !important;
           font-weight: bold;
           color: #000000;
           line-height: 24px;
@@ -490,14 +490,14 @@
         &:nth-of-type(1) {
           height: 14px;
           font-size: 14px;
-          font-family: Montserrat-Bold, Montserrat;
+          font-family: Montserrat-Bold, Montserrat !important;
           font-weight: bold;
           color: #959595;
           line-height: 14px;
         }
         &:nth-of-type(2) {
           font-size: 14px;
-          font-family: Montserrat-Medium, Montserrat;
+          font-family: Montserrat-Medium, Montserrat !important;
           font-weight: 500;
           color: #000000;
           line-height: 14px;
@@ -521,7 +521,7 @@
     &_progress_title {
       margin-top: 15px;
       font-size: 16px;
-      font-family: Montserrat-Bold, Montserrat;
+      font-family: Montserrat-Bold, Montserrat !important;
       font-weight: bold;
       color: #000000;
       line-height: 16px;
@@ -539,14 +539,14 @@
           span {
             &:nth-of-type(1) {
               font-size: 14px;
-              font-family: Montserrat-Regular, Montserrat;
+              font-family: Montserrat-Regular, Montserrat !important;
               font-weight: 400;
               color: #959595;
               line-height: 20px;
             }
             &:nth-of-type(2) {
               font-size: 14px;
-              font-family: Montserrat-Bold, Montserrat;
+              font-family: Montserrat-Bold, Montserrat !important;
               font-weight: bold;
               color: #03a678;
               line-height: 20px;
@@ -556,7 +556,7 @@
         }
         > span {
           font-size: 14px;
-          font-family: Montserrat-Medium, Montserrat;
+          font-family: Montserrat-Medium, Montserrat !important;
           font-weight: 500;
           color: #000000;
           line-height: 16px;

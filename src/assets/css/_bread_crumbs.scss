@@ -9,15 +9,15 @@
     }
     span {
       font-size: 14px;
-      font-family: Montserrat-Bold, Montserrat;
+      font-family: Montserrat-Bold, Montserrat !important;
       font-weight: bold;
-      color: #03A678;
+      color: #03a678;
       line-height: 18px;
     }
   }
 }
 @media #{$mdWidth} {
-   .bread_crumbs {
+  .bread_crumbs {
     display: flex;
     align-items: center;
     width: 100%;
@@ -27,15 +27,15 @@
     }
     span {
       font-size: 14px;
-      font-family: Montserrat-Bold, Montserrat;
+      font-family: Montserrat-Bold, Montserrat !important;
       font-weight: bold;
-      color: #03A678;
+      color: #03a678;
       line-height: 18px;
     }
   }
 }
 @media #{$smWidth} {
-   .bread_crumbs {
+  .bread_crumbs {
     display: flex;
     align-items: center;
     width: 100%;
@@ -45,15 +45,15 @@
     }
     span {
       font-size: 14px;
-      font-family: Montserrat-Bold, Montserrat;
+      font-family: Montserrat-Bold, Montserrat !important;
       font-weight: bold;
-      color: #03A678;
+      color: #03a678;
       line-height: 18px;
     }
   }
 }
 @media #{$xsWidth} {
-   .bread_crumbs {
+  .bread_crumbs {
     display: flex;
     align-items: center;
     width: 100%;
@@ -63,9 +63,9 @@
     }
     span {
       font-size: 14px;
-      font-family: Montserrat-Bold, Montserrat;
+      font-family: Montserrat-Bold, Montserrat !important;
       font-weight: bold;
-      color: #03A678;
+      color: #03a678;
       line-height: 18px;
     }
   }

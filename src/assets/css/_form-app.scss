@@ -53,7 +53,7 @@
         span {
           margin-top: 15px;
           font-size: 14px;
-          font-family: Montserrat-Bold, Montserrat;
+          font-family: Montserrat-Bold, Montserrat !important;
           font-weight: bold;
           color: #000000;
           line-height: 18px;
@@ -662,7 +662,7 @@
   .form-app__inner__header {
     max-width: 100%;
     font-size: 18px;
-    font-family: Montserrat-Medium, Montserrat;
+    font-family: Montserrat-Medium, Montserrat !important;
     font-weight: 600;
     color: #121212;
   }
@@ -712,7 +712,7 @@
       }
       span {
         font-size: 14px;
-        font-family: Montserrat-Bold, Montserrat;
+        font-family: Montserrat-Bold, Montserrat !important;
         font-weight: bold;
         color: #000000;
         line-height: 18px;

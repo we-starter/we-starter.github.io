@@ -43,6 +43,7 @@ body {
   height: 100%;
   background-color: #fff;
   overflow-y: auto;
+  -webkit-appearance: none;
   @media screen and (max-width: 450px) {
     padding-bottom: 64px;
   }
@@ -273,7 +274,7 @@ a[href^="tel"],
 .language {
   border-radius: 5px;
   font-size: 14px;
-  font-family: Montserrat-SemiBold, Montserrat;
+  font-family: Montserrat-SemiBold, Montserrat !important;
   color: #22292f;
   padding: 8px;
   cursor: pointer;
