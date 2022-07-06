@@ -21,9 +21,12 @@
     > a {
       font-size: 14px;
       font-family: Montserrat-Bold, Montserrat;
+      color: #00c57b;
       font-weight: bold;
-      color: #03a678;
       line-height: 18px;
+      &:hover {
+        color: #03a678;
+      }
     }
   }
   .pool_info {
@@ -66,7 +69,8 @@
         margin: 0;
         display: flex;
         align-items: center;
-        > svg {
+        cursor: pointer;
+        svg {
           margin-left: 10px;
         }
       }
@@ -197,8 +201,8 @@
         left: 0;
         z-index: 1;
         padding: 0 30px;
-        width: 640px;
-        height: 164px;
+        width: 760px;
+        height: 100%;
         font-size: 14px;
         font-weight: 500;
         color: #ffffff;
@@ -520,9 +524,12 @@
     > a {
       font-size: 14px;
       font-family: Montserrat-Bold, Montserrat;
+      color: #00c57b;
       font-weight: bold;
-      color: #03a678;
       line-height: 18px;
+      &:hover {
+        color: #03a678;
+      }
     }
   }
   .pool_info {
@@ -1012,9 +1019,12 @@
     > a {
       font-size: 14px;
       font-family: Montserrat-Bold, Montserrat;
+      color: #00c57b;
       font-weight: bold;
-      color: #03a678;
       line-height: 18px;
+      &:hover {
+        color: #03a678;
+      }
     }
   }
   .pool_info {
@@ -1533,9 +1543,12 @@
     > a {
       font-size: 14px;
       font-family: Montserrat-Bold, Montserrat;
+      color: #00c57b;
       font-weight: bold;
-      color: #03a678;
       line-height: 18px;
+      &:hover {
+        color: #03a678;
+      }
     }
   }
   .pool_info {

@@ -253,29 +253,11 @@ const PoolsIndex = (props) => {
         }
         key={pool.address + '' + index}
       >
-        <div className='type_private_box_t'>
-
-        </div>
+        <div className='type_private_box_t' />
         <div className='type_private_box_b'>
           <div className='type_private_box_b_logo'>
             <p className='type_private_box_b_logo_l'>
               {pool && pool.icon && <img src={pool.icon} />}
-              {/* {pool && pool.svipFlag && <span className='svip'></span>} */}
-              {/* {pool && pool.underlying.name === 'LBP' && (
-                <a className='pools-type_card_warning'>
-                  <span
-                    className='warning_tips'
-                    onMouseOver={() => setHoverFlag(index + 'LBP')}
-                    onMouseOut={() => setHoverFlag(null)}
-                  >
-                    {hoverFlag == index + 'LBP' && (
-                      <i className='warning_tips_content'>
-                        <FormattedMessage id='publicTips2' />
-                      </i>
-                    )}
-                  </span>
-                </a>
-              )} */}
             </p>
             <p className='type_private_box_b_logo_g'>
               {renderStatus(pool)}
@@ -311,7 +293,7 @@ const PoolsIndex = (props) => {
               )}
             </p>
           </div>
-          <div className='type_private_box_b_name'> <h3>{pool && pool.name} POOL</h3> <img src='' /></div>
+          <div className='type_private_box_b_name'> <h3>{pool && pool.name} POOL {pool && pool.svipFlag && <span className='svip'></span>}</h3> <img src='' /></div>
           <div className='type_private_box_b_text'>
             <span>
               <FormattedMessage id='poolsIndexText1' />
@@ -355,6 +337,89 @@ const PoolsIndex = (props) => {
             <span>{(progress * 100).toFixed(0)}%</span>
 
           </div>
+          {((pool && pool.status !== 3) ||
+            (pool && pool.underlying.name === 'LBP')) && (
+              <div className='type_private_box_b_text'>
+                <span><FormattedMessage id='accessType' /></span>
+                <span>
+                  {type === 1 && !(pool.svipFlag || pool.nft) && (
+                    <>
+                      <span
+                        className={cs('crown', quotaOf > 0 && 'crown-highlight')}
+                      ></span>
+                      <FormattedMessage id='private' />
+                      <span
+                        className='tips'
+                        onMouseOver={() => setHoverFlag(index)}
+                        onMouseOut={() => setHoverFlag(null)}
+                      >
+                        {hoverFlag === index && (
+                          <i className='tips_content'>
+                            <FormattedMessage id='privateTips' />
+                          </i>
+                        )}
+                      </span>
+                    </>
+                  )}
+                  {type === 1 && pool && pool.svipFlag && (
+                    <>
+                      <span
+                        className={cs('crown', quotaOf > 0 && 'crown-highlight')}
+                      ></span>
+                      <FormattedMessage id='svip' />
+                      <span
+                        className='tips'
+                        onMouseOver={() => setHoverFlag(index)}
+                        onMouseOut={() => setHoverFlag(null)}
+                      >
+                        {hoverFlag === index && (
+                          <i className='tips_content'>
+                            <FormattedMessage id='svipTips' />
+                          </i>
+                        )}
+                      </span>
+                    </>
+                  )}
+                  {(type === 0 || type === 2) && (
+                    <>
+                      <FormattedMessage id='public' />
+                      <span
+                        className='tips'
+                        onMouseOver={() => setHoverFlag(index)}
+                        onMouseOut={() => setHoverFlag(null)}
+                      >
+                        {hoverFlag === index &&
+                          pool &&
+                          pool.underlying.name !== 'LBP' && (
+                            <i className='tips_content'>
+                              <FormattedMessage id='publicTips' />
+                            </i>
+                          )}
+                        {hoverFlag === index &&
+                          pool &&
+                          pool.underlying.name === 'LBP' && (
+                            <i className='tips_content'>
+                              <FormattedMessage id='publicTips1' />
+                            </i>
+                          )}
+                      </span>
+                    </>
+                  )}
+                  {pool.nft && (
+                    <>
+                      <div className="nft-badge">
+                        <img src={pool.nft.icon} alt="" />
+                        {pool.nft.name}
+                      </div>
+
+                      <Popover content={() => <NftCardTipContent nft={pool.nft} />} title={null}>
+                        <span className='tips' />
+                      </Popover>
+                    </>
+                  )}
+                </span>
+              </div>
+            )}
           {/*
               pool.settleable.volume > 0 获取数量大于0
               pool.settleable.amount > 0 未结算数量大于0
@@ -445,7 +510,7 @@ const PoolsIndex = (props) => {
             </a>
           )}
         </div>
-      </div>
+      </div >
     )
   }
   const noData = () => {

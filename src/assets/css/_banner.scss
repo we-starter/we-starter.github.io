@@ -345,9 +345,11 @@
           font-family: Montserrat-Regular, Montserrat;
           color: #000000;
           line-height: 40px;
-          > img {
-            margin-left: 10px;
-            cursor: pointer;
+          > a {
+            > img {
+              margin-left: 10px;
+              cursor: pointer;
+            }
           }
         }
       }
@@ -376,6 +378,7 @@
       border: 2px solid #000000;
       font-family: Montserrat-SemiBold, Montserrat;
       font-weight: 600;
+      cursor: pointer;
       color: #000000;
       &:hover {
         color: #000000;
@@ -718,9 +721,11 @@
           font-family: Montserrat-Regular, Montserrat;
           color: #000000;
           line-height: 40px;
-          > img {
-            margin-left: 10px;
-            cursor: pointer;
+          > a {
+            > img {
+              margin-left: 10px;
+              cursor: pointer;
+            }
           }
         }
       }
@@ -740,16 +745,19 @@
       align-items: center;
       margin-left: 16px;
       padding: 0 10px;
-      height: 32px;
       font-size: 12px;
-      font-family: PingFangSC-Semibold, PingFang SC;
-      font-weight: 600;
       color: #0f8c20;
       line-height: 32px;
-      background: #f2f0eb;
-      border-radius: 24px;
+      background: transparent;
+      height: 36px;
+      border-radius: 14px;
+      border: 2px solid #000000;
+      font-family: Montserrat-SemiBold, Montserrat;
+      font-weight: 600;
+      color: #000000;
+      cursor: pointer;
       &:hover {
-        color: #00b900;
+        color: #000000;
       }
       .metaMask_logo {
         display: inline-block;
@@ -1179,12 +1187,14 @@
           font-family: Montserrat-Regular, Montserrat;
           color: #000000;
           line-height: 30px;
-          > img {
-            margin-left: 10px;
-            cursor: pointer;
-            display: none;
-          }
           > a {
+            > img {
+              margin-left: 10px;
+              cursor: pointer;
+              display: none;
+            }
+          }
+          > span {
             display: none;
           }
         }
@@ -1215,6 +1225,7 @@
       font-family: Montserrat-SemiBold, Montserrat;
       font-weight: 600;
       color: #000000;
+      cursor: pointer;
       &:hover {
         color: #000000;
       }
@@ -1636,12 +1647,14 @@
           font-family: Montserrat-Regular, Montserrat;
           color: #000000;
           line-height: 30px;
-          > img {
-            margin-left: 10px;
-            cursor: pointer;
-            display: none;
-          }
           > a {
+            > img {
+              margin-left: 10px;
+              cursor: pointer;
+              display: none;
+            }
+          }
+          > span {
             display: none;
           }
         }
@@ -1672,6 +1685,7 @@
       font-family: Montserrat-SemiBold, Montserrat;
       font-weight: 600;
       color: #000000;
+      cursor: pointer;
       &:hover {
         color: #000000;
       }

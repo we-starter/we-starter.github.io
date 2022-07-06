@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect, useMemo } from 'react'
-import {getHttpWeb3, getLogs, useActiveWeb3React} from '../../web3'
+import { getHttpWeb3, getLogs, useActiveWeb3React } from '../../web3'
 import {
   ADDRESS_0,
   ChainId,
@@ -41,7 +41,7 @@ import { ReactComponent as X10 } from '../../assets/logo/10X.svg'
 import BigNumber from 'bignumber.js'
 import { formatAmount, fromWei, numToWei } from '../../utils/format'
 import PoolsLBP from '../../configs/poolsLBP'
-import {ClientContract, multicallClient,} from '../../utils/multicall'
+import { ClientContract, multicallClient, } from '../../utils/multicall'
 
 import warnAboutDeprecatedESMImport from 'react-router-dom/es/warnAboutDeprecatedESMImport'
 import { mainContext } from '../../reducer'
@@ -446,13 +446,12 @@ const debounceFn = debounce((pools, account, callback) => {
 
     const pool_contract = new ClientContract(pool.abi, pool.address, pool.networkId)
     let underlying_token = pool.underlying.address ? new ClientContract(ERC20, pool.underlying.address, pool.networkId) : null
-
     if (pool.type === 0) {
       const promise_list = [
         pool_contract.price(), // 结算时间点
         pool_contract.totalPurchasedCurrency(), //总申购的量
         pool_contract.purchasedCurrencyOf(account),
-        pool_contract.totalSettleable(),
+        pool.totalSettleableError ? pool_contract.price() : pool_contract.totalSettleable(),
         pool_contract.settleable(account),
         pool_contract.totalSettledUnderlying(),
         pool_contract.underlying(),
@@ -460,7 +459,7 @@ const debounceFn = debounce((pools, account, callback) => {
       ]
       let balanceOf = 0
       // 获取链上的原生资产,
-      if (pool.currency.is_ht){
+      if (pool.currency.is_ht) {
         const web3 = getHttpWeb3(pool.networkId)
         balanceOf = await web3.eth.getBalance(pool.address)
       } else {
@@ -480,6 +479,9 @@ const debounceFn = debounce((pools, account, callback) => {
 
       return multicallClient(promise_list)
         .then((data) => {
+          if (data[0] === null) {
+            return pool
+          }
           let [
             price,
             totalPurchasedCurrency,
@@ -490,7 +492,7 @@ const debounceFn = debounce((pools, account, callback) => {
             underlyingAddress,
             claimOf
           ] = data
-          let time = 0,timeSettle = 0,currency_allowance = 0
+          let time = 0, timeSettle = 0, currency_allowance = 0
           if (pool.currency.is_ht) {
             time = data[8]
             timeSettle = data[9]
@@ -507,7 +509,7 @@ const debounceFn = debounce((pools, account, callback) => {
             total_amount,
             total_volume,
             total_rate,
-          ] = totalSettleable
+          ] = (pool.totalSettleableError ? [true, "", "0", "0", "0", "100"] : totalSettleable)
           const [completed_, amount, volume, rate, unlockVolume, unlockRate] = settleable
           let status = pool.status || 0 // 即将上线
           const timeClose = time
@@ -539,7 +541,6 @@ const debounceFn = debounce((pools, account, callback) => {
             .div(new BigNumber(10).pow(pool.currency.decimal))
             .div(new BigNumber(Web3.utils.toWei('1', 'ether'))).toString()
 
-          console.log('price', price.toString())
 
           balanceOf = fromWei(balanceOf, pool.currency.decimal)
           const totalPurchasedAmount = new BigNumber(pool.amount).multipliedBy(new BigNumber(price))
@@ -582,9 +583,8 @@ const debounceFn = debounce((pools, account, callback) => {
             .toFixed(10, 1)
             .toString() * 1
           return Object.assign({}, pool, {
-            ratio: `1${pool.underlying.symbol}=${price}${
-              pool.currency.symbol
-            }`,
+            ratio: `1${pool.underlying.symbol}=${price}${pool.currency.symbol
+              }`,
             progress,
             status: status,
             time: time,
@@ -652,7 +652,7 @@ const debounceFn = debounce((pools, account, callback) => {
           pool_contract.quotaOf(account), // 最大申购额度
         ]
       }
-      if (pool.lock){
+      if (pool.lock) {
         promise_list.push(pool_contract.getUnlockRate())
       }
       currency_token &&
@@ -662,7 +662,9 @@ const debounceFn = debounce((pools, account, callback) => {
         promise_list.push(underlying_token.decimals())
       return multicallClient(promise_list)
         .then((data) => {
-
+          if (data[0] === null) {
+            return pool
+          }
           let [
             start_at,
             time,
@@ -683,23 +685,23 @@ const debounceFn = debounce((pools, account, callback) => {
             userFull = false,
             unlockRate;
 
-          if (pool.nft){
+          if (pool.nft) {
             quotaOf = data[7]
-            tokenValue=data[8]
+            tokenValue = data[8]
             nftBalanceOf = data[9][0]
-            nftRatio = new BigNumber(quotaOf).div(tokenValue).toFixed(2)*1
+            nftRatio = new BigNumber(quotaOf).div(tokenValue).toFixed(2) * 1
             userFull = data[10] >= data[11]
-          } else{
+          } else {
             ratio = data[7]
             totalQuota = data[8]
             quotaOf = data[9]
             if (pool.lock) {
               unlockRate = data[10]
-              currency_allowance = data[11]||0
-              underlying_decimals = data[12]||18
+              currency_allowance = data[11] || 0
+              underlying_decimals = data[12] || 18
             } else {
-              currency_allowance = data[10]||0
-              underlying_decimals = data[11]||18
+              currency_allowance = data[10] || 0
+              underlying_decimals = data[11] || 18
             }
           }
           let status = pool.status || 0 // 即将上线
@@ -736,7 +738,6 @@ const debounceFn = debounce((pools, account, callback) => {
               )
             )
           )
-          console.log('__ratio', __ratio.toString())
 
           const totalPurchasedAmount =
             new BigNumber(pool.amount)
@@ -761,12 +762,12 @@ const debounceFn = debounce((pools, account, callback) => {
           Object.assign(pool.currency, {
             allowance: currency_allowance,
           })
-           Object.assign(pool.underlying, {
-             address:
-               tokenAddress === '0x0000000000000000000000000000000000000000'
-                 ? ''
-                 : tokenAddress,
-           })
+          Object.assign(pool.underlying, {
+            address:
+              tokenAddress === '0x0000000000000000000000000000000000000000'
+                ? ''
+                : tokenAddress,
+          })
 
           let purchasedCurrencyOf = new BigNumber(fromWei(offeredOf, pool.underlying.decimal))
             .multipliedBy(new BigNumber(__ratio))
@@ -779,10 +780,10 @@ const debounceFn = debounce((pools, account, callback) => {
             nftRatio,
             ratio: `1${pool.underlying.symbol}=${nftRatio ? nftRatio :
               __ratio.toFixed(5, 1).toString() * 1
-            }${pool.currency.symbol}`,
+              }${pool.currency.symbol}`,
             progress:
               new BigNumber(totalOffered)
-                .dividedBy(pool.nft ? new BigNumber(pool.amount).div(nftRatio): new BigNumber(pool.amount))
+                .dividedBy(pool.nft ? new BigNumber(pool.amount).div(nftRatio) : new BigNumber(pool.amount))
                 .toNumber()
                 .toFixed(2) * 1,
             status: status,
@@ -806,7 +807,7 @@ const debounceFn = debounce((pools, account, callback) => {
               volume: pool.nft ? tokenValue : offeredOf, // 预计中签量,nft是全量
               claimedOf, // 获取募资币种数量
               rate: Web3.utils.toWei('1', 'ether'), // 预计中签率
-              unlockVolume: pool.lock ? (fromWei(offeredOf, pool.underlying.decimal).toNumber() * (unlockRate/100) - fromWei(claimedOf).toNumber()) : (
+              unlockVolume: pool.lock ? (fromWei(offeredOf, pool.underlying.decimal).toNumber() * (unlockRate / 100) - fromWei(claimedOf).toNumber()) : (
                 fromWei(offeredOf, pool.underlying.decimal).toNumber() - fromWei(claimedOf, pool.underlying.decimal).toNumber()
               )
             },
@@ -862,7 +863,7 @@ export const usePoolsInfo = (address = '') => {
     })
   })
   useEffect(() => {
-    if (!account) return () => {}
+    if (!account) return () => { }
     debounceFn(pools, account, (promise) => {
       promise
         .then((pools) => {
@@ -873,7 +874,7 @@ export const usePoolsInfo = (address = '') => {
           console.log(e, 'pools')
         })
     })
-    return () => {}
+    return () => { }
   }, [account, address, blockHeight])
   return poolsInfo
 }
@@ -942,9 +943,8 @@ export const usePoolsLBPInfo = (address = '') => {
               localStorage.getItem(`is_join_${pool.address}`) || false
             const price = Web3.utils.fromWei(priceLBP, 'ether')
             return Object.assign({}, pool, {
-              ratio: `1${pool.underlying.symbol}=${formatAmount(priceLBP)}${
-                pool.currency.symbol
-              }`,
+              ratio: `1${pool.underlying.symbol}=${formatAmount(priceLBP)}${pool.currency.symbol
+                }`,
               status: status,
               time: time,
               price: Web3.utils.fromWei(priceLBP, 'ether'),
@@ -965,7 +965,7 @@ export const usePoolsLBPInfo = (address = '') => {
         console.log(e, 'usePoolsLBPInfo')
       })
 
-    return () => {}
+    return () => { }
   }, [account, address, blockHeight])
   return poolsLBPInfo
 }
@@ -984,7 +984,7 @@ export const useTotalRewards = (address, abi, _chainId) => {
           setTotal(_total)
         })
     }
-    return () => {}
+    return () => { }
   }, [blockHeight])
   return total
 }
@@ -1003,7 +1003,7 @@ export const useSpan = (address, abi, _chainId) => {
           setSpan(_span)
         })
     }
-    return () => {}
+    return () => { }
   }, [blockHeight])
   return span
 }
@@ -1033,7 +1033,7 @@ const getPairPrice = (address1, address2, amount, _chainId) => {
 
     return multicallClient(promiseList).then((promiseListData) => {
       const [token0, token1, getReserves] = promiseListData
-      const [ _reserve0, _reserve1 ] = getReserves
+      const [_reserve0, _reserve1] = getReserves
       const mdexRouterList1 = [
         mdex_router_contract.getAmountOut(
           numToWei(amount),
@@ -1060,7 +1060,7 @@ const getPairPrice = (address1, address2, amount, _chainId) => {
           return Web3.utils.fromWei(amountOut, 'ether')
         })
       }
-    }).catch((e)=>{
+    }).catch((e) => {
       console.log(e)
     })
   })
@@ -1129,7 +1129,7 @@ export const useMDexPrice = (
         }
       )
     }
-    return () => {}
+    return () => { }
   }, [blockHeight, address1, address2, amount])
   if (amount == 0) return ['0', '0']
 
@@ -1238,8 +1238,8 @@ export const useFarmInfo = (address = '') => {
   const hasApr = (pool.dueDate > now || !pool.dueDate) && !pool.isEnd
 
   useMemo(() => {
-    if(hasApr && pool.poolType === 2 && pool.rewards2) {
-      const contract = new ClientContract(MDexPool, MDEX_POOL_ADDRESS , pool.networkId)
+    if (hasApr && pool.poolType === 2 && pool.rewards2) {
+      const contract = new ClientContract(MDexPool, MDEX_POOL_ADDRESS, pool.networkId)
       const pool_contract = new ClientContract(pool.abi, pool.address, pool.networkId)
       const promiseList = [contract.poolInfo(pool.mdexPid), pool_contract.totalSupply()]
       // // console.log('request___2')
@@ -1288,7 +1288,7 @@ export const useFarmInfo = (address = '') => {
           )
         )
 
-        if(pool.rewards2 && reward2Radio > 0){
+        if (pool.rewards2 && reward2Radio > 0) {
           promise_list.push(
             calc_contract.getSwapRewardLPTApr(
               pool.address,
@@ -1358,16 +1358,16 @@ export const useFarmInfo = (address = '') => {
         // 处理mdx奖励减半问题
         const blockNumber = await multicallClient.getBlockInfo(ChainId.HECO).then(res => res.number)
         const mdexPoolContract = new ClientContract(MDexPool, '0xfb03e11d93632d97a8981158a632dd5986f5e909', pool.networkId)
-         await multicallClient([
-           mdexPoolContract.startBlock(),
-           mdexPoolContract.halvingPeriod()
+        await multicallClient([
+          mdexPoolContract.startBlock(),
+          mdexPoolContract.halvingPeriod()
         ]).then(res => {
           const [startBlock, halvingPeriod] = res
           const n = Math.floor((blockNumber - startBlock) / halvingPeriod) - 3
-           for (let i = 0; i < n; i++) {
-             APR2 =  new BigNumber(APR2).div(2)
-           }
-         })
+          for (let i = 0; i < n; i++) {
+            APR2 = new BigNumber(APR2).div(2)
+          }
+        })
       }
       let APR_ = fromWei(
         new BigNumber(APR).plus(new BigNumber(APR2)).toString(),
@@ -1410,19 +1410,19 @@ export const useAmountsOut = (path, amount, _chainId) => {
       )
       multicallClient([mdex_router_contract.getAmountsOut(numToWei(amount, 18), path)]).then(data_ => {
         const data = data_[0]
-        const outAmountTotal_ = fromWei(data[data.length - 1], 18).toFixed(6)*1
+        const outAmountTotal_ = fromWei(data[data.length - 1], 18).toFixed(6) * 1
         // setOutAmountTotal(outAmountTotal_)
         // 1 - (1-0.003)^len
         const fee_ = new BigNumber(amount).multipliedBy(
           new BigNumber(1).minus((new BigNumber(1).minus(new BigNumber(0.003))).pow(path.length - 1))
-        ).toFixed(6)*1
+        ).toFixed(6) * 1
         console.log('outAmount, outFee, new', outAmountTotal_, fee_, path.length)
         setFee(fee_)
         setOutAmount(outAmountTotal_)
       })
     }
   }, [amount, path])
-  if (!amount){
+  if (!amount) {
     return [0, 0]
   }
   return [outAmount, fee]
@@ -1437,9 +1437,9 @@ export const VoteSpanVal = () => {
     multicallClient([pool_contract.voteSpan()]).then((res) => {
       setVal(res)
     })
-    .catch((err) => {
-      console.log('error', err)
-    })
+      .catch((err) => {
+        console.log('error', err)
+      })
   }, [library, account, active, blockHeight])
   return val
 }
@@ -1480,24 +1480,24 @@ export const SuccessPercent = () => {
 }
 
 export const VotesData = (propId, voteMax) => {
-   const { account, active, library } = useActiveWeb3React()
-   const blockHeight = useBlockHeight()
+  const { account, active, library } = useActiveWeb3React()
+  const blockHeight = useBlockHeight()
   const [progressData, setProgressData] = useState('')
-   useEffect(() => {
-     const pool_contract = new ClientContract(voteMain.abi, voteMain.address, ChainId.HECO)
-     multicallClient([pool_contract.getVotes(propId)])
-       .then((res) => {
-         let resData = res[0]
-         setProgressData(
-           new BigNumber(formatAmount(resData[1]))
-             .div(new BigNumber(formatAmount(voteMax)).div(2))
-             .toFixed(2, 1)
-             .toString()
-         )
-       })
-       .catch((err) => {
-         console.log('error', err)
-       })
-   }, [account, active, blockHeight, library])
-   return progressData
- }
+  useEffect(() => {
+    const pool_contract = new ClientContract(voteMain.abi, voteMain.address, ChainId.HECO)
+    multicallClient([pool_contract.getVotes(propId)])
+      .then((res) => {
+        let resData = res[0]
+        setProgressData(
+          new BigNumber(formatAmount(resData[1]))
+            .div(new BigNumber(formatAmount(voteMax)).div(2))
+            .toFixed(2, 1)
+            .toString()
+        )
+      })
+      .catch((err) => {
+        console.log('error', err)
+      })
+  }, [account, active, blockHeight, library])
+  return progressData
+}

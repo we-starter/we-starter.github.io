@@ -180,20 +180,20 @@ const PoolsIndex = (props) => {
     switch (status) {
       case 0:
         return (
-          <span className='pools-example_coming_status'>
+          <span className='pools-type_coming_status'>
             <FormattedMessage id='willStart' />
           </span>
         )
       case 1:
         if (timeClose - 0 === 0 || timeClose > now) {
           return (
-            <span className='pools-example_progress_status'>
+            <span className='pools-type_progress_status'>
               <FormattedMessage id='recruit' />
             </span>
           )
         } else {
           return (
-            <span className='pools-example_progress_status'>
+            <span className='pools-type_progress_status'>
               <FormattedMessage id='recruitOver' />
             </span>
           )
@@ -201,13 +201,13 @@ const PoolsIndex = (props) => {
 
       case 2:
         return (
-          <span className='pools-example_progress_status'>
+          <span className='pools-type_progress_status'>
             <FormattedMessage id='settlement' />
           </span>
         )
       case 3:
         return (
-          <span className='pools-example_over_status'>
+          <span className='pools-type_over_status'>
             <FormattedMessage id='completed' />
           </span>
         )
@@ -288,7 +288,7 @@ const PoolsIndex = (props) => {
         </div>
         <div className='pools-example_card_box_b'>
           {pool && pool.icon && <div className='pools-example_card_box_b_logo'><div><img src={pool.icon} /></div></div>}
-          {pool && <div className={'pools-example_card_box_b_name'}><h3 >{pool.name} POOL</h3> <span className={'chain_' + pool.networkId} /></div>}
+          {pool && <div className={'pools-example_card_box_b_name'}><h3 >{pool.name} POOL {pool && pool.svipFlag && <span className='svip'></span>}</h3> <span className={'chain_' + pool.networkId} /></div>}
           <p className='pools-example_card_box_b_time'>
             {renderStatus(pool)}
             {(
@@ -358,11 +358,101 @@ const PoolsIndex = (props) => {
             <FormattedMessage id='poolsIndexText2' />
             <i> {(progress * 100).toFixed(0)}%</i>
           </p>
-          <a
-            onClick={(e) => {
-              console.log(pool)
-              goDetail(
-                e,
+          {((pool && pool.status !== 3) ||
+            (pool && pool.underlying.name === 'LBP')) && (
+              <p className='pools-example_card_box_b_text'>
+                <FormattedMessage id='accessType' />
+                <i>
+                  {type === 1 && !(pool.svipFlag || pool.nft) && (
+                    <>
+                      <span
+                        className={cs('crown', quotaOf > 0 && 'crown-highlight')}
+                      ></span>
+                      <FormattedMessage id='private' />
+                      <span
+                        className='tips'
+                        onMouseOver={() => setHoverFlag(index)}
+                        onMouseOut={() => setHoverFlag(null)}
+                      >
+                        {hoverFlag === index && (
+                          <i className='tips_content'>
+                            <FormattedMessage id='privateTips' />
+                          </i>
+                        )}
+                      </span>
+                    </>
+                  )}
+                  {type === 1 && pool && pool.svipFlag && (
+                    <>
+                      <span
+                        className={cs('crown', quotaOf > 0 && 'crown-highlight')}
+                      ></span>
+                      <FormattedMessage id='svip' />
+                      <span
+                        className='tips'
+                        onMouseOver={() => setHoverFlag(index)}
+                        onMouseOut={() => setHoverFlag(null)}
+                      >
+                        {hoverFlag === index && (
+                          <i className='tips_content'>
+                            <FormattedMessage id='svipTips' />
+                          </i>
+                        )}
+                      </span>
+                    </>
+                  )}
+                  {(type === 0 || type === 2) && (
+                    <>
+                      <FormattedMessage id='public' />
+                      <span
+                        className='tips'
+                        onMouseOver={() => setHoverFlag(index)}
+                        onMouseOut={() => setHoverFlag(null)}
+                      >
+                        {hoverFlag === index &&
+                          pool &&
+                          pool.underlying.name !== 'LBP' && (
+                            <i className='tips_content'>
+                              <FormattedMessage id='publicTips' />
+                            </i>
+                          )}
+                        {hoverFlag === index &&
+                          pool &&
+                          pool.underlying.name === 'LBP' && (
+                            <i className='tips_content'>
+                              <FormattedMessage id='publicTips1' />
+                            </i>
+                          )}
+                      </span>
+                    </>
+                  )}
+                  {pool.nft && (
+                    <>
+                      <div className="nft-badge">
+                        <img src={pool.nft.icon} alt="" />
+                        {pool.nft.name}
+                      </div>
+
+                      <Popover content={() => <NftCardTipContent nft={pool.nft} />} title={null}>
+                        <span className='tips' />
+                      </Popover>
+                    </>
+                  )}
+                </i>
+              </p>
+            )}
+
+
+          {pool && pool.networkId == chainId && (
+            <a
+              className={cs(
+                'pools-type_enter',
+                pool.networkId == ChainId.MATIC && 'pools-type_matic_enter',
+                pool.networkId == ChainId.BSC && 'pools-type_bsc_enter',
+                pool.networkId == ChainId.AVALANCHE && 'pools-type_avalanche_enter',
+                pool &&
+                pool.underlying.name === 'LBP' &&
+                'pools-type_lbp_enter',
                 pool &&
                 (pool.is_coming ||
                   (status === 3 &&
@@ -372,22 +462,71 @@ const PoolsIndex = (props) => {
                       pool.settleable.volume == 0) ||
                       (pool.settleable &&
                         pool.type === 1 &&
-                        pool.settleable.claimedOf * 1 !== 0) ||
-                      (pool.settleable && pool.settleable.volume == 0))) ||
+                        (pool.settleable.claimedOf * 1 !== 0 ||
+                          pool.settleable.volume == 0)))) ||
                   (!active && status === 3) ||
-                  (status === 3 && pool.underlying.name === 'LBP')),
-                address,
-                pool && pool.underlying.name
-              )
-            }}
-            className={cs(
-              'pools-example_card_box_b_enter',
-              pool.networkId == ChainId.MATIC && 'pools-example_card_box_b_matic_enter',
-              pool.networkId == ChainId.BSC && 'pools-example_card_box_b_bsc_enter',
-              pool.networkId == ChainId.AVALANCHE && 'pools-example_card_box_b_avalanche_enter')}
-          >
-            Enter Pool
-          </a>
+                  (status === 3 && pool.underlying.name === 'LBP')) &&
+                'pools-type_disable_enter'
+              )}
+              onClick={(e) => {
+                console.log(pool)
+                goDetail(
+                  e,
+                  pool &&
+                  (pool.is_coming ||
+                    (status === 3 &&
+                      ((pool.type === 0 &&
+                        pool.settleable &&
+                        pool.settleable.amount == 0 &&
+                        pool.settleable.volume == 0) ||
+                        (pool.settleable &&
+                          pool.type === 1 &&
+                          pool.settleable.claimedOf * 1 !== 0) ||
+                        (pool.settleable && pool.settleable.volume == 0))) ||
+                    (!active && status === 3) ||
+                    (status === 3 && pool.underlying.name === 'LBP')),
+                  address,
+                  pool && pool.underlying.name
+                )
+              }}
+            >
+              <FormattedMessage id='poolsIndexText3' />
+            </a>
+          )}
+          {pool && pool.networkId !== chainId && (
+            <a
+              className={cs(
+                'pools-type_enter',
+                pool.networkId == ChainId.MATIC && 'pools-type_matic_enter',
+                pool.networkId == ChainId.BSC && 'pools-type_bsc_enter',
+                pool.networkId == ChainId.AVALANCHE && 'pools-type_avalanche_enter',
+              )}
+              onClick={(e) => {
+                changeNetwork(pool.networkId).then(() => {
+                  if (window.onto) {
+                    message.warning('Please switch manually in the ONTO wallet')
+                  } else {
+                    message.success('Switch success')
+                  }
+                })
+                e.stopPropagation()
+                return false
+              }}
+            >
+              {pool.networkId == ChainId.HECO && (
+                <FormattedMessage id='poolTextS128' />
+              )}
+              {pool.networkId == ChainId.MATIC && (
+                <FormattedMessage id='poolTextS137' />
+              )}
+              {pool.networkId == ChainId.BSC && (
+                <FormattedMessage id='poolTextS56' />
+              )}
+              {pool.networkId == ChainId.AVALANCHE && (
+                <FormattedMessage id='poolTextS43114' />
+              )}
+            </a>
+          )}
         </div>
       </div>
     )

@@ -241,17 +241,19 @@ const Banner = (props) => {
               </span>
               <div>
                 {WarTokenAddress}
-                <CopyToClipboard
+                {/* <CopyToClipboard
                   text={WarTokenAddress}
                   onCopy={() => {
                     message.success('copy success')
                   }}
-                >
+                > */}
+                <a href='https://hecoinfo.com/token/0x910651F81a605a6Ef35d05527d24A72fecef8bF0' target="_blank">
                   <img src={CopyIcon} />
-                </CopyToClipboard>
-                <a className='banner_address_metaMask' onClick={addToken}>
-                  Add WAR to MetaMask<span className='metaMask_logo'></span>
                 </a>
+                {/* </CopyToClipboard> */}
+                <span className='banner_address_metaMask' onClick={addToken}>
+                  Add WAR to MetaMask<span className='metaMask_logo'></span>
+                </span>
               </div>
             </div>
           </div>

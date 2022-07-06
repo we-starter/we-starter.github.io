@@ -12,7 +12,61 @@
     border: 1px solid #0f8c20;
   }
 }
-
+.crown,
+.tips,
+.crown-highlight {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+}
+.crown {
+  margin-right: 2px;
+  background: url("../icon/home_N02_night@2x.png") no-repeat;
+  background-size: 100% 100%;
+}
+.crown-highlight {
+  margin-right: 2px;
+  background: url("../icon/home_N01_night@2x.png") no-repeat;
+  background-size: 100% 100%;
+}
+.tips {
+  position: relative;
+  margin-left: 2px;
+  background: url("../icon/06\ icon／minor／info@2x.png") no-repeat;
+  background-size: 100% 100%;
+  &:hover {
+    cursor: pointer;
+  }
+}
+.tips_content {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 0 10px;
+  margin-top: 0 !important;
+  height: 24px;
+  font-style: normal;
+  font-size: 12px;
+  color: #22292f;
+  line-height: 24px !important;
+  background: #e1dfd9;
+  border-radius: 3px;
+  white-space: nowrap;
+  &::after {
+    content: "";
+    display: inline-block;
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-top: 7px solid #e1dfd9;
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+  }
+}
 .nft-card-tip-content {
   display: flex;
   img {
@@ -241,19 +295,18 @@
         border-radius: 20px;
         vertical-align: top;
         width: 380px;
-        height: 420px;
         background: #f9f9f9;
         border-radius: 14px;
-        overflow: hidden;
         .type_private_box_t {
+          border-radius: 14px 14px 0 0;
           width: 100%;
-          height: 50%;
+          height: 210px;
           background-image: url(../../assets/image/default-pool.png);
           background-repeat: no-repeat;
           background-size: 100% 100%;
         }
         .type_private_box_b {
-          height: 50%;
+          height: 240px;
           position: relative;
           &_logo {
             width: 100%;
@@ -282,11 +335,9 @@
               padding-right: 20px;
               > span {
                 height: 16px;
-                background: #fff0b3;
                 border-radius: 3px;
                 font-size: 12px;
                 font-family: PingFangSC-Regular, PingFang SC;
-                color: #000000;
                 line-height: 12px;
                 padding: 0 3px;
               }
@@ -304,6 +355,8 @@
               color: #000000;
               line-height: 24px;
               margin-bottom: 0;
+              display: flex;
+              align-items: center;
             }
           }
           &_text {
@@ -325,6 +378,8 @@
                 font-weight: bold;
                 color: #000000;
                 line-height: 18px;
+                display: flex;
+                align-items: center;
               }
             }
           }
@@ -454,62 +509,8 @@
           }
         }
       }
-      .crown,
-      .tips,
-      .crown-highlight {
-        display: inline-block;
-        width: 24px;
-        height: 24px;
-      }
-      .crown {
-        margin-right: 2px;
-        background: url("../icon/home_N02_night@2x.png") no-repeat;
-        background-size: 100% 100%;
-      }
-      .crown-highlight {
-        margin-right: 2px;
-        background: url("../icon/home_N01_night@2x.png") no-repeat;
-        background-size: 100% 100%;
-      }
-      .tips {
-        position: relative;
-        margin-left: 2px;
-        background: url("../icon/06\ icon／minor／info@2x.png") no-repeat;
-        background-size: 100% 100%;
-        &:hover {
-          cursor: pointer;
-        }
-      }
-      .tips_content {
-        position: absolute;
-        bottom: 30px;
-        left: 50%;
-        transform: translateX(-50%);
-        padding: 0 10px;
-        margin-top: 0 !important;
-        height: 24px;
-        font-style: normal;
-        font-size: 12px;
-        color: #22292f;
-        line-height: 24px !important;
-        background: #e1dfd9;
-        border-radius: 3px;
-        white-space: nowrap;
-        &::after {
-          content: "";
-          display: inline-block;
-          position: absolute;
-          bottom: -5px;
-          left: 50%;
-          transform: translateX(-50%);
-          width: 0;
-          height: 0;
-          border-top: 7px solid #e1dfd9;
-          border-left: 7px solid transparent;
-          border-right: 7px solid transparent;
-        }
-      }
     }
+
     &_chaind_box_128 {
       position: absolute;
       right: -22px;
@@ -626,6 +627,7 @@
       display: inline-block;
       position: absolute;
       bottom: 0;
+      left: 0;
       width: 100%;
       height: 48px;
       line-height: 48px;
@@ -647,12 +649,14 @@
       color: #f0b90b;
       &:hover {
         background: rgba(240, 185, 11, 0.5);
+        color: #cf9f06 !important;
       }
     }
     &_matic_enter {
       background: rgba(130, 71, 229, 0.2);
       color: #8247e5;
       &:hover {
+        color: #7835e9 !important;
         background: rgba(130, 71, 229, 0.5);
       }
     }
@@ -662,6 +666,7 @@
       color: #e84142;
       &:hover {
         background: rgba(232, 65, 66, 0.5);
+        color: #ec292b !important;
       }
     }
     &_disable_enter {
@@ -902,14 +907,15 @@
         border: 1px solid #f7ecc9;
         overflow: hidden;
         .type_private_box_t {
+          border-radius: 14px 14px 0 0;
           width: 100%;
-          height: 50%;
+          height: 210px;
           background-image: url(../../assets/image/default-pool.png);
           background-repeat: no-repeat;
           background-size: 100% 100%;
         }
         .type_private_box_b {
-          height: 50%;
+          height: 240px;
           position: relative;
           &_logo {
             width: 100%;
@@ -935,11 +941,9 @@
               padding-right: 20px;
               > span {
                 height: 16px;
-                background: #fff0b3;
                 border-radius: 3px;
                 font-size: 12px;
                 font-family: PingFangSC-Regular, PingFang SC;
-                color: #000000;
                 line-height: 12px;
                 padding: 0 3px;
               }
@@ -957,6 +961,8 @@
               color: #000000;
               line-height: 24px;
               margin-bottom: 0;
+              display: flex;
+              align-items: center;
             }
           }
           &_text {
@@ -978,6 +984,8 @@
                 font-weight: bold;
                 color: #000000;
                 line-height: 18px;
+                display: flex;
+                align-items: center;
               }
             }
           }
@@ -1278,6 +1286,7 @@
     &_enter {
       display: inline-block;
       position: absolute;
+      left: 0;
       bottom: 0;
       width: 100%;
       height: 48px;
@@ -1300,12 +1309,14 @@
       color: #f0b90b;
       &:hover {
         background: rgba(240, 185, 11, 0.5);
+        color: #cf9f06 !important;
       }
     }
     &_matic_enter {
       background: rgba(130, 71, 229, 0.2);
       color: #8247e5;
       &:hover {
+        color: #7835e9 !important;
         background: rgba(130, 71, 229, 0.5);
       }
     }
@@ -1315,6 +1326,7 @@
       color: #e84142;
       &:hover {
         background: rgba(232, 65, 66, 0.5);
+        color: #ec292b !important;
       }
     }
     &_disable_enter {
@@ -1555,14 +1567,15 @@
         border: 1px solid #f7ecc9;
         overflow: hidden;
         .type_private_box_t {
+          border-radius: 14px 14px 0 0;
           width: 100%;
-          height: 50%;
+          height: 210px;
           background-image: url(../../assets/image/default-pool.png);
           background-repeat: no-repeat;
           background-size: 100% 100%;
         }
         .type_private_box_b {
-          height: 50%;
+          height: 240px;
           position: relative;
           &_logo {
             width: 100%;
@@ -1588,11 +1601,9 @@
               padding-right: 20px;
               > span {
                 height: 16px;
-                background: #fff0b3;
                 border-radius: 3px;
                 font-size: 12px;
                 font-family: PingFangSC-Regular, PingFang SC;
-                color: #000000;
                 line-height: 12px;
                 padding: 0 3px;
               }
@@ -1610,6 +1621,8 @@
               color: #000000;
               line-height: 24px;
               margin-bottom: 0;
+              display: flex;
+              align-items: center;
             }
           }
           &_text {
@@ -1631,6 +1644,8 @@
                 font-weight: bold;
                 color: #000000;
                 line-height: 18px;
+                display: flex;
+                align-items: center;
               }
             }
           }
@@ -1931,6 +1946,7 @@
     &_enter {
       display: inline-block;
       position: absolute;
+      left: 0;
       bottom: 0;
       width: 100%;
       height: 48px;
@@ -1953,12 +1969,14 @@
       color: #f0b90b;
       &:hover {
         background: rgba(240, 185, 11, 0.5);
+        color: #cf9f06 !important;
       }
     }
     &_matic_enter {
       background: rgba(130, 71, 229, 0.2);
       color: #8247e5;
       &:hover {
+        color: #7835e9 !important;
         background: rgba(130, 71, 229, 0.5);
       }
     }
@@ -1968,6 +1986,7 @@
       color: #e84142;
       &:hover {
         background: rgba(232, 65, 66, 0.5);
+        color: #ec292b !important;
       }
     }
     &_disable_enter {
@@ -2208,14 +2227,15 @@
         border: 1px solid #f7ecc9;
         overflow: hidden;
         .type_private_box_t {
+          border-radius: 14px 14px 0 0;
           width: 100%;
-          height: 50%;
+          height: 210px;
           background-image: url(../../assets/image/default-pool.png);
           background-repeat: no-repeat;
           background-size: 100% 100%;
         }
         .type_private_box_b {
-          height: 50%;
+          height: 240px;
           position: relative;
           &_logo {
             width: 100%;
@@ -2241,11 +2261,9 @@
               padding-right: 20px;
               > span {
                 height: 16px;
-                background: #fff0b3;
                 border-radius: 3px;
                 font-size: 12px;
                 font-family: PingFangSC-Regular, PingFang SC;
-                color: #000000;
                 line-height: 12px;
                 padding: 0 3px;
               }
@@ -2263,6 +2281,8 @@
               color: #000000;
               line-height: 24px;
               margin-bottom: 0;
+              display: flex;
+              align-items: center;
             }
           }
           &_text {
@@ -2284,6 +2304,8 @@
                 font-weight: bold;
                 color: #000000;
                 line-height: 18px;
+                display: flex;
+                align-items: center;
               }
             }
           }
@@ -2584,6 +2606,7 @@
     &_enter {
       display: inline-block;
       position: absolute;
+      left: 0;
       bottom: 0;
       width: 100%;
       height: 48px;
@@ -2606,12 +2629,14 @@
       color: #f0b90b;
       &:hover {
         background: rgba(240, 185, 11, 0.5);
+        color: #cf9f06 !important;
       }
     }
     &_matic_enter {
       background: rgba(130, 71, 229, 0.2);
       color: #8247e5;
       &:hover {
+        color: #7835e9 !important;
         background: rgba(130, 71, 229, 0.5);
       }
     }
@@ -2621,6 +2646,7 @@
       color: #e84142;
       &:hover {
         background: rgba(232, 65, 66, 0.5);
+        color: #ec292b !important;
       }
     }
     &_disable_enter {

@@ -200,18 +200,20 @@ const PoolsDetail = (props) => {
           </div>
           <p>
             {pool && pool.address}
-            <svg width="24px" height="24px" viewBox="0 0 24 24" >
-              <g id="westar" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                <g transform="translate(-1086.000000, -249.000000)">
-                  <g transform="translate(462.000000, 243.000000)">
-                    <g transform="translate(624.000000, 6.000000)">
-                      <polygon points="0 0 24 0 24 24 0 24"></polygon>
-                      <path d="M10,3 L10,5 L5,5 L5,19 L19,19 L19,14 L21,14 L21,20 C21,20.5522847 20.5522847,21 20,21 L4,21 C3.44771525,21 3,20.5522847 3,20 L3,4 C3,3.44771525 3.44771525,3 4,3 L10,3 Z M17.586,5 L13,5 L13,3 L21,3 L21,11 L19,11 L19,6.414 L12,13.414 L10.586,12 L17.586,5 Z" id="形状" fill="#00C57B" fill-rule="nonzero"></path>
+            <a href={`https://hecoinfo.com/address/${pool.address}`} target='_blank'>
+              <svg width="24px" height="24px" viewBox="0 0 24 24" >
+                <g id="westar" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                  <g transform="translate(-1086.000000, -249.000000)">
+                    <g transform="translate(462.000000, 243.000000)">
+                      <g transform="translate(624.000000, 6.000000)">
+                        <polygon points="0 0 24 0 24 24 0 24"></polygon>
+                        <path d="M10,3 L10,5 L5,5 L5,19 L19,19 L19,14 L21,14 L21,20 C21,20.5522847 20.5522847,21 20,21 L4,21 C3.44771525,21 3,20.5522847 3,20 L3,4 C3,3.44771525 3.44771525,3 4,3 L10,3 Z M17.586,5 L13,5 L13,3 L21,3 L21,11 L19,11 L19,6.414 L12,13.414 L10.586,12 L17.586,5 Z" id="形状" fill="#00C57B" fill-rule="nonzero"></path>
+                      </g>
                     </g>
                   </g>
                 </g>
-              </g>
-            </svg>
+              </svg>
+            </a>
           </p>
         </div></div>
       <div className='pools_card'>
@@ -380,8 +382,54 @@ const PoolsDetail = (props) => {
         </div>
       )}
       <div className='pools_detail_record'>
+        {pool &&
+          pool.type === 1 &&
+          pool.quotaOf == 0 &&
+          left_time > 0 &&
+          pool.status == 0 && (
+            <div className='mask_layer'>
+              <p style={{ lineHeight: '30px', marginBottom: '0' }}>
+                <FormattedMessage id='countdown' />
+                &nbsp;
+                <span className='pools-type_time'>
+                  <Timer
+                    key={left_time}
+                    initialTime={left_time}
+                    direction='backward'
+                    formatValue={(number) => {
+                      if (number === 0) return '00'
+                      if (number < 10) {
+                        return `0${number}`
+                      }
+                      return number
+                    }}
+                  >
+                    <span>
+                      <Timer.Consumer>
+                        {({ h, d, formatValue }) => formatValue(d * 24 + h)}
+                      </Timer.Consumer>
+                    </span>
+                    &nbsp;:&nbsp;
+                    <span>
+                      <Timer.Minutes />
+                    </span>
+                    &nbsp;:&nbsp;
+                    <span>
+                      <Timer.Seconds />
+                    </span>
+                  </Timer>
+                </span>
+              </p>
+            </div>
+          )}
+        {pool && pool.type === 1 && pool.quotaOf == 0 && pool.status > 0 && (
+          <div className='mask_layer'>
+            <p style={{ lineHeight: '30px', marginBottom: '0' }}>
+              <FormattedMessage id='cannotProject' />
+            </p>
+          </div>
+        )}
         <div className='pools_detail_record_wrap'>
-
           {pool &&
             pool.type === 1 &&
             pool.quotaOf == 0 &&

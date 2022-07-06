@@ -1,10 +1,28 @@
 .pools-example {
   background-size: 100% 100%;
 }
-.pools-example_progress_status {
-  background: #fff0b3;
-  border-radius: 3px;
+.pools-type_over_status {
+  color: #42526e;
+  background: #dfe1e6;
   padding: 2px 3px;
+}
+.pools-type_progress_status {
+  color: #0f8c20;
+  background: #d4e9e2;
+  padding: 2px 3px;
+}
+.pools-type_coming_status {
+  color: #22292f;
+  background: #fff0b3;
+  padding: 2px 3px;
+}
+.svip {
+  display: inline-block;
+  margin-left: 4px;
+  width: 34px;
+  height: 18px;
+  background: url("../icon/farm/SVIP@2x.png") no-repeat;
+  background-size: 100% 100%;
 }
 @media #{$desktop} {
   .pools-example {
@@ -58,7 +76,6 @@
         position: relative;
         overflow: hidden;
         width: 380px;
-        height: 420px;
         background: #f9f9f9;
         border-radius: 14px;
         &_t {
@@ -70,12 +87,12 @@
         }
         &_b {
           width: 100%;
-          height: 210px;
+          height: 240px;
           padding: 35px 20px 0;
           &_logo {
             position: absolute;
             top: 50%;
-            transform: translateY(-50px);
+            transform: translateY(-70px);
             width: 80px;
             height: 80px;
             border-radius: 12px;
@@ -107,6 +124,8 @@
               color: #000000;
               line-height: 24px;
               margin-bottom: 0;
+              display: flex;
+              align-items: center;
             }
             > span {
               display: block;
@@ -131,7 +150,7 @@
           &_time {
             position: absolute;
             top: 50%;
-            transform: translateY(-23px);
+            transform: translateY(-39px);
             right: 0;
             width: calc(100% - 100px);
             height: 24px;
@@ -180,6 +199,8 @@
               color: #000000;
               line-height: 18px;
               font-style: normal;
+              display: flex;
+              align-items: center;
             }
           }
           &_enter {
@@ -293,7 +314,6 @@
         position: relative;
         overflow: hidden;
         width: 380px;
-        height: 420px;
         background: #f9f9f9;
         border-radius: 14px;
         &_t {
@@ -305,12 +325,12 @@
         }
         &_b {
           width: 100%;
-          height: 210px;
+          height: 240px;
           padding: 35px 20px 0;
           &_logo {
             position: absolute;
             top: 50%;
-            transform: translateY(-50px);
+            transform: translateY(-70px);
             width: 80px;
             height: 80px;
             border-radius: 12px;
@@ -341,6 +361,8 @@
               color: #000000;
               line-height: 24px;
               margin-bottom: 0;
+              display: flex;
+              align-items: center;
             }
             > span {
               display: block;
@@ -365,7 +387,7 @@
           &_time {
             position: absolute;
             top: 50%;
-            transform: translateY(-23px);
+            transform: translateY(-39px);
             right: 0;
             width: calc(100% - 100px);
             height: 24px;
@@ -527,7 +549,6 @@
         position: relative;
         overflow: hidden;
         width: 335px;
-        height: 420px;
         background: #f9f9f9;
         border-radius: 14px;
         margin-top: 20px;
@@ -540,12 +561,12 @@
         }
         &_b {
           width: 100%;
-          height: 210px;
+          height: 240px;
           padding: 35px 20px 0;
           &_logo {
             position: absolute;
             top: 50%;
-            transform: translateY(-50px);
+            transform: translateY(-70px);
             width: 80px;
             height: 80px;
             border-radius: 12px;
@@ -576,6 +597,8 @@
               color: #000000;
               line-height: 24px;
               margin-bottom: 0;
+              display: flex;
+              align-items: center;
             }
             > span {
               display: block;
@@ -600,7 +623,7 @@
           &_time {
             position: absolute;
             top: 50%;
-            transform: translateY(-23px);
+            transform: translateY(-39px);
             right: 0;
             width: calc(100% - 100px);
             height: 24px;
