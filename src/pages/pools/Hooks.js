@@ -479,6 +479,9 @@ const debounceFn = debounce((pools, account, callback) => {
 
       return multicallClient(promise_list)
         .then((data) => {
+          if (data[0] === null){
+            return pool
+          }
           let [
             price,
             totalPurchasedCurrency,
@@ -660,7 +663,9 @@ const debounceFn = debounce((pools, account, callback) => {
         promise_list.push(underlying_token.decimals())
       return multicallClient(promise_list)
         .then((data) => {
-
+          if (data[0] === null){
+            return pool
+          }
           let [
             start_at,
             time,
