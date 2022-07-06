@@ -506,7 +506,7 @@ const debounceFn = debounce((pools, account, callback) => {
             total_amount,
             total_volume,
             total_rate,
-          ] = (pool.totalSettleableError ? totalSettleable : [true,"","0","0","0","100"])
+          ] = (pool.totalSettleableError ? [true,"","0","0","0","100"]: totalSettleable)
           const [completed_, amount, volume, rate, unlockVolume, unlockRate] = settleable
           let status = pool.status || 0 // 即将上线
           const timeClose = time
