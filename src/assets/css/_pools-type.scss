@@ -53,6 +53,7 @@
   background: #e1dfd9;
   border-radius: 3px;
   white-space: nowrap;
+  z-index: 1;
   &::after {
     content: "";
     display: inline-block;

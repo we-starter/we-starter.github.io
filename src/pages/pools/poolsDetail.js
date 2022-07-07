@@ -7,6 +7,7 @@ import Web3 from 'web3'
 import Timer from 'react-compound-timer'
 import { GALLERY_SELECT_WEB3_CONTEXT, HANDLE_WALLET_MODAL } from '../../const'
 import transitions from '@material-ui/core/styles/transitions'
+import { SCAN_ADDRESS } from '../../web3/address'
 // import pools from '../../configs/pools'
 import { usePoolsInfo } from './Hooks'
 import { message } from 'antd'
@@ -200,7 +201,7 @@ const PoolsDetail = (props) => {
           </div>
           <p>
             {pool && pool.address}
-            <a href={`https://hecoinfo.com/address/${pool.address}`} target='_blank'>
+            <a href={`${SCAN_ADDRESS[pool.networkId]}/address/${pool.address}`} target='_blank'>
               <svg width="24px" height="24px" viewBox="0 0 24 24" >
                 <g id="westar" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                   <g transform="translate(-1086.000000, -249.000000)">

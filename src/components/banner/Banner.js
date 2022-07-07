@@ -19,6 +19,7 @@ import AddressIMG from '../../assets/icon/address_img.png'
 import BannerIMG from '../../assets/image/banner-img.png'
 import BigNumber from 'bignumber.js'
 import { HANDLE_WALLET_MODAL } from '../../const'
+import { SCAN_ADDRESS } from '../../web3/address'
 import {
   usePoolsInfo,
   usePoolsLBPInfo,
@@ -247,7 +248,7 @@ const Banner = (props) => {
                     message.success('copy success')
                   }}
                 > */}
-                <a href='https://hecoinfo.com/token/0x910651F81a605a6Ef35d05527d24A72fecef8bF0' target="_blank">
+                <a href={`${SCAN_ADDRESS[chainId !== 128 && chainId !== 56 ? 128 : chainId]}/token/0x910651F81a605a6Ef35d05527d24A72fecef8bF0`} target="_blank">
                   <img src={CopyIcon} />
                 </a>
                 {/* </CopyToClipboard> */}
