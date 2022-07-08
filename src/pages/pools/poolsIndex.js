@@ -420,6 +420,58 @@ const PoolsIndex = (props) => {
                 </span>
               </div>
             )}
+          {pool && pool.status == 3 && pool && pool.underlying.name !== 'LBP' && (
+            <div className='type_private_box_b_text'>
+              <span> <FormattedMessage id='accessType' /></span>
+              <span>
+                {type === 1 && (
+                  <>
+                    <span
+                      className={cs('crown', quotaOf > 0 && 'crown-highlight')}
+                    ></span>
+                    <FormattedMessage id='private' />
+                    <span
+                      className='tips'
+                      onMouseOver={() => setHoverFlag(index)}
+                      onMouseOut={() => setHoverFlag(null)}
+                    >
+                      {hoverFlag === index && (
+                        <i className='tips_content'>
+                          <FormattedMessage id='privateTips' />
+                        </i>
+                      )}
+                    </span>
+                  </>
+                )}
+                {(type === 0 || type === 2) && (
+                  <>
+                    <FormattedMessage id='public' />
+                    <span
+                      className='tips'
+                      onMouseOver={() => setHoverFlag(index)}
+                      onMouseOut={() => setHoverFlag(null)}
+                    >
+                      {hoverFlag === index &&
+                        pool &&
+                        pool.underlying.name !== 'LBP' && (
+                          <i className='tips_content'>
+                            <FormattedMessage id='publicTips' />
+                          </i>
+                        )}
+                      {hoverFlag === index &&
+                        pool &&
+                        pool.underlying.name === 'LBP' && (
+                          <i className='tips_content'>
+                            <FormattedMessage id='publicTips1' />
+                          </i>
+                        )}
+                    </span>
+                  </>
+                )}
+              </span>
+            </div>
+          )}
+
           {/*
               pool.settleable.volume > 0 获取数量大于0
               pool.settleable.amount > 0 未结算数量大于0

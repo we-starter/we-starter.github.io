@@ -167,6 +167,7 @@ export default [
   {
     name: 'GRVS',
     address: '0x3d61cB81EC67350488641Ac697901cd1e3c41351',
+    totalSettleableError: true,
     icon: GRVS,
     abi: StarterLock,
     start_at: '1648476000',
@@ -451,6 +452,7 @@ export default [
   {
     name: 'HRS',
     address: '0xA720faF024e8e7863808f1b63ed943a1ac72aaC9',
+    totalSettleableError: true,
     icon: HRS,
     abi: StarterV3,
     start_at: '1642248000',
