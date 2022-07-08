@@ -703,8 +703,8 @@
         left: 0;
         z-index: 1;
         padding: 0 30px;
-        width: 640px;
-        height: 164px;
+        width: 760px;
+        height: 100%;
         font-size: 14px;
         font-weight: 500;
         color: #ffffff;
@@ -1200,7 +1200,6 @@
         left: 0;
         z-index: 1;
         padding: 0 20px;
-        width: 320px;
         // height: 172px;
         height: 100%;
         font-size: 14px;
@@ -1210,6 +1209,7 @@
         text-align: center;
         background: rgba(34, 41, 47, 0.7);
         border-radius: 10px;
+        margin: 0 20px;
       }
     }
     &_record_tab {
@@ -1724,7 +1724,6 @@
         left: 0;
         z-index: 1;
         padding: 0 20px;
-        width: 320px;
         // height: 172px;
         height: 100%;
         font-size: 14px;
@@ -1734,6 +1733,7 @@
         text-align: center;
         background: rgba(34, 41, 47, 0.7);
         border-radius: 10px;
+        margin: 0 20px;
       }
     }
     &_record_tab {
