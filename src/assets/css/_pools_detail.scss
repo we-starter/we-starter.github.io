@@ -20,7 +20,7 @@
     align-items: center;
     > a {
       font-size: 14px;
-      font-family: Montserrat-Bold, Montserrat !important;
+      font-family: Montserrat-Bold, HelveticaNeue, "Helvetica Neue";
       color: #00c57b;
       font-weight: bold;
       line-height: 18px;
@@ -42,7 +42,7 @@
       margin-left: 10px;
       > div {
         font-size: 48px;
-        font-family: Montserrat-SemiBold, Montserrat !important;
+        font-family: Montserrat-SemiBold, HelveticaNeue, "Helvetica Neue";
         font-weight: 600;
         color: #000000;
         line-height: 58px;
@@ -53,7 +53,7 @@
           background: rgba(0, 197, 123, 0.2);
           border-radius: 14px;
           font-size: 20px;
-          font-family: Montserrat-Regular, Montserrat !important;
+          font-family: Montserrat-Regular, HelveticaNeue, "Helvetica Neue";
           color: #00c57b;
           line-height: 24px;
           font-weight: 400;
@@ -62,7 +62,7 @@
       }
       > p {
         font-size: 24px;
-        font-family: Montserrat-Bold, Montserrat !important;
+        font-family: Montserrat-Bold, HelveticaNeue, "Helvetica Neue";
         font-weight: bold;
         color: #00c57b;
         line-height: 36px;
@@ -87,18 +87,26 @@
       text-align: center;
     }
     &_tips_box {
-      margin: 0 auto;
-      width: 640px;
+      margin: 0 auto 0;
+      width: 1180px;
+      height: 48px;
+      border-radius: 14px;
       text-align: center;
     }
     &_tips {
+      width: 100%;
       display: inline-block;
+      height: 100%;
       margin-bottom: 0;
-      padding: 6px 8px;
-      font-size: 12px;
       color: #ff6400;
-      background: #fff3f0;
+      background: #f4e7e7;
       border-radius: 5px;
+      font-size: 14px;
+      font-family: Montserrat-Medium, Montserrat;
+      font-weight: 500;
+      color: #e84142;
+      border-radius: 14px;
+      line-height: 48px;
     }
     &_btn {
       display: flex;
@@ -281,7 +289,7 @@
         tr {
           td {
             font-size: 16px;
-            font-family: Montserrat-Bold, Montserrat !important;
+            font-family: Montserrat-Bold, HelveticaNeue, "Helvetica Neue";
             font-weight: bold;
             color: #4f4f4f;
             line-height: 19px;
@@ -325,7 +333,7 @@
       line-height: 60px;
       border-bottom: 4px solid #e7f4ef;
       a {
-        font-family: Montserrat-Medium, Montserrat !important;
+        font-family: Montserrat-Medium, HelveticaNeue, "Helvetica Neue";
         font-weight: 500;
         color: #4f4f4f;
         line-height: 60px;
@@ -373,12 +381,12 @@
           font-weight: bold;
           line-height: 60px;
           text-align: left;
-          font-family: Montserrat-Bold, Montserrat !important;
+          font-family: Montserrat-Bold, HelveticaNeue, "Helvetica Neue";
           color: #000000;
         }
         td {
           font-size: 14px;
-          font-family: Montserrat-Regular, Montserrat !important;
+          font-family: Montserrat-Regular, HelveticaNeue, "Helvetica Neue";
           color: #4f4f4f;
           p {
             display: -webkit-box;
@@ -513,7 +521,7 @@
   .pools_detail_box {
     min-width: 1080px;
     min-height: 100%;
-    background-color: #fff;
+    background-color: #f7fcf9;
     padding-top: 100px;
   }
   .pool_back {
@@ -523,7 +531,7 @@
     align-items: center;
     > a {
       font-size: 14px;
-      font-family: Montserrat-Bold, Montserrat !important;
+      font-family: Montserrat-Bold, HelveticaNeue, "Helvetica Neue";
       color: #00c57b;
       font-weight: bold;
       line-height: 18px;
@@ -545,7 +553,7 @@
       margin-left: 10px;
       > div {
         font-size: 48px;
-        font-family: Montserrat-SemiBold, Montserrat !important;
+        font-family: Montserrat-SemiBold, HelveticaNeue, "Helvetica Neue";
         font-weight: 600;
         color: #000000;
         line-height: 58px;
@@ -556,7 +564,7 @@
           background: rgba(0, 197, 123, 0.2);
           border-radius: 14px;
           font-size: 20px;
-          font-family: Montserrat-Regular, Montserrat !important;
+          font-family: Montserrat-Regular, HelveticaNeue, "Helvetica Neue";
           color: #00c57b;
           line-height: 24px;
           font-weight: 400;
@@ -565,7 +573,7 @@
       }
       > p {
         font-size: 24px;
-        font-family: Montserrat-Bold, Montserrat !important;
+        font-family: Montserrat-Bold, HelveticaNeue, "Helvetica Neue";
         font-weight: bold;
         color: #00c57b;
         line-height: 36px;
@@ -590,17 +598,24 @@
     }
     &_tips_box {
       margin: 0 auto;
-      width: 640px;
+      width: 100%;
+      height: 48px;
       text-align: center;
     }
     &_tips {
+      width: 100%;
       display: inline-block;
+      height: 100%;
       margin-bottom: 0;
-      padding: 6px 8px;
-      font-size: 12px;
       color: #ff6400;
-      background: #fff3f0;
+      background: #f4e7e7;
       border-radius: 5px;
+      font-size: 14px;
+      font-family: Montserrat-Medium, Montserrat;
+      font-weight: 500;
+      color: #e84142;
+      border-radius: 14px;
+      line-height: 48px;
     }
     &_btn {
       display: flex;
@@ -780,7 +795,7 @@
         tr {
           td {
             font-size: 14px;
-            font-family: Montserrat-Bold, Montserrat !important;
+            font-family: Montserrat-Bold, HelveticaNeue, "Helvetica Neue";
             font-weight: bold;
             color: #4f4f4f;
             line-height: 19px;
@@ -824,7 +839,7 @@
       line-height: 60px;
       border-bottom: 2px solid #e7f4ef;
       a {
-        font-family: Montserrat-Medium, Montserrat !important;
+        font-family: Montserrat-Medium, HelveticaNeue, "Helvetica Neue";
         font-weight: 500;
         color: #4f4f4f;
         line-height: 60px;
@@ -873,7 +888,7 @@
           line-height: 20px;
           text-align: left;
           color: #000000;
-          font-family: Montserrat-Bold, Montserrat !important;
+          font-family: Montserrat-Bold, HelveticaNeue, "Helvetica Neue";
         }
         td {
           font-size: 14px;
@@ -1007,7 +1022,7 @@
     min-width: 350px;
     // height: 100%;
     min-height: 100%;
-    background-color: #fff;
+    background-color: #f7fcf9;
     padding-top: 80px;
   }
   .pool_back {
@@ -1018,7 +1033,7 @@
     align-items: center;
     > a {
       font-size: 14px;
-      font-family: Montserrat-Bold, Montserrat !important;
+      font-family: Montserrat-Bold, HelveticaNeue, "Helvetica Neue";
       color: #00c57b;
       font-weight: bold;
       line-height: 18px;
@@ -1040,7 +1055,7 @@
     > div {
       > div {
         font-size: 24px;
-        font-family: Montserrat-SemiBold, Montserrat !important;
+        font-family: Montserrat-SemiBold, HelveticaNeue, "Helvetica Neue";
         font-weight: 600;
         color: #000000;
         line-height: 58px;
@@ -1051,7 +1066,7 @@
           background: rgba(0, 197, 123, 0.2);
           border-radius: 14px;
           font-size: 20px;
-          font-family: Montserrat-Regular, Montserrat !important;
+          font-family: Montserrat-Regular, HelveticaNeue, "Helvetica Neue";
           color: #00c57b;
           line-height: 24px;
           font-weight: 400;
@@ -1061,7 +1076,7 @@
       > p {
         word-break: break-word;
         font-size: 20px;
-        font-family: Montserrat-Bold, Montserrat !important;
+        font-family: Montserrat-Bold, HelveticaNeue, "Helvetica Neue";
         font-weight: bold;
         color: #00c57b;
         line-height: 24px;
@@ -1083,18 +1098,25 @@
       text-align: center;
     }
     &_tips_box {
-      margin: 0 auto;
-      width: 320px;
+      margin: 30px auto 0;
+      width: 100%;
       text-align: center;
+      padding: 0 20px;
     }
     &_tips {
+      width: 100%;
       display: inline-block;
+      height: 100%;
       margin-bottom: 0;
-      padding: 6px 8px;
-      font-size: 12px;
       color: #ff6400;
-      background: #fff3f0;
+      background: #f4e7e7;
       border-radius: 5px;
+      font-size: 14px;
+      font-family: Montserrat-Medium, Montserrat;
+      font-weight: 500;
+      color: #e84142;
+      border-radius: 14px;
+      line-height: 20px;
     }
     &_btn {
       display: flex;
@@ -1359,7 +1381,7 @@
       line-height: 60px;
       border-bottom: 4px solid #e7f4ef;
       a {
-        font-family: Montserrat-Medium, Montserrat !important;
+        font-family: Montserrat-Medium, HelveticaNeue, "Helvetica Neue";
         font-weight: 500;
         color: #4f4f4f;
         line-height: 60px;
@@ -1531,7 +1553,7 @@
     min-width: 350px;
     // height: 100%;
     min-height: 100%;
-    background-color: #fff;
+    background-color: #f7fcf9;
     padding-top: 80px;
   }
   .pool_back {
@@ -1542,7 +1564,7 @@
     align-items: center;
     > a {
       font-size: 14px;
-      font-family: Montserrat-Bold, Montserrat !important;
+      font-family: Montserrat-Bold, HelveticaNeue, "Helvetica Neue";
       color: #00c57b;
       font-weight: bold;
       line-height: 18px;
@@ -1564,7 +1586,7 @@
     > div {
       > div {
         font-size: 24px;
-        font-family: Montserrat-SemiBold, Montserrat !important;
+        font-family: Montserrat-SemiBold, HelveticaNeue, "Helvetica Neue";
         font-weight: 600;
         color: #000000;
         line-height: 58px;
@@ -1575,7 +1597,7 @@
           background: rgba(0, 197, 123, 0.2);
           border-radius: 14px;
           font-size: 20px;
-          font-family: Montserrat-Regular, Montserrat !important;
+          font-family: Montserrat-Regular, HelveticaNeue, "Helvetica Neue";
           color: #00c57b;
           line-height: 24px;
           font-weight: 400;
@@ -1585,7 +1607,7 @@
       > p {
         word-break: break-word;
         font-size: 20px;
-        font-family: Montserrat-Bold, Montserrat !important;
+        font-family: Montserrat-Bold, HelveticaNeue, "Helvetica Neue";
         font-weight: bold;
         color: #00c57b;
         line-height: 24px;
@@ -1607,18 +1629,25 @@
       text-align: center;
     }
     &_tips_box {
-      margin: 0 auto;
-      width: 320px;
+      margin: 30px auto 0;
+      width: 100%;
       text-align: center;
+      padding: 0 20px;
     }
     &_tips {
+      width: 100%;
       display: inline-block;
+      height: 100%;
       margin-bottom: 0;
-      padding: 6px 8px;
-      font-size: 12px;
       color: #ff6400;
-      background: #fff3f0;
+      background: #f4e7e7;
       border-radius: 5px;
+      font-size: 14px;
+      font-family: Montserrat-Medium, Montserrat;
+      font-weight: 500;
+      color: #e84142;
+      border-radius: 14px;
+      line-height: 20px;
     }
     &_btn {
       display: flex;
@@ -1883,7 +1912,7 @@
       line-height: 60px;
       border-bottom: 4px solid #e7f4ef;
       a {
-        font-family: Montserrat-Medium, Montserrat !important;
+        font-family: Montserrat-Medium, HelveticaNeue, "Helvetica Neue";
         font-weight: 500;
         color: #4f4f4f;
         line-height: 60px;
