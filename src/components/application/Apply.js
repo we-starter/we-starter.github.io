@@ -72,9 +72,42 @@ export default function Apply() {
       })
     }
   }
-  const getNftCards = () => {
+  const getNftCards = async () => {
     setLoadLoading(true)
-    axios({
+
+    const voteNFTContract = new ClientContract(voteNFT.abi, voteNFT.address, ChainId.HECO)
+    const maxId = await multicallClient([
+      voteNFTContract.maxId()
+    ]).then(res => {
+      return res[0]
+    })
+    const calls = []
+    for (let i = 1; i <= maxId; i++) {
+      calls.push(
+        voteNFTContract.ownerOf(i),
+        voteNFTContract.tokenURI(i)
+      )
+    }
+    multicallClient(calls).then(res => {
+      if (res[0] === null) {
+        return
+      }
+      const list = []
+      for (let i = 1; i <= maxId; i++) {
+        if (account.toLowerCase() === res[(i-1) * 2].toLowerCase()) {
+          list.push({
+            holder: res[(i-1) * 2],
+            tokenId: i,
+            tokenURI: res[(i-1) * 2 + 1]
+          })
+        }
+      }
+      setNFTList(list)
+      setNFTIndex(list.length - 1)
+      getApproved(list)
+    })
+
+/*    axios({
       method: 'post',
       url: 'https://graph.westarter.org/heco/subgraphs/name/westarter/governance',
       data: {
@@ -92,7 +125,7 @@ export default function Apply() {
       setNFTList(nftList)
       setNFTIndex(nftList.length - 1)
       getApproved(nftList)
-    })
+    })*/
   }
   useMemo(() => {
     if (nftList[nftIndex]) {

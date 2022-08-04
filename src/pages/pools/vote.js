@@ -27,9 +27,9 @@ const Vote = (props) => {
   const { dispatch, state } = useContext(mainContext)
 
   useEffect(() => {
-    props.location.state.detailData &&
+    props.location.state?.detailData &&
       setVoteDetail(props.location.state.detailData)
-  }, [props.location.state.detailData, active, blockHeight, account])
+  }, [props.location, active, blockHeight, account])
 
   const getUsers = () => {
     if (!active) {
@@ -77,7 +77,7 @@ const Vote = (props) => {
       setVoteLogoUrl(getIPFSFile(voteDetail && voteDetail.logo))
     }
   }, [voteDetail])
-    
+
   const setDisableBtn = () => {
     if (voteDetail && voteDetail.status === 1) {
       setIsVoteModalVisible(true)

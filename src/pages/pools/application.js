@@ -1,35 +1,38 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 import cs from 'classnames'
-import { getContract, useActiveWeb3React } from '../../web3'
-import { FormattedMessage, injectIntl } from 'react-intl'
+import {getContract, useActiveWeb3React} from '../../web3'
+import {FormattedMessage, injectIntl} from 'react-intl'
 import axios from 'axios'
-import { ApplicationBanner } from '../../components/application/applicationBanner'
-import { InProgressCard } from '../../components/application/inProgressCard'
+import {ApplicationBanner} from '../../components/application/applicationBanner'
+import {InProgressCard} from '../../components/application/inProgressCard'
 import Footer from '../../components/Footer'
-import { mainContext } from '../../reducer'
-import { changeNetwork } from '../../connectors'
-import { ChainId } from '../../web3/address'
+import {mainContext} from '../../reducer'
+import {changeNetwork} from '../../connectors'
+import {ChainId, voteMain, voteNFT} from '../../web3/address'
 import NoData from '../../assets/icon/noData@2x.png'
 import {
   HANDLE_CHANGE_NETWORKS,
 } from '../../const'
-import { Spin } from 'antd'
+import {Spin} from 'antd'
 import {
   useBlockHeight,
   VoteSpanVal,
   VoteEndToClaimSpan,
 } from './Hooks'
+import {getWeb3 as getClientWeb3, Contract as ClientContract} from '@chainstarter/multicall-client.js'
 import BigNumber from 'bignumber.js'
 import {NavLink} from "react-router-dom";
+import {multicallClient} from "../../utils/multicall";
+import {fromWei} from "../../utils/format";
 
 const Application = (props) => {
-  const { account, active, library, chainId } = useActiveWeb3React()
-  const { blockHeight } = useBlockHeight()
+  const {account, active, library, chainId} = useActiveWeb3React()
+  const {blockHeight} = useBlockHeight()
   const [statusFlag, setStatusFlag] = useState(1)
   const [cardDataList, setCardDataList] = useState([])
   const [progressData, setProgressData] = useState('')
   const [loading, setLoading] = useState(false)
-   const { dispatch, state } = useContext(mainContext)
+  const {dispatch, state} = useContext(mainContext)
   const voteCycle = VoteSpanVal()
   const voteEndClaimCycle = VoteEndToClaimSpan()
 
@@ -58,36 +61,87 @@ const Application = (props) => {
   const changeFlag = (val) => {
     setStatusFlag(val)
   }
-  const cardList = () => {
-    setLoading(true)
-    axios({
-      method: 'post',
-      url:
-        'https://graph.westarter.org/heco/subgraphs/name/westarter/governance',
-      data: {
-        query: `{
-          projectVotes(first: 1000, skip:0) {
-            id
-            ProjectId
-            tokenId
-            tokenURI
-            begin
-            voteMax
-            voteYes
-            voteNo
-          }
-        }`,
-      },
-    })
-      .then((res) => {
-        if (res.data.data.projectVotes) {
-          setCardDataList(res.data.data.projectVotes)
-          setLoading(false)
+
+  const getEvents = (address, topic0, fromBlock = 1) => {
+    return new Promise((resolve, reject) => {
+      axios({
+        method: 'get',
+        url: `https://api.hecoinfo.com/api?module=logs&action=getLogs
+&fromBlock=${fromBlock}
+&toBlock=latest
+&address=${address}
+&topic0=${topic0}
+&apikey=982S8JF95E4K4J46SMA2Y4I93UZH5WRMIC`
+      }).then(async res => {
+        let result = res.data.result
+        if (result.length >= 1000) {
+          result = result.concat(await getEvents(address, topic0, Number(result[result.length - 1].blockNumber)))
+        } else {
+          resolve(result)
         }
+      }).catch((e) => {
+        reject()
       })
-      .catch((e) => {
-        console.log(e)
+    })
+  }
+
+  const cardList = async () => {
+    setLoading(true)
+    // 982S8JF95E4K4J46SMA2Y4I93UZH5WRMIC
+    // multicallClient.  CreatePropose
+    const eventName = 'CreatePropose'
+    const web3 = getClientWeb3(ChainId.HECO)
+    const eventAbi = voteMain.abi.find(item => item.name === eventName && item.type === 'event')
+    const topic0 = web3.eth.abi.encodeEventSignature(eventAbi)
+    const datas = await getEvents(voteMain.address, topic0, 1)
+    const eventsData = []
+    const calls = []
+    const voteNFTContract = new ClientContract(voteNFT.abi, voteNFT.address, ChainId.HECO)
+
+    for (let i = 0; i < datas.length; i++) {
+      const eventItem = web3.eth.abi.decodeLog(eventAbi.inputs, datas[i].data,
+        [datas[i].topics[1]])
+      eventsData.push({
+        ProjectId: eventItem.propID,
+        tokenId: eventItem.NFTtokenId,
+        tokenURI: '',
+        begin: eventItem.begin,
+        voteMax: new BigNumber(eventItem.iwoAmountUSDT).div(fromWei(eventItem.warPrice, 18)).toString()
       })
+      calls.push(voteNFTContract.tokenURI(eventItem.NFTtokenId))
+    }
+    const tokenURIs = await multicallClient(calls)
+    eventsData.map((item, index) => {
+      item.tokenURI = tokenURIs[index]
+    })
+    setCardDataList(eventsData)
+    setLoading(false)
+    /*    axios({
+          method: 'post',
+          url:
+            'https://graph.westarter.org/heco/subgraphs/name/westarter/governance',
+          data: {
+            query: `{
+              projectVotes(first: 1000, skip:0) {
+                id
+                ProjectId
+                tokenId
+                tokenURI
+                begin
+                voteMax
+              }
+            }`,
+          },
+        })
+          .then((res) => {
+            if (res.data.data.projectVotes) {
+              setCardDataList(res.data.data.projectVotes)
+              setLoading(false)
+            }
+          })
+          .catch((e) => {
+            console.log(e)
+          })*/
   }
 
   useEffect(() => {
@@ -137,8 +191,8 @@ const Application = (props) => {
   }, [props.location, cardDataList, voteCycle, voteEndClaimCycle])
 
   return (
-    <div style={{ position: 'relative' }}>
-      <ApplicationBanner />
+    <div style={{position: 'relative'}}>
+      <ApplicationBanner/>
       <div className='application_content'>
         <div className='application_content_tab'>
           <a
@@ -147,7 +201,7 @@ const Application = (props) => {
               changeFlag(0)
             }}
           >
-            <FormattedMessage id='applicationText18' />
+            <FormattedMessage id='applicationText18'/>
           </a>
           <a
             className={cs(statusFlag === 1 && 'application_content_tab_active')}
@@ -155,7 +209,7 @@ const Application = (props) => {
               changeFlag(1)
             }}
           >
-            <FormattedMessage id='applicationText3' />
+            <FormattedMessage id='applicationText3'/>
           </a>
           <a
             className={cs(statusFlag === 2 && 'application_content_tab_active')}
@@ -163,20 +217,20 @@ const Application = (props) => {
               changeFlag(2)
             }}
           >
-            <FormattedMessage id='applicationText4' />
+            <FormattedMessage id='applicationText4'/>
           </a>
         </div>
         <Spin spinning={loading}>
           {!cardDataList.filter((item) => item.status === statusFlag).length ? (
             <div className='no-data'>
-              <img src={NoData} className='no-proposal' />
+              <img src={NoData} className='no-proposal'/>
 
               <p className='no-proposal-text'>
-                <FormattedMessage id='applicationText5' />
+                <FormattedMessage id='applicationText5'/>
               </p>
               <p className='initiate-proposal'>
                 <NavLink to='/application/apply'>
-                  <FormattedMessage id='applicationText2' />
+                  <FormattedMessage id='applicationText2'/>
                 </NavLink>
               </p>
             </div>
@@ -184,14 +238,14 @@ const Application = (props) => {
             cardDataList.map((item, index) => {
               return (
                 item.status === statusFlag && (
-                  <InProgressCard listData={item} key={index} />
+                  <InProgressCard listData={item} key={index}/>
                 )
               )
             })
           )}
         </Spin>
       </div>
-      <Footer />
+      <Footer/>
     </div>
   )
 }
