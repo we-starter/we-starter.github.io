@@ -75,7 +75,7 @@ const Application = (props) => {
       }).then(async res => {
         let result = res.data.result
         if (result.length >= 1000) {
-          result = result.concat(await getEvents(address, topic0, Number(result[result.length - 1].blockNumber)))
+          result = result.concat(await getEvents(address, topic0, Number(result[result.length - 1].blockNumber+1)))
         } else {
           resolve(result)
         }
