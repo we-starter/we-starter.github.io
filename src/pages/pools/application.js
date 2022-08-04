@@ -100,7 +100,7 @@ const Application = (props) => {
 
     for (let i = 0; i < datas.length; i++) {
       const eventItem = web3.eth.abi.decodeLog(eventAbi.inputs, datas[i].data,
-        [datas[i].topics[1]])
+        datas[i].topics.slice(1))
       eventsData.push({
         ProjectId: eventItem.propID,
         tokenId: eventItem.NFTtokenId,
